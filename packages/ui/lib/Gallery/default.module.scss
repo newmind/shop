@@ -1,0 +1,117 @@
+
+@import "~@packages/theme";
+
+.gallery {
+
+  position: relative;
+  display: flex;
+  flex: 1 0 auto;
+  flex-direction: column;
+
+  &__next {
+
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    display: flex;
+    width: 20%;
+    z-index: 30;
+    cursor: pointer;
+    align-items: center;
+    justify-content: flex-end;
+    padding: 0 20px 0 0;
+  }
+
+  &__next:hover &__icon {
+    color: $gray-color;
+  }
+
+  &__prev {
+
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    display: flex;
+    width: 20%;
+    z-index: 30;
+    cursor: pointer;
+    align-items: center;
+    padding: 0 0 0 20px;
+  }
+
+  &__prev:hover &__icon {
+
+    color: $gray-color;
+  }
+
+  &__icon {
+
+    display: inline-block;
+    font-size: 24px;
+    color: $light-gray-color;
+    transition: color 400ms;
+  }
+
+  &__content {
+
+    position: relative;
+    display: flex;
+    flex: 1 0 auto;
+    flex-direction: column;
+    z-index: 20;
+  }
+
+  &__count {
+
+    position: absolute;
+    bottom: 4px;
+    left: 50%;
+    display: inline-block;
+    background: whitesmoke;
+    padding: 2px 2px 3px;
+    width: 50px;
+    text-align: center;
+    border-radius: 4px;
+    margin: 0 0 0 -24px;
+    color: #222;
+    z-index: 30;
+  }
+
+  &__numbers {
+
+    font: 11px "Opinion Pro";
+    font-weight: bold;
+  }
+}
+
+.image {
+
+  position: relative;
+  display: flex;
+  flex: 1 1 auto;
+  flex-direction: column;
+  overflow: hidden;
+
+  &__loading {
+
+    display: flex;
+    flex: 1 0 auto;
+    flex-direction: column;
+    background: $whitesmoke-color;
+    color: $dark-color;
+    font: 13px "Opinion Pro";
+    z-index: 20;
+    justify-content: center;
+    text-align: center;
+  }
+
+  &__element {
+
+    position: absolute;
+    display: block;
+    border: none;
+    z-index: 10;
+  }
+}

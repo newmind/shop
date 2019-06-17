@@ -1,0 +1,41 @@
+
+.product {
+
+  position: relative;
+  display: flex;
+  flex-direction: row;
+  margin: 20px 0;
+
+  &__promo {
+
+    position: relative;
+    display: flex;
+    width: 150px;
+    height: 120px;
+  }
+
+  &__info {
+
+    display: flex;
+    flex: 1 0 auto;
+    flex-direction: column;
+    margin: 0 0 0 20px;
+  }
+
+  &__brand {
+
+    display: inline-block;
+    font: 15px "Opinion Pro";
+    font-weight: bold;
+    color: #222;
+
+  }
+
+  &__name {
+
+    display: inline-block;
+    font: 13px "Opinion Pro";
+    color: #222;
+    margin: 10px 0 0;
+  }
+}

@@ -1,0 +1,24 @@
+
+@import "~@packages/theme";
+
+.header {
+
+  display: block;
+  color: $white-color;
+  padding: 15px 20px;
+  align-items: center;
+
+  &__title {
+
+    display: flex;
+    flex: 1 0 auto;
+    flex-direction: column;
+    font: 16px "Opinion Pro";
+    font-weight: bold;
+  }
+
+  &__cart {
+
+    display: block;
+  }
+}

@@ -1,0 +1,92 @@
+
+@import "~@packages/theme";
+
+.wrapper {
+
+  display: block;
+  border: 1px solid $primary-color;
+  border-radius: 3px;
+  overflow: hidden;
+}
+
+.table {
+
+  width: 100%;
+  box-sizing: border-box;
+  table-layout: fixed;
+  caption-side: bottom;
+  border: none;
+
+  &__thead {
+
+    border: 1px solid $primary-color;
+    background: $primary-color;
+  }
+
+  &__thead td:first-child &__title {
+    padding: 11px 10px 10px 20px;
+  }
+
+  &__thead td &__title {
+    padding: 11px 10px 10px;
+  }
+
+  &__thead td:last-child &__title {
+    padding: 11px 20px 10px 10px;
+  }
+
+  &__title {
+
+    display: block;
+    font: 14px "Opinion Pro";
+    font-weight: bold;
+    text-align: left;
+    color: $whitesmoke-color;
+    letter-spacing: 0.5px;
+
+    &--right { text-align: right; }
+    &--center { text-align: center; }
+  }
+
+  &__row {
+
+    & + & {
+      border-top: 1px solid $light-gray-color;
+    }
+  }
+
+  &__row td:first-child &__col {
+    padding: 10px 10px 10px 20px;
+  }
+
+  &__row td &__col {
+    padding: 10px;
+  }
+
+  &__row td:last-child &__col {
+    padding: 10px 10px 20px 10px;
+  }
+
+  &__col {
+
+    display: block;
+    font: 13px "Opinion Pro";
+
+    &--right { text-align: right; }
+    &--center { text-align: center; }
+  }
+
+  &__caption {
+
+    text-align: center;
+    font: 13px "Opinion Pro";
+    color: $dark-color;
+    padding: 20px;
+    border: 1px solid $light-gray-color;
+    border-top: none;
+  }
+
+  &__checking {
+
+  }
+}

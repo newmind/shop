@@ -1,0 +1,9 @@
+{
+  "name": "@packages/socket",
+  "version": "1.0.0",
+  "private": true,
+  "main": "./src/index.js",
+  "dependencies": {
+    "socket.io-client": "^2.2.0"
+  }
+}

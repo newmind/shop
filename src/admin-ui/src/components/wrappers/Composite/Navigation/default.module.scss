@@ -1,0 +1,42 @@
+
+@import "~@packages/theme";
+
+.navigate {
+
+  display: block;
+
+  &__item {
+
+    display: inline-block;
+    color: $dark-color;
+    cursor: pointer;
+    transition: background 400ms;
+
+    &:hover {
+
+      background: lighten($primary-color, 3%);
+    }
+
+    &--active,
+    &--active:hover {
+
+      color: $whitesmoke-color;
+      background: darken($primary-color, 5%);
+    }
+  }
+
+  &__link {
+
+    display: inline-block;
+    padding: 15px 20px;
+    color: inherit;
+    text-decoration: none;
+  }
+
+  &__text {
+
+    font: 14px "Opinion Pro";
+    font-weight: bold;
+    color: inherit;
+  }
+}

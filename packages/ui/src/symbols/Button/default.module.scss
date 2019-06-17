@@ -1,0 +1,91 @@
+
+@import "~@packages/theme";
+
+
+.button {
+
+  display: inline-block;
+  padding: 10px 20px 8px;
+  border: 1px solid $dark-color;
+  border-radius: 4px;
+  cursor: pointer;
+  background: $white-color;
+  color: $dark-color;
+  font: 14px "Opinion Pro";
+  font-weight: bold;
+  outline: none;
+  letter-spacing: .5px;
+  transition: background 400ms;
+
+  & + & {
+    margin: 0 0 0 10px;
+  }
+
+  &:hover {
+    background: darken(#fff, 5%);
+  }
+
+  &:disabled {
+
+    background: $light-gray-color !important;
+    border-color: $gray-color !important;
+    color: $gray-color !important;
+    text-shadow: -1px 1px 0 $white-color !important;
+    cursor: default;
+  }
+
+  &--info {
+
+    border-color: $info-color;
+    background: $info-color;
+    color: $dark-color;
+
+    &:hover {
+      background: darken($info-color, 10%);
+    }
+  }
+
+  &--primary {
+
+    border-color: $primary-color;
+    background: $primary-color;
+    color: $white-color;
+
+    &:hover {
+      background: darken($primary-color, 10%);
+    }
+  }
+
+  &--success {
+
+    border-color: $success-color;
+    background: $success-color;
+    color: $white-color;
+
+    &:hover {
+      background: darken($success-color, 10%);
+    }
+  }
+
+  &--warning {
+
+    border-color: $warning-color;
+    background: $warning-color;
+    color: $white-color;
+
+    &:hover {
+      background: darken($warning-color, 10%);
+    }
+  }
+
+  &--danger {
+
+    border-color: $danger-color;
+    background: $danger-color;
+    color: $white-color;
+
+    &:hover {
+      background: darken($danger-color, 10%);
+    }
+  }
+}

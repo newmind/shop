@@ -1,0 +1,8 @@
+{
+  "name": "@packages/rabbit",
+  "version": "1.0.0",
+  "main": "src/index.mjs",
+  "dependencies": {
+    "amqplib": "^0.5.3"
+  }
+}

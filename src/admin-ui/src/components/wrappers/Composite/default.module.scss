@@ -1,0 +1,44 @@
+
+@import "~@packages/theme";
+
+
+.wrapper {
+
+  display: flex;
+  flex: 1 0 auto;
+  flex-direction: column;
+}
+
+.header {
+
+  display: block;
+  background: #cbcbcb;
+}
+
+.page {
+
+  display: flex;
+  flex: 1 0 auto;
+  flex-direction: column;
+}
+
+.aside {
+
+  display: block;
+  background: $primary-color;
+  box-shadow: 0 3px 10px 0 rgba($dark-color, .3);
+}
+
+.content {
+
+  display: flex;
+  flex: 1 1 auto;
+  flex-direction: column;
+  width: 100%;
+}
+
+.footer {
+
+  display: block;
+  background: #cbcbcb;
+}

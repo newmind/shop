@@ -1,0 +1,61 @@
+
+@import "~@packages/theme";
+
+.wrapper {
+
+  display: block;
+  padding: 20px 0 0;
+}
+
+.filters {
+
+  display: block;
+  border-bottom: 1px solid $light-gray-color;
+  padding: 20px 0 20px 0;
+}
+
+.products {
+
+  display: flex;
+  flex-direction: column;
+  padding: 60px 0;
+
+  &__line {
+
+    display: flex;
+    flex: 1 0 auto;
+    flex-direction: row;
+
+    & + & {
+
+      margin: 36px 0 0;
+    }
+  }
+
+  &__controls {
+
+    display: block;
+    margin: 60px 0 90px;
+    text-align: center;
+  }
+
+  &__more {
+
+    display: inline-block;
+    background: linear-gradient($whitesmoke-color, $white-color);
+    border: 1px solid $gray-color;
+    padding: 20px 40px 16px;
+    font: 13px "Opinion Pro Condensed";
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    outline: none;
+    cursor: pointer;
+    border-radius: 3px;
+    color: $dark-color;
+    transition: background 400ms;
+
+    &:hover {
+      background: linear-gradient(darken($whitesmoke-color, 10%), darken($white-color, 10%));
+    }
+  }
+}

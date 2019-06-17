@@ -1,0 +1,36 @@
+
+@import "~@packages/theme";
+
+.footer {
+
+  display: block;
+}
+
+.links {
+
+  display: block;
+  font-size: 0;
+  text-align: right;
+
+  &__item {
+    
+    display: inline-block;
+
+    & + & {
+      margin: 0 0 0 10px;
+    }
+  }
+  
+  &__link {
+
+    display: block;
+    font: 13px "Opinion Pro";
+    color: $dark-color;
+    text-decoration: none;
+
+    &:hover {
+
+      text-decoration: underline;
+    }
+  }
+}

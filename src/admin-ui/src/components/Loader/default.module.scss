@@ -1,0 +1,32 @@
+
+@import "~@packages/theme";
+
+.wrapper {
+
+  display: flex;
+  flex: 1 0 auto;
+  flex-direction: column;
+  background: radial-gradient(circle, rgba(255,255,255,1) 0%, rgba(254,255,229,0.6643032212885154) 53%, rgba(55,178,209,0.13489145658263302) 100%);
+}
+
+.loader {
+
+  display: flex;
+  flex-direction: column;
+  flex: 0 0 auto;
+  width: 300px;
+  height: 300px;
+  margin: auto auto;
+  text-align: center;
+  background: $whitesmoke-color;
+  border-radius: 50%;
+  box-shadow: 0 5px 20px 0 rgba(34, 34, 34, 0.2);
+  justify-content: center;
+}
+
+.content {
+
+  display: block;
+  font: 18px "Opinion Pro";
+  color: $dark-color;
+}

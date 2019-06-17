@@ -1,0 +1,33 @@
+
+@import "~@packages/theme";
+
+.header {
+
+  display: flex;
+  flex: 1 0 auto;
+  flex-direction: row;
+  color: $white-color;
+  padding: 15px 20px;
+  align-items: center;
+
+  &__title {
+
+    display: flex;
+    flex: 1 0 auto;
+    flex-direction: column;
+  }
+
+  .logotype {
+
+    display: inline-block;
+    font: 16px "Opinion Pro";
+    font-weight: bold;
+    color: $white-color;
+    text-decoration: none;
+  }
+
+  &__cart {
+
+    display: block;
+  }
+}

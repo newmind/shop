@@ -1,0 +1,64 @@
+
+@import "~@packages/theme";
+
+.comments {
+
+  display: block;
+}
+
+.comment {
+
+  display: flex;
+  flex-direction: column;
+  flex: 0 0 auto;
+
+  & + & {
+    margin: 40px 0 0;
+  }
+
+  &__header {
+
+    display: flex;
+    flex: 1 0 auto;
+    flex-direction: row;
+    align-items: baseline;
+  }
+
+  &__wrapper {
+
+    display: flex;
+    flex: 1 0 auto;
+    flex-direction: row;
+    align-items: center;
+  }
+
+  &__person {
+
+    display: block;
+    font: 14px 'Opinion Pro';
+    font-weight: bold;
+    color: $dark-color;
+  }
+
+  &__evaluation {
+
+    display: block;
+    margin: 0 20px 0 0;
+  }
+
+  &__date {
+
+    display: block;
+    margin: 0 0 0 10px;
+    font: 12px 'Opinion Pro';
+    color: $gray-color;
+  }
+
+  &__content {
+
+    display: block;
+    margin: 10px 0 0;
+    font: 14px 'Opinion Pro';
+    line-height: 1.4;
+  }
+}

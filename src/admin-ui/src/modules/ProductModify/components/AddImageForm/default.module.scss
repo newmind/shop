@@ -1,0 +1,59 @@
+
+@import "~@packages/theme";
+
+.wrapper {
+
+  display: block;
+}
+
+.input {
+
+  display: none;
+}
+
+.image {
+
+  display: inline-flex;
+  width: 150px;
+  height: 200px;
+}
+
+.add-image {
+
+  display: inline-flex;
+  width: 150px;
+  height: 200px;
+  background: $light-gray-color;
+  border: 1px solid $gray-color;
+  border-radius: 3px;
+  cursor: pointer;
+  vertical-align: top;
+  transition: background-color 200ms;
+
+  &:hover {
+
+    background: darken($light-gray-color, 2%);
+  }
+
+  &__icon {
+
+    display: inline-block;
+    margin: auto auto;
+    font-size: 40px;
+    color: $gray-color;
+    vertical-align: top;
+  }
+}
+
+.content {
+
+  display: block;
+  min-height: 100px;
+  font-size: 0;
+}
+
+.controls {
+
+  display: block;
+  text-align: center;
+}

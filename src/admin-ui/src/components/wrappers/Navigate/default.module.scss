@@ -1,0 +1,63 @@
+
+@import "~@packages/theme";
+
+.wrapper {
+
+  display: flex;
+  flex: 1 0 auto;
+  flex-direction: row;
+}
+
+.center {
+
+  display: flex;
+  flex: 1 0 auto;
+  flex-direction: column;
+}
+
+.header {
+
+  display: block;
+  background: $dark-color;
+}
+
+.page {
+
+  position: relative;
+  display: flex;
+  flex: 1 0 auto;
+  flex-direction: column;
+  z-index: 10;
+}
+
+.aside {
+
+  display: block;
+  background: $whitesmoke-color;
+  border-right: 1px solid $light-gray-color;
+  width: 300px;
+}
+
+.navigate {
+
+  display: block;
+}
+
+.content {
+
+  display: flex;
+  flex: 1 1 auto;
+  flex-direction: column;
+  background: $white-color;
+  width: 100%;
+  z-index: 10;
+}
+
+.footer {
+
+  display: block;
+  background-image: linear-gradient($whitesmoke-color, #fff);
+  border-top: 1px solid $gray-color;
+  padding: 20px;
+  font: 13px "Opinion Pro Condensed";
+}

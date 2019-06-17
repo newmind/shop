@@ -1,0 +1,23 @@
+@font-face {
+    font-family: 'Opinion Pro';
+    src:
+            local('Opinion Pro Light'),
+            local('OpinionPro-Light'),
+            url('./fonts/opinion-pro/Opinionprolight.woff2') format('woff2'),
+            url('./fonts/opinion-pro/Opinionprolight.woff') format('woff'),
+            url('./fonts/opinion-pro/Opinionprolight.ttf') format('truetype');
+    font-weight: 300;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Opinion Pro';
+    src:
+            local('Opinion Pro Light Italic'),
+            local('OpinionPro-LightItalic'),
+            url('./fonts/opinion-pro/Opinionprolightitalic.woff2') format('woff2'),
+            url('./fonts/opinion-pro/Opinionprolightitalic.woff') format('woff'),
+            url('./fonts/opinion-pro/Opinionprolightitalic.ttf') format('truetype');
+    font-weight: 300;
+    font-style: italic;
+}

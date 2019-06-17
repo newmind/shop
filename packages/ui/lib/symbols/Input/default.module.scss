@@ -1,0 +1,189 @@
+
+@import "~@packages/theme";
+
+
+.wrapper {
+
+  display: flex;
+  flex: 1 0 auto;
+  flex-direction: column;
+
+  //&:hover {
+  //
+  //  border-color: $gray-color;
+  //}
+
+  & + & {
+
+    margin: 20px 0 0;
+  }
+
+  &--info {
+
+    .container {
+      border-color: $info-color;
+    }
+
+    .label,
+    .input,
+    .info__icon {
+      color: darken($info-color, 10%);
+    }
+  }
+
+  &--primary {
+
+    .container {
+      border-color: $primary-color;
+    }
+
+    .label,
+    .input,
+    .info__icon {
+      color: darken($primary-color, 10%);
+    }
+  }
+
+  &--success {
+
+    .container {
+      border-color: $success-color;
+    }
+
+    .label,
+    .input,
+    .info__icon {
+      color: darken($success-color, 10%);
+    }
+  }
+
+  &--warning {
+
+    .container {
+      border-color: $warning-color;
+    }
+
+    .label,
+    .input,
+    .info__icon {
+      color: darken($warning-color, 10%);
+    }
+  }
+
+  &--danger {
+
+    .container {
+      border-color: $danger-color;
+    }
+
+    .label,
+    .input,
+    .info__icon {
+      color: darken($danger-color, 10%);
+    }
+  }
+
+  &--disabled {
+
+    background: $light-gray-color;
+    border-color: $gray-color;
+
+    .label {
+      color: $gray-color;
+      text-shadow: -1px 1px 0 $white-color;
+    }
+
+    .input {
+      color: $gray-color;
+      text-shadow: -1px 1px 0 $white-color;
+    }
+  }
+}
+
+.label {
+
+  display: block;
+  font: 12px "Opinion Pro";
+  font-weight: bold;
+  color: #222;
+  margin: 0 0 8px 1px;
+  letter-spacing: 1px;
+  transition: color 400ms;
+}
+
+.input {
+
+  display: block;
+  padding: 10px 0 8px 10px;
+  color: #222;
+  font: 14px "Opinion Pro";
+  outline: none;
+  width: 100%;
+  box-sizing: border-box;
+  border: none;
+  letter-spacing: .5px;
+  background: transparent;
+
+  &:disabled {
+
+    border-color: $light-gray-color;
+    color: $gray-color;
+  }
+}
+
+.container {
+
+  display: flex;
+  flex: 1 0 auto;
+  flex-direction: column;
+  border: 1px solid $light-gray-color;
+  border-radius: 3px;
+  overflow: hidden;
+  transition: border 400ms;
+}
+
+.controls {
+
+  display: block;
+  padding: 10px;
+}
+
+.info__icon {
+
+  font-size: 16px;
+  color: $light-gray-color;
+  cursor: pointer;
+}
+
+.tooltip {
+
+  position: fixed;
+  padding: 10px 16px;
+  display: block;
+  background: $danger-color;
+  border-radius: 4px;
+
+  &:before {
+
+    position: absolute;
+    right: 100%;
+    top: 50%;
+    display: inline-block;
+    margin: -7px 0 0;
+    width: 0;
+    height: 0;
+    border: 6px solid transparent;
+    border-left: none;
+    border-right-color: $danger-color;
+    content: '';
+  }
+
+  &__message {
+
+    display: inline-block;
+    font: 13px "Opinion Pro";
+    color: $whitesmoke-color;
+    letter-spacing: .5px;
+    font-weight: bold;
+  }
+}

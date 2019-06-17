@@ -1,0 +1,30 @@
+{
+  "name": "identity-srv",
+  "version": "1.0.0",
+  "license": "MIT",
+  "dependencies": {
+    "@packages/db": "^1.0.0",
+    "@packages/server": "^1.0.0",
+    "@packages/socket.io": "^1.0.0",
+    "@packages/utils": "^1.0.0",
+    "dotenv": "^7.0.0",
+    "jsonwebtoken": "^8.5.1",
+    "koa": "^2.7.0",
+    "koa-bodyparser": "^4.2.1",
+    "koa-logger": "^3.2.0",
+    "koa-passport": "^4.1.1",
+    "koa-router": "^7.4.0",
+    "passport-jwt": "^4.0.0",
+    "passport-local": "^1.0.0",
+    "pg": "^7.9.0",
+    "pg-hstore": "^2.3.2",
+    "sequelize": "^5.1.0"
+  },
+  "scripts": {
+    "start": "node -r dotenv/config --experimental-modules src/index.mjs dotenv_config_path=./.env",
+    "start:dev": "../product-proxy/node_modules/.bin/nodemon --exec node -r dotenv/config --experimental-modules ./src/index.mjs dotenv_config_path=./.env"
+  },
+  "devDependencies": {
+    "nodemon": "^1.18.10"
+  }
+}

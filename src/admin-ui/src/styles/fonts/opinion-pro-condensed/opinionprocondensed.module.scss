@@ -1,0 +1,22 @@
+@font-face {
+    font-family: 'Opinion Pro Condensed';
+    src:
+            local('Opinion Pro Condensed Light'),
+            local('OpinionProCondensed-Light'),
+            url('./fonts/opinion-pro-condensed/Opinionprocondensedlight.woff2') format('woff2'),
+            url('./fonts/opinion-pro-condensed/Opinionprocondensedlight.woff') format('woff'),
+            url('./fonts/opinion-pro-condensed/Opinionprocondensedlight.ttf') format('truetype');
+    font-weight: 300;
+    font-style: normal;
+}
+@font-face {
+    font-family: 'Opinion Pro Condensed';
+    src:
+            local('Opinion Pro Condensed LightItalic'),
+            local('OpinionProCondensed-LightItalic'),
+            url('./fonts/opinion-pro-condensed/Opinionprocondensedlightitalic.woff2') format('woff2'),
+            url('./fonts/opinion-pro-condensed/Opinionprocondensedlightitalic.woff') format('woff'),
+            url('./fonts/opinion-pro-condensed/Opinionprocondensedlightitalic.ttf') format('truetype');
+    font-weight: 300;
+    font-style: italic;
+}

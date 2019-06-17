@@ -1,0 +1,25 @@
+
+@import "~@packages/theme";
+
+.wrapper {
+
+  display: block;
+}
+
+.form {
+
+  display: block;
+}
+
+.controls {
+
+  display: block;
+  padding: 20px;
+  border-top: 1px solid $light-gray-color;
+  text-align: center;
+}
+
+.delimiter {
+
+  margin: 40px 30px 60px;
+}

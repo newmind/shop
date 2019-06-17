@@ -1,0 +1,50 @@
+
+@import "~@packages/theme";
+
+.page {
+
+  position: relative;
+  display: flex;
+  flex: 1 0 auto;
+  flex-direction: column;
+
+  &--blur &__content {
+
+    filter: blur(3px);
+  }
+
+  &__content {
+
+    display: flex;
+    flex: 1 0 auto;
+    flex-direction: column;
+    z-index: 0;
+  }
+
+  &__loading {
+
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    display: flex;
+    flex: 1 0 auto;
+    flex-direction: column;
+    background: rgba($gray-color, .8);
+    z-index: 10;
+  }
+
+  &__spinner {
+
+    display: block;
+    width: 300px;
+    padding: 40px;
+    margin: auto auto;
+    text-align: center;
+    background: $whitesmoke-color;
+    font: 18px "Opinion Pro";
+    box-shadow: 0 6px 14px 4px rgba($dark-color, .2);
+  }
+
+}

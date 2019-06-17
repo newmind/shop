@@ -1,0 +1,37 @@
+
+.wrapper {
+
+  display: flex;
+  flex: 1 0 auto;
+  flex-direction: column;
+}
+
+.header {
+
+  display: block;
+  background: #d3dfeb;
+  padding: 15px 20px;
+  font: 16px "Opinion Pro";
+  font-weight: bold;
+}
+
+.content {
+
+  display: flex;
+  flex: 1 1 auto;
+  flex-direction: column;
+  background: #e5eef5;
+  width: 100%;
+  z-index: 10;
+}
+
+.footer {
+
+  position: relative;
+  display: block;
+  background: #d3dfeb;
+  padding: 20px;
+  box-shadow: 0 -1px 3px 0 rgba(150, 150, 150, .5);
+  font: 13px "Opinion Pro Condensed";
+  z-index: 20;
+}
