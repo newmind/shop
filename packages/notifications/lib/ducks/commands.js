@@ -9,7 +9,7 @@ export var closeNotification = function closeNotification(index) {
 };
 export var pushNotification = function pushNotification(notification) {
   return function (dispatch) {
-    notification['index'] = UUID();
+    notification['index.mjs'] = UUID();
     dispatch(pushNotificationAction(notification));
   };
 };

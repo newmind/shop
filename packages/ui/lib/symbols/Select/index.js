@@ -7,7 +7,7 @@ import _assertThisInitialized from "/home/viktor/projects/shop/node_modules/babe
 import _inherits from "/home/viktor/projects/shop/node_modules/babel-preset-react-app/node_modules/@babel/runtime/helpers/esm/inherits";
 
 var _this = this,
-    _jsxFileName = "/home/viktor/projects/shop/packages/ui/src/symbols/Select/index.js";
+    _jsxFileName = "/home/viktor/projects/shop/packages/ui/src/symbols/Select/index.mjs";
 
 import types from 'prop-types';
 import React, { PureComponent } from 'react';

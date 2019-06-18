@@ -16,7 +16,7 @@ export default (function () {
     case CLOSE_NOTIFICATION:
       {
         var index = state['notifications'].findIndex(function (item) {
-          return item['index'] === payload;
+          return item['index.mjs'] === payload;
         });
         return _objectSpread({}, state, {
           notifications: [].concat(_toConsumableArray(state['notifications'].slice(0, index)), _toConsumableArray(state['notifications'].slice(index + 1)))

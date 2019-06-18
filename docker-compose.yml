@@ -1,0 +1,30 @@
+#nginx:
+#  build: ./nginx
+#  container_name: nginx
+#  links:
+#    - web:web
+#    - api:api
+#  ports:
+#    - "80:80"
+#
+#web:
+#  build: ./web
+#  container_name: web
+#  ports:
+#    - "8080"
+#
+#api:
+#  build: ./api
+#  container_name: api
+#  ports:
+#    - "8080"
+
+version: "3.7"
+services:
+
+  admin-gw:
+    build:
+      context: ./
+      dockerfile: ./admin-gw.Dockerfile
+    ports:
+      - "8080"

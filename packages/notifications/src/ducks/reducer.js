@@ -14,7 +14,7 @@ export const KEY = 'notifications';
 export default (state = initialState, { type, payload }) => {
   switch (type) {
     case CLOSE_NOTIFICATION: {
-      const index = state['notifications'].findIndex(item => item['index'] === payload);
+      const index = state['notifications'].findIndex(item => item['index.mjs'] === payload);
       return {
         ...state,
         notifications: [

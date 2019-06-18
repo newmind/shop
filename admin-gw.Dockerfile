@@ -24,16 +24,18 @@ RUN npm i yarn -g --yes
 
 WORKDIR /app
 
-COPY admin-gw/src ./src/admin-gw/src
-COPY admin-gw/.env.production ./src/admin-gw/
-COPY admin-gw/package.json ./src/admin-gw/
-COPY ../packages ./packages
-COPY product-proxy/package.json ./
-COPY ../lerna.json ./
-COPY ../yarn.lock ./
+COPY ./src/admin-gw/src              ./src/admin-gw/src
+COPY ./src/admin-gw/.env.production  ./src/admin-gw/
+COPY ./src/admin-gw/package.json     ./src/admin-gw/
+COPY ./packages                      ./packages
+COPY ./package.json                  ./
+COPY ./lerna.json                    ./
+COPY ./yarn.lock                     ./
+
+RUN ls
 
 RUN yarn
 
-WORKDIR ./src/admin-gw
+WORKDIR /app/src/admin-gw
 
 ENTRYPOINT ["yarn", "run", "start"]

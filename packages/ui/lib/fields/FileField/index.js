@@ -5,7 +5,7 @@ import _possibleConstructorReturn from "/home/viktor/projects/shop/node_modules/
 import _getPrototypeOf from "/home/viktor/projects/shop/node_modules/babel-preset-react-app/node_modules/@babel/runtime/helpers/esm/getPrototypeOf";
 import _inherits from "/home/viktor/projects/shop/node_modules/babel-preset-react-app/node_modules/@babel/runtime/helpers/esm/inherits";
 import _asyncToGenerator from "/home/viktor/projects/shop/node_modules/babel-preset-react-app/node_modules/@babel/runtime/helpers/esm/asyncToGenerator";
-var _jsxFileName = "/home/viktor/projects/shop/packages/ui/src/fields/FileField/index.js";
+var _jsxFileName = "/home/viktor/projects/shop/packages/ui/src/fields/FileField/index.mjs";
 import types from 'prop-types';
 import React, { PureComponent } from 'react';
 import { Field } from 'redux-form';
