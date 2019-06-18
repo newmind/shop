@@ -1,11 +1,11 @@
-FROM nginx
 
-MAINTAINER your_email_address
+FROM rabbitmq:3-management-alpine
 
-COPY nginx.conf /etc/nginx/nginx.conf
+ADD definitions.json /etc/rabbitmq/
+ADD rabbitmq.config /etc/rabbitmq/
 
-WORKDIR /etc/nginx
+RUN chown rabbitmq:rabbitmq /etc/rabbitmq/rabbitmq.config /etc/rabbitmq/definitions.json
 
-EXPOSE 80
+EXPOSE 4369 5671 5672 15671 15672 25672
 
-CMD ["nginx", "-g", "daemon off;"]
+CMD ["rabbitmq-server"]

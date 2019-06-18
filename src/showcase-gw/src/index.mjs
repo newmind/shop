@@ -11,7 +11,7 @@ import {
   bindQueueToExchange
 } from '@packages/rabbit';
 
-import routes from './routes/index';
+import routes from './routes';
 
 
 (async () => {

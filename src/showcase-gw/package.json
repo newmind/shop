@@ -6,14 +6,14 @@
     "@packages/db": "^1.0.0",
     "@packages/server": "^1.0.0",
     "@packages/socket.io": "^1.0.0",
-    "@packages/utils": "^1.0.0",
+    "@packages/sys.utils": "^1.0.0",
     "@packages/rabbit": "^1.0.0",
     "axios": "^0.18.0",
     "dotenv": "^7.0.0"
   },
   "scripts": {
-    "start": "node -r dotenv/config --experimental-modules ../identity-srv/src/index.mjs dotenv_config_path=./.env",
-    "start:dev": "../identity-srv/node_modules/.bin/nodemon --exec node -r dotenv/config --experimental-modules src/index.mjs dotenv_config_path=./.env"
+    "start": "node -r dotenv/config --experimental-modules ./src/index.mjs dotenv_config_path=./.env.production",
+    "start:dev": "nodemon --exec node -r dotenv/config --experimental-modules ./src/index.mjs dotenv_config_path=./.env.development"
   },
   "devDependencies": {
     "nodemon": "^1.18.10"

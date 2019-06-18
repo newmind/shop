@@ -22,9 +22,29 @@
 version: "3.7"
 services:
 
+  rabbitmq:
+    container_name: rabbitmq
+    build: ./rabbit
+    ports:
+      - "8080:15672"
+      - "5672"
+
   admin-gw:
+    container_name: admin-gw
     build:
       context: ./
-      dockerfile: ./admin-gw.Dockerfile
+      dockerfile: Dockerfile.admin-gw
+    links:
+      - "rabbitmq:rabbitmq"
+    ports:
+      - "8080"
+
+  showcase-gw:
+    container_name: showcase-gw
+    build:
+      context: ./
+      dockerfile: Dockerfile.showcase-gw
+    links:
+      - "rabbitmq:rabbitmq"
     ports:
       - "8080"
