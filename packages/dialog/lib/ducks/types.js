@@ -1,2 +1,0 @@
-export var OPEN_DIALOG = 'OPEN_DIALOG';
-export var CLOSE_DIALOG = 'CLOSE_DIALOG';

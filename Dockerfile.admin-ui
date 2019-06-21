@@ -35,12 +35,16 @@ COPY ./yarn.lock                     ./
 
 RUN ls
 
+RUN ["chmod", "+x", "./packages/ui"]
+RUN ["chmod", "+x", "./packages/dialog"]
+RUN ["chmod", "+x", "./packages/notifications"]
+
 RUN yarn
 
 WORKDIR /app/src/admin-ui
 
-CMD ["yarn", "run", "ui:build"]
-CMD ["yarn", "run", "dialog:build"]
-CMD ["yarn", "run", "notification:build"]
+RUN ["yarn", "run", "ui:build"]
+RUN ["yarn", "run", "dialog:build"]
+RUN ["yarn", "run", "notification:build"]
 
 ENTRYPOINT ["yarn", "run", "build"]
