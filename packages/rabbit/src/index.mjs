@@ -16,36 +16,35 @@ const work = (msg, cb) => {
 };
 
 
-export const connect = (host) => {
-  return new Promise((resolve) => {
-    amqp.connect(host, (error, connection) => {
-      if (error) {
-        setTimeout(() => connect(host), 1000);
-        return;
+export const connect = (host, cb) => {
+  amqp.connect(host,  (error, connection) => {
+    if (error) {
+      setTimeout(() => connect(host, cb), 1000);
+      return;
+    }
+
+    connection.on("error", function(err) {
+      if (err.message !== "Connection closing") {
+        console.error("RabbitMQ connection error", err.message);
       }
-
-      connection.on("error", function(err) {
-        if (err.message !== "Connection closing") {
-          console.error("[AMQP] conn error", err.message);
-        }
-      });
-
-      connection.on("close", function() {
-        console.error("RabbitMQ reconnecting");
-        return setTimeout(() => connect(host), 1000);
-      });
-
-      console.log('RabbitMQ connected');
-      resolve(connection);
+      console.log(err);
+      cb(err, null);
     });
+
+    connection.on("close", function() {
+      console.error("RabbitMQ reconnecting");
+      return setTimeout(() => connect(host, cb), 1000);
+    });
+
+    console.log('RabbitMQ connected');
+    cb(null, connection);
   });
 };
 
-export const channel = (connection) => {
-  return new Promise((resolve, reject) => {
+export const channel = (connection, cb) => {
     connection.createChannel((error, channel) => {
       if (closeOnErr(error)) {
-        reject(error);
+        cb(error, null);
       }
 
       channel.on("error", function(err) {
@@ -67,9 +66,8 @@ export const channel = (connection) => {
         sendEvent(m[0], m[1], m[2]);
       }
 
-      resolve(channel);
+      cb(null, channel);
     });
-  });
 };
 
 export const createConsumer = (channel, queue, cb) => {

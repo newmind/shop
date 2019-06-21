@@ -7,13 +7,8 @@ import Sequelize from 'sequelize';
 let models = {};
 const __dirname = process.cwd();
 
-const sequelize = new Sequelize(
-  process.env['DATA_BASE_NAME'],
-  process.env['DATA_BASE_USERNAME'],
-  process.env['DATA_BASE_PASSWORD'],
+const sequelize = new Sequelize(`postgres://${process.env['DATA_BASE_USERNAME']}:${process.env['DATA_BASE_PASSWORD']}@${process.env['DATA_BASE_HOST']}:${process.env['DATA_BASE_PORT']}/${process.env['DATA_BASE_NAME']}`,
   {
-    port: process.env['DATA_BASE_PORT'],
-    host: process.env['DATA_BASE_HOST'],
     dialect: 'postgres',
     pool: {
       max: 5,

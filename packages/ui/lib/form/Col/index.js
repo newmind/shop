@@ -5,7 +5,7 @@ import _createClass from "/home/viktor/projects/shop/node_modules/babel-preset-r
 import _possibleConstructorReturn from "/home/viktor/projects/shop/node_modules/babel-preset-react-app/node_modules/@babel/runtime/helpers/esm/possibleConstructorReturn";
 import _getPrototypeOf from "/home/viktor/projects/shop/node_modules/babel-preset-react-app/node_modules/@babel/runtime/helpers/esm/getPrototypeOf";
 import _inherits from "/home/viktor/projects/shop/node_modules/babel-preset-react-app/node_modules/@babel/runtime/helpers/esm/inherits";
-var _jsxFileName = "/home/viktor/projects/shop/packages/ui/src/form/Col/index.mjs";
+var _jsxFileName = "/home/viktor/projects/shop/packages/ui/src/form/Col/index.js";
 import React, { PureComponent } from 'react';
 import styles from './default.module.scss';
 

@@ -12,13 +12,15 @@ export default async (server) => {
     });
     io.on('connection', client => {
       client.on('disconnect', () => { console.log('Socket disconnect') });
-      console.log('Socket connected');
+      console.log('SocketIO connected');
     });
+
+    console.log('SocketIO created');
 
     return io;
 
   } catch(error) {
-    console.log(error)
+    console.log('SocketIO error:', error)
   }
 }
 

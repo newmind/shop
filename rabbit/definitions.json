@@ -48,106 +48,11 @@
   "global_parameters": [
     {
       "name": "cluster_name",
-      "value": "rabbit@viktor-UX51VZA"
+      "value": "rabbit@rabbit"
     }
   ],
   "policies": [],
-  "queues": [
-    {
-      "name": "amq.gen-9wFPlkAa4Q8XZA4iVEEheg",
-      "vhost": "/",
-      "durable": true,
-      "auto_delete": false,
-      "arguments": {}
-    },
-    {
-      "name": "amq.gen-oC2KGaDF0xqR00tFDplz_w",
-      "vhost": "/",
-      "durable": true,
-      "auto_delete": false,
-      "arguments": {}
-    },
-    {
-      "name": "amq.gen-m0idhfKKr7mxJM_EiDJLDQ",
-      "vhost": "/",
-      "durable": true,
-      "auto_delete": false,
-      "arguments": {}
-    }
-  ],
-  "exchanges": [
-    {
-      "name": "STOCK_PRODUCT_PROXY_EXCHANGE.product.updated",
-      "vhost": "/",
-      "type": "fanout",
-      "durable": true,
-      "auto_delete": false,
-      "internal": false,
-      "arguments": {}
-    },
-    {
-      "name": "OPERATION_PROXY_EXCHANGE.order.updated",
-      "vhost": "/",
-      "type": "fanout",
-      "durable": true,
-      "auto_delete": false,
-      "internal": false,
-      "arguments": {}
-    },
-    {
-      "name": "PRODUCT_PROXY_EXCHANGE.product.updated",
-      "vhost": "/",
-      "type": "fanout",
-      "durable": true,
-      "auto_delete": false,
-      "internal": false,
-      "arguments": {}
-    },
-    {
-      "name": "STOCK_PRODUCT_PROXY_EXCHANGE.product.deleted",
-      "vhost": "/",
-      "type": "fanout",
-      "durable": true,
-      "auto_delete": false,
-      "internal": false,
-      "arguments": {}
-    },
-    {
-      "name": "PRODUCT_PROXY_EXCHANGE.product.created",
-      "vhost": "/",
-      "type": "fanout",
-      "durable": true,
-      "auto_delete": false,
-      "internal": false,
-      "arguments": {}
-    },
-    {
-      "name": "STOCK_PRODUCT_PROXY_EXCHANGE.product.created",
-      "vhost": "/",
-      "type": "fanout",
-      "durable": true,
-      "auto_delete": false,
-      "internal": false,
-      "arguments": {}
-    },
-    {
-      "name": "PRODUCT_PROXY_EXCHANGE.product.deleted",
-      "vhost": "/",
-      "type": "fanout",
-      "durable": true,
-      "auto_delete": false,
-      "internal": false,
-      "arguments": {}
-    },
-    {
-      "name": "OPERATION_PROXY_EXCHANGE.order.created",
-      "vhost": "/",
-      "type": "fanout",
-      "durable": true,
-      "auto_delete": false,
-      "internal": false,
-      "arguments": {}
-    }
-  ],
+  "queues": [],
+  "exchanges": [],
   "bindings": []
 }

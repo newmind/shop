@@ -22,29 +22,64 @@
 version: "3.7"
 services:
 
-  rabbitmq:
-    container_name: rabbitmq
+  db:
+    container_name: postgre_sql
+    build: ./postgresql
+    ports:
+      - "5432"
+
+  rabbit:
+    container_name: rabbit_mq
     build: ./rabbit
     ports:
-      - "8080:15672"
+      - "15672"
       - "5672"
 
-  admin-gw:
-    container_name: admin-gw
+  product_proxy:
+    container_name: product_proxy
+    build:
+      context: ./
+      dockerfile: Dockerfile.product-proxy
+    links:
+      - "db"
+      - "rabbit"
+    ports:
+      - "8080"
+    volumes:
+      - "./src/product-proxy/.env.production:/app/src/product-proxy/.env.production"
+
+  admin_gw:
+    container_name: admin_gw
     build:
       context: ./
       dockerfile: Dockerfile.admin-gw
     links:
-      - "rabbitmq:rabbitmq"
+      - "rabbit"
+      - "product_proxy"
     ports:
-      - "8080"
+      - "3000:8080"
+    volumes:
+      - "./src/admin-gw/.env.production:/app/src/admin-gw/.env.production"
 
-  showcase-gw:
-    container_name: showcase-gw
+  admin_ui:
+    container_name: admin_ui
     build:
       context: ./
-      dockerfile: Dockerfile.showcase-gw
+      dockerfile: Dockerfile.admin-ui
     links:
-      - "rabbitmq:rabbitmq"
+      - "admin_gw"
     ports:
-      - "8080"
+      - "80:8080"
+    volumes:
+      - "./src/admin-ui/.env.production:/app/src/admin-ui/.env.production"
+#      - "./src/admin-ui/nginx/nginx.config:/app/src/admin-ui/.env.production"
+
+#  showcase-gw:
+#    container_name: showcase-gw
+#    build:
+#      context: ./
+#      dockerfile: Dockerfile.showcase-gw
+#    links:
+#      - "rabbitmq:rabbitmq"
+#    ports:
+#      - "8080"

@@ -6,7 +6,7 @@ import _possibleConstructorReturn from "/home/viktor/projects/shop/node_modules/
 import _getPrototypeOf from "/home/viktor/projects/shop/node_modules/babel-preset-react-app/node_modules/@babel/runtime/helpers/esm/getPrototypeOf";
 import _createClass from "/home/viktor/projects/shop/node_modules/babel-preset-react-app/node_modules/@babel/runtime/helpers/esm/createClass";
 import _inherits from "/home/viktor/projects/shop/node_modules/babel-preset-react-app/node_modules/@babel/runtime/helpers/esm/inherits";
-var _jsxFileName = "/home/viktor/projects/shop/packages/ui/src/symbols/Image/index.mjs";
+var _jsxFileName = "/home/viktor/projects/shop/packages/ui/src/symbols/Image/index.js";
 import types from 'prop-types';
 import React, { PureComponent } from 'react';
 import Spinner from '../Spinner';
