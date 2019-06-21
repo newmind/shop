@@ -13,6 +13,7 @@
     "@packages/validate": "^1.0.0",
     "@packages/dialog": "^1.0.0",
     "@packages/notifications": "^1.0.0",
+    "@fortawesome/fontawesome-free": "^5.8.1",
     "classnames": "^2.2.6",
     "history": "^4.7.2",
     "i18n-calypso": "^3.0.0",
@@ -32,6 +33,9 @@
     "redux-thunk": "^2.3.0"
   },
   "scripts": {
+    "ui:build": "././../../packages/ui/ && yarn run build",
+    "dialog:build": "././../../packages/dialog/ && yarn run build",
+    "notification:build": "././../../packages/notifications/ && yarn run build",
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
@@ -47,7 +51,6 @@
     "not op_mini all"
   ],
   "devDependencies": {
-    "@fortawesome/fontawesome-free": "^5.8.1",
     "redux-devtools-extension": "^2.13.8",
     "node-sass": "^4.11.0"
   }

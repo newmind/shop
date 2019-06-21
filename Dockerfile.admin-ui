@@ -39,4 +39,8 @@ RUN yarn
 
 WORKDIR /app/src/admin-ui
 
+CMD ["yarn", "run", "ui:build"]
+CMD ["yarn", "run", "dialog:build"]
+CMD ["yarn", "run", "notification:build"]
+
 ENTRYPOINT ["yarn", "run", "build"]
