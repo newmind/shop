@@ -60,7 +60,7 @@ services:
       context: ./
       dockerfile: Dockerfile.admin-ui
     links:
-      - "admin_gw"
+      - "admin_gw:admin_gw"
     ports:
       - "6000:8080"
     volumes:

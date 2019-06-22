@@ -51,7 +51,7 @@ FROM nginx as nginx
 
 EXPOSE 80
 
-COPY --from=ui /app/src/admin-ui/build /app
+COPY --from=ui /app/src/showcase-ui/build /app
 
 WORKDIR /etc/nginx
 
