@@ -8,7 +8,7 @@ let socket = null;
 export default (host) => {
   socket = SocketIO(host, {
     forceNew: true,
-    path: '/admin-ui-gw',
+    path: '/admin.socket.io',
     transports: ['websocket'],
     reconnection: true,
   });

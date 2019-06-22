@@ -33,9 +33,9 @@
     "redux-thunk": "^2.3.0"
   },
   "scripts": {
-    "ui:build": "././../../packages/ui/ && yarn run build",
-    "dialog:build": "././../../packages/dialog/ && yarn run build",
-    "notification:build": "././../../packages/notifications/ && yarn run build",
+    "ui:build": "cd ././../../packages/ui/ && yarn run build",
+    "dialog:build": "cd ././../../packages/dialog/ && yarn run build",
+    "notification:build": "cd ././../../packages/notifications/ && yarn run build",
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",

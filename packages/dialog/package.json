@@ -1,7 +1,8 @@
 {
   "name": "@packages/dialog",
   "version": "1.0.0",
-  "main": "lib/index.js",
+  "private": true,
+  "module": "lib/index.js",
   "dependencies": {
     "@packages/theme": "^1.0.0",
     "@packages/ui": "^1.0.0",
@@ -17,7 +18,8 @@
     "resolve": "1.10.0"
   },
   "scripts": {
-    "build": "node_modules/.bin/cross-env NODE_ENV=development babel ./src --out-dir ./lib --copy-files --watch"
+    "build": "node_modules/.bin/cross-env NODE_ENV=development babel ./src --out-dir ./lib --copy-files",
+    "start:dev": "node_modules/.bin/cross-env NODE_ENV=development babel ./src --out-dir ./lib --copy-files --watch"
   },
   "babel": {
     "presets": [

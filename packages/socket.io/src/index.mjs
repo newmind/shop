@@ -7,7 +7,7 @@ let io = null;
 export default async (server) => {
   try {
     io = new SocketIO(server, {
-      path: '/admin-gw',
+      path: '/admin.socket.io',
       transports: ['websocket'],
     });
     io.on('connection', client => {
