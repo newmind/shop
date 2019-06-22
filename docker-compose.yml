@@ -62,7 +62,7 @@ services:
     links:
       - "admin_gw:admin_gw"
     ports:
-      - "6000:8080"
+      - "8080:8080"
     volumes:
       - "./src/admin-ui/.env.production:/app/src/admin-ui/.env.production"
       - "./src/admin-ui/nginx/mime.types:/etc/nginx/mime.types"

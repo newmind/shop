@@ -39,4 +39,6 @@ RUN yarn
 
 WORKDIR /app/src/product-proxy
 
+RUN mkdir -p ./files
+
 ENTRYPOINT ["yarn", "run", "start"]
