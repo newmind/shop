@@ -1,37 +1,47 @@
 'use strict';
 
-import passport from 'koa-passport';
 import jwt from 'jsonwebtoken';
+import crypto from 'crypto';
+
+import { genHash256 } from '@packages/sys.utils';
+import { models } from '@packages/db';
 
 
 export default () => async (ctx, next) => {
+  const { User } = models;
+  const { login, password } = ctx.request.body;
 
-  await passport.authenticate('local', function (err, user) {
+  const hashPassword = genHash256(password, process.env['PASSWORD_SALT']);
 
-    // if (user === false) {
-    //   ctx.body = "Login failed";
-    // }
-    // else {
+  const user = await User.findOne({
+    where: {
+      login,
+      password: hashPassword,
+    }
+  });
 
-      const today = new Date();
-      const expirationDate = new Date(today);
-      expirationDate.setDate(today.getDate() + 60);
+  if ( ! user) {
+    ctx.throw(401, { code: '', message: '' });
+  }
 
-      const payload = {
-        id: '78687',//user.id,
-        displayName: 'name',//user.displayName,
-        email: 'eee@rt.ru',//user.email,
-        exp: parseInt(expirationDate.getTime() / 1000, 10),
-      };
-      const token = jwt.sign(payload, process.env['JWT_SECRET'], {
-        issuer:  'viktor',
-        subject:  'shop',
-        audience:  'ppp@mmm.ru',
-        // expiresIn:  '12h',
-        algorithm:  "HS256"
-      }); //здесь создается JWT
+  const today = new Date();
+  const expirationTime = parseInt(today.getTime() / 1000 + process.env['JWT_EXP'], 10);
 
-      ctx.body = {user: user.displayName, token: 'JWT ' + token};
-    // }
-  })(ctx, next);
+  const payload = {
+    id: user['id'],
+    login: user['login'],
+    password: user['password'],
+    exp: expirationTime,
+  };
+
+  const token = jwt.sign(payload, process.env['JWT_SECRET'], {
+    // issuer:  'viktor',
+    // subject:  'shop',
+    // audience:  'ppp@mmm.ru',
+    algorithm:  "HS256"
+  });
+
+  ctx.body = {
+    token: token
+  };
 };

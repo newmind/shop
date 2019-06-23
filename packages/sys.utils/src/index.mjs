@@ -2,6 +2,7 @@
 
 import fs from "fs";
 import BusBoy from 'busboy';
+import crypto from "crypto";
 
 const extensions = {
   'image/jpeg': 'jpg',
@@ -103,4 +104,10 @@ export const getFiles = async (req) => {
 
     req.pipe(bb);
   });
+};
+
+export const genHash256 = (data, salt) => {
+  const hash = crypto.createHmac('sha256', salt);
+  hash.update(data);
+  return hash.digest('hex');
 };
