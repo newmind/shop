@@ -1,6 +1,7 @@
 'use strict';
 
 import http from 'http';
+import koaCORS from "koa-cors2";
 
 import createSocket from '@packages/socket.io';
 import appServer, { initRouter } from '@packages/server';
@@ -27,6 +28,12 @@ import routes from './routes';
 
     });
   });
+
+  appServer.use(koaCORS({
+    credentials: true,
+    origin: process.env['HTTP_ORIGINS'],
+    allowMethods: ['GET', 'POST', 'PATCH', 'PUT', 'DELETE', 'OPTIONS'],
+  }));
 
   const httpServer = http.createServer(appServer.callback());
   const io = await createSocket(httpServer);

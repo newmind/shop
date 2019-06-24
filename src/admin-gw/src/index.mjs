@@ -2,7 +2,6 @@
 
 import http from 'http';
 
-import convert from "koa-convert";
 import koaCORS from "koa-cors2";
 import request from 'axios';
 

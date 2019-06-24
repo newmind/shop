@@ -2,11 +2,8 @@
 
 import Koa from 'koa';
 import Router from 'koa-router';
-import convert from 'koa-convert';
 
-import koaCORS from 'koa-cors2';
 import koaBodyParser from 'koa-bodyparser';
-import logger from 'koa-logger';
 
 const app = new Koa();
 const router = new Router();
