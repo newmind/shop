@@ -24,19 +24,17 @@ RUN npm i yarn -g --yes
 
 WORKDIR /app
 
-COPY ./src/product-proxy/src              ./src/product-proxy/src
-COPY ./src/product-proxy/package.json     ./src/product-proxy/
-COPY ./packages                           ./packages
-COPY ./package.json                       ./
-COPY ./lerna.json                         ./
-COPY ./yarn.lock                          ./
+COPY ./src/identity-srv/src              ./src/identity-srv/src
+COPY ./src/identity-srv/package.json     ./src/identity-srv/
+COPY ./packages                          ./packages
+COPY ./package.json                      ./
+COPY ./lerna.json                        ./
+COPY ./yarn.lock                         ./
 
 RUN ls
 
 RUN yarn
 
-WORKDIR /app/src/product-proxy
-
-RUN mkdir -p ./files
+WORKDIR /app/src/identity-srv
 
 ENTRYPOINT ["yarn", "run", "start"]

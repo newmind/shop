@@ -15,6 +15,18 @@ services:
       - "15672"
       - "5672"
 
+  identity_srv:
+    container_name: identity_srv
+    build:
+      context: ./
+      dockerfile: Dockerfile.identity-srv
+    links:
+      - "db"
+    ports:
+      - "8080"
+    volumes:
+      - "./src/identity_srv/.env.production:/app/src/identity_srv/.env.production"
+
   product_proxy:
     container_name: product_proxy
     build:
@@ -36,6 +48,7 @@ services:
     links:
       - "rabbit"
       - "product_proxy"
+      - "identity_srv"
     ports:
       - "8080"
     volumes:
