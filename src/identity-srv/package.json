@@ -17,7 +17,8 @@
     "sequelize": "^5.1.0"
   },
   "scripts": {
-    "start": "node -r dotenv/config --experimental-modules src/index.mjs dotenv_config_path=./.env.production",
+    "migrations": "node -r dotenv/config --experimental-modules ./src/migrations/index.mjs dotenv_config_path=./.env",
+    "start": "node -r dotenv/config --experimental-modules ./src/index.mjs dotenv_config_path=./.env.production",
     "start:dev": "nodemon --exec node -r dotenv/config --experimental-modules ./src/index.mjs dotenv_config_path=./.env.development"
   },
   "devDependencies": {
