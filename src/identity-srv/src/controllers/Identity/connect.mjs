@@ -1,9 +1,8 @@
 'use strict';
 
 import jwt from 'jsonwebtoken';
-import crypto from 'crypto';
 
-import { genHash256 } from '@packages/sys.utils';
+import { genHash256, token } from '@packages/sys.utils';
 import { models } from '@packages/db';
 
 
@@ -24,8 +23,17 @@ export default () => async (ctx, next) => {
     ctx.throw(401, { code: '', message: '' });
   }
 
+  await User.update({ refreshToken: null }, {
+    where: { id: user['id'] }
+  });
+
   const today = new Date();
-  const expirationTime = parseInt(today.getTime() / 1000 + process.env['JWT_EXP'], 10);
+  const expirationTime = parseInt((today.getTime() / 1000) + Number(process.env['JWT_EXP']), 10);
+  const refreshToken = token(process.env['JWT_SECRET']).digest('hex');
+
+  await User.update({ refreshToken }, {
+    where: { id: user['id'] }
+  });
 
   const payload = {
     id: user['id'],
@@ -34,7 +42,7 @@ export default () => async (ctx, next) => {
     exp: expirationTime,
   };
 
-  const token = jwt.sign(payload, process.env['JWT_SECRET'], {
+  const identityToken = jwt.sign(payload, process.env['JWT_SECRET'], {
     // issuer:  'viktor',
     // subject:  'shop',
     // audience:  'ppp@mmm.ru',
@@ -42,6 +50,9 @@ export default () => async (ctx, next) => {
   });
 
   ctx.body = {
-    token: token
+    data: {
+      token: identityToken,
+      refreshToken: refreshToken,
+    }
   };
 };

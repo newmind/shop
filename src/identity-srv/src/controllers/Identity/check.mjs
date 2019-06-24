@@ -4,23 +4,24 @@ import jwt from 'jsonwebtoken';
 
 
 export default () => async (ctx, next) => {
-  const { token } = ctx.request.body;
+  try {
 
-  const user = await new Promise((resolve, reject) => {
+    const { token } = ctx.request.body;
 
-    jwt.verify(token, process.env['JWT_SECRET'], (err, decoded) => {
-      if (err) {
-        reject(err);
-      }
+    const user = await new Promise((resolve, reject) => {
 
-      const { exp } = decoded;
-      const nowDate = Math.round(Date.now() / 1000);
-
-      console.log(exp, nowDate, exp > nowDate);
-
-      resolve(decoded);
+      jwt.verify(token, process.env['JWT_SECRET'], (err, decoded) => {
+        if (err) {
+          reject(err);
+        }
+        resolve(decoded);
+      });
     });
-  });
 
-  ctx.body = user;
+    ctx.body = user;
+
+  } catch (error) {
+
+    ctx.throw(401, { code: 401, message: 'token invalid' });
+  }
 };

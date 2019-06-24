@@ -106,8 +106,12 @@ export const getFiles = async (req) => {
   });
 };
 
+export const token = (salt) => {
+  return crypto.createHmac('sha256', salt);
+};
+
 export const genHash256 = (data, salt) => {
-  const hash = crypto.createHmac('sha256', salt);
+  const hash = token(salt);
   hash.update(data);
   return hash.digest('hex');
 };

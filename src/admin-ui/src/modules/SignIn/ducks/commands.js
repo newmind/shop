@@ -1,15 +1,37 @@
 
-import axios from 'axios';
+import Cookies from 'js-cookie';
+import { push } from 'react-router-redux';
+
+import request from '@packages/request';
+
 
 import {
-  applicationAuthRequest,
+  applicationAuthRequestAction,
+  applicationAuthRequestFailAction,
+  applicationAuthRequestSuccessAction,
 } from './actions';
 
 
-export const signIn = () => async dispatch => {
+export const signIn = (formData) => async dispatch => {
   try {
-    const res = await axios.post('');
+
+    dispatch(applicationAuthRequestAction());
+
+    const result = await request({
+      url: '/sign-in',
+      method: 'post',
+      data: {
+        ...formData,
+      }
+    });
+
+    Cookies.set('admin', result);
+
+    dispatch(push('/'));
+    dispatch(applicationAuthRequestSuccessAction(result));
+
   } catch(error) {
 
+    dispatch(applicationAuthRequestFailAction(error));
   }
 };

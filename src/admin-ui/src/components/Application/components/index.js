@@ -5,16 +5,18 @@ import { withRouter } from 'react-router';
 
 import Component from './Component';
 
-import { checkAuthState } from '../ducks/commands';
+import { checkAuthState, changeInitial } from '../ducks/commands';
 
 
 const mapStateToProps = (store) => {
   return {
-    isInitializing: store['admin-ui-gw']['isInitializing'],
+    isAuth: store['application']['isAuth'],
+    isInitializing: store['application']['isInitializing'],
   };
 };
 
 const mapActionsToProps = dispatch => ({
+  changeInitial: bindActionCreators(changeInitial, dispatch),
   checkAuthState: bindActionCreators(checkAuthState, dispatch),
 });
 

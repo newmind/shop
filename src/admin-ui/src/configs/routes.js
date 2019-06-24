@@ -45,4 +45,9 @@ export default [
     wrapper: 'Composite',
     module: 'Currency',
   },
+  {
+    path: '/sign-in',
+    wrapper: 'Empty',
+    module: 'SignIn',
+  },
 ];

@@ -1,15 +1,19 @@
 
-import { APPLICATION_CHANGE_STATE } from './types';
+import {
+  APPLICATION_CHANGE_STATE,
+
+  APPLICATION_AUTH_REQUEST_SUCCESS,
+} from './types';
 
 const initialState = {
   isInitializing: true,
+  isAuth: false,
 };
 
-export const KEY = 'admin-ui-gw';
+export const KEY = 'application';
 
 
 export default (state = initialState, { type, payload }) => {
-
   switch (type) {
     case APPLICATION_CHANGE_STATE: {
       return {
@@ -17,6 +21,12 @@ export default (state = initialState, { type, payload }) => {
         isInitializing: payload,
       };
     }
+
+    case APPLICATION_AUTH_REQUEST_SUCCESS: return {
+      ...state,
+      isAuth: true,
+    };
+
     default: return { ...state };
   }
 }

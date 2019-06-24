@@ -2,7 +2,7 @@
 import types from 'prop-types';
 import React, { PureComponent } from 'react';
 
-import numeral from '@packages/numeral';
+// import numeral from '@packages/numeral';
 
 import { Link } from 'react-router-dom';
 import { Gallery, Table, Button, Row, Col } from '@packages/ui';

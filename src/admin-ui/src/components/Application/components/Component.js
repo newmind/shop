@@ -44,19 +44,19 @@ class Component extends PureComponent {
     routes: PropTypes.array,
     navigate: PropTypes.array,
     isInitializing: PropTypes.bool,
-    authenticated: PropTypes.bool,
+    isAuth: PropTypes.bool,
   };
 
   static defaultProps = {
     routes: [],
     navigate: [],
-    isInitializing: true,
+    isInitializing: false,
+    isAuth: false,
   };
 
   componentWillMount() {
-    // if (!this.props.authenticated) {
-    //   this.props.history.push('/sign-in');
-    // }
+    const { changeInitial } = this.props;
+    changeInitial(true);
   }
 
   componentDidMount() {

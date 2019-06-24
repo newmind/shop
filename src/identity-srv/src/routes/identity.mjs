@@ -1,14 +1,12 @@
 'use strict';
 
-import signIn from '../controllers/Identity/sign-in';
-import signUp from '../controllers/Identity/sign-up';
 import check from '../controllers/Identity/check';
+import connect from '../controllers/Identity/connect';
 
 
 export default (router) => {
 
   router
-    .post('/check', check())
-    .post('/sign-in', signIn())
-    .post('/sign-up', signUp());
+    .post('/v1/api/check', check())
+    .post('/v1/api/connect', connect());
 }

@@ -15,7 +15,10 @@ module.exports = (db, DataType) => {
     },
     password: {
       type: DataType.STRING(255),
-    }
+    },
+    refreshToken: {
+      type: DataType.STRING(255),
+    },
   });
 
   User.associate = ({}) => {};

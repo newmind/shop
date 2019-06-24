@@ -7,34 +7,37 @@ import {
   updateProduct,
   updateProductStatus,
   deleteProductById
-} from '../controllers/Products/index';
+} from '../controllers/Products';
 
 import {
   addImages,
   getImageByFileName
-} from '../controllers/Gallery/index';
+} from '../controllers/Gallery';
 
 import {
   getProducts as getStockProducts,
   create as createStockProduct,
   deleteProductById as deleteStockProductById,
   updateProduct as updateStockProductById,
-} from '../controllers/Stock/index';
+} from '../controllers/Stock';
 
 import {
   getAll as getCurrencies,
   create as createCurrency,
   deleteById as deleteCurrencyById,
   updateById as updateCurrencyById,
-} from '../controllers/Currency/index';
+} from '../controllers/Currency';
 
 import {
   getAll as getAllCategories,
   create as createCategory,
   deleteById as deleteCategoryById,
   // updateById as updateCurrencyById,
-} from '../controllers/Category/index';
+} from '../controllers/Category';
 
+import {
+  signIn,
+} from '../controllers/User';
 
 export default (router) => {
 
@@ -62,4 +65,6 @@ export default (router) => {
   router.post('/category', createCategory());
   // router.put('/currency/:currencyId', updateCurrencyById());
   router.delete('/category/:categoryId', deleteCategoryById());
+
+  router.post('/sign-in', signIn());
 };

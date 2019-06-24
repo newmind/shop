@@ -10,5 +10,3 @@ export const changeState = state => {
     payload: state,
   }
 };
-
-

@@ -14,10 +14,6 @@ import routes from './routes';
 
   const httpServer = http.createServer(appServer.callback());
 
-  appServer.use(async (ctx, next) => {
-    await next();
-  });
-
   initRouter(routes);
 
   httpServer.listen(process.env['PORT'], () => console.log('Server started on port', process.env['PORT']));

@@ -1,16 +1,26 @@
 
+import Cookies from 'js-cookie';
+import { push } from 'react-router-redux';
+
 import { sleep } from '@packages/utils';
-// import { getCookie } from 'redux-cookie';
+
 import { changeState } from './actions';
 
 
+export const changeInitial = (state) => async (dispatch) => {
+
+  dispatch(changeState(state));
+};
+
 export const checkAuthState = () => async (dispatch) => {
 
-  dispatch(changeState(true));
+  const cookies = Cookies.get('admin');
 
-  // const cookie = dispatch(getCookie('state'));
+  if ( ! cookies) {
+    dispatch(push('/sign-in'));
+  }
 
-  await sleep(1000);
+  await sleep(500);
 
-  dispatch(changeState(false));
+  dispatch(changeInitial(false));
 };

@@ -33,14 +33,6 @@ app.use(async (ctx, next) => {
   console.log(`RESPONSE <--- [${ctx.request.method}] "${ctx.request.url}" ${ctx.response.status} (${response})`);
 });
 
-
-app.use(convert(koaCORS({
-  credentials: true,
-  origin: process.env['HTTP_ORIGINS'],
-  allowMethods: ['GET', 'POST', 'PATCH', 'PUT', 'DELETE', 'OPTIONS'],
-})));
-
-
 app.use(koaBodyParser({
   enableTypes: ['json', 'form'],
   onerror: (err, ctx) => {
@@ -56,9 +48,9 @@ app.use(async (ctx, next) => {
 
     const { status, message } = ctx.response;
 
-    ctx.status = e.status || status;
+    ctx.status = e['status'] || status;
     ctx.body = {
-      status: status,
+      status: e['status'] || status,
       message: e['message'] || message,
     };
   }

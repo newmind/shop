@@ -10,7 +10,8 @@ import styles from './default.module.scss';
 
 class Component extends PureComponent {
   onSubmit(data) {
-    console.log(data);
+    const { signIn } = this.props;
+    signIn(data);
   }
 
   _onSubmitForm() {

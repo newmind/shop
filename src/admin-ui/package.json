@@ -3,17 +3,17 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@fortawesome/fontawesome-free": "^5.8.1",
+    "@packages/dialog": "^1.0.0",
+    "@packages/moment": "^1.0.0",
+    "@packages/notifications": "^1.0.0",
+    "@packages/numeral": "^1.0.0",
     "@packages/request": "^1.0.0",
     "@packages/socket": "^1.0.0",
+    "@packages/theme": "^1.0.0",
     "@packages/ui": "^1.0.0",
     "@packages/utils": "^1.0.0",
-    "@packages/moment": "^1.0.0",
-    "@packages/numeral": "^1.0.0",
-    "@packages/theme": "^1.0.0",
     "@packages/validate": "^1.0.0",
-    "@packages/dialog": "^1.0.0",
-    "@packages/notifications": "^1.0.0",
-    "@fortawesome/fontawesome-free": "^5.8.1",
     "classnames": "^2.2.6",
     "history": "^4.7.2",
     "i18n-calypso": "^3.0.0",
@@ -51,7 +51,7 @@
     "not op_mini all"
   ],
   "devDependencies": {
-    "redux-devtools-extension": "^2.13.8",
-    "node-sass": "^4.11.0"
+    "node-sass": "^4.11.0",
+    "redux-devtools-extension": "^2.13.8"
   }
 }

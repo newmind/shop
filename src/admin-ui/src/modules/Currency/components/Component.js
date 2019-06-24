@@ -2,7 +2,7 @@
 import types from 'prop-types';
 import React, { PureComponent } from 'react';
 
-import numeral from '@packages/numeral';
+// import numeral from '@packages/numeral';
 import { Confirm, Dialog } from "@packages/dialog";
 import { Table, Row, Col, Button } from '@packages/ui';
 
