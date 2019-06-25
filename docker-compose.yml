@@ -20,6 +20,8 @@ services:
     build:
       context: ./
       dockerfile: Dockerfile.identity-srv
+    depends_on:
+      - db
     links:
       - "db"
     ports:
@@ -38,6 +40,9 @@ services:
     build:
       context: ./
       dockerfile: Dockerfile.product-proxy
+    depends_on:
+      - db
+      - rabbit
     links:
       - "db"
       - "rabbit"
@@ -57,6 +62,10 @@ services:
     build:
       context: ./
       dockerfile: Dockerfile.admin-gw
+    depends_on:
+      - rabbit
+      - product_proxy
+      - identity_srv
     links:
       - "rabbit"
       - "product_proxy"
@@ -77,6 +86,9 @@ services:
     build:
       context: ./
       dockerfile: Dockerfile.showcase-gw
+    depends_on:
+      - rabbit
+      - product_proxy
     links:
       - "rabbit"
       - "product_proxy"
@@ -96,6 +108,8 @@ services:
     build:
       context: ./
       dockerfile: Dockerfile.admin-ui
+    depends_on:
+      - admin_gw
     links:
       - "admin_gw:admin_gw"
     ports:
@@ -116,6 +130,8 @@ services:
     build:
       context: ./
       dockerfile: Dockerfile.showcase-ui
+    depends_on:
+      - showcase_gw
     links:
       - "showcase_gw"
     ports:
