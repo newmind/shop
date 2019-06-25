@@ -7,6 +7,7 @@ import appServer, { initRouter } from '@packages/server';
 
 import routes from './routes';
 
+console.log(process.env);
 
 (async () => {
 
