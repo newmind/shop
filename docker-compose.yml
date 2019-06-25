@@ -6,7 +6,7 @@ services:
     container_name: postgre_sql
     build: ./postgresql
     ports:
-      - "54320:5432"
+      - "5432"
 
 #  rabbit:
 #    container_name: rabbit_mq
@@ -25,7 +25,13 @@ services:
     ports:
       - "8080"
     volumes:
+      - "./src/identity-srv/src:/app/src/identity-srv/src"
       - "./src/identity_srv/.env.production:/app/src/identity_srv/.env.production"
+      - "./src/identity-srv/package.json:/app/src/identity-srv/package.json"
+      - "./packages:/app/packages"
+      - "./package.json:/app/package.json"
+      - "./lerna.json:/app/lerna.json"
+      - "./yarn.lock:/app/yarn.lock"
 
 #  product_proxy:
 #    container_name: product_proxy
