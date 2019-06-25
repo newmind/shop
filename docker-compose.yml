@@ -8,12 +8,12 @@ services:
     ports:
       - "5432"
 
-#  rabbit:
-#    container_name: rabbit_mq
-#    build: ./rabbit
-#    ports:
-#      - "15672"
-#      - "5672"
+  rabbit:
+    container_name: rabbit_mq
+    build: ./rabbit
+    ports:
+      - "15672"
+      - "5672"
 
   identity_srv:
     container_name: identity_srv
@@ -26,77 +26,107 @@ services:
       - "8080"
     volumes:
       - "./src/identity-srv/src:/app/src/identity-srv/src"
-      - "./src/identity_srv/.env.production:/app/src/identity_srv/.env.production"
+      - "./src/identity-srv/.env.production:/app/src/identity-srv/.env.production"
       - "./src/identity-srv/package.json:/app/src/identity-srv/package.json"
       - "./packages:/app/packages"
       - "./package.json:/app/package.json"
       - "./lerna.json:/app/lerna.json"
       - "./yarn.lock:/app/yarn.lock"
 
-#  product_proxy:
-#    container_name: product_proxy
-#    build:
-#      context: ./
-#      dockerfile: Dockerfile.product-proxy
-#    links:
-#      - "db"
-#      - "rabbit"
-#    ports:
-#      - "8080"
-#    volumes:
-#      - "./src/product-proxy/.env.production:/app/src/product-proxy/.env.production"
-#
-#  admin_gw:
-#    container_name: admin_gw
-#    build:
-#      context: ./
-#      dockerfile: Dockerfile.admin-gw
-#    links:
-#      - "rabbit"
-#      - "product_proxy"
-#      - "identity_srv"
-#    ports:
-#      - "8080"
-#    volumes:
-#      - "./src/admin-gw/.env.production:/app/src/admin-gw/.env.production"
-#
-#  showcase_gw:
-#    container_name: showcase_gw
-#    build:
-#      context: ./
-#      dockerfile: Dockerfile.showcase-gw
-#    links:
-#      - "rabbit"
-#      - "product_proxy"
-#    ports:
-#      - "8080"
-#    volumes:
-#      - "./src/showcase-gw/.env.production:/app/src/showcase-gw/.env.production"
-#
-#  admin_ui:
-#    container_name: admin_ui
-#    build:
-#      context: ./
-#      dockerfile: Dockerfile.admin-ui
-#    links:
-#      - "admin_gw:admin_gw"
-#    ports:
-#      - "8080:8080"
-#    volumes:
-#      - "./src/admin-ui/.env.production:/app/src/admin-ui/.env.production"
-#      - "./src/admin-ui/nginx/mime.types:/etc/nginx/mime.types"
-#      - "./src/admin-ui/nginx/nginx.conf:/etc/nginx/nginx.conf"
-#
-#  showcase_ui:
-#    container_name: showcase_ui
-#    build:
-#      context: ./
-#      dockerfile: Dockerfile.showcase-ui
-#    links:
-#      - "showcase_gw"
-#    ports:
-#      - "80:8080"
-#    volumes:
-#      - "./src/showcase-ui/.env.production:/app/src/showcase-ui/.env.production"
-#      - "./src/showcase-ui/nginx/mime.types:/etc/nginx/mime.types"
-#      - "./src/showcase-ui/nginx/nginx.conf:/etc/nginx/nginx.conf"
+  product_proxy:
+    container_name: product_proxy
+    build:
+      context: ./
+      dockerfile: Dockerfile.product-proxy
+    links:
+      - "db"
+      - "rabbit"
+    ports:
+      - "8080"
+    volumes:
+      - "./src/product-proxy/src:/app/src/product-proxy/src"
+      - "./src/product-proxy/.env.production:/app/src/product-proxy/.env.production"
+      - "./src/product-proxy/package.json:/app/src/product-proxy/package.json"
+      - "./packages:/app/packages"
+      - "./package.json:/app/package.json"
+      - "./lerna.json:/app/lerna.json"
+      - "./yarn.lock:/app/yarn.lock"
+
+  admin_gw:
+    container_name: admin_gw
+    build:
+      context: ./
+      dockerfile: Dockerfile.admin-gw
+    links:
+      - "rabbit"
+      - "product_proxy"
+      - "identity_srv"
+    ports:
+      - "8080"
+    volumes:
+      - "./src/admin-gw/src:/app/src/admin-gw/src"
+      - "./src/admin-gw/.env.production:/app/src/admin-gw/.env.production"
+      - "./src/admin-gw/package.json:/app/src/admin-gw/package.json"
+      - "./packages:/app/packages"
+      - "./package.json:/app/package.json"
+      - "./lerna.json:/app/lerna.json"
+      - "./yarn.lock:/app/yarn.lock"
+
+  showcase_gw:
+    container_name: showcase_gw
+    build:
+      context: ./
+      dockerfile: Dockerfile.showcase-gw
+    links:
+      - "rabbit"
+      - "product_proxy"
+    ports:
+      - "8080"
+    volumes:
+      - "./src/showcase-gw/src:/app/src/showcase-gw/src"
+      - "./src/showcase-gw/.env.production:/app/src/showcase-gw/.env.production"
+      - "./src/showcase-gw/package.json:/app/src/showcase-gw/package.json"
+      - "./packages:/app/packages"
+      - "./package.json:/app/package.json"
+      - "./lerna.json:/app/lerna.json"
+      - "./yarn.lock:/app/yarn.lock"
+
+  admin_ui:
+    container_name: admin_ui
+    build:
+      context: ./
+      dockerfile: Dockerfile.admin-ui
+    links:
+      - "admin_gw:admin_gw"
+    ports:
+      - "8080:8080"
+    volumes:
+      - "./src/admin-ui/src:/app/src/admin-ui/src"
+      - "./src/admin-ui/.env.production:/app/src/admin-ui/.env.production"
+      - "./src/admin-ui/package.json:/app/src/admin-ui/package.json"
+      - "./packages:/app/packages"
+      - "./package.json:/app/package.json"
+      - "./lerna.json:/app/lerna.json"
+      - "./yarn.lock:/app/yarn.lock"
+      - "./src/admin-ui/nginx/mime.types:/etc/nginx/mime.types"
+      - "./src/admin-ui/nginx/nginx.conf:/etc/nginx/nginx.conf"
+
+  showcase_ui:
+    container_name: showcase_ui
+    build:
+      context: ./
+      dockerfile: Dockerfile.showcase-ui
+    links:
+      - "showcase_gw"
+    ports:
+      - "80:8080"
+    volumes:
+      - "./src/showcase-ui/src:/app/src/showcase-ui/src"
+      - "./src/showcase-ui/.env.production:/app/src/showcase-ui/.env.production"
+      - "./src/showcase-ui/package.json:/app/src/showcase-ui/package.json"
+      - "./packages:/app/packages"
+      - "./package.json:/app/package.json"
+      - "./lerna.json:/app/lerna.json"
+      - "./yarn.lock:/app/yarn.lock"
+      - "./src/showcase-ui/nginx/mime.types:/etc/nginx/mime.types"
+      - "./src/showcase-ui/nginx/nginx.conf:/etc/nginx/nginx.conf"
