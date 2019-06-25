@@ -21,6 +21,8 @@ RUN yarn
 
 WORKDIR /app/src/showcase-ui
 
+RUN ls
+
 RUN ["yarn", "run", "ui:build"]
 RUN ["yarn", "run", "dialog:build"]
 RUN ["yarn", "run", "notification:build"]
