@@ -11,11 +11,13 @@ const defaultOptions = {
 };
 
 let dispatch = null;
+let hostApi = null;
 
 
-export const middleware = () => (store) => (next) => (action) => {
+export const middleware = (host) => (store) => (next) => (action) => {
 
   dispatch = store['dispatch'];
+  hostApi = host;
 
   return next(action);
 };
@@ -33,7 +35,7 @@ export default async (options) => {
   }
 
   const instance = axios.create({
-    baseURL: process.env['REACT_APP_API_HOST'],
+    baseURL: hostApi,
     timeout: 1000,
     headers: {
       'Authorization': cookies && cookies['token'],
