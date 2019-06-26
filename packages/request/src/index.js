@@ -29,23 +29,17 @@ export default async (options) => {
       ...options,
     };
 
-    let cookies = Cookies.get('admin');
     let headers = {};
 
     if (options['headers']) {
       headers = options['headers'];
     }
 
-    if (cookies) {
-      const cookiesContent = JSON.parse(cookies);
-      headers['Authorization'] = cookiesContent['token'];
-    }
-
     const instance = axios.create({
       baseURL: hostApi,
       timeout: 24000,
       headers: headers,
-      withCredentials: false,
+      withCredentials: true,
     });
 
     const { data } = await instance(options);

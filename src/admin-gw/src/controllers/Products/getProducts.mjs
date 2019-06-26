@@ -11,7 +11,6 @@ export default () => async (ctx) => {
   if (status) {
     filter['status'] = status;
   }
-
   const { data } = await get(filter);
 
   ctx.body = {

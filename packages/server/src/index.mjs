@@ -26,7 +26,6 @@ app.use(async (ctx, next) => {
     }
   }
 
-
   console.log(`RESPONSE <--- [${ctx.request.method}] "${ctx.request.url}" ${ctx.response.status} (${response})`);
 });
 
@@ -42,6 +41,8 @@ app.use(async (ctx, next) => {
   try {
     await next();
   } catch(e) {
+
+    console.log(e);
 
     const { status, message } = ctx.response;
 

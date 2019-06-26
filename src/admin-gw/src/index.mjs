@@ -3,7 +3,10 @@
 import http from 'http';
 
 import koaCORS from "koa-cors2";
+import cookie from 'koa-cookie';
+import cookies from 'cookie';
 import request from 'axios';
+
 
 import createSocket from '@packages/socket.io';
 import appServer, { initRouter } from '@packages/server';
@@ -60,22 +63,34 @@ import routes from './routes';
       allowMethods: ['GET', 'POST', 'PATCH', 'PUT', 'DELETE', 'OPTIONS'],
     }));
 
+    appServer.use(cookie.default());
+
     appServer.use(async (ctx, next) => {
       const { url } = ctx.request;
 
       if (/^\/sign-in/.test(url)) {
+
         await next();
+
       } else {
         try {
+          const { admin = null } = ctx.cookie;
 
-          const { authorization = null } = ctx[ 'request' ][ 'headers' ];
-          console.log(authorization);
+          if ( ! admin) {
+            ctx.throw(500, 'Неверный объект cookie');
+          }
+
+          const { token = null } = JSON.parse(decodeURIComponent(admin));
+
+          if ( ! token) {
+            ctx.throw(500, 'Неверное свойство cookie');
+          }
 
           await request({
             url: `${process.env[ 'API_INVOICE' ]}/check`,
             method: 'post',
             data: {
-              token: authorization
+              token: token,
             },
           });
 

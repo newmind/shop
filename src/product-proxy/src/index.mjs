@@ -7,7 +7,7 @@ import createSocket from '@packages/socket.io';
 import appServer, { initRouter } from '@packages/server';
 import { connect as createConnection, channel as createChannel, createExchange } from "@packages/rabbit";
 
-import routes from './routes/index';
+import routes from './routes';
 
 
 (async () => {

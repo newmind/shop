@@ -3676,6 +3676,11 @@ cookie@0.3.1:
   resolved "https://registry.yarnpkg.com/cookie/-/cookie-0.3.1.tgz#e7e0a1f9ef43b4c8ba925c5c5a96e806d16873bb"
   integrity sha1-5+Ch+e9DtMi6klxcWpboBtFoc7s=
 
+cookie@^0.4.0:
+  version "0.4.0"
+  resolved "https://registry.yarnpkg.com/cookie/-/cookie-0.4.0.tgz#beb437e7022b3b6d49019d088665303ebe9c14ba"
+  integrity sha512-+Hp8fLp57wnUSt0tY0tHEXh4voZRDnoIrZPqlo3DPiI4y9lwg/jqx+1Om94/W6ZaPDOUbnjOt/99w66zk+l1Xg==
+
 cookies@~0.7.1:
   version "0.7.3"
   resolved "https://registry.yarnpkg.com/cookies/-/cookies-0.7.3.tgz#7912ce21fbf2e8c2da70cf1c3f351aecf59dadfa"
@@ -7649,6 +7654,11 @@ koa-convert@^1.2.0:
   dependencies:
     co "^4.6.0"
     koa-compose "^3.0.0"
+
+koa-cookie@^1.0.0:
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/koa-cookie/-/koa-cookie-1.0.0.tgz#7c79723dd03b97abcfe430028b700bd47a36dafb"
+  integrity sha1-fHlyPdA7l6vP5DACi3AL1Ho22vs=
 
 koa-cors2@^0.0.1:
   version "0.0.1"
