@@ -23,36 +23,29 @@ export const middleware = (host) => (store) => (next) => (action) => {
 };
 
 export default async (options) => {
-
-  options = {
-    ...defaultOptions,
-    ...options,
-  };
-
-  console.log(3333, options);
-
-  let cookies = Cookies.get('admin');
-
-  console.log(4444, cookies);
-
-  if (cookies) {
-    cookies = JSON.parse(cookies);
-  }
-
-  console.log(5555, cookies);
-
-
-  let headers = {};
-  if (options['headers']) {
-    headers = options['headers'];
-  }
-  if (cookies) {
-    headers['Authorization'] = cookies['token'];
-  }
-
-  console.log(5555, headers);
-
   try {
+    options = {
+      ...defaultOptions,
+      ...options,
+    };
+
+    console.log(3333, options);
+
+    let cookies = Cookies.get('admin');
+    let headers = {};
+
+    if (options['headers']) {
+      headers = options['headers'];
+    }
+
+    console.log(4444, cookies);
+
+    if (cookies) {
+      const cookiesContent = JSON.parse(cookies);
+      headers['Authorization'] = cookiesContent['token'];
+    }
+
+    console.log(5555, headers);
 
     const instance = axios.create({
       baseURL: hostApi,
