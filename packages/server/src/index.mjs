@@ -42,8 +42,6 @@ app.use(async (ctx, next) => {
     await next();
   } catch(e) {
 
-    console.log(e);
-
     const { status, message } = ctx.response;
 
     ctx.status = e['status'] || status;
