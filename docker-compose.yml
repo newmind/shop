@@ -5,12 +5,14 @@ services:
   db:
     container_name: postgre_sql
     build: ./postgresql
+    restart: always
     ports:
       - "5432"
 
   rabbit:
     container_name: rabbit_mq
     build: ./rabbit
+    restart: always
     ports:
       - "15672"
       - "5672"
@@ -20,6 +22,7 @@ services:
     build:
       context: ./
       dockerfile: Dockerfile.identity-srv
+    restart: always
     depends_on:
       - db
     links:
@@ -40,6 +43,7 @@ services:
     build:
       context: ./
       dockerfile: Dockerfile.product-proxy
+    restart: always
     depends_on:
       - db
       - rabbit
@@ -62,6 +66,7 @@ services:
     build:
       context: ./
       dockerfile: Dockerfile.admin-gw
+    restart: always
     depends_on:
       - rabbit
       - product_proxy
@@ -86,6 +91,7 @@ services:
     build:
       context: ./
       dockerfile: Dockerfile.showcase-gw
+    restart: always
     depends_on:
       - rabbit
       - product_proxy
@@ -108,6 +114,7 @@ services:
     build:
       context: ./
       dockerfile: Dockerfile.admin-ui
+    restart: always
     depends_on:
       - admin_gw
     links:
@@ -123,6 +130,7 @@ services:
     build:
       context: ./
       dockerfile: Dockerfile.showcase-ui
+    restart: always
     depends_on:
       - showcase_gw
     links:

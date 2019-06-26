@@ -29,8 +29,6 @@ export default async (options) => {
       ...options,
     };
 
-    console.log(3333, options);
-
     let cookies = Cookies.get('admin');
     let headers = {};
 
@@ -38,14 +36,10 @@ export default async (options) => {
       headers = options['headers'];
     }
 
-    console.log(4444, cookies);
-
     if (cookies) {
       const cookiesContent = JSON.parse(cookies);
       headers['Authorization'] = cookiesContent['token'];
     }
-
-    console.log(5555, headers);
 
     const instance = axios.create({
       baseURL: hostApi,
@@ -54,19 +48,18 @@ export default async (options) => {
       withCredentials: false,
     });
 
-    console.log(6666, instance);
-
     const { data } = await instance(options);
 
     return data;
 
   } catch(error) {
-    const { status } = error['response'];
 
-    console.log(111, error);
+    const { status } = error['response'];
 
     if (status === 401) {
       dispatch(push('/sign-in'));
     }
+
+    throw Error(error);
   }
 };
