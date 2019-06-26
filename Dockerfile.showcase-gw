@@ -13,9 +13,9 @@ COPY ./src/showcase-gw/src               ./src/showcase-gw/src
 COPY ./src/showcase-gw/.env.production   ./src/showcase-gw
 COPY ./src/showcase-gw/package.json      ./src/showcase-gw
 COPY ./packages                          ./packages
-COPY ./package.json                      ./
-COPY ./lerna.json                        ./
-COPY ./yarn.lock                         ./
+COPY ./package.json                      .
+COPY ./lerna.json                        .
+COPY ./yarn.lock                         .
 
 RUN ls
 
