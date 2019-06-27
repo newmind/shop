@@ -157,6 +157,9 @@ services:
       - ./src/showcase-ui/nginx/nginx.conf:/etc/nginx/nginx.conf
       - ./src/showcase-ui/nginx/data/certbot/conf:/etc/letsencrypt
       - ./src/showcase-ui/nginx/data/certbot/www:/var/www/certbot
+      - ./src/showcase-ui/nginx/init-letsencrypt.sh:/etc/nginx
     environment:
       - NODE_ENV=production
-    command: '/bin/sh -c ''while :; do sleep 6h & wait $${!}; nginx -s reload; done & nginx -g "daemon off;"'''
+    command:
+      - '/bin/sh /etc/nginx/init-letsencrypt.sh'
+      - '/bin/sh -c ''while :; do sleep 6h & wait $${!}; nginx -s reload; done & nginx -g "daemon off;"'''
