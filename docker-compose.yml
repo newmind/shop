@@ -110,7 +110,10 @@ services:
       - "./yarn.lock:/app/yarn.lock"
 
   certbot:
+    # Новый контейнер, который запуститься вместе с nginx
+    container_name: certbot
     image: certbot/certbot
+    # Образ берется с docker hub
     volumes:
       - ./data/certbot/conf:/etc/letsencrypt
       - ./data/certbot/www:/var/www/certbot
@@ -130,6 +133,11 @@ services:
     volumes:
       - "./src/admin-ui/nginx/mime.types:/etc/nginx/mime.types"
       - "./src/admin-ui/nginx/nginx.conf:/etc/nginx/nginx.conf"
+      - ./data/certbot/conf:/etc/letsencrypt
+      - ./data/certbot/www:/var/www/certbot
+    environment:
+      - NODE_ENV=production
+    command: '/bin/sh -c ''while :; do sleep 6h & wait $${!}; nginx -s reload; done & nginx -g "daemon off;"'''
 
   showcase_ui:
     container_name: showcase_ui
@@ -147,5 +155,8 @@ services:
     volumes:
       - ./src/showcase-ui/nginx/mime.types:/etc/nginx/mime.types
       - ./src/showcase-ui/nginx/nginx.conf:/etc/nginx/nginx.conf
-      - ./data/certbot/conf:/etc/letsencrypt
-      - ./data/certbot/www:/var/www/certbot
+      - ./src/admin-ui/nginx/data/certbot/conf:/etc/letsencrypt
+      - ./src/admin-ui/nginx/data/certbot/www:/var/www/certbot
+    environment:
+      - NODE_ENV=production
+    command: '/bin/sh -c ''while :; do sleep 6h & wait $${!}; nginx -s reload; done & nginx -g "daemon off;"'''
