@@ -32,9 +32,11 @@ RUN ["yarn", "run", "build"]
 
 
 # START NGINX
-FROM nginx as nginx
+FROM staticfloat/nginx-certbot
 
-EXPOSE 80
+COPY *.conf /etc/nginx/conf.d/
+
+EXPOSE 80 443
 
 COPY --from=ui /app/src/showcase-ui/build /app
 

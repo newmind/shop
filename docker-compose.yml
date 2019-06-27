@@ -137,8 +137,10 @@ services:
     links:
       - "showcase_gw"
     ports:
-      - "80:80"
-      - "443:443"
+      - 80:80/tcp
+      - 443:443/tcp
     volumes:
       - "./src/showcase-ui/nginx/mime.types:/etc/nginx/mime.types"
       - "./src/showcase-ui/nginx/nginx.conf:/etc/nginx/nginx.conf"
+    environment:
+      - CERTBOT_EMAIL=pyatakov.viktor@gmail.com
