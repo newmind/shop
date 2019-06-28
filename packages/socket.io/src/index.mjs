@@ -4,10 +4,10 @@ import SocketIO from 'socket.io';
 
 let io = null;
 
-export default async (server) => {
+export default async (server, options = {}) => {
   try {
     io = new SocketIO(server, {
-      path: '/admin.socket.io',
+      path: options['path'] || '/admin.socket.io',
       transports: ['websocket'],
     });
     io.on('connection', client => {

@@ -36,7 +36,7 @@ import routes from './routes';
   }));
 
   const httpServer = http.createServer(appServer.callback());
-  const io = await createSocket(httpServer);
+  const io = await createSocket(httpServer, { path: '/showcase.socket.io' });
 
   appServer.use(async (ctx, next) => {
     ctx.io = io.sockets;

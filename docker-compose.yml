@@ -109,14 +109,14 @@ services:
       - "./lerna.json:/app/lerna.json"
       - "./yarn.lock:/app/yarn.lock"
 
-  certbot:
-    container_name: certbot
-    image: certbot/certbot
-    restart: unless-stopped #+++
-    volumes:
-      - ./data/certbot/conf:/etc/letsencrypt
-      - ./data/certbot/www:/var/www/certbot
-    entrypoint: "/bin/sh -c 'trap exit TERM; while :; do certbot renew; sleep 12h & wait $${!}; done;'"
+#  certbot:
+#    container_name: certbot
+#    image: certbot/certbot
+#    restart: unless-stopped
+#    volumes:
+#      - ./data/certbot/conf:/etc/letsencrypt
+#      - ./data/certbot/www:/var/www/certbot
+#    entrypoint: "/bin/sh -c 'trap exit TERM; while :; do certbot renew; sleep 12h & wait $${!}; done;'"
 
   admin_ui:
     container_name: admin_ui
@@ -127,7 +127,7 @@ services:
     depends_on:
       - admin_gw
     links:
-      - "admin_gw:admin_gw"
+      - "admin_gw"
     ports:
       - "8080:80"
     volumes:
