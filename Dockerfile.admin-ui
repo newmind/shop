@@ -34,7 +34,7 @@ RUN ["yarn", "run", "build"]
 
 
 # START NGINX
-FROM nginx as nginx
+FROM nginx
 
 EXPOSE 80
 
