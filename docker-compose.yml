@@ -129,7 +129,7 @@ services:
     links:
       - "admin_gw"
     ports:
-      - "8080:80"
+      - "80:80"
     volumes:
       - "./src/admin-ui/nginx/mime.types:/etc/nginx/mime.types"
       - "./src/admin-ui/nginx/nginx.conf:/etc/nginx/nginx.conf"
@@ -148,7 +148,6 @@ services:
       - "showcase_gw"
     ports:
       - "80:80"
-      - "443:443"
     volumes:
       - "./src/showcase-ui/nginx/mime.types:/etc/nginx/mime.types"
       - "./src/showcase-ui/nginx/nginx.conf:/etc/nginx/nginx.conf"
