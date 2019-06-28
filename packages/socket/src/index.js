@@ -5,10 +5,10 @@ import SocketIO from 'socket.io-client';
 
 let socket = null;
 
-export default (host) => {
+export default (host, options) => {
   socket = SocketIO(host, {
     forceNew: true,
-    path: '/admin.socket.io',
+    path: options['path'] || '/admin.socket.io',
     transports: ['websocket'],
     reconnection: true,
   });

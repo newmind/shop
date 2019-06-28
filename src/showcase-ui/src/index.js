@@ -23,7 +23,9 @@ import './styles/index.module.scss';
 import * as serviceWorker from './serviceWorker';
 
 
-const socket = createSocketIO(process.env['REACT_APP_SOCKET_HOST']);
+const socket = createSocketIO(process.env['REACT_APP_SOCKET_HOST'], {
+  path: '/showcase.socket.io',
+});
 
 const history = createHistory();
 const store = createStore({},
