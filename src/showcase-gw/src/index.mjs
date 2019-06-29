@@ -20,11 +20,11 @@ import routes from './routes';
   createConnection(process.env['RABBIT_CONNECTION_HOST'], async (error, connection) => {
     createChannel(connection, async (error, channel) => {
 
-      await createConsumer(channel, process.env['RABBIT_SHOWCASE_GW_QUEUE_PRODUCT_UPDATED'], (message) => {
+      await createConsumer(process.env['RABBIT_SHOWCASE_GW_QUEUE_PRODUCT_UPDATED'], (message) => {
         io.emit('action', { type: process.env['SOCKET_PRODUCT_UPDATED'], payload: JSON.parse(message) });
       });
 
-      await bindQueueToExchange(channel, process.env['RABBIT_PRODUCT_PROXY_EXCHANGE_PRODUCT_UPDATED'], process.env['RABBIT_SHOWCASE_GW_QUEUE_PRODUCT_UPDATED']);
+      await bindQueueToExchange(process.env['RABBIT_PRODUCT_PROXY_EXCHANGE_PRODUCT_UPDATED'], process.env['RABBIT_SHOWCASE_GW_QUEUE_PRODUCT_UPDATED']);
 
     });
   });
