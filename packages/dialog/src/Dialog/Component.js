@@ -30,10 +30,20 @@ class Component extends PureComponent {
     mode: 'default',
   };
 
+  wrapperRef = React.createRef();
+
   _handleCloseDialog() {
     const { name, closeDialog, onClose } = this.props;
     closeDialog(name);
     onClose && onClose(name);
+  }
+
+  _handleOutClick(event) {
+    const { current: wrapperElement } = this.wrapperRef;
+    const target = event.target;
+    if (wrapperElement === target) {
+      this._handleCloseDialog();
+    }
   }
 
   render() {
@@ -46,8 +56,9 @@ class Component extends PureComponent {
       [styles['dialog--danger']]: mode === DANGER_MODE,
       [styles['dialog--warning']]: mode === WARNING_MODE,
     });
+
     return isOpen && (name === actionDialogName) && (
-      <div className={styles['wrapper']}>
+      <div ref={this.wrapperRef} className={styles['wrapper']} onClick={this._handleOutClick.bind(this)}>
         <div className={classNameDialog}>
           <span className={classNameCloseDialog} onClick={this._handleCloseDialog.bind(this)} />
           {title && (

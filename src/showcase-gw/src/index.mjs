@@ -18,7 +18,7 @@ import routes from './routes';
 (async () => {
 
   createConnection(process.env['RABBIT_CONNECTION_HOST'], async (error, connection) => {
-    createChannel(connection, async (error, channel) => {
+    createChannel(connection, async () => {
 
       await createConsumer(process.env['RABBIT_SHOWCASE_GW_QUEUE_PRODUCT_UPDATED'], (message) => {
         io.emit('action', { type: process.env['SOCKET_PRODUCT_UPDATED'], payload: JSON.parse(message) });
