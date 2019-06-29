@@ -9,7 +9,7 @@ export default () => async (ctx) => {
   const filePath = path.resolve('files', fileName);
 
   ctx.res.writeHead(200, {
-    "Content-Type": "admin-ui-gw/octet-stream",
+    "Content-Type": "application/octet-stream",
     "Content-Disposition": "attachment; filename=" + fileName,
   });
 

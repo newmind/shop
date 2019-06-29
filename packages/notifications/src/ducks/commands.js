@@ -13,7 +13,7 @@ export const closeNotification = (index) => dispatch => {
 };
 
 export const pushNotification = (notification) => dispatch => {
-  notification['index.mjs'] = UUID();
+  notification['index'] = UUID();
   dispatch(pushNotificationAction(notification));
 };
 

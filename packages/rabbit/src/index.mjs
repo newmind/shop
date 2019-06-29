@@ -3,6 +3,7 @@
 import amqp from 'amqplib/callback_api';
 
 
+let channelConnect = null;
 let offlinePubQueue = [];
 
 const closeOnErr = (err) => {
@@ -55,6 +56,8 @@ export const channel = (connection, cb) => {
         console.log("RabbitMQ channel closed");
       });
 
+      channelConnect = channel;
+
       while (true) {
 
         const m = offlinePubQueue.shift();
@@ -70,19 +73,19 @@ export const channel = (connection, cb) => {
     });
 };
 
-export const createConsumer = (channel, queue, cb) => {
+export const createConsumer = (queue, cb) => {
   return new Promise((resolve, reject) => {
-    channel.assertQueue(queue, { durable: true, autoDelete: true }, function(error, _ok) {
+    channelConnect.assertQueue(queue, { durable: true, autoDelete: true }, function(error, _ok) {
       if (error) {
         reject(error);
       }
-      channel.consume(queue, function(message) {
+      channelConnect.consume(queue, function(message) {
         work(message, (ok) => {
           try {
             if (ok) {
-              channel.ack(message);
+              channelConnect.ack(message);
             } else {
-              channel.reject(message, true);
+              channelConnect.reject(message, true);
             }
             cb(message.content.toString());
           } catch (e) {
@@ -95,9 +98,9 @@ export const createConsumer = (channel, queue, cb) => {
   });
 };
 
-export const bindQueueToExchange = (chanel, exchange, queue) => {
+export const bindQueueToExchange = (exchange, queue) => {
   return new Promise((resolve, reject) => {
-    chanel.bindQueue(queue, exchange, '', {}, function(error, _ok) {
+    channelConnect.bindQueue(queue, exchange, '', {}, function(error, _ok) {
       if (error) {
         reject(error);
       }
@@ -106,9 +109,9 @@ export const bindQueueToExchange = (chanel, exchange, queue) => {
   });
 };
 
-export const createExchange = (channel, exchange) => {
+export const createExchange = (exchange) => {
   return new Promise((resolve, reject) => {
-    channel.assertExchange(exchange, 'fanout', { durable: true }, function(error, _ok) {
+    channelConnect.assertExchange(exchange, 'fanout', { durable: true }, function(error, _ok) {
       if (error) {
         reject(error);
       }
@@ -117,13 +120,13 @@ export const createExchange = (channel, exchange) => {
   });
 };
 
-export const sendEvent = (channel, exchange, content) => {
+export const sendEvent = (exchange, content) => {
   content = Buffer.from(content);
-  channel.publish(exchange, '', content, { percistent: true }, function(error) {
+  channelConnect.publish(exchange, '', content, { percistent: true }, function(error) {
     if (error) {
       console.error("RabbitMQ publish error:", error);
       offlinePubQueue.push([exchange, '', content]);
-      channel.connection.close();
+      channelConnect.connection.close();
     }
   });
 };

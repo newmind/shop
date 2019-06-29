@@ -15,15 +15,23 @@ import routes from './routes';
   databaseORM(`postgres://${process.env['DATA_BASE_USERNAME']}:${process.env['DATA_BASE_PASSWORD']}@${process.env['DATA_BASE_HOST']}:${process.env['DATA_BASE_PORT']}/${process.env['DATA_BASE_NAME']}`);
 
   createConnection(process.env['RABBIT_CONNECTION_HOST'], (error, connection) => {
-    createChannel(connection, async (error, channel) => {
+    createChannel(connection, async () => {
 
-      await createExchange(channel, process.env['RABBIT_PRODUCT_PROXY_EXCHANGE_PRODUCT_UPDATED']);
-      await createExchange(channel, process.env['RABBIT_PRODUCT_PROXY_EXCHANGE_PRODUCT_CREATED']);
-      await createExchange(channel, process.env['RABBIT_PRODUCT_PROXY_EXCHANGE_PRODUCT_DELETED']);
+      await createExchange(process.env['RABBIT_PRODUCT_PROXY_EXCHANGE_CURRENCY_UPDATED']);
+      await createExchange(process.env['RABBIT_PRODUCT_PROXY_EXCHANGE_CURRENCY_CREATED']);
+      await createExchange(process.env['RABBIT_PRODUCT_PROXY_EXCHANGE_CURRENCY_DELETED']);
 
-      await createExchange(channel, process.env['RABBIT_PRODUCT_PROXY_EXCHANGE_STOCK_PRODUCT_CREATED']);
-      await createExchange(channel, process.env['RABBIT_PRODUCT_PROXY_EXCHANGE_STOCK_PRODUCT_UPDATED']);
-      await createExchange(channel, process.env['RABBIT_PRODUCT_PROXY_EXCHANGE_STOCK_PRODUCT_DELETED']);
+      await createExchange(process.env['RABBIT_PRODUCT_PROXY_EXCHANGE_CATEGORY_UPDATED']);
+      await createExchange(process.env['RABBIT_PRODUCT_PROXY_EXCHANGE_CATEGORY_CREATED']);
+      await createExchange(process.env['RABBIT_PRODUCT_PROXY_EXCHANGE_CATEGORY_DELETED']);
+
+      await createExchange(process.env['RABBIT_PRODUCT_PROXY_EXCHANGE_PRODUCT_UPDATED']);
+      await createExchange(process.env['RABBIT_PRODUCT_PROXY_EXCHANGE_PRODUCT_CREATED']);
+      await createExchange(process.env['RABBIT_PRODUCT_PROXY_EXCHANGE_PRODUCT_DELETED']);
+
+      await createExchange(process.env['RABBIT_PRODUCT_PROXY_EXCHANGE_STOCK_PRODUCT_CREATED']);
+      await createExchange(process.env['RABBIT_PRODUCT_PROXY_EXCHANGE_STOCK_PRODUCT_UPDATED']);
+      await createExchange(process.env['RABBIT_PRODUCT_PROXY_EXCHANGE_STOCK_PRODUCT_DELETED']);
     });
   });
 

@@ -54,7 +54,7 @@ export default () => async (ctx) => {
       ], transaction });
   });
 
-  sendEvent(ctx.rabbit, process.env['RABBIT_PRODUCT_PROXY_EXCHANGE_STOCK_PRODUCT_UPDATED'], JSON.stringify(product));
+  sendEvent(process.env['RABBIT_PRODUCT_PROXY_EXCHANGE_STOCK_PRODUCT_UPDATED'], JSON.stringify(product));
 
   ctx.body = {
     success: true,

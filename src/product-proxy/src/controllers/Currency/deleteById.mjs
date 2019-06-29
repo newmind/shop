@@ -1,24 +1,23 @@
 'use strict';
 
 import { sequelize, models } from '@packages/db';
-// import { sendEvent } from "@packages/rabbit";
+import { sendEvent } from "@packages/rabbit";
 
 
 export default () => async (ctx) => {
 
   const { currencyId } = ctx['params'];
-
-  console.log(11111, currencyId);
+  const { Currency } = models;
 
   await sequelize.transaction(async (transaction) => {
 
-    await models['Currency'].destroy({
+    await Currency.destroy({
       where: { id: currencyId },
       transaction,
     });
   });
 
-  // sendEvent(ctx.rabbit, process.env['RABBIT_PRODUCT_PROXY_EXCHANGE_PRODUCT_DELETED'], productId);
+  sendEvent(ctx.rabbit, process.env['RABBIT_PRODUCT_PROXY_EXCHANGE_CURRENCY_DELETED'], productId);
 
   ctx.body = {
     success: true,

@@ -17,7 +17,7 @@ export default () => async (ctx) => {
     });
   });
 
-  sendEvent(ctx.rabbit, process.env['RABBIT_PRODUCT_PROXY_EXCHANGE_STOCK_PRODUCT_DELETED'], productId);
+  sendEvent(process.env['RABBIT_PRODUCT_PROXY_EXCHANGE_STOCK_PRODUCT_DELETED'], productId);
 
   ctx.body = {
     success: true,

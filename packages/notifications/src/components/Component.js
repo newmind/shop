@@ -44,11 +44,12 @@ class Notification extends PureComponent {
 
   _handleClose() {
     const { index, onClose } = this.props;
+    console.log(index);
     onClose(index);
   }
 
   render() {
-    const { title, content, mode, index } = this.props;
+    const { title, content, mode } = this.props;
     const classNameClose = cn('fas fa-times', styles['notification__close']);
     const classNameNotification = cn(styles['notification'], {
       [styles['notification--success']]: mode === 'success',

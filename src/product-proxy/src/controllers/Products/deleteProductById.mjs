@@ -12,27 +12,33 @@ const FILE_PATH = path.resolve(process.cwd(), 'files');
 export default () => async (ctx) => {
 
   const { productId } = ctx['params'];
+  const { Product, Gallery } = models;
 
   await sequelize.transaction(async (transaction) => {
 
-    await models['Product'].destroy({
+    await Product.destroy({
       where: { id: productId },
       transaction,
     });
 
-    const images = await models['Gallery'].findAll({
+    const images = await Gallery.findAll({
       where: { productId }
     }, { transaction });
 
-    images.forEach(image => fs.unlinkSync(path.join(FILE_PATH, image['file'])));
+    images.forEach(image => {
+      const filePath = path.join(FILE_PATH, image['file']);
+      if (fs.existsSync(filePath)) {
+        fs.unlinkSync(filePath)
+      }
+    });
 
-    await models['Gallery'].destroy({
+    await Gallery.destroy({
       where: { productId },
       transaction,
     })
   });
 
-  sendEvent(ctx.rabbit, process.env['RABBIT_PRODUCT_PROXY_EXCHANGE_PRODUCT_DELETED'], productId);
+  sendEvent(process.env['RABBIT_PRODUCT_PROXY_EXCHANGE_PRODUCT_DELETED'], productId);
 
   ctx.body = {
     success: true,

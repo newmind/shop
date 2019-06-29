@@ -9,8 +9,6 @@ export default () => async (ctx) => {
   const { currencyId } = ctx.params;
   const { body } = ctx.request;
 
-  console.log(currencyId, body);
-
   const currency = await sequelize.transaction(async (transaction) => {
 
     await models['Currency'].update({
@@ -28,7 +26,7 @@ export default () => async (ctx) => {
     });
   });
 
-  // sendEvent(ctx.rabbit, process.env['RABBIT_PRODUCT_PROXY_EXCHANGE_PRODUCT_UPDATED'], JSON.stringify(product));
+  sendEvent(process.env['RABBIT_PRODUCT_PROXY_EXCHANGE_CATEGORY_UPDATED'], JSON.stringify(currency));
 
   ctx.body = {
     success: true,
