@@ -19,11 +19,13 @@ export default [
     path: '/products/create',
     wrapper: 'Composite',
     module: 'ProductModify',
+    removable: true,
   },
   {
     path: '/products/:id',
     wrapper: 'Composite',
     module: 'ProductModify',
+    removable: true,
   },
   {
     path: '/orders',

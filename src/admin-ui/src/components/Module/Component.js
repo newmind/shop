@@ -1,6 +1,6 @@
 
 import PropTypes from 'prop-types';
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 
 import { injectAsyncReducer, rejectAsyncReducer } from '../../bin/createStore';
 
@@ -21,7 +21,7 @@ const createWrapper = type => props => {
   }
 };
 
-class ModuleComponent extends Component {
+class ModuleComponent extends PureComponent {
   static propTypes = {
     navigate: PropTypes.array,
     module: PropTypes.string,
@@ -52,10 +52,6 @@ class ModuleComponent extends Component {
     if (removable) {
       await rejectAsyncReducer(module);
     }
-  }
-
-  shouldComponentUpdate(nextProps, nextState, nextContext) {
-    return this.state['Module'] !== nextState['Module'];
   }
 
   render() {

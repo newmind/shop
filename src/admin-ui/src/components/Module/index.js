@@ -5,4 +5,8 @@ import { withRouter } from 'react-router-dom';
 import Component from './Component';
 
 
-export default withRouter(connect()(Component));
+const mapStateToProps = (state, props) => {
+  return {};
+};
+
+export default withRouter(connect(mapStateToProps, null)(Component));
