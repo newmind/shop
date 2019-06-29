@@ -1,6 +1,7 @@
 
 @import "~@packages/theme";
 
+
 .header {
   
   display: block;
@@ -137,6 +138,38 @@
 
   display: block;
   margin: 80px 0 0;
+
+  &__controls {
+
+    display: flex;
+    flex: 1 0 auto;
+
+  }
+
+  &__header {
+
+    display: flex;
+    flex: 1 0 auto;
+    font: 16px "Opinion Pro";
+    color: $dark-color;
+    font-weight: bold;
+  }
+
+  &__link {
+
+    display: inline-block;
+    font: 14px "Opinion Pro";
+    color: $primary-color;
+    text-decoration: underline;
+    cursor: pointer;
+  }
+
+  &__empty {
+
+    display: inline-block;
+    font: 14px "Opinion Pro";
+    color: $dark-color;
+  }
 
   &__content {
 

@@ -4,12 +4,12 @@ import PageHOC from '../../_bin/PageHOC';
 
 import Component from './Component';
 
-import {
-  openDialog,
-  closeDialog,
+import { openDialog, closeDialog } from '@packages/dialog';
 
+import {
   getProductById,
   addProductToCart,
+  createComment,
 } from '../ducks/commands';
 
 
@@ -28,6 +28,8 @@ const mapActionsToProps = (dispatch) => {
   return {
     openDialog: bindActionCreators(openDialog, dispatch),
     closeDialog: bindActionCreators(closeDialog, dispatch),
+
+    createComment: bindActionCreators(createComment, dispatch),
     getProductById: bindActionCreators(getProductById, dispatch),
     addProductToCart: bindActionCreators(addProductToCart, dispatch),
   };

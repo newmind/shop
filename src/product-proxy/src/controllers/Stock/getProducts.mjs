@@ -35,6 +35,12 @@ export default () => async (ctx) => {
         attributes: ['id', 'name']
       },
       {
+        model: models['Comment'],
+        required: false,
+        as: 'comments',
+        attributes: ['evaluation', 'person', 'comment'],
+      },
+      {
         model: models['Product'],
         attributes: ['id', 'name', 'brand', 'description', 'status'],
         required: true,

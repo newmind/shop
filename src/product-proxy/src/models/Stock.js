@@ -31,7 +31,7 @@ module.exports = (db, DataType) => {
     },
   });
 
-  Stock.associate = ({ Product, Currency, Category }) => {
+  Stock.associate = ({ Product, Currency, Category, Comment }) => {
 
     Stock.belongsTo(Category, {
       foreignKey: 'categoryId',
@@ -46,7 +46,12 @@ module.exports = (db, DataType) => {
     Stock.belongsTo(Product, {
       foreignKey: 'productId',
       as: 'product'
-    })
+    });
+
+    Stock.hasMany(Comment, {
+      foreignKey: 'productId',
+      as: 'comments'
+    });
   };
 
   // Stock.sync({ force: true });

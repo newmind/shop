@@ -13,7 +13,7 @@ import {
   updateProductStatusById,
 
   getBrands,
-} from '../controllers/Products/index';
+} from '../controllers/Products';
 
 import {
   getProducts as getStockProducts,
@@ -21,21 +21,22 @@ import {
   createProduct as createStockProduct,
   deleteProductById as deleteStockProductById,
   updateProductById as updateStockProductById,
-} from '../controllers/Stock/index';
+  createComment,
+} from '../controllers/Stock';
 
 import {
   getAll as getCurrencies,
   create as createCurrency,
   deleteById as deleteCurrencyById,
   updateById as updateCurrencyById,
-} from '../controllers/Currency/index';
+} from '../controllers/Currency';
 
 import {
   getAll as getAllCategories,
   create as createCategory,
   deleteById as deleteCategoryById,
   // updateById as updateCurrencyById,
-} from '../controllers/Category/index';
+} from '../controllers/Category';
 
 
 export default (router) => {
@@ -54,6 +55,8 @@ export default (router) => {
   router.post('/v1/api/stock/products', createStockProduct());
   router.put('/v1/api/stock/products/:productId', updateStockProductById());
   router.delete('/v1/api/stock/products/:productId', deleteStockProductById());
+
+  router.post('/v1/api/stock/products/:productId/comments', createComment());
 
   router.get('/v1/api/currency', getCurrencies());
   router.post('/v1/api/currency', createCurrency());

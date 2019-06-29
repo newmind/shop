@@ -40,7 +40,6 @@ const store = createStore({},
 
   await importReducer('Application');
   await importReducer('Page');
-  await importReducer('Dialog');
   await importReducer('Cart');
 
   ReactDOM.render((

@@ -33,7 +33,7 @@ class Component extends PureComponent {
               </div>
             </div>
             <div className={styles['comment__content']}>
-              { comment['content'] }
+              { comment['comment'] }
             </div>
           </div>
         ))}

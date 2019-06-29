@@ -7,10 +7,12 @@ import Component from './Component';
 import { closeDialog } from '../ducks/commands';
 
 
-const mapStateToProps = state => ({
-  isOpen: state['dialog']['isOpen'],
-  actionDialogName: state['dialog']['name'],
-});
+const mapStateToProps = state => {
+  return {
+    isOpen: state['dialog']['isOpen'],
+    actionDialogName: state['dialog']['name'],
+  }
+};
 
 const mapActionsToProps = (dispatch) => {
   return {

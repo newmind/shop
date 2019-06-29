@@ -3,14 +3,13 @@ import { bindActionCreators } from 'redux';
 import PageHOC from '../../_bin/PageHOC';
 import { push } from 'react-router-redux';
 import { queryToObject } from '@packages/utils';
+import { openDialog, closeDialog } from '@packages/dialog';
 
 import Component from './Component';
 
+
 import {
   addProductToCart,
-
-  openDialog,
-  closeDialog,
 
   getProducts,
 

@@ -7,7 +7,7 @@ import Product from './Product';
 import Form from './Form';
 
 import Filter from './Filter';
-import Dialog from '../../../components/Dialog/components';
+import { Dialog } from '@packages/dialog';
 
 import styles from './default.module.scss';
 
@@ -42,7 +42,7 @@ class Component extends PureComponent {
 
   _handleFastView(product) {
     const { openDialog } = this.props;
-    openDialog(product);
+    openDialog('product');
   }
 
   _handleCart(product) {
@@ -88,7 +88,7 @@ class Component extends PureComponent {
             </div>
           )}
         </section>
-        <Dialog title="Быстрый просмотр товара">
+        <Dialog name="product" title="Быстрый просмотр товара">
           <Form onCart={this._handleCart.bind(this)} />
         </Dialog>
       </section>

@@ -4,6 +4,10 @@ import {
   GET_PRODUCT_BY_ID_REQUEST_FAIL,
   GET_PRODUCT_BY_ID_REQUEST_SUCCESS,
 
+  CREATE_COMMENT_REQUEST,
+  CREATE_COMMENT_REQUEST_FAIL,
+  CREATE_COMMENT_REQUEST_SUCCESS,
+
   SOCKET_PRODUCT_UPDATED,
 } from './types';
 
@@ -16,6 +20,7 @@ const initialState = {
     currency: {
       value: '',
     },
+    comments: [],
     product: {
       gallery: [],
       brand: 'None',
@@ -24,7 +29,6 @@ const initialState = {
       attributes: [],
     }
   },
-  comments: [],
   isInitialize: false,
 };
 
@@ -43,10 +47,23 @@ export default (state = initialState, { type, payload }) => {
           ...state['product'],
           ...payload
         },
-        comments: payload['comments'],
         isInitialize: true,
       };
     }
+
+    case CREATE_COMMENT_REQUEST: return {
+      ...state,
+    };
+    case CREATE_COMMENT_REQUEST_FAIL: return {
+      ...state,
+    };
+    case CREATE_COMMENT_REQUEST_SUCCESS: return {
+      ...state,
+      product: {
+        ...state['product'],
+        comments: [payload, ...state['product']['comments']]
+      },
+    };
 
     case SOCKET_PRODUCT_UPDATED: return {
       ...state,

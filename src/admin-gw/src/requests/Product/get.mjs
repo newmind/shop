@@ -9,6 +9,8 @@ const API_PRODUCTS_SERVER = process.env['API_PRODUCTS_SERVER'];
 export default async (filter = {}) => {
   try {
 
+    console.log(6546546465)
+
     const { data } = await axios({
       method: 'get',
       url: API_PRODUCTS_SERVER,
@@ -18,6 +20,6 @@ export default async (filter = {}) => {
     return data;
 
   } catch (error) {
-    console.log(error);
+    console.log(11111, error);
   }
 };

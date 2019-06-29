@@ -5,8 +5,7 @@ import React, { PureComponent } from 'react';
 import numeral from '@packages/numeral';
 
 import { Gallery } from '@packages/ui';
-
-import Dialog from '../../../components/Dialog/components';
+import { Dialog } from '@packages/dialog';
 
 import Comments from './Comments';
 import Properties from './Properties';
@@ -19,7 +18,6 @@ class Component extends PureComponent {
   static propTypes = {
     product: types.object,
     initialValues: types.object,
-    comments: types.array,
     closeDialog: types.func,
     openDialog: types.func,
   };
@@ -33,6 +31,7 @@ class Component extends PureComponent {
       currency: {
         value: '',
       },
+      comments: [],
       product: {
         id: null,
         gallery: [],
@@ -42,8 +41,6 @@ class Component extends PureComponent {
         attributes: [],
       }
     },
-    comments: [],
-    initialValues: {}
   };
 
   _handleClickCart(event) {
@@ -52,19 +49,21 @@ class Component extends PureComponent {
     addProductToCart(product);
   }
 
-  _openDialog() {
+  _handleOpenCommentDialog() {
     const { openDialog } = this.props;
-    openDialog();
+    openDialog('comment');
+  }
+
+  async _handleCreateComment(formData) {
+    const { closeDialog } = this.props;
+    const { product: { id }, createComment } = this.props;
+    await createComment(id, formData);
+    closeDialog('comment');
   }
 
   render() {
-    const {
-      product: { product, amount, currency },
-      comments,
-      initialValues
-    } = this.props;
+    const { product: { product, comments, amount, currency }} = this.props;
     const { gallery, attributes, brand, name, description } = product;
-
     return (
       <article className={styles['product']}>
         <div className={styles['product__common']}>
@@ -92,14 +91,18 @@ class Component extends PureComponent {
           </div>
         </div>
         <div className={styles['comments']}>
-          <h4 className={styles['header']}>Отзывы о товаре</h4>
-          <span onClick={this._openDialog.bind(this)}>Оставить отзыв</span>
+          <div className={styles['comments__controls']}>
+            <h4 className={styles['comments__header']}>Отзывы о товаре</h4>
+            <span className={styles['comments__link']} onClick={this._handleOpenCommentDialog.bind(this)}>Оставить отзыв</span>
+          </div>
           <div className={styles['comments__content']}>
-            <Comments comments={comments} />
+            { comments && !! comments.length
+              ? <Comments comments={comments} />
+              : <p className={styles['comments__empty']}>Отзывов о товаре еще нет</p>}
           </div>
         </div>
-        <Dialog title="Ваш отзыв о товаре">
-          <Form onSubmit={data => console.log(data)} initialValues={initialValues} />
+        <Dialog name="comment" title="Ваш отзыв о товаре">
+          <Form onSubmit={this._handleCreateComment.bind(this)} />
         </Dialog>
       </article>
     );
