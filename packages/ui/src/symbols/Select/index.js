@@ -126,21 +126,28 @@ class Component extends PureComponent {
   }
 
   _eventReset(event) {
+    const { isOpen } = this.state;
     const {current: selectElement} = this.selectRef;
     const target = event.target;
     if (selectElement && ! selectElement.contains(target)) {
-      this._handleOnBlur();
+      isOpen && this._handleOnBlur();
     }
   }
 
   _eventHandleScrolling() {
-    this._handleOnBlur();
-    this._calculateTooltipPosition();
+    const { isOpen } = this.state;
+    if (isOpen) {
+      this._handleOnBlur();
+      this._calculateTooltipPosition();
+    }
   }
 
   _eventHandleResize() {
-    this._handleOnBlur();
-    this._calculateTooltipPosition();
+    const { isOpen } = this.state;
+    if (isOpen) {
+      this._handleOnBlur();
+      this._calculateTooltipPosition();
+    }
   }
 
   _handleSetFocus() {

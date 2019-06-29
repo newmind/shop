@@ -95,9 +95,10 @@ class Component extends PureComponent {
 
   _onClick(event) {
     const target = event.target;
-    const { current: cartElement} = this.cartRef;
+    const { isOpen } = this.props;
+    const { current: cartElement } = this.cartRef;
     if (cartElement && target && ! cartElement.contains(target)) {
-      this._closeCart();
+      isOpen && this._closeCart();
     }
   }
 
