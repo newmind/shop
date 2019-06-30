@@ -16,7 +16,7 @@ class Component extends PureComponent {
   static defaultProps = {};
 
   render() {
-    const { handleSubmit } = this.props;
+    const { handleSubmit, valid, pristine } = this.props;
     return (
       <form className={styles['form']} onSubmit={handleSubmit}>
         <Container>
@@ -37,7 +37,7 @@ class Component extends PureComponent {
           </Row>
           <Row>
             <Col>
-              <Button mode="success" type="submit">Отправить</Button>
+              <Button mode="success" disabled={ ! valid || pristine } type="submit">Отправить</Button>
             </Col>
           </Row>
         </Container>

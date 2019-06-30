@@ -72,8 +72,6 @@ export const getCurrencies = () => async dispatch => {
       url: '/currency'
     });
 
-    console.log(result);
-
     return dispatch(getCurrenciesSuccessAction(result['items']));
 
   } catch (error) {

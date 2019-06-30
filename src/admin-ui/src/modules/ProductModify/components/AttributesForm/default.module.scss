@@ -27,7 +27,8 @@
   }
 
   &__title,
-  &__value {
+  &__value,
+  &__units {
 
     display: flex;
     flex-direction: column;

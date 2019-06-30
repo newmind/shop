@@ -3,13 +3,13 @@
 import axios from 'axios';
 
 
-const API_CURRENCIES_SERVER = process.env['API_CURRENCIES_SERVER'];
+const PRODUCT_API_SRV = process.env['PRODUCT_API_SRV'];
 
 
 export default async (id) => {
   try {
 
-    const { data } = await axios.delete(`${API_CURRENCIES_SERVER}/${id}`);
+    const { data } = await axios.delete(`${PRODUCT_API_SRV}/currency/${id}`);
 
     return data;
 

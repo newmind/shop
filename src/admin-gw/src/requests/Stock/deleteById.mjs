@@ -3,13 +3,13 @@
 import axios from 'axios';
 
 
-const API_STOCK_SERVER = process.env['API_STOCK_SERVER'];
+const PRODUCT_API_SRV = process.env['PRODUCT_API_SRV'];
 
 
 export default async (id) => {
   try {
 
-    const { data } = await axios.delete(`${API_STOCK_SERVER}/${id}`);
+    const { data } = await axios.delete(`${PRODUCT_API_SRV}/stock/products/${id}`);
 
     return data;
 

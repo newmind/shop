@@ -12,7 +12,7 @@ import styles from './default.module.scss';
 
 class Component extends PureComponent {
   render() {
-    const { handleSubmit } = this.props;
+    const { handleSubmit, units } = this.props;
     return (
       <form className={styles['wrapper']} onSubmit={handleSubmit}>
         <div className={styles['form']}>
@@ -55,7 +55,7 @@ class Component extends PureComponent {
           </Row>
           <Row>
             <Col>
-              <FieldArray name="attributes" component={AttrsForm} />
+              <FieldArray name="attributes" units={units} component={AttrsForm} />
             </Col>
           </Row>
         </div>

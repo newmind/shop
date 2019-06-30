@@ -2,17 +2,14 @@
 
 import axios from 'axios';
 
-// import { getBuffer } from "@packages/sys.utils";
-
-
-const API_STOCK_SERVER = process.env['API_STOCK_SERVER'];
+const PRODUCT_API_SRV = process.env['PRODUCT_API_SRV'];
 
 
 export default async (id, formData) => {
 
   const { data } = await axios({
     method: 'put',
-    url: `${API_STOCK_SERVER}/${id}`,
+    url: `${PRODUCT_API_SRV}/stock/products/${id}`,
     data: formData,
   });
 

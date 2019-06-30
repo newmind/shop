@@ -3,8 +3,9 @@ import request from '@packages/request';
 import { pushNotification } from '@packages/notifications';
 
 import {
-  openDialogAction,
-  closeDialogAction,
+  getUnitsRequestAction,
+  getUnitsRequestFailAction,
+  getUnitsRequestSuccessAction,
 
   getProductRequestAction,
   getProductRequestFailAction,
@@ -22,12 +23,22 @@ import {
 import { replace } from 'react-router-redux';
 
 
-export const openDialog = () => dispatch => {
-  dispatch(openDialogAction());
-};
+export const getUnits = () => async dispatch => {
+  try {
 
-export const closeDialog = () => dispatch => {
-  dispatch(closeDialogAction());
+    dispatch(getUnitsRequestAction());
+
+    const result = await request({
+      method: 'get',
+      url: '/units'
+    });
+
+    dispatch(getUnitsRequestSuccessAction(result));
+
+  } catch(error) {
+
+    dispatch(getUnitsRequestFailAction(error));
+  }
 };
 
 
@@ -45,9 +56,18 @@ export const getProductById = (id) => async dispatch => {
       url: `/products/${id}`
     });
 
+    const product = result['data'];
     const resultData = {
-      ...result['data'],
+      ...product,
       gallery: result['data']['gallery'].map(img => img['file']),
+      attributes: product['attributes'] ? product['attributes'].map(item => {
+        return {
+          id: item['id'],
+          name: item['name'],
+          value: item['value'],
+          unitId: item['unit'] ? item['unit']['id'] : -1,
+        };
+      }) : []
     };
 
     dispatch(getProductRequestSuccessAction(resultData));
@@ -88,6 +108,14 @@ export const updateProductsById = (data) => async dispatch => {
     const resultData = {
       ...result,
       gallery: result['gallery'].map(img => img['file']),
+      attributes: result['attributes'] ? result['attributes'].map(item => {
+        return {
+          id: item['id'],
+          name: item['name'],
+          value: item['value'],
+          unitId: item['unit'] ? item['unit']['id'] : -1,
+        };
+      }) : []
     };
 
     dispatch(updateProductRequestSuccessAction(resultData));
@@ -129,6 +157,14 @@ export const createProduct = (data) => async dispatch => {
     const resultData = {
       ...result,
       gallery: result['gallery'].map(img => img['file']),
+      attributes: result['attributes'] ? result['attributes'].map(item => {
+        return {
+          id: item['id'],
+          name: item['name'],
+          value: item['value'],
+          unitId: item['unit'] ? item['unit']['id'] : -1,
+        };
+      }) : []
     };
 
     dispatch(createProductRequestSuccessAction(resultData));

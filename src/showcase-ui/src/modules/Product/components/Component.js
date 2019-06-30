@@ -62,7 +62,7 @@ class Component extends PureComponent {
   }
 
   render() {
-    const { product: { product, comments, amount, currency }} = this.props;
+    const { product: { product, comments, amount, currency }, initialValues } = this.props;
     const { gallery, attributes, brand, name, description } = product;
     return (
       <article className={styles['product']}>
@@ -84,25 +84,31 @@ class Component extends PureComponent {
             </div>
           </div>
         </div>
-        <div className={styles['product__feature']}>
-          <h4 className={styles['header']}>Харастеристика товара:</h4>
-          <div className={styles['product__list']}>
-            <Properties list={attributes} />
-          </div>
-        </div>
-        <div className={styles['comments']}>
-          <div className={styles['comments__controls']}>
-            <h4 className={styles['comments__header']}>Отзывы о товаре</h4>
-            <span className={styles['comments__link']} onClick={this._handleOpenCommentDialog.bind(this)}>Оставить отзыв</span>
-          </div>
-          <div className={styles['comments__content']}>
-            { comments && !! comments.length
-              ? <Comments comments={comments} />
-              : <p className={styles['comments__empty']}>Отзывов о товаре еще нет</p>}
+        <div className={styles['features']}>
+          {attributes.length
+            ? (
+              <div className={styles['product__feature']}>
+                <h4 className={styles['header']}>Харастеристика товара:</h4>
+                <div className={styles['product__list']}>
+                  <Properties list={attributes} />
+                </div>
+              </div>
+            )
+            : null}
+          <div className={styles['comments']}>
+            <div className={styles['comments__controls']}>
+              <h4 className={styles['comments__header']}>Отзывы о товаре{comments.length ? <span className={styles['comments__count']}>({comments.length})</span> : null}</h4>
+              <span className={styles['comments__link']} onClick={this._handleOpenCommentDialog.bind(this)}>Оставить отзыв</span>
+            </div>
+            <div className={styles['comments__content']}>
+              { !! comments.length
+                ? <Comments comments={comments} />
+                : <p className={styles['comments__empty']}>Отзывов о товаре еще нет</p>}
+            </div>
           </div>
         </div>
         <Dialog name="comment" title="Ваш отзыв о товаре">
-          <Form onSubmit={this._handleCreateComment.bind(this)} />
+          <Form onSubmit={this._handleCreateComment.bind(this)} initialValues={initialValues} />
         </Dialog>
       </article>
     );

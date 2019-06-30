@@ -3,12 +3,12 @@
 import request from 'axios';
 
 
-const API_PRODUCTS_SERVER = process.env['API_PRODUCTS_SERVER'];
+const PRODUCT_API_SRV = process.env['PRODUCT_API_SRV'];
 
 export default () => async (ctx) => {
 
   const { productId } = ctx['params'];
-  const { data } = await request(`${API_PRODUCTS_SERVER}/${productId}`);
+  const { data } = await request(`${PRODUCT_API_SRV}/products/${productId}`);
 
   ctx.body = data;
 }

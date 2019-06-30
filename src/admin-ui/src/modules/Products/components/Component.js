@@ -82,6 +82,7 @@ class Component extends PureComponent {
                           <li key={index} className={styles['attributes__item']}>
                             <span className={styles['attributes__name']}>{ attr['name'] }:</span>
                             <span className={styles['attributes__value']}>{ attr['value'] }</span>
+                            {attr['unit'] && <span className={styles['attributes__unit']}>{ attr['unit']['value'] }</span>}
                           </li>
                         ))}
                       </ul>

@@ -5,7 +5,7 @@ import axios from 'axios';
 import { getBuffer } from "@packages/sys.utils";
 
 
-const API_PRODUCTS_SERVER = process.env['API_PRODUCTS_SERVER'];
+const PRODUCT_API_SRV = process.env['PRODUCT_API_SRV'];
 
 
 export default async (request) => {
@@ -14,7 +14,7 @@ export default async (request) => {
 
   const { data } = await axios({
     method: 'post',
-    url: `${API_PRODUCTS_SERVER}`,
+    url: `${PRODUCT_API_SRV}/products`,
     headers: {
       'content-type': request.headers['content-type']
     },

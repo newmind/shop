@@ -3,14 +3,14 @@
 import axios from 'axios';
 
 
-const API_PRODUCTS_SERVER = process.env['API_PRODUCTS_SERVER'];
+const PRODUCT_API_SRV = process.env['PRODUCT_API_SRV'];
 
 
 export default async (productId, status) => {
 
   const { data } = await axios({
     method: 'put',
-    url: `${API_PRODUCTS_SERVER}/${productId}/status/${status}`,
+    url: `${PRODUCT_API_SRV}/products/${productId}/status/${status}`,
   });
 
   return data;

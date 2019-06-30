@@ -29,6 +29,13 @@ import {
 } from '../controllers/Currency';
 
 import {
+  getAll as getUnits,
+  create as createUnit,
+  deleteById as deleteUnitById,
+  updateById as updateUnitById,
+} from '../controllers/Units';
+
+import {
   getAll as getAllCategories,
   create as createCategory,
   deleteById as deleteCategoryById,
@@ -60,6 +67,11 @@ export default (router) => {
   router.post('/currency', createCurrency());
   router.put('/currency/:currencyId', updateCurrencyById());
   router.delete('/currency/:currencyId', deleteCurrencyById());
+
+  router.get('/units', getUnits());
+  router.post('/units', createUnit());
+  router.put('/units/:unitId', updateUnitById());
+  router.delete('/units/:units', deleteUnitById());
 
   router.get('/category', getAllCategories());
   router.post('/category', createCategory());

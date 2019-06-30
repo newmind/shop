@@ -4,9 +4,6 @@ import request from "@packages/request";
 import {
   addProductToCartAction,
 
-  openDialogAction,
-  closeDialogAction,
-
   getProductByIdRequest,
   getProductByIdRequestFail,
   getProductByIdRequestSuccess,
@@ -15,15 +12,6 @@ import {
   createCommentRequestFailAction,
   createCommentRequestSuccessAction,
 } from './actions';
-
-
-export const openDialog = (product) => dispatch => {
-  dispatch(openDialogAction(product));
-};
-
-export const closeDialog = () => dispatch => {
-  dispatch(closeDialogAction());
-};
 
 
 export const addProductToCart = (product) => dispatch => {

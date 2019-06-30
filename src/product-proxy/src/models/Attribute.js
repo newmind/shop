@@ -23,7 +23,14 @@ module.exports = (db, DataType) => {
     },
   });
 
-  Attribute.associate = ({ Product, Values, ProductAttribute }) => {};
+  Attribute.associate = ({ Units }) => {
+
+    Attribute.hasOne(Units, {
+      foreignKey: 'id',
+      sourceKey: 'unitId',
+      as: 'unit',
+    });
+  };
 
   // Attribute.sync({ force: true });
 

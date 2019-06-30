@@ -7,6 +7,7 @@ import PageHOC from '../../_bin/PageHOC';
 import Component from './Component';
 
 import {
+  getUnits,
   getProductById,
   updateProductsById,
   createProduct
@@ -25,6 +26,7 @@ const mapStateToProps = state => {
     hasId: formValues ? !! formValues['id'] : false,
     isInvalid: isFormInvalid,
     isPristine: isFormPristine,
+    units: Product['units'],
     product: Product['product'],
     isError: Product['isError'],
   };
@@ -32,6 +34,7 @@ const mapStateToProps = state => {
 
 const mapActionsToProps = (dispatch) => {
   return {
+    getUnits: bindActionCreators(getUnits, dispatch),
     getProductById: bindActionCreators(getProductById, dispatch),
     updateProductsById: bindActionCreators(updateProductsById, dispatch),
     createProduct: bindActionCreators(createProduct, dispatch),
@@ -42,8 +45,9 @@ const mapActionsToProps = (dispatch) => {
 export default PageHOC({
   mapStateToProps,
   mapActionsToProps,
-  onEnter: ({ onLoading, getProductById, match: { params: { id }} }) => {
+  onEnter: ({ onLoading, getProductById, getUnits, match: { params: { id }} }) => {
     getProductById(id);
+    getUnits();
     onLoading(false);
   },
   onDestroy: () => {},

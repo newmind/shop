@@ -87,7 +87,7 @@ import routes from './routes';
           }
 
           await request({
-            url: `${process.env[ 'API_INVOICE' ]}/check`,
+            url: `${process.env['INVOICE_API_SRV']}/check`,
             method: 'post',
             data: {
               token: token,

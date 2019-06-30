@@ -1,7 +1,8 @@
 
 import {
-  OPEN_DIALOG,
-  CLOSE_DIALOG,
+  GET_UNITS_REQUEST,
+  GET_UNITS_REQUEST_FAIL,
+  GET_UNITS_REQUEST_SUCCESS,
 
   GET_PRODUCT_REQUEST,
   GET_PRODUCT_REQUEST_FAIL,
@@ -17,13 +18,20 @@ import {
 } from './types';
 
 
-export const openDialogAction = () => ({
-  type: OPEN_DIALOG,
+export const getUnitsRequestAction = () => ({
+  type: GET_UNITS_REQUEST,
 });
 
-export const closeDialogAction = () => ({
-  type: CLOSE_DIALOG,
+export const getUnitsRequestFailAction = () => ({
+  type: GET_UNITS_REQUEST_FAIL,
 });
+
+export const getUnitsRequestSuccessAction = (data) => {
+  return {
+    type: GET_UNITS_REQUEST_SUCCESS,
+    payload: data,
+  }
+};
 
 
 export const getProductRequestAction = () => ({

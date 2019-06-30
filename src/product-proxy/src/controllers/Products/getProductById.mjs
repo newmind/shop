@@ -4,8 +4,9 @@ import { models } from '@packages/db';
 
 
 export default () => async (ctx) => {
-
   const { productId } = ctx['params'];
+  const { Units } = models;
+
   const product = await models['Product'].findOne({
     where: { id: productId },
     attributes: ['id', 'name', 'brand', 'description', 'status'],
@@ -15,6 +16,14 @@ export default () => async (ctx) => {
         required: false,
         as: 'attributes',
         attributes: ['id', 'name', 'value'],
+        include: [
+          {
+            model: Units,
+            required: false,
+            as: 'unit',
+            attributes: ['id', 'value']
+          }
+        ]
       },
       {
         model: models['Gallery'],
@@ -30,8 +39,10 @@ export default () => async (ctx) => {
     ctx.throw(404, 'Not found');
   }
 
+  const productJSON = product.toJSON();
+
   ctx.body = {
     success: true,
-    data: product,
+    data: productJSON,
   };
 };

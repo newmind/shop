@@ -2,17 +2,14 @@
 
 import axios from 'axios';
 
-// import { getBuffer } from "@packages/sys.utils";
-
-
-const API_CURRENCIES_SERVER = process.env['API_CURRENCIES_SERVER'];
+const PRODUCT_API_SRV = process.env['PRODUCT_API_SRV'];
 
 
 export default async (id, formData) => {
 
   const { data } = await axios({
     method: 'put',
-    url: `${API_CURRENCIES_SERVER}/${id}`,
+    url: `${PRODUCT_API_SRV}/currency/${id}`,
     data: formData,
   });
 

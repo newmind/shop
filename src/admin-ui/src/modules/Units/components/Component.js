@@ -2,9 +2,10 @@
 import types from 'prop-types';
 import React, { PureComponent } from 'react';
 
-// import numeral from '@packages/numeral';
-import { Confirm } from "@packages/dialog";
-import { Table, Row, Col } from '@packages/ui';
+import { Confirm, Dialog } from "@packages/dialog";
+import {Table, Row, Col, Button} from '@packages/ui';
+
+import Form from './UnitForm';
 
 import cn from 'classnames';
 import styles from './default.module.scss';
@@ -13,11 +14,13 @@ import styles from './default.module.scss';
 
 class Component extends PureComponent {
   static propTypes = {
-    products: types.array,
+    units: types.array,
+    inProcess: types.bool,
   };
 
   static defaultProps = {
-    products: [],
+    units: [],
+    inProcess: false,
   };
 
   state = {
@@ -40,21 +43,36 @@ class Component extends PureComponent {
     removeProductById(productId);
   }
 
+  _handleAddUnityDialogOpen() {
+    const { openDialog } = this.props;
+    openDialog('unit-modify');
+  }
+
+  _handleSaveUnit(formData) {
+    const { createUnit } = this.props;
+    createUnit(formData);
+  }
+
   render() {
-    const { products } = this.props;
+    const { units, inProcess } = this.props;
     return (
       <div className="page">
         <Row>
           <Col>
+            <Button mode="primary" disabled={inProcess} onClick={this._handleAddUnityDialogOpen.bind(this)}>Добавить единицу измерения</Button>
+          </Col>
+        </Row>
+        <Row>
+          <Col>
             <Table
-              items={products}
+              items={units}
               columns={[
                 {
                   alias: 'id',
                   title: 'ID'
                 },
                 {
-                  alias: 'name',
+                  alias: 'value',
                   title: 'Наименование',
                 },
                 {
@@ -79,9 +97,12 @@ class Component extends PureComponent {
             />
           </Col>
         </Row>
+        <Dialog name="unit-modify" title="Добавить единицу измерения">
+          <Form onSubmit={this._handleSaveUnit.bind(this)} />
+        </Dialog>
         <Confirm
           name="remove-confirm"
-          message="Вы уверены, что хотите удалить продукт?"
+          message="Вы уверены, что хотите удалить значение?"
           onConfirm={this._handleConfirmRemove.bind(this)}
           onCancel={this._handleCancelRemove.bind(this)}
         />

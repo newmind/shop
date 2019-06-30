@@ -2,7 +2,7 @@
 
 import axios from 'axios';
 
-const API_PRODUCTS_SERVER = process.env['API_PRODUCTS_SERVER'];
+const PRODUCT_API_SRV = process.env['PRODUCT_API_SRV'];
 
 
 const getBuffer = async (req) => {
@@ -22,7 +22,7 @@ export default () => async (ctx) => {
 
   const res = await axios({
     method: 'post',
-    url: `${API_PRODUCTS_SERVER}/gallery`,
+    url: `${PRODUCT_API_SRV}/gallery`,
     headers: {
       'content-type': ctx.req.headers['content-type']
     },

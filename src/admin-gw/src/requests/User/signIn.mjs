@@ -2,15 +2,14 @@
 
 import axios from 'axios';
 
-
-const API_INVOICE = process.env['API_INVOICE'];
+const INVOICE_API_SRV = process.env['INVOICE_API_SRV'];
 
 
 export default async (formData) => {
 
   const { data } = await axios({
     method: 'post',
-    url: `${API_INVOICE}/connect`,
+    url: `${INVOICE_API_SRV}/connect`,
     data: formData,
   });
 

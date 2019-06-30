@@ -2,7 +2,7 @@
 import types from 'prop-types';
 import React, { PureComponent } from 'react';
 
-import { Row, Col, InputField } from '@packages/ui';
+import { Row, Col, InputField, SelectField } from '@packages/ui';
 
 import cn from 'classnames';
 import styles from './default.module.scss';
@@ -11,11 +11,13 @@ import styles from './default.module.scss';
 class Attribute extends PureComponent {
   static propTypes = {
     field: types.string,
+    units: types.array,
     onRemove: types.func,
   };
 
   static defaultProps = {
     field: '',
+    units: [],
   };
 
   _handleRemove() {
@@ -24,7 +26,7 @@ class Attribute extends PureComponent {
   }
 
   render() {
-    const { field } = this.props;
+    const { field, units } = this.props;
     const classNameRemoveAttr = cn(styles['attr__remove'], 'far fa-trash-alt');
     return (
       <div className={styles['attr']}>
@@ -33,6 +35,9 @@ class Attribute extends PureComponent {
         </div>
         <div className={styles['attr__value']}>
           <InputField label="Значение" name={`${field}.value`} />
+        </div>
+        <div className={styles['attr__units']}>
+          <SelectField label="Значение" name={`${field}.unitId`} options={units} simple={true} optionKey="id" optionValue="value" />
         </div>
         <div className={styles['attr__controls']}>
           <span className={classNameRemoveAttr} onClick={this._handleRemove.bind(this)} />
@@ -46,10 +51,12 @@ class Attribute extends PureComponent {
 class Component extends PureComponent {
   static propTypes = {
     path: types.string,
+    units: types.array,
   };
 
   static defaultProps = {
     path: '',
+    units: [],
   };
 
   _handleAddAttr() {
@@ -63,12 +70,12 @@ class Component extends PureComponent {
   }
 
   render() {
-    const { fields } = this.props;
+    const { fields, units } = this.props;
     return (
       <div className={styles['wrapper']}>
         {!!fields.length && (<Row>
           <div className={styles['attrs']}>
-          {fields.map((field, index) => <Attribute key={index} field={field} onRemove={this._handleRemoveAttr.bind(this, index)} />)}
+            {fields.map((field, index) => <Attribute key={index} units={units} field={field} onRemove={this._handleRemoveAttr.bind(this, index)} />)}
           </div>
         </Row>)}
         <Row>

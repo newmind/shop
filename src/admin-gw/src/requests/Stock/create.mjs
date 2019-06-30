@@ -3,14 +3,14 @@
 import axios from 'axios';
 
 
-const API_STOCK_SERVER = process.env['API_STOCK_SERVER'];
+const PRODUCT_API_SRV = process.env['PRODUCT_API_SRV'];
 
 
 export default async (formData) => {
 
   const { data } = await axios({
     method: 'post',
-    url: `${API_STOCK_SERVER}`,
+    url: `${PRODUCT_API_SRV}/stock/products`,
     data: formData,
   });
 

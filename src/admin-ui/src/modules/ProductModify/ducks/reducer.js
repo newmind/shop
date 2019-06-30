@@ -1,5 +1,9 @@
 
 import {
+  GET_UNITS_REQUEST,
+  GET_UNITS_REQUEST_FAIL,
+  GET_UNITS_REQUEST_SUCCESS,
+
   GET_PRODUCT_REQUEST,
   GET_PRODUCT_REQUEST_FAIL,
   GET_PRODUCT_REQUEST_SUCCESS,
@@ -17,6 +21,7 @@ import {
 
 
 const initialState = {
+  units: [],
   product: {},
   inProcess: false,
   isError: false,
@@ -26,6 +31,20 @@ export default (state = initialState, { type, payload }) => {
   switch (type) {
     case 'RESET': return {
       ...initialState,
+    };
+
+    case GET_UNITS_REQUEST: return {
+      ...state,
+    };
+    case GET_UNITS_REQUEST_FAIL: return {
+      ...state,
+    };
+    case GET_UNITS_REQUEST_SUCCESS: return {
+      ...state,
+      units: [
+        ...state['units'],
+        ...payload['items'],
+      ],
     };
 
     case GET_PRODUCT_REQUEST: return {

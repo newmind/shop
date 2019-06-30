@@ -3,7 +3,7 @@
 import axios from 'axios';
 
 
-const API_STOCK_SERVER = process.env['API_STOCK_SERVER'];
+const PRODUCT_API_SRV = process.env['PRODUCT_API_SRV'];
 
 
 export default async (filter = {}) => {
@@ -11,7 +11,7 @@ export default async (filter = {}) => {
 
     const { data } = await axios({
       method: 'get',
-      url: `${API_STOCK_SERVER}`,
+      url: `${PRODUCT_API_SRV}/stock/products`,
       params: { ...filter }
     });
 

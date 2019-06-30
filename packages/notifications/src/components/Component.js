@@ -44,7 +44,6 @@ class Notification extends PureComponent {
 
   _handleClose() {
     const { index, onClose } = this.props;
-    console.log(index);
     onClose(index);
   }
 

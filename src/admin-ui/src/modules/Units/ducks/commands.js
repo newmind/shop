@@ -3,51 +3,51 @@ import request from '@packages/request';
 import { closeDialog } from '@packages/dialog';
 
 import {
-  getProductsRequestAction,
-  getProductsRequestFailAction,
-  getProductsRequestSuccessAction,
+  getUnitsRequestAction,
+  getUnitsRequestFailAction,
+  getUnitsRequestSuccessAction,
 
-  removeProductsRequestAction,
-  removeProductsRequestFailAction,
-  removeProductsRequestSuccessAction,
+  createUnitsRequestAction,
+  createUnitsRequestFailAction,
+  createUnitsRequestSuccessAction,
 } from './actions';
 
 
-export const getProducts = () => async dispatch => {
+export const getUnits = () => async dispatch => {
   try {
 
-    dispatch(getProductsRequestAction());
+    dispatch(getUnitsRequestAction());
 
     const result = await request({
       method: 'get',
-      url: '/products',
-      params: {
-        status: 0,
-      }
+      url: '/units',
     });
 
-    dispatch(getProductsRequestSuccessAction(result['items']));
+    dispatch(getUnitsRequestSuccessAction(result['items']));
 
   } catch(error) {
-    dispatch(getProductsRequestFailAction());
+
+    dispatch(getUnitsRequestFailAction(error));
   }
 };
 
-export const removeProductById = (id) => async dispatch => {
+
+export const createUnit = (formData) => async dispatch => {
   try {
 
-    dispatch(removeProductsRequestAction());
+    dispatch(createUnitsRequestAction());
 
-    await request({
-      method: 'delete',
-      url: `/products/${id}`,
+    const result = await request({
+      method: 'post',
+      url: '/units',
+      data: formData,
     });
 
-    dispatch(removeProductsRequestSuccessAction(id));
-    dispatch(closeDialog('remove-confirm'));
+    dispatch(createUnitsRequestSuccessAction(result));
+    dispatch(closeDialog('unit-modify'));
 
   } catch(error) {
-    console.log(error);
-    dispatch(removeProductsRequestFailAction());
+
+    dispatch(createUnitsRequestFailAction(error));
   }
 };

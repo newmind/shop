@@ -15,16 +15,6 @@ import {
 } from "./types";
 
 
-export const openDialogAction = (data) => ({
-  type: OPEN_DIALOG,
-  payload: data,
-});
-
-export const closeDialogAction = () => ({
-  type: CLOSE_DIALOG,
-});
-
-
 export const addProductToCartAction = (data) => ({
   type: ADD_PRODUCT_TO_CART,
   payload: data,

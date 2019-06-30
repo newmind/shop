@@ -1,35 +1,36 @@
 
-// import { bindActionCreators } from 'redux';
+import { bindActionCreators } from 'redux';
 import PageHOC from '../../_bin/PageHOC';
 
-// import { openDialog, closeDialog } from '@packages/dialog';
+import { openDialog, closeDialog } from '@packages/dialog';
 
 import Component from './Component';
 
-// import { getProducts, removeProductById } from '../ducks/commands';
+import { getUnits, createUnit } from '../ducks/commands';
 
 
 const mapStateToProps = state => {
-  // const Products = state['Recycle'];
+  const Units = state['Units'];
   return {
-    // products: Products['products'],
+    units: Units['units'],
   };
 };
 
 const mapActionsToProps = (dispatch) => {
   return {
-    // openDialog: bindActionCreators(openDialog, dispatch),
-    // closeDialog: bindActionCreators(closeDialog, dispatch),
-    // getProducts: bindActionCreators(getProducts, dispatch),
-    // removeProductById: bindActionCreators(removeProductById, dispatch),
+    openDialog: bindActionCreators(openDialog, dispatch),
+    closeDialog: bindActionCreators(closeDialog, dispatch),
+
+    getUnits: bindActionCreators(getUnits, dispatch),
+    createUnit: bindActionCreators(createUnit, dispatch),
   };
 };
 
 export default PageHOC({
   mapStateToProps,
   mapActionsToProps,
-  onEnter: ({ onLoading }) => {
-    // getProducts();
+  onEnter: ({ onLoading, getUnits }) => {
+    getUnits();
     onLoading(false);
   },
   onDestroy: () => {},

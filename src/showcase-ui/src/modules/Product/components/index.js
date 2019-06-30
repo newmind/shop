@@ -17,9 +17,10 @@ const mapStateToProps = state => {
   const Product = state['Product'];
   return {
     product: Product['product'],
-    isInitialize: Product['isInitialize'],
     initialValues: {
-      evaluation: 0
+      evaluation: 0,
+      person: '',
+      comment: '',
     }
   };
 };
@@ -38,12 +39,10 @@ const mapActionsToProps = (dispatch) => {
 export default PageHOC({
   mapStateToProps,
   mapActionsToProps,
-  onEnter: ({ onLoading, isInitialize, getProductById, match: { params } }) => {
+  onEnter: ({ onLoading, getProductById, match: { params } }) => {
     const { id } = params;
-    if ( ! isInitialize) {
-      getProductById(id);
-      onLoading(false);
-    }
+    getProductById(id);
+    onLoading(false);
   },
   onChange: () => { console.log('onChange')},
   onDestroy: () => {console.log('onDestroy')},

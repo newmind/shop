@@ -34,6 +34,14 @@ export default () => async (ctx) => {
         required: false,
         as: 'attributes',
         attributes: ['id', 'name', 'value'],
+        include: [
+          {
+            model: models['Units'],
+            required: false,
+            as: 'unit',
+            attributes: ['id', 'value']
+          }
+        ]
       },
       {
         model: models['Gallery'],

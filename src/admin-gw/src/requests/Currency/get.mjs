@@ -3,7 +3,7 @@
 import axios from 'axios';
 
 
-const API_CURRENCIES_SERVER = process.env['API_CURRENCIES_SERVER'];
+const PRODUCT_API_SRV = process.env['PRODUCT_API_SRV'];
 
 
 export default async () => {
@@ -11,7 +11,7 @@ export default async () => {
 
     const { data } = await axios({
       method: 'get',
-      url: `${API_CURRENCIES_SERVER}`,
+      url: `${PRODUCT_API_SRV}/currency`,
     });
 
     return data;
