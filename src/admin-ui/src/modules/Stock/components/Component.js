@@ -80,7 +80,7 @@ class Component extends PureComponent {
       amount: Number(formData['amount']),
       productId: formData['product']['id'],
       currencyId: formData['currency']['id'],
-      categoryId: formData['category']['id'],
+      categoryId: formData['category'] && formData['category']['id'],
     });
     this._onCloseDialog();
   }
