@@ -19,6 +19,8 @@ module.exports = (db, DataType) => {
     }
   });
 
+  Unit.associate = () => {};
+
   // Unit.sync({ force: true });
 
   return Unit;

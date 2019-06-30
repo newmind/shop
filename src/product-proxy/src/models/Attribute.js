@@ -18,17 +18,12 @@ module.exports = (db, DataType) => {
     value: {
       type: DataType.STRING(256),
     },
-    unitId: {
-      type: DataType.INTEGER,
-    },
   });
 
   Attribute.associate = ({ Units }) => {
 
-    Attribute.hasOne(Units, {
-      foreignKey: 'id',
-      sourceKey: 'unitId',
-      as: 'unit',
+    Attribute.belongsTo(Units, {
+      as: 'unit'
     });
   };
 
