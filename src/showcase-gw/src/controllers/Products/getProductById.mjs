@@ -3,14 +3,14 @@
 import request from 'axios';
 
 
-const API_PRODUCTS_SERVER = process.env['API_PRODUCTS_SERVER'];
+const PRODUCT_API_SRV = process.env['PRODUCT_API_SRV'];
 
 export default () => async (ctx) => {
   const { productId } = ctx['params'];
 
   const { data } = await request({
     method: 'get',
-    url: `${API_PRODUCTS_SERVER}/${productId}`
+    url: `${PRODUCT_API_SRV}/stock/products/${productId}`
   });
 
   ctx.body = data['data'];

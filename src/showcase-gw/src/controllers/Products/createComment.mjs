@@ -3,7 +3,7 @@
 import request from 'axios';
 
 
-const API_PRODUCTS_SERVER = process.env['API_PRODUCTS_SERVER'];
+const PRODUCT_API_SRV = process.env['PRODUCT_API_SRV'];
 
 export default () => async (ctx) => {
   const { productId } = ctx.params;
@@ -11,7 +11,7 @@ export default () => async (ctx) => {
 
   const { data } = await request({
     method: 'post',
-    url: `${API_PRODUCTS_SERVER}/${productId}/comments`,
+    url: `${PRODUCT_API_SRV}/stock/products/${productId}/comments`,
     data: formData,
   });
 

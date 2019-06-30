@@ -2,14 +2,13 @@
 
 import request from 'axios';
 
+const PRODUCT_API_SRV = process.env['PRODUCT_API_SRV'];
 
-const API_BRANDS_SERVER = process.env['API_BRANDS_SERVER'];
-const API_CATEGORY_SERVER = process.env['API_CATEGORY_SERVER'];
 
 export default () => async (ctx) => {
 
-  const { data: brands } = await request(API_BRANDS_SERVER);
-  const { data: categories } = await request(API_CATEGORY_SERVER);
+  const { data: brands } = await request(`${PRODUCT_API_SRV}/brands`);
+  const { data: categories } = await request(`${PRODUCT_API_SRV}/category`);
 
   ctx.body = {
     categories: [...categories['data']],

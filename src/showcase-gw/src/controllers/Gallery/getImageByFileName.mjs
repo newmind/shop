@@ -2,7 +2,7 @@
 
 import request from 'axios';
 
-const API_GALLERY_SERVER = process.env['API_GALLERY_SERVER'];
+const PRODUCT_API_SRV = process.env['PRODUCT_API_SRV'];
 
 
 export default () => async (ctx) => {
@@ -10,7 +10,7 @@ export default () => async (ctx) => {
   const { fileName } = ctx['params'];
   const { data } = await request({
     method: 'get',
-    url: `${API_GALLERY_SERVER}/${fileName}`,
+    url: `${PRODUCT_API_SRV}/gallery/${fileName}`,
     responseType: 'stream',
   });
 
