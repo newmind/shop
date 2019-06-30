@@ -21,7 +21,7 @@ class Component extends PureComponent {
         {list.map((item, index) => (
           <div key={index} className={styles['list__line']}>
             <div className={styles['list__col']}>{ item['name'] }:</div>
-            <div className={styles['list__col']}>{ item['value'] }</div>
+            <div className={styles['list__col']}>{ item['value'] } { item['unit'] && item['unit']['value'] }</div>
           </div>
         ))}
       </div>

@@ -6,44 +6,53 @@ import { models } from '@packages/db';
 export default () => async (ctx) => {
 
   const { productId } = ctx.params;
+  const { Stock, Units, Currency, Category, Comment, Product, Attribute, Gallery } = models;
 
-  const products = await models['Stock'].findOne({
+  const products = await Stock.findOne({
     attributes: ['id', 'count', 'amount'],
     where: { id: productId },
     include: [
       {
-        model: models['Currency'],
+        model: Currency,
         required: false,
         as: 'currency',
         attributes: ['id', 'value']
       },
       {
-        model: models['Category'],
+        model: Category,
         required: false,
         as: 'category',
         attributes: ['id', 'name']
       },
       {
-        model: models['Comment'],
+        model: Comment,
         required: false,
         as: 'comments',
         attributes: ['evaluation', 'person', 'comment'],
       },
       {
-        model: models['Product'],
+        model: Product,
         attributes: ['id', 'name', 'brand', 'description', 'status'],
         required: true,
         as: 'product',
         where: { status: 1 },
         include: [
           {
-            model: models['Attribute'],
+            model: Attribute,
             required: false,
             as: 'attributes',
             attributes: ['id', 'name', 'value'],
+            include: [
+              {
+                model: Units,
+                required: false,
+                as: 'unit',
+                attributes: ['value']
+              }
+            ],
           },
           {
-            model: models['Gallery'],
+            model: Gallery,
             required: false,
             as: 'gallery',
             attributes: ['file'],
