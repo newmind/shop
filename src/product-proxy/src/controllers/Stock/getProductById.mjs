@@ -47,9 +47,9 @@ export default () => async (ctx) => {
                 model: Units,
                 required: false,
                 as: 'unit',
-                attributes: ['value']
+                attributes: ['id', 'value']
               }
-            ],
+            ]
           },
           {
             model: Gallery,
