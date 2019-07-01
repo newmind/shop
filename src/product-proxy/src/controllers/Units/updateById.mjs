@@ -1,7 +1,7 @@
 'use strict';
 
 import { sequelize, models } from '@packages/db';
-// import { sendEvent } from '@packages/rabbit';
+import { sendEvent } from '@packages/rabbit';
 
 
 export default () => async (ctx) => {
@@ -12,10 +12,7 @@ export default () => async (ctx) => {
 
   const unit = await sequelize.transaction(async (transaction) => {
 
-    await Units.update({
-      ...body,
-    },
-    {
+    await Units.update(body, {
       where: { id: unitId },
       transaction
     });
@@ -27,7 +24,7 @@ export default () => async (ctx) => {
     });
   });
 
-  // sendEvent(ctx.rabbit, process.env['RABBIT_PRODUCT_PROXY_EXCHANGE_CURRENCY_UPDATED'], JSON.stringify(currency));
+  sendEvent(process.env['RABBIT_PRODUCT_PROXY_EXCHANGE_UNIT_UPDATED'], JSON.stringify(unit));
 
   ctx.body = {
     success: true,

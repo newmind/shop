@@ -1,14 +1,14 @@
 'use strict';
 
-import { updateById } from '../../requests/Currency/index';
+import { updateById } from '../../requests/Category';
 
 
 export default () => async (ctx) => {
 
-  const { currencyId } = ctx.params;
+  const { categoryId } = ctx.params;
   const { body } = ctx.request;
 
-  const { data } = await updateById(currencyId, body);
+  const { data } = await updateById(categoryId, body);
 
   ctx.body = data;
 }

@@ -42,7 +42,7 @@ import {
   getAll as getAllCategories,
   create as createCategory,
   deleteById as deleteCategoryById,
-  // updateById as updateCurrencyById,
+  updateById as updateCategoryById,
 } from '../controllers/Category';
 
 
@@ -79,6 +79,6 @@ export default (router) => {
 
   router.get('/v1/api/category', getAllCategories());
   router.post('/v1/api/category', createCategory());
-  router.put('/v1/api/category/:categoryId', updateCurrencyById());
+  router.put('/v1/api/category/:categoryId', updateCategoryById());
   router.delete('/v1/api/category/:categoryId', deleteCategoryById());
 };

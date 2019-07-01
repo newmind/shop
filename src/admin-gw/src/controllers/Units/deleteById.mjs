@@ -5,9 +5,9 @@ import { deleteById } from '../../requests/Unit';
 
 export default () => async (ctx) => {
 
-  const { currencyId } = ctx['params'];
+  const { unitId } = ctx['params'];
 
-  const { data } = await deleteById(currencyId);
+  const { data } = await deleteById(unitId);
 
   ctx.body = data;
 }

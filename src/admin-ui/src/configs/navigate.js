@@ -3,11 +3,11 @@ export default [
   {
     title: 'Витрина',
     path: '/',
+  },
+  {
+    title: 'Продукты',
+    path: '/products',
     navigate: [
-      {
-        title: 'Склад',
-        path: '/',
-      },
       {
         title: 'Продукты',
         path: '/products',

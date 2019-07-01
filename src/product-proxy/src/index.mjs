@@ -17,6 +17,10 @@ import routes from './routes';
   createConnection(process.env['RABBIT_CONNECTION_HOST'], (error, connection) => {
     createChannel(connection, async () => {
 
+      await createExchange(process.env['RABBIT_PRODUCT_PROXY_EXCHANGE_UNIT_UPDATED']);
+      await createExchange(process.env['RABBIT_PRODUCT_PROXY_EXCHANGE_UNIT_CREATED']);
+      await createExchange(process.env['RABBIT_PRODUCT_PROXY_EXCHANGE_UNIT_DELETED']);
+
       await createExchange(process.env['RABBIT_PRODUCT_PROXY_EXCHANGE_CURRENCY_UPDATED']);
       await createExchange(process.env['RABBIT_PRODUCT_PROXY_EXCHANGE_CURRENCY_CREATED']);
       await createExchange(process.env['RABBIT_PRODUCT_PROXY_EXCHANGE_CURRENCY_DELETED']);

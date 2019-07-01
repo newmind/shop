@@ -31,6 +31,11 @@ class Component extends PureComponent {
     category: null,
   };
 
+  _handleOpenModifyDialog(category) {
+    const { openDialog } = this.props;
+    this.setState({ category }, () => openDialog(DIALOG_NAME));
+  }
+
   _handleCreateDialog() {
     const { openDialog } = this.props;
     openDialog(DIALOG_NAME);
@@ -59,8 +64,10 @@ class Component extends PureComponent {
     closeDialog(DIALOG_NAME);
   }
 
-  _handleUpdate() {
-
+  async _handleUpdate(formData) {
+    const { updateById, closeDialog } = this.props;
+    await updateById(formData);
+    this.setState({ category: null }, () => closeDialog(DIALOG_NAME));
   }
 
   render() {
@@ -99,11 +106,13 @@ class Component extends PureComponent {
                     width: '70px',
                     vAlign: 'middle',
                   },
-                  template: ({ id }) => {
-                    const toArchiveClassName = cn(styles['actions__item'], styles['actions__item--trash'], 'far fa-trash-alt');
+                  template: (category) => {
+                    const toEditClassName = cn(styles['actions__item'], styles['actions__item--edit'], 'fas fa-pencil-alt');
+                    const toRemoveClassName = cn(styles['actions__item'], styles['actions__item--trash'], 'far fa-trash-alt');
                     return (
                       <div className={styles['actions']}>
-                        <span className={toArchiveClassName} onClick={this._handleOpenConfirmRemoveProduct.bind(this, id)} />
+                        <span className={toEditClassName} onClick={this._handleOpenModifyDialog.bind(this, category)} />
+                        <span className={toRemoveClassName} onClick={this._handleOpenConfirmRemoveProduct.bind(this, category['id'])} />
                       </div>
                     );
                   }

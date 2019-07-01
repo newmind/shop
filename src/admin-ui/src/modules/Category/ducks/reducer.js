@@ -15,6 +15,10 @@ import {
   DELETE_CATEGORY_REQUEST,
   DELETE_CATEGORY_REQUEST_FAIL,
   DELETE_CATEGORY_REQUEST_SUCCESS,
+
+  SOCKET_CATEGORY_CREATED,
+  SOCKET_CATEGORY_DELETED,
+  SOCKET_CATEGORY_UPDATED,
 } from './types';
 
 
@@ -51,6 +55,7 @@ export default (state = initialState, { type, payload }) => {
       ...state,
       inProcess: false,
     };
+    case SOCKET_CATEGORY_CREATED:
     case CREATE_CATEGORY_REQUEST_SUCCESS: return {
       ...state,
       categories: [
@@ -68,9 +73,15 @@ export default (state = initialState, { type, payload }) => {
       ...state,
       inProcess: false,
     };
+    case SOCKET_CATEGORY_UPDATED:
     case UPDATE_CATEGORY_REQUEST_SUCCESS: return {
       ...state,
-      categories: payload,
+      categories: state['categories'].map(category => {
+        if (category['id'] === payload['id']) {
+          return payload;
+        }
+        return category;
+      }),
       inProcess: false,
     };
 
@@ -82,6 +93,7 @@ export default (state = initialState, { type, payload }) => {
       ...state,
       inProcess: false,
     };
+    case SOCKET_CATEGORY_DELETED:
     case DELETE_CATEGORY_REQUEST_SUCCESS: {
       const categories = state['categories'];
       const index = categories.findIndex(category => category['id'] === payload);

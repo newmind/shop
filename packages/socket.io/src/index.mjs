@@ -26,7 +26,7 @@ export default async (server, options = {}) => {
 
 export const emit = (type, payload) => {
   io.sockets.emit('action', {
-    type: `@@SOCKET/${type}`,
+    type: `@@socket/${type}`,
     payload,
   });
 };

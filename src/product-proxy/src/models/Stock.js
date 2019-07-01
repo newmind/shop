@@ -19,16 +19,7 @@ module.exports = (db, DataType) => {
     },
     count: {
       type: DataType.INTEGER,
-    },
-    productId: {
-      type: DataType.INTEGER,
-    },
-    currencyId: {
-      type: DataType.INTEGER,
-    },
-    categoryId: {
-      type: DataType.INTEGER,
-    },
+    }
   });
 
   Stock.associate = ({ Product, Currency, Category, Comment }) => {

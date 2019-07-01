@@ -7,9 +7,17 @@ import {
   getUnitsRequestFailAction,
   getUnitsRequestSuccessAction,
 
-  createUnitsRequestAction,
-  createUnitsRequestFailAction,
-  createUnitsRequestSuccessAction,
+  createUnitRequestAction,
+  createUnitRequestFailAction,
+  createUnitRequestSuccessAction,
+
+  removeUnitByIdRequestAction,
+  removeUnitByIdRequestFailAction,
+  removeUnitByIdRequestSuccessAction,
+
+  updateUnitByIdRequestAction,
+  updateUnitByIdRequestFailAction,
+  updateUnitByIdRequestSuccessAction,
 } from './actions';
 
 
@@ -35,7 +43,7 @@ export const getUnits = () => async dispatch => {
 export const createUnit = (formData) => async dispatch => {
   try {
 
-    dispatch(createUnitsRequestAction());
+    dispatch(createUnitRequestAction());
 
     const result = await request({
       method: 'post',
@@ -43,11 +51,52 @@ export const createUnit = (formData) => async dispatch => {
       data: formData,
     });
 
-    dispatch(createUnitsRequestSuccessAction(result));
+    dispatch(createUnitRequestSuccessAction(result));
     dispatch(closeDialog('unit-modify'));
 
   } catch(error) {
 
-    dispatch(createUnitsRequestFailAction(error));
+    dispatch(createUnitRequestFailAction(error));
+  }
+};
+
+
+export const removeUnitById = (unitId) => async dispatch => {
+  try {
+
+    dispatch(removeUnitByIdRequestAction());
+
+    await request({
+      method: 'delete',
+      url: `/units/${unitId}`,
+    });
+
+    dispatch(removeUnitByIdRequestSuccessAction(unitId));
+    dispatch(closeDialog('remove-confirm'));
+
+  } catch(error) {
+
+    dispatch(removeUnitByIdRequestFailAction(error));
+  }
+};
+
+
+export const updateUnitById = (formData) => async dispatch => {
+  try {
+
+    dispatch(updateUnitByIdRequestAction());
+
+    const result = await request({
+      method: 'put',
+      url: `/units/${formData['id']}`,
+      data: formData,
+    });
+
+    dispatch(updateUnitByIdRequestSuccessAction(result));
+    dispatch(closeDialog('unit-modify'));
+
+  } catch(error) {
+
+    dispatch(updateUnitByIdRequestFailAction(error));
   }
 };

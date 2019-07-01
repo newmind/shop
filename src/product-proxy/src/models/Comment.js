@@ -9,9 +9,6 @@ module.exports = (db, DataType) => {
       autoIncrement: true,
       index: true,
     },
-    productId: {
-      type: DataType.INTEGER,
-    },
     evaluation: {
       type: DataType.INTEGER,
       defaultValue: 0,

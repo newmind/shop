@@ -7,6 +7,18 @@ import {
   CREATE_UNIT_REQUEST,
   CREATE_UNIT_REQUEST_FAIL,
   CREATE_UNIT_REQUEST_SUCCESS,
+
+  REMOVE_UNIT_REQUEST,
+  REMOVE_UNIT_REQUEST_FAIL,
+  REMOVE_UNIT_REQUEST_SUCCESS,
+
+  UPDATE_UNIT_REQUEST,
+  UPDATE_UNIT_REQUEST_FAIL,
+  UPDATE_UNIT_REQUEST_SUCCESS,
+
+  SOCKET_UNIT_CREATED,
+  SOCKET_UNIT_DELETED,
+  SOCKET_UNIT_UPDATED,
 } from './types';
 
 
@@ -39,12 +51,42 @@ export default (state = initialState, { type, payload }) => {
     case CREATE_UNIT_REQUEST_FAIL: return {
       ...state,
     };
+    case SOCKET_UNIT_CREATED:
     case CREATE_UNIT_REQUEST_SUCCESS: return {
       ...state,
       units: [
         ...state['units'],
         payload,
       ],
+    };
+
+    case REMOVE_UNIT_REQUEST: return {
+      ...state,
+    };
+    case REMOVE_UNIT_REQUEST_FAIL: return {
+      ...state,
+    };
+    case SOCKET_UNIT_DELETED:
+    case REMOVE_UNIT_REQUEST_SUCCESS: return {
+      ...state,
+      units: state['units'].filter(unit => unit['id'] !== payload)
+    };
+
+    case UPDATE_UNIT_REQUEST: return {
+      ...state,
+    };
+    case UPDATE_UNIT_REQUEST_FAIL: return {
+      ...state,
+    };
+    case SOCKET_UNIT_UPDATED:
+    case UPDATE_UNIT_REQUEST_SUCCESS: return {
+      ...state,
+      units: state['units'].map(unit => {
+        if (unit['id'] === payload['id']) {
+          return payload;
+        }
+        return unit;
+      })
     };
 
     default: return { ...state };

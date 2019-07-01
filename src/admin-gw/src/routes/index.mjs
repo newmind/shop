@@ -1,25 +1,8 @@
 'use strict';
 
-import {
-  getProducts,
-  getProductById,
-  createProduct,
-  updateProduct,
-  updateProductStatus,
-  deleteProductById
-} from '../controllers/Products';
-
-import {
-  addImages,
-  getImageByFileName
-} from '../controllers/Gallery';
-
-import {
-  getProducts as getStockProducts,
-  create as createStockProduct,
-  deleteProductById as deleteStockProductById,
-  updateProduct as updateStockProductById,
-} from '../controllers/Stock';
+import { addImages, getImageByFileName } from '../controllers/Gallery';
+import { getProducts, getProductById,  createProduct, updateProduct, updateProductStatus, deleteProductById } from '../controllers/Products';
+import { getProducts as getStockProducts, create as createStockProduct, deleteProductById as deleteStockProductById, updateProduct as updateStockProductById } from '../controllers/Stock';
 
 import {
   getAll as getCurrencies,
@@ -39,7 +22,7 @@ import {
   getAll as getAllCategories,
   create as createCategory,
   deleteById as deleteCategoryById,
-  // updateById as updateCurrencyById,
+  updateById as updateCategoryById,
 } from '../controllers/Category';
 
 import {
@@ -71,11 +54,11 @@ export default (router) => {
   router.get('/units', getUnits());
   router.post('/units', createUnit());
   router.put('/units/:unitId', updateUnitById());
-  router.delete('/units/:units', deleteUnitById());
+  router.delete('/units/:unitId', deleteUnitById());
 
   router.get('/category', getAllCategories());
   router.post('/category', createCategory());
-  // router.put('/currency/:currencyId', updateCurrencyById());
+  router.put('/category/:categoryId', updateCategoryById());
   router.delete('/category/:categoryId', deleteCategoryById());
 
   router.post('/sign-in', signIn());

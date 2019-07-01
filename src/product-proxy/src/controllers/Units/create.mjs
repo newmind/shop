@@ -23,7 +23,7 @@ export default () => async (ctx) => {
     });
   });
 
-  // sendEvent(process.env['RABBIT_PRODUCT_PROXY_EXCHANGE_CURRENCY_CREATED'], JSON.stringify(currency));
+  sendEvent(process.env['RABBIT_PRODUCT_PROXY_EXCHANGE_UNIT_CREATED'], JSON.stringify(unit));
 
   ctx.body = {
     success: true,

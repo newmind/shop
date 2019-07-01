@@ -24,23 +24,29 @@ class Component extends PureComponent {
   };
 
   state = {
-    productId: null,
+    unitId: null,
+    unit: null,
   };
+
+  _handleOpenModifyDialog(unit) {
+    const { openDialog } = this.props;
+    this.setState({ unit }, () => openDialog('unit-modify'));
+  }
 
   _handleCancelRemove() {
     const { closeDialog } = this.props;
-    this.setState({ productId: null }, () => closeDialog('remove-confirm'));
+    this.setState({ unitId: null }, () => closeDialog('remove-confirm'));
   }
 
-  _handleOpenConfirmRemoveProduct(productId) {
+  _handleOpenConfirmRemove(unitId) {
     const { openDialog } = this.props;
-    this.setState({ productId }, () => openDialog('remove-confirm'));
+    this.setState({ unitId }, () => openDialog('remove-confirm'));
   }
 
   _handleConfirmRemove() {
-    const { productId } = this.state;
-    const { removeProductById } = this.props;
-    removeProductById(productId);
+    const { unitId } = this.state;
+    const { removeUnitById } = this.props;
+    removeUnitById(unitId);
   }
 
   _handleAddUnityDialogOpen() {
@@ -53,7 +59,13 @@ class Component extends PureComponent {
     createUnit(formData);
   }
 
+  _updateUnit(formData) {
+    const { updateUnitById } = this.props;
+    updateUnitById(formData);
+  }
+
   render() {
+    const { unit } = this.state;
     const { units, inProcess } = this.props;
     return (
       <div className="page">
@@ -69,7 +81,11 @@ class Component extends PureComponent {
               columns={[
                 {
                   alias: 'id',
-                  title: 'ID'
+                  title: 'ID',
+                  attrs: {
+                    width: '50px',
+                    align: 'right'
+                  }
                 },
                 {
                   alias: 'value',
@@ -84,11 +100,13 @@ class Component extends PureComponent {
                     width: '70px',
                     vAlign: 'middle',
                   },
-                  template: ({ id }) => {
-                    const toArchiveClassName = cn(styles['actions__item'], styles['actions__item--trash'], 'far fa-trash-alt');
+                  template: (unit) => {
+                    const toEditClassName = cn(styles['actions__item'], styles['actions__item--edit'], 'fas fa-pencil-alt');
+                    const toRemoveClassName = cn(styles['actions__item'], styles['actions__item--trash'], 'far fa-trash-alt');
                     return (
                       <div className={styles['actions']}>
-                        <span className={toArchiveClassName} onClick={this._handleOpenConfirmRemoveProduct.bind(this, id)} />
+                        <span className={toEditClassName} onClick={this._handleOpenModifyDialog.bind(this, unit)} />
+                        <span className={toRemoveClassName} onClick={this._handleOpenConfirmRemove.bind(this, unit['id'])} />
                       </div>
                     );
                   }
@@ -97,8 +115,8 @@ class Component extends PureComponent {
             />
           </Col>
         </Row>
-        <Dialog name="unit-modify" title="Добавить единицу измерения">
-          <Form onSubmit={this._handleSaveUnit.bind(this)} />
+        <Dialog name="unit-modify" title={unit ? "Редактировать единицу измерения" : "Добавить единицу измерения"}>
+          <Form initialValues={unit} onSubmit={unit ? this._updateUnit.bind(this) : this._handleSaveUnit.bind(this)} />
         </Dialog>
         <Confirm
           name="remove-confirm"

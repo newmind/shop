@@ -13,6 +13,10 @@ const validate = values => {
     errors['count'] = 'Только положительное значение';
   }
 
+  if ( ! values['currency']) {
+    errors['currency'] = 'Необходимо выбрать';
+  }
+
   if ( ! values['product']) {
     errors['product'] = 'Необходимо выбрать';
   }

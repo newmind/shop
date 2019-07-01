@@ -6,7 +6,7 @@ import { openDialog, closeDialog } from '@packages/dialog';
 
 import Component from './Component';
 
-import { getUnits, createUnit } from '../ducks/commands';
+import { getUnits, createUnit, removeUnitById, updateUnitById } from '../ducks/commands';
 
 
 const mapStateToProps = state => {
@@ -23,6 +23,8 @@ const mapActionsToProps = (dispatch) => {
 
     getUnits: bindActionCreators(getUnits, dispatch),
     createUnit: bindActionCreators(createUnit, dispatch),
+    removeUnitById: bindActionCreators(removeUnitById, dispatch),
+    updateUnitById: bindActionCreators(updateUnitById, dispatch),
   };
 };
 

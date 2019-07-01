@@ -6,30 +6,30 @@ import { sendEvent } from '@packages/rabbit';
 
 export default () => async (ctx) => {
 
-  const { currencyId } = ctx.params;
+  const { categoryId } = ctx.params;
   const { body } = ctx.request;
 
-  const currency = await sequelize.transaction(async (transaction) => {
+  const category = await sequelize.transaction(async (transaction) => {
 
-    await models['Currency'].update({
+    await models['Category'].update({
       ...body,
     },
     {
-      where: { id: currencyId },
+      where: { id: categoryId },
       transaction
     });
 
-    return await models['Currency'].findOne({
-      attributes: ['id', 'value', 'description'],
-      where: { id: currencyId },
+    return await models['Category'].findOne({
+      attributes: ['id', 'name', 'description'],
+      where: { id: categoryId },
       transaction,
     });
   });
 
-  sendEvent(process.env['RABBIT_PRODUCT_PROXY_EXCHANGE_CATEGORY_UPDATED'], JSON.stringify(currency));
+  sendEvent(process.env['RABBIT_PRODUCT_PROXY_EXCHANGE_CATEGORY_UPDATED'], JSON.stringify(category));
 
   ctx.body = {
     success: true,
-    data: currency,
+    data: category,
   };
 };
