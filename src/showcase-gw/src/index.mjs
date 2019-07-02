@@ -22,7 +22,7 @@ import routes from './routes';
 
       // QUEUES
 
-      await createConsumer(process.env['RABBIT_SHOWCASE_GW_QUEUE_UNIT_UPDATED'], (message) =>{ console.log(90); io.emit('action', { type: process.env['SOCKET_UNIT_UPDATED'], payload: JSON.parse(message) })});
+      await createConsumer(process.env['RABBIT_SHOWCASE_GW_QUEUE_UNIT_UPDATED'], (message) => io.emit('action', { type: process.env['SOCKET_UNIT_UPDATED'], payload: JSON.parse(message) }));
       await createConsumer(process.env['RABBIT_SHOWCASE_GW_QUEUE_UNIT_CREATED'], (message) => io.emit('action', { type: process.env['SOCKET_UNIT_CREATED'], payload: JSON.parse(message) }));
       await createConsumer(process.env['RABBIT_SHOWCASE_GW_QUEUE_UNIT_DELETED'], (message) => io.emit('action', { type: process.env['SOCKET_UNIT_DELETED'], payload: Number(message) }));
 

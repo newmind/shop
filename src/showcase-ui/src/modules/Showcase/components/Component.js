@@ -4,10 +4,10 @@ import React, { PureComponent } from 'react';
 import { reduceToArray, objectToQuery } from '@packages/utils';
 
 import Product from './Product';
-import Form from './Form';
+// import Form from './Form';
 
 import Filter from './Filter';
-import { Dialog } from '@packages/dialog';
+// import { Dialog } from '@packages/dialog';
 
 import styles from './default.module.scss';
 
@@ -40,10 +40,10 @@ class Component extends PureComponent {
     getProducts(newPage);
   }
 
-  _handleFastView(product) {
-    const { openDialog } = this.props;
-    openDialog('product');
-  }
+  // _handleFastView() {
+  //   const { openDialog } = this.props;
+  //   openDialog('product');
+  // }
 
   _handleCart(product) {
     const { addProductToCart } = this.props;
@@ -88,9 +88,9 @@ class Component extends PureComponent {
             </div>
           )}
         </section>
-        <Dialog name="product" title="Быстрый просмотр товара">
-          <Form onCart={this._handleCart.bind(this)} />
-        </Dialog>
+        {/*<Dialog name="product" title="Быстрый просмотр товара">*/}
+        {/*  <Form onCart={this._handleCart.bind(this)} />*/}
+        {/*</Dialog>*/}
       </section>
     );
   }

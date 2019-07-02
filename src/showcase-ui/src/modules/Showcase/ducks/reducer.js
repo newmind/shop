@@ -9,6 +9,7 @@ import {
   GET_ADDITIONAL_DATA_REQUEST_SUCCESS,
 
   SOCKET_PRODUCT_UPDATED,
+  SOCKET_STOCK_PRODUCT_UPDATED,
 } from './types';
 
 const initialState = {
@@ -60,17 +61,32 @@ export default (state = initialState, { type, payload }) => {
       ...payload,
     };
 
-    case SOCKET_PRODUCT_UPDATED: {
-      const products = state['items'];
-      const newProducts = products.map(item => {
-        if (item['id'] === payload['id']) {
+    case SOCKET_STOCK_PRODUCT_UPDATED: return {
+      ...state,
+      items: state['items'].map(product => {
+        if (product['id'] === payload['id']) {
           return payload;
         }
-        return item;
-      });
+        return product;
+      }),
+    };
+
+    case SOCKET_PRODUCT_UPDATED: {
       return {
         ...state,
-        items: newProducts,
+        items: state['items'].map(product => {
+          console.log(product['product'])
+          if (product['product']['id'] === payload['id']) {
+            return {
+              ...product,
+              product: {
+                ...product['product'],
+                ...payload,
+              }
+            };
+          }
+          return product;
+        }),
       };
     }
 

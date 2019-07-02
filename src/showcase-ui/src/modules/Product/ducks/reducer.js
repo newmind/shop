@@ -10,6 +10,8 @@ import {
 
   SOCKET_PRODUCT_UPDATED,
 
+  STOCK_PRODUCT_UPDATED,
+
   SOCKET_UNIT_DELETED,
   SOCKET_UNIT_UPDATED,
 } from './types';
@@ -78,6 +80,15 @@ export default (state = initialState, { type, payload }) => {
         },
       }
     };
+
+    case STOCK_PRODUCT_UPDATED: return {
+      ...state,
+      product: {
+        ...state['product'],
+        ...payload,
+      }
+    };
+
     case SOCKET_UNIT_DELETED: {
       const stock = state['product'];
       const product = stock['product'];
@@ -99,6 +110,7 @@ export default (state = initialState, { type, payload }) => {
         }
       };
     }
+
     case SOCKET_UNIT_UPDATED: {
       const stock = state['product'];
       const product = stock['product'];
