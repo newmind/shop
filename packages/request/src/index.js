@@ -22,7 +22,7 @@ export const middleware = (host) => (store) => (next) => (action) => {
   return next(action);
 };
 
-export default async (options) => {
+const request = async (options) => {
   try {
     options = {
       ...defaultOptions,
@@ -57,3 +57,5 @@ export default async (options) => {
     throw Error(error);
   }
 };
+
+export default request;

@@ -2,37 +2,28 @@
 
 import jwt from 'jsonwebtoken';
 
-import { genHash256, token } from '@packages/sys.utils';
+import { token } from '@packages/sys.utils';
 import { models } from '@packages/db';
 
 
-export default () => async (ctx, next) => {
+export default () => async (ctx) => {
   const { User } = models;
-  const { login, password } = ctx.request.body;
-
-  const hashPassword = genHash256(password, process.env['PASSWORD_SALT']);
+  const { token: refreshToken } = ctx.request.body;
 
   const user = await User.findOne({
-    where: {
-      login,
-      password: hashPassword,
-    }
+    where: { refreshToken }
   });
 
   if ( ! user) {
-    ctx.throw(404, { code: '', message: '' });
+    ctx.throw(401, { code: '', message: '' });
   }
-
-  await User.update({ refreshToken: null }, {
-    where: { id: user['id'] }
-  });
 
   const today = new Date();
   const expirationTime = parseInt((today.getTime() / 1000) + Number(process.env['JWT_EXP']), 10);
-  const refreshToken = token(process.env['JWT_SECRET']).digest('hex');
+  const newRefreshToken = token(process.env['JWT_SECRET']).digest('hex');
 
   await User.update({ refreshToken }, {
-    where: { id: user['id'] }
+    where: { refreshToken: newRefreshToken }
   });
 
   const payload = {
@@ -52,7 +43,7 @@ export default () => async (ctx, next) => {
   ctx.body = {
     data: {
       token: identityToken,
-      refreshToken: refreshToken,
+      refreshToken: newRefreshToken,
     }
   };
 };

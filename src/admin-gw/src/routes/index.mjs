@@ -27,6 +27,7 @@ import {
 
 import {
   signIn,
+  refresh,
 } from '../controllers/User';
 
 export default (router) => {
@@ -62,4 +63,5 @@ export default (router) => {
   router.delete('/category/:categoryId', deleteCategoryById());
 
   router.post('/sign-in', signIn());
+  router.post('/refresh', refresh());
 };

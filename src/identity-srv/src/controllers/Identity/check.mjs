@@ -3,7 +3,7 @@
 import jwt from 'jsonwebtoken';
 
 
-export default () => async (ctx, next) => {
+export default () => async (ctx) => {
   try {
 
     const { token } = ctx.request.body;
@@ -22,6 +22,6 @@ export default () => async (ctx, next) => {
 
   } catch (error) {
 
-    ctx.throw(401, { code: 401, message: 'token invalid' });
+    ctx.throw(403, { code: 403, message: 'token invalid' });
   }
 };

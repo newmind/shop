@@ -73,12 +73,16 @@ import routes from './routes';
       const { url } = ctx.request;
 
       if (/^\/sign-in/.test(url)) {
-
         await next();
-
       } else {
         try {
-          const { admin = null } = ctx.cookie;
+          const cookies = ctx.cookie;
+
+          if ( ! cookies) {
+            ctx.throw(401, 'Не авторизован');
+          }
+
+          const { admin = null } = cookies;
 
           if ( ! admin) {
             ctx.throw(500, 'Неверный объект cookie');
@@ -89,6 +93,8 @@ import routes from './routes';
           if ( ! token) {
             ctx.throw(500, 'Неверное свойство cookie');
           }
+
+          console.log(55, token);
 
           await request({
             url: `${process.env['INVOICE_API_SRV']}/check`,
@@ -102,9 +108,48 @@ import routes from './routes';
 
         } catch(error) {
 
-          const { data } = error.response;
+          let errorResult = {};
 
-          ctx.throw(data['status'], data['message']);
+          if (error['response']) {
+            const { data } = error.response;
+            errorResult = data;
+          } else {
+            errorResult = error;
+          }
+
+          console.log(errorResult);
+
+          if (errorResult['status'] === 403) {
+
+            console.log(1);
+
+            const { admin = null } = ctx.cookie;
+
+            if ( ! admin) {
+              ctx.throw(500, 'Неверный объект cookie');
+            }
+
+            const { refreshToken = null } = JSON.parse(decodeURIComponent(admin));
+
+            if ( ! refreshToken) {
+              ctx.throw(500, 'Неверное свойство cookie');
+            }
+
+            const { data } = await request({
+              url: `${process.env['INVOICE_API_SRV']}/refresh`,
+              method: 'post',
+              data: {
+                token: refreshToken,
+              },
+            });
+
+            ctx.cookies.set('admin', encodeURI(JSON.stringify(data['data'])));
+
+            await next();
+          } else {
+            console.log(2);
+            ctx.throw(errorResult['status'], errorResult['message']);
+          }
         }
       }
     });
