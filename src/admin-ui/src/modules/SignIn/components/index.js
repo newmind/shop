@@ -5,7 +5,7 @@ import { bindActionCreators } from 'redux';
 import { isValid } from 'redux-form';
 
 import Component from './Component';
-import { signIn } from '../ducks/commands';
+import { signIn, checkCookies } from '../ducks/commands';
 
 const mapStateToProps = state => ({
   isValid: isValid('sign-in')(state),
@@ -14,21 +14,16 @@ const mapStateToProps = state => ({
 const mapActionsToProps = (dispatch) => {
   return {
     signIn: bindActionCreators(signIn, dispatch),
+    checkCookies: bindActionCreators(checkCookies, dispatch),
   };
 };
 
 export default PageHOC({
     mapStateToProps,
     mapActionsToProps,
-    onEnter: ({ onLoading }) => {
+    onEnter: ({ onLoading, checkCookies }) => {
       onLoading(false);
-      console.log('onLoad');
-    },
-    onChange: () => {
-      console.log('onChange');
-    },
-    onDestroy: () => {
-      console.log('onDestroy');
+      checkCookies();
     },
   }
 )(Component);

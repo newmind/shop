@@ -43,5 +43,4 @@ export default PageHOC({
     getProducts();
     onLoading(false);
   },
-  onDestroy: () => {},
 })(Component);

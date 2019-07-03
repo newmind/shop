@@ -15,7 +15,7 @@ export default () => async (ctx) => {
   });
 
   if ( ! user) {
-    ctx.throw(401, { code: '', message: '' });
+    ctx.throw(401, { code: '401', message: 'Неверный рефрешь токен' });
   }
 
   const today = new Date();

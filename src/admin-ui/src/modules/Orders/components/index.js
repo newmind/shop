@@ -17,6 +17,4 @@ export default PageHOC({
     console.log('onEnter');
     onLoading(false);
   },
-  onChange: () => { console.log('onChange')},
-  onDestroy: () => {console.log('onDestroy')},
 })(Component);

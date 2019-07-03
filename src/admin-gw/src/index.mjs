@@ -70,9 +70,9 @@ import routes from './routes';
     appServer.use(cookie.default());
 
     appServer.use(async (ctx, next) => {
-      const { url } = ctx.request;
+      const { url, method } = ctx.request;
 
-      if (/^\/sign-in/.test(url)) {
+      if (/^\/sign-in/.test(url) && method === 'POST') {
         await next();
       } else {
         try {
@@ -93,8 +93,6 @@ import routes from './routes';
           if ( ! token) {
             ctx.throw(500, 'Неверное свойство cookie');
           }
-
-          console.log(55, token);
 
           await request({
             url: `${process.env['INVOICE_API_SRV']}/check`,
@@ -117,11 +115,7 @@ import routes from './routes';
             errorResult = error;
           }
 
-          console.log(errorResult);
-
           if (errorResult['status'] === 403) {
-
-            console.log(1);
 
             const { admin = null } = ctx.cookie;
 
@@ -143,11 +137,13 @@ import routes from './routes';
               },
             });
 
-            ctx.cookies.set('admin', encodeURI(JSON.stringify(data['data'])));
+            const jsonString = JSON.stringify(data['data']).replace(/[{}]/ig, '');
+
+            ctx.cookies.set('admin', `{${encodeURI(jsonString)}}`);
 
             await next();
           } else {
-            console.log(2);
+
             ctx.throw(errorResult['status'], errorResult['message']);
           }
         }

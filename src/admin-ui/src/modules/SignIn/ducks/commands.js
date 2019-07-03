@@ -12,6 +12,20 @@ import {
 } from './actions';
 
 
+export const checkCookies = () => dispatch => {
+  try {
+
+    const cookies = Cookies.getJSON('admin');
+
+    if (cookies) {
+      dispatch(push('/'));
+    }
+
+  } catch(error) {
+
+  }
+};
+
 export const signIn = (formData) => async dispatch => {
   try {
 

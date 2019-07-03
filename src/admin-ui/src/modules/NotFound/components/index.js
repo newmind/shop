@@ -14,5 +14,4 @@ export default PageHOC({
   mapStateToProps,
   mapActionsToProps,
   onEnter: ({ onLoading }) => onLoading(false),
-  onDestroy: () => {},
 })(Component);

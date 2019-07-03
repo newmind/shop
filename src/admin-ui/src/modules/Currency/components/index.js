@@ -41,5 +41,4 @@ export default PageHOC({
     await getAll();
     onLoading(false);
   },
-  onDestroy: () => {},
 })(Component);

@@ -35,5 +35,4 @@ export default PageHOC({
     getUnits();
     onLoading(false);
   },
-  onDestroy: () => {},
 })(Component);
