@@ -1,17 +1,24 @@
 'use strict';
 
-import { sequelize, models } from '@packages/db';
+import { models } from '@packages/db';
 
 
 export default () => async (ctx) => {
 
-  const brands = await models['Product'].findAll({
-    attributes: ['brand'],
-    order: [['brand', 'ASC']],
-    group: ['brand']
+  const { Stock, Product } = models;
+  const brands = await Stock.findAll({
+    include: [
+      {
+        model: Product,
+        attributes: ['brand'],
+        order: [['brand', 'ASC']],
+        group: ['brand'],
+        as: 'product'
+      }
+    ]
   });
 
-  const result = brands.map(item => item['brand']);
+  const result = brands.map(item => item['product']['brand']);
 
   ctx.body = {
     success: true,

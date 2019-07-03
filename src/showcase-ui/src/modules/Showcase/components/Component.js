@@ -76,7 +76,7 @@ class Component extends PureComponent {
                   <Product
                     key={index}
                     {...product}
-                    onView={this._handleFastView.bind(this, product)}
+                    // onView={this._handleFastView.bind(this, product)}
                     onCart={this._handleCart.bind(this, product)} />
                 ))}
               </div>

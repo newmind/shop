@@ -76,11 +76,11 @@ class Component extends PureComponent {
   }
 
   componentDidMount() {
-    document.addEventListener('click', this._onClick);
+    document.addEventListener('click', this._onClick, true);
   }
 
   componentWillUnmount() {
-    document.removeEventListener('click', this._onClick);
+    document.removeEventListener('click', this._onClick, true);
   }
 
   _closeCart() {

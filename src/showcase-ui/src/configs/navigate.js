@@ -5,15 +5,15 @@ export default [
     path: '/products',
   },
   {
-    title: "О компании",
-    path: '/about',
-  },
-  {
     title: 'О продукции',
     path: '/produce',
   },
   {
-    title: 'Уголок покупателя',
+    title: 'Информация для вас',
     path: '/corner',
-  }
+  },
+  {
+    title: "О нас",
+    path: '/about',
+  },
 ];

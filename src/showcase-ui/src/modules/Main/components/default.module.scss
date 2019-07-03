@@ -1,94 +1,23 @@
+
+@import "~@packages/theme";
+
 .wrapper {
 
   display: block;
   padding: 40px 20px 120px;
 }
 
-.header {
+.categories {
 
   display: block;
-  font: 16px "Opinion Pro";
-  font-weight: bold;
+  height: 400px;
+  background: $light-gray-color;
+  margin: 0 0 40px;
 }
 
-.list {
+.category {
 
   display: block;
-  margin: 40px 0 0;
-
-  &__line {
-
-    display: block;
-  }
-}
-
-
-.table {
-
-  table-layout: fixed;
-  width: 100%;
-
-  &__head {
-
-    border-bottom: 2px solid #eee;
-  }
-
-  .table__header {
-
-    display: block;
-    padding: 0 0 10px;
-  }
-
-  &__col {
-
-    vertical-align: middle;
-  }
-
-  &__body &__line {
-
-    border-bottom: 1px solid #eee;
-  }
-
-  &__caption {
-
-    text-align: right;
-    caption-side: bottom;
-    border-bottom: 3px solid #eee;
-    padding: 20px 0;
-    font: 14px "Opinion Pro";
-    font-weight: bold;
-  }
-}
-
-.product {
-
-  font: 13px "Opinion Pro";
-  font-weight: bold;
-  text-align: left;
-}
-
-.count {
-
-  font: 12px "Opinion Pro";
-  text-align: center;
-  width: 100px;
-}
-
-.amount {
-
-  font: 12px "Opinion Pro";
-  text-align: right;
-  width: 100px;
-}
-
-.pay {
-
-  display: block;
-  margin: 80px 0 0;
-}
-
-.address {
-
-  display: block;
-  margin: 40px 0 0;
+  height: 200px;
+  background: $light-gray-color;
 }
