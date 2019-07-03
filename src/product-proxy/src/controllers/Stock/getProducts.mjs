@@ -1,13 +1,15 @@
 'use strict';
 
-import { models } from '@packages/db';
+import { models, Sequelize } from '@packages/db';
 
 
 export default () => async (ctx) => {
 
   let where = {};
   let productWhere = {};
-  const { categoryId, brand } = ctx.request.query;
+  const { Op } = Sequelize;
+  const { Stock, Product, Currency, Category, Comment, Attribute, Gallery } = models;
+  const { categoryId, brand, amountFrom, amountTo } = ctx.request.query;
 
   if (categoryId) {
     where['categoryId'] = categoryId;
@@ -17,44 +19,58 @@ export default () => async (ctx) => {
     productWhere['brand'] = brand;
   }
 
-  const products = await models['Stock'].findAll({
+  if (amountFrom && ! amountTo) {
+    where['amount'] = {
+      [Op.gte]: amountFrom
+    };
+  } else if (amountTo && ! amountFrom) {
+    where['amount'] = {
+      [Op.lte]: amountTo
+    };
+  } else if (amountFrom && amountTo) {
+    where['amount'] = {
+      [Op.between]: [amountFrom, amountTo]
+    };
+  }
+
+  const products = await Stock.findAll({
     attributes: ['id', 'count', 'amount'],
     where: { ...where },
     order: [['id', 'DESC']],
     include: [
       {
-        model: models['Currency'],
+        model: Currency,
         required: false,
         as: 'currency',
         attributes: ['id', 'value']
       },
       {
-        model: models['Category'],
+        model: Category,
         required: false,
         as: 'category',
         attributes: ['id', 'name']
       },
       {
-        model: models['Comment'],
+        model: Comment,
         required: false,
         as: 'comments',
         attributes: ['evaluation', 'person', 'comment'],
       },
       {
-        model: models['Product'],
+        model: Product,
         attributes: ['id', 'name', 'brand', 'description', 'status'],
         required: true,
         as: 'product',
         where: { status: 1, ...productWhere },
         include: [
           {
-            model: models['Attribute'],
+            model: Attribute,
             required: false,
             as: 'attributes',
             attributes: ['id', 'name', 'value'],
           },
           {
-            model: models['Gallery'],
+            model: Gallery,
             required: false,
             as: 'gallery',
             attributes: ['file'],

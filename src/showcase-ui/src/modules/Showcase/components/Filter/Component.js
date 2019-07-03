@@ -2,7 +2,7 @@
 import types from 'prop-types';
 import React, { PureComponent } from 'react';
 
-import { SelectField, Row, Col, Button } from '@packages/ui';
+import { SelectField, InputField, Row, Col, Button } from '@packages/ui';
 
 import styles from './default.module.scss';
 
@@ -39,6 +39,15 @@ class Component extends PureComponent {
                 name="brand"
                 options={brands}
               />
+            </Col>
+          </Row>
+          <Row>
+            <Col>
+              <div className={styles['amount']}>
+                <InputField className={styles['amount__input']} name="amountFrom" />
+                <span className={styles['amount__delimiter']}>-</span>
+                <InputField className={styles['amount__input']} name="amountTo" />
+              </div>
             </Col>
           </Row>
         </div>

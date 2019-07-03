@@ -13,7 +13,7 @@
 .fields {
 
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   flex: 1 0 auto;
 }
 
@@ -21,4 +21,22 @@
 
   display: block;
   margin: 0 0 0 20px;
+}
+
+.amount {
+
+  display: inline-flex;
+  flex-direction: row;
+  align-items: center;
+
+  &__input {
+
+    width: 100px;
+  }
+
+  &__delimiter {
+
+    margin: 0 6px;
+    color: $light-gray-color;
+  }
 }
