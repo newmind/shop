@@ -7,15 +7,14 @@ services:
     build: ./postgresql
     restart: always
     ports:
-      - "54320:5432"
+      - 50001:5432
 
   rabbit:
     container_name: rabbit_mq
     build: ./rabbit
     restart: always
     ports:
-      - "15672"
-      - "5672"
+      - 50002:15672
 
   identity_srv:
     container_name: identity_srv
@@ -26,17 +25,15 @@ services:
     depends_on:
       - db
     links:
-      - "db"
-    ports:
-      - "8080"
+      - db
     volumes:
-      - "./src/identity-srv/src:/app/src/identity-srv/src"
-      - "./src/identity-srv/.env.production:/app/src/identity-srv/.env.production"
-      - "./src/identity-srv/package.json:/app/src/identity-srv/package.json"
-      - "./packages:/app/packages"
-      - "./package.json:/app/package.json"
-      - "./lerna.json:/app/lerna.json"
-      - "./yarn.lock:/app/yarn.lock"
+      - ./src/identity-srv/src:/app/src/identity-srv/src
+      - ./src/identity-srv/.env.production:/app/src/identity-srv/.env.production
+      - ./src/identity-srv/package.json:/app/src/identity-srv/package.json
+      - ./packages:/app/packages
+      - ./package.json:/app/package.json
+      - ./lerna.json:/app/lerna.json
+      - ./yarn.lock:/app/yarn.lock
 
   product_proxy:
     container_name: product_proxy
@@ -48,18 +45,17 @@ services:
       - db
       - rabbit
     links:
-      - "db"
-      - "rabbit"
-    ports:
-      - "8080"
+      - db
+      - rabbit
     volumes:
-      - "./src/product-proxy/src:/app/src/product-proxy/src"
-      - "./src/product-proxy/.env.production:/app/src/product-proxy/.env.production"
-      - "./src/product-proxy/package.json:/app/src/product-proxy/package.json"
-      - "./packages:/app/packages"
-      - "./package.json:/app/package.json"
-      - "./lerna.json:/app/lerna.json"
-      - "./yarn.lock:/app/yarn.lock"
+      - ./src/product-proxy/files:/app/files
+      - ./src/product-proxy/src:/app/src/product-proxy/src
+      - ./src/product-proxy/.env.production:/app/src/product-proxy/.env.production
+      - ./src/product-proxy/package.json:/app/src/product-proxy/package.json
+      - ./packages:/app/packages
+      - ./package.json:/app/package.json
+      - ./lerna.json:/app/lerna.json
+      - ./yarn.lock:/app/yarn.lock
 
   admin_gw:
     container_name: admin_gw
@@ -72,19 +68,17 @@ services:
       - product_proxy
       - identity_srv
     links:
-      - "rabbit"
-      - "product_proxy"
-      - "identity_srv"
-    ports:
-      - "8080"
+      - rabbit
+      - product_proxy
+      - identity_srv
     volumes:
-      - "./src/admin-gw/src:/app/src/admin-gw/src"
-      - "./src/admin-gw/.env.production:/app/src/admin-gw/.env.production"
-      - "./src/admin-gw/package.json:/app/src/admin-gw/package.json"
-      - "./packages:/app/packages"
-      - "./package.json:/app/package.json"
-      - "./lerna.json:/app/lerna.json"
-      - "./yarn.lock:/app/yarn.lock"
+      - ./src/admin-gw/src:/app/src/admin-gw/src
+      - ./src/admin-gw/.env.production:/app/src/admin-gw/.env.production
+      - ./src/admin-gw/package.json:/app/src/admin-gw/package.json
+      - ./packages:/app/packages
+      - ./package.json:/app/package.json
+      - ./lerna.json:/app/lerna.json
+      - ./yarn.lock:/app/yarn.lock
 
   showcase_gw:
     container_name: showcase_gw
@@ -96,27 +90,25 @@ services:
       - rabbit
       - product_proxy
     links:
-      - "rabbit"
-      - "product_proxy"
-    ports:
-      - "8080"
+      - rabbit
+      - product_proxy
     volumes:
-      - "./src/showcase-gw/src:/app/src/showcase-gw/src"
-      - "./src/showcase-gw/.env.production:/app/src/showcase-gw/.env.production"
-      - "./src/showcase-gw/package.json:/app/src/showcase-gw/package.json"
-      - "./packages:/app/packages"
-      - "./package.json:/app/package.json"
-      - "./lerna.json:/app/lerna.json"
-      - "./yarn.lock:/app/yarn.lock"
+      - ./src/showcase-gw/src:/app/src/showcase-gw/src
+      - ./src/showcase-gw/.env.production:/app/src/showcase-gw/.env.production
+      - ./src/showcase-gw/package.json:/app/src/showcase-gw/package.json
+      - ./packages:/app/packages
+      - ./package.json:/app/package.json
+      - ./lerna.json:/app/lerna.json
+      - ./yarn.lock:/app/yarn.lock
 
-#  certbot:
-#    container_name: certbot
-#    image: certbot/certbot
-#    restart: unless-stopped
-#    volumes:
-#      - ./data/certbot/conf:/etc/letsencrypt
-#      - ./data/certbot/www:/var/www/certbot
-#    entrypoint: "/bin/sh -c 'trap exit TERM; while :; do certbot renew; sleep 12h & wait $${!}; done;'"
+##  certbot:
+##    container_name: certbot
+##    image: certbot/certbot
+##    restart: unless-stopped
+##    volumes:
+##      - ./data/certbot/conf:/etc/letsencrypt
+##      - ./data/certbot/www:/var/www/certbot
+##    entrypoint: /bin/sh -c 'trap exit TERM; while :; do certbot renew; sleep 12h & wait $${!}; done;'
 
   admin_ui:
     container_name: admin_ui
@@ -127,12 +119,9 @@ services:
     depends_on:
       - admin_gw
     links:
-      - "admin_gw"
-    ports:
-      - "8080:80"
+      - admin_gw
     volumes:
-      - "./src/admin-ui/nginx/mime.types:/etc/nginx/mime.types"
-      - "./src/admin-ui/nginx/nginx.conf:/etc/nginx/nginx.conf"
+      - ./src/admin-ui/nginx/conf.d:/etc/nginx/conf.d
     environment:
       - NODE_ENV=production
 
@@ -145,11 +134,23 @@ services:
     depends_on:
       - showcase_gw
     links:
-      - "showcase_gw"
-    ports:
-      - "80:80"
+      - showcase_gw
     volumes:
-      - "./src/showcase-ui/nginx/mime.types:/etc/nginx/mime.types"
-      - "./src/showcase-ui/nginx/nginx.conf:/etc/nginx/nginx.conf"
+      - ./src/showcase-ui/nginx/conf.d:/etc/nginx/conf.d
     environment:
       - NODE_ENV=production
+
+  proxy:
+    container_name: proxy
+    build: ./nginx
+    restart: always
+    depends_on:
+      - admin_ui
+      - showcase_ui
+    links:
+      - admin_ui
+      - showcase_ui
+    ports:
+      - 80:80
+    volumes:
+      - ./nginx/conf.d:/etc/nginx/conf.d
