@@ -48,7 +48,7 @@ services:
       - db
       - rabbit
     volumes:
-      - ./src/product-proxy/files:/app/files
+      - ./src/product-proxy/files=/app/files
       - ./src/product-proxy/src:/app/src/product-proxy/src
       - ./src/product-proxy/.env.production:/app/src/product-proxy/.env.production
       - ./src/product-proxy/package.json:/app/src/product-proxy/package.json
