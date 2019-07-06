@@ -2,12 +2,18 @@
 # BUILD APP
 FROM node:11-alpine
 
-EXPOSE 8080
-
 RUN npm config set package-lock false
 RUN npm i yarn -g --yes
 
 WORKDIR /app
+
+COPY ./src/identity-srv/src               ./src/identity-srv/src
+COPY ./src/identity-srv/.env.production   ./src/identity-srv
+COPY ./src/identity-srv/package.json      ./src/identity-srv
+COPY ./packages                           ./packages
+COPY ./package.json                       ./
+COPY ./lerna.json                         ./
+COPY ./yarn.lock                          ./
 
 RUN yarn
 
