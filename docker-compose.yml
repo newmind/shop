@@ -27,12 +27,12 @@ services:
     links:
       - db
     volumes:
-      - ./src/identity-srv/src:/app/src/identity-srv/src
-      - ./src/identity-srv/.env.production:/app/src/identity-srv/.env.production
-      - ./src/identity-srv/package.json:/app/src/identity-srv/package.json
-      - ./packages:/app/packages
-      - ./package.json:/app/package.json
-      - ./lerna.json:/app/lerna.json
+      - /shop/src/identity-srv/src:/app/src/identity-srv/src
+      - /shop/src/identity-srv/.env.production:/app/src/identity-srv/.env.production
+      - /shop/src/identity-srv/package.json:/app/src/identity-srv/package.json
+      - /shop/packages:/app/packages
+      - /shop/package.json:/app/package.json
+      - /shop/lerna.json:/app/lerna.json
 
   product_proxy:
     container_name: product_proxy
@@ -47,12 +47,12 @@ services:
       - db
       - rabbit
     volumes:
-      - ./src/product-proxy/src:/app/src/product-proxy/src
-      - ./src/product-proxy/.env.production:/app/src/product-proxy/.env.production
-      - ./src/product-proxy/package.json:/app/src/product-proxy/package.json
-      - ./packages:/app/packages
-      - ./package.json:/app/package.json
-      - ./lerna.json:/app/lerna.json
+      - /shop/src/product-proxy/src:/app/src/product-proxy/src
+      - /shop/src/product-proxy/.env.production:/app/src/product-proxy/.env.production
+      - /shop/src/product-proxy/package.json:/app/src/product-proxy/package.json
+      - /shop/packages:/app/packages
+      - /shop/package.json:/app/package.json
+      - /shop/lerna.json:/app/lerna.json
 
   admin_gw:
     container_name: admin_gw
@@ -69,12 +69,12 @@ services:
       - product_proxy
       - identity_srv
     volumes:
-      - ./src/admin-gw/src:/app/src/admin-gw/src
-      - ./src/admin-gw/.env.production:/app/src/admin-gw/.env.production
-      - ./src/admin-gw/package.json:/app/src/admin-gw/package.json
-      - ./packages:/app/packages
-      - ./package.json:/app/package.json
-      - ./lerna.json:/app/lerna.json
+      - /shop/src/admin-gw/src:/app/src/admin-gw/src
+      - /shop/src/admin-gw/.env.production:/app/src/admin-gw/.env.production
+      - /shop/src/admin-gw/package.json:/app/src/admin-gw/package.json
+      - /shop/packages:/app/packages
+      - /shop/package.json:/app/package.json
+      - /shop/lerna.json:/app/lerna.json
 
   showcase_gw:
     container_name: showcase_gw
@@ -89,12 +89,12 @@ services:
       - rabbit
       - product_proxy
     volumes:
-      - ./src/showcase-gw/src:/app/src/showcase-gw/src
-      - ./src/showcase-gw/.env.production:/app/src/showcase-gw/.env.production
-      - ./src/showcase-gw/package.json:/app/src/showcase-gw/package.json
-      - ./packages:/app/packages
-      - ./package.json:/app/package.json
-      - ./lerna.json:/app/lerna.json
+      - /shop/src/showcase-gw/src:/app/src/showcase-gw/src
+      - /shop/src/showcase-gw/.env.production:/app/src/showcase-gw/.env.production
+      - /shop/src/showcase-gw/package.json:/app/src/showcase-gw/package.json
+      - /shop/packages:/app/packages
+      - /shop/package.json:/app/package.json
+      - /shop/lerna.json:/app/lerna.json
 
 ##  certbot:
 ##    container_name: certbot
@@ -116,13 +116,13 @@ services:
     links:
       - admin_gw
     volumes:
-      - ./src/admin-ui/nginx/conf.d:/etc/nginx/conf.d
-      - ./src/admin-ui/src:/app/src/admin-ui/src
-      - ./src/admin-ui/.env.production:/app/src/admin-ui/.env.production
-      - ./src/admin-ui/package.json:/app/src/admin-ui/package.json
-      - ./packages:/app/packages
-      - ./package.json:/app/package.json
-      - ./lerna.json:/app/lerna.json
+      - /shop/src/admin-ui/nginx/conf.d:/etc/nginx/conf.d
+      - /shop/src/admin-ui/src:/app/src/admin-ui/src
+      - /shop/src/admin-ui/.env.production:/app/src/admin-ui/.env.production
+      - /shop/src/admin-ui/package.json:/app/src/admin-ui/package.json
+      - /shop/packages:/app/packages
+      - /shop/package.json:/app/package.json
+      - /shop/lerna.json:/app/lerna.json
     environment:
       - NODE_ENV=production
 
@@ -137,13 +137,13 @@ services:
     links:
       - showcase_gw
     volumes:
-      - ./src/showcase-ui/nginx/conf.d:/etc/nginx/conf.d
-      - ./src/showcase-ui/src:/app/src/showcase-ui/src
-      - ./src/showcase-ui/.env.production:/app/src/showcase-ui/.env.production
-      - ./src/showcase-ui/package.json:/app/src/showcase-ui/package.json
-      - ./packages:/app/packages
-      - ./package.json:/app/package.json
-      - ./lerna.json:/app/lerna.json
+      - /shop/src/showcase-ui/nginx/conf.d:/etc/nginx/conf.d
+      - /shop/src/showcase-ui/src:/app/src/showcase-ui/src
+      - /shop/src/showcase-ui/.env.production:/app/src/showcase-ui/.env.production
+      - /shop/src/showcase-ui/package.json:/app/src/showcase-ui/package.json
+      - /shop/packages:/app/packages
+      - /shop/package.json:/app/package.json
+      - /shop/lerna.json:/app/lerna.json
     environment:
       - NODE_ENV=production
 
@@ -160,5 +160,5 @@ services:
     ports:
       - 80:80
     volumes:
-      - ./nginx/conf.d:/etc/nginx/conf.d
-      - ./nginx/nginx.conf:/etc/nginx/nginx.conf
+      - /shop/nginx/conf.d:/etc/nginx/conf.d
+      - /shop/nginx/nginx.conf:/etc/nginx/nginx.conf
