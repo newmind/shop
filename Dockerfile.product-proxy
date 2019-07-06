@@ -18,12 +18,8 @@ COPY ./package.json                        .
 COPY ./lerna.json                          .
 COPY ./yarn.lock                           .
 
-RUN ls
-
 RUN yarn
 
 WORKDIR /app/src/product-proxy
-
-RUN mkdir -p /app/src/product-proxy/files
 
 ENTRYPOINT ["yarn", "run", "start"]
