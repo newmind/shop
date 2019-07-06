@@ -147,18 +147,18 @@ services:
     environment:
       - NODE_ENV=production
 
-  proxy:
-    container_name: proxy
-    build: ./nginx
-    restart: always
-    depends_on:
-      - admin_ui
-      - showcase_ui
-    links:
-      - admin_ui
-      - showcase_ui
-    ports:
-      - 80:80
-    volumes:
-      - /shop/nginx/conf.d:/etc/nginx/conf.d
-      - /shop/nginx/nginx.conf:/etc/nginx/nginx.conf
+#  proxy:
+#    container_name: proxy
+#    build: ./nginx
+#    restart: always
+#    depends_on:
+#      - admin_ui
+#      - showcase_ui
+#    links:
+#      - admin_ui
+#      - showcase_ui
+#    ports:
+#      - 80:80
+#    volumes:
+#      - /shop/nginx/conf.d:/etc/nginx/conf.d
+#      - /shop/nginx/nginx.conf:/etc/nginx/nginx.conf
