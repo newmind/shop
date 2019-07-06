@@ -13,10 +13,6 @@ RUN yarn
 
 WORKDIR /app/src/admin-ui
 
-RUN ls
-
-RUN tail ./.env.production
-
 RUN ["yarn", "run", "ui:build"]
 RUN ["yarn", "run", "dialog:build"]
 RUN ["yarn", "run", "notification:build"]

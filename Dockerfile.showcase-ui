@@ -7,11 +7,7 @@ WORKDIR /
 RUN npm config set package-lock false
 RUN npm i yarn -g --yes
 
-WORKDIR /app
-
 WORKDIR /app/src/showcase-ui
-
-RUN ls
 
 RUN ["yarn", "run", "ui:build"]
 RUN ["yarn", "run", "dialog:build"]

@@ -118,7 +118,7 @@ services:
     volumes:
       - /shop/src/admin-ui/nginx/conf.d:/etc/nginx/conf.d
       - /shop/src/admin-ui/src:/app/src/admin-ui/src
-      - "/shop/src/admin-ui/.env.production:/app/src/admin-ui/.env.production"
+      - /shop/src/admin-ui/.env.production:/app/src/admin-ui/.env.production
       - /shop/src/admin-ui/package.json:/app/src/admin-ui/package.json
       - /shop/packages:/app/packages
       - /shop/package.json:/app/package.json
