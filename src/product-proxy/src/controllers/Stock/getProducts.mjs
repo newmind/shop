@@ -73,7 +73,7 @@ export default () => async (ctx) => {
             model: Gallery,
             required: false,
             as: 'gallery',
-            attributes: ['file'],
+            attributes: ['id'],
           },
         ]
       }

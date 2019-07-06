@@ -244,6 +244,12 @@
     background: $light-gray-color;
   }
 
+  &--selected,
+  &--selected:hover {
+
+    background: $gray-color;
+  }
+
   & + & {
 
     border-top: 1px solid $light-gray-color;

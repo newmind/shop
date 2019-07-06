@@ -27,7 +27,7 @@ const initialState = {
   isError: false,
 };
 
-export default (state = initialState, { type, payload }) => {
+export default (state = { ...initialState }, { type, payload }) => {
   switch (type) {
     case 'RESET': return {
       ...initialState,
@@ -95,7 +95,7 @@ export default (state = initialState, { type, payload }) => {
         product: {
           ...state['product'],
           ...payload,
-          gallery: payload['gallery'].map(img => img['file'])
+          gallery: payload['gallery'].map(img => img['id'])
         },
       };
     }

@@ -59,7 +59,7 @@ export const getProductById = (id) => async dispatch => {
     const product = result['data'];
     const resultData = {
       ...product,
-      gallery: result['data']['gallery'].map(img => img['file']),
+      gallery: result['data']['gallery'].map(img => img['id']),
       attributes: product['attributes'] ? product['attributes'].map(item => {
         return {
           id: item['id'],
@@ -87,6 +87,7 @@ export const updateProductsById = (data) => async dispatch => {
 
     (data['gallery'] || []).forEach((file, index) => {
       if (file.constructor === File) {
+
         formData.append(`file-${index}`, file);
       }
     });
@@ -107,7 +108,7 @@ export const updateProductsById = (data) => async dispatch => {
 
     const resultData = {
       ...result,
-      gallery: result['gallery'].map(img => img['file']),
+      gallery: result['gallery'].map(img => img['id']),
       attributes: result['attributes'] ? result['attributes'].map(item => {
         return {
           id: item['id'],
@@ -156,7 +157,7 @@ export const createProduct = (data) => async dispatch => {
 
     const resultData = {
       ...result,
-      gallery: result['gallery'].map(img => img['file']),
+      gallery: result['gallery'].map(img => img['id']),
       attributes: result['attributes'] ? result['attributes'].map(item => {
         return {
           id: item['id'],

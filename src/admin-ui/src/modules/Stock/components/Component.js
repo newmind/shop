@@ -114,7 +114,7 @@ class Component extends PureComponent {
                     align: 'center',
                     width: '140px',
                   },
-                  template: ({ gallery }) => <Gallery className={styles['image']} valueKey={'file'} items={gallery} path={`${process.env['REACT_APP_API_HOST']}/gallery`} />
+                  template: ({ gallery }) => <Gallery className={styles['image']} valueKey={'id'} items={gallery} path={`${process.env['REACT_APP_API_HOST']}/gallery`} />
                 },
                 {
                   title: 'Категория',

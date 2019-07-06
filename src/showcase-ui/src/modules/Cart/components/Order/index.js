@@ -1,8 +1,9 @@
 
 import { reduxForm } from 'redux-form';
 
-import Component from './Componect';
+import Component from './Component';
+
 
 export default reduxForm({
-  form: 'payment-data',
+  form: 'order',
 })(Component);

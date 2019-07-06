@@ -63,7 +63,7 @@ class Component extends PureComponent {
           <span className={styles['product__name']}>{ name }</span>
         </div>
         <div className={styles['product__promo']}>
-          <Gallery items={gallery} isList={false} valueKey="file" path={`${process.env['REACT_APP_API_HOST']}/gallery`} />
+          <Gallery items={gallery} isList={false} valueKey="id" path={`${process.env['REACT_APP_API_HOST']}/gallery`} />
           {/*<span className={styles['product__view']} title="быстрый росмотр" onClick={this._handleClickView.bind(this)}>Быстрый просмотр</span>*/}
         </div>
         <div className={styles['product__amount']}>{ numeral(amount).format() } {currency['value']}</div>

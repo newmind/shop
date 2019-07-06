@@ -58,7 +58,7 @@ class Component extends PureComponent {
                     width: '140px',
                     align: 'center',
                   },
-                  template: (items) => <Gallery className={styles['image']} valueKey={'file'} items={items} path={`${process.env['REACT_APP_API_HOST']}/gallery`} />
+                  template: (items) => <Gallery className={styles['image']} valueKey={'id'} items={items} path={`${process.env['REACT_APP_API_HOST']}/gallery`} />
                 },
                 {
                   alias: 'name',

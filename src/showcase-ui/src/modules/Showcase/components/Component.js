@@ -7,7 +7,7 @@ import Product from './Product';
 // import Form from './Form';
 
 import Filter from './Filter';
-// import { Dialog } from '@packages/dialog';
+// import { Tabs } from '@packages/dialog';
 
 import styles from './default.module.scss';
 
@@ -88,9 +88,9 @@ class Component extends PureComponent {
             </div>
           )}
         </section>
-        {/*<Dialog name="product" title="Быстрый просмотр товара">*/}
+        {/*<Tabs name="product" title="Быстрый просмотр товара">*/}
         {/*  <Form onCart={this._handleCart.bind(this)} />*/}
-        {/*</Dialog>*/}
+        {/*</Tabs>*/}
       </section>
     );
   }

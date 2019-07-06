@@ -21,17 +21,6 @@ export default () => async (ctx) => {
       transaction,
     });
 
-    const images = await Gallery.findAll({
-      where: { productId }
-    }, { transaction });
-
-    images.forEach(image => {
-      const filePath = path.join(FILE_PATH, image['file']);
-      if (fs.existsSync(filePath)) {
-        fs.unlinkSync(filePath)
-      }
-    });
-
     await Gallery.destroy({
       where: { productId },
       transaction,

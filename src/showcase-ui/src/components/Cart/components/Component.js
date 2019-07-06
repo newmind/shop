@@ -35,7 +35,7 @@ class Item extends PureComponent {
     return (
       <div className={styles['item']}>
         <div className={styles['item__promo']}>
-          <Gallery items={gallery} isList={false} valueKey="file" path={`${process.env['REACT_APP_API_HOST']}/gallery`} />
+          <Gallery items={gallery} isList={false} valueKey="id" path={`${process.env['REACT_APP_API_HOST']}/gallery`} />
         </div>
         <div className={styles['item__description']}>
           <div className={styles['item__names']}>
@@ -155,7 +155,7 @@ class Component extends PureComponent {
                       <p className={styles['cart__full-amount']}>Итого: { fullAmount } руб.</p>
                     </div>
                     <div className={styles['list__controls']}>
-                      <Link className={styles['cart__pay']} to={'/cart'} onClick={this._closeCart.bind(this)}>Перейти к оплате</Link>
+                      <Link className={styles['cart__pay']} to={'/cart'} onClick={this._closeCart.bind(this)}>Перейти к оформлению заказа</Link>
                     </div>
                   </div>
                 )

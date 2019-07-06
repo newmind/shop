@@ -12,6 +12,7 @@
     "@packages/theme": "^1.0.0",
     "@packages/validate": "^1.0.0",
     "@packages/dialog": "^1.0.0",
+    "@packages/tabs": "^1.0.0",
     "classnames": "^2.2.6",
     "history": "^4.7.2",
     "i18n-calypso": "^3.0.0",

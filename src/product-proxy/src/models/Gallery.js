@@ -10,14 +10,11 @@ module.exports = (db, DataType) => {
       index: true,
     },
     file: {
-      type: DataType.STRING(255),
-      unique: true,
-    },
+      type: DataType.BLOB,
+    }
   });
 
-  Gallery.associate = ({  }) => {
-
-  };
+  Gallery.associate = ({}) => {};
 
   // Gallery.sync({ force: true });
 

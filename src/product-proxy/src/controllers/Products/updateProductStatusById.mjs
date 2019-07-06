@@ -34,7 +34,7 @@ export default () => async (ctx) => {
           model: models['Gallery'],
           required: false,
           as: 'gallery',
-          attributes: ['file'],
+          attributes: ['id'],
         },
       ],
       transaction });

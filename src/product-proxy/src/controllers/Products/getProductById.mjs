@@ -5,14 +5,14 @@ import { models } from '@packages/db';
 
 export default () => async (ctx) => {
   const { productId } = ctx['params'];
-  const { Units } = models;
+  const { Units, Gallery, Attribute } = models;
 
   const product = await models['Product'].findOne({
     where: { id: productId },
     attributes: ['id', 'name', 'brand', 'description', 'status'],
     include: [
       {
-        model: models['Attribute'],
+        model: Attribute,
         required: false,
         as: 'attributes',
         attributes: ['id', 'name', 'value'],
@@ -26,11 +26,14 @@ export default () => async (ctx) => {
         ]
       },
       {
-        model: models['Gallery'],
+        model: Gallery,
         required: false,
         as: 'gallery',
-        attributes: ['file'],
-        where: { productId }
+        attributes: ['id'],
+        where: { productId },
+        order: [
+          ['order', 'DESC']
+        ]
       },
     ],
   });

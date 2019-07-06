@@ -1,12 +1,8 @@
 'use strict';
 
-import path from "path";
-
 import { sequelize, models } from '@packages/db';
 import { getFiles, saveFile } from "@packages/sys.utils";
 import { sendEvent } from "@packages/rabbit";
-
-const FILE_PATH = path.resolve(process.cwd(), 'files');
 
 
 const saveFiles = (files, { productId }, { transaction }) => {
@@ -19,10 +15,8 @@ const saveFiles = (files, { productId }, { transaction }) => {
       .map(async (key, index) => {
 
         const fileBuffer = files[key]['buffer'];
-        const FILE_NAME = files[key]['fileName'];
 
-        await saveFile(fileBuffer, path.join(FILE_PATH, FILE_NAME));
-        await Gallery.create({ productId, file: FILE_NAME }, { transaction });
+        await Gallery.create({ productId, file: fileBuffer, order: index }, { transaction });
 
         if (Object.keys(files).length === index + 1) {
           resolve();
@@ -71,7 +65,7 @@ export default () => async (ctx) => {
           model: Gallery,
           required: false,
           as: 'gallery',
-          attributes: ['file'],
+          attributes: ['id'],
         },
       ], transaction });
   });

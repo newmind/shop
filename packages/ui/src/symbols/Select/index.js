@@ -13,7 +13,7 @@ const SUCCESS_MODE = 'success';
 
 
 const Options = React.forwardRef((props, ref) => {
-  const { options, optionValue, onCheck } = props;
+  const { value, options, optionKey, optionValue, onCheck } = props;
 
   const getValue = (value) => {
     if (value instanceof Object) {
@@ -29,8 +29,11 @@ const Options = React.forwardRef((props, ref) => {
         {options.length
           ? (
             options.map((option, key) => {
+              const classNameOption = cn(styles['option'], {
+                [styles['option--selected']]: value[optionKey] === option[optionKey],
+              });
               return (
-                <span key={key} className={styles['option']} onClick={onCheck.bind(this, option)}>
+                <span key={key} className={classNameOption} onClick={onCheck.bind(this, option)}>
                   <span className={styles['option__value']}>{getValue(option)}</span>
                 </span>
               );
@@ -303,7 +306,9 @@ class Component extends PureComponent {
               <span className={styles['tooltip__message']}>{ message }</span>
             </span>
           )}
-          {isOpen && <Options ref={this.optionsRef} options={options} optionKey={optionKey} optionValue={optionValue} onCheck={this._handleOnChange.bind(this)} />}
+          {isOpen && (
+            <Options ref={this.optionsRef} value={value} options={options} optionKey={optionKey} optionValue={optionValue} onCheck={this._handleOnChange.bind(this)} />
+          )}
         </div>
       </div>
     );
