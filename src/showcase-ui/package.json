@@ -34,7 +34,7 @@
   },
   "scripts": {
     "ui:build": "cd ././../../packages/ui/ && yarn run build",
-    "tab:build": "cd ././../../packages/tabs/ && yarn run build",
+    "tabs:build": "cd ././../../packages/tabs/ && yarn run build",
     "dialog:build": "cd ././../../packages/dialog/ && yarn run build",
     "notification:build": "cd ././../../packages/notifications/ && yarn run build",
     "start": "react-scripts start",
