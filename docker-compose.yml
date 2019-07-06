@@ -33,7 +33,6 @@ services:
       - ./packages:/app/packages
       - ./package.json:/app/package.json
       - ./lerna.json:/app/lerna.json
-      - ./yarn.lock:/app/yarn.lock
 
   product_proxy:
     container_name: product_proxy
@@ -54,7 +53,6 @@ services:
       - ./packages:/app/packages
       - ./package.json:/app/package.json
       - ./lerna.json:/app/lerna.json
-      - ./yarn.lock:/app/yarn.lock
 
   admin_gw:
     container_name: admin_gw
@@ -77,7 +75,6 @@ services:
       - ./packages:/app/packages
       - ./package.json:/app/package.json
       - ./lerna.json:/app/lerna.json
-      - ./yarn.lock:/app/yarn.lock
 
   showcase_gw:
     container_name: showcase_gw
@@ -98,7 +95,6 @@ services:
       - ./packages:/app/packages
       - ./package.json:/app/package.json
       - ./lerna.json:/app/lerna.json
-      - ./yarn.lock:/app/yarn.lock
 
 ##  certbot:
 ##    container_name: certbot
@@ -121,6 +117,12 @@ services:
       - admin_gw
     volumes:
       - ./src/admin-ui/nginx/conf.d:/etc/nginx/conf.d
+      - ./src/admin-ui/src:/app/src/admin-ui/src
+      - ./src/admin-ui/.env.production:/app/src/admin-ui/.env.production
+      - ./src/admin-ui/package.json:/app/src/admin-ui/package.json
+      - ./packages:/app/packages
+      - ./package.json:/app/package.json
+      - ./lerna.json:/app/lerna.json
     environment:
       - NODE_ENV=production
 
@@ -136,6 +138,12 @@ services:
       - showcase_gw
     volumes:
       - ./src/showcase-ui/nginx/conf.d:/etc/nginx/conf.d
+      - ./src/showcase-ui/src:/app/src/showcase-ui/src
+      - ./src/showcase-ui/.env.production:/app/src/showcase-ui/.env.production
+      - ./src/showcase-ui/package.json:/app/src/showcase-ui/package.json
+      - ./packages:/app/packages
+      - ./package.json:/app/package.json
+      - ./lerna.json:/app/lerna.json
     environment:
       - NODE_ENV=production
 

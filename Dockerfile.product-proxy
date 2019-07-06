@@ -9,15 +9,6 @@ RUN npm i yarn -g --yes
 
 WORKDIR /app
 
-COPY ./src/product-proxy/files             ./src/product-proxy/files
-COPY ./src/product-proxy/src               ./src/product-proxy/src
-COPY ./src/product-proxy/.env.production   ./src/product-proxy
-COPY ./src/product-proxy/package.json      ./src/product-proxy
-COPY ./packages                            ./packages
-COPY ./package.json                        .
-COPY ./lerna.json                          .
-COPY ./yarn.lock                           .
-
 RUN yarn
 
 WORKDIR /app/src/product-proxy
