@@ -2,14 +2,25 @@
 # BUILD APP
 FROM node:11-alpine as ui
 
-WORKDIR /
-
 RUN npm config set package-lock false
 RUN npm i yarn -g --yes
+
+WORKDIR /app
+
+COPY ./src/showcase-ui/src              ./src/showcase-ui/src
+COPY ./src/showcase-ui/public           ./src/showcase-ui/public
+COPY ./src/showcase-ui/package.json     ./src/showcase-ui
+COPY ./src/showcase-ui/.env.production  ./src/showcase-ui
+COPY ./packages                         ./packages
+COPY ./package.json                     .
+COPY ./lerna.json                       .
+
+RUN yarn
 
 WORKDIR /app/src/showcase-ui
 
 RUN ["yarn", "run", "ui:build"]
+RUN ["yarn", "run", "tabs:build"]
 RUN ["yarn", "run", "dialog:build"]
 RUN ["yarn", "run", "notification:build"]
 
