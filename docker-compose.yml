@@ -105,26 +105,26 @@ services:
 ##      - ./data/certbot/www:/var/www/certbot
 ##    entrypoint: /bin/sh -c 'trap exit TERM; while :; do certbot renew; sleep 12h & wait $${!}; done;'
 
-  admin_ui:
-    container_name: admin_ui
-    build:
-      context: ./
-      dockerfile: Dockerfile.admin-ui
-    restart: always
-    depends_on:
-      - admin_gw
-    links:
-      - admin_gw
-    volumes:
-      - /shop/src/admin-ui/nginx/conf.d:/etc/nginx/conf.d
-      - /shop/src/admin-ui/src:/app/src/admin-ui/src
-      - /shop/src/admin-ui/.env.production:/app/src/admin-ui/.env.production
-      - /shop/src/admin-ui/package.json:/app/src/admin-ui/package.json
-      - /shop/packages:/app/packages
-      - /shop/package.json:/app/package.json
-      - /shop/lerna.json:/app/lerna.json
-    environment:
-      - NODE_ENV=production
+#  admin_ui:
+#    container_name: admin_ui
+#    build:
+#      context: ./
+#      dockerfile: Dockerfile.admin-ui
+#    restart: always
+#    depends_on:
+#      - admin_gw
+#    links:
+#      - admin_gw
+#    volumes:
+#      - /shop/src/admin-ui/nginx/conf.d:/etc/nginx/conf.d
+#      - /shop/src/admin-ui/src:/app/src/admin-ui/src
+#      - /shop/src/admin-ui/.env.production:/app/src/admin-ui/.env.production
+#      - /shop/src/admin-ui/package.json:/app/src/admin-ui/package.json
+#      - /shop/packages:/app/packages
+#      - /shop/package.json:/app/package.json
+#      - /shop/lerna.json:/app/lerna.json
+#    environment:
+#      - NODE_ENV=production
 
   showcase_ui:
     container_name: showcase_ui
