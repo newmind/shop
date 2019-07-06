@@ -2,8 +2,6 @@
 # BUILD APP
 FROM node:11-alpine as ui
 
-WORKDIR /
-
 RUN npm config set package-lock false
 RUN npm i yarn -g --yes
 
@@ -14,6 +12,7 @@ RUN yarn
 WORKDIR /app/src/admin-ui
 
 RUN ["yarn", "run", "ui:build"]
+RUN ["yarn", "run", "tabs:build"]
 RUN ["yarn", "run", "dialog:build"]
 RUN ["yarn", "run", "notification:build"]
 
