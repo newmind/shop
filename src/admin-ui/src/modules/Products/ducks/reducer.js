@@ -48,38 +48,8 @@ export default (state = initialState, { type, payload }) => {
     case CREATE_PRODUCTS_REQUEST_FAIL: return {
       ...state,
     };
+    case SOCKET_PRODUCT_CREATED:
     case CREATE_PRODUCTS_REQUEST_SUCCESS: {
-      const products = state['products'];
-      products.push(payload);
-      return {
-        ...state,
-        products: [ ...products ],
-      };
-    }
-
-    case REMOVE_PRODUCT_REQUEST: return {
-      ...state,
-    };
-    case REMOVE_PRODUCT_REQUEST_FAIL: return {
-      ...state,
-    };
-    case REMOVE_PRODUCT_REQUEST_SUCCESS: {
-      const products = state['products'];
-      const newProducts = products.map(product => {
-        if (product['id'] === payload['id']) {
-          return payload;
-        }
-        return product;
-      });
-      return {
-        ...state,
-        products: [
-          ...newProducts,
-        ],
-      };
-    }
-
-    case SOCKET_PRODUCT_CREATED: {
       const products = state['products'];
       if ( ! products.some(item => item['id'] === payload['id'])) {
         products.unshift(payload);
@@ -91,6 +61,26 @@ export default (state = initialState, { type, payload }) => {
         ],
       };
     }
+
+    case REMOVE_PRODUCT_REQUEST: return {
+      ...state,
+    };
+    case REMOVE_PRODUCT_REQUEST_FAIL: return {
+      ...state,
+    };
+    case SOCKET_PRODUCT_DELETED:
+    case REMOVE_PRODUCT_REQUEST_SUCCESS: {
+      const products = state['products'];
+      const index = products.findIndex(item => item['id'] === payload);
+      return {
+        ...state,
+        products: [
+          ...products.slice(0, index),
+          ...products.slice(index + 1),
+        ],
+      };
+    }
+
     case SOCKET_PRODUCT_UPDATED: {
       const products = state['products']
         .map(item => {
@@ -103,17 +93,6 @@ export default (state = initialState, { type, payload }) => {
         ...state,
         products: [
           ...products,
-        ],
-      };
-    }
-    case SOCKET_PRODUCT_DELETED: {
-      const products = state['products'];
-      const index = products.findIndex(item => item['id'] === payload);
-      return {
-        ...state,
-        products: [
-          ...products.slice(0, index),
-          ...products.slice(index + 1),
         ],
       };
     }

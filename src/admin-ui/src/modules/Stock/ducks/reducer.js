@@ -20,7 +20,7 @@ import {
 
   CREATE_STOCK_PRODUCTS_REQUEST,
   CREATE_STOCK_PRODUCTS_REQUEST_FAIL,
-  // CREATE_STOCK_PRODUCTS_REQUEST_SUCCESS,
+  CREATE_STOCK_PRODUCTS_REQUEST_SUCCESS,
 
   UPDATE_STOCK_PRODUCTS_REQUEST,
   UPDATE_STOCK_PRODUCTS_REQUEST_FAIL,
@@ -32,7 +32,7 @@ import {
 
   SOCKET_STOCK_PRODUCT_CREATED,
   SOCKET_STOCK_PRODUCT_DELETED,
-  SOCKET_STOCK_PRODUCT_UPDATED,
+  SOCKET_STOCK_PRODUCT_UPDATED, CREATE_STOCK_PRODUCTS_REQUEST_SUCCESS,
 } from './types';
 
 
@@ -111,7 +111,8 @@ export default (state = initialState, { type, payload }) => {
       ...state,
       inProcess: false,
     };
-    case SOCKET_STOCK_PRODUCT_CREATED: {
+    case SOCKET_STOCK_PRODUCT_CREATED:
+    case CREATE_STOCK_PRODUCTS_REQUEST_SUCCESS: {
       const stock = state['stock'];
       if ( ! stock.some(item => item['id'] === payload['id'])) {
         stock.unshift(payload);

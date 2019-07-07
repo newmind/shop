@@ -63,20 +63,6 @@ export default (state = initialState, { type, payload }) => {
       };
     }
 
-    case REMOVE_UNIT_REQUEST: return {
-      ...state,
-    };
-    case REMOVE_UNIT_REQUEST_FAIL: return {
-      ...state,
-    };
-    case SOCKET_UNIT_DELETED:
-    case REMOVE_UNIT_REQUEST_SUCCESS: {
-      return {
-        ...state,
-        units: state['units'].filter(unit => unit['id'] !== payload)
-      };
-    }
-
     case UPDATE_UNIT_REQUEST: return {
       ...state,
     };
@@ -93,6 +79,20 @@ export default (state = initialState, { type, payload }) => {
         return unit;
       })
     };
+
+    case REMOVE_UNIT_REQUEST: return {
+      ...state,
+    };
+    case REMOVE_UNIT_REQUEST_FAIL: return {
+      ...state,
+    };
+    case SOCKET_UNIT_DELETED:
+    case REMOVE_UNIT_REQUEST_SUCCESS: {
+      return {
+        ...state,
+        units: state['units'].filter(unit => unit['id'] !== payload)
+      };
+    }
 
     default: return { ...state };
   }

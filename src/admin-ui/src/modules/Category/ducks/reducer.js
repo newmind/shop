@@ -56,14 +56,17 @@ export default (state = initialState, { type, payload }) => {
       inProcess: false,
     };
     case SOCKET_CATEGORY_CREATED:
-    case CREATE_CATEGORY_REQUEST_SUCCESS: return {
-      ...state,
-      categories: [
-        ...state['categories'],
-        payload,
-      ],
-      inProcess: false,
-    };
+    case CREATE_CATEGORY_REQUEST_SUCCESS: {
+      const categories = [...state['categories']];
+      if ( ! categories.some(category => category['id'] === payload['id'])) {
+        categories.push(payload);
+      }
+      return {
+        ...state,
+        categories,
+        inProcess: false,
+      };
+    }
 
     case UPDATE_CATEGORY_REQUEST: return {
       ...state,
