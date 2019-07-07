@@ -12,8 +12,8 @@
     "dotenv": "^7.0.0"
   },
   "scripts": {
-    "start": "node -r dotenv/config --experimental-modules ../product-proxy/src/index.mjs dotenv_config_path=./.env",
-    "start:dev": "node_modules/.bin/nodemon --exec node -r dotenv/config --experimental-modules ./src/index.mjs dotenv_config_path=./.env"
+    "start": "node -r dotenv/config --experimental-modules ../product-proxy/src/index.mjs dotenv_config_path=./.env.production",
+    "start:dev": "node_modules/.bin/nodemon --exec node -r dotenv/config --experimental-modules ./src/index.mjs dotenv_config_path=./.env.development"
   },
   "devDependencies": {
     "nodemon": "^1.18.10"

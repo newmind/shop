@@ -54,6 +54,26 @@ services:
       - /shop/package.json:/app/package.json
       - /shop/lerna.json:/app/lerna.json
 
+  operation_proxy:
+    container_name: operation_proxy
+    build:
+      context: ./
+      dockerfile: Dockerfile.operation-proxy
+    restart: always
+    depends_on:
+      - db
+      - rabbit
+    links:
+      - db
+      - rabbit
+    volumes:
+      - /shop/src/operation-proxy/src:/app/src/operation-proxy/src
+      - /shop/src/operation-proxy/.env.production:/app/src/operation-proxy/.env.production
+      - /shop/src/operation-proxy/package.json:/app/src/operation-proxy/package.json
+      - /shop/packages:/app/packages
+      - /shop/package.json:/app/package.json
+      - /shop/lerna.json:/app/lerna.json
+
   admin_gw:
     container_name: admin_gw
     build:
@@ -64,10 +84,12 @@ services:
       - rabbit
       - product_proxy
       - identity_srv
+      - operation_proxy
     links:
       - rabbit
       - product_proxy
       - identity_srv
+      - operation_proxy
     volumes:
       - /shop/src/admin-gw/src:/app/src/admin-gw/src
       - /shop/src/admin-gw/.env.production:/app/src/admin-gw/.env.production
@@ -85,9 +107,11 @@ services:
     depends_on:
       - rabbit
       - product_proxy
+      - operation_proxy
     links:
       - rabbit
       - product_proxy
+      - operation_proxy
     volumes:
       - /shop/src/showcase-gw/src:/app/src/showcase-gw/src
       - /shop/src/showcase-gw/.env.production:/app/src/showcase-gw/.env.production
