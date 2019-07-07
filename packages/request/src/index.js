@@ -54,7 +54,7 @@ const request = async (options) => {
       dispatch(push('/sign-in'));
     }
 
-    throw Error(error);
+    throw error['response'];
   }
 };
 

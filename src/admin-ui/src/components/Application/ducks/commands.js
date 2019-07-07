@@ -14,7 +14,7 @@ export const changeInitial = (state) => async (dispatch) => {
 
 export const checkAuthState = () => async (dispatch) => {
 
-  const cookies = Cookies.get('admin');
+  const cookies = Cookies.getJSON('admin');
 
   if ( ! cookies) {
     dispatch(push('/sign-in'));

@@ -13,6 +13,14 @@ const validate = values => {
     errors['count'] = 'Только положительное значение';
   }
 
+  if ( ! values['amount']) {
+    errors['amount'] = 'Необходимо заполнить';
+  } else if ( ! /^\d+(\.\d{1,2})?/.test(values['amount'])) {
+    errors['amount'] = 'Неверное значение';
+  } else if (values['amount'] < 0) {
+    errors['amount'] = 'Только положительное значение';
+  }
+
   if ( ! values['currency']) {
     errors['currency'] = 'Необходимо выбрать';
   }

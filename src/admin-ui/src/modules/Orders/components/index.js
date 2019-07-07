@@ -14,7 +14,6 @@ export default PageHOC({
   mapStateToProps,
   mapActionsToProps,
   onEnter: ({ onLoading }) => {
-    console.log('onEnter');
     onLoading(false);
   },
 })(Component);

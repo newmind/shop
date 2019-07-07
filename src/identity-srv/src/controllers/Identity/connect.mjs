@@ -20,7 +20,7 @@ export default () => async (ctx, next) => {
   });
 
   if ( ! user) {
-    ctx.throw(404, { code: '', message: '' });
+    ctx.throw(404, { code: '404', message: 'User not found' });
   }
 
   await User.update({ refreshToken: null }, {
@@ -37,8 +37,6 @@ export default () => async (ctx, next) => {
 
   const payload = {
     id: user['id'],
-    login: user['login'],
-    password: user['password'],
     exp: expirationTime,
   };
 

@@ -4,7 +4,6 @@ import http from 'http';
 
 import koaCORS from "koa-cors2";
 import cookie from 'koa-cookie';
-import cookies from 'cookie';
 import request from 'axios';
 
 
@@ -139,7 +138,10 @@ import routes from './routes';
 
             const jsonString = JSON.stringify(data['data']).replace(/[{}]/ig, '');
 
-            ctx.cookies.set('admin', `{${encodeURI(jsonString)}}`);
+            ctx.cookies.set('admin', `{${encodeURI(jsonString)}}`, {
+              path: '/',
+
+            });
 
             await next();
           } else {

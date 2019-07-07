@@ -2,13 +2,14 @@
 import PageHOC from '../../_bin/PageHOC';
 
 import { bindActionCreators } from 'redux';
-import { isValid } from 'redux-form';
+import { isValid, isPristine } from 'redux-form';
 
 import Component from './Component';
 import { signIn, checkCookies } from '../ducks/commands';
 
 const mapStateToProps = state => ({
   isValid: isValid('sign-in')(state),
+  isPristine: isPristine('sign-in')(state),
 });
 
 const mapActionsToProps = (dispatch) => {

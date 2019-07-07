@@ -1,14 +1,27 @@
 
+import types from 'prop-types';
 import React, { PureComponent } from 'react';
+
 import { submit } from 'redux-form';
 
-import Form from './Form';
 import { Button } from '@packages/ui';
+
+import Form from './Form';
 
 import styles from './default.module.scss';
 
 
 class Component extends PureComponent {
+  static propTypes = {
+    isValid: types.bool,
+    isPristine: types.bool,
+  };
+
+  static defaultProps = {
+    isValid: false,
+    isPristine: false,
+  };
+
   onSubmit(data) {
     const { signIn } = this.props;
     signIn(data);
@@ -20,7 +33,7 @@ class Component extends PureComponent {
   }
 
   render() {
-    const { isValid } = this.props;
+    const { isValid, isPristine } = this.props;
     return (
       <div className="page">
         <div className={styles['dialog']}>
@@ -31,7 +44,7 @@ class Component extends PureComponent {
             <Form onSubmit={this.onSubmit.bind(this)} />
           </div>
           <div className={styles['dialog__controls']}>
-            <Button onClick={this._onSubmitForm.bind(this)} disabled={ ! isValid}>Выполнить</Button>
+            <Button onClick={this._onSubmitForm.bind(this)} disabled={ ! isValid || isPristine}>Выполнить</Button>
           </div>
         </div>
       </div>

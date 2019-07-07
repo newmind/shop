@@ -3,6 +3,7 @@ import Cookies from 'js-cookie';
 import { push } from 'react-router-redux';
 
 import request from '@packages/request';
+import { pushNotification } from '@packages/notifications';
 
 
 import {
@@ -13,16 +14,11 @@ import {
 
 
 export const checkCookies = () => dispatch => {
-  try {
 
-    const cookies = Cookies.getJSON('admin');
+  const cookies = Cookies.getJSON('admin');
 
-    if (cookies) {
-      dispatch(push('/'));
-    }
-
-  } catch(error) {
-
+  if (cookies) {
+    dispatch(push('/'));
   }
 };
 
@@ -46,6 +42,16 @@ export const signIn = (formData) => async dispatch => {
 
   } catch(error) {
 
+    let message = '';
+
+    if (error['status'] === 404) {
+      message = 'Не верный логин или пароль';
+    }
+
     dispatch(applicationAuthRequestFailAction(error));
+    dispatch(pushNotification({
+      mode: 'danger',
+      content:  message,
+    }));
   }
 };
