@@ -52,13 +52,16 @@ export default (state = initialState, { type, payload }) => {
       ...state,
     };
     case SOCKET_UNIT_CREATED:
-    case CREATE_UNIT_REQUEST_SUCCESS: return {
-      ...state,
-      units: [
-        ...state['units'],
-        payload,
-      ],
-    };
+    case CREATE_UNIT_REQUEST_SUCCESS: {
+      const units = [...state['units']];
+      if ( ! units.some(unit => unit['id'] === payload['id'])) {
+        units.push(payload);
+      }
+      return {
+        ...state,
+        units,
+      };
+    }
 
     case REMOVE_UNIT_REQUEST: return {
       ...state,
@@ -67,10 +70,12 @@ export default (state = initialState, { type, payload }) => {
       ...state,
     };
     case SOCKET_UNIT_DELETED:
-    case REMOVE_UNIT_REQUEST_SUCCESS: return {
-      ...state,
-      units: state['units'].filter(unit => unit['id'] !== payload)
-    };
+    case REMOVE_UNIT_REQUEST_SUCCESS: {
+      return {
+        ...state,
+        units: state['units'].filter(unit => unit['id'] !== payload)
+      };
+    }
 
     case UPDATE_UNIT_REQUEST: return {
       ...state,

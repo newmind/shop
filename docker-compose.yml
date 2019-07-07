@@ -117,12 +117,6 @@ services:
       - admin_gw
     volumes:
       - /shop/src/admin-ui/nginx/conf.d:/etc/nginx/conf.d
-      - /shop/src/admin-ui/src:/app/src/admin-ui/src
-      - /shop/src/admin-ui/.env.production:/app/src/admin-ui/.env.production
-      - /shop/src/admin-ui/package.json:/app/src/admin-ui/package.json
-      - /shop/packages:/app/packages
-      - /shop/package.json:/app/package.json
-      - /shop/lerna.json:/app/lerna.json
     environment:
       - NODE_ENV=production
 
@@ -138,12 +132,6 @@ services:
       - showcase_gw
     volumes:
       - /shop/src/showcase-ui/nginx/conf.d:/etc/nginx/conf.d
-      - /shop/src/showcase-ui/src:/app/src/showcase-ui/src
-      - /shop/src/showcase-ui/.env.production:/app/src/showcase-ui/.env.production
-      - /shop/src/showcase-ui/package.json:/app/src/showcase-ui/package.json
-      - /shop/packages:/app/packages
-      - /shop/package.json:/app/package.json
-      - /shop/lerna.json:/app/lerna.json
     environment:
       - NODE_ENV=production
 
