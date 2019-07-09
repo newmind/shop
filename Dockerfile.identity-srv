@@ -2,7 +2,7 @@
 # BUILD APP
 FROM node:11-alpine
 
-RUN addgroup -r vpyatakov -g 901 && adduser -u 901 -r -g vpyatakov
+RUN adduser -u vpyatakov -r -g vpyatakov
 
 RUN npm config set package-lock false
 RUN npm i yarn -g --yes
