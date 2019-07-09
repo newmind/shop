@@ -21,7 +21,6 @@ services:
     build:
       context: ./
       dockerfile: Dockerfile.identity-srv
-    user: vpyatakov
     restart: always
     depends_on:
       - db
