@@ -2,7 +2,7 @@
 # BUILD APP
 FROM node:11-alpine
 
-RUN useradd -ms /bin/bash  vpyatakov
+RUN useradd -ms /bin/sh  vpyatakov
 
 USER vpyatakov
 
