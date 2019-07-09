@@ -2,6 +2,8 @@
 # BUILD APP
 FROM node:11-alpine
 
+USER vpyatakov:vpyatakov
+
 RUN npm config set package-lock false
 RUN npm i yarn -g --yes
 
