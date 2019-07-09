@@ -4,6 +4,8 @@ FROM node:11-alpine
 
 RUN adduser -S vpyatakov
 
+USER vpyatakov
+
 RUN npm config set package-lock false
 RUN npm i yarn -g --yes
 
