@@ -18,11 +18,10 @@ services:
 
   identity_srv:
     container_name: identity_srv
-    command: ["make", "assets"]
-    user: ${CURRENT_UID}
     build:
       context: ./
       dockerfile: Dockerfile.identity-srv
+    user: vpyatakov
     restart: always
     depends_on:
       - db
