@@ -175,3 +175,5 @@ services:
     volumes:
       - /shop/nginx/conf.d:/etc/nginx/conf.d
       - /shop/nginx/nginx.conf:/etc/nginx/nginx.conf
+      - /shop/data/certbot/conf:/etc/letsencrypt:rw
+      - /shop/data/certbot/www:/var/www/certbot:rw
