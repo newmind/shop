@@ -163,7 +163,6 @@ services:
     container_name: proxy
     build: ./nginx
     restart: unless-stopped
-    user: certbot
     depends_on:
       - admin_ui
       - showcase_ui
