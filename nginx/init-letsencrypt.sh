@@ -1,6 +1,6 @@
 #!/bin/bash
 
-domains=("xn--80aagcvgokokb0i.xn--p1ai www.xn--80aagcvgokokb0i.xn--p1ai" "admin.xn--80aagcvgokokb0i.xn--p1ai www.admin.xn--80aagcvgokokb0i.xn--p1ai")
+domains=("xn--80aagcvgokokb0i.xn--p1ai" "admin.xn--80aagcvgokokb0i.xn--p1ai")
 email="pyatakov.viktor@gmail.com" # Adding a valid address is strongly recommended
 staging=1 # Set to 1 if you're testing your setup to avoid hitting request limits
 
@@ -59,9 +59,9 @@ for domain in ${!domains[*]}; do
 
 done
 
-echo "### Starting nginx ..."
+#echo "### Starting nginx ..."
 # Restarting for case if nginx container is already started
-docker-compose up -d nginx && docker-compose restart nginx
+#docker-compose up -d nginx && docker-compose restart nginx
 
 # Select appropriate email arg
 case "$email" in
