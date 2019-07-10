@@ -6,7 +6,7 @@
     "@packages/db": "^1.0.0",
     "@packages/server": "^1.0.0",
     "@packages/socket.io": "^1.0.0",
-    "@packages/utils": "^1.0.0",
+    "@packages/sys.utils": "^1.0.0",
     "@packages/rabbit": "^1.0.0",
     "busboy": "^0.3.1",
     "dotenv": "^7.0.0"
