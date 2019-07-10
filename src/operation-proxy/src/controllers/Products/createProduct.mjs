@@ -3,7 +3,7 @@
 import path from "path";
 
 import { sequelize, models } from '@packages/db';
-import { getFiles, saveFile } from "@packages/utils";
+import { getFiles, saveFile } from "@packages/sys.utils";
 import {sendEvent} from "@packages/rabbit";
 
 
