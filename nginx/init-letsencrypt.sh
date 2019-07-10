@@ -1,6 +1,6 @@
 #!/bin/bash
 
-domains=("xn--80aagcvgokokb0i.xn--p1ai" "admin.xn--80aagcvgokokb0i.xn--p1ai")
+domains=("xn--80aagcvgokokb0i.xn--p1ai")
 email="pyatakov.viktor@gmail.com" # Adding a valid address is strongly recommended
 staging=0 # Set to 1 if you're testing your setup to avoid hitting request limits
 
