@@ -61,7 +61,7 @@ done
 
 #echo "### Starting nginx ..."
 # Restarting for case if nginx container is already started
-#docker-compose up -d nginx && docker-compose restart nginx
+#docker-compose up -d proxy && docker-compose restart proxy
 
 # Select appropriate email arg
 case "$email" in
