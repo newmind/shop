@@ -15,6 +15,7 @@ node_modules/
 **/build/
 **/lib/
 **/files/
+**/backup/
 
 # misc
 .DS_Store
