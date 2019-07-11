@@ -7,4 +7,4 @@ docker exec postgre_sql pg_dump -Fc products > /shop/src/product-proxy/backup/pr
 docker exec postgre_sql pg_dump -Fc identity > /shop/src/identity-srv/backup/identity.sql
 
 [ -d /shop/src/operation-proxy/backup ] || mkdir -p /shop/src/product-proxy/backup
-docker exec postgre_sql pg_dump -Fc operations > /shop/src/operation-proxy/backup/operations.sql
+docker exec postgre_sql pg_dump --column-inserts --data-only operations > /shop/src/operation-proxy/backup/operations.sql
