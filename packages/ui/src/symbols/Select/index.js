@@ -23,6 +23,14 @@ const Options = React.forwardRef((props, ref) => {
     }
   };
 
+  const getKey = (value) => {
+    if (value instanceof Object) {
+      return value[optionKey];
+    } else {
+      return value;
+    }
+  };
+
   return (
     <div ref={ref} className={styles['options']}>
       <div className={styles['options__content']}>
@@ -30,7 +38,7 @@ const Options = React.forwardRef((props, ref) => {
           ? (
             options.map((option, key) => {
               const classNameOption = cn(styles['option'], {
-                [styles['option--selected']]: value[optionKey] === option[optionKey],
+                [styles['option--selected']]: getKey(value) === getKey(option),
               });
               return (
                 <span key={key} className={classNameOption} onClick={onCheck.bind(this, option)}>

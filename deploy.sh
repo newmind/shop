@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
 
-docker cp -a product_proxy:/app/src/product-proxy/files/ /shop/src/product-proxy/
+docker exec postgre_sql pg_dump --column-inserts --data-only  products > /shop/src/products/backup/products.sql
 
 docker-compose up --build -d
