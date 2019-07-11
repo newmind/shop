@@ -178,6 +178,6 @@ services:
       - /shop/nginx/init-letsencrypt.sh:/etc/nginx/init-letsencrypt.sh
       - /shop/nginx/conf.d:/etc/nginx/conf.d
       - /shop/nginx/nginx.conf:/etc/nginx/nginx.conf
-      - /shop/data/certbot/conf:/etc/letsencrypt:rw
-      - /shop/data/certbot/www:/var/www/certbot:rw
+      - /shop/data/certbot/conf:/etc/letsencrypt
+      - /shop/data/certbot/www:/var/www/certbot
     command: '/bin/sh -c ''while :; do sleep 6h & wait $${!}; nginx -s reload; done & nginx -g "daemon off;"'''
