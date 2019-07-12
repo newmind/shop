@@ -11,7 +11,7 @@ import routes from './routes';
 
 (async () => {
 
-  databaseORM();
+  databaseORM(`postgres://${process.env['DATA_BASE_USERNAME']}:${process.env['DATA_BASE_PASSWORD']}@${process.env['DATA_BASE_HOST']}:${process.env['DATA_BASE_PORT']}/${process.env['DATA_BASE_NAME']}`);
 
   const httpServer = http.createServer(appServer.callback());
 
