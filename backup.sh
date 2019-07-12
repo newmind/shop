@@ -13,7 +13,7 @@ echo "-----------------------"
 
 [ -d /shop/src/identity-srv/backup ] || mkdir -p /shop/src/identity-srv/backup
 #docker exec postgre_sql pg_dump -Fc -U postgres identity > /shop/src/identity-srv/backup/dump.bak
-docker exec postgre_sql pg_dump --file "/shop/src/identity-srv/backup/dump.bak" --username "postgres" --no-password --verbose --role "admin" --format=c --blobs --data-only --no-owner --no-privileges --no-tablespaces --no-unlogged-table-data --encoding "UTF8" "identity"
+docker exec postgre_sql pg_dump --username "postgres" --no-password --verbose --role "admin" --format=c --blobs --data-only --no-owner --no-privileges --no-tablespaces --no-unlogged-table-data --encoding "UTF8" "identity" > "/shop/src/identity-srv/backup/dump.bak"
 
 echo "-------------------------"
 echo "|   BACKUP OPERATIONS   |"
