@@ -19,4 +19,4 @@ echo "|   BACKUP OPERATIONS   |"
 echo "-------------------------"
 
 [ -d /shop/src/operation-proxy/backup ] || mkdir -p /shop/src/operation-proxy/backup
-docker exec postgre_sql pg_dump -Fc -U postgres operations > /shop/src/operation-proxy/backup/dump.bak
+docker exec postgre_sql pg_dump --username postgres -b -c -E UTF-8 --no-owner --no-privileges --no-tablespaces --clean --schema public -F c -Z 9 -f /shop/src/operation-proxy/backup/dump.bak operations
