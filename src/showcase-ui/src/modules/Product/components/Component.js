@@ -2,10 +2,10 @@
 import types from 'prop-types';
 import React, { PureComponent } from 'react';
 
-import numeral from '@packages/numeral';
+import numeral from '@ui.packages/numeral';
 
-import { Gallery } from '@packages/ui';
-import { Dialog } from '@packages/dialog';
+import { Gallery } from '@ui.packages/ui';
+import { Dialog } from '@ui.packages/dialog';
 
 import Comments from './Comments';
 import Properties from './Properties';

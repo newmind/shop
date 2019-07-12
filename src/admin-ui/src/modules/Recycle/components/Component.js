@@ -2,9 +2,9 @@
 import types from 'prop-types';
 import React, { PureComponent } from 'react';
 
-// import numeral from '@packages/numeral';
-import { Confirm } from "@packages/dialog";
-import { Table, Row, Col } from '@packages/ui';
+// import numeral from '@ui.packages/numeral';
+import { Confirm } from "@ui.packages/dialog";
+import { Table, Row, Col } from '@ui.packages/ui';
 
 import cn from 'classnames';
 import styles from './default.module.scss';

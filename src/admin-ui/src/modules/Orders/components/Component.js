@@ -1,7 +1,7 @@
 
 import React, { PureComponent } from 'react';
 
-import { Col, Row, Table } from "@packages/ui";
+import { Col, Row, Table } from "@ui.packages/ui";
 
 
 class Component extends PureComponent {

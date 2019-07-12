@@ -2,7 +2,7 @@
 import types from 'prop-types';
 import React, { PureComponent } from 'react';
 
-import { SelectField, InputField, Row, Col, Button } from '@packages/ui';
+import { SelectField, InputField, Row, Col, Button } from '@ui.packages/ui';
 
 import styles from './default.module.scss';
 

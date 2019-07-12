@@ -1,5 +1,5 @@
 
-import { sleep } from '@packages/utils';
+import { sleep } from '@ui.packages/utils';
 // import { getCookie } from 'redux-cookie';
 import { changeState } from './actions';
 

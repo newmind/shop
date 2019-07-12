@@ -3,9 +3,9 @@
   "version": "1.0.0",
   "license": "MIT",
   "dependencies": {
-    "@packages/db": "^1.0.0",
-    "@packages/server": "^1.0.0",
-    "@packages/sys.utils": "^1.0.0",
+    "@sys.packages/db": "^1.0.0",
+    "@sys.packages/server": "^1.0.0",
+    "@sys.packages/sys.utils": "^1.0.0",
     "dotenv": "^7.0.0",
     "jsonwebtoken": "^8.5.1",
     "koa": "^2.7.0",

@@ -2,9 +2,9 @@
 
 import path from "path";
 
-import { sequelize, models } from '@packages/db';
-import { getFiles, saveFile } from "@packages/sys.utils";
-import { sendEvent } from '@packages/rabbit';
+import { sequelize, models } from '@sys.packages/db';
+import { getFiles, saveFile } from "@sys.packages/sys.utils";
+import { sendEvent } from '@sys.packages/rabbit';
 
 
 const FILE_PATH = path.resolve(process.cwd(), 'files');

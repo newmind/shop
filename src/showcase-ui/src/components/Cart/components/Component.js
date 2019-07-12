@@ -3,9 +3,9 @@ import types from 'prop-types';
 import React, { PureComponent } from 'react';
 import { Link } from 'react-router-dom';
 
-import numeral from '@packages/numeral';
+import numeral from '@ui.packages/numeral';
 
-import { Gallery } from '@packages/ui';
+import { Gallery } from '@ui.packages/ui';
 
 import cn from 'classnames';
 import styles from './defaults.module.scss';

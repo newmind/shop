@@ -2,8 +2,8 @@
 import types from 'prop-types';
 import React, { PureComponent } from 'react';
 
-import { Confirm, Dialog } from "@packages/dialog";
-import {Table, Row, Col, Button} from '@packages/ui';
+import { Confirm, Dialog } from "@ui.packages/dialog";
+import {Table, Row, Col, Button} from '@ui.packages/ui';
 
 import Form from './UnitForm';
 

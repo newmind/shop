@@ -1,0 +1,24 @@
+
+@import "~@ui.packages/theme";
+
+
+.confirm {
+
+  display: block;
+  padding: 20px;
+
+  &__message {
+
+    display: block;
+    font: 14px "Opinion Pro";
+    color: $dark-color;
+    text-shadow: 2px 1px 0 $whitesmoke-color;
+  }
+
+  &__controls {
+
+    display: block;
+    text-align: right;
+    margin: 30px 0 0;
+  }
+}

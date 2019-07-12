@@ -10,7 +10,7 @@ WORKDIR /app
 COPY ./src/identity-srv/src               ./src/identity-srv/src
 COPY ./src/identity-srv/.env.production   ./src/identity-srv
 COPY ./src/identity-srv/package.json      ./src/identity-srv
-COPY ./packages                           ./packages
+COPY ./sys.packages                       ./sys.packages
 COPY ./package.json                       .
 COPY ./lerna.json                         .
 COPY ./yarn.lock                          .

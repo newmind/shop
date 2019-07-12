@@ -2,8 +2,8 @@
 
 import jwt from 'jsonwebtoken';
 
-import { token } from '@packages/sys.utils';
-import { models } from '@packages/db';
+import { token } from '@sys.packages/sys.utils';
+import { models } from '@sys.packages/db';
 
 
 export default () => async (ctx) => {

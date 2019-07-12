@@ -2,8 +2,8 @@
 import types from 'prop-types';
 import React, { PureComponent } from 'react';
 
-import moment from '@packages/moment';
-import { Evaluation } from '@packages/ui';
+import moment from '@ui.packages/moment';
+import { Evaluation } from '@ui.packages/ui';
 
 import styles from './default.module.scss';
 

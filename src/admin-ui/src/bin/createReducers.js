@@ -3,8 +3,8 @@ import { combineReducers } from 'redux';
 import { routerReducer } from 'react-router-redux';
 import { reducer as formReducer } from 'redux-form';
 
-import { dialogReducer } from '@packages/dialog';
-import { notificationReducer } from '@packages/notifications';
+import { dialogReducer } from '@ui.packages/dialog';
+import { notificationReducer } from '@ui.packages/notifications';
 
 
 export default (asyncReducers = {}) => {

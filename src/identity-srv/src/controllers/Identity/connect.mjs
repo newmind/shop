@@ -2,11 +2,11 @@
 
 import jwt from 'jsonwebtoken';
 
-import { genHash256, token } from '@packages/sys.utils';
-import { models } from '@packages/db';
+import { genHash256, token } from '@sys.packages/sys.utils';
+import { models } from '@sys.packages/db';
 
 
-export default () => async (ctx, next) => {
+export default () => async (ctx) => {
   const { User } = models;
   const { login, password } = ctx.request.body;
 

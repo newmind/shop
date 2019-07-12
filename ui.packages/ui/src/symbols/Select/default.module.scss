@@ -1,0 +1,298 @@
+
+@import "~@ui.packages/theme";
+
+
+.wrapper {
+
+  display: block;
+
+  &--info {
+
+    .select { border-color: $info-color; }
+    .label { color: $info-color; }
+
+    &:hover {
+      border-color: darken($info-color, 10%);
+    }
+  }
+  &--info &__value,
+  &--info &__placeholder {
+    color: $info-color;
+  }
+
+  &--primary {
+
+    border-color: $primary-color;
+
+    &:hover {
+      border-color: darken($primary-color, 10%);
+    }
+  }
+  &--primary &__value,
+  &--primary &__placeholder {
+    color: $primary-color;
+  }
+
+  &--success {
+
+    border-color: $success-color;
+
+    &:hover {
+      border-color: darken($success-color, 10%);
+    }
+  }
+  &--success &__value,
+  &--success &__placeholder {
+    color: $success-color;
+  }
+
+  &--warning {
+
+    border-color: $warning-color;
+
+    &:hover {
+      border-color: darken($warning-color, 10%);
+    }
+  }
+  &--warning &__value,
+  &--warning &__placeholder {
+    color: $warning-color;
+  }
+
+  &--danger {
+
+    .select { border-color: $danger-color; }
+    .label,
+    .select__value,
+    .select__placeholder { color: $danger-color; }
+
+    &:hover {
+      border-color: darken($danger-color, 10%);
+    }
+  }
+}
+
+.label {
+
+  display: block;
+  font: 12px "Opinion Pro";
+  font-weight: bold;
+  color: #222;
+  margin: 0 0 8px 1px;
+  letter-spacing: 1px;
+  transition: color 400ms;
+}
+
+.select {
+
+  display: flex;
+  flex: 1 0 auto;
+  border: 1px solid $light-gray-color;
+  border-radius: 3px;
+  cursor: pointer;
+  background: $white-color;
+  transition: border-color 400ms;
+
+  &:hover &__angle {
+
+    color: $dark-color;
+  }
+
+  &:hover &__cross {
+
+    color: $danger-color;
+  }
+
+  & + & {
+    margin: 0 0 0 10px;
+  }
+
+  &--is-focus &__angle {
+
+    color: $dark-color;
+  }
+
+  &--is-focus &__cross {
+
+    color: $danger-color;
+  }
+
+  &__content {
+
+    display: flex;
+    flex: 1 0 auto;
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  &__controls {
+
+    display: inline-flex;
+  }
+
+  &__values {
+
+    display: flex;
+    flex: 1 0 auto;
+    flex-direction: column;
+  }
+
+  &__value,
+  &__input,
+  &__placeholder {
+
+    display: block;
+    font: 13px "Opinion Pro";
+    padding: 11px 0 9px 10px;
+    width: 100%;
+    box-sizing: border-box;
+    transition: color 200ms;
+  }
+
+  &__value {
+
+    width: 100%;
+    box-sizing: border-box;
+  }
+
+  &__input {
+
+    border: none;
+    outline: none;
+    background: transparent;
+  }
+
+  &__placeholder {
+
+    color: lighten($dark-color, 40%);
+  }
+
+  &__angle {
+
+    display: flex;
+    flex: 1 0 auto;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 0 8px;
+    color: $light-gray-color;
+    transition: color 200ms;
+  }
+
+  &__cross {
+
+    display: flex;
+    flex: 1 0 auto;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 0;
+    color: rgba($danger-color, .1);
+    transition: color 200ms;
+  }
+
+  &__marker {
+
+    font-size: 14px;
+    color: inherit;
+  }
+
+  &--disabled {
+
+    background: $light-gray-color;
+    border-color: $gray-color;
+    color: $gray-color;
+    text-shadow: -1px 1px 0 $white-color;
+    cursor: default;
+  }
+}
+
+.options {
+
+  position: fixed;
+  display: block;
+  min-width: 200px;
+  padding: 6px 0 0;
+  z-index: 9000;
+
+  &__content {
+
+    display: block;
+    border: 1px solid $light-gray-color;
+    border-radius: 4px;
+    box-shadow: 0 2px 4px 1px rgba($dark-color, .4);
+    background: $whitesmoke-color;
+  }
+
+  &__empty {
+
+    display: block;
+    font: 13px "Opinion Pro";
+    color: $dark-color;
+    padding: 11px 20px 8px 20px;
+  }
+}
+
+.option {
+
+  display: block;
+  padding: 10px 20px;
+  transition: background 200ms;
+
+  &:hover {
+
+    background: $light-gray-color;
+  }
+
+  &--selected,
+  &--selected:hover {
+
+    background: $gray-color;
+  }
+
+  & + & {
+
+    border-top: 1px solid $light-gray-color;
+  }
+
+  &__value {
+
+    display: block;
+    font: 13px "Opinion Pro";
+    color: $dark-color;
+  }
+}
+
+.tooltip {
+
+  position: fixed;
+  padding: 10px 16px;
+  display: block;
+  max-width: 200px;
+  background: $danger-color;
+  border-radius: 4px;
+
+  &:before {
+
+    position: absolute;
+    right: 100%;
+    top: 50%;
+    display: inline-block;
+    margin: -7px 0 0;
+    width: 0;
+    height: 0;
+    border: 6px solid transparent;
+    border-left: none;
+    border-right-color: $danger-color;
+    content: '';
+  }
+
+  &__message {
+
+    display: inline-block;
+    font: 13px "Opinion Pro";
+    color: $whitesmoke-color;
+    letter-spacing: .5px;
+    font-weight: bold;
+  }
+}

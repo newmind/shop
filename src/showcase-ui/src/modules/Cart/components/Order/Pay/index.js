@@ -1,7 +1,7 @@
 
 import React, { PureComponent } from 'react';
 
-import { Tab, Tabs } from "@packages/tabs";
+import { Tab, Tabs } from "@ui.packages/tabs";
 
 
 class Component extends PureComponent {

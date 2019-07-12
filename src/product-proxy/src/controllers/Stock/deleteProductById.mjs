@@ -1,8 +1,8 @@
 'use strict';
 
-import { sequelize, models } from '@packages/db';
+import { sequelize, models } from '@sys.packages/db';
 
-import { sendEvent } from "@packages/rabbit";
+import { sendEvent } from "@sys.packages/rabbit";
 
 
 export default () => async (ctx) => {

@@ -1,7 +1,7 @@
 'use strict';
 
 import { Duplex } from 'stream';
-import { models } from '@packages/db';
+import { models } from '@sys.packages/db';
 
 
 export default () => async (ctx) => {
@@ -17,8 +17,6 @@ export default () => async (ctx) => {
     where: { id: fileName },
     attributes: ['file']
   });
-
-  console.log(image['file'])
 
   const stream = new Duplex();
 

@@ -1,6 +1,6 @@
 
-import request from '@packages/request';
-import { pushNotification } from '@packages/notifications';
+import request from '@ui.packages/request';
+import { pushNotification } from '@ui.packages/notifications';
 
 import {
   openDialogAction,

@@ -2,15 +2,15 @@
 import types from 'prop-types';
 import React, { PureComponent } from 'react';
 
-import { nounDeclension } from '@packages/utils';
-import { Dialog, Confirm } from '@packages/dialog';
-import { Button, Col, Gallery, Row, Table } from "@packages/ui";
+import { nounDeclension } from '@ui.packages/utils';
+import { Dialog, Confirm } from '@ui.packages/dialog';
+import { Button, Col, Gallery, Row, Table } from "@ui.packages/ui";
 
 import ModifyDialog from './ModifyDialog';
 
 import cn from "classnames";
 import styles from "./default.module.scss";
-import numeral from "@packages/numeral";
+import numeral from "@ui.packages/numeral";
 
 
 class Component extends PureComponent {

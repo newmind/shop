@@ -1,8 +1,8 @@
 'use strict';
 
-import { sequelize, models } from '@packages/db';
-import { getFiles, saveFile } from "@packages/sys.utils";
-import { sendEvent } from "@packages/rabbit";
+import { sequelize, models } from '@sys.packages/db';
+import { getFiles } from "@sys.packages/sys.utils";
+import { sendEvent } from "@sys.packages/rabbit";
 
 
 const saveFiles = (files, { productId }, { transaction }) => {

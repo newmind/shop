@@ -11,7 +11,7 @@ COPY ./src/showcase-ui/src              ./src/showcase-ui/src
 COPY ./src/showcase-ui/public           ./src/showcase-ui/public
 COPY ./src/showcase-ui/package.json     ./src/showcase-ui
 COPY ./src/showcase-ui/.env.production  ./src/showcase-ui
-COPY ./packages                         ./packages
+COPY ./ui.packages                      ./ui.packages
 COPY ./package.json                     .
 COPY ./lerna.json                       .
 COPY ./yarn.lock                        .

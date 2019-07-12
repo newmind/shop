@@ -5,7 +5,7 @@ import AddImageForm from '../AddImageForm';
 import AttrsForm from '../AttributesForm';
 
 import { Field, FieldArray } from 'redux-form';
-import { Row, Col, Hr, InputField, TextariaField } from '@packages/ui';
+import { Row, Col, Hr, InputField, TextariaField } from '@ui.packages/ui';
 
 import styles from './default.module.scss';
 

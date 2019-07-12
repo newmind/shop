@@ -1,0 +1,78 @@
+
+@import "~@ui.packages/theme";
+
+
+.tab {
+
+  display: inline-block;
+  padding: 8px 20px;
+  background: $whitesmoke-color;
+  border-bottom: 1px solid $gray-color;
+  cursor: pointer;
+
+  &__caption {
+
+    font: 14px "Opinion Pro";
+  }
+
+  &--active {
+
+    background: $primary-color;
+    color: $white-color;
+  }
+
+  &--info { background: lighten($info-color, 30%); }
+  &--info &__header { background: $info-color;  }
+
+  &--primary { background: lighten($primary-color, 40%); }
+  &--primary &__header { background: $primary-color; color: $white-color; }
+  &--primary &__close:hover { color: $white-color; }
+
+  &--success { background: lighten($success-color, 40%); }
+  &--success &__header { background: $success-color; color: $white-color; }
+  &--success &__close:hover { color: $white-color; }
+
+  &--warning { background: lighten($warning-color, 40%); }
+  &--warning &__header { background: $warning-color; color: $white-color; }
+  &--warning &__close:hover { color: $white-color; }
+
+  &--danger { background: lighten($danger-color, 40%); }
+  &--danger &__header { background: $danger-color; color: $white-color; }
+  &--danger &__close:hover { color: $white-color; }
+
+
+  &__close {
+
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    display: block;
+    width: 16px;
+    height: 16px;
+    font-size: 20px;
+    color: $light-gray-color;
+    cursor: pointer;
+    transition: color 400ms;
+
+    &:hover {
+      color: $dark-color;
+    }
+  }
+
+  &__header {
+
+    display: block;
+    background: $whitesmoke-color;
+    border-bottom: 1px solid $light-gray-color;
+    font: 14px "Opinion Pro";
+    font-weight: bold;
+    padding: 14px 20px 10px;
+    color: $dark-color;
+  }
+
+  &__content {
+
+    display: block;
+    overflow: auto;
+  }
+}

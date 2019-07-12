@@ -2,8 +2,8 @@
 // import types from 'prop-types';
 import React, { PureComponent } from 'react';
 
-// import numeral from '@packages/numeral';
-import { Row, Col } from '@packages/ui';
+// import numeral from '@ui.packages/numeral';
+import { Row, Col } from '@ui.packages/ui';
 
 // import cn from 'classnames';
 import styles from './default.module.scss';

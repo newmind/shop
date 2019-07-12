@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import React, { PureComponent } from 'react';
 import { Route, Switch } from "react-router";
 
-import { Notifications } from '@packages/notifications';
+import { Notifications } from '@ui.packages/notifications';
 
 import Loader from '../../Loader';
 import Module from '../../Module';

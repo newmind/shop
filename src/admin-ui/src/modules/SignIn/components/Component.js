@@ -4,7 +4,7 @@ import React, { PureComponent } from 'react';
 
 import { submit } from 'redux-form';
 
-import { Button } from '@packages/ui';
+import { Button } from '@ui.packages/ui';
 
 import Form from './Form';
 

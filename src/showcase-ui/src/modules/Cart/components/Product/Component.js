@@ -2,7 +2,7 @@
 import types from 'prop-types';
 import React, { PureComponent } from 'react';
 
-import { Gallery } from '@packages/ui';
+import { Gallery } from '@ui.packages/ui';
 
 import styles from './default.module.scss';
 

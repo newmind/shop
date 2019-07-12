@@ -2,7 +2,7 @@
 import types from 'prop-types';
 import React, { PureComponent } from 'react';
 
-import { Image, Row, Col } from '@packages/ui';
+import { Image, Row, Col } from '@ui.packages/ui';
 
 import cn from 'classnames';
 import styles from './default.module.scss';

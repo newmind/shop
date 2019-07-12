@@ -2,9 +2,9 @@
 
 import http from 'http';
 
-import databaseORM from '@packages/db';
-import appServer, { initRouter } from '@packages/server';
-// import { connect as createConnection, channel as createChannel, createExchange } from "@packages/rabbit";
+import databaseORM from '@sys.packages/db';
+import appServer, { initRouter } from '@sys.packages/server';
+// import { connect as createConnection, channel as createChannel, createExchange } from "@sys.packages/rabbit";
 
 import routes from './routes';
 

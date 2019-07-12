@@ -1,5 +1,5 @@
 
-import request from '@packages/request';
+import request from '@ui.packages/request';
 
 import {
   destroyAction,

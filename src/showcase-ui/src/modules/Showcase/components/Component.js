@@ -1,13 +1,13 @@
 
 import types from 'prop-types';
 import React, { PureComponent } from 'react';
-import { reduceToArray, objectToQuery } from '@packages/utils';
+import { reduceToArray, objectToQuery } from '@ui.packages/utils';
 
 import Product from './Product';
 // import Form from './Form';
 
 import Filter from './Filter';
-// import { Tabs } from '@packages/dialog';
+// import { Tabs } from '@ui.packages/dialog';
 
 import styles from './default.module.scss';
 

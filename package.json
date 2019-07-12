@@ -5,7 +5,8 @@
     "lerna": "^3.13.0"
   },
   "workspaces": [
-    "packages/*",
+    "sys.packages/*",
+    "ui.packages/*",
     "src/*"
   ]
 }

@@ -2,7 +2,7 @@
 
 import http from 'http';
 
-import appServer, { initRouter } from '@packages/server';
+import appServer, { initRouter } from '@sys.packages/server';
 
 import routes from './routes/index';
 

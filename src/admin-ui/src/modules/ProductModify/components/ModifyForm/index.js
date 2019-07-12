@@ -1,7 +1,7 @@
 
 import { reduxForm } from 'redux-form';
 
-import valid from '@packages/validate';
+import valid from '@ui.packages/validate';
 
 import Component from './Component';
 

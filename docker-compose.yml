@@ -30,7 +30,7 @@ services:
       - /shop/src/identity-srv/src:/app/src/identity-srv/src
       - /shop/src/identity-srv/.env.production:/app/src/identity-srv/.env.production
       - /shop/src/identity-srv/package.json:/app/src/identity-srv/package.json
-      - /shop/packages:/app/packages
+      - /shop/sys.packages:/app/sys.packages
       - /shop/package.json:/app/package.json
       - /shop/lerna.json:/app/lerna.json
 
@@ -50,7 +50,7 @@ services:
       - /shop/src/product-proxy/src:/app/src/product-proxy/src
       - /shop/src/product-proxy/.env.production:/app/src/product-proxy/.env.production
       - /shop/src/product-proxy/package.json:/app/src/product-proxy/package.json
-      - /shop/packages:/app/packages
+      - /shop/sys.packages:/app/sys.packages
       - /shop/package.json:/app/package.json
       - /shop/lerna.json:/app/lerna.json
 
@@ -70,7 +70,7 @@ services:
       - /shop/src/operation-proxy/src:/app/src/operation-proxy/src
       - /shop/src/operation-proxy/.env.production:/app/src/operation-proxy/.env.production
       - /shop/src/operation-proxy/package.json:/app/src/operation-proxy/package.json
-      - /shop/packages:/app/packages
+      - /shop/sys.packages:/app/sys.packages
       - /shop/package.json:/app/package.json
       - /shop/lerna.json:/app/lerna.json
 
@@ -94,7 +94,7 @@ services:
       - /shop/src/admin-gw/src:/app/src/admin-gw/src
       - /shop/src/admin-gw/.env.production:/app/src/admin-gw/.env.production
       - /shop/src/admin-gw/package.json:/app/src/admin-gw/package.json
-      - /shop/packages:/app/packages
+      - /shop/sys.packages:/app/sys.packages
       - /shop/package.json:/app/package.json
       - /shop/lerna.json:/app/lerna.json
 
@@ -116,7 +116,7 @@ services:
       - /shop/src/showcase-gw/src:/app/src/showcase-gw/src
       - /shop/src/showcase-gw/.env.production:/app/src/showcase-gw/.env.production
       - /shop/src/showcase-gw/package.json:/app/src/showcase-gw/package.json
-      - /shop/packages:/app/packages
+      - /shop/sys.packages:/app/sys.packages
       - /shop/package.json:/app/package.json
       - /shop/lerna.json:/app/lerna.json
 

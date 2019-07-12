@@ -2,9 +2,9 @@
 import types from 'prop-types';
 import React, { PureComponent } from 'react';
 
-// import numeral from '@packages/numeral';
-import { Confirm, Dialog } from "@packages/dialog";
-import { Table, Row, Col, Button } from '@packages/ui';
+// import numeral from '@ui.packages/numeral';
+import { Confirm, Dialog } from "@ui.packages/dialog";
+import { Table, Row, Col, Button } from '@ui.packages/ui';
 
 import CurrencyModifyDialog from './CurrencyModifyDialog';
 

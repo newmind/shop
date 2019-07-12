@@ -8,8 +8,8 @@ import { Router } from 'react-router';
 import { routerMiddleware } from 'react-router-redux';
 import createSocketIoMiddleware from 'redux-socket.io';
 
-import createSocketIO from '@packages/socket';
-import { middleware as requestMiddleware } from "@packages/request";
+import createSocketIO from '@ui.packages/socket';
+import { middleware as requestMiddleware } from "@ui.packages/request";
 
 import createStore, { importReducer }  from './bin/createStore';
 import createHistory from './bin/createRouter';

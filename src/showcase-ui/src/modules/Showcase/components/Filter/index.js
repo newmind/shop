@@ -4,7 +4,7 @@ import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 
 import Component from './Component';
-import {queryToObject} from "@packages/utils";
+import {queryToObject} from "@ui.packages/utils";
 
 
 const mapStateToProps = (state, props) => {
@@ -18,7 +18,7 @@ const mapStateToProps = (state, props) => {
   }
 };
 
-const mapActionsToProps = (dispatch) => {
+const mapActionsToProps = () => {
   return {};
 };
 

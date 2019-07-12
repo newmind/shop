@@ -2,7 +2,7 @@
 import Cookies from 'js-cookie';
 import { push } from 'react-router-redux';
 
-import { sleep } from '@packages/utils';
+import { sleep } from '@ui.packages/utils';
 
 import { changeState } from './actions';
 

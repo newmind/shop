@@ -1,8 +1,0 @@
-{
-  "name": "@packages/socket.io",
-  "version": "1.0.0",
-  "main": "src/index.mjs",
-  "dependencies": {
-    "socket.io": "^2.2.0"
-  }
-}

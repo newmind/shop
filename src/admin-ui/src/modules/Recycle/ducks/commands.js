@@ -1,6 +1,6 @@
 
-import request from '@packages/request';
-import { closeDialog } from '@packages/dialog';
+import request from '@ui.packages/request';
+import { closeDialog } from '@ui.packages/dialog';
 
 import {
   getProductsRequestAction,

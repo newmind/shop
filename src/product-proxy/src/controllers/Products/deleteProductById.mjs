@@ -1,12 +1,7 @@
 'use strict';
 
-import fs from 'fs';
-import path from "path";
-
-import { sequelize, models } from '@packages/db';
-import { sendEvent } from "@packages/rabbit";
-
-const FILE_PATH = path.resolve(process.cwd(), 'files');
+import { sequelize, models } from '@sys.packages/db';
+import { sendEvent } from "@sys.packages/rabbit";
 
 
 export default () => async (ctx) => {

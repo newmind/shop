@@ -5,7 +5,7 @@ import PageHOC from '../../_bin/PageHOC';
 
 import Component from './Component';
 
-import { pushNotification } from '@packages/notifications';
+import { pushNotification } from '@ui.packages/notifications';
 
 import {
   openDialog,

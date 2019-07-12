@@ -1,6 +1,6 @@
 'use strict';
 
-import { models, Sequelize } from '@packages/db';
+import { models, Sequelize } from '@sys.packages/db';
 
 
 export default () => async (ctx) => {

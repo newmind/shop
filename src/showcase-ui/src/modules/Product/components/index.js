@@ -4,7 +4,7 @@ import PageHOC from '../../_bin/PageHOC';
 
 import Component from './Component';
 
-import { openDialog, closeDialog } from '@packages/dialog';
+import { openDialog, closeDialog } from '@ui.packages/dialog';
 
 import {
   getProductById,

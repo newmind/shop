@@ -1,0 +1,9 @@
+{
+  "name": "@ui.packages/numeral",
+  "version": "1.0.0",
+  "private": true,
+  "main": "./src/index.js",
+  "dependencies": {
+    "numeral": "^2.0.6"
+  }
+}

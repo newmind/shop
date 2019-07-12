@@ -1,8 +1,8 @@
 
 import React, { PureComponent } from 'react';
 
-import { Row, Col, SelectField } from '@packages/ui';
-import { Tabs, Tab, TabContainer } from '@packages/tabs';
+import { Row, Col, SelectField } from '@ui.packages/ui';
+import { Tabs, Tab, TabContainer } from '@ui.packages/tabs';
 
 
 class Component extends PureComponent {

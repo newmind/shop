@@ -10,7 +10,7 @@ WORKDIR /app
 COPY ./src/operation-proxy/src               ./src/operation-proxy/src
 COPY ./src/operation-proxy/.env.production   ./src/operation-proxy
 COPY ./src/operation-proxy/package.json      ./src/operation-proxy
-COPY ./packages                              ./packages
+COPY ./sys.packages                          ./sys.packages
 COPY ./package.json                          .
 COPY ./lerna.json                            .
 COPY ./yarn.lock                             .

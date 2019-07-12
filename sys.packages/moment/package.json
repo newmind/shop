@@ -1,0 +1,9 @@
+{
+  "name": "@sys.packages/moment",
+  "version": "1.0.0",
+  "private": true,
+  "main": "./src/index.js",
+  "dependencies": {
+    "moment": "^2.24.0"
+  }
+}

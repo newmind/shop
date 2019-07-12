@@ -2,8 +2,8 @@
 
 import http from 'http';
 
-import databaseORM from '@packages/db';
-import appServer, { initRouter } from '@packages/server';
+import databaseORM from '@sys.packages/db';
+import appServer, { initRouter } from '@sys.packages/server';
 
 import routes from './routes';
 

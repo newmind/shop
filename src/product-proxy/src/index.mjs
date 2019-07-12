@@ -2,10 +2,10 @@
 
 import http from 'http';
 
-import databaseORM from '@packages/db';
-import createSocket from '@packages/socket.io';
-import appServer, { initRouter } from '@packages/server';
-import { connect as createConnection, channel as createChannel, createExchange } from "@packages/rabbit";
+import databaseORM from '@sys.packages/db';
+import createSocket from '@sys.packages/socket.io';
+import appServer, { initRouter } from '@sys.packages/server';
+import { connect as createConnection, channel as createChannel, createExchange } from "@sys.packages/rabbit";
 
 import routes from './routes';
 

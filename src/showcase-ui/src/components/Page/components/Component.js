@@ -2,7 +2,7 @@
 import PropTypes from 'prop-types';
 import React, { cloneElement, PureComponent,  } from 'react';
 
-import { sleep } from '@packages/utils';
+import { sleep } from '@ui.packages/utils';
 
 import cn from 'classnames';
 import styles from './default.module.scss';

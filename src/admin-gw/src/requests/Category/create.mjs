@@ -2,7 +2,7 @@
 
 import axios from 'axios';
 
-// import { getBuffer } from "@packages/sys.utils";
+// import { getBuffer } from "@sys.packages/sys.utils";
 
 
 const PRODUCT_API_SRV = process.env['PRODUCT_API_SRV'];

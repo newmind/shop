@@ -1,6 +1,6 @@
 'use strict';
 
-import { models } from '@packages/db';
+import { models } from '@sys.packages/db';
 
 
 export default () => async (ctx) => {
