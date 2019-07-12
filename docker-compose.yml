@@ -152,8 +152,6 @@ services:
     deploy:
       limits:
         memory: 512m
-      reservations:
-        memory: 256m
 
   certbot:
     user: root
