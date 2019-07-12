@@ -150,8 +150,9 @@ services:
     environment:
       - NODE_ENV=production
     deploy:
-      limits:
-        memory: 512m
+      resources:
+        limits:
+          memory: 512m
 
   certbot:
     user: root
