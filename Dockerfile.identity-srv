@@ -11,8 +11,9 @@ COPY ./src/identity-srv/src               ./src/identity-srv/src
 COPY ./src/identity-srv/.env.production   ./src/identity-srv
 COPY ./src/identity-srv/package.json      ./src/identity-srv
 COPY ./packages                           ./packages
-COPY ./package.json                       ./
-COPY ./lerna.json                         ./
+COPY ./package.json                       .
+COPY ./lerna.json                         .
+COPY ./yarn.lock                          .
 
 RUN yarn
 
