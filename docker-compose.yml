@@ -149,7 +149,11 @@ services:
       - /shop/src/showcase-ui/nginx/conf.d:/etc/nginx/conf.d
     environment:
       - NODE_ENV=production
-    mem_limit: 512m
+    deploy:
+      limits:
+        memory: 512m
+      reservations:
+        memory: 256m
 
   certbot:
     user: root
