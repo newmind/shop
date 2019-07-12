@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
-[ -f /shop/src/product-proxy/backup/dump.gz ] && docker exec postgre_sql zcat /shop/src/product-proxy/backup/dump.gz | psql products
+[ -f /shop/src/product-proxy/backup/dump.gz ] || docker exec postgre_sql pg_restore -d products /shop/src/product-proxy/backup/dump.gz
 
-[ -f /shop/src/identity-srv/backup/dump.gz ] && docker exec postgre_sql zcat /shop/src/identity-srv/backup/dump.gz | psql identity
+[ -f /shop/src/identity-srv/backup/dump.gz ] || docker exec postgre_sql pg_restore -d identity /shop/src/identity-srv/backup/dump.gz
 
-[ -f /shop/src/operation-proxy/backup/dump.gz ] && docker exec postgre_sql zcat /shop/src/operation-proxy/backup/dump.gz | psql operations
+[ -f /shop/src/operation-proxy/backup/dump.gz ] || docker exec postgre_sql pg_restore -d operations /shop/src/operation-proxy/backup/dump.gz
