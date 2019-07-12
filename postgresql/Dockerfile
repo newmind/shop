@@ -30,7 +30,8 @@ USER postgres
 RUN    /etc/init.d/postgresql start &&\
     psql --command "CREATE USER admin WITH SUPERUSER PASSWORD '1Ctdfcnjgjkm';" &&\
     createdb -O admin products &&\
-    createdb -O admin identity
+    createdb -O admin identity &&\
+    createdb -O admin operations
 
 # Adjust PostgreSQL configuration so that remote connections to the
 # database are possible.
