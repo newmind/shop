@@ -26,7 +26,7 @@ export default () => async (ctx) => {
         },
         {
           model: models['Category'],
-          required: true,
+          required: false,
           as: 'category',
           attributes: ['id', 'name']
         },
