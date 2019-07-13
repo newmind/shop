@@ -137,9 +137,9 @@ services:
     deploy:
       resources:
         limits:
-          memory: 128M
-        reservations:
           memory: 512M
+        reservations:
+          memory: 128M
 
   showcase_ui:
     container_name: showcase_ui
@@ -158,9 +158,9 @@ services:
     deploy:
       resources:
         limits:
-          memory: 128M
-        reservations:
           memory: 512M
+        reservations:
+          memory: 128M
 
   certbot:
     user: root
