@@ -134,6 +134,12 @@ services:
       - /shop/src/admin-ui/nginx/conf.d:/etc/nginx/conf.d
     environment:
       - NODE_ENV=production
+    deploy:
+      resources:
+        limits:
+          memory: 128M
+        reservations:
+          memory: 512M
 
   showcase_ui:
     container_name: showcase_ui
@@ -152,7 +158,9 @@ services:
     deploy:
       resources:
         limits:
-          memory: 512m
+          memory: 128M
+        reservations:
+          memory: 512M
 
   certbot:
     user: root
