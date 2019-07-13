@@ -7,14 +7,7 @@ import {
 } from './types';
 
 
-const initialState = {
-  tabs: {
-    'default': {
-      activeTab: '',
-    }
-  },
-};
-
+const initialState = {};
 
 export const KEY = 'tabs';
 
@@ -23,32 +16,24 @@ export default (state = initialState, { type, payload }) => {
 
     case CREATE_TABS: return {
       ...state,
-      tabs: {
-        ...state['tabs'],
-        [payload['name']]: {
-          activeTab: payload['tabName'],
-        }
-      },
+      [payload['name']]: {
+        activeTab: payload['tabName'],
+      }
     };
 
     case REMOVE_TABS: {
-      const tabs = state['tabs'];
+      const tabs = state;
       delete tabs[payload];
       return {
         ...state,
-        tabs: {
-          ...tabs
-        },
+        ...tabs
       };
     }
 
     case SET_ACTIVE_TAB: return {
       ...state,
-      tabs: {
-        ...state['tabs'],
-        [payload['tabsName']]: {
-          activeTab: payload['tabName'],
-        }
+      [payload['name']]: {
+        activeTab: payload['tabName'],
       }
     };
 

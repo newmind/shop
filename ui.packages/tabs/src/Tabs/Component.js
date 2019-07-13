@@ -12,10 +12,21 @@ class Component extends PureComponent {
     createTabs: types.func,
   };
 
+  static childContextTypes = {
+    tabsName: types.string,
+  };
+
   static defaultProps = {
     name: 'default',
     defaultTab: '',
   };
+
+  getChildContext() {
+    const { name } = this.props;
+    return {
+      tabsName: name,
+    };
+  }
 
   componentWillMount() {
     const { name, defaultTab, createTabs } = this.props;
@@ -28,14 +39,10 @@ class Component extends PureComponent {
   }
 
   render() {
-    const { name, children } = this.props;
+    const { children } = this.props;
     return (
       <div className={styles['wrapper']}>
-        {React.Children.map(children, child =>
-          React.cloneElement(child, {
-            tabsName: name,
-          })
-        )}
+        { children }
       </div>
     );
   }

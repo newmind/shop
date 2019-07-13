@@ -7,18 +7,15 @@ import Component from './Component';
 import { setActiveTab } from '../ducks/commands';
 
 
-const mapStateToProps = (state, props) => {
-  const { tabsName } = props;
-  const tabs = state['tabs']['tabs'][tabsName] || {};
+const mapStateToProps = (state) => {
   return {
-    activeTab: tabs['activeTab'] || '',
+    tabs: state['tabs'],
   }
 };
 
-const mapActionsToProps = (dispatch, props) => {
-  const { tabsName } = props;
+const mapActionsToProps = (dispatch) => {
   return {
-    setActiveTab: bindActionCreators(setActiveTab.bind(null, tabsName), dispatch),
+    setActiveTab: bindActionCreators(setActiveTab, dispatch),
   };
 };
 

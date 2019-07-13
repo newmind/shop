@@ -15,6 +15,6 @@ export const removeTabs = (name) => dispatch => {
   dispatch(removeTabsAction(name));
 };
 
-export const setActiveTab = (tabsName, tabName) => dispatch => {
-  dispatch(setActiveTabAction(tabsName, tabName));
+export const setActiveTab = (name, tabName) => dispatch => {
+  dispatch(setActiveTabAction(name, tabName));
 };

@@ -9,24 +9,30 @@ import styles from "./defaults.module.scss";
 class Comment extends PureComponent {
   static propTypes = {
     caption: types.string,
-    name: types.string.isRequired,
-    activeTab: types.string.isRequired,
+    name: types.string,
+    tabs: types.object.isRequired,
     setActiveTab: types.func,
+  };
+
+  static contextTypes = {
+    tabsName: types.string,
   };
 
   static defaultProps = {
     caption: 'No caption',
     name: '',
-    activeTab: '',
+    tabs: {},
   };
 
   render() {
-    const { caption, name, activeTab, setActiveTab } = this.props;
+    const { tabsName } = this.context;
+    const { name, tabs, caption, setActiveTab } = this.props;
+    const activeTab = tabs[tabsName] && tabs[tabsName]['activeTab'];
     const classNameTab = cn(styles['tab'], {
       [styles['tab--active']]: activeTab === name,
     });
     return (
-      <span className={classNameTab} onClick={setActiveTab.bind(this, name)}>
+      <span className={classNameTab} onClick={setActiveTab.bind(this, tabsName, name)}>
         <span className={styles['tab__caption']}>{ caption }</span>
       </span>
     );

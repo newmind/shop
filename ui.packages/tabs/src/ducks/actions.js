@@ -17,7 +17,7 @@ export const removeTabsAction = (name) => ({
   payload: name ,
 });
 
-export const setActiveTabAction = (tabsName, tabName) => ({
+export const setActiveTabAction = (name, tabName) => ({
   type: SET_ACTIVE_TAB,
-  payload: { tabsName, tabName },
+  payload: { name, tabName },
 });

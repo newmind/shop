@@ -4,11 +4,9 @@ import { connect } from 'react-redux';
 import Component from './Component';
 
 
-const mapStateToProps = (state, props) => {
-  const { tabsName } = props;
-  const tabs = state['tabs']['tabs'][tabsName] || {};
+const mapStateToProps = (state) => {
   return {
-    activeTab: tabs['activeTab'] || '',
+    tabs: state['tabs'],
   }
 };
 

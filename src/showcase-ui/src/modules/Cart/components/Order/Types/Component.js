@@ -13,12 +13,13 @@ class Component extends PureComponent {
   render() {
     return (
       <Tabs name="type" defaultTab="simple">
-        <Tab name="simple" caption="Оправа или очки без рецепта" />
-        <Tab name="eye-glasses" caption="Очки для зрения" />
-        <Tab name="progressive" caption="Прогрессивы" />
-        <Tab name="bifocal" caption="Бифокалы" />
-        <Tab name="digress" caption="Дегрессивы" />
-
+        <div>
+          <Tab name="simple" caption="Оправа или очки без рецепта" />
+          <Tab name="eye-glasses" caption="Очки для зрения" />
+          <Tab name="progressive" caption="Прогрессивы" />
+          <Tab name="bifocal" caption="Бифокалы" />
+          <Tab name="digress" caption="Дегрессивы" />
+        </div>
         <TabContainer to="simple">
           <Row>
             <Row>
