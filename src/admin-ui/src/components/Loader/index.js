@@ -2,6 +2,7 @@
 import React, { PureComponent } from 'react';
 
 import styles from './default.module.scss';
+import cn from "classnames";
 
 
 class Component extends PureComponent {
@@ -9,7 +10,13 @@ class Component extends PureComponent {
     return (
       <div className={styles['wrapper']}>
         <span className={styles['loader']}>
-          <p className={styles['content']}>Загрузка</p>
+          <div className={styles['container']}>
+            <span className={styles['logotype']}>
+              <i className={cn('fas fa-glasses', styles['logotype__icon'])} />
+              <span className={styles['logotype__text']}>Магазин очков</span>
+            </span>
+            <p className={styles['spinner']}>Загрузка</p>
+          </div>
         </span>
       </div>
     );

@@ -1,32 +1,66 @@
 
 @import "~@ui.packages/theme";
 
+
 .wrapper {
 
   display: flex;
   flex: 1 0 auto;
   flex-direction: column;
-  background: radial-gradient(circle, rgba(255,255,255,1) 0%, rgba(254,255,229,0.6643032212885154) 53%, rgba(55,178,209,0.13489145658263302) 100%);
+  background: $whitesmoke-color;
 }
 
 .loader {
 
   display: flex;
-  flex-direction: column;
-  flex: 0 0 auto;
   width: 300px;
   height: 300px;
   margin: auto auto;
   text-align: center;
-  background: $whitesmoke-color;
-  border-radius: 50%;
-  box-shadow: 0 5px 20px 0 rgba(34, 34, 34, 0.2);
+  background: transparent;
+  font: 18px "Opinion Pro";
+}
+
+.container {
+
+  display: flex;
+  flex-direction: column;
+  flex: 0 0 auto;
+  margin: auto auto;
+  white-space: pre-wrap;
   justify-content: center;
 }
 
-.content {
+.logotype {
+
+  display: inline-block;
+  font-size: 0;
+  white-space: nowrap;
+
+  &__icon {
+
+    display: inline-block;
+    font-size: 30px;
+    margin: 0 15px 0 0;
+    vertical-align: baseline;
+    color: $dark-color;
+  }
+
+  &__text {
+
+    display: inline-block;
+    font: 30px "Opinion Pro";
+    font-weight: bold;
+    vertical-align: baseline;
+    color: $dark-color;
+  }
+}
+
+.spinner {
 
   display: block;
   font: 18px "Opinion Pro";
+  margin: 16px 0 0;
   color: $dark-color;
+  letter-spacing: 1px;
 }
