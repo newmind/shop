@@ -5,10 +5,20 @@
 .tab {
 
   display: inline-block;
-  padding: 8px 20px;
+  padding: 14px 24px;
   background: $whitesmoke-color;
   border-bottom: 1px solid $gray-color;
   cursor: pointer;
+
+  &:first-child {
+
+    border-radius: 4px 0 0 0;
+  }
+
+  &:last-child {
+
+    border-radius: 0 4px 0 0;
+  }
 
   &__caption {
 
