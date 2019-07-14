@@ -1,3 +1,3 @@
 #!/usr/bin/env bash
 
-docker-compose --compatibility up --build -d
+docker-compose up --build -d
