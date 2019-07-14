@@ -7,14 +7,14 @@ RUN npm i yarn -g --yes
 
 WORKDIR /app
 
-#COPY ./src/admin-ui/src              ./src/admin-ui/src
-#COPY ./src/admin-ui/public           ./src/admin-ui/public
+COPY ./src/admin-ui/src              ./src/admin-ui/src
+COPY ./src/admin-ui/public           ./src/admin-ui/public
 COPY ./src/admin-ui/package.json     ./src/admin-ui
-#COPY ./src/admin-ui/.env.production  ./src/admin-ui
-#COPY ./packages                      ./packages
-#COPY ./package.json                  .
-#COPY ./lerna.json                    .
-#COPY ./yarn.lock                     .
+COPY ./src/admin-ui/.env.production  ./src/admin-ui
+COPY ./ui.packages                   ./ui.packages
+COPY ./package.json                  .
+COPY ./lerna.json                    .
+COPY ./yarn.lock                     .
 
 RUN yarn
 
