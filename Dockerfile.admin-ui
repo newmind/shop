@@ -5,9 +5,16 @@ FROM node:11-alpine as ui
 RUN npm config set package-lock false
 RUN npm i yarn -g --yes
 
-COPY /shop/src/admin-ui/package.json /app/src/admin-ui
-
 WORKDIR /app
+
+#COPY ./src/admin-ui/src              ./src/admin-ui/src
+#COPY ./src/admin-ui/public           ./src/admin-ui/public
+COPY ./src/admin-ui/package.json     ./src/admin-ui
+#COPY ./src/admin-ui/.env.production  ./src/admin-ui
+#COPY ./packages                      ./packages
+#COPY ./package.json                  .
+#COPY ./lerna.json                    .
+#COPY ./yarn.lock                     .
 
 RUN yarn
 
