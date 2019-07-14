@@ -5,13 +5,13 @@ FROM node:11-alpine as ui
 RUN npm config set package-lock false
 RUN npm i yarn -g --yes
 
+COPY /shop/src/admin-ui/package.json .
+
 WORKDIR /app
 
 RUN yarn
 
 WORKDIR /app/src/admin-ui
-
-COPY /shop/src/admin-ui/package.json .
 
 RUN ["yarn", "run", "ui:build"]
 RUN ["yarn", "run", "tabs:build"]
