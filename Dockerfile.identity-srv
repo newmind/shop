@@ -7,6 +7,14 @@ RUN npm i yarn -g --yes
 
 WORKDIR /app
 
+COPY ./src/identity-srv                 ./src/identity-srv/src
+COPY ./src/identity-srv/.env.production ./src/identity-srv
+COPY ./src/identity-srv/package.json    ./src/identity-srv
+COPY ./sys.packages                     ./sys.packages
+COPY ./package.json                     ./
+COPY ./lerna.json                       ./
+COPY ./yarn.lock                        ./
+
 RUN yarn
 
 WORKDIR /app/src/identity-srv
