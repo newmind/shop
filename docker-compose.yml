@@ -26,14 +26,8 @@ services:
       - db
     links:
       - db
-    volumes:
-      - /shop/src/identity-srv/src:/app/src/identity-srv/src:ro
-      - /shop/src/identity-srv/.env.production:/app/src/identity-srv/.env.production:ro
-      - /shop/src/identity-srv/package.json:/app/src/identity-srv/package.json:ro
-      - /shop/sys.packages:/app/sys.packages:ro
-      - /shop/package.json:/app/package.json:ro
-      - /shop/lerna.json:/app/lerna.json:ro
-      - /shop/yarn.lock:/app/yarn.lock:ro
+    venvironment:
+      - NODE_ENV=production
 
   product_proxy:
     container_name: product_proxy
@@ -47,14 +41,8 @@ services:
     links:
       - db
       - rabbit
-    volumes:
-      - /shop/src/product-proxy/src:/app/src/product-proxy/src:ro
-      - /shop/src/product-proxy/.env.production:/app/src/product-proxy/.env.production:ro
-      - /shop/src/product-proxy/package.json:/app/src/product-proxy/package.json:ro
-      - /shop/sys.packages:/app/sys.packages:ro
-      - /shop/package.json:/app/package.json:ro
-      - /shop/lerna.json:/app/lerna.json:ro
-      - /shop/yarn.lock:/app/yarn.lock:ro
+    environment:
+      - NODE_ENV=production
 
   operation_proxy:
     container_name: operation_proxy
@@ -68,14 +56,8 @@ services:
     links:
       - db
       - rabbit
-    volumes:
-      - /shop/src/operation-proxy/src:/app/src/operation-proxy/src:ro
-      - /shop/src/operation-proxy/.env.production:/app/src/operation-proxy/.env.production:ro
-      - /shop/src/operation-proxy/package.json:/app/src/operation-proxy/package.json:ro
-      - /shop/sys.packages:/app/sys.packages:ro
-      - /shop/package.json:/app/package.json:ro
-      - /shop/lerna.json:/app/lerna.json:ro
-      - /shop/yarn.lock:/app/yarn.lock:ro
+    environment:
+      - NODE_ENV=production
 
   admin_gw:
     container_name: admin_gw
@@ -93,14 +75,8 @@ services:
       - product_proxy
       - identity_srv
       - operation_proxy
-    volumes:
-      - /shop/src/admin-gw/src:/app/src/admin-gw/src:ro
-      - /shop/src/admin-gw/.env.production:/app/src/admin-gw/.env.production:ro
-      - /shop/src/admin-gw/package.json:/app/src/admin-gw/package.json:ro
-      - /shop/sys.packages:/app/sys.packages:ro
-      - /shop/package.json:/app/package.json:ro
-      - /shop/lerna.json:/app/lerna.json:ro
-      - /shop/yarn.lock:/app/yarn.lock:ro
+    environment:
+      - NODE_ENV=production
 
   showcase_gw:
     container_name: showcase_gw
@@ -116,13 +92,8 @@ services:
       - rabbit
       - product_proxy
       - operation_proxy
-    volumes:
-      - /shop/src/showcase-gw/src:/app/src/showcase-gw/src
-      - /shop/src/showcase-gw/.env.production:/app/src/showcase-gw/.env.production
-      - /shop/src/showcase-gw/package.json:/app/src/showcase-gw/package.json
-      - /shop/sys.packages:/app/sys.packages
-      - /shop/package.json:/app/package.json
-      - /shop/lerna.json:/app/lerna.json
+    environment:
+      - NODE_ENV=production
 
   admin_ui:
     container_name: admin_ui
