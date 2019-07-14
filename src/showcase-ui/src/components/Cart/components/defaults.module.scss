@@ -41,7 +41,7 @@
 
     display: inline-block;
     color: $white-color;
-    font: 13px -apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Oxigen,Ubuntu,Cantarell,'Fira Sans','Droid Sans','Helvetica Neue',sans-serif;
+    font: 13px 'Helvetica Neue',sans-serif;
     transition: color 400ms;
   }
 
@@ -59,7 +59,7 @@
 
     display: block;
     padding: 20px;
-    font: 14px -apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Oxigen,Ubuntu,Cantarell,'Fira Sans','Droid Sans','Helvetica Neue',sans-serif;
+    font: 14px 'Helvetica Neue',sans-serif;
     color: $dark-color;
     text-align: center;
     background: $white-color;
@@ -68,7 +68,7 @@
   &__full-amount {
 
     text-align: right;
-    font: 14px -apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Oxigen,Ubuntu,Cantarell,'Fira Sans','Droid Sans','Helvetica Neue',sans-serif;
+    font: 14px 'Helvetica Neue',sans-serif;
     font-weight: bold;
     color: $dark-color;
   }
@@ -78,7 +78,7 @@
     display: inline-block;
     vertical-align: middle;
     padding: 10px 10px 8px;
-    font: 12px -apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Oxigen,Ubuntu,Cantarell,'Fira Sans','Droid Sans','Helvetica Neue',sans-serif;
+    font: 12px 'Helvetica Neue',sans-serif;
     border: 1px solid $light-gray-color;
     text-decoration: none;
     outline: none;
@@ -98,7 +98,7 @@
     display: inline-block;
     vertical-align: middle;
     padding: 10px 10px 8px;
-    font: 12px -apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Oxigen,Ubuntu,Cantarell,'Fira Sans','Droid Sans','Helvetica Neue',sans-serif;
+    font: 12px 'Helvetica Neue',sans-serif;
     border: 1px solid $gray-color;
     text-decoration: none;
     outline: none;
@@ -206,14 +206,14 @@
 
     display: block;
     text-align: right;
-    font: 13px -apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Oxigen,Ubuntu,Cantarell,'Fira Sans','Droid Sans','Helvetica Neue',sans-serif;
+    font: 13px 'Helvetica Neue',sans-serif;
     color: $dark-color;
   }
 
   &__brand {
 
     display: block;
-    font: 14px -apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Oxigen,Ubuntu,Cantarell,'Fira Sans','Droid Sans','Helvetica Neue',sans-serif;
+    font: 14px 'Helvetica Neue',sans-serif;
     font-weight: bold;
     color: $dark-color;
   }
@@ -221,7 +221,7 @@
   &__name {
 
     display: block;
-    font: 12px -apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Oxigen,Ubuntu,Cantarell,'Fira Sans','Droid Sans','Helvetica Neue',sans-serif;
+    font: 12px 'Helvetica Neue',sans-serif;
     color: $dark-color;
     margin: 5px 0 0;
   }
