@@ -133,12 +133,12 @@ services:
     volumes:
       - /shop/src/admin-ui/nginx/conf.d:/etc/nginx/conf.d
       - /shop/src/admin-ui/src:/app/src/admin-ui/src
-      - /shop/src/admin-ui/.env.production:/app/src/admin-ui/.env.production
-      - /shop/src/admin-ui/package.json:/app/src/admin-ui/package.json
+      - /shop/src/admin-ui/.env.production:/app/src/admin-ui
+      - /shop/src/admin-ui/package.json:/app/src/admin-ui
       - /shop/ui.packages:/app/ui.packages
-      - /shop/package.json:/app/package.json
-      - /shop/lerna.json:/app/lerna.json
-      - /shop/yarn.lock:/app/yarn.lock
+      - /shop/package.json:/app
+      - /shop/lerna.json:/app
+      - /shop/yarn.lock:/app
     environment:
       - NODE_ENV=production
 
