@@ -136,13 +136,13 @@ services:
       - admin_gw
     volumes:
       - /shop/src/admin-ui/nginx/conf.d:/etc/nginx/conf.d:ro
+      - /shop/yarn.lock:/app/yarn.lock:ro
+      - /shop/lerna.json:/app/lerna.json:ro
+      - /shop/package.json:/app/package.json:ro
+      - /shop/ui.packages:/app/ui.packages:ro
       - /shop/src/admin-ui/src:/app/src/admin-ui/src:ro
       - /shop/src/admin-ui/.env.production:/app/src/admin-ui/.env.production:ro
       - /shop/src/admin-ui/package.json:/app/src/admin-ui/package.json:ro
-      - /shop/ui.packages:/app/ui.packages:ro
-      - /shop/package.json:/app/package.json:ro
-      - /shop/lerna.json:/app/lerna.json:ro
-      - /shop/yarn.lock:/app/yarn.lock:ro
     environment:
       - NODE_ENV=production
 
