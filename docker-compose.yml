@@ -26,8 +26,7 @@ services:
       - db
     links:
       - db
-    venvironment:
-      - NODE_ENV=production
+
 
   product_proxy:
     container_name: product_proxy
@@ -41,8 +40,7 @@ services:
     links:
       - db
       - rabbit
-    environment:
-      - NODE_ENV=production
+
 
   operation_proxy:
     container_name: operation_proxy
@@ -56,8 +54,7 @@ services:
     links:
       - db
       - rabbit
-    environment:
-      - NODE_ENV=production
+
 
   admin_gw:
     container_name: admin_gw
@@ -75,8 +72,7 @@ services:
       - product_proxy
       - identity_srv
       - operation_proxy
-    environment:
-      - NODE_ENV=production
+
 
   showcase_gw:
     container_name: showcase_gw
@@ -92,8 +88,7 @@ services:
       - rabbit
       - product_proxy
       - operation_proxy
-    environment:
-      - NODE_ENV=production
+
 
   admin_ui:
     container_name: admin_ui
@@ -110,6 +105,7 @@ services:
     environment:
       - NODE_ENV=production
 
+
   showcase_ui:
     container_name: showcase_ui
     build:
@@ -125,6 +121,7 @@ services:
     environment:
       - NODE_ENV=production
 
+
   certbot:
     user: root
     container_name: certbot
@@ -134,6 +131,7 @@ services:
       - /shop/data/certbot/conf:/etc/letsencrypt:rw
       - /shop/data/certbot/www:/var/www/certbot:rw
     entrypoint: /bin/sh -c 'trap exit TERM; while :; do certbot renew; sleep 12h & wait $${!}; done;'
+
 
   proxy:
     user: root
