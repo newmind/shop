@@ -13,7 +13,6 @@ COPY ./src/identity-srv/package.json      ./src/identity-srv
 COPY ./sys.packages                       ./sys.packages
 COPY ./package.json                       .
 COPY ./lerna.json                         .
-COPY ./yarn.lock                          .
 
 RUN yarn
 
