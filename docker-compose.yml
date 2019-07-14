@@ -151,13 +151,6 @@ services:
       - showcase_gw
     volumes:
       - /shop/src/showcase-ui/nginx/conf.d:/etc/nginx/conf.d:ro
-      - /shop/src/showcase-ui/src:/app/src/showcase-ui/src:ro
-      - /shop/src/showcase-ui/.env.production:/app/src/showcase-ui/.env.production:ro
-      - /shop/src/showcase-ui/package.json:/app/src/showcase-ui/package.json:ro
-      - /shop/ui.packages:/app/ui.packages:ro
-      - /shop/package.json:/app/package.json:ro
-      - /shop/lerna.json:/app/lerna.json:ro
-      - /shop/yarn.lock:/app/yarn.lock:ro
     environment:
       - NODE_ENV=production
 
