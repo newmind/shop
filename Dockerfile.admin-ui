@@ -7,9 +7,13 @@ RUN npm i yarn -g --yes
 
 WORKDIR /app
 
+RUN ls -l
+
 RUN yarn
 
 WORKDIR /app/src/admin-ui
+
+RUN ls -l
 
 RUN ["yarn", "run", "ui:build"]
 RUN ["yarn", "run", "tabs:build"]
