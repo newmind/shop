@@ -14,7 +14,6 @@ COPY ./src/admin-ui/.env.production  ./src/admin-ui
 COPY ./ui.packages                   ./ui.packages
 COPY ./package.json                  .
 COPY ./lerna.json                    .
-COPY ./yarn.lock                     .
 
 RUN yarn
 
