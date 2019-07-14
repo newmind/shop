@@ -16,6 +16,7 @@ class Comment extends PureComponent {
 
   static contextTypes = {
     tabsName: types.string,
+    onChange: types.func,
   };
 
   static defaultProps = {
@@ -24,15 +25,23 @@ class Comment extends PureComponent {
     tabs: {},
   };
 
+  _handleSetActiveTab() {
+    const { tabsName, onChange } = this.context;
+    const { name } = this.props;
+    const { setActiveTab } = this.props;
+    onChange(name);
+    setActiveTab(tabsName, name)
+  }
+
   render() {
     const { tabsName } = this.context;
-    const { name, tabs, caption, setActiveTab } = this.props;
+    const { name, tabs, caption } = this.props;
     const activeTab = tabs[tabsName] && tabs[tabsName]['activeTab'];
     const classNameTab = cn(styles['tab'], {
       [styles['tab--active']]: activeTab === name,
     });
     return (
-      <span className={classNameTab} onClick={setActiveTab.bind(this, tabsName, name)}>
+      <span className={classNameTab} onClick={this._handleSetActiveTab.bind(this)}>
         <span className={styles['tab__caption']}>{ caption }</span>
       </span>
     );

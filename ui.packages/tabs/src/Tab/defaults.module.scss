@@ -5,10 +5,10 @@
 .tab {
 
   display: inline-block;
-  padding: 14px 24px;
-  background: $whitesmoke-color;
-  border-bottom: 1px solid $gray-color;
+  padding: 18px 24px 14px;;
+  background: $light-gray-color;
   cursor: pointer;
+  transition: background 200ms, color 200ms;
 
   &:first-child {
 
@@ -20,12 +20,18 @@
     border-radius: 0 4px 0 0;
   }
 
+  &:hover {
+
+    background: darken($light-gray-color, 4%);
+  }
+
   &__caption {
 
     font: 14px "Opinion Pro";
   }
 
-  &--active {
+  &--active,
+  &--active:hover {
 
     background: $primary-color;
     color: $white-color;

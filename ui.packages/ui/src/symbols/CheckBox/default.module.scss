@@ -25,8 +25,13 @@
 
   &__marker {
 
-    display: inline-flex;
+    display: none;
     font-size: 13px;
+  }
+
+  &--checked &__marker {
+
+    display: inline-flex;
   }
 
   &--disabled {

@@ -1,6 +1,6 @@
 
 import types from 'prop-types';
-import React, { PureComponent } from 'react';
+import React, { Component as PureComponent } from 'react';
 
 import cn from 'classnames';
 import styles from './default.module.scss';
@@ -91,6 +91,7 @@ class Component extends PureComponent {
   messageRef = React.createRef();
 
   state = {
+    isDirectUp: false,
     isOpen: false,
     isFocus: false,
     value: ''
@@ -111,7 +112,8 @@ class Component extends PureComponent {
   }
 
   componentDidUpdate(prevProps, prevState, snapshot) {
-    this._calculateTooltipPosition();
+    const { isOpen } = this.state;
+    isOpen && this._calculateDirection();
   }
 
   componentWillUnmount() {
@@ -133,6 +135,30 @@ class Component extends PureComponent {
 
       messageElement.style['top'] = selectRect['top'] - ((messageRect['height'] - selectRect['height']) / 2) + 2 + 'px';
       messageElement.style['left'] = selectRect['right'] + 8 + 'px';
+    }
+  }
+
+  _calculateDirection() {
+
+    const { isDirectUp } = this.state;
+    const { current: selectElement } = this.selectRef;
+    const { current: optionsElement } = this.optionsRef;
+
+    const selectRECT = selectElement.getBoundingClientRect();
+    const optionsRECT = optionsElement.getBoundingClientRect();
+    const viewportRECT = document.body.getBoundingClientRect();
+
+    if ( ! isDirectUp && optionsRECT['bottom'] + 20 >= viewportRECT['bottom']) {
+      if (optionsRECT['bottom'] + 50 >= viewportRECT['bottom']) {
+        this.setState({isDirectUp: true}, () => {
+          optionsElement.style['top'] = 'auto';
+          optionsElement.style['bottom'] = viewportRECT['bottom'] - selectRECT['top'] + 8 + 'px';
+        });
+      }
+    }
+
+    if ( ! isDirectUp && optionsRECT['bottom'] + 20 <= viewportRECT['bottom']) {
+      optionsElement.style['top'] = selectRECT['bottom'] + 'px';
     }
   }
 
@@ -171,7 +197,6 @@ class Component extends PureComponent {
 
     // inputRef.focus();
 
-    optionsRef.style['top'] = selectRect['bottom'] + 'px';
     optionsRef.style['width'] = selectRect['width'] + 'px';
 
     onFocus();
@@ -192,17 +217,21 @@ class Component extends PureComponent {
 
   _getValue(value) {
     const { simple, options, optionKey, optionValue } = this.props;
-    if (simple) {
-      const option = options.find(option => option[optionKey] === value);
-      if (option) {
+    const option = options.find(option => {
+      if (simple) {
+        return (option[optionKey] === value);
+      }
+      return (option[optionKey] === value[optionKey]) && (option[optionValue] === value[optionValue])
+    });
+
+    if (option) {
+      if (value instanceof Object) {
         return option[optionValue];
+      } else {
+        return option;
       }
     } else {
-      if (value instanceof Object) {
-        return value[optionValue];
-      } else {
-        return value;
-      }
+      return null;
     }
   }
 
@@ -215,14 +244,14 @@ class Component extends PureComponent {
 
   _handleOnBlur() {
     const { onBlur } = this.props;
-    this.setState({ isOpen: false }, () => {
+    this.setState({ isOpen: false, isDirectUp: false }, () => {
       onBlur();
     });
   }
 
   _handleOnChange(option) {
     const { onChange } = this.props;
-    this.setState({ isOpen: false }, () => onChange && onChange(this._applyValue(option)));
+    this.setState({ isOpen: false, isDirectUp: false }, () => onChange && onChange(this._applyValue(option)));
   }
 
   _handleInputOnChange(event) {
@@ -232,7 +261,7 @@ class Component extends PureComponent {
 
   _handleResetValue() {
     const { onChange } = this.props;
-    this.setState({ isOpen: false }, () => onChange && onChange(null));
+    this.setState({ isOpen: false, isDirectUp: false }, () => onChange && onChange(null));
   }
 
   _renderInput() {

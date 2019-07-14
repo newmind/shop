@@ -43,9 +43,10 @@ class Component extends PureComponent {
       [styles['checkbox--disabled']]: disabled,
       [styles['checkbox--checked']]: value,
     });
+
     return (
       <span className={classNameButton} onClick={this._handleClick.bind(this)}>
-        <span className={cn(styles['checkbox__marker'], 'fas fa-check')} />
+        {value && <span className={cn(styles['checkbox__marker'], 'fas fa-check')} />}
       </span>
     );
   }

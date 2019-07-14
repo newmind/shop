@@ -1,0 +1,56 @@
+
+@import "~@ui.packages/theme";
+
+
+.tabs {
+
+  display: block;
+}
+
+.content {
+
+  display: block;
+  border-radius: 0 4px 4px 4px;
+  border: 1px solid $primary-color;
+  padding: 40px 20px 20px;
+}
+
+.card {
+
+  display: flex;
+  flex-direction: column;
+  flex: 1 0 auto;
+  border-radius: 4px;
+  border: 1px solid $gray-color;
+  background: $light-gray-color;
+  padding: 20px;
+  cursor: pointer;
+  transition: border 200ms;
+
+  &--active {
+
+    background: $primary-color;
+    border-color: $primary-color;
+    color: $white-color;
+  }
+
+  &:hover {
+
+    border-color: $primary-color;
+  }
+
+  &__header {
+
+    display: block;
+    font: 16px "Opinion Pro";
+    font-weight: bold;
+
+  }
+
+  &__description {
+
+    display: block;
+    margin: 20px 0 0;
+    font: 14px/1.4 "Opinion Pro";
+  }
+}

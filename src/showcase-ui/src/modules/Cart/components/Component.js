@@ -2,9 +2,11 @@
 import types from 'prop-types';
 import React, { PureComponent } from 'react';
 
+import { Dialog } from '@ui.packages/dialog';
 import numeral from '@ui.packages/numeral';
 import { Button } from '@ui.packages/ui';
 
+import RecipeModify from './RecipeModify';
 import Product from './Product';
 import Order from './Order';
 
@@ -15,11 +17,17 @@ import styles from './default.module.scss';
 class Component extends PureComponent {
   static propTypes = {
     products: types.array,
+    openDialog: types.func,
   };
 
   static defaultProps = {
     products: [],
   };
+
+  _handleOpenDialogRecipe() {
+    const { openDialog } = this.props;
+    openDialog('recipe');
+  }
 
   _calculateFullAmount() {
     const { products } = this.props;
@@ -44,8 +52,8 @@ class Component extends PureComponent {
                   <th className={cn(styles['table__col'], styles['product'])}>
                     <span className={styles['table__header']}>Товар</span>
                   </th>
-                  <th className={cn(styles['table__col'], styles['count'])}>
-                    <span className={styles['table__header']}>Количество</span>
+                  <th className={cn(styles['table__col'], styles['recipe'])}>
+                    <span className={styles['table__header']}>Рецепт</span>
                   </th>
                   <th className={cn(styles['table__col'], styles['amount'])}>
                     <span className={styles['table__header']}>Цена</span>
@@ -56,7 +64,11 @@ class Component extends PureComponent {
                 {products.map((product, index) => (
                   <tr key={index} className={styles['table__line']}>
                     <td className={styles['table__col']}><Product {...product['product']} /></td>
-                    <td className={cn(styles['table__col'], styles['count'])}>1</td>
+                    <td className={styles['table__col']} align="center">
+                      {product['recipe']
+                        ? null
+                        : <Button onClick={this._handleOpenDialogRecipe.bind(this)}>Добавить рецепт</Button>}
+                    </td>
                     <td className={cn(styles['table__col'], styles['amount'])}>{numeral(product['amount']).format()} {product['currency']['value']}</td>
                   </tr>
                 ))}
@@ -68,8 +80,11 @@ class Component extends PureComponent {
             <Order onSubmit={this._handleSubmitOrder.bind(this)} />
           </div>
           <div>
-            <Button mode="success" onClick={submit.bind(this, 'order')}>Оформить заказ</Button>
+            <Button mode="success" onClick={submit.bind(this, 'order')}>Оплатить заказ на сумму { this._calculateFullAmount() } руб.</Button>
           </div>
+          <Dialog name="recipe" title="Рецепт">
+            <RecipeModify />
+          </Dialog>
         </div>
       )
      : (

@@ -17,6 +17,7 @@ export { default as InputField } from './fields/InputField';
 export { default as TextariaField } from './fields/TextariaField';
 export { default as EvaluationField } from './fields/EvaluationField';
 export { default as SelectField } from './fields/SelectField';
+export { default as CheckBoxField } from './fields/CheckBoxField';
 
 export { default as Container } from './form/Container';
 export { default as Col } from './form/Col';

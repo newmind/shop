@@ -6,9 +6,9 @@ import { Field } from 'redux-form';
 import CheckBox from '../../symbols/CheckBox';
 
 
-const InputField = ({ input, label, mode, meta: { touched, error } }) => {
+const InputField = ({ input, label, mode, meta: { touched, error }, ...props }) => {
   return (
-    <CheckBox label={label} {...input} mode={mode || (touched && error && 'danger' || 'default')} />
+    <CheckBox label={label} {...input} {...props} mode={mode || (touched && error && 'danger' || 'default')} />
   );
 };
 
@@ -21,9 +21,9 @@ class Component extends PureComponent {
   };
 
   render() {
-    const { name, label } = this.props;
+    const { name, label, ...props } = this.props;
     return (
-      <Field name={name} label={label} component={InputField} />
+      <Field name={name} label={label} {...props} component={InputField} />
     );
   }
 }

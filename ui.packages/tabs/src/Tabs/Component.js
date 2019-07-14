@@ -10,10 +10,12 @@ class Component extends PureComponent {
     name: types.string,
     defaultTab: types.string,
     createTabs: types.func,
+    onChange: types.func,
   };
 
   static childContextTypes = {
     tabsName: types.string,
+    onChange: types.func,
   };
 
   static defaultProps = {
@@ -25,6 +27,7 @@ class Component extends PureComponent {
     const { name } = this.props;
     return {
       tabsName: name,
+      onChange: this._handleChangeTab.bind(this)
     };
   }
 
@@ -36,6 +39,11 @@ class Component extends PureComponent {
   componentWillUnmount() {
     const { name, removeTabs } = this.props;
     removeTabs(name);
+  }
+
+  _handleChangeTab(name) {
+    const { onChange } = this.props;
+    onChange && onChange(name);
   }
 
   render() {
