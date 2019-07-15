@@ -13,5 +13,8 @@ const mapActionsToProps = (dispatch) => {
 export default PageHOC({
   mapStateToProps,
   mapActionsToProps,
-  onEnter: ({ onLoading }) => onLoading(false),
+  onEnter: ({ onLoading }) => {
+    document.title = `${process.env['REACT_APP_WEBSITE_NAME']} - Страница не найдена`;
+    onLoading(false);
+  },
 })(Component);

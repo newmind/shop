@@ -40,6 +40,7 @@ export default PageHOC({
   mapStateToProps,
   mapActionsToProps,
   onEnter: ({ onLoading, getProductById, match: { params } }) => {
+    document.title = `${process.env['REACT_APP_WEBSITE_NAME']} - Витрина`;
     const { id } = params;
     getProductById(id);
     onLoading(false);
