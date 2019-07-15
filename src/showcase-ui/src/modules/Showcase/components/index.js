@@ -45,7 +45,7 @@ export default PageHOC({
   mapStateToProps,
   mapActionsToProps,
   onEnter: async ({ onLoading, getProducts, getDataForFilter, location: { search } }) => {
-    document.title = `${process.env['REACT_APP_WEBSITE_NAME']} - Главная`;
+    document.title = `${process.env['REACT_APP_WEBSITE_NAME']} - Витрина`;
     const params = new URLSearchParams(search);
     const searchParams = {};
     for (let p of params) {
