@@ -45,6 +45,7 @@ export default PageHOC({
   mapStateToProps,
   mapActionsToProps,
   onEnter: async ({ onLoading, getProducts, getDataForFilter, location: { search } }) => {
+    document.title = `${process.env['REACT_APP_WEBSITE_NAME']} - Витрина`;
     const params = new URLSearchParams(search);
     const searchParams = {};
     for (let p of params) {
@@ -53,5 +54,11 @@ export default PageHOC({
     await getProducts(searchParams);
     await getDataForFilter();
     onLoading(false);
+    ym(54447574, "init", {
+      clickmap:true,
+      trackLinks:true,
+      accurateTrackBounce:true,
+      webvisor:true
+    });
   },
 })(Component);
