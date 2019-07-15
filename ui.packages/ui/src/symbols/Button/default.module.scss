@@ -5,16 +5,15 @@
 .button {
 
   display: inline-block;
-  padding: 10px 20px 8px;
+  padding: 10px 20px;
   border: 1px solid $dark-color;
   border-radius: 4px;
   cursor: pointer;
   background: $white-color;
   color: $dark-color;
-  font: 14px 'Helvetica Neue',sans-serif;
-  font-weight: bold;
-  outline: none;
+  font-size: 14px;
   letter-spacing: .5px;
+  outline: none;
   transition: background 400ms;
 
   & + & {

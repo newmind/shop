@@ -29,7 +29,7 @@ export default () => async (ctx) => {
           },
           {
             model: models['Category'],
-            required: true,
+            required: false,
             as: 'category',
             attributes: ['id', 'name']
           },
@@ -56,6 +56,8 @@ export default () => async (ctx) => {
           }
         ], transaction });
     });
+
+    console.log(product)
 
     sendEvent(process.env['RABBIT_PRODUCT_PROXY_EXCHANGE_STOCK_PRODUCT_CREATED'], JSON.stringify(product));
 

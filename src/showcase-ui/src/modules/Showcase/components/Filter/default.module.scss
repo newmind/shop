@@ -20,7 +20,7 @@
 .controls {
 
   display: block;
-  margin: 0 0 0 20px;
+  text-align: right;
 }
 
 .amount {
@@ -28,6 +28,19 @@
   display: inline-flex;
   flex-direction: row;
   align-items: center;
+
+  &__label {
+
+    display: inline-flex;
+    font-size: 14px;
+    margin: 0 8px 0 0;
+  }
+
+  &__wrapper {
+
+    display: inline-flex;
+    align-items: center;
+  }
 
   &__input {
 

@@ -1,11 +1,31 @@
 
-import { reduxForm } from 'redux-form';
+import { bindActionCreators } from 'redux';
+import { reduxForm, reset, submit, isValid, isPristine } from 'redux-form';
 import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 
-import Component from './Component';
-import {queryToObject} from "@ui.packages/utils";
+import { queryToObject } from "@ui.packages/utils";
 
+import Component from './Component';
+
+
+const validate = values => {
+  const errors = {};
+
+  if (values['amountFrom']) {
+    if ( ! /^\d+(.\d{1,2})?$/.test(values['amountFrom'])) {
+      errors['amountFrom'] = 'Неверный формат';
+    }
+  }
+  if (values['amountTo']) {
+    if ( ! /^\d+(.\d{1,2})?$/.test(values['amountFrom'])) {
+      errors['amountTo'] = 'Неверный формат';
+    } else if (values['amountTo'] > values['amountTo']) {
+      errors['amountTo'] = 'Неверное значение';
+    }
+  }
+  return errors;
+};
 
 const mapStateToProps = (state, props) => {
   const Showcase = state['Showcase'];
@@ -15,11 +35,16 @@ const mapStateToProps = (state, props) => {
     categories: Showcase['categories'],
     brands: Showcase['brands'],
     initialValues: query,
+    isValid: isValid('filter-showcase-ui')(state),
+    isPristine: isPristine('filter-showcase-ui')(state),
   }
 };
 
-const mapActionsToProps = () => {
-  return {};
+const mapActionsToProps = (dispatch) => {
+  return {
+    reset: bindActionCreators(reset, dispatch),
+    submit: bindActionCreators(submit, dispatch),
+  };
 };
 
 export default withRouter(connect(
@@ -27,4 +52,5 @@ export default withRouter(connect(
   mapActionsToProps
 )(reduxForm({
   form: 'filter-showcase-ui',
+  validate,
 })(Component)));

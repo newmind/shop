@@ -13,10 +13,13 @@ const SUCCESS_MODE = 'success';
 
 
 const Options = React.forwardRef((props, ref) => {
-  const { value, options, optionKey, optionValue, onCheck } = props;
+  const { value, options, optionKey, optionValue, onCheck, optionTransform } = props;
 
   const getValue = (value) => {
     if (value instanceof Object) {
+      if (optionTransform) {
+        return optionTransform(value);
+      }
       return value[optionValue];
     } else {
       return value;
@@ -67,6 +70,7 @@ class Component extends PureComponent {
     options: types.array,
     optionKey: types.string,
     optionValue: types.string,
+    optionTransform: types.func,
     onChange: types.func,
     onFocus: types.func,
     onBlur: types.func,
@@ -228,6 +232,9 @@ class Component extends PureComponent {
       if (value instanceof Object) {
         return option[optionValue];
       } else {
+        if (simple) {
+          return option[optionValue]
+        }
         return option;
       }
     } else {
@@ -244,9 +251,7 @@ class Component extends PureComponent {
 
   _handleOnBlur() {
     const { onBlur } = this.props;
-    this.setState({ isOpen: false, isDirectUp: false }, () => {
-      onBlur();
-    });
+    this.setState({ isOpen: false, isDirectUp: false }, () => onBlur());
   }
 
   _handleOnChange(option) {
@@ -314,7 +319,7 @@ class Component extends PureComponent {
 
   render() {
     const { isOpen } = this.state;
-    const { className, disabled, message, mode, options, optionKey, optionValue, value, label } = this.props;
+    const { className, disabled, message, mode, options, optionKey, optionValue, value, label, optionTransform } = this.props;
     const classNameSelectWrapper = cn(className, styles['wrapper'], {
       [styles['wrapper--primary']]: mode === PRIMARY_MODE,
       [styles['wrapper--success']]: mode === SUCCESS_MODE,
@@ -344,7 +349,7 @@ class Component extends PureComponent {
             </span>
           )}
           {isOpen && (
-            <Options ref={this.optionsRef} value={value} options={options} optionKey={optionKey} optionValue={optionValue} onCheck={this._handleOnChange.bind(this)} />
+            <Options ref={this.optionsRef} value={value} options={options} optionKey={optionKey} optionValue={optionValue} optionTransform={optionTransform} onCheck={this._handleOnChange.bind(this)} />
           )}
         </div>
       </div>

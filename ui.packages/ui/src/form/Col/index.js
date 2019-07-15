@@ -9,9 +9,11 @@ class Component extends PureComponent {
     const { children, ...props } = this.props;
     return (
       <span className={styles['col']}>
-        {children && React.cloneElement(children, {
-          ...props,
-        })}
+        <span className={styles['wrapper']}>
+          {children && React.cloneElement(children, {
+            ...props,
+          })}
+        </span>
       </span>
     );
   }

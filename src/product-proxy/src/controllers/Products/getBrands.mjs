@@ -1,6 +1,6 @@
 'use strict';
 
-import { models } from '@sys.packages/db';
+import { Sequelize, models } from '@sys.packages/db';
 
 
 export default () => async (ctx) => {
@@ -10,20 +10,29 @@ export default () => async (ctx) => {
     include: [
       {
         model: Product,
-        attributes: ['brand'],
-        order: [['brand', 'ASC']],
-        group: ['brand'],
-        as: 'product'
+        attributes: ['id', 'brand'],
+        as: 'product',
+        required: false,
       }
-    ]
+    ],
+    // attributes: [
+    //   [Sequelize.fn('count', Sequelize.col('product.brand')), 'count']
+    // ],
+    // order: [['brand', 'ASC']],
+    group: ['Stock.id', 'product.brand'],
   });
 
-  const result = brands.map(item => item['product']['brand']);
+  console.log(brands);
+
+  // const result = brands.map(brand => ({
+  //   brand: brand['brand'],
+  //   count: brand['count']
+  // }));
 
   ctx.body = {
     success: true,
     data: [
-      ...result,
+      ...brands,
     ],
   };
 };

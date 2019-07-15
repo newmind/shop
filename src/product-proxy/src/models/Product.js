@@ -27,7 +27,12 @@ module.exports = (db, DataType) => {
     },
   });
 
-  Product.associate = function({ Attribute, Gallery }) {
+  Product.associate = function({ Attribute, Gallery, Stock }) {
+
+    Product.hasOne(Stock, {
+      foreignKey: 'productId',
+      as: 'stock',
+    });
 
     Product.hasMany(Attribute, {
       foreignKey: 'productId',
