@@ -6,33 +6,34 @@ import { Sequelize, models } from '@sys.packages/db';
 export default () => async (ctx) => {
 
   const { Stock, Product } = models;
-  const brands = await Stock.findAll({
+  const brands = await Product.findAll({
     include: [
       {
-        model: Product,
-        attributes: ['id', 'brand'],
-        as: 'product',
-        required: false,
+        model: Stock,
+        attributes: [],
+        required: true,
+        as: 'stock',
       }
     ],
-    // attributes: [
-    //   [Sequelize.fn('count', Sequelize.col('product.brand')), 'count']
-    // ],
-    // order: [['brand', 'ASC']],
-    group: ['Stock.id', 'product.brand'],
+    attributes: [
+      'brand',
+      [Sequelize.fn('count', Sequelize.col('Product.brand')), 'count']
+    ],
+    group: ['Product.brand']
   });
 
-  console.log(brands);
-
-  // const result = brands.map(brand => ({
-  //   brand: brand['brand'],
-  //   count: brand['count']
-  // }));
+  const result = brands.map(productModel => {
+    const productJSON = productModel.toJSON();
+    return {
+      brand: productJSON['brand'],
+      count: productJSON['count'],
+    }
+  });
 
   ctx.body = {
     success: true,
     data: [
-      ...brands,
+      ...result,
     ],
   };
 };
