@@ -103,7 +103,7 @@ class Component extends PureComponent {
           <Dialog name="recipe" title="Рецепт">
             <RecipeModify
               product={product}
-              initialValues={product['recipe'] || {}}
+              initialValues={product && (product['recipe'] || {})}
               onSubmit={this._handleSetRecipeToProduct.bind(this)}
               onClose={this._handleCloseDialog.bind(this)}
             />
