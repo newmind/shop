@@ -43,10 +43,9 @@
   &__name {
 
     display: block;
-    font: 13px 'Helvetica Neue',sans-serif;
+    font-size: 14px;
     color: $dark-color;
     margin: 6px 0 0;
-    letter-spacing: 1px;
   }
 
   &__amount {
@@ -119,14 +118,15 @@
   display: block;
   background: $primary-color;
   color: $white-color;
-  font: 14px 'Helvetica Neue',sans-serif;
-  padding: 13px 20px 10px;
+  font-size: 14px;
+  padding: 16px 20px;
   font-weight: bold;
   width: 160px;
   text-align: center;
-  margin: 10px 0 0;
+  margin: 14px 0 0;
   cursor: pointer;
   box-shadow: 0 0 4px 0 rgba($primary-color, .5);
+  white-space: nowrap;
   transition: background 400ms;
 
   &:hover {

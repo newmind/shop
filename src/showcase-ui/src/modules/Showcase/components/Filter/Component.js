@@ -18,11 +18,6 @@ class Component extends PureComponent {
     brands: [],
   };
 
-  _handleResetForm() {
-    const { reset } = this.props;
-    reset('filter-showcase-ui');
-  }
-
   render() {
     const { handleSubmit, categories, brands, isValid } = this.props;
     return (
@@ -64,7 +59,6 @@ class Component extends PureComponent {
             <Col>
               <div className={styles['controls']}>
                 <Button type="submit" mode="primary" disabled={ ! isValid}>Применить</Button>
-                <Button type="button" onClick={this._handleResetForm.bind(this)}>Сбросить</Button>
               </div>
             </Col>
           </Row>

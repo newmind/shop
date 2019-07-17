@@ -54,11 +54,5 @@ export default PageHOC({
     await getProducts(searchParams);
     await getDataForFilter();
     onLoading(false);
-    ym(54447574, "init", {
-      clickmap:true,
-      trackLinks:true,
-      accurateTrackBounce:true,
-      webvisor:true
-    });
   },
 })(Component);

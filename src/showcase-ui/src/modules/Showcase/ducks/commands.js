@@ -18,6 +18,7 @@ import {
 
 
 export const addProductToCart = (product) => dispatch => {
+  product['recipe'] = {};
   dispatch(addProductToCartAction(product));
 };
 

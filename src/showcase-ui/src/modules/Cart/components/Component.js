@@ -24,9 +24,17 @@ class Component extends PureComponent {
     products: [],
   };
 
-  _handleOpenDialogRecipe() {
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      product: null,
+    };
+  }
+
+  _handleOpenDialogRecipe(product) {
     const { openDialog } = this.props;
-    openDialog('recipe');
+    this.setState({ product }, () => openDialog('recipe'));
   }
 
   _calculateFullAmount() {
@@ -35,11 +43,21 @@ class Component extends PureComponent {
     return numeral(fullAmount).format();
   }
 
+  _handleCloseDialog() {
+    this.setState({ product: null });
+  }
+
+  _handleSetRecipeToProduct(formData) {
+    console.log(formData);
+
+  }
+
   _handleSubmitOrder(formData) {
     console.log(formData);
   }
 
   render() {
+    const { product = {} } = this.state;
     const { products, submit } = this.props;
     return Object.keys(products).length
       ? (
@@ -64,10 +82,10 @@ class Component extends PureComponent {
                 {products.map((product, index) => (
                   <tr key={index} className={styles['table__line']}>
                     <td className={styles['table__col']}><Product {...product['product']} /></td>
-                    <td className={styles['table__col']} align="center">
+                    <td className={styles['table__col']} style={{ textAlign: 'center' }}>
                       {product['recipe']
                         ? null
-                        : <Button onClick={this._handleOpenDialogRecipe.bind(this)}>Добавить рецепт</Button>}
+                        : <Button onClick={this._handleOpenDialogRecipe.bind(this, product)}>Добавить рецепт</Button>}
                     </td>
                     <td className={cn(styles['table__col'], styles['amount'])}>{numeral(product['amount']).format()} {product['currency']['value']}</td>
                   </tr>
@@ -83,7 +101,12 @@ class Component extends PureComponent {
             <Button mode="success" onClick={submit.bind(this, 'order')}>Оплатить заказ на сумму { this._calculateFullAmount() } руб.</Button>
           </div>
           <Dialog name="recipe" title="Рецепт">
-            <RecipeModify />
+            <RecipeModify
+              product={product}
+              initialValues={product['recipe'] || {}}
+              onSubmit={this._handleSetRecipeToProduct.bind(this)}
+              onClose={this._handleCloseDialog.bind(this)}
+            />
           </Dialog>
         </div>
       )

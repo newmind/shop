@@ -18,9 +18,9 @@ const validate = values => {
     }
   }
   if (values['amountTo']) {
-    if ( ! /^\d+(.\d{1,2})?$/.test(values['amountFrom'])) {
+    if ( ! /^\d+(.\d{1,2})?$/.test(values['amountTo'])) {
       errors['amountTo'] = 'Неверный формат';
-    } else if (values['amountTo'] > values['amountTo']) {
+    } else if (values['amountTo'] < values['amountFrom']) {
       errors['amountTo'] = 'Неверное значение';
     }
   }

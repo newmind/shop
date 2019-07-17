@@ -1,5 +1,5 @@
 
-export const ADD_PRODUCT_TO_CART = 'ADD_PRODUCT_TO_CART';
+export const ADD_PRODUCT_TO_CART = '@cart/ADD_PRODUCT_TO_CART';
 
 export const OPEN_DIALOG = 'OPEN_DIALOG';
 export const CLOSE_DIALOG = 'CLOSE_DIALOG';
