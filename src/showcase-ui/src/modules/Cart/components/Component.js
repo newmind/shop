@@ -83,9 +83,7 @@ class Component extends PureComponent {
                   <tr key={index} className={styles['table__line']}>
                     <td className={styles['table__col']}><Product {...product['product']} /></td>
                     <td className={styles['table__col']} style={{ textAlign: 'center' }}>
-                      {product['recipe']
-                        ? null
-                        : <Button onClick={this._handleOpenDialogRecipe.bind(this, product)}>Добавить рецепт</Button>}
+                      <Button onClick={this._handleOpenDialogRecipe.bind(this, product)}>Добавить рецепт</Button>
                     </td>
                     <td className={cn(styles['table__col'], styles['amount'])}>{numeral(product['amount']).format()} {product['currency']['value']}</td>
                   </tr>
