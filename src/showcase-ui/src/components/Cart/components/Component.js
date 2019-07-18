@@ -1,11 +1,12 @@
 
 import types from 'prop-types';
 import React, { PureComponent } from 'react';
-import { Link } from 'react-router-dom';
 
 import numeral from '@ui.packages/numeral';
 
-import { Gallery } from '@ui.packages/ui';
+import { Gallery, Button } from '@ui.packages/ui';
+
+import Icon from './Icon';
 
 import cn from 'classnames';
 import styles from './defaults.module.scss';
@@ -54,12 +55,17 @@ class Item extends PureComponent {
   }
 }
 
+
+
+
+
 class Component extends PureComponent {
   static propTypes = {
     isOpen: types.bool,
     items: types.array,
     openCart: types.func,
     closeCart: types.func,
+    getCartFromLocalStorage: types.func,
   };
 
   static defaultProps = {
@@ -73,6 +79,11 @@ class Component extends PureComponent {
     super(props);
 
     this._onClick = this._onClick.bind(this);
+  }
+
+  componentWillMount() {
+    const { getCartFromLocalStorage } = this.props;
+    getCartFromLocalStorage();
   }
 
   componentDidMount() {
@@ -102,15 +113,6 @@ class Component extends PureComponent {
     }
   }
 
-  _handleSwitchStateCaretList() {
-    const { isOpen } = this.props;
-    if (isOpen) {
-      this._closeCart();
-    } else {
-      this._openCart();
-    }
-  }
-
   _calculateFullAmount() {
     const { items } = this.props;
     const fullAmount = items.reduce((accumulator, product) => accumulator + product['amount'], 0);
@@ -122,20 +124,25 @@ class Component extends PureComponent {
     removeProduct(id);
   }
 
+  _handleResetCart() {
+    const { closeCart, resetCart } = this.props;
+    resetCart();
+    closeCart();
+  }
+
+  _handleGoToCart() {
+    const { closeCart, push } = this.props;
+    closeCart();
+    push('/cart');
+  }
+
   render() {
     const { items, isOpen } = this.props;
     const hasProductsInCart = !! items.length;
     const fullAmount = this._calculateFullAmount();
-    const classNameCartIcon = cn('fas fa-shopping-cart', styles['cart__icon']);
-    const classNameCartWrapper = cn(styles['cart__wrapper'], {
-      [styles['cart__wrapper--open']]: isOpen,
-    });
     return (
       <div ref={this.cartRef} className={styles['cart']}>
-        <div className={classNameCartWrapper} onClick={this._handleSwitchStateCaretList.bind(this)}>
-          <span className={classNameCartIcon} />
-          <span className={styles['cart__count']}>{ items.length }</span>
-        </div>
+        <Icon />
         {isOpen && (
           <div className={styles['cart__list']}>
             <div className={styles['list']}>
@@ -155,7 +162,8 @@ class Component extends PureComponent {
                       <p className={styles['cart__full-amount']}>Итого: { fullAmount } руб.</p>
                     </div>
                     <div className={styles['list__controls']}>
-                      <Link className={styles['cart__pay']} to={'/cart'} onClick={this._closeCart.bind(this)}>Перейти к оформлению заказа</Link>
+                      <Button onClick={this._handleResetCart.bind(this)}>Отменить</Button>
+                      <Button onClick={this._handleGoToCart.bind(this)} mode="success">Перейти к оформлению заказа</Button>
                     </div>
                   </div>
                 )

@@ -5,6 +5,9 @@ import {
 
   ADD_PRODUCT_TO_CART,
   REMOVE_PRODUCT_FROM_CART,
+
+  RESTORE_CART,
+  RESET_CART,
 } from './types';
 
 
@@ -27,24 +30,43 @@ export default (state = initialState, { type, payload }) => {
       isOpen: false,
     };
     case ADD_PRODUCT_TO_CART: {
+      const { localStorage } = window;
+      const newItems = [
+        ...state['items'],
+        payload,
+      ];
+
+      localStorage.setItem('cart', JSON.stringify(newItems));
+
       return {
         ...state,
-        items: [
-          ...state['items'],
-          payload,
-        ],
+        items: newItems,
       };
     }
     case REMOVE_PRODUCT_FROM_CART: {
       const itemIndex = state['items'].findIndex(item => item['id'] === payload);
+      const newItems = [
+        ...state['items'].slice(0, itemIndex),
+        ...state['items'].slice(itemIndex + 1),
+      ];
+
+      localStorage.setItem('cart', JSON.stringify(newItems));
+
       return {
         ...state,
-        items: [
-          ...state['items'].slice(0, itemIndex),
-          ...state['items'].slice(itemIndex + 1)
-        ],
+        items: newItems,
       };
     }
+
+    case RESTORE_CART: return {
+      ...state,
+      items: payload,
+    };
+    case RESET_CART: return {
+      ...state,
+      items: [],
+    };
+
     default: return state;
   }
 }
