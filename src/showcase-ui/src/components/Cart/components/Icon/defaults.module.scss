@@ -22,7 +22,7 @@
 
   &__wrapper--open &__count,
   &__wrapper:hover &__count,
-  &__wrapper:hover &__amount,
+  &__wrapper--open &__amount,
   &__wrapper:hover &__amount {
     color: $dark-color;
   }
@@ -32,7 +32,7 @@
     display: inline-block;
     font-size: 16px;
     color: $danger-color;
-    margin: 0 6px 0 0;
+    margin: 0 10px 0 0;
   }
 
   &__info {

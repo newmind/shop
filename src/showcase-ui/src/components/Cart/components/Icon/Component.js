@@ -43,12 +43,11 @@ class Icon extends PureComponent {
     return (
       <div className={classNameCartWrapper} onClick={this._handleSwitchStateCaretList.bind(this)}>
         <span className={classNameCartIcon} />
-        {hasItems && (
-          <span className={styles['cart__info']}>
-            <span className={styles['cart__count']}>{items['length']} {nounDeclension(items['length'], ['товар', 'товара', 'товаров'])}</span>
-            <span className={styles['cart__amount']}>{fullAmount} руб.</span>
-          </span>
-        )}
+        <span className={styles['cart__info']}>
+          <span className={styles['cart__count']}>
+            {hasItems ? `${items['length']} ${nounDeclension(items['length'], ['товар', 'товара', 'товаров'])}` : 'пусто'}</span>
+          <span className={styles['cart__amount']}>{fullAmount} руб.</span>
+        </span>
       </div>
     );
   }

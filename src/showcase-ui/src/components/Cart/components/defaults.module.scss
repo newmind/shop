@@ -23,27 +23,6 @@
     }
   }
 
-  &__wrapper--open &__count,
-  &__wrapper:hover &__count {
-    color: $dark-color;
-  }
-
-  &__icon {
-
-    display: inline-block;
-    font-size: 16px;
-    color: $danger-color;
-    margin: 0 6px 0 0;
-  }
-
-  &__count {
-
-    display: inline-block;
-    color: $white-color;
-    font: 13px 'Helvetica Neue',sans-serif;
-    transition: color 400ms;
-  }
-
   &__list {
 
     position: absolute;
