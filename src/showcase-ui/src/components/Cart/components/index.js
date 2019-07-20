@@ -2,6 +2,7 @@
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { push } from 'react-router-redux';
+import { withRouter } from 'react-router-dom';
 
 import Component from './Component';
 
@@ -41,4 +42,4 @@ const mapActionsToProps = (dispatch) => {
 export default connect(
   mapStateToProps,
   mapActionsToProps,
-)(Component);
+)(withRouter(Component));

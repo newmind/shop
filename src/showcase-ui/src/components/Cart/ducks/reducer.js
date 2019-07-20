@@ -5,6 +5,7 @@ import {
 
   ADD_PRODUCT_TO_CART,
   REMOVE_PRODUCT_FROM_CART,
+  UPDATE_PRODUCT_IN_CART,
 
   RESTORE_CART,
   RESET_CART,
@@ -55,6 +56,21 @@ export default (state = initialState, { type, payload }) => {
       return {
         ...state,
         items: newItems,
+      };
+    }
+    case UPDATE_PRODUCT_IN_CART: {
+      const products = state['items'].map(product => {
+        if (product['id'] === payload['id']) {
+          return {
+            ...product,
+            ...payload,
+          };
+        }
+        return product;
+      });
+      return {
+        ...state,
+        items: products,
       };
     }
 

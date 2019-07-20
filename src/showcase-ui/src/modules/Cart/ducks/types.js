@@ -1,2 +1,0 @@
-
-export const SET_PRODUCT_RECIPE = '@@cart/SET_PRODUCT_RECIPE';

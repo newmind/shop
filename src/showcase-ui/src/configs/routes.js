@@ -32,9 +32,9 @@ export default [
     module: 'Corner',
   },
   {
-    path: '/cart',
+    path: '/order',
     removable: true,
     wrapper: 'Navigate',
-    module: 'Cart',
+    module: 'Order',
   }
 ];

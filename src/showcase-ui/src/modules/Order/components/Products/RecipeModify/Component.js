@@ -22,7 +22,7 @@ class Component extends PureComponent {
 
   render() {
     const { handleSubmit, product } = this.props;
-    console.log(product)
+    console.log(product);
     return (
       <form className={styles['wrapper']} onSubmit={handleSubmit}>
         <div className={styles['block']}>

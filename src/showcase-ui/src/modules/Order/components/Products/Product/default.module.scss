@@ -11,7 +11,9 @@
     position: relative;
     display: flex;
     width: 150px;
+    box-shadow: 1px 1px 5px 0 rgba(62, 62, 62, .2);
     height: 120px;
+    border-radius: 4px;
   }
 
   &__info {
@@ -25,7 +27,7 @@
   &__brand {
 
     display: inline-block;
-    font: 15px 'Helvetica Neue',sans-serif;
+    font-size: 18px;
     font-weight: bold;
     color: #222;
 
@@ -34,7 +36,7 @@
   &__name {
 
     display: inline-block;
-    font: 13px 'Helvetica Neue',sans-serif;
+    font-size: 14px;
     color: #222;
     margin: 10px 0 0;
   }

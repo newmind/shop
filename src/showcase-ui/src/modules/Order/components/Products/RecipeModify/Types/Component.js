@@ -50,6 +50,8 @@ class Component extends PureComponent {
                     <p className={styles['card__description']}>Оправа для создания имиджа, работы с компьютером - оптические линзы без рецепта</p>
                   </div>
                 </Col>
+                <Col/>
+                <Col/>
               </Row>
             </Row>
           </TabContainer>
@@ -73,6 +75,7 @@ class Component extends PureComponent {
                   <p className={styles['card__description']}>Линзы для работы на средней дистанции - например, за компьютером или чтением книг</p>
                 </div>
               </Col>
+              <Col/>
             </Row>
           </TabContainer>
           <TabContainer to="progressive">
@@ -95,6 +98,7 @@ class Component extends PureComponent {
                   <p className={styles['card__description']}>Компьютерное нивелирование боковых аберраций</p>
                 </div>
               </Col>
+              <Col/>
             </Row>
           </TabContainer>
           <TabContainer to="bifocal">
@@ -133,6 +137,9 @@ class Component extends PureComponent {
                   <p className={styles['card__description']}>Линзы для работы на близких и средних расстояниях.</p>
                 </div>
               </Col>
+              <Col/>
+              <Col/>
+              <Col/>
             </Row>
           </TabContainer>
         </div>

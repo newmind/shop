@@ -1,0 +1,60 @@
+
+@import "~@ui.packages/theme";
+
+
+.table {
+
+  table-layout: fixed;
+  width: 100%;
+
+  &__head {
+
+    border-bottom: 2px solid #eee;
+  }
+
+  .table__header {
+
+    display: block;
+    padding: 0 0 10px;
+  }
+
+  &__col {
+
+    vertical-align: middle;
+  }
+
+  &__body &__line {
+
+    border-bottom: 1px solid #eee;
+  }
+
+  &__caption {
+
+    text-align: right;
+    caption-side: bottom;
+    padding: 20px 0;
+    font-size: 18px;
+    font-weight: bold;
+  }
+}
+
+.product {
+
+  font-size: 17px;
+  font-weight: bold;
+  text-align: left;
+}
+
+.recipe {
+
+  font-size: 14px;
+  text-align: center;
+  width: 190px;
+}
+
+.amount {
+
+  font-size: 14px;
+  text-align: right;
+  width: 120px;
+}

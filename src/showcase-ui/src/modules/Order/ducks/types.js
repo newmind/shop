@@ -1,0 +1,2 @@
+
+export const UPDATE_PRODUCT_IN_CART = '@cart/UPDATE_PRODUCT_IN_CART';

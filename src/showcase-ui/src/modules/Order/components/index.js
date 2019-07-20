@@ -3,7 +3,7 @@ import PageHOC from '../../_bin/PageHOC';
 import { bindActionCreators } from 'redux';
 import { submit } from 'redux-form';
 
-import { openDialog } from '@ui.packages/dialog';
+import { updateProduct } from '../ducks/commands';
 
 import Component from './Component';
 
@@ -17,7 +17,7 @@ const mapStateToProps = state => {
 
 const mapActionsToProps = (dispatch) => ({
   submit: bindActionCreators(submit, dispatch),
-  openDialog: bindActionCreators(openDialog, dispatch),
+  updateProduct: bindActionCreators(updateProduct, dispatch),
 });
 
 

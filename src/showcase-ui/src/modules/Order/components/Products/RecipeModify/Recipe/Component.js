@@ -2,9 +2,7 @@
 import React, { PureComponent } from 'react';
 
 import { Row, Col, SelectField, CheckBox } from '@ui.packages/ui';
-import { Tabs, Tab, TabContainer } from '@ui.packages/tabs';
 
-import cn from 'classnames';
 import styles from './default.module.scss';
 
 
@@ -25,7 +23,7 @@ class Component extends PureComponent {
     const { isPDTwo } = this.state;
     return (
       <div className={styles['params']}>
-        <div><CheckBox value={isPDTwo} onChange={value => this.setState({ isPDTwo: ! value })}/></div>
+        <div><CheckBox value={isPDTwo} onChange={value => this.setState({ isPDTwo: ! value })}/>У меня два значения PD</div>
         { ! isPDTwo
         ? (<Row>
             <Col>
@@ -243,6 +241,11 @@ class Component extends PureComponent {
             />
           </Col>
         </Row>)}
+        <Row>
+          <Col>
+
+          </Col>
+        </Row>
       </div>
     );
   }
