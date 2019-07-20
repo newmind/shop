@@ -10,8 +10,10 @@ class Component extends PureComponent {
     return (
       <span className={styles['col']}>
         <span className={styles['wrapper']}>
-          {children && React.cloneElement(children, {
-            ...props,
+          {children && React.Children.map(children, (child) => {
+            return React.cloneElement(child, {
+              ...props,
+            });
           })}
         </span>
       </span>
