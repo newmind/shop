@@ -30,6 +30,7 @@ class Component extends PureComponent {
     options: types.array,
     disabled: types.bool,
     simple: types.bool,
+    defaultKey: types.any,
     optionKey: types.string,
     optionValue: types.string,
     optionTransform: types.func,

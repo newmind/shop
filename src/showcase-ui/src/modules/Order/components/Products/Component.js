@@ -39,9 +39,9 @@ class Component extends PureComponent {
   }
 
   _handleSetRecipeToProduct(productId, formData) {
-    const { onUpdateProduct } = this.props;
+    const { onUpdateProduct, closeDialog } = this.props;
     onUpdateProduct({ id: productId, recipe: formData });
-
+    closeDialog('recipe');
   }
 
   render() {

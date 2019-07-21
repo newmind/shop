@@ -15,6 +15,7 @@ const SUCCESS_MODE = 'success';
 class Component extends PureComponent {
   static propTypes = {
     className: types.string,
+    label: types.string,
     mode: types.oneOf(['info', 'primary', 'danger', 'warning', 'success', 'default']),
     disabled: types.bool,
     value: types.bool,
@@ -25,6 +26,7 @@ class Component extends PureComponent {
     mode: 'default',
     disabled: false,
     value: false,
+    label: null,
   };
 
   _handleClick() {
@@ -33,7 +35,7 @@ class Component extends PureComponent {
   }
 
   render() {
-    const { className, disabled, mode, value } = this.props;
+    const { className, disabled, mode, value, label } = this.props;
     const classNameButton = cn(className, styles['checkbox'], {
       [styles['checkbox--primary']]: mode === PRIMARY_MODE,
       [styles['checkbox--success']]: mode === SUCCESS_MODE,
@@ -45,9 +47,12 @@ class Component extends PureComponent {
     });
 
     return (
-      <span className={classNameButton} onClick={this._handleClick.bind(this)}>
-        {value && <span className={cn(styles['checkbox__marker'], 'fas fa-check')} />}
-      </span>
+      <div className={styles['wrapper']} onClick={this._handleClick.bind(this)}>
+        <span className={classNameButton}>
+          {value && <span className={cn(styles['checkbox__marker'], 'fas fa-check')} />}
+        </span>
+        {label && <label className={styles['label']}>{ label }</label>}
+      </div>
     );
   }
 }

@@ -13,8 +13,16 @@ class Component extends PureComponent {
     values: {},
   };
 
-  _handleChangeTab() {
+  componentWillMount() {
+    const { values: { part }, onChange} = this.props;
+    if ( ! part) {
+      onChange('recipe', 'part', 'eye-glasses');
+    }
+  }
+
+  _handleChangeTab(name) {
     const { onChange } = this.props;
+    onChange('recipe', 'part', name);
     onChange('recipe', 'type', null);
   }
 
@@ -24,37 +32,37 @@ class Component extends PureComponent {
   }
 
   render() {
-    const { values: { type = -1 }} = this.props;
+    const { values: { type = -1, part }} = this.props;
     return (
-      <Tabs name="type" defaultTab="simple" onChange={this._handleChangeTab.bind(this)}>
+      <Tabs name="type" defaultTab={part} onChange={this._handleChangeTab.bind(this)}>
         <div className={styles['tabs']}>
-          <Tab name="simple" caption="Оправа или очки без рецепта" />
+          {/*<Tab name="simple" caption="Оправа или очки без рецепта" />*/}
           <Tab name="eye-glasses" caption="Очки для зрения" />
           <Tab name="progressive" caption="Прогрессивы" />
           <Tab name="bifocal" caption="Бифокалы" />
           <Tab name="digress" caption="Дегрессивы" />
         </div>
         <div className={styles['content']}>
-          <TabContainer to="simple">
-            <Row>
-              <Row>
-                <Col>
-                  <div className={cn(styles['card'], {[styles['card--active']]: type === 1})} onClick={this._handleSelectType.bind(this, 1)}>
-                    <h3 className={styles['card__header']}>Только оправа</h3>
-                    <p className={styles['card__description']}>Оправа поставляется с пластиковыми демо-линзами от производителя</p>
-                  </div>
-                </Col>
-                <Col>
-                  <div className={cn(styles['card'], {[styles['card--active']]: type === 2})} onClick={this._handleSelectType.bind(this, 2)}>
-                    <h3 className={styles['card__header']}>Имиджевые линзы</h3>
-                    <p className={styles['card__description']}>Оправа для создания имиджа, работы с компьютером - оптические линзы без рецепта</p>
-                  </div>
-                </Col>
-                <Col/>
-                <Col/>
-              </Row>
-            </Row>
-          </TabContainer>
+          {/*<TabContainer to="simple">*/}
+          {/*  <Row>*/}
+          {/*    <Row>*/}
+          {/*      <Col>*/}
+          {/*        <div className={cn(styles['card'], {[styles['card--active']]: type === 1})} onClick={this._handleSelectType.bind(this, 1)}>*/}
+          {/*          <h3 className={styles['card__header']}>Только оправа</h3>*/}
+          {/*          <p className={styles['card__description']}>Оправа поставляется с пластиковыми демо-линзами от производителя</p>*/}
+          {/*        </div>*/}
+          {/*      </Col>*/}
+          {/*      <Col>*/}
+          {/*        <div className={cn(styles['card'], {[styles['card--active']]: type === 2})} onClick={this._handleSelectType.bind(this, 2)}>*/}
+          {/*          <h3 className={styles['card__header']}>Имиджевые линзы</h3>*/}
+          {/*          <p className={styles['card__description']}>Оправа для создания имиджа, работы с компьютером - оптические линзы без рецепта</p>*/}
+          {/*        </div>*/}
+          {/*      </Col>*/}
+          {/*      <Col/>*/}
+          {/*      <Col/>*/}
+          {/*    </Row>*/}
+          {/*  </Row>*/}
+          {/*</TabContainer>*/}
           <TabContainer to="eye-glasses">
             <Row>
               <Col>

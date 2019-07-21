@@ -2,7 +2,7 @@
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 
-import { openDialog } from '@ui.packages/dialog';
+import { openDialog, closeDialog } from '@ui.packages/dialog';
 
 import Component from './Component';
 
@@ -16,6 +16,7 @@ const mapStateToProps = state => {
 
 const mapActionsToProps = (dispatch) => ({
   openDialog: bindActionCreators(openDialog, dispatch),
+  closeDialog: bindActionCreators(closeDialog, dispatch),
 });
 
 

@@ -61,8 +61,10 @@ const Options = React.forwardRef((props, ref) => {
 class Component extends PureComponent {
   static propTypes = {
     className: types.string,
+    defaultKey: types.any,
     label: types.string,
     simple: types.bool,
+    clearable: types.bool,
     message: types.string,
     mode: types.oneOf(['info', 'primary', 'danger', 'warning', 'success', 'default']),
     disabled: types.bool,
@@ -80,6 +82,7 @@ class Component extends PureComponent {
     className: '',
     label: '',
     simple: false,
+    clearable: true,
     message: '',
     mode: 'default',
     disabled: false,
@@ -138,7 +141,7 @@ class Component extends PureComponent {
       const messageRect = messageElement.getBoundingClientRect();
 
       messageElement.style['top'] = selectRect['top'] - ((messageRect['height'] - selectRect['height']) / 2) + 2 + 'px';
-      messageElement.style['left'] = selectRect['right'] + 8 + 'px';
+      messageElement.style['left'] = selectRect['right'] + 6 + 'px';
     }
   }
 
@@ -156,7 +159,7 @@ class Component extends PureComponent {
       if (optionsRECT['bottom'] + 50 >= viewportRECT['bottom']) {
         this.setState({isDirectUp: true}, () => {
           optionsElement.style['top'] = 'auto';
-          optionsElement.style['bottom'] = viewportRECT['bottom'] - selectRECT['top'] + 8 + 'px';
+          optionsElement.style['bottom'] = viewportRECT['bottom'] - selectRECT['top'] + 4 + 'px';
         });
       }
     }
@@ -269,23 +272,23 @@ class Component extends PureComponent {
     this.setState({ isOpen: false, isDirectUp: false }, () => onChange && onChange(null));
   }
 
-  _renderInput() {
-    const { value: inputValue } = this.state;
-    const { value, optionValue } = this.props;
-    return (
-      <input
-        ref={this.inputRef}
-        className={styles['select__input']}
-        value={inputValue || value && value[optionValue]}
-        onBlur={this._handleOnBlur.bind(this)}
-        onChange={this._handleInputOnChange.bind(this)}
-      />
-    );
-  }
+  // _renderInput() {
+  //   const { value: inputValue } = this.state;
+  //   const { value, optionValue } = this.props;
+  //   return (
+  //     <input
+  //       ref={this.inputRef}
+  //       className={styles['select__input']}
+  //       value={inputValue || value && value[optionValue]}
+  //       onBlur={this._handleOnBlur.bind(this)}
+  //       onChange={this._handleInputOnChange.bind(this)}
+  //     />
+  //   );
+  // }
 
   _renderValue() {
     const { value } = this.props;
-    const selectedValue = value && this._getValue(value) || null;
+    const selectedValue = (value && this._getValue(value)) || null;
     return (
       <span className={styles['select__values']} onClick={this._handleOnFocus.bind(this)}>
         {selectedValue
@@ -296,8 +299,9 @@ class Component extends PureComponent {
   }
 
   _renderCancel() {
+    const { clearable } = this.props;
     const classNameMarker = cn(styles['select__marker'], 'fas fa-times');
-    return (
+    return clearable && (
       <span className={styles['select__cross']} onClick={this._handleResetValue.bind(this)}>
         <span className={classNameMarker}/>
       </span>
@@ -319,7 +323,7 @@ class Component extends PureComponent {
 
   render() {
     const { isOpen } = this.state;
-    const { className, disabled, message, mode, options, optionKey, optionValue, value, label, optionTransform } = this.props;
+    const { className, disabled, message, mode, options, optionKey, optionValue, value, label, optionTransform, defaultKey } = this.props;
     const classNameSelectWrapper = cn(className, styles['wrapper'], {
       [styles['wrapper--primary']]: mode === PRIMARY_MODE,
       [styles['wrapper--success']]: mode === SUCCESS_MODE,

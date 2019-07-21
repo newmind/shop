@@ -36,6 +36,13 @@ class Component extends PureComponent {
     createTabs(name, defaultTab);
   }
 
+  componentWillReceiveProps(nextProps, nextContext) {
+    const { name, defaultTab, setActiveTab } = this.props;
+    if (nextProps['defaultTab'] !== defaultTab) {
+      setActiveTab(name, nextProps['defaultTab']);
+    }
+  }
+
   componentWillUnmount() {
     const { name, removeTabs } = this.props;
     removeTabs(name);

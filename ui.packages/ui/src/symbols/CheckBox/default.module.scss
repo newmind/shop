@@ -2,6 +2,23 @@
 @import "~@ui.packages/theme";
 
 
+.wrapper {
+
+  display: inline-flex;
+  flex: 0;
+  flex-direction: row;
+  align-items: center;
+  cursor: pointer;
+}
+
+.label {
+
+  display: inline-block;
+  font-size: 14px;
+  color: $dark-color;
+  margin: 0 0 0 10px;
+}
+
 .checkbox {
 
   display: inline-flex;
@@ -10,7 +27,6 @@
   height: 16px;
   border: 1px solid $light-gray-color;
   border-radius: 2px;
-  cursor: pointer;
   background: $white-color;
   color: $dark-color;
   font-size: 0;
