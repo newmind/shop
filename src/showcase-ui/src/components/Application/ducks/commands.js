@@ -10,7 +10,7 @@ export const checkAuthState = () => async (dispatch) => {
 
   const cookie = Cookies('agent');
 
-  console.log(cookie)
+  console.log(111, cookie);
 
   await sleep(200);
 
