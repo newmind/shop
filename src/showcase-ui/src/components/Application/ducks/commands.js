@@ -1,6 +1,6 @@
 
 import { sleep } from '@ui.packages/utils';
-// import { getCookie } from 'redux-cookie';
+import Cookies from 'js-cookie';
 import { changeState } from './actions';
 
 
@@ -8,9 +8,11 @@ export const checkAuthState = () => async (dispatch) => {
 
   dispatch(changeState(true));
 
-  // const cookie = dispatch(getCookie('state'));
+  const cookie = Cookies('agent');
 
-  await sleep(1000);
+  console.log(cookie)
+
+  await sleep(200);
 
   dispatch(changeState(false));
 };

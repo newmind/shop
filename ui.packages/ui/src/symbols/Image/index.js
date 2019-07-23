@@ -89,7 +89,7 @@ class Component extends PureComponent {
     imageElement.style['margin-top'] = `-${imageSize['height'] / 2}px`;
     imageElement.style['margin-left'] = `-${imageSize['width'] / 2}px`;
 
-    this.timeOutInstance = setTimeout(() => this.setState({ isLoading: false, isError: false }), 300);
+    this.timeOutInstance = setTimeout(() => this.setState({ isLoading: false, isError: false }), 10);
   }
 
   componentWillUnmount() {
