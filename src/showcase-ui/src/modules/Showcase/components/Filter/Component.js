@@ -44,22 +44,18 @@ class Component extends PureComponent {
                 optionTransform={option => `${option['brand']} (${option['count']})`}
               />
             </Col>
-          </Row>
-          <Row>
-            <Col>
+            <Col className={styles['amounts']}>
               <div className={styles['amount']}>
                 <span className={styles['amount__label']}>Сумма</span>
                 <span className={styles['amount__wrapper']}>
-                  <InputField className={styles['amount__input']} name="amountFrom" />
-                  <span className={styles['amount__delimiter']}>-</span>
-                  <InputField className={styles['amount__input']} name="amountTo" />
-                </span>
+                    <InputField className={styles['amount__input']} name="amountFrom" />
+                    <span className={styles['amount__delimiter']}>-</span>
+                    <InputField className={styles['amount__input']} name="amountTo" />
+                  </span>
               </div>
             </Col>
-            <Col>
-              <div className={styles['controls']}>
-                <Button type="submit" mode="primary" disabled={ ! isValid}>Применить</Button>
-              </div>
+            <Col className={styles['controls']}>
+              <Button type="submit" mode="primary" disabled={ ! isValid}>Применить</Button>
             </Col>
           </Row>
         </div>
