@@ -13,7 +13,7 @@ const SUCCESS_MODE = 'success';
 
 
 const Options = React.forwardRef((props, ref) => {
-  const { value, options, optionKey, optionValue, onCheck, optionTransform } = props;
+  const { value, options, optionKey, optionValue, onCheck, optionTransform, optionTemplate } = props;
 
   const getValue = (value) => {
     if (value instanceof Object) {
@@ -45,7 +45,9 @@ const Options = React.forwardRef((props, ref) => {
               });
               return (
                 <span key={key} className={classNameOption} onClick={onCheck.bind(this, option)}>
-                  <span className={styles['option__value']}>{getValue(option)}</span>
+                  {optionTemplate
+                    ? optionTemplate(option)
+                    : <span className={styles['option__value']}>{getValue(option)}</span>}
                 </span>
               );
             })
@@ -73,6 +75,7 @@ class Component extends PureComponent {
     optionKey: types.string,
     optionValue: types.string,
     optionTransform: types.func,
+    optionTemplate: types.func,
     onChange: types.func,
     onFocus: types.func,
     onBlur: types.func,
@@ -323,7 +326,7 @@ class Component extends PureComponent {
 
   render() {
     const { isOpen } = this.state;
-    const { className, disabled, message, mode, options, optionKey, optionValue, value, label, optionTransform, defaultKey } = this.props;
+    const { className, disabled, message, mode, options, optionKey, optionValue, value, label, optionTransform, optionTemplate } = this.props;
     const classNameSelectWrapper = cn(className, styles['wrapper'], {
       [styles['wrapper--primary']]: mode === PRIMARY_MODE,
       [styles['wrapper--success']]: mode === SUCCESS_MODE,
@@ -331,7 +334,9 @@ class Component extends PureComponent {
       [styles['wrapper--danger']]: mode === DANGER_MODE,
       [styles['wrapper--warning']]: mode === WARNING_MODE,
       [styles['wrapper--disabled']]: disabled,
-      [styles['wrapper--is-focus']]: isOpen,
+    });
+    const classNameSelect = cn(styles['select'], {
+      [styles['select--is-focus']]: isOpen,
     });
 
     return (
@@ -339,7 +344,7 @@ class Component extends PureComponent {
         {label && (
           <p className={styles['label']}>{ label }</p>
         )}
-        <div ref={this.selectRef} className={styles['select']}>
+        <div ref={this.selectRef} className={classNameSelect}>
           <span className={styles['select__content']}>
             { this._renderValue() }
           </span>
@@ -353,7 +358,16 @@ class Component extends PureComponent {
             </span>
           )}
           {isOpen && (
-            <Options ref={this.optionsRef} value={value} options={options} optionKey={optionKey} optionValue={optionValue} optionTransform={optionTransform} onCheck={this._handleOnChange.bind(this)} />
+            <Options
+              ref={this.optionsRef}
+              value={value}
+              options={options}
+              optionKey={optionKey}
+              optionValue={optionValue}
+              optionTransform={optionTransform}
+              optionTemplate={optionTemplate}
+              onCheck={this._handleOnChange.bind(this)}
+            />
           )}
         </div>
       </div>

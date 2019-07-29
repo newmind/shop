@@ -17,6 +17,24 @@
   flex: 1 0 auto;
 }
 
+.option {
+
+  display: block;
+
+  &__title {
+
+    font-size: 13px;
+    font-weight: bold;
+  }
+
+  &__count {
+
+    font-size: 13px;
+    font-style: italic;
+    margin: 0 0 0 8px;
+  }
+}
+
 .controls {
 
   flex: 0;

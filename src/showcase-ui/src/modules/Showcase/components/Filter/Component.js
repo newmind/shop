@@ -41,7 +41,12 @@ class Component extends PureComponent {
                 optionValue="brand"
                 options={brands}
                 simple={true}
-                optionTransform={option => `${option['brand']} (${option['count']})`}
+                optionTemplate={option => (
+                  <span className={styles['option']}>
+                    <span className={styles['option__title']}>{option['brand']}</span>
+                    <span className={styles['option__count']}>({option['count']})</span>
+                  </span>
+                )}
               />
             </Col>
             <Col className={styles['amounts']}>
