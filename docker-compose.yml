@@ -26,8 +26,6 @@ services:
       - db
     links:
       - db
-    volumes:
-      - /shop/node_modules:/app/node_modules
 
 
   product_proxy:
@@ -42,8 +40,6 @@ services:
     links:
       - db
       - rabbit
-    volumes:
-      - /shop/node_modules:/app/node_modules
 
 
   operation_proxy:
@@ -58,8 +54,6 @@ services:
     links:
       - db
       - rabbit
-    volumes:
-      - /shop/node_modules:/app/node_modules
 
 
   admin_gw:
@@ -78,8 +72,6 @@ services:
       - product_proxy
       - identity_srv
       - operation_proxy
-    volumes:
-      - /shop/node_modules:/app/node_modules
 
 
   showcase_gw:
@@ -96,8 +88,6 @@ services:
       - rabbit
       - product_proxy
       - operation_proxy
-    volumes:
-      - /shop/node_modules:/app/node_modules
 
 
   admin_ui:
@@ -112,7 +102,6 @@ services:
       - admin_gw
     volumes:
       - /shop/src/admin-ui/nginx/conf.d:/etc/nginx/conf.d:ro
-      - /shop/node_modules:/app/node_modules
     environment:
       - NODE_ENV=production
 
@@ -129,7 +118,6 @@ services:
       - showcase_gw
     volumes:
       - /shop/src/showcase-ui/nginx/conf.d:/etc/nginx/conf.d:ro
-      - /shop/node_modules:/app/node_modules
     environment:
       - NODE_ENV=production
 
