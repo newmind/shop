@@ -161,7 +161,7 @@
   &__cart {
 
     display: block;
-    width: 43px;
+    width: 48px;
     font-size: 18px;
     background: rgba($danger-color, 0.3);
     color: $white-color;
@@ -170,7 +170,7 @@
     border-radius: 3px;
     transition: background 400ms;
     text-align: center;
-    padding: 12px 0 0;
+    padding: 12px 2px 0 0;
 
     &:hover {
       background: $danger-color;
