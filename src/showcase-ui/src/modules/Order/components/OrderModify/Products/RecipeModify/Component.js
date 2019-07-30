@@ -27,7 +27,7 @@ class Component extends PureComponent {
         <div className={styles['block']}>
           <h2 className={styles['block__header']}>Тип очков</h2>
           <div className={styles['block__content']}>
-            <Types />
+            <Types initialValues={initialValues} />
           </div>
         </div>
         <div className={styles['block']}>

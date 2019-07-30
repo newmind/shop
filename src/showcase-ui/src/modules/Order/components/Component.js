@@ -2,10 +2,9 @@
 import types from 'prop-types';
 import React, { PureComponent } from 'react';
 
-import { Button } from '@ui.packages/ui';
+import { Button, Container, Row, Col } from '@ui.packages/ui';
 
-import Details from './Details';
-import Products from './Products';
+import OrderModify from './OrderModify';
 
 import styles from './default.module.scss';
 
@@ -20,39 +19,32 @@ class Component extends PureComponent {
     products: [],
   };
 
-  _handleUpdateProduct(product) {
-    const { updateProduct } = this.props;
-    updateProduct(product);
-  }
-
-  _handleSubmitOrder(formData) {
+  _handleSendOrderData(formData) {
     console.log(formData);
   }
 
+  _handleSubmitOrder() {
+    const { submit } = this.props;
+    submit('order');
+  }
+
   render() {
-    const { products, submit } = this.props;
+    const { products } = this.props;
     const productsCount = Object.keys(products).length;
     return !! productsCount
       ? (
-        <section className={styles['wrapper']}>
-          <div className={styles['block']}>
-            <h2 className={styles['block__header']}>Выбранные товары</h2>
-            <div className={styles['block__content']}>
-              <Products onUpdateProduct={this._handleUpdateProduct.bind(this)} />
-            </div>
-          </div>
-          <div className={styles['block']}>
-            <h2 className={styles['block__header']}>Оформление заказа</h2>
-            <div className={styles['block__content']}>
-              <Details onSubmit={this._handleSubmitOrder.bind(this)} />
-            </div>
-          </div>
-          <div className={styles['block']}>
-            <div className={styles['block__content']}>
-              <Button mode="success" onClick={submit.bind(this, 'order')}>Оплатить заказ</Button>
-            </div>
-          </div>
-        </section>
+        <Container className={styles['wrapper']}>
+          <Row>
+            <Col>
+              <OrderModify onSubmit={this._handleSendOrderData.bind(this)} />
+            </Col>
+          </Row>
+          <Row>
+            <Col>
+              <Button onClick={this._handleSubmitOrder.bind(this)}>Оформить заказ</Button>
+            </Col>
+          </Row>
+        </Container>
       )
      : (
        <div>Для оформления заказа необходимо выбрать товар</div>

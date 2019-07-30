@@ -13,12 +13,12 @@ class Component extends PureComponent {
     values: {},
   };
 
-  componentWillMount() {
-    const { values: { part }, onChange} = this.props;
-    if ( ! part) {
-      onChange('recipe', 'part', 'eye-glasses');
-    }
-  }
+  // componentWillMount() {
+  //   const { values: { part }, onChange} = this.props;
+  //   if ( ! part) {
+  //     onChange('recipe', 'part', 'eye-glasses');
+  //   }
+  // }
 
   _handleChangeTab(name) {
     const { onChange } = this.props;
@@ -32,7 +32,7 @@ class Component extends PureComponent {
   }
 
   render() {
-    const { values: { type = -1, part }} = this.props;
+    const { values: { type = -1, part = 'eye-glasses' }} = this.props;
     return (
       <Tabs name="type" defaultTab={part} onChange={this._handleChangeTab.bind(this)}>
         <div className={styles['tabs']}>

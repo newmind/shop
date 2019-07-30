@@ -9,6 +9,7 @@ export { default as CheckBox } from './symbols/CheckBox';
 export { default as Image } from './symbols/Image';
 export { default as Spinner } from './symbols/Spinner';
 export { default as Select } from './symbols/Select';
+export { default as RadioBox, Radio } from './symbols/RadioBox';
 
 export { default as Gallery } from './Gallery';
 
@@ -18,6 +19,7 @@ export { default as TextariaField } from './fields/TextariaField';
 export { default as EvaluationField } from './fields/EvaluationField';
 export { default as SelectField } from './fields/SelectField';
 export { default as CheckBoxField } from './fields/CheckBoxField';
+export { default as RadioBoxField } from './fields/RadioBoxField';
 
 export { default as Container } from './form/Container';
 export { default as Col } from './form/Col';
