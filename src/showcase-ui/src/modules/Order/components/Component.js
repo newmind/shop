@@ -36,7 +36,9 @@ class Component extends PureComponent {
         <Container className={styles['wrapper']}>
           <Row>
             <Col>
-              <OrderModify onSubmit={this._handleSendOrderData.bind(this)} />
+              <OrderModify onSubmit={this._handleSendOrderData.bind(this)} initialValues={{
+                products
+              }} />
             </Col>
           </Row>
           <Row>

@@ -18,7 +18,7 @@ class Component extends PureComponent {
           <Col>
             <h2 className={styles['block__header']}>Выбранные товары</h2>
             <div className={styles['block__content']}>
-              {/*<Products />*/}
+              <Products />
             </div>
           </Col>
         </Row>

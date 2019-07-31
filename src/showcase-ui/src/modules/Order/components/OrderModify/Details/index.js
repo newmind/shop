@@ -1,9 +1,9 @@
 
-import { reduxForm } from 'redux-form';
+import { connect } from 'react-redux';
 
 import Component from './Component';
 
 
-export default reduxForm({
-  form: 'order',
-})(Component);
+export default connect(
+
+)(Component);

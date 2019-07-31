@@ -1,16 +1,16 @@
 
 import React, { PureComponent } from 'react';
 
-import { Tab, Tabs } from "@ui.packages/tabs";
+import { RadioBoxField, Radio } from "@ui.packages/ui";
 
 
 class Component extends PureComponent {
   render() {
     return (
-      <Tabs name="pay" defaultTab="online">
-        <Tab name="online" caption="Оплата онлайн"/>
-        <Tab name="courier" caption="Наличными курьеру"/>
-      </Tabs>
+      <RadioBoxField name="pay" defaultValue="post">
+        <Radio name="cash" label="Онлайн оплата" />
+        <Radio name="courier" label="Оплата при получении товара" />
+      </RadioBoxField>
     );
   }
 }

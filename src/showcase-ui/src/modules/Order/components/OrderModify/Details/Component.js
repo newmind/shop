@@ -1,7 +1,7 @@
 
 import React, { PureComponent } from 'react';
 
-import { Container, Row, Col } from '@ui.packages/ui';
+import { Container, Row, Col, CheckBoxField } from '@ui.packages/ui';
 
 import Customer from './Customer';
 import Delivery from './Delivery';
@@ -40,11 +40,8 @@ class Component extends PureComponent {
         </Row>
         <Row>
           <Col>
-            <p>
-              Нажимая на кнопку ”Оформить заказ”, Вы подтверждаете согласие на обработку Персональных данных.
-              Я хочу быть в курсе новостей и акций по электронной почте
-              Я хочу получать новости и акции в SMS-сообщениях
-            </p>
+            <p>Нажимая на кнопку ”Оформить заказ”, Вы подтверждаете согласие на обработку Персональных данных.</p>
+            <CheckBoxField name="news" label="Я хочу быть в курсе новостей и акций по электронной почте" />
           </Col>
         </Row>
       </Container>
