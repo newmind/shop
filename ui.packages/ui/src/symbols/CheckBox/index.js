@@ -31,7 +31,6 @@ class Component extends PureComponent {
 
   _handleClick() {
     const { value, onChange } = this.props;
-    console.log(555, value);
     onChange && onChange( ! value);
   }
 
