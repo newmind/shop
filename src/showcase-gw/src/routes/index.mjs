@@ -2,6 +2,7 @@
 
 import { getProducts, getProductById, getProductsAdditionalData, createComment } from '../controllers/Products';
 import { getImageByFileName } from '../controllers/Gallery';
+import { create as createOperation } from '../controllers/Operation';
 
 
 export default (router) => {
@@ -13,4 +14,6 @@ export default (router) => {
   router.post('/products/:productId/comments', createComment());
 
   router.get('/gallery/:fileName', getImageByFileName());
+
+  router.post('/operation', createOperation());
 };

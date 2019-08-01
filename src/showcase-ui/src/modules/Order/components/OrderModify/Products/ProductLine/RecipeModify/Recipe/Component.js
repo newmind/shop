@@ -1,7 +1,8 @@
 
+import types from 'prop-types';
 import React, { PureComponent } from 'react';
 
-import { Row, Col, SelectField, CheckBox } from '@ui.packages/ui';
+import { Row, Col, Select } from '@ui.packages/ui';
 
 import styles from './default.module.scss';
 
@@ -391,47 +392,48 @@ const spherical = [
   { id: '+12.00', value: '+12.00' },
 ];
 
-// const prism = [
-//   { id: '0.25', value: '0.25' },
-//   { id: '0.50', value: '0.50' },
-//   { id: '0.75', value: '0.75' },
-//   { id: '1.00', value: '1.00' },
-//   { id: '1.25', value: '1.25' },
-//   { id: '1.50', value: '1.50' },
-//   { id: '1.75', value: '1.75' },
-//   { id: '2.00', value: '2.00' },
-//   { id: '2.25', value: '2.25' },
-//   { id: '2.50', value: '2.50' },
-//   { id: '2.75', value: '2.75' },
-//   { id: '3.00', value: '3.00' },
-// ];
-// const direction = [
-//   { id: 'in', value: 'Внутри' },
-//   { id: 'out', value: 'Снаружи' }
-// ];
-
 
 class Component extends PureComponent {
   static defaultProps = {
-    values: {},
+    onChange: types.func,
   };
 
   constructor(props) {
     super(props);
 
+    const { recipe } = this.props;
+
     this.state = {
-      isPDTwo: false,
+      PDLeft: 'average',
+      PDRight: 'average',
+      sphRight: 'plano',
+      sphLeft: 'plano',
+      cylRight: 'plano',
+      cylLeft: 'plano',
+      axisRight: '0',
+      axisLeft: '0',
+      addRight: '0.00',
+      addLeft: '0.00',
+      ...recipe,
     };
   }
 
+  _setValue(name, value) {
+    const { onChange } = this.props;
+    this.setState({ [name]: value }, () => onChange(this.state));
+  }
+
   render() {
+    const { PDLeft, PDRight, sphRight, sphLeft, cylRight, cylLeft, axisRight, axisLeft, addRight, addLeft } = this.state;
     return (
       <div className={styles['params']}>
         <Row>
           <Col>
-            <SelectField
+            <Select
               label="Левый глаз"
-              name="PD-left"
+              clearable={false}
+              simple={true}
+              value={PDLeft}
               options={[
                 { id: 'average', value: 'Использовать среднее значение (Я не знаю свой PD)' },
                 { id: '25.0', value: '25.0' },
@@ -466,12 +468,15 @@ class Component extends PureComponent {
                 { id: '39.5', value: '39.5' },
                 { id: '40.0', value: '40.0' },
               ]}
+              onChange={(value) => this._setValue('PDLeft', value)}
             />
           </Col>
           <Col>
-            <SelectField
+            <Select
               label="Правый глаз"
-              name="PD-right"
+              clearable={false}
+              simple={true}
+              value={PDRight}
               options={[
                 { id: 'average', value: 'Использовать среднее значение (Я не знаю свой PD)' },
                 { id: '25.0', value: '25.0' },
@@ -506,6 +511,7 @@ class Component extends PureComponent {
                 { id: '39.5', value: '39.5' },
                 { id: '40.0', value: '40.0' },
               ]}
+              onChange={(value) => this._setValue('PDRight', value)}
             />
           </Col>
         </Row>
@@ -524,53 +530,22 @@ class Component extends PureComponent {
               <tbody>
                 <tr>
                   <td>OD (Павый)</td>
-                  <td><SelectField name="sph-right" options={spherical} simple={true} defaultKey="plano" clearable={false} /></td>
-                  <td><SelectField name="cyl-right" options={cylinder} simple={true} defaultKey="plano" clearable={false} /></td>
-                  <td><SelectField name="axis-right" options={axis} simple={true} defaultKey="0" clearable={false} /></td>
-                  <td><SelectField name="add-right" options={addition} simple={true} defaultKey="0.00" clearable={false} /></td>
+                  <td><Select value={sphRight} options={spherical} simple={true} clearable={false} onChange={value => this._setValue('sphRight', value)} /></td>
+                  <td><Select value={cylRight} options={cylinder} simple={true} clearable={false} onChange={value => this._setValue('cylRight', value)} /></td>
+                  <td><Select value={axisRight} options={axis} simple={true} clearable={false} onChange={value => this._setValue('axisRight', value)} /></td>
+                  <td><Select value={addRight} options={addition} simple={true} clearable={false} onChange={value => this._setValue('addRight', value)} /></td>
                 </tr>
                 <tr>
                   <td>OS (Левый)</td>
-                  <td><SelectField name="sph-left" options={spherical} simple={true} defaultKey="plano" clearable={false} /></td>
-                  <td><SelectField name="cyl-left" options={cylinder} simple={true} defaultKey="plano" clearable={false} /></td>
-                  <td><SelectField name="axis-left" options={axis} simple={true} defaultKey="0" clearable={false} /></td>
-                  <td><SelectField name="add-left" options={addition} simple={true} defaultKey="0.00" clearable={false} /></td>
+                  <td><Select value={sphLeft} options={spherical} simple={true} clearable={false} onChange={value => this._setValue('sphLeft', value)} /></td>
+                  <td><Select value={cylLeft} options={cylinder} simple={true} clearable={false} onChange={value => this._setValue('cylLeft', value)} /></td>
+                  <td><Select value={axisLeft} options={axis} simple={true} clearable={false} onChange={value => this._setValue('axisLeft', value)} /></td>
+                  <td><Select value={addLeft} options={addition} simple={true} clearable={false} onChange={value => this._setValue('addLeft', value)} /></td>
                 </tr>
               </tbody>
             </table>
           </Col>
         </Row>
-        {/*<Row>*/}
-        {/*  <Col>*/}
-        {/*    <table className={styles['table']}>*/}
-        {/*      <thead>*/}
-        {/*      <tr>*/}
-        {/*        <th></th>*/}
-        {/*        <th>По горизонтали</th>*/}
-        {/*        <th>Направление</th>*/}
-        {/*        <th>По вертикали</th>*/}
-        {/*        <th>Направление</th>*/}
-        {/*      </tr>*/}
-        {/*      </thead>*/}
-        {/*      <tbody>*/}
-        {/*      <tr>*/}
-        {/*        <td>OD (Павый)</td>*/}
-        {/*        <td><SelectField name="horizontal-prism-right" options={prism} simple={true} /></td>*/}
-        {/*        <td><SelectField name="horizontal-base-direction-right" options={direction} simple={true} /></td>*/}
-        {/*        <td><SelectField name="vertical-prism-right" options={prism} simple={true} /></td>*/}
-        {/*        <td><SelectField name="vertical-base-direction-right" options={direction} simple={true} /></td>*/}
-        {/*      </tr>*/}
-        {/*      <tr>*/}
-        {/*        <td>OS (Левый)</td>*/}
-        {/*        <td><SelectField name="horizontal-prism-left" options={prism} simple={true} /></td>*/}
-        {/*        <td><SelectField name="horizontal-base-direction-left" options={direction} simple={true} /></td>*/}
-        {/*        <td><SelectField name="vertical-prism-left" options={prism} simple={true} /></td>*/}
-        {/*        <td><SelectField name="vertical-base-direction-left" options={direction} simple={true} /></td>*/}
-        {/*      </tr>*/}
-        {/*      </tbody>*/}
-        {/*    </table>*/}
-        {/*  </Col>*/}
-        {/*</Row>*/}
       </div>
     );
   }

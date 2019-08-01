@@ -1,68 +1,16 @@
 
-import React, { Fragment, PureComponent } from 'react';
+import React, { PureComponent } from 'react';
 import { FieldArray } from 'redux-form';
 
-import { Dialog } from '@ui.packages/dialog';
 import { nounDeclension } from "@ui.packages/utils";
-import { Button, RadioBoxField, Radio } from '@ui.packages/ui';
 import numeral from '@ui.packages/numeral';
 
-import Product from './Product';
-import RecipeModify from './RecipeModify';
+import ProductLine from './ProductLine';
 
 import cn from 'classnames';
 import styles from './default.module.scss';
 
 
-class ProductField extends PureComponent {
-
-  _handleOpenDialogRecipe(dialogName) {
-    const { openDialog } = this.props;
-    openDialog(dialogName);
-  }
-
-  _handleCloseDialog(dialogName) {
-    const { closeDialog } = this.props;
-    closeDialog(dialogName);
-  }
-
-  render() {
-    const { fields, meta: { touched, error }} = this.props;
-    return fields.map((field, index) => {
-      const product = fields.get(index);
-      console.log(111, product);
-      return (
-        <tbody key={index} className={styles['table__body']}>
-          <tr className={styles['table__line']}>
-            <td className={styles['table__col']}>
-              <Product {...product['product']} />
-            </td>
-            <td className={styles['table__col']} style={{ textAlign: 'center' }}>
-              <RadioBoxField name={`${field}.receipt`}>
-                <Radio name="only-rim" label="Только оправа" />
-                <Radio name="image-lenses" label="Имиджевые линзы" />
-                <Radio name="on-prescription" label="По рецепту" />
-              </RadioBoxField>
-              <Button onClick={this._handleOpenDialogRecipe.bind(this, `${field}-recipe`)}>Добавить рецепт</Button>
-            </td>
-            <td className={cn(styles['table__col'], styles['amount'])}>
-              {numeral(product['amount']).format()} {product['currency']['value']}
-            </td>
-            <td>
-              <Dialog name={`${field}-recipe`} title="Рецепт">
-                <RecipeModify
-                  initialValues={`${product}.recipe`}
-                  onSubmit={this._handleCloseDialog.bind(this, `${field}-recipe`)}
-                  onClose={this._handleCloseDialog.bind(this, `${field}-recipe`)}
-                />
-              </Dialog>
-            </td>
-          </tr>
-        </tbody>
-      )
-    });
-  }
-}
 
 
 class Component extends PureComponent {
@@ -92,7 +40,7 @@ class Component extends PureComponent {
             <th style={{width: 0}} />
           </tr>
         </thead>
-        <FieldArray name="products" component={ProductField} {...props} />
+        <FieldArray name="products" component={ProductLine} {...props} />
         <caption className={styles['table__caption']}>Итого: { this._calculateFullAmount() } руб.</caption>
       </table>
     );

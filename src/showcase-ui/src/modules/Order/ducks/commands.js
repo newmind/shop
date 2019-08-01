@@ -1,10 +1,27 @@
 
+import request from '@ui.packages/request';
+
 import {
-  updateProductAction,
+  createOperationRequestAction,
+  createOperationRequestFailAction,
+  createOperationRequestSuccessAction,
 } from './actions';
 
 
-export const updateProduct = (product) => dispatch => {
+export const createOperation = (order) => async dispatch => {
+  try {
 
-  dispatch(updateProductAction(product));
+    dispatch(createOperationRequestAction());
+
+    const result = await request({
+      method: 'post',
+      url: '/operation',
+      data: order,
+    });
+
+    dispatch(createOperationRequestSuccessAction(result));
+
+  } catch(error) {
+    dispatch(createOperationRequestFailAction(error));
+  }
 };

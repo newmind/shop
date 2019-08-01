@@ -64,14 +64,14 @@ class Component extends PureComponent {
       const containerRect = containerElement.getBoundingClientRect();
       const messageRect = messageElement.getBoundingClientRect();
 
-      messageElement.style['top'] = containerRect['top'] - ((messageRect['height'] - containerRect['height']) / 2) + 2 + 'px';
+      messageElement.style['top'] = containerRect['top'] - ((messageRect['height'] - containerRect['height']) / 2) + 'px';
       messageElement.style['left'] = containerRect['right'] + 8 + 'px';
     }
   }
 
   componentDidMount() {
 
-    document.addEventListener('scroll', this._resizeEvent);
+    document.querySelector('#root').addEventListener('scroll', this._resizeEvent);
     window.addEventListener('resize', this._scrollEvent);
   }
 
@@ -81,7 +81,7 @@ class Component extends PureComponent {
 
   componentWillUnmount() {
 
-    document.removeEventListener('scroll', this._resizeEvent);
+    document.querySelector('#root').removeEventListener('scroll', this._resizeEvent);
     window.removeEventListener('resize', this._scrollEvent);
   }
 

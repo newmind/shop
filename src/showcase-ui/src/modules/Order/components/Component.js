@@ -12,7 +12,8 @@ import styles from './default.module.scss';
 class Component extends PureComponent {
   static propTypes = {
     products: types.array,
-    openDialog: types.func,
+    isValid: types.bool,
+    submit: types.func,
   };
 
   static defaultProps = {
@@ -20,7 +21,8 @@ class Component extends PureComponent {
   };
 
   _handleSendOrderData(formData) {
-    console.log(formData);
+    const { createOperation } = this.props;
+    createOperation(formData);
   }
 
   _handleSubmitOrder() {
@@ -36,9 +38,7 @@ class Component extends PureComponent {
         <Container className={styles['wrapper']}>
           <Row>
             <Col>
-              <OrderModify onSubmit={this._handleSendOrderData.bind(this)} initialValues={{
-                products
-              }} />
+              <OrderModify onSubmit={this._handleSendOrderData.bind(this)} />
             </Col>
           </Row>
           <Row>

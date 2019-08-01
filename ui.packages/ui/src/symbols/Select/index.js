@@ -118,7 +118,7 @@ class Component extends PureComponent {
   componentDidMount() {
     window.addEventListener('click', this._eventReset);
     window.addEventListener('resize', this._eventHandleResize);
-    document.addEventListener('scroll', this._eventHandleScrolling);
+    document.querySelector('#root').addEventListener('scroll', this._eventHandleScrolling);
   }
 
   componentDidUpdate(prevProps, prevState, snapshot) {
@@ -129,7 +129,7 @@ class Component extends PureComponent {
   componentWillUnmount() {
     window.removeEventListener('click', this._eventReset);
     window.removeEventListener('resize', this._eventHandleResize);
-    document.removeEventListener('scroll', this._eventHandleScrolling);
+    document.querySelector('#root').removeEventListener('scroll', this._eventHandleScrolling);
   }
 
   _calculateTooltipPosition() {
@@ -209,7 +209,7 @@ class Component extends PureComponent {
 
     optionsRef.style['width'] = selectRect['width'] + 'px';
 
-    onFocus();
+    onFocus && onFocus();
   }
 
   _applyValue(value) {
@@ -257,7 +257,7 @@ class Component extends PureComponent {
 
   _handleOnBlur() {
     const { onBlur } = this.props;
-    this.setState({ isOpen: false, isDirectUp: false }, () => onBlur());
+    this.setState({ isOpen: false, isDirectUp: false }, () => onBlur && onBlur());
   }
 
   _handleOnChange(option) {

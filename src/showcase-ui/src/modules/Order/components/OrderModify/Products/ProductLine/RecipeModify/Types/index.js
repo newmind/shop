@@ -14,9 +14,7 @@ const mapStateToProps = (state) => {
 };
 
 const mapActionsToProps = (dispatch) => {
-  return {
-    onChange: bindActionCreators(change, dispatch),
-  };
+  return {};
 };
 
 
