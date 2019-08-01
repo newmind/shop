@@ -2,7 +2,7 @@
 
 module.exports = (db, DataType) => {
 
-  const Operation = db.define('Operation', {
+  const Invoice = db.define('Invoice', {
     id: {
       type: DataType.INTEGER(11),
       primaryKey: true,
@@ -13,10 +13,6 @@ module.exports = (db, DataType) => {
       type: DataType.STRING(255),
       allowNull: false,
     },
-    details: {
-      type: DataType.TEXT,
-      allowNull: false,
-    },
     paymentMethodId: {
       type: DataType.INTEGER,
     },
@@ -24,11 +20,14 @@ module.exports = (db, DataType) => {
       type: DataType.DECIMAL(10, 2),
       allowNull: false,
     },
+    currencyId: {
+      type: DataType.INTEGER,
+    },
     statusCode: {
       type: DataType.INTEGER(2),
       allowNull: false,
     }
   });
 
-  return Operation;
+  return Invoice;
 };
