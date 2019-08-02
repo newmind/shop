@@ -22,7 +22,7 @@ module.exports = (db, DataType) => {
     }
   });
 
-  Stock.associate = ({ Product, Currency, Category, Comment }) => {
+  Stock.associate = ({ Product, Currency, Category }) => {
 
     Stock.belongsTo(Category, {
       foreignKey: 'categoryId',

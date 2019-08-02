@@ -40,12 +40,6 @@ import routes from './routes';
   });
 
   const httpServer = http.createServer(appServer.callback());
-  const io = await createSocket(httpServer);
-
-  appServer.use(async (ctx, next) => {
-    ctx.io = io.sockets;
-    await next();
-  });
 
   initRouter(routes);
 

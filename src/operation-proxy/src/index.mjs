@@ -4,7 +4,7 @@ import http from 'http';
 
 import databaseORM from '@sys.packages/db';
 import appServer, { initRouter } from '@sys.packages/server';
-// import { connect as createConnection, channel as createChannel, createExchange } from "@sys.packages/rabbit";
+import {channel as createChannel, connect as createConnection, createExchange} from "@sys.packages/rabbit";
 
 import routes from './routes';
 
@@ -13,18 +13,32 @@ import routes from './routes';
 
   databaseORM(`postgres://${process.env['DATA_BASE_USERNAME']}:${process.env['DATA_BASE_PASSWORD']}@${process.env['DATA_BASE_HOST']}:${process.env['DATA_BASE_PORT']}/${process.env['DATA_BASE_NAME']}`);
 
-  const httpServer = http.createServer(appServer.callback());
+  createConnection(process.env['RABBIT_CONNECTION_HOST'], (error, connection) => {
+    createChannel(connection, async () => {
 
-  // const connection = await createConnection(process.env['RABBIT_CONNECTION_HOST']);
-  // const channel = await createChannel(connection);
-  //
-  // await createExchange(channel, process.env['RABBIT_OPERATION_PROXY_EXCHANGE_ORDER_UPDATED']);
-  // await createExchange(channel, process.env['RABBIT_OPERATION_PROXY_EXCHANGE_ORDER_CREATED']);
-  //
-  // appServer.use(async (ctx, next) => {
-  //   ctx.rabbit = channel;
-  //   await next();
-  // });
+      await createExchange(process.env['RABBIT_PRODUCT_PROXY_EXCHANGE_UNIT_UPDATED']);
+      await createExchange(process.env['RABBIT_PRODUCT_PROXY_EXCHANGE_UNIT_CREATED']);
+      await createExchange(process.env['RABBIT_PRODUCT_PROXY_EXCHANGE_UNIT_DELETED']);
+
+      await createExchange(process.env['RABBIT_PRODUCT_PROXY_EXCHANGE_CURRENCY_UPDATED']);
+      await createExchange(process.env['RABBIT_PRODUCT_PROXY_EXCHANGE_CURRENCY_CREATED']);
+      await createExchange(process.env['RABBIT_PRODUCT_PROXY_EXCHANGE_CURRENCY_DELETED']);
+
+      await createExchange(process.env['RABBIT_PRODUCT_PROXY_EXCHANGE_CATEGORY_UPDATED']);
+      await createExchange(process.env['RABBIT_PRODUCT_PROXY_EXCHANGE_CATEGORY_CREATED']);
+      await createExchange(process.env['RABBIT_PRODUCT_PROXY_EXCHANGE_CATEGORY_DELETED']);
+
+      await createExchange(process.env['RABBIT_PRODUCT_PROXY_EXCHANGE_PRODUCT_UPDATED']);
+      await createExchange(process.env['RABBIT_PRODUCT_PROXY_EXCHANGE_PRODUCT_CREATED']);
+      await createExchange(process.env['RABBIT_PRODUCT_PROXY_EXCHANGE_PRODUCT_DELETED']);
+
+      await createExchange(process.env['RABBIT_PRODUCT_PROXY_EXCHANGE_STOCK_PRODUCT_CREATED']);
+      await createExchange(process.env['RABBIT_PRODUCT_PROXY_EXCHANGE_STOCK_PRODUCT_UPDATED']);
+      await createExchange(process.env['RABBIT_PRODUCT_PROXY_EXCHANGE_STOCK_PRODUCT_DELETED']);
+    });
+  });
+
+  const httpServer = http.createServer(appServer.callback());
 
   initRouter(routes);
 
