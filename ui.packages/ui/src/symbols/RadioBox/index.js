@@ -2,7 +2,6 @@
 import types from 'prop-types';
 import React, { PureComponent } from 'react';
 
-import cn from 'classnames';
 import styles from './default.module.scss';
 
 
@@ -39,7 +38,7 @@ class Component extends PureComponent {
   render() {
     const { children, value } = this.props;
     return (
-      <div className={styles['wrapper']}>
+      <div className={styles['container']}>
         { React.Children.map(children, (child) => React.cloneElement(child, { value })) }
       </div>
     );

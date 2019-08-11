@@ -42,7 +42,8 @@ class Component extends PureComponent {
 
   render() {
     const { className, disabled, mode, label, name, value, children } = this.props;
-    const classNameRadio = cn(className, styles['radio'], {
+    const classNameWrapper = cn(className, styles['wrapper']);
+    const classNameRadio = cn(styles['radio'], {
       [styles['radio--primary']]: mode === PRIMARY_MODE,
       [styles['radio--success']]: mode === SUCCESS_MODE,
       [styles['radio--info']]: mode === INFO_MODE,
@@ -50,18 +51,20 @@ class Component extends PureComponent {
       [styles['radio--warning']]: mode === WARNING_MODE,
       [styles['radio--disabled']]: disabled,
     });
+    const isSelected = (name === value);
     return children
       ? (
-          React.Children.map(children, child =>
-            React.cloneElement(child, {
+          React.Children.map(children, child => {
+            return React.cloneElement(child, {
               selected: name === value,
               onClick: this._handleChange.bind(this, name)
-            }))
+            })
+          })
         )
       : (
-          <span className={styles['wrapper']} onClick={this._handleChange.bind(this)}>
+          <span className={classNameWrapper} onClick={this._handleChange.bind(this)}>
             <span className={classNameRadio}>
-              {(name === value) && <span className={cn(styles['radio__marker'])} />}
+              {isSelected && <span className={cn(styles['radio__marker'])} />}
             </span>
             {label && <label className={styles['label']}>{ label }</label>}
           </span>

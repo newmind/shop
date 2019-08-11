@@ -1,13 +1,13 @@
 
 import React, { PureComponent } from 'react';
 
-import { Col, InputField, Row } from "@ui.packages/ui";
+import { Container, Col, InputField, Row } from "@ui.packages/ui";
 
 
 class Component extends PureComponent {
   render() {
     return (
-      <div>
+      <Container>
         <Row>
           <Col>
             <InputField label="Имя" name="name" />
@@ -24,7 +24,7 @@ class Component extends PureComponent {
             <InputField label="E-Mail" name="email" />
           </Col>
         </Row>
-      </div>
+      </Container>
     );
   }
 }

@@ -6,31 +6,13 @@
 
   display: flex;
   flex: 1 0 auto;
-  flex-direction: row;
-  border: 1px solid $light-gray-color;
-  border-radius: 4px;
-  overflow: hidden;
-  transition: border 400ms;
-
-  //&:hover {
-  //
-  //  border-color: $gray-color;
-  //}
-
-  & + & {
-
-    margin: 20px 0 0;
-  }
-
-  &--with-label {
-    .input {
-      padding: 8px 10px 10px;
-    }
-  }
+  flex-direction: column;
 
   &--info {
 
-    border-color: $info-color;
+    .container {
+      border-color: $info-color;
+    }
 
     .label,
     .input,
@@ -41,7 +23,9 @@
 
   &--primary {
 
-    border-color: $primary-color;
+    .container {
+      border-color: $primary-color;
+    }
 
     .label,
     .input,
@@ -52,7 +36,9 @@
 
   &--success {
 
-    border-color: $success-color;
+    .container {
+      border-color: $success-color;
+    }
 
     .label,
     .input,
@@ -63,7 +49,9 @@
 
   &--warning {
 
-    border-color: $warning-color;
+    .container {
+      border-color: $warning-color;
+    }
 
     .label,
     .input,
@@ -74,7 +62,9 @@
 
   &--danger {
 
-    border-color: $danger-color;
+    .container {
+      border-color: $danger-color;
+    }
 
     .label,
     .input,
@@ -103,23 +93,21 @@
 .label {
 
   display: block;
-  font: 10px 'Helvetica Neue',sans-serif;
-  font-weight: bold;
-  color: $dark-color;
-  padding: 8px 10px 0 10px;
-  letter-spacing: 1px;
+  font-size: 14px;
+  color: #222;
+  margin: 0 0 8px 1px;
+  transition: color 400ms;
 }
 
 .textarea {
 
   display: block;
-  padding: 6px 10px 6px;
+  padding: 10px 0 8px 10px;
   color: #222;
   font: 14px 'Helvetica Neue',sans-serif;
   outline: none;
   width: 100%;
   height: 150px;
-  min-height: 150px;
   box-sizing: border-box;
   border: none;
   letter-spacing: .5px;
@@ -138,6 +126,10 @@
   display: flex;
   flex: 1 0 auto;
   flex-direction: column;
+  border: 1px solid $light-gray-color;
+  border-radius: 3px;
+  overflow: hidden;
+  transition: border 400ms;
 }
 
 .controls {

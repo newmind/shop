@@ -14,7 +14,7 @@ class Component extends PureComponent {
   render() {
     return (
       <Container>
-        <Row>
+        <Row className={styles['block']}>
           <Col>
             <h2 className={styles['block__header']}>Покупатель</h2>
             <div className={styles['block__content']}>
@@ -22,7 +22,7 @@ class Component extends PureComponent {
             </div>
           </Col>
         </Row>
-        <Row>
+        <Row className={styles['block']}>
           <Col>
             <h2 className={styles['block__header']}>Доставка</h2>
             <div className={styles['block__content']}>
@@ -30,7 +30,7 @@ class Component extends PureComponent {
             </div>
           </Col>
         </Row>
-        <Row>
+        <Row className={styles['block']}>
           <Col>
             <h2 className={styles['block__header']}>Способ оплаты</h2>
             <div className={styles['block__content']}>
@@ -38,7 +38,7 @@ class Component extends PureComponent {
             </div>
           </Col>
         </Row>
-        <Row>
+        <Row className={styles['block']}>
           <Col>
             <p>Нажимая на кнопку ”Оформить заказ”, Вы подтверждаете согласие на обработку Персональных данных.</p>
             <CheckBoxField name="news" label="Я хочу быть в курсе новостей и акций по электронной почте" />

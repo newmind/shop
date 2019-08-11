@@ -35,6 +35,56 @@ class Component extends PureComponent {
     disabled: false,
   };
 
+  messageRef = React.createRef();
+  containerRef = React.createRef();
+
+  constructor(props) {
+    super(props);
+
+    this._scrollEvent = this._scrollEvent.bind(this);
+    this._resizeEvent = this._resizeEvent.bind(this);
+  }
+
+  _scrollEvent() {
+    this._calculateTooltipPosition();
+  }
+
+  _resizeEvent() {
+    this._calculateTooltipPosition();
+  }
+
+  _calculateTooltipPosition() {
+
+    const { message } = this.props;
+    const {current: containerElement} = this.containerRef;
+    const {current: messageElement} = this.messageRef;
+
+    if (message) {
+
+      const containerRect = containerElement.getBoundingClientRect();
+      const messageRect = messageElement.getBoundingClientRect();
+
+      messageElement.style['top'] = containerRect['top'] - ((messageRect['height'] - containerRect['height']) / 2) + 'px';
+      messageElement.style['left'] = containerRect['right'] + 8 + 'px';
+    }
+  }
+
+  componentDidMount() {
+
+    document.querySelector('#root').addEventListener('scroll', this._resizeEvent);
+    window.addEventListener('resize', this._scrollEvent);
+  }
+
+  componentDidUpdate(prevProps, prevState, snapshot) {
+    this._calculateTooltipPosition();
+  }
+
+  componentWillUnmount() {
+
+    document.querySelector('#root').removeEventListener('scroll', this._resizeEvent);
+    window.removeEventListener('resize', this._scrollEvent);
+  }
+
   render() {
     const { className, disabled, mode, label, message, ...props } = this.props;
     const classNameInputWrapper = cn(className, styles['wrapper'], {
@@ -48,17 +98,17 @@ class Component extends PureComponent {
     });
     return (
       <div className={classNameInputWrapper}>
-        <div className={styles['container']}>
-          {label && (
-            <p className={styles['label']}>{ label }</p>
-          )}
-          <textarea className={styles['textarea']} disabled={disabled}  {...props} />
-        </div>
-        { ! disabled && message && (
-          <div className={styles['controls']}>
-            <span className={cn(styles['info__icon'], 'fas fa-exclamation-circle')} />
-          </div>
+        {label && (
+          <p className={styles['label']}>{ label }</p>
         )}
+        <div ref={this.containerRef} className={styles['container']}>
+          <textarea className={styles['textarea']} disabled={disabled}  {...props} />
+          { ! disabled && message && (
+            <span ref={this.messageRef} className={styles['tooltip']}>
+              <span className={styles['tooltip__message']}>{ message }</span>
+            </span>
+          )}
+        </div>
       </div>
     );
   }

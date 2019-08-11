@@ -35,13 +35,18 @@ class Component extends PureComponent {
   }
 
   render() {
-    const { inProcess, isValid, isPristine, initialValues, stock, currencies, categories, products, disabled, onSubmit } = this.props;
-    const filteredProducts = products.filter(product => ! stock.some(item => item['product']['id'] === product['id']));
-
+    const { inProcess, isValid, isPristine, initialValues, currencies, categories, products, disabled, onSubmit } = this.props;
     return (
       <div className={styles['form']}>
         <div className={styles['content']}>
-          <ProductForm initialValues={initialValues} categories={categories} currencies={currencies} products={filteredProducts} disable={ ! isValid || isPristine || inProcess || disabled} onSubmit={onSubmit} />
+          <ProductForm
+            initialValues={initialValues}
+            categories={categories}
+            currencies={currencies}
+            products={products}
+            disable={ ! isValid || isPristine || inProcess || disabled}
+            onSubmit={onSubmit}
+          />
         </div>
         <div className={styles['controls']}>
           <Button mode="success" disabled={ ! isValid || isPristine || inProcess || disabled} onClick={this._handleSubmit.bind(this)}>Сохранить</Button>
