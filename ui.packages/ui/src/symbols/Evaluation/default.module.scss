@@ -9,7 +9,7 @@
   &__star {
 
     display: inline-block;
-    font-size: 12px;
+    font-size: 16px;
     color: $gray-color;
     transition: color 400ms;
 
@@ -22,8 +22,15 @@
       margin: 0 0 0 4px;
     }
   }
+}
 
-  &--info &__star {
+.wrapper {
+
+  display: flex;
+  flex: 1 0 auto;
+  flex-direction: column;
+
+  &--info  .evaluation__star {
 
     color: $info-color;
 
@@ -32,7 +39,7 @@
     }
   }
 
-  &--primary &__star {
+  &--primary .evaluation__star {
 
     color: $primary-color;
 
@@ -41,7 +48,7 @@
     }
   }
 
-  &--success &__star {
+  &--success .evaluation__star {
 
     color: $success-color;
 
@@ -50,7 +57,7 @@
     }
   }
 
-  &--warning &__star {
+  &--warning .evaluation__star {
 
     color: $warning-color;
 
@@ -59,12 +66,64 @@
     }
   }
 
-  &--danger &__star {
+  &--danger .evaluation__star {
 
     color: $danger-color;
 
     &:hover {
       color: darken($danger-color, 10%);
     }
+  }
+
+  &--small .evaluation__star {
+
+    font-size: 14px;
+  }
+
+  &--large .evaluation__star {
+
+    font-size: 18px;
+  }
+}
+
+.label {
+
+  display: block;
+  font-size: 14px;
+  color: #222;
+  margin: 0 0 10px 1px;
+  transition: color 400ms;
+}
+
+.tooltip {
+
+  position: fixed;
+  padding: 10px 16px;
+  display: block;
+  background: $danger-color;
+  border-radius: 4px;
+
+  &:before {
+
+    position: absolute;
+    right: 100%;
+    top: 50%;
+    display: inline-block;
+    margin: -7px 0 0;
+    width: 0;
+    height: 0;
+    border: 6px solid transparent;
+    border-left: none;
+    border-right-color: $danger-color;
+    content: '';
+  }
+
+  &__message {
+
+    display: inline-block;
+    font: 13px 'Helvetica Neue',sans-serif;
+    color: $whitesmoke-color;
+    letter-spacing: .5px;
+    font-weight: bold;
   }
 }

@@ -8,28 +8,16 @@
   padding: 40px 20px 120px;
 }
 
-.block {
+.controls {
+
+  margin-top: 80px;
+  text-align: right;
+}
+
+.message {
 
   display: block;
-
-  & + & {
-
-    margin: 60px 0 0;
-  }
-
-  &__header {
-
-    display: block;
-    border-bottom: 2px solid $dark-color;
-    font-size: 20px;
-    text-transform: uppercase;
-    color: $dark-color;
-    padding: 0 0 4px;
-  }
-
-  &__content {
-
-    display: block;
-    margin: 50px 0 0;
-  }
+  font-size: 14px;
+  color: $dark-color;
+  margin: 0 0 20px;
 }

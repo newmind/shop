@@ -53,7 +53,7 @@ class Component extends PureComponent {
                 {isRecipe
                   ? hasRecipe
                     ? <p>Заполнен</p>
-                    : <Button onClick={this._handleOpenDialogRecipe.bind(this, `${field}-recipe`)}>Добавить рецепт</Button>
+                    : <Button mode="success" size="s" onClick={this._handleOpenDialogRecipe.bind(this, `${field}-recipe`)}>Добавить рецепт</Button>
                   : null}
               </div>
             </td>

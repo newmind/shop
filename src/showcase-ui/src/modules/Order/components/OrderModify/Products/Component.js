@@ -11,8 +11,6 @@ import cn from 'classnames';
 import styles from './default.module.scss';
 
 
-
-
 class Component extends PureComponent {
 
   _calculateFullAmount() {

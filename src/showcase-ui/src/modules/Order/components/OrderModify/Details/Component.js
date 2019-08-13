@@ -1,7 +1,7 @@
 
 import React, { PureComponent } from 'react';
 
-import { Container, Row, Col, CheckBoxField } from '@ui.packages/ui';
+import { Container, Row, Col } from '@ui.packages/ui';
 
 import Customer from './Customer';
 import Delivery from './Delivery';
@@ -36,12 +36,6 @@ class Component extends PureComponent {
             <div className={styles['block__content']}>
               <Pay />
             </div>
-          </Col>
-        </Row>
-        <Row className={styles['block']}>
-          <Col>
-            <p>Нажимая на кнопку ”Оформить заказ”, Вы подтверждаете согласие на обработку Персональных данных.</p>
-            <CheckBoxField name="news" label="Я хочу быть в курсе новостей и акций по электронной почте" />
           </Col>
         </Row>
       </Container>

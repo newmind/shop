@@ -25,7 +25,7 @@ class Component extends PureComponent {
           <div key={index} className={styles['comment']}>
             <div className={styles['comment__header']}>
               <div className={styles['comment__evaluation']}>
-                <Evaluation mode="info" value={comment['evaluation']} />
+                <Evaluation mode="info" size="s" value={comment['evaluation']} />
               </div>
               <div className={styles['comment__wrapper']}>
                 <span className={styles['comment__person']}>{ comment['person'] }</span>

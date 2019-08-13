@@ -17,6 +17,7 @@ class Component extends PureComponent {
     className: types.string,
     type: types.oneOf(['button', 'submit']),
     mode: types.oneOf(['info', 'primary', 'danger', 'warning', 'success', 'default']),
+    size: types.oneOf(['s', 'm', 'l']),
     caption: types.string,
     children: types.any,
     disabled: types.bool,
@@ -37,7 +38,7 @@ class Component extends PureComponent {
   }
 
   render() {
-    const { type, className, caption, children, disabled, mode } = this.props;
+    const { type, className, caption, children, disabled, mode, size } = this.props;
     const classNameButton = cn(className, styles['button'], {
       [styles['button--primary']]: mode === PRIMARY_MODE,
       [styles['button--success']]: mode === SUCCESS_MODE,
@@ -45,6 +46,9 @@ class Component extends PureComponent {
       [styles['button--danger']]: mode === DANGER_MODE,
       [styles['button--warning']]: mode === WARNING_MODE,
       [styles['button--disabled']]: disabled,
+    }, {
+      [styles['button--small']]: size === 's',
+      [styles['button--large']]: size === 'l',
     });
     return (
       <button type={type} className={classNameButton} onClick={this._handleClick.bind(this)} disabled={disabled}>

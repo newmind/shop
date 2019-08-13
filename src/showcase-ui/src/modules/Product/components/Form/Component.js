@@ -22,12 +22,12 @@ class Component extends PureComponent {
         <Container>
           <Row>
             <Col>
-              <EvaluationField name="evaluation" mode="info" />
+              <EvaluationField label="Оценка" name="evaluation" size="l" mode="info" />
             </Col>
           </Row>
           <Row>
             <Col>
-              <InputField label="Представтесь" name="person" />
+              <InputField label="Представьтесь" name="person" />
             </Col>
           </Row>
           <Row>
@@ -36,7 +36,7 @@ class Component extends PureComponent {
             </Col>
           </Row>
           <Row>
-            <Col>
+            <Col className={styles['controls']}>
               <Button mode="success" disabled={ ! valid || pristine } type="submit">Отправить</Button>
             </Col>
           </Row>
