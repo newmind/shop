@@ -36,7 +36,7 @@ class Component extends PureComponent {
     return fields.map((field, index) => {
       const product = fields.get(index);
       const isRecipe = product['goal'] === 'on-prescription';
-      const hasRecipe = !! Object.keys(product['recipe']).length;
+      const hasRecipe = !! Object.keys(product['recipe'] || {}).length;
       return (
         <tbody key={index} className={styles['table__body']}>
           <tr className={styles['table__line']}>
