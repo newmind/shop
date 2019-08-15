@@ -33,3 +33,31 @@
     margin: 50px 0 0;
   }
 }
+
+.information {
+
+  margin: 30px 0 0;
+}
+
+.paragraph {
+
+  display: block;
+  font-size: 14px;
+  margin: 0 0 20px;
+}
+
+.list {
+
+  display: block;
+
+  &__item {
+
+    display: block;
+    font-size: 14px;
+
+    & + & {
+
+      margin: 10px 0 0;
+    }
+  }
+}

@@ -30,7 +30,7 @@ class Component extends PureComponent {
               <span className={styles['table__header']}>{productsCount} {nounDeclension(productsCount, ['Товар', 'Товара', 'Товаров'])}</span>
             </th>
             <th className={cn(styles['table__col'], styles['recipe'])}>
-              <span className={styles['table__header']}>Рецепт</span>
+              <span className={styles['table__header']}>Опции</span>
             </th>
             <th className={cn(styles['table__col'], styles['amount'])}>
               <span className={styles['table__header']}>Цена</span>
