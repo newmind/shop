@@ -5,8 +5,8 @@
   "scripts": {
     "build": "react-scripts build",
     "dialog:build": "cd ././../../ui.packages/dialog/ && yarn run build",
-    "hocs:build": "cd ././../../ui.packages/hocs/ && yarn run build",
     "eject": "react-scripts eject",
+    "hocs:build": "cd ././../../ui.packages/hocs/ && yarn run build",
     "notification:build": "cd ././../../ui.packages/notifications/ && yarn run build",
     "start": "react-scripts start",
     "tabs:build": "cd ././../../ui.packages/tabs/ && yarn run build",
@@ -37,7 +37,7 @@
     "react-router-dom": "5.0.1",
     "react-router-redux": "^4.0.8",
     "react-scripts": "^3.1.1",
-    "redux": "^4.0.1",
+    "redux": "4.0.4",
     "redux-cookie": "^0.5.9",
     "redux-devtools-extension": "^2.13.8",
     "redux-form": "^8.1.0",
