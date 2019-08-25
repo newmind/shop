@@ -19,8 +19,8 @@
   &__header {
 
     display: block;
-    font: 16px "Opinion Pro";
-    font-weight: bold;
+    font-size: 16px;
+    letter-spacing: .5px;
     border-bottom: 1px solid $light-gray-color;
     padding: 0 0 4px 0;
     color: rgba($dark-color, .4);
