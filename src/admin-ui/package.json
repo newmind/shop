@@ -5,6 +5,7 @@
   "scripts": {
     "build": "react-scripts build",
     "dialog:build": "cd ././../../ui.packages/dialog/ && yarn run build",
+    "hocs:build": "cd ././../../ui.packages/hocs/ && yarn run build",
     "eject": "react-scripts eject",
     "notification:build": "cd ././../../ui.packages/notifications/ && yarn run build",
     "start": "react-scripts start",

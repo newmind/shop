@@ -22,6 +22,7 @@ WORKDIR /app/src/admin-ui
 
 RUN ["yarn", "run", "ui:build"]
 RUN ["yarn", "run", "tabs:build"]
+RUN ["yarn", "run", "hocs:build"]
 RUN ["yarn", "run", "dialog:build"]
 RUN ["yarn", "run", "notification:build"]
 
