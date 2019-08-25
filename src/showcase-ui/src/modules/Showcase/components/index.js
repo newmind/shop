@@ -1,6 +1,6 @@
 
 import { bindActionCreators } from 'redux';
-import PageHOC from '../../_bin/PageHOC';
+import PageHOC from '@ui.packages/hocs';
 import { push } from 'react-router-redux';
 import { queryToObject } from '@ui.packages/utils';
 import { openDialog, closeDialog } from '@ui.packages/dialog';
@@ -52,7 +52,8 @@ export default PageHOC({
     const params = new URLSearchParams(search);
     const searchParams = {};
 
-    for (let p of params) {
+    let p;
+    for (p of params) {
       searchParams[p[0]] = p[1];
     }
 
