@@ -19,12 +19,6 @@ export const injectAsyncReducer = (name, asyncReducer) => {
   store.replaceReducer(createReducer(store.asyncReducers));
 };
 
-export const rejectAsyncReducer = (name) => {
-  delete store.asyncReducers[name];
-  store.dispatch({ type: RESET });
-  store.replaceReducer(createReducer(store.asyncReducers));
-};
-
 export const importReducer = async (component) => {
   const module = await import(`../components/${component}/ducks/reducer.js`);
   injectAsyncReducer(module['KEY'], module['default']);

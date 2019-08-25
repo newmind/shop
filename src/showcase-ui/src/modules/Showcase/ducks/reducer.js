@@ -47,6 +47,7 @@ export default (state = initialState, { type, payload }) => {
           pages: payload['paging']['pages'],
         },
         isInitialize: true,
+        inProcess: false,
       };
     }
 
@@ -75,7 +76,6 @@ export default (state = initialState, { type, payload }) => {
       return {
         ...state,
         items: state['items'].map(product => {
-          console.log(product['product'])
           if (product['product']['id'] === payload['id']) {
             return {
               ...product,

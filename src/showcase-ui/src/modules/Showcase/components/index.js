@@ -21,6 +21,7 @@ const mapStateToProps = (state, props) => {
   const { location: { search }} = props;
   const showcase = state['Showcase'];
   return {
+    inProcess: showcase['inProcess'],
     items: showcase['items'],
     count: showcase['count'],
     paging: showcase['paging'],
@@ -45,14 +46,19 @@ export default PageHOC({
   mapStateToProps,
   mapActionsToProps,
   onEnter: async ({ onLoading, getProducts, getDataForFilter, location: { search } }) => {
+
     document.title = `${process.env['REACT_APP_WEBSITE_NAME']} - Витрина`;
+
     const params = new URLSearchParams(search);
     const searchParams = {};
+
     for (let p of params) {
       searchParams[p[0]] = p[1];
     }
+
     await getProducts(searchParams);
     await getDataForFilter();
+
     onLoading(false);
   },
 })(Component);

@@ -1,6 +1,6 @@
 {
   "private": true,
-  "name": "@ui.packages/dialog",
+  "name": "@ui.packages/hocs",
   "version": "1.0.0",
   "module": "lib/index.js",
   "scripts": {
@@ -8,12 +8,10 @@
     "start:dev": "node_modules/.bin/cross-env NODE_ENV=development babel ./src --out-dir ./lib --copy-files --watch"
   },
   "dependencies": {
-    "@ui.packages/theme": "^1.0.0",
-    "@ui.packages/ui": "^1.0.0",
-    "classnames": "^2.2.6",
     "prop-types": "^15.7.2",
     "react": "16.9.0",
-    "redux": "^4.0.1"
+    "react-redux": "^7.1.0",
+    "react-router-dom": "^4.3.1"
   },
   "devDependencies": {
     "@babel/cli": "^7.4.3",

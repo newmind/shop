@@ -1,12 +1,12 @@
 
 import {
-  APPLICATION_CHANGE_STATE,
+  CHANGE_STATE,
 } from './types';
 
 
 export const changeState = state => {
   return{
-    type: APPLICATION_CHANGE_STATE,
+    type: CHANGE_STATE,
     payload: state,
   }
 };

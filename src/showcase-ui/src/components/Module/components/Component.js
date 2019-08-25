@@ -2,14 +2,14 @@
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 
-import { injectAsyncReducer } from '../../bin/createStore';
+import { injectAsyncReducer } from '../../../bin/createStore';
 
-import Page from '../Page/components'
+import Page from '../../Page/components'
 
-import None from '../wrappers/None';
-import Empty from '../wrappers/Empty';
-import Navigate from '../wrappers/Navigate';
-import Composite from '../wrappers/Composite';
+import None from '../../wrappers/None';
+import Empty from '../../wrappers/Empty';
+import Navigate from '../../wrappers/Navigate';
+import Composite from '../../wrappers/Composite';
 
 
 const createWrapper = type => props => {
@@ -35,36 +35,47 @@ class ModuleComponent extends Component {
     removable: false,
   };
 
-  state = {
-    Module: null,
-  };
+  constructor(...props) {
+    super(...props);
+
+    this.state = {
+      Module: null,
+    };
+  }
 
   async componentDidMount() {
-    const { module } = this.props;
-    const { default: moduleReducer } = await import(`../../modules/${module}/ducks/reducer.js`);
-    const { default: Module } = await import(`../../modules/${module}/components`);
+    const { module, setProcess } = this.props;
+
+    setProcess();
+
+    const { default: moduleReducer } = await import(`../../../modules/${module}/ducks/reducer.js`);
+    const { default: Module } = await import(`../../../modules/${module}/components`);
+
     injectAsyncReducer(module, moduleReducer);
+
     this.setState({ Module });
   }
 
-  componentWillUnmount() {
-    // const { removable, module } = this.props;
-    // if (removable) {
-    //   rejectAsyncReducer(module);
-    // }
+  componentWillUpdate(nextProps, nextState, nextContext) {
+    const { Module } = this.state;
+    const { inProcess, setProcess } = this.props;
+    if (Module && inProcess === nextProps['inProcess']) {
+      setProcess();
+    }
   }
 
   shouldComponentUpdate(nextProps, nextState, nextContext) {
-    return this.state['Module'] !== nextState['Module'];
+    const { Module } = this.state;
+    return Module !== nextState['Module'];
   }
 
   render() {
-    const { navigate, wrapper, location, dispatch } = this.props;
+    const { navigate, wrapper, location, dispatch, setProcess } = this.props;
     const { Module } = this.state;
     const Wrapper = createWrapper(wrapper);
     return (
       <Wrapper navigate={navigate} location={location}>
-        <Page>
+        <Page setProcess={setProcess}>
           { Module && <Module dispatch={dispatch} /> }
         </Page>
       </Wrapper>

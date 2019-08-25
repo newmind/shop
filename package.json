@@ -2,7 +2,8 @@
   "name": "root",
   "private": true,
   "devDependencies": {
-    "lerna": "^3.13.0"
+    "lerna": "^3.13.0",
+    "lerna-update-wizard": "^0.16.0"
   },
   "workspaces": [
     "sys.packages/*",

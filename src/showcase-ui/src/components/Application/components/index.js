@@ -10,7 +10,7 @@ import { checkAuthState } from '../ducks/commands';
 
 const mapStateToProps = (store) => {
   return {
-    isInitializing: store['admin-ui-gw']['isInitializing'],
+    isInitializing: store['application']['isInitializing'],
   };
 };
 

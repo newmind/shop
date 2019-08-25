@@ -1,5 +1,6 @@
 
 import React, { PureComponent } from 'react';
+import { withRouter } from 'react-router-dom';
 
 import Header from './Header';
 import Footer from './Footer';
@@ -42,4 +43,4 @@ class Component extends PureComponent {
   }
 }
 
-export default Component;
+export default withRouter(Component);

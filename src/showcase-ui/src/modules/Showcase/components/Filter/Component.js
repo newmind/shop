@@ -9,17 +9,19 @@ import styles from './default.module.scss';
 
 class Component extends PureComponent {
   static propTypes = {
+    inProcess: types.bool,
     categories: types.array,
     brands: types.array,
   };
 
   static defaultProps = {
+    inProcess: false,
     categories: [],
     brands: [],
   };
 
   render() {
-    const { handleSubmit, categories, brands, isValid } = this.props;
+    const { handleSubmit, categories, brands, isValid, inProcess } = this.props;
     return (
       <form onSubmit={handleSubmit} className={styles['wrapper']}>
         <div className={styles['fields']}>
@@ -31,6 +33,7 @@ class Component extends PureComponent {
                 options={categories}
                 optionValue="name"
                 simple={true}
+                disabled={inProcess}
               />
             </Col>
             <Col>
@@ -47,15 +50,16 @@ class Component extends PureComponent {
                     <span className={styles['option__count']}>({option['count']})</span>
                   </span>
                 )}
+                disabled={inProcess}
               />
             </Col>
             <Col className={styles['amounts']}>
               <div className={styles['amount']}>
                 <span className={styles['amount__label']}>Сумма</span>
                 <span className={styles['amount__wrapper']}>
-                    <InputField className={styles['amount__input']} name="amountFrom" />
+                    <InputField className={styles['amount__input']} name="amountFrom" disabled={inProcess} />
                     <span className={styles['amount__delimiter']}>-</span>
-                    <InputField className={styles['amount__input']} name="amountTo" />
+                    <InputField className={styles['amount__input']} name="amountTo" disabled={inProcess} />
                   </span>
               </div>
             </Col>

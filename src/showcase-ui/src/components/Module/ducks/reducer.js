@@ -1,20 +1,21 @@
 
-import { CHANGE_STATE } from './types';
+import {
+  SET_LOADING_PAGE,
+} from './types';
 
 const initialState = {
-  isInitializing: true,
+  inProcess: true,
 };
 
-export const KEY = 'application';
+export const KEY = 'module';
 
 
 export default (state = initialState, { type, payload }) => {
-
   switch (type) {
-    case CHANGE_STATE: {
+    case SET_LOADING_PAGE: {
       return {
         ...state,
-        isInitializing: payload,
+        inProcess: payload,
       };
     }
     default: return state;

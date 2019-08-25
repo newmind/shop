@@ -1,4 +1,2 @@
 
-export const APPLICATION_CHANGE_STATE = '@@APPLICATION_CHANGE_STATE';
-
-export const SET_ACTIVE_PAGE = 'SET_ACTIVE_PAGE';
+export const CHANGE_STATE = '@application/CHANGE_STATE';

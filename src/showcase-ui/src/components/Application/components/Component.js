@@ -5,7 +5,7 @@ import PropTypes from 'prop-types';
 import { Route, Switch } from "react-router";
 
 import Loader from '../../Loader';
-import Module from '../../Module';
+import Module from '../../Module/components';
 
 import styles from './default.module.scss';
 
@@ -51,12 +51,6 @@ class Component extends PureComponent {
     navigate: [],
     isInitializing: true,
   };
-
-  componentWillMount() {
-    // if (!this.props.authenticated) {
-    //   this.props.history.push('/sign-in');
-    // }
-  }
 
   componentDidMount() {
     const { checkAuthState } = this.props;

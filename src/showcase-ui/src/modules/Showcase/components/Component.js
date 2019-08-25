@@ -4,10 +4,7 @@ import React, { PureComponent } from 'react';
 import { reduceToArray, objectToQuery } from '@ui.packages/utils';
 
 import Product from './Product';
-// import Form from './Form';
-
 import Filter from './Filter';
-// import { Tabs } from '@ui.packages/dialog';
 
 import styles from './default.module.scss';
 
@@ -60,13 +57,13 @@ class Component extends PureComponent {
   }
 
   render() {
-    const { items, count, initialValues} = this.props;
+    const { items, count, initialValues, inProcess } = this.props;
     const products = reduceToArray(items, SIZE);
 
     return (
       <section className={styles['wrapper']}>
         <aside className={styles['filters']}>
-          <Filter initialValues={initialValues} onSubmit={this._handleFilter.bind(this)} />
+          <Filter inProcess={inProcess} initialValues={initialValues} onSubmit={this._handleFilter.bind(this)} />
         </aside>
         <section className={styles['products']}>
           {products.map((lineWithProducts, index) => {

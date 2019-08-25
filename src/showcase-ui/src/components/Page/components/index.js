@@ -1,18 +1,11 @@
 
 import { connect } from 'react-redux';
-import { bindActionCreators } from 'redux';
 
 import Component from './Component';
 
-import { setPage } from '../ducks/commands';
 
+const mapStoreToAction = store => ({});
 
-const mapStoreToAction = store => ({
-  inProcess: store['page']['inProcess'],
-});
-
-const mapActionsToProps = dispatch => ({
-  setPage: bindActionCreators(setPage, dispatch),
-});
+const mapActionsToProps = dispatch => ({});
 
 export default connect(mapStoreToAction, mapActionsToProps)(Component);
