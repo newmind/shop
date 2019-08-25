@@ -3,9 +3,9 @@
     src:
             local('Opinion Pro Light'),
             local('OpinionPro-Light'),
-            url('./fonts/opinion-pro/Opinionprolight.woff2') format('woff2'),
-            url('./fonts/opinion-pro/Opinionprolight.woff') format('woff'),
-            url('./fonts/opinion-pro/Opinionprolight.ttf') format('truetype');
+            url('/Opinionprolight.woff2') format('woff2'),
+            url('/Opinionprolight.woff') format('woff'),
+            url('/Opinionprolight.ttf') format('truetype');
     font-weight: 300;
     font-style: normal;
 }
@@ -15,9 +15,9 @@
     src:
             local('Opinion Pro Light Italic'),
             local('OpinionPro-LightItalic'),
-            url('./fonts/opinion-pro/Opinionprolightitalic.woff2') format('woff2'),
-            url('./fonts/opinion-pro/Opinionprolightitalic.woff') format('woff'),
-            url('./fonts/opinion-pro/Opinionprolightitalic.ttf') format('truetype');
+            url('/Opinionprolightitalic.woff2') format('woff2'),
+            url('/Opinionprolightitalic.woff') format('woff'),
+            url('/Opinionprolightitalic.ttf') format('truetype');
     font-weight: 300;
     font-style: italic;
 }
