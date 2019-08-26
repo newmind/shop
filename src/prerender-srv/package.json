@@ -4,7 +4,8 @@
   "license": "MIT",
   "dependencies": {
     "chrome-launcher": "^0.11.1",
-    "chrome-remote-interface": "^0.27.2"
+    "chrome-remote-interface": "^0.27.2",
+    "koa": "^2.8.1"
   },
   "scripts": {
     "start": "node -r dotenv/config --experimental-modules ./src/index.mjs dotenv_config_path=./.env.production",
