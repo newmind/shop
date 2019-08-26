@@ -1,7 +1,11 @@
 {
   "name": "admin-gw",
-  "version": "1.0.0",
   "license": "MIT",
+  "version": "1.0.0",
+  "scripts": {
+    "start": "node -r dotenv/config --experimental-modules ./src/index.mjs dotenv_config_path=./.env.production",
+    "start:dev": "nodemon --exec node -r dotenv/config --experimental-modules ./src/index.mjs dotenv_config_path=./.env.development"
+  },
   "dependencies": {
     "@sys.packages/db": "^1.0.0",
     "@sys.packages/rabbit": "^1.0.0",
@@ -15,11 +19,7 @@
     "koa-cookie": "^1.0.0",
     "koa-cors2": "^0.0.1"
   },
-  "scripts": {
-    "start": "node -r dotenv/config --experimental-modules ./src/index.mjs dotenv_config_path=./.env.production",
-    "start:dev": "nodemon --exec node -r dotenv/config --experimental-modules ./src/index.mjs dotenv_config_path=./.env.development"
-  },
   "devDependencies": {
-    "nodemon": "^1.18.10"
+    "nodemon": "1.19.1"
   }
 }
