@@ -1,7 +1,8 @@
 
 import { bindActionCreators } from 'redux';
-import PageHOC from '@ui.packages/hocs';
 import { push } from 'react-router-redux';
+
+import PageHOC from '@ui.packages/hocs';
 import { queryToObject } from '@ui.packages/utils';
 import { openDialog, closeDialog } from '@ui.packages/dialog';
 

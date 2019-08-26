@@ -1,5 +1,5 @@
 
-import PageHOC from '../../_bin/PageHOC';
+import PageHOC from '@ui.packages/hocs';
 
 import Component from './Component';
 
@@ -11,7 +11,7 @@ const mapStateToProps = state => {
   };
 };
 
-const mapActionsToProps = (dispatch) => ({});
+const mapActionsToProps = () => ({});
 
 
 export default PageHOC({

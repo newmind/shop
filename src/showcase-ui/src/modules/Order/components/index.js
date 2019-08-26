@@ -1,8 +1,8 @@
 
-import PageHOC from '../../_bin/PageHOC';
-
 import { bindActionCreators } from 'redux';
 import { submit, isValid } from 'redux-form';
+
+import PageHOC from '@ui.packages/hocs';
 
 import Component from './Component';
 
