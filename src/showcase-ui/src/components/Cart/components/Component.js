@@ -32,15 +32,13 @@ class Component extends PureComponent {
     super(props);
 
     this._onClick = this._onClick.bind(this);
-  }
 
-  componentWillMount() {
-    const { getCartFromLocalStorage } = this.props;
-    getCartFromLocalStorage();
+    document.addEventListener('click', this._onClick, true);
   }
 
   componentDidMount() {
-    document.addEventListener('click', this._onClick, true);
+    const { getCartFromLocalStorage } = this.props;
+    getCartFromLocalStorage();
   }
 
   componentWillUnmount() {

@@ -56,10 +56,10 @@ class ModuleComponent extends Component {
     this.setState({ Module });
   }
 
-  componentWillUpdate(nextProps, nextState, nextContext) {
+  componentDidUpdate(prevProps, prevState, nextContext) {
     const { Module } = this.state;
-    const { inProcess, setProcess } = this.props;
-    if (Module && inProcess === nextProps['inProcess']) {
+    const { inProcess, setProcess } = prevProps;
+    if (Module && inProcess === this.props['inProcess']) {
       setProcess();
     }
   }

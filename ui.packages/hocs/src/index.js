@@ -12,7 +12,7 @@ class Wrapper extends Component {
     onDestroy: PropTypes.func,
   };
 
-  componentWillMount() {
+  componentDidMount() {
     const { onEnter, children } = this.props;
     onEnter && onEnter(children.props);
   }
@@ -20,10 +20,10 @@ class Wrapper extends Component {
     const { onDestroy, children } = this.props;
     onDestroy && onDestroy(children.props);
   }
-  componentWillReceiveProps(nextProps) {
-    const { onChange, children } = this.props;
+  componentDidUpdate(prevProps) {
+    const { onChange, children } = prevProps;
     const { location } = children.props;
-    if (nextProps.children.props.location.key !== location.key) {
+    if (this.props.children.props.location.key !== location.key) {
       onChange && onChange(children.props);
     }
   }

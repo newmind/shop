@@ -36,10 +36,10 @@ class Component extends PureComponent {
     createTabs(name, defaultTab);
   }
 
-  componentWillReceiveProps(nextProps, nextContext) {
-    const { name, defaultTab, setActiveTab } = this.props;
-    if (nextProps['defaultTab'] !== defaultTab) {
-      setActiveTab(name, nextProps['defaultTab']);
+  componentDidUpdate(prevProps) {
+    const { name, defaultTab, setActiveTab } = prevProps;
+    if (this.props['defaultTab'] !== defaultTab) {
+      setActiveTab(name, this.props['defaultTab']);
     }
   }
 

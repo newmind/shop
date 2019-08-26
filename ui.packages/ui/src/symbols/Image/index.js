@@ -49,12 +49,12 @@ class Component extends PureComponent {
     };
   }
 
-  componentWillReceiveProps(nextProps, nextContext) {
+  componentDidUpdate(prevProps) {
     const { current: imageElement } = this.imageRef;
-    const { src } = this.props;
+    const { src } = prevProps;
     const state = { isError: false };
 
-    if (src !== nextProps['src']) {
+    if (src !== this.props['src']) {
 
       imageElement.style['width'] = 'auto';
       imageElement.style['height'] = 'auto';
