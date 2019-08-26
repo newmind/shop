@@ -30,7 +30,7 @@
     width: 100%;
     box-sizing: border-box;
     outline: none;
-    font: 15px 'Helvetica Neue',sans-serif;
+    font-size: 15px;
     transition: border-color 400ms;
 
     &:focus {
@@ -45,7 +45,7 @@
     bottom: 0;
     display: inline-block;
     color: #d50000;
-    font: 12px 'Helvetica Neue',sans-serif;
+    font-size: 12px;
     font-weight: bold;
 
     &:before {

@@ -9,6 +9,7 @@ import { Button, Radio, RadioBoxField } from "@ui.packages/ui";
 import Product from "./Product";
 import RecipeModify from "./RecipeModify";
 
+import cn from 'classnames';
 import styles from "./default.module.scss";
 
 
@@ -51,9 +52,13 @@ class Component extends PureComponent {
                   <Radio className={styles['recipe__type']} name="on-prescription" label="По рецепту" />
                 </RadioBoxField>
                 {isRecipe
-                  ? hasRecipe
-                    ? <p>Заполнен</p>
-                    : <Button mode="success" size="s" onClick={this._handleOpenDialogRecipe.bind(this, `${field}-recipe`)}>Добавить рецепт</Button>
+                  ? (<div className={styles['recipe__info']}>{
+                    hasRecipe
+                      ? <p className={cn(styles['recipe__success'])}><i className='fas fa-check' /> Рецепт заполнен</p>
+                      : <Button mode="success" size="s"
+                                onClick={this._handleOpenDialogRecipe.bind(this, `${field}-recipe`)}>Добавить
+                        рецепт</Button>
+                  }</div>)
                   : null}
               </div>
             </td>

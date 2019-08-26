@@ -45,7 +45,7 @@
 
     display: inline-block;
     color: $white-color;
-    font: 13px 'Helvetica Neue',sans-serif;
+    font-size: 13px;
     transition: color 400ms;
   }
 
@@ -53,7 +53,7 @@
 
     display: block;
     color: $white-color;
-    font: 13px 'Helvetica Neue',sans-serif;
+    font-size: 13px;
     transition: color 400ms;
   }
 }

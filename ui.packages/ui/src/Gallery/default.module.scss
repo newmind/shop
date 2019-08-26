@@ -81,7 +81,7 @@
 
   &__numbers {
 
-    font: 11px "Opinion Pro";
+    font-size: 11px;
     font-weight: bold;
   }
 }
@@ -101,7 +101,7 @@
     flex-direction: column;
     background: $whitesmoke-color;
     color: $dark-color;
-    font: 13px "Opinion Pro";
+    font-size: 13px;
     z-index: 20;
     justify-content: center;
     text-align: center;

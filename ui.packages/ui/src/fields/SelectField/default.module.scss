@@ -12,7 +12,7 @@
 
     position: absolute;
     display: inline-block;
-    font: 13px 'Helvetica Neue',sans-serif;
+    font-size: 13px;
     font-weight: bold;
     margin: 0 0 0 2px;
   }
@@ -31,7 +31,7 @@
     width: 100%;
     box-sizing: border-box;
     outline: none;
-    font: 15px 'Helvetica Neue',sans-serif;
+    font-size: 15px;
     transition: border-color 400ms;
 
     &:focus {
@@ -46,7 +46,7 @@
     bottom: 0;
     display: inline-block;
     color: #d50000;
-    font: 12px 'Helvetica Neue',sans-serif;
+    font-size: 12px;
     font-weight: bold;
 
     &:before {

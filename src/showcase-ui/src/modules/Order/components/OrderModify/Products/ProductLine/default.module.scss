@@ -37,6 +37,22 @@
       margin: 4px 0 0;
     }
   }
+
+  &__info {
+
+    display: block;
+    margin: 12px 0 0;
+  }
+
+  &__success {
+
+    display: inline-block;
+    font-size: 12px;
+    padding: 8px 12px;
+    color: $success-color;
+    border: 1px solid $success-color;
+    border-radius: 4px;
+  }
 }
 
 .amount {

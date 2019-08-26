@@ -51,7 +51,7 @@
   &__amount {
 
     display: block;
-    font: 22px 'Helvetica Neue',sans-serif;
+    font-size: 22px;
     margin: 35px 0 0;
     color: $dark-color;
   }
@@ -67,7 +67,7 @@
     &__header {
 
       display: block;
-      font: 18px 'Helvetica Neue',sans-serif;
+      font-size: 18px;
       font-weight: bold;
       margin: 0 0 20px;
     }

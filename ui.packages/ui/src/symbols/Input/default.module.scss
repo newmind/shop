@@ -104,7 +104,7 @@
   display: block;
   padding: 10px 0 8px 10px;
   color: #222;
-  font: 14px 'Helvetica Neue',sans-serif;
+  font-size: 14px;
   outline: none;
   width: 100%;
   box-sizing: border-box;
@@ -169,7 +169,7 @@
   &__message {
 
     display: inline-block;
-    font: 13px 'Helvetica Neue',sans-serif;
+    font-size: 13px;
     color: $whitesmoke-color;
     letter-spacing: .5px;
     font-weight: bold;

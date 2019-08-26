@@ -140,7 +140,7 @@
   &__placeholder {
 
     display: block;
-    font: 13px 'Helvetica Neue',sans-serif;
+    font-size: 13px;
     padding: 11px 0 9px 10px;
     width: 100%;
     box-sizing: border-box;
@@ -227,7 +227,7 @@
   &__empty {
 
     display: block;
-    font: 13px 'Helvetica Neue',sans-serif;
+    font-size: 13px;
     color: $dark-color;
     padding: 11px 20px 8px 20px;
   }
@@ -241,13 +241,13 @@
 
   &:hover {
 
-    background: $light-gray-color;
+    background: rgba($info-color, .2);
   }
 
   &--selected,
   &--selected:hover {
 
-    background: $gray-color;
+    background: $info-color;
   }
 
   & + & {
@@ -258,7 +258,7 @@
   &__value {
 
     display: block;
-    font: 13px 'Helvetica Neue',sans-serif;
+    font-size: 13px;
     color: $dark-color;
   }
 }
@@ -290,7 +290,7 @@
   &__message {
 
     display: inline-block;
-    font: 13px 'Helvetica Neue',sans-serif;
+    font-size: 13px;
     color: $whitesmoke-color;
     letter-spacing: .5px;
     font-weight: bold;

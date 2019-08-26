@@ -38,7 +38,7 @@
   &__title {
 
     display: block;
-    font: 14px 'Helvetica Neue',sans-serif;
+    font-size: 14px;
     font-weight: bold;
     text-align: left;
     color: $whitesmoke-color;
@@ -70,7 +70,7 @@
   &__col {
 
     display: block;
-    font: 13px 'Helvetica Neue',sans-serif;
+    font-size: 13px;
 
     &--right { text-align: right; }
     &--center { text-align: center; }
@@ -79,7 +79,7 @@
   &__caption {
 
     text-align: center;
-    font: 13px 'Helvetica Neue',sans-serif;
+    font-size: 13px;
     color: $dark-color;
     padding: 20px;
     border: 1px solid $light-gray-color;
