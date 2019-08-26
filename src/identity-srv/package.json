@@ -1,25 +1,25 @@
 {
   "name": "identity-srv",
-  "version": "1.0.0",
   "license": "MIT",
+  "version": "1.0.0",
+  "scripts": {
+    "migrations": "node -r dotenv/config --experimental-modules ./src/migrations/index.mjs dotenv_config_path=./.env",
+    "start": "node -r dotenv/config --experimental-modules ./src/index.mjs dotenv_config_path=./.env.production",
+    "start:dev": "nodemon --exec node -r dotenv/config --experimental-modules ./src/index.mjs dotenv_config_path=./.env.development"
+  },
   "dependencies": {
     "@sys.packages/db": "^1.0.0",
     "@sys.packages/server": "^1.0.0",
     "@sys.packages/sys.utils": "^1.0.0",
     "dotenv": "^7.0.0",
     "jsonwebtoken": "^8.5.1",
-    "koa": "^2.7.0",
+    "koa": "2.8.1",
     "koa-bodyparser": "^4.2.1",
     "koa-logger": "^3.2.0",
     "koa-router": "^7.4.0",
     "pg": "^7.9.0",
     "pg-hstore": "^2.3.2",
     "sequelize": "^5.1.0"
-  },
-  "scripts": {
-    "migrations": "node -r dotenv/config --experimental-modules ./src/migrations/index.mjs dotenv_config_path=./.env",
-    "start": "node -r dotenv/config --experimental-modules ./src/index.mjs dotenv_config_path=./.env.production",
-    "start:dev": "nodemon --exec node -r dotenv/config --experimental-modules ./src/index.mjs dotenv_config_path=./.env.development"
   },
   "devDependencies": {
     "nodemon": "^1.18.10"
