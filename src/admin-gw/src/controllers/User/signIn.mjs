@@ -9,7 +9,12 @@ export default () => async (ctx) => {
     const formData = ctx.request.body;
     const { data } = await signIn(formData);
 
-    ctx.body = data;
+    ctx.cookies.set('admin', JSON.stringify(data), {
+      httpOnly: true,
+      secure: ctx.request.protocol === 'https',
+    });
+
+    ctx.body = {};
 
   } catch(error) {
 

@@ -1,5 +1,5 @@
 
-import Cookies from 'js-cookie';
+import request from '@ui.packages/request';
 import { push } from 'react-router-redux';
 
 import { sleep } from '@ui.packages/utils';
@@ -13,12 +13,6 @@ export const changeInitial = (state) => async (dispatch) => {
 };
 
 export const checkAuthState = () => async (dispatch) => {
-
-  const cookies = Cookies.getJSON('admin');
-
-  if ( ! cookies) {
-    dispatch(push('/sign-in'));
-  }
 
   await sleep(500);
 

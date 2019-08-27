@@ -35,8 +35,6 @@ export const signIn = (formData) => async dispatch => {
       }
     });
 
-    Cookies.set('admin', result);
-
     dispatch(push('/'));
     dispatch(applicationAuthRequestSuccessAction(result));
 
