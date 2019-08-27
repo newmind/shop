@@ -11,7 +11,7 @@ export default () => async (ctx) => {
 
     ctx.cookies.set('admin', JSON.stringify(data), {
       httpOnly: true,
-      secure: ctx.request.protocol === 'https',
+      secure: JSON.stringify(process.env['COOCIE_SECURE']),
     });
 
     ctx.body = {};
