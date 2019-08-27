@@ -77,25 +77,13 @@ import routes from './routes';
         try {
           const cookies = ctx.cookie;
 
-          console.log(5555, cookies);
-
-          if ( ! cookies) {
-            ctx.throw(401, 'Не авторизован');
-          }
-
-          console.log(1111, cookies);
-
           const { admin = null } = cookies;
 
           if ( ! admin) {
-            ctx.throw(500, 'Неверный объект cookie');
+            ctx.throw(401, 'Неавторизован');
           }
 
-          console.log(2222, admin);
-
           const { token = null } = JSON.parse(admin);
-
-          console.log(3333, token);
 
           if ( ! token) {
             ctx.throw(500, 'Неверное свойство cookie');
