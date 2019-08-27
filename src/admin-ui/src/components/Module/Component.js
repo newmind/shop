@@ -39,7 +39,7 @@ class ModuleComponent extends PureComponent {
     Module: null,
   };
 
-  async componentWillMount() {
+  async componentDidMount() {
     const { module } = this.props;
     const { default: moduleReducer } = await import(`../../modules/${module}/ducks/reducer.js`);
     const { default: Module } = await import(`../../modules/${module}/components`);

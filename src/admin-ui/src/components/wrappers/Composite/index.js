@@ -1,5 +1,6 @@
 
 import React, { PureComponent } from 'react';
+import { withRouter } from 'react-router-dom';
 
 import Wrapper from '../Navigate';
 import Navigation from './Navigation';
@@ -15,6 +16,7 @@ class Component extends PureComponent {
 
       if ('navigate' in item) {
         hasPath = item['navigate'].some(item => {
+
           const navPath = item['path'].replace(/^\/|\/$/, '') || '/';
           const matchPath = match['url'].replace(/^\/|\/$/, '') || '/';
           const regExp = new RegExp('^' + navPath);
@@ -40,4 +42,4 @@ class Component extends PureComponent {
   }
 }
 
-export default Component;
+export default withRouter(Component);

@@ -56,7 +56,7 @@
   &__value {
 
     display: inline-block;
-    font: 13px "Opinion Pro";
+    font-size: 13px;
     //font-weight: bold;
     margin: 0 4px 0 0;
   }
@@ -64,7 +64,7 @@
   &__currency {
 
     display: inline-block;
-    font: 13px "Opinion Pro";
+    font-size: 13px;
     //font-weight: bold;
   }
 }
@@ -83,7 +83,7 @@
   &__item {
 
     display: block;
-    font: 12px "Opinion Pro";
+    font-size: 12px;
     white-space: nowrap;
 
     & + & {

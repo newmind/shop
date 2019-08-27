@@ -39,6 +39,7 @@ const store = createStore({},
 (async () => {
 
   await importReducer('Application');
+  await importReducer('Module');
   await importReducer('Page');
 
   ReactDOM.render((

@@ -27,7 +27,7 @@
 
   &__caption {
 
-    font: 14px "Opinion Pro";
+    font-size: 14px;
   }
 
   &--active,
@@ -80,7 +80,7 @@
     display: block;
     background: $whitesmoke-color;
     border-bottom: 1px solid $light-gray-color;
-    font: 14px "Opinion Pro";
+    font-size: 14px;
     font-weight: bold;
     padding: 14px 20px 10px;
     color: $dark-color;

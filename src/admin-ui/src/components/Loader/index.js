@@ -1,8 +1,8 @@
 
 import React, { PureComponent } from 'react';
 
+import cn from 'classnames';
 import styles from './default.module.scss';
-import cn from "classnames";
 
 
 class Component extends PureComponent {

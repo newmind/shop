@@ -2,8 +2,6 @@
 import types from 'prop-types';
 import React, { PureComponent } from 'react';
 
-import { submit } from 'redux-form';
-
 import { Button } from '@ui.packages/ui';
 
 import Form from './Form';
@@ -28,8 +26,8 @@ class Component extends PureComponent {
   }
 
   _onSubmitForm() {
-    const { dispatch } = this.props;
-    dispatch(submit('sign-in'));
+    const { submit } = this.props;
+    submit('sign-in');
   }
 
   render() {

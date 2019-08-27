@@ -1,12 +1,11 @@
 
-import PropTypes from 'prop-types';
 import React, { PureComponent } from 'react';
+
+import PropTypes from 'prop-types';
 import { Route, Switch } from "react-router";
 
-import { Notifications } from '@ui.packages/notifications';
-
 import Loader from '../../Loader';
-import Module from '../../Module';
+import Module from '../../Module/components';
 
 import styles from './default.module.scss';
 
@@ -44,23 +43,18 @@ class Component extends PureComponent {
     routes: PropTypes.array,
     navigate: PropTypes.array,
     isInitializing: PropTypes.bool,
-    isAuth: PropTypes.bool,
+    authenticated: PropTypes.bool,
   };
 
   static defaultProps = {
     routes: [],
     navigate: [],
-    isInitializing: false,
-    isAuth: false,
+    isInitializing: true,
   };
 
-  componentWillMount() {
-    const { changeInitial } = this.props;
-    changeInitial(true);
-  }
-
   componentDidMount() {
-    const { checkAuthState } = this.props;
+    const { checkAuthState, changeInitial } = this.props;
+    changeInitial(true);
     checkAuthState();
   }
 
@@ -73,7 +67,6 @@ class Component extends PureComponent {
             ? <Loader />
             : <Routes {...props} />
         }
-        <Notifications />
       </div>
     );
   }

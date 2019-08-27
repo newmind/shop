@@ -1,8 +1,8 @@
 
-import PageHOC from '../../_bin/PageHOC';
+import PageHOC from '@ui.packages/hocs';
 
 import { bindActionCreators } from 'redux';
-import { isValid, isPristine } from 'redux-form';
+import { isValid, isPristine, submit } from 'redux-form';
 
 import Component from './Component';
 import { signIn, checkCookies } from '../ducks/commands';
@@ -14,6 +14,7 @@ const mapStateToProps = state => ({
 
 const mapActionsToProps = (dispatch) => {
   return {
+    submit: bindActionCreators(submit, dispatch),
     signIn: bindActionCreators(signIn, dispatch),
     checkCookies: bindActionCreators(checkCookies, dispatch),
   };
@@ -22,9 +23,9 @@ const mapActionsToProps = (dispatch) => {
 export default PageHOC({
     mapStateToProps,
     mapActionsToProps,
-    onEnter: ({ onLoading, checkCookies }) => {
+    onEnter: async ({ onLoading, checkCookies }) => {
+      await checkCookies();
       onLoading(false);
-      checkCookies();
     },
   }
 )(Component);

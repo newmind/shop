@@ -62,7 +62,7 @@
 .amount {
 
   display: block;
-  font: 13px 'Helvetica Neue',sans-serif;
+  font-size: 13px;
 }
 
 .amount {
@@ -76,7 +76,7 @@
   &__value {
 
     display: inline-block;
-    font: 13px 'Helvetica Neue',sans-serif;
+    font-size: 13px;
     //font-weight: bold;
     margin: 0 4px 0 0;
   }
@@ -84,7 +84,7 @@
   &__currency {
 
     display: inline-block;
-    font: 13px 'Helvetica Neue',sans-serif;
+    font-size: 13px;
     //font-weight: bold;
   }
 }

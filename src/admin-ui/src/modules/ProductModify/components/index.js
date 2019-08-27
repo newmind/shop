@@ -2,7 +2,7 @@
 import { bindActionCreators } from 'redux';
 import { getFormValues, isInvalid, isPristine, submit } from 'redux-form';
 
-import PageHOC from '../../_bin/PageHOC';
+import PageHOC from '@ui.packages/hocs';
 
 import Component from './Component';
 

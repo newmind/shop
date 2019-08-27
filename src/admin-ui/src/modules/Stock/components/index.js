@@ -3,7 +3,7 @@ import { bindActionCreators } from 'redux';
 
 import { openDialog, closeDialog } from '@ui.packages/dialog';
 
-import PageHOC from '../../_bin/PageHOC';
+import PageHOC from '@ui.packages/hocs';
 
 import Component from './Component';
 

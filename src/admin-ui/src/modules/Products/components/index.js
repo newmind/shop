@@ -1,7 +1,8 @@
 
 import { bindActionCreators } from 'redux';
 import { replace } from 'react-router-redux';
-import PageHOC from '../../_bin/PageHOC';
+
+import PageHOC from '@ui.packages/hocs';
 
 import Component from './Component';
 

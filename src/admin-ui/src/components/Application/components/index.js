@@ -21,3 +21,4 @@ const mapActionsToProps = dispatch => ({
 });
 
 export default withRouter(connect(mapStateToProps, mapActionsToProps)(Component));
+
