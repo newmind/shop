@@ -1,7 +1,4 @@
 
-import request from '@ui.packages/request';
-import { push } from 'react-router-redux';
-
 import { sleep } from '@ui.packages/utils';
 
 import { changeState } from './actions';
