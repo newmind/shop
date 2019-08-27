@@ -77,7 +77,7 @@ import routes from './routes';
         try {
           const cookies = ctx.cookie;
 
-          const { admin = null } = cookies;
+          const { admin = null } = cookies || {};
 
           if ( ! admin) {
             ctx.throw(401, 'Неавторизован');
