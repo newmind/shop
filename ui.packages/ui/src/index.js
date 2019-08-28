@@ -10,6 +10,7 @@ export { default as Image } from './symbols/Image';
 export { default as Spinner } from './symbols/Spinner';
 export { default as Select } from './symbols/Select';
 export { default as RadioBox, Radio } from './symbols/RadioBox';
+export { default as DatePicker } from './symbols/DatePicker';
 
 export { default as Gallery } from './Gallery';
 
