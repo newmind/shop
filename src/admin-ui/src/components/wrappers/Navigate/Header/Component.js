@@ -15,9 +15,9 @@ class Component extends PureComponent {
     return (
       <div className={styles['header']}>
         <div className={styles['header__title']}>
-          <div className={styles['logotype']}><i className="fas fa-glasses" />&nbsp;&nbsp;&nbsp;Магазин очков</div>
-          <p className={styles['profile']}>{ profile['name'] } {profile['surname']}</p>
-          <p className={styles['role']}>Роль: { profile['role'] }</p>
+          <span className={styles['logotype']}><i className="fas fa-glasses" />&nbsp;&nbsp;&nbsp;Магазин очков</span>
+          <span className={styles['profile']}>{ profile['name'] } {profile['surname']}</span>
+          <span className={styles['role']}>Роль: { profile['role'] }</span>
         </div>
       </div>
     );
