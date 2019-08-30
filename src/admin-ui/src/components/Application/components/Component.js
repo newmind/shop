@@ -1,8 +1,9 @@
 
+import types from 'prop-types';
 import React, { PureComponent } from 'react';
-
-import PropTypes from 'prop-types';
 import { Route, Switch } from "react-router";
+
+import { sleep } from '@ui.packages/utils';
 
 import Loader from '../../Loader';
 import Module from '../../Module/components';
@@ -40,32 +41,47 @@ const Routes = props => {
 
 class Component extends PureComponent {
   static propTypes = {
-    routes: PropTypes.array,
-    navigate: PropTypes.array,
-    isInitializing: PropTypes.bool,
-    authenticated: PropTypes.bool,
+    routes: types.array,
+    navigate: types.array,
+    isInit: types.bool,
+    profile: types.object,
+    changeState: types.func,
+    getProfile: types.func,
   };
 
   static defaultProps = {
     routes: [],
     navigate: [],
-    isInitializing: true,
+    isInit: true,
+    profile: {},
   };
 
-  componentDidMount() {
-    const { checkAuthState, changeInitial } = this.props;
-    changeInitial(true);
-    checkAuthState();
+  static childContextTypes = {
+    profile: types.object,
+  };
+
+  getChildContext() {
+    const { profile } = this.props;
+    return {
+      profile,
+    };
+  }
+
+  async componentDidMount() {
+    const { changeState, getProfile } = this.props;
+    await getProfile();
+    await sleep(600);
+    changeState(true);
   }
 
   render() {
-    const { isInitializing, ...props } = this.props;
+    const { isInit, ...props } = this.props;
     return (
       <div className={styles['wrapper']}>
         {
-          isInitializing
-            ? <Loader />
-            : <Routes {...props} />
+          isInit
+            ? <Routes {...props} />
+            : <Loader />
         }
       </div>
     );

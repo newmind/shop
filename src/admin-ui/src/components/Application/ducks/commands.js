@@ -1,17 +1,46 @@
 
-import { sleep } from '@ui.packages/utils';
+import { push } from 'react-router-redux';
 
-import { changeState } from './actions';
+import request from "@ui.packages/request";
+
+import {
+  changeStateAction,
+
+  applicationGetProfileRequestAction,
+  applicationGetProfileRequestFailAction,
+  applicationGetProfileRequestSuccessAction,
+} from './actions';
 
 
-export const changeInitial = (state) => async (dispatch) => {
+export const changeState = (state) => async (dispatch) => {
 
-  dispatch(changeState(state));
+  dispatch(changeStateAction(state));
 };
 
-export const checkAuthState = () => async (dispatch) => {
+export const getProfile = () => async (dispatch) => {
+  try {
 
-  await sleep(500);
+    dispatch(applicationGetProfileRequestAction());
 
-  dispatch(changeInitial(false));
+    const profile = await request({
+      url: '/profile',
+      method: 'get',
+      data: {},
+    });
+
+    dispatch(applicationGetProfileRequestSuccessAction(profile));
+    dispatch(push('/'));
+
+  } catch(error) {
+
+    const { status } = error;
+
+    if (status === 404) {
+      dispatch(push('/error404'));
+    } else {
+      dispatch(push('/sign-in'));
+    }
+
+    dispatch(applicationGetProfileRequestFailAction());
+  }
 };

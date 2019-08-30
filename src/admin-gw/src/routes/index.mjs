@@ -27,7 +27,7 @@ import {
 
 import {
   signIn,
-  refresh,
+  get as getUser,
 } from '../controllers/User';
 
 export default (router) => {
@@ -63,5 +63,5 @@ export default (router) => {
   router.delete('/category/:categoryId', deleteCategoryById());
 
   router.post('/sign-in', signIn());
-  router.post('/refresh', refresh());
+  router.get('/profile', getUser());
 };
