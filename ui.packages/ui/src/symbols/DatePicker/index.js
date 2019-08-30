@@ -18,11 +18,11 @@ const SUCCESS_MODE = 'success';
 
 
 const DatePickerBoard = React.forwardRef((props, ref) => {
-  const { value, onChange } = props;
+  const { value, maxDate, minDate, onChange } = props;
   return (
     <div ref={ref} className={styles['dates']}>
       <div className={styles['dates__content']}>
-        <Dashboard value={value} onChange={onChange} />
+        <Dashboard value={value} maxDate={maxDate} minDate={minDate} onChange={onChange} />
       </div>
     </div>
   );
@@ -34,11 +34,14 @@ class Component extends PureComponent {
     className: types.string,
     label: types.string,
     value: types.any,
+    minDate: types.any,
+    maxDate: types.any,
     displayFormat: types.string,
     format: types.string,
     message: types.string,
     mode: types.string,
     disabled: types.bool,
+    scroller: types.string,
     onChange: types.func,
     onFocus: types.func,
     onBlur: types.func,
@@ -51,8 +54,11 @@ class Component extends PureComponent {
     mode: 'default',
     disabled: false,
     value: null,
+    minDate: null,
+    maxDate: null,
     format: 'YYYY-MM-DD HH:mm:ss.SSSSSSZ',
     displayFormat: 'DD.MM.YYYY',
+    scroller: 'body',
   };
 
   inputRef = React.createRef();
@@ -77,7 +83,7 @@ class Component extends PureComponent {
   componentDidMount() {
     window.addEventListener('click', this._eventReset);
     window.addEventListener('resize', this._eventHandleResize);
-    document.querySelector('#root').addEventListener('scroll', this._eventHandleScrolling);
+    document.querySelector('body').addEventListener('scroll', this._eventHandleScrolling);
   }
 
   componentDidUpdate(prevProps, prevState, snapshot) {
@@ -88,7 +94,7 @@ class Component extends PureComponent {
   componentWillUnmount() {
     window.removeEventListener('click', this._eventReset);
     window.removeEventListener('resize', this._eventHandleResize);
-    document.querySelector('#root').removeEventListener('scroll', this._eventHandleScrolling);
+    document.querySelector('body').removeEventListener('scroll', this._eventHandleScrolling);
   }
 
   _calculateTooltipPosition() {
@@ -188,13 +194,9 @@ class Component extends PureComponent {
     this.setState({ isOpen: false, isDirectUp: false }, () => onChange && onChange(value.format(format)));
   }
 
-  _handleChangeYear(year) {
-
-  }
-
   _handleResetValue() {
     const { onChange } = this.props;
-    this.setState({ isOpen: false, isDirectUp: false }, () => onChange && onChange(null));
+    this.setState({ isOpen: false, isDirectUp: false }, () => onChange && onChange(''));
   }
 
   _renderValue(value) {
@@ -230,7 +232,7 @@ class Component extends PureComponent {
 
   render() {
     const { isOpen } = this.state;
-    const { className, disabled, message, mode, value, label } = this.props;
+    const { className, disabled, message, mode, value, label, minDate, maxDate } = this.props;
     const classNameSelectWrapper = cn(className, styles['wrapper'], {
       [styles['wrapper--primary']]: mode === PRIMARY_MODE,
       [styles['wrapper--success']]: mode === SUCCESS_MODE,
@@ -265,6 +267,8 @@ class Component extends PureComponent {
             <DatePickerBoard
               ref={this.optionsRef}
               value={value}
+              minDate={minDate}
+              maxDate={maxDate}
               onChange={this._handleOnChange.bind(this)}
             />
           )}

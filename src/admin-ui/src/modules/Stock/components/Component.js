@@ -4,7 +4,7 @@ import React, { PureComponent } from 'react';
 
 import { nounDeclension } from '@ui.packages/utils';
 import { Dialog, Confirm } from '@ui.packages/dialog';
-import { Button, Col, Gallery, Row, Table, DatePicker } from "@ui.packages/ui";
+import { Button, Col, Gallery, Row, Table } from "@ui.packages/ui";
 
 import ModifyDialog from './ModifyDialog';
 
@@ -92,7 +92,6 @@ class Component extends PureComponent {
       <div className="page">
         <Row>
           <Col>
-            <DatePicker />
             <Button mode="primary" disabled={inProcess} onClick={this._handleOpenModifyProductDialog.bind(this)}>Добавить товар на склад</Button>
           </Col>
         </Row>

@@ -15,11 +15,15 @@ import styles from "./default.module.scss";
 class Component extends PureComponent {
   static propTypes = {
     value: types.any,
+    minDate: types.any,
+    maxDate: types.any,
     onChange: types.func,
   };
 
   static defaultProps = {
     value: null,
+    minDate: null,
+    maxDate: null,
   };
 
   constructor(...props) {
@@ -67,6 +71,7 @@ class Component extends PureComponent {
   }
 
   render() {
+    const { minDate, maxDate } = this.props;
     const { year, month, date } = this.state;
 
     const prevClassName = cn(styles['month__prev'], 'fas fa-caret-left');
@@ -87,7 +92,7 @@ class Component extends PureComponent {
           </div>
         </div>
         <div className={styles['dashboard__content']}>
-          <Days date={date} year={year} month={month} onChange={this._handleChangeDate.bind(this)} />
+          <Days date={date} year={year} month={month} minDate={minDate} maxDate={maxDate} onChange={this._handleChangeDate.bind(this)} />
         </div>
       </div>
     );

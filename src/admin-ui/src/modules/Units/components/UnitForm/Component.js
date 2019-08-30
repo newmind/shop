@@ -2,7 +2,7 @@
 import types from 'prop-types';
 import React, { PureComponent } from 'react';
 
-import { Button, Row, Col, InputField, TextariaField } from '@ui.packages/ui';
+import { Button, Row, Col, InputField, TextareaField } from '@ui.packages/ui';
 
 import styles from './default.module.scss';
 
@@ -33,7 +33,7 @@ class Component extends PureComponent {
         </Row>
         <Row>
           <Col>
-            <TextariaField
+            <TextareaField
               label="Описание"
               name="description"
               disabled={disabled}

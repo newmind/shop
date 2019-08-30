@@ -5,7 +5,7 @@ import AddImageForm from '../AddImageForm';
 import AttrsForm from '../AttributesForm';
 
 import { Field, FieldArray } from 'redux-form';
-import { Row, Col, Hr, InputField, TextariaField } from '@ui.packages/ui';
+import { Row, Col, Hr, InputField, TextareaField } from '@ui.packages/ui';
 
 import styles from './default.module.scss';
 
@@ -44,7 +44,7 @@ class Component extends PureComponent {
           </Row>
           <Row>
             <Col>
-              <TextariaField name="description" label="Описание" />
+              <TextareaField name="description" label="Описание" />
             </Col>
           </Row>
           <Hr className={styles['delimiter']} />

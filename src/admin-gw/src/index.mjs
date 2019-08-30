@@ -83,7 +83,7 @@ import routes from './routes';
             ctx.throw(401, 'Неавторизован');
           }
 
-          const { token = null } = JSON.parse(admin);
+          const { token = null } = JSON.parse(decodeURIComponent(admin));
 
           if ( ! token) {
             ctx.throw(500, 'Неверное свойство cookie');

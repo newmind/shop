@@ -2,7 +2,7 @@
 import types from 'prop-types';
 import React, { PureComponent } from 'react';
 
-import { Container, Row, Col, EvaluationField, InputField, TextariaField, Button } from '@ui.packages/ui';
+import { Container, Row, Col, EvaluationField, InputField, TextareaField, Button } from '@ui.packages/ui';
 
 import styles from './default.module.scss';
 
@@ -32,7 +32,7 @@ class Component extends PureComponent {
           </Row>
           <Row>
             <Col>
-              <TextariaField label="Комментарий" name="comment" />
+              <TextareaField label="Комментарий" name="comment" />
             </Col>
           </Row>
           <Row>

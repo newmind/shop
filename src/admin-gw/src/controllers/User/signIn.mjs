@@ -9,7 +9,7 @@ export default () => async (ctx) => {
     const formData = ctx.request.body;
     const { data } = await signIn(formData);
 
-    ctx.cookies.set('admin', JSON.stringify(data), {
+    ctx.cookies.set('admin', JSON.stringify(encodeURIComponent(data)), {
       httpOnly: true,
       secure: JSON.parse(process.env['COOCIE_SECURE']),
     });

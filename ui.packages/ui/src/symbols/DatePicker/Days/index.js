@@ -18,7 +18,17 @@ class Component extends PureComponent {
     year: types.number,
     month: types.number,
     date: types.number,
+    minDate: types.any,
+    maxDate: types.any,
     onChange: types.func,
+  };
+
+  static defaultProps = {
+    year: null,
+    month: null,
+    date: null,
+    minDate: null,
+    maxDate: null,
   };
 
   _calculateDates() {
@@ -66,7 +76,7 @@ class Component extends PureComponent {
   }
 
   render() {
-    const { year, month, date } = this.props;
+    const { year, month, date, minDate, maxDate } = this.props;
 
     const today = moment();
     const days = this._calculateDates();
@@ -78,16 +88,19 @@ class Component extends PureComponent {
             {week.map((day, dayKey) => {
 
               const isToday = moment({ year, month, date: day }).isSame(today,'date');
-              const isWeekend = day && [6, 7].indexOf(moment({ year, month, date: day }).isoWeekday()) > -1;
-              const isSelected = typeof day === 'number' && moment({ year, month, date: day }).isSame({ year, month, date }, 'date');
+              const isWeekend = [5, 6].indexOf(dayKey) > -1;
+              const isSelected = (typeof day === 'number') && date && moment({ year, month, date: day }).isSame({ year, month, date }, 'date');
+              const isDisabledBefore = maxDate && moment({ year, month, date: day }).isBefore(maxDate, 'date');
+              const isDisabledAfter = minDate && moment({ year, month, date: day }).isAfter(minDate, 'date');
 
               const dayClassName = cn(styles['board__day'], {
                 [styles['board__day--today']]: isToday,
                 [styles['board__day--weekend']]: isWeekend,
                 [styles['board__day--selected']]: isSelected,
+                [styles['board__day--disabled']]: isDisabledBefore || isDisabledAfter,
               });
               return (
-                <div key={dayKey} className={dayClassName} onClick={this._handleCheckDay.bind(this, day)}>{ day }</div>
+                <div key={dayKey} className={dayClassName} onClick={this._handleCheckDay.bind(this, ! (isDisabledBefore || isDisabledAfter) && day)}>{ day }</div>
               );
             })}
           </div>

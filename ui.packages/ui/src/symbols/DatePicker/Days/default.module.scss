@@ -14,6 +14,11 @@
     flex: 1 0 auto;
     flex-direction: row;
 
+    &:first-child {
+      font-size: 14px;
+      background: $light-gray-color;
+    }
+
     & + & {
       border-top: 1px solid $light-gray-color;
     }
@@ -35,6 +40,7 @@
 
     &--today {
       text-decoration: underline;
+      font-weight: bold;
     }
 
     &--weekend {
@@ -44,6 +50,10 @@
     &--selected {
       background: $primary-color;
       color: $white-color;
+    }
+
+    &--disabled {
+      color: darken($light-gray-color, 5%);
     }
   }
 }
