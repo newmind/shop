@@ -1,0 +1,49 @@
+
+@import "~@ui.packages/theme";
+
+
+.board {
+
+  display: flex;
+  flex: 1 0 auto;
+  flex-direction: column;
+
+  &__week {
+
+    display: flex;
+    flex: 1 0 auto;
+    flex-direction: row;
+
+    & + & {
+      border-top: 1px solid $light-gray-color;
+    }
+  }
+
+  &__day {
+
+    display: flex;
+    flex: 1 0;
+    flex-direction: column;
+    height: 35px;
+    align-items: center;
+    justify-content: center;
+    font-size: 13px;
+
+    & + & {
+      border-left: 1px solid $light-gray-color;
+    }
+
+    &--today {
+      text-decoration: underline;
+    }
+
+    &--weekend {
+      color: $danger-color
+    }
+
+    &--selected {
+      background: $primary-color;
+      color: $white-color;
+    }
+  }
+}

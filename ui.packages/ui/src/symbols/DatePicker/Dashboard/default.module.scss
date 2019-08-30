@@ -1,0 +1,58 @@
+
+@import "~@ui.packages/theme";
+
+
+.dashboard {
+
+  &__header {
+
+    display: flex;
+    flex: 1 0 auto;
+    flex-direction: row;
+    border-bottom: 1px solid $light-gray-color;
+  }
+
+  &__left,
+  &__right {
+
+    display: block;
+    padding: 12px;
+    color: $gray-color;
+    transition: color 200ms;
+
+    &:hover {
+      color: $dark-color;
+    }
+  }
+
+  &__center {
+
+    display: flex;
+    flex: 1 0 auto;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+  }
+
+  &__content {
+
+    display: block;
+  }
+}
+
+.month {
+
+  &__prev {
+
+    display: inline-block;
+    vertical-align: middle;
+    font-size: 14px;
+  }
+
+  &__next {
+
+    display: inline-block;
+    vertical-align: middle;
+    font-size: 14px;
+  }
+}

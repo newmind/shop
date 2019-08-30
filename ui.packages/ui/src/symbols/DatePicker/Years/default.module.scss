@@ -1,0 +1,42 @@
+
+@import "~@ui.packages/theme";
+
+
+.year {
+
+  display: inline-block;
+
+  &__prev {
+
+    display: inline-block;
+    vertical-align: middle;
+    font-size: 14px;
+    color: $gray-color;
+    transition: color 200ms;
+
+    &:hover {
+      color: $dark-color;
+    }
+  }
+
+  &__value {
+
+    display: inline-block;
+    vertical-align: middle;
+    font-size: 14px;
+    margin: 0 8px;
+  }
+
+  &__next {
+
+    display: inline-block;
+    vertical-align: middle;
+    font-size: 14px;
+    color: $gray-color;
+    transition: color 200ms;
+
+    &:hover {
+      color: $dark-color;
+    }
+  }
+}

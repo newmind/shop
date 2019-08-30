@@ -1,0 +1,16 @@
+
+@import "~@ui.packages/theme";
+
+
+.month {
+
+  display: inline-block;
+  margin: 0 20px 0 0;
+
+  &__value {
+
+    display: inline-block;
+    vertical-align: middle;
+    font-size: 14px;
+  }
+}
