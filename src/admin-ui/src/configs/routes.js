@@ -52,4 +52,9 @@ export default [
     wrapper: 'Empty',
     module: 'SignIn',
   },
+  {
+    path: '/profile',
+    wrapper: 'Navigate',
+    module: 'Profile',
+  },
 ];

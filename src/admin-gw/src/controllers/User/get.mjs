@@ -13,6 +13,7 @@ export default () => async (ctx) => {
       surname: 'Пятаков',
       phone: '+79154537766',
       email: 'zenlya911@mail.ru',
+      birthday: '1985-10-13 00:00:00.000000+03:00'
     };
 
   } catch(error) {

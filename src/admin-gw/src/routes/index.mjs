@@ -28,6 +28,7 @@ import {
 import {
   signIn,
   get as getUser,
+  update as updateUser,
 } from '../controllers/User';
 
 export default (router) => {
@@ -64,4 +65,5 @@ export default (router) => {
 
   router.post('/sign-in', signIn());
   router.get('/profile', getUser());
+  router.put('/profile', updateUser());
 };

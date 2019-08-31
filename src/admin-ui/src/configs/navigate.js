@@ -40,4 +40,8 @@ export default [
     title: "Заказы",
     path: '/orders',
   },
+  {
+    title: "Профайл",
+    path: '/profile',
+  },
 ];

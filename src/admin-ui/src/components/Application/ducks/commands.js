@@ -29,7 +29,7 @@ export const getProfile = () => async (dispatch) => {
     });
 
     dispatch(applicationGetProfileRequestSuccessAction(profile));
-    dispatch(push('/'));
+    // dispatch(push('/'));
 
   } catch(error) {
 
