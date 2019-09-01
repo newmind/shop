@@ -9,6 +9,8 @@ import {
   saveProfileRequestAction,
   saveProfileRequestFailAction,
   saveProfileRequestSuccessAction,
+
+  applicationGetProfileRequestSuccessAction,
 } from './actions';
 
 
@@ -19,7 +21,7 @@ export const getProfile = () => async dispatch => {
 
     const profile = await request({
       method: 'get',
-      url: '/profile',
+      url: `/profile`,
     });
 
     dispatch(getProfileRequestSuccessAction(profile));
@@ -42,6 +44,7 @@ export const saveProfile = (formData) => async dispatch => {
     });
 
     dispatch(saveProfileRequestSuccessAction(profile));
+    dispatch(applicationGetProfileRequestSuccessAction(profile));
 
   } catch(error) {
 

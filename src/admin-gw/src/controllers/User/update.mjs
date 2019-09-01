@@ -1,21 +1,25 @@
 'use strict';
 
-// import { signIn } from "../../requests/User";
+import { update } from "../../requests/User";
 
 
 export default () => async (ctx) => {
   try {
 
-    const { body } = ctx.request;
+    const { id } = ctx['user'];
+    const { body } = ctx['request'];
 
-    console.log(body);
+    const { data } = await update(id, body);
 
-    ctx.body = {};
+    ctx.body = data;
 
   } catch(error) {
 
-    const { status, data } = error['response'];
-
-    ctx.throw(status, data);
+    if ('response' in error) {
+      let { status, data } = error['response'];
+      ctx.throw(status, data);
+    } else {
+      ctx.throw(500, error['message']);
+    }
   }
 }

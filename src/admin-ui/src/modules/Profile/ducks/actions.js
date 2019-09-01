@@ -8,6 +8,7 @@ import {
   SAVE_PROFILE_REQUEST_FAIL,
   SAVE_PROFILE_REQUEST_SUCCESS,
 } from './types';
+import {APPLICATION_GET_PROFILE_REQUEST_SUCCESS} from "../../../components/Application/ducks/types";
 
 
 export const getProfileRequestAction = () => ({
@@ -37,5 +38,11 @@ export const saveProfileRequestFailAction = (error) => ({
 
 export const saveProfileRequestSuccessAction = (data) => ({
   type: SAVE_PROFILE_REQUEST_SUCCESS,
+  payload: data,
+});
+
+
+export const applicationGetProfileRequestSuccessAction = (data) => ({
+  type: APPLICATION_GET_PROFILE_REQUEST_SUCCESS,
   payload: data,
 });

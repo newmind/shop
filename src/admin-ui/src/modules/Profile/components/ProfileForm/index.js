@@ -7,9 +7,21 @@ import Component from './Component';
 const validate = values => {
   const errors = {};
 
-  // if ( ! values['count']) {
-  //   errors['count'] = 'Необходимо заполнить'
-  // }
+  if ( ! values['name']) {
+    errors['name'] = 'Необходимо заполнить'
+  }
+
+  if ( ! values['email']) {
+    errors['email'] = 'Необходимо заполнить'
+  }
+
+  if ( ! values['phone']) {
+    errors['phone'] = 'Необходимо заполнить'
+  }
+
+  if ( ! values['birthday']) {
+    errors['birthday'] = 'Необходимо заполнить'
+  }
 
   return errors;
 };

@@ -12,6 +12,7 @@ const mapStateToProps = (store) => {
   const App = store['application'];
   return {
     isInit: App['isInit'],
+    isAuth: App['isAuth'],
     profile: App['profile'],
   };
 };

@@ -5,10 +5,13 @@ import {
   APPLICATION_GET_PROFILE_REQUEST,
   APPLICATION_GET_PROFILE_REQUEST_FAIL,
   APPLICATION_GET_PROFILE_REQUEST_SUCCESS,
+
+  SOCKET_PASSPORT_UPDATED,
 } from './types';
 
 const initialState = {
   isInit: false,
+  isAuth: false,
   profile: {},
 };
 
@@ -29,8 +32,15 @@ export default (state = initialState, { type, payload }) => {
     };
     case APPLICATION_GET_PROFILE_REQUEST_FAIL: return {
       ...state,
+      isAuth: false,
     };
     case APPLICATION_GET_PROFILE_REQUEST_SUCCESS: return {
+      ...state,
+      profile: payload,
+      isAuth: true,
+    };
+
+    case SOCKET_PASSPORT_UPDATED: return {
       ...state,
       profile: payload,
     };

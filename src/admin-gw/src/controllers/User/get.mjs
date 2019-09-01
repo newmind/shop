@@ -1,20 +1,18 @@
 'use strict';
 
-// import { signIn } from "../../requests/User";
+import { get } from "../../requests/User";
 
 
 export default () => async (ctx) => {
   try {
 
-    ctx.body = {
-      role: 'admin',
-      permissions: ['product.get'],
-      name: 'Виктор',
-      surname: 'Пятаков',
-      phone: '+79154537766',
-      email: 'zenlya911@mail.ru',
-      birthday: '1985-10-13 00:00:00.000000+03:00'
-    };
+    const { id } = ctx.user || {};
+    const { data } = await get(id);
+
+    delete data['id'];
+    delete data['userId'];
+
+    ctx.body = data;
 
   } catch(error) {
 

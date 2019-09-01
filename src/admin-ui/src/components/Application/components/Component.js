@@ -52,18 +52,21 @@ class Component extends PureComponent {
   static defaultProps = {
     routes: [],
     navigate: [],
-    isInit: true,
+    isInit: false,
+    isAuth: false,
     profile: {},
   };
 
   static childContextTypes = {
     profile: types.object,
+    isAuth: types.bool,
   };
 
   getChildContext() {
-    const { profile } = this.props;
+    const { profile, isAuth } = this.props;
     return {
       profile,
+      isAuth,
     };
   }
 

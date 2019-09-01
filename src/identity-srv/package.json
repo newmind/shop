@@ -3,7 +3,7 @@
   "license": "MIT",
   "version": "1.0.0",
   "scripts": {
-    "migrations": "node -r dotenv/config --experimental-modules ./src/migrations/index.mjs dotenv_config_path=./.env",
+    "migrations:dev": "node -r dotenv/config sequelize-cli db:seed:all dotenv_config_path=./.env",
     "start": "node -r dotenv/config --experimental-modules ./src/index.mjs dotenv_config_path=./.env.production",
     "start:dev": "nodemon --exec node -r dotenv/config --experimental-modules ./src/index.mjs dotenv_config_path=./.env.development"
   },

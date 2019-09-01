@@ -3,6 +3,7 @@ import PageHOC from '@ui.packages/hocs';
 
 import { bindActionCreators } from 'redux';
 import { isValid, isPristine, submit } from 'redux-form';
+import { push } from 'react-router-redux';
 
 import Component from './Component';
 import { signIn, checkCookies } from '../ducks/commands';
@@ -14,6 +15,7 @@ const mapStateToProps = state => ({
 
 const mapActionsToProps = (dispatch) => {
   return {
+    push: bindActionCreators(push, dispatch),
     submit: bindActionCreators(submit, dispatch),
     signIn: bindActionCreators(signIn, dispatch),
     checkCookies: bindActionCreators(checkCookies, dispatch),

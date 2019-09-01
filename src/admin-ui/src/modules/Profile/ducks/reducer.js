@@ -7,6 +7,8 @@ import {
   SAVE_PROFILE_REQUEST,
   SAVE_PROFILE_REQUEST_FAIL,
   SAVE_PROFILE_REQUEST_SUCCESS,
+
+  SOCKET_PASSPORT_UPDATED,
 } from './types';
 
 
@@ -45,6 +47,11 @@ export default (state = initialState, { type, payload }) => {
     };
     case SAVE_PROFILE_REQUEST_SUCCESS: return {
       ...state,
+    };
+
+    case SOCKET_PASSPORT_UPDATED: return {
+      ...state,
+      profile: payload,
       inProcess: false,
     };
 

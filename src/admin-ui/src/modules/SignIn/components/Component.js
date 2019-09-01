@@ -13,12 +13,25 @@ class Component extends PureComponent {
   static propTypes = {
     isValid: types.bool,
     isPristine: types.bool,
+    push: types.func,
   };
 
   static defaultProps = {
     isValid: false,
     isPristine: false,
   };
+
+  static contextTypes = {
+    isAuth: types.bool,
+  };
+
+  componentDidMount() {
+    const { push } = this.props;
+    const { isAuth } = this.context;
+    if (isAuth) {
+      push('/');
+    }
+  }
 
   onSubmit(data) {
     const { signIn } = this.props;

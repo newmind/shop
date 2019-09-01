@@ -1,0 +1,8 @@
+{
+  "name": "@sys.packages/jwt",
+  "version": "1.0.0",
+  "main": "src/index.mjs",
+  "dependencies": {
+    "axios": "^0.18.0"
+  }
+}

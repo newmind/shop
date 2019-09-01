@@ -35,7 +35,7 @@ class Component extends PureComponent {
     this.state = {
       year: current.year(),
       month: current.month(),
-      date: value && current.date(),
+      date: value ? current.date() : null,
     };
   }
 

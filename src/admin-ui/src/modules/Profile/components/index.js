@@ -2,7 +2,7 @@
 import { bindActionCreators } from 'redux';
 import PageHOC from '@ui.packages/hocs';
 
-import { submit } from 'redux-form';
+import { submit, isValid, isPristine } from 'redux-form';
 
 import Component from './Component';
 
@@ -13,6 +13,8 @@ const mapStateToProps = state => {
   const Profile = state['Profile'];
   return {
     profile: Profile['profile'],
+    isValid: isValid('profile')(state),
+    isPristine: isPristine('profile')(state),
   };
 };
 

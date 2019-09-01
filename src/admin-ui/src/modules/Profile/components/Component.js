@@ -13,11 +13,15 @@ class Component extends PureComponent {
   static propTypes = {
     profile: types.object,
     inProcess: types.bool,
+    isValid: types.bool,
+    isPristine: types.bool,
   };
 
   static defaultProps = {
     profile: {},
     inProcess: false,
+    isValid: false,
+    isPristine: false,
   };
 
   _handleSave(data) {
@@ -31,7 +35,7 @@ class Component extends PureComponent {
   }
 
   render() {
-    const { profile, inProcess } = this.props;
+    const { profile, inProcess, isValid, isPristine } = this.props;
     return (
       <div className="page">
         <div className={styles['container']}>
@@ -45,7 +49,7 @@ class Component extends PureComponent {
           <div className={styles['controls']}>
             <Button
               mode="success"
-              disabled={inProcess}
+              disabled={ ! isValid || isPristine || inProcess}
               onClick={this._handleSubmit.bind(this)}
             >Сохранить</Button>
           </div>
