@@ -5,9 +5,13 @@ import { models } from '@sys.packages/db';
 
 export default () => async (ctx) => {
 
+  console.log(87236487642864);
+
   let where = {};
   let options = {};
+
   const { status = null, limit = null, offset = null } = ctx.request.query;
+  const { SubProduct, Gallery } = models;
 
   if (status) {
     where['status'] = status;
@@ -21,31 +25,19 @@ export default () => async (ctx) => {
     options['offset'] = offset;
   }
 
-  const products = await models['Product'].findAndCountAll({
-    attributes: ['id', 'name', 'brand', 'description', 'amount', 'status', 'createdAt'],
-    order: [['createdAt', 'DESC']],
+  const products = await SubProduct.findAndCountAll({
+    attributes: ['id', 'name', 'brand', 'description', 'status', 'createdAt'],
+    order: [['id', 'ASC']],
     distinct: true,
     subQuery: false,
     ...options,
     where: { ...where },
     include: [
       {
-        model: models['Currency'],
-        required: true,
-        as: 'currency',
-        attributes: ['id', 'value']
-      },
-      {
-        model: models['Attribute'],
-        required: false,
-        as: 'attributes',
-        attributes: ['id', 'name', 'value'],
-      },
-      {
-        model: models['Gallery'],
+        model: Gallery,
         required: false,
         as: 'gallery',
-        attributes: ['file'],
+        attributes: ['id'],
       },
     ],
   });

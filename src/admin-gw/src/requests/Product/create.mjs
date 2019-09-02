@@ -1,6 +1,6 @@
 'use strict';
 
-import axios from 'axios';
+import axios from '@sys.packages/request';
 
 import { getBuffer } from "@sys.packages/sys.utils";
 
@@ -12,7 +12,7 @@ export default async (request) => {
 
   const buffer = await getBuffer(request);
 
-  const { data } = await axios({
+  const data = await axios({
     method: 'post',
     url: `${PRODUCT_API_SRV}/products`,
     headers: {

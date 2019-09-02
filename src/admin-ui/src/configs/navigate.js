@@ -13,6 +13,10 @@ export default [
         path: '/products',
       },
       {
+        title: 'Дополнительные продукты',
+        path: '/sub-products',
+      },
+      {
         title: 'Корзина',
         path: '/recycle',
       }

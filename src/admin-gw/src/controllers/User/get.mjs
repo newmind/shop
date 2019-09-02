@@ -16,6 +16,8 @@ export default () => async (ctx) => {
 
   } catch(error) {
 
+    console.log(error);
+
     const { status, data } = error['response'];
 
     ctx.throw(status, data);

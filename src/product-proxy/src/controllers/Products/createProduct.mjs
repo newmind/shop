@@ -51,7 +51,7 @@ export default () => async (ctx) => {
       await saveFiles(files, { productId: id }, { transaction });
     }
 
-    return await Product.findOne({
+    return Product.findOne({
       where: { id },
       attributes: ['id', 'name', 'brand', 'description', 'status'],
       include: [

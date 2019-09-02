@@ -1,6 +1,6 @@
 'use strict';
 
-import axios from 'axios';
+import axios from '@sys.packages/request';
 
 
 const PRODUCT_API_SRV = process.env['PRODUCT_API_SRV'];
@@ -9,9 +9,7 @@ const PRODUCT_API_SRV = process.env['PRODUCT_API_SRV'];
 export default async (productId, formData) => {
   try {
 
-    const { data } = await axios.put(`${PRODUCT_API_SRV}/gallery/${productId}`, formData);
-
-    return data;
+    return await axios.put(`${PRODUCT_API_SRV}/gallery/${productId}`, formData);
 
   } catch (error) {
 

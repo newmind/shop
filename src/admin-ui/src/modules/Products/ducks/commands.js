@@ -70,14 +70,14 @@ export const createProducts = (data) => async dispatch => {
   }
 };
 
-export const removeProductById = (id, status) => async dispatch => {
+export const removeProductById = (id) => async dispatch => {
   try {
 
     dispatch(removeProductsRequestAction());
 
     const product = await request({
-      method: 'put',
-      url: `/products/${id}/status/${status}`,
+      method: 'delete',
+      url: `/products/${id}`,
     });
 
     dispatch(removeProductsRequestSuccessAction(product));

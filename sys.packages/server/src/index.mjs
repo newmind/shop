@@ -40,14 +40,14 @@ app.use(async (ctx, next) => {
 
   try {
     await next();
-  } catch(e) {
+  } catch(error) {
 
     const { status, message } = ctx.response;
 
-    ctx.status = e['status'] || status;
+    ctx.status = error['status'] || status;
     ctx.body = {
-      status: e['status'] || status,
-      message: e['message'] || message,
+      status: error['status'] || status,
+      message: error['message'] || message,
     };
   }
 });

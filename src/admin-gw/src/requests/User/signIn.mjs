@@ -1,17 +1,15 @@
 'use strict';
 
-import axios from 'axios';
+import axios from '@sys.packages/request';
 
 const INVOICE_API_SRV = process.env['INVOICE_API_SRV'];
 
 
 export default async (formData) => {
 
-  const { data } = await axios({
+  return await axios({
     method: 'post',
     url: `${INVOICE_API_SRV}/connect`,
     data: formData,
   });
-
-  return data;
 };

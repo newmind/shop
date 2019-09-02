@@ -5,15 +5,21 @@ import {
 } from '../controllers/Gallery/index';
 
 import {
+  getBrands,
   getProducts,
-  getProductById,
   createProduct,
+  getProductById,
   deleteProductById,
   updateProductById,
-  updateProductStatusById,
-
-  getBrands,
 } from '../controllers/Products';
+
+import {
+  getAll as getSubProducts,
+  create as createSubProduct,
+  getById as getSubProductById,
+  updateById as updateSubProductById,
+  deleteById as deleteSubProductById,
+} from '../controllers/SubProducts';
 
 import {
   getProducts as getStockProducts,
@@ -49,11 +55,16 @@ import {
 export default (router) => {
 
   router.get('/v1/api/products', getProducts());
-  router.get('/v1/api/products/:productId', getProductById());
   router.post('/v1/api/products', createProduct());
+  router.get('/v1/api/products/:productId', getProductById());
   router.put('/v1/api/products/:productId', updateProductById());
-  router.put('/v1/api/products/:productId/status/:status', updateProductStatusById());
   router.delete('/v1/api/products/:productId', deleteProductById());
+
+  router.get('/v1/api/sub-products', getSubProducts);
+  router.post('/v1/api/sub-products', createSubProduct());
+  router.get('/v1/api/sub-products/:productId', getSubProductById());
+  router.put('/v1/api/sub-products/:productId', updateSubProductById());
+  router.delete('/v1/api/sub-products/:productId', deleteSubProductById());
 
   router.get('/v1/api/gallery/:fileName', getImageByName());
 

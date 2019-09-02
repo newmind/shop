@@ -11,6 +11,11 @@ export default [
     module: 'Products',
   },
   {
+    path: '/sub-products',
+    wrapper: 'Composite',
+    module: 'SubProducts',
+  },
+  {
     path: '/recycle',
     wrapper: 'Composite',
     module: 'Recycle',

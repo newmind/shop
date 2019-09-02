@@ -9,5 +9,10 @@ export default () => async (ctx) => {
 
   const { data } = await refresh(token);
 
-  ctx.body = data;
+  ctx.cookies.set('admin', encodeURIComponent(JSON.stringify(data)), {
+    httpOnly: true,
+    secure: JSON.parse(process.env['COOCIE_SECURE']),
+  });
+
+  ctx.body = {};
 }

@@ -1,17 +1,15 @@
 'use strict';
 
-import axios from 'axios';
+import axios from '@sys.packages/request';
 
 
 const PRODUCT_API_SRV = process.env['PRODUCT_API_SRV'];
 
 
-export default async (ctx) => {
+export default async () => {
   try {
 
-    const { data } = await axios.get(`${PRODUCT_API_SRV}/gallery`);
-
-    return data;
+    return  await axios.get(`${PRODUCT_API_SRV}/gallery`);
 
   } catch (error) {
 
