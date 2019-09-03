@@ -35,6 +35,7 @@ import {
 
 import {
   signIn,
+  signOut,
   get as getUser,
   update as updateUser,
 } from '../controllers/User';
@@ -77,6 +78,7 @@ export default (router) => {
   router.delete('/category/:categoryId', deleteCategoryById());
 
   router.post('/sign-in', signIn());
+  router.post('/sign-out', signOut());
   router.get('/profile', getUser());
   router.put('/profile', updateUser());
 };

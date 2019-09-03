@@ -4,6 +4,7 @@ import React, { PureComponent } from 'react';
 import { Route, Switch } from "react-router";
 
 import { sleep } from '@ui.packages/utils';
+import { Notifications } from '@ui.packages/notifications';
 
 import Loader from '../../Loader';
 import Module from '../../Module/components';
@@ -60,13 +61,15 @@ class Component extends PureComponent {
   static childContextTypes = {
     profile: types.object,
     isAuth: types.bool,
+    signOut: types.func,
   };
 
   getChildContext() {
-    const { profile, isAuth } = this.props;
+    const { profile, isAuth, signOut } = this.props;
     return {
       profile,
       isAuth,
+      signOut,
     };
   }
 
@@ -86,6 +89,7 @@ class Component extends PureComponent {
             ? <Routes {...props} />
             : <Loader />
         }
+        <Notifications />
       </div>
     );
   }

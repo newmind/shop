@@ -21,7 +21,7 @@ const createWrapper = type => props => {
   }
 };
 
-class ModuleComponent extends PureComponent {
+class Component extends PureComponent {
   static propTypes = {
     navigate: PropTypes.array,
     module: PropTypes.string,
@@ -68,4 +68,4 @@ class ModuleComponent extends PureComponent {
   }
 }
 
-export default ModuleComponent;
+export default Component;

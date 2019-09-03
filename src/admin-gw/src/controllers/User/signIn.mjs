@@ -1,6 +1,7 @@
 'use strict';
 
-import { signIn } from "../../requests/User";
+import { signIn, get } from "../../requests/User";
+import { decode } from '@sys.packages/jwt';
 
 
 export default () => async (ctx) => {
@@ -9,12 +10,18 @@ export default () => async (ctx) => {
     const formData = ctx.request.body;
     const { data } = await signIn(formData);
 
-    ctx.cookies.set('admin', encodeURIComponent(JSON.stringify(data)), {
+    const { id } = await decode(data['token'], process.env['JWT_SECRET']);
+
+    const { data: profile } = await get(id);
+
+    ctx.cookies.set(process.env['COOKIE_NAME'], encodeURIComponent(JSON.stringify(data)), {
       httpOnly: true,
-      secure: JSON.parse(process.env['COOCIE_SECURE']),
+      secure: JSON.parse(process.env['COOKIE_SECURE']),
     });
 
-    ctx.body = {};
+    ctx.body = {
+      ...profile,
+    };
 
   } catch(error) {
 

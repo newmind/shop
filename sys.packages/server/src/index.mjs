@@ -26,7 +26,7 @@ app.use(async (ctx, next) => {
     }
   }
 
-  console.log(`RESPONSE <--- [${ctx.request.method}] "${ctx.request.url}" ${ctx.response.status} (${response})`);
+  console.log(`RESPONSE <--- [${ctx.request.method}] "${ctx.request.url}" [${ctx.response.status}] (${response})`);
 });
 
 app.use(koaBodyParser({
@@ -37,9 +37,10 @@ app.use(koaBodyParser({
 }));
 
 app.use(async (ctx, next) => {
-
   try {
+
     await next();
+
   } catch(error) {
 
     const { status, message } = ctx.response;

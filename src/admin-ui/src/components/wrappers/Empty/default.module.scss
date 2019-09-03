@@ -1,4 +1,6 @@
 
+@import "~@ui.packages/theme";
+
 .wrapper {
 
   display: flex;
@@ -9,7 +11,7 @@
 .header {
 
   display: block;
-  background: #d3dfeb;
+  background: $dark-color;
   padding: 15px 20px;
   font-size: 16px;
   font-weight: bold;
@@ -23,15 +25,4 @@
   background: #e5eef5;
   width: 100%;
   z-index: 10;
-}
-
-.footer {
-
-  position: relative;
-  display: block;
-  background: #d3dfeb;
-  padding: 20px;
-  box-shadow: 0 -1px 3px 0 rgba(150, 150, 150, .5);
-  font-size: 13px;
-  z-index: 20;
 }

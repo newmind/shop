@@ -1,6 +1,7 @@
 'use strict';
 
 import request from "axios";
+import jwt from 'jsonwebtoken';
 
 
 export default (options) => async (ctx, next) => {
@@ -81,4 +82,15 @@ export default (options) => async (ctx, next) => {
       ctx.throw(errorResult['status'], errorResult['message']);
     }
   }
+};
+
+export const decode = (token, secret) => {
+  return new Promise((resolve, reject) => {
+    jwt.verify(token, secret, (err, decoded) => {
+      if (err) {
+        reject(err);
+      }
+      resolve(decoded);
+    });
+  });
 };

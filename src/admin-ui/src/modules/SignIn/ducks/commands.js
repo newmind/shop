@@ -35,8 +35,8 @@ export const signIn = (formData) => async dispatch => {
       }
     });
 
-    dispatch(push('/'));
     dispatch(applicationAuthRequestSuccessAction(result));
+    dispatch(push('/'));
 
   } catch(error) {
 
@@ -44,6 +44,8 @@ export const signIn = (formData) => async dispatch => {
 
     if (error['status'] === 404) {
       message = 'Не верный логин или пароль';
+    } else if (error['status'] === 500) {
+      message = 'Непредвиденная ошибка';
     }
 
     dispatch(applicationAuthRequestFailAction(error));

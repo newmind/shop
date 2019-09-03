@@ -5,8 +5,9 @@
 .wrapper {
 
   display: flex;
-  flex: 1 0 auto;
+  flex: 1 1;
   flex-direction: column;
+  overflow: auto;
 }
 
 .header {
@@ -18,8 +19,9 @@
 .page {
 
   display: flex;
-  flex: 1 0 auto;
+  flex: 1 1;
   flex-direction: column;
+  overflow: auto;
 }
 
 .aside {
@@ -32,9 +34,10 @@
 .content {
 
   display: flex;
-  flex: 1 1 auto;
+  flex: 1 1;
   flex-direction: column;
   width: 100%;
+  overflow: auto;
 }
 
 .footer {

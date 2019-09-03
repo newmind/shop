@@ -1,6 +1,8 @@
 
 import React, { PureComponent } from 'react';
 
+import Header from './Header';
+
 import styles from './default.module.scss';
 
 
@@ -10,14 +12,11 @@ class Component extends PureComponent {
     return (
       <section className={styles['wrapper']}>
         <header className={styles['header']}>
-          header
+          <Header />
         </header>
         <section className={styles['content']}>
           { children }
         </section>
-        <footer className={styles['footer']}>
-          footer
-        </footer>
       </section>
     );
   }

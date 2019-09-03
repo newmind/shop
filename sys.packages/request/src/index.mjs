@@ -23,16 +23,22 @@ const requestLogger = (config) => {
     requestData = JSON.stringify(config['data'])
   }
 
-  console.log(`[${method.toLocaleUpperCase()}] ---> "${url}" (${JSON.stringify(requestData)})`);
+  console.log(`[${method.toLocaleUpperCase()}] ---> "${url}" (${requestData})`);
 
   return config;
 };
 
 const responseLogger = (response) => {
 
-  const { config: { url, method }, status, data } = response;
+  const { config: { url, method }, status, data = null } = response;
 
-  console.log(`[${method.toLocaleUpperCase()}] <--- "${url}" [${status}] (${JSON.stringify(data)})`);
+  let responseData = null;
+
+  if (data) {
+    responseData = JSON.stringify(data);
+  }
+
+  console.log(`[${method.toLocaleUpperCase()}] <--- "${url}" [${status}] (${responseData})`);
 
   return response;
 };
@@ -41,49 +47,47 @@ const errorLogger = (error) => {
 
   const {config: { url, method }, response } = error;
 
-  let status, data;
+  let status = 0;
+  let data = null;
+
   if(response){
-    status = response.status;
-    data = response.data;
+    status = response['status'];
+    if ('data' in response) {
+      data = JSON.stringify(response.data);
+    }
   }
 
   console.log(`[${method.toLocaleUpperCase()}] <--- "${url}" [${status}] (${data})`);
 
-  return error;
+  return Promise.reject(error);
 };
 
 
 const request = async (options) => {
-  try {
 
-    options = {
-      ...defaultOptions,
-      ...options,
-    };
+  options = {
+    ...defaultOptions,
+    ...options,
+  };
 
-    let headers = {};
+  let headers = {};
 
-    if (options['headers']) {
-      headers = options['headers'];
-    }
-
-    const instance = axios.create({
-      timeout: 24000,
-      headers: headers,
-      withCredentials: options['withCredentials'],
-    });
-
-    instance.interceptors.request.use(requestLogger, errorLogger);
-    instance.interceptors.response.use(responseLogger, errorLogger);
-
-    const { data } = await instance(options);
-
-    return data;
-
-  } catch(error) {
-
-    throw error['response'];
+  if (options['headers']) {
+    headers = options['headers'];
   }
+
+  const instance = axios.create({
+    timeout: 24000,
+    headers: headers,
+    withCredentials: options['withCredentials'],
+  });
+
+  instance.interceptors.request.use(requestLogger, errorLogger);
+  instance.interceptors.response.use(responseLogger, errorLogger);
+
+  const { data } = await instance(options);
+
+  return data;
 };
 
 export default request;

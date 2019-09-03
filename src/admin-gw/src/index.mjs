@@ -31,7 +31,7 @@ import routes from './routes';
       if (/^\/sign-in/.test(url) && method === 'POST') {
         await next();
       } else {
-        await jwtToken({ name: 'admin', serviceUrl: process.env['INVOICE_API_SRV'] })(ctx, next);
+        await jwtToken({ name: process.env['COOKIE_NAME'], serviceUrl: process.env['INVOICE_API_SRV'] })(ctx, next);
       }
     });
 

@@ -7,6 +7,7 @@ export default () => async (ctx) => {
   try {
 
     const { id } = ctx.user || {};
+
     const { data } = await get(id);
 
     delete data['id'];
@@ -15,8 +16,6 @@ export default () => async (ctx) => {
     ctx.body = data;
 
   } catch(error) {
-
-    console.log(error);
 
     const { status, data } = error['response'];
 

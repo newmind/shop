@@ -9,6 +9,10 @@ import {
   applicationGetProfileRequestAction,
   applicationGetProfileRequestFailAction,
   applicationGetProfileRequestSuccessAction,
+
+  applicationSignOutRequestAction,
+  applicationSignOutRequestFailAction,
+  applicationSignOutRequestSuccessAction,
 } from './actions';
 
 
@@ -29,7 +33,6 @@ export const getProfile = () => async (dispatch) => {
     });
 
     dispatch(applicationGetProfileRequestSuccessAction(profile));
-    // dispatch(push('/'));
 
   } catch(error) {
 
@@ -42,5 +45,24 @@ export const getProfile = () => async (dispatch) => {
     }
 
     dispatch(applicationGetProfileRequestFailAction());
+  }
+};
+
+export const signOut = () => async (dispatch) => {
+  try {
+
+    dispatch(applicationSignOutRequestAction());
+
+    await request({
+      url: '/sign-out',
+      method: 'post'
+    });
+
+    dispatch(applicationSignOutRequestSuccessAction());
+    dispatch(push('/sign-in'));
+
+  } catch(error) {
+
+    dispatch(applicationSignOutRequestFailAction(error));
   }
 };

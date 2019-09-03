@@ -6,6 +6,8 @@ import {
   APPLICATION_GET_PROFILE_REQUEST_FAIL,
   APPLICATION_GET_PROFILE_REQUEST_SUCCESS,
 
+  APPLICATION_AUTH_REQUEST_SUCCESS,
+
   SOCKET_PASSPORT_UPDATED,
 } from './types';
 
@@ -40,6 +42,7 @@ export default (state = initialState, { type, payload }) => {
       isAuth: true,
     };
 
+    case APPLICATION_AUTH_REQUEST_SUCCESS:
     case SOCKET_PASSPORT_UPDATED: return {
       ...state,
       profile: payload,
