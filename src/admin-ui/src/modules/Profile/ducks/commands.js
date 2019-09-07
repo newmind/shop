@@ -2,6 +2,8 @@
 import request from '@ui.packages/request';
 
 import {
+  pageInProcess,
+
   getProfileRequestAction,
   getProfileRequestFailAction,
   getProfileRequestSuccessAction,
@@ -15,6 +17,9 @@ import {
 
 
 export const getProfile = () => async dispatch => {
+
+  dispatch(pageInProcess(true));
+
   try {
 
     dispatch(getProfileRequestAction());
@@ -30,6 +35,8 @@ export const getProfile = () => async dispatch => {
 
     dispatch(getProfileRequestFailAction(error));
   }
+
+  dispatch(pageInProcess(false));
 };
 
 export const saveProfile = (formData) => async dispatch => {

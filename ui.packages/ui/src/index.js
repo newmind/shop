@@ -14,6 +14,7 @@ export { default as DatePicker } from './symbols/DatePicker';
 
 export { default as Gallery } from './Gallery';
 
+export { default as BaseField } from './fields/BaseField';
 export { default as FileField } from './fields/FileField';
 export { default as InputField } from './fields/InputField';
 export { default as TextareaField } from './fields/TextareaField';

@@ -40,18 +40,24 @@ export const signIn = (formData) => async dispatch => {
 
   } catch(error) {
 
-    let message = '';
+    const notification = {
+      mode: '',
+      title: '',
+      content: '',
+    };
 
     if (error['status'] === 404) {
-      message = 'Не верный логин или пароль';
-    } else if (error['status'] === 500) {
-      message = 'Непредвиденная ошибка';
+      notification['mode'] = 'warning';
+      notification['title'] = 'Ошибка авторизации';
+      notification['content'] = 'Не верный логин или пароль';
+    }
+    else if (error['status'] === 500) {
+      notification['mode'] = 'danger';
+      notification['title'] = 'Ошибка доступа';
+      notification['content'] = `${error['data']['message']} (${error['data']['code']})`;
     }
 
+    dispatch(pushNotification(notification));
     dispatch(applicationAuthRequestFailAction(error));
-    dispatch(pushNotification({
-      mode: 'danger',
-      content:  message,
-    }));
   }
 };

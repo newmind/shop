@@ -29,8 +29,7 @@ const mapActionsToProps = (dispatch) => {
 export default PageHOC({
   mapStateToProps,
   mapActionsToProps,
-  onEnter: async ({ getProfile, onLoading }) => {
+  onEnter: async ({ getProfile }) => {
     await getProfile();
-    onLoading(false);
   },
 })(Component);

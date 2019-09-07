@@ -5,6 +5,40 @@
 
   position: relative;
   display: flex;
-  flex: 1 0 auto;
+  flex: 1 0;
   flex-direction: column;
+  overflow: hidden;
+
+  &__content {
+
+    position: relative;
+    display: flex;
+    flex: 1 0;
+    flex-direction: column;
+    overflow: auto;
+    z-index: 10;
+  }
+}
+
+.loading {
+
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  display: flex;
+  background: rgba($dark-color, .15);
+  z-index: 20;
+}
+
+.spinner {
+
+  display: block;
+  margin: auto;
+  padding: 30px;
+  border-radius: 4px;
+  background: $whitesmoke-color;
+  color: $dark-color;
+  font-size: 14px;
 }

@@ -1,12 +1,15 @@
 
 import {
   APPLICATION_CHANGE_STATE,
+  APPLICATION_AUTH_REQUEST_SUCCESS,
 
   APPLICATION_GET_PROFILE_REQUEST,
   APPLICATION_GET_PROFILE_REQUEST_FAIL,
   APPLICATION_GET_PROFILE_REQUEST_SUCCESS,
 
-  APPLICATION_AUTH_REQUEST_SUCCESS,
+  APPLICATION_SIG_OUT_REQUEST,
+  APPLICATION_SIG_OUT_REQUEST_FAIL,
+  APPLICATION_SIG_OUT_REQUEST_SUCCESS,
 
   SOCKET_PASSPORT_UPDATED,
 } from './types';
@@ -40,6 +43,19 @@ export default (state = initialState, { type, payload }) => {
       ...state,
       profile: payload,
       isAuth: true,
+    };
+
+    case APPLICATION_SIG_OUT_REQUEST: return {
+      ...state,
+    };
+    case APPLICATION_SIG_OUT_REQUEST_FAIL: return {
+      ...state,
+      isAuth: true,
+    };
+    case APPLICATION_SIG_OUT_REQUEST_SUCCESS: return {
+      ...state,
+      isAuth: false,
+      profile: {},
     };
 
     case APPLICATION_AUTH_REQUEST_SUCCESS:

@@ -16,6 +16,12 @@
   display: inline-flex;
   width: 150px;
   height: 200px;
+  border: 1px solid $light-gray-color;
+
+  & + & {
+
+    margin: 0 0 0 20px;
+  }
 }
 
 .add-image {
@@ -23,6 +29,7 @@
   display: inline-flex;
   width: 150px;
   height: 200px;
+  margin: 0 0 0 20px;
   background: $light-gray-color;
   border: 1px solid $gray-color;
   border-radius: 3px;

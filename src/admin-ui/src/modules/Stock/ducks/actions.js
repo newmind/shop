@@ -1,6 +1,6 @@
 
 import {
-  DESTROY,
+  PAGE_IN_PROCESS,
 
   GET_CATEGORIES_REQUEST,
   GET_CATEGORIES_REQUEST_FAIL,
@@ -37,11 +37,10 @@ import {
 } from './types';
 
 
-export const destroyAction = () => ({
-  type: DESTROY,
-  payload: null,
+export const pageInProcess = (status = true) => ({
+  type: PAGE_IN_PROCESS,
+  payload: status,
 });
-
 
 export const getCategoriesAction = () => ({
   type: GET_CATEGORIES_REQUEST,

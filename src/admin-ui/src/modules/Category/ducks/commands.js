@@ -2,6 +2,8 @@
 import request from '@ui.packages/request';
 
 import {
+  pageInProcess,
+
   getAllRequestAction,
   getAllRequestFaulAction,
   getAllRequestSuccessAction,
@@ -21,6 +23,9 @@ import {
 
 
 export const getAll = () => async dispatch => {
+
+  dispatch(pageInProcess(true));
+
   try {
 
     dispatch(getAllRequestAction());
@@ -36,6 +41,8 @@ export const getAll = () => async dispatch => {
 
     dispatch(getAllRequestFaulAction(error));
   }
+
+  dispatch(pageInProcess(false));
 };
 
 export const create = (formData) => async dispatch => {

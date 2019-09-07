@@ -1,5 +1,7 @@
 
 import {
+  SIGN_OUT,
+
   GET_PRODUCTS_REQUEST,
   GET_PRODUCTS_REQUEST_FAIL,
   GET_PRODUCTS_REQUEST_SUCCESS,
@@ -25,7 +27,7 @@ const initialState = {
 
 export default (state = initialState, { type, payload }) => {
   switch (type) {
-    case 'RESET': return {
+    case SIGN_OUT: return {
       ...initialState,
     };
 

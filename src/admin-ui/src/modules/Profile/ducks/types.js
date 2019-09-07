@@ -1,5 +1,7 @@
 
-export const APPLICATION_GET_PROFILE_REQUEST_SUCCESS = '@application/APPLICATION_GET_PROFILE_REQUEST_SUCCESS';
+export const SIGN_OUT = '@application/SIGN_OUT';
+
+export const PAGE_IN_PROCESS = '@page/PAGE_IN_PROCESS';
 
 export const GET_PROFILE_REQUEST = '@profile/GET_PROFILE_REQUEST';
 export const GET_PROFILE_REQUEST_FAIL = '@profile/GET_PROFILE_REQUEST_FAIL';

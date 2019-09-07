@@ -1,5 +1,7 @@
 
 import {
+  PAGE_IN_PROCESS,
+
   GET_PRODUCTS_REQUEST,
   GET_PRODUCTS_REQUEST_FAIL,
   GET_PRODUCTS_REQUEST_SUCCESS,
@@ -9,6 +11,11 @@ import {
   REMOVE_PRODUCT_REQUEST_SUCCESS,
 } from './types';
 
+
+export const pageInProcess = (status = true) => ({
+  type: PAGE_IN_PROCESS,
+  payload: status,
+});
 
 export const getProductsRequestAction = () => ({
   type: GET_PRODUCTS_REQUEST,

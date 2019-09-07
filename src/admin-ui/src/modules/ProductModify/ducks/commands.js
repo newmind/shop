@@ -3,6 +3,8 @@ import request from '@ui.packages/request';
 import { pushNotification } from '@ui.packages/notifications';
 
 import {
+  pageInProcess,
+
   getUnitsRequestAction,
   getUnitsRequestFailAction,
   getUnitsRequestSuccessAction,
@@ -49,6 +51,7 @@ export const getProductById = (id) => async dispatch => {
       return;
     }
 
+    dispatch(pageInProcess(true));
     dispatch(getProductRequestAction());
 
     const result = await request({
@@ -71,9 +74,12 @@ export const getProductById = (id) => async dispatch => {
     };
 
     dispatch(getProductRequestSuccessAction(resultData));
+    dispatch(pageInProcess(false));
 
   } catch(error) {
+
     dispatch(getProductRequestFailAction(error['message']));
+    dispatch(pageInProcess(false));
   }
 };
 
@@ -125,6 +131,11 @@ export const updateProductsById = (data) => async dispatch => {
   } catch(error) {
 
     dispatch(updateProductRequestFailAction());
+    dispatch(pushNotification({
+      mode: 'danger',
+      title: 'Ошибка при сохранении данных',
+      content: `${error['data']['message']} (${error['data']['code']})`
+    }));
   }
 };
 

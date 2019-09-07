@@ -16,11 +16,11 @@ const requestLogger = (config) => {
   let requestData = null;
 
   if (params) {
-    requestData = JSON.stringify(params)
+    requestData = JSON.stringify(params);
   }
 
   if (data) {
-    requestData = JSON.stringify(config['data'])
+    requestData = JSON.stringify(config['data']);
   }
 
   console.log(`[${method.toLocaleUpperCase()}] ---> "${url}" (${requestData})`);
@@ -30,11 +30,11 @@ const requestLogger = (config) => {
 
 const responseLogger = (response) => {
 
-  const { config: { url, method }, status, data = null } = response;
+  const { config: { url, method, responseType }, status, data = null } = response;
 
   let responseData = null;
 
-  if (data) {
+  if (responseType === 'json' && data) {
     responseData = JSON.stringify(data);
   }
 

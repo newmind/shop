@@ -3,6 +3,8 @@ import axios from 'axios';
 
 import { push } from 'react-router-redux';
 
+import { NetworkError } from '@packages/errors';
+
 const defaultOptions = {
   method: 'get',
   url: '/',
@@ -47,13 +49,20 @@ const request = async (options) => {
 
   } catch(error) {
 
-    const { status } = error['response'];
+    if (error['response']) {
 
-    if (status === 401) {
-      dispatch(push('/sign-in'));
+      const {status, data} = error['response'];
+
+      if (status === 401) {
+        dispatch(push('/sign-in'));
+      }
+
+      throw new NetworkError(status, data);
+
+    } else {
+
+      throw new NetworkError(500, { code: '1.0.0', message: 'Сервис временно не доступен' });
     }
-
-    throw error['response'];
   }
 };
 

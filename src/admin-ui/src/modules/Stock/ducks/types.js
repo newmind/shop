@@ -1,5 +1,7 @@
 
-export const DESTROY = '@@stock/DESTROY';
+export const SIGN_OUT = '@application/SIGN_OUT';
+
+export const PAGE_IN_PROCESS = '@page/PAGE_IN_PROCESS';
 
 export const GET_CURRENCIES_REQUEST = '@@stock/GET_CURRENCIES_REQUEST';
 export const GET_CURRENCIES_REQUEST_FAIL = '@@stock/GET_CURRENCIES_REQUEST_FAIL';

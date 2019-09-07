@@ -8,8 +8,6 @@ import PageHOC from '@ui.packages/hocs';
 import Component from './Component';
 
 import {
-  destroy,
-
   getCategories,
   getCurrencies,
   getProducts,
@@ -35,8 +33,6 @@ const mapActionsToProps = (dispatch) => {
     openDialog: bindActionCreators(openDialog, dispatch),
     closeDialog: bindActionCreators(closeDialog, dispatch),
 
-    destroy: bindActionCreators(destroy, dispatch),
-
     getCurrencies: bindActionCreators(getCurrencies, dispatch),
     getCategories: bindActionCreators(getCategories, dispatch),
     getProducts: bindActionCreators(getProducts, dispatch),
@@ -52,11 +48,10 @@ const mapActionsToProps = (dispatch) => {
 export default PageHOC({
   mapStateToProps,
   mapActionsToProps,
-  onEnter: async ({ onLoading, getProducts, getStockProducts, getCurrencies, getCategories }) => {
+  onEnter: async ({ getProducts, getStockProducts, getCurrencies, getCategories }) => {
     await getCategories();
     await getCurrencies();
     await getStockProducts();
     await getProducts();
-    onLoading(false);
   },
 })(Component);

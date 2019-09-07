@@ -1,6 +1,6 @@
 'use strict';
 
-import { deleteById } from '../../requests/Category/index';
+import { deleteById } from '../../requests/Category';
 
 
 export default () => async (ctx) => {
@@ -8,9 +8,9 @@ export default () => async (ctx) => {
   try {
 
     const { categoryId } = ctx['params'];
-    const { data } = await deleteById(categoryId);
+    const result = await deleteById(categoryId);
 
-    ctx.body = data;
+    ctx.body = result;
 
   } catch (error) {
 

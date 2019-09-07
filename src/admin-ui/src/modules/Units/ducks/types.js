@@ -1,4 +1,8 @@
 
+export const SIGN_OUT = '@application/SIGN_OUT';
+
+export const PAGE_IN_PROCESS = '@page/PAGE_IN_PROCESS';
+
 export const GET_UNITS_REQUEST = '@units/GET_UNITS_REQUEST';
 export const GET_UNITS_REQUEST_FAIL = '@units/GET_UNITS_REQUEST_FAIL';
 export const GET_UNITS_REQUEST_SUCCESS = '@units/GET_UNITS_REQUEST_SUCCESS';

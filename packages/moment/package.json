@@ -1,8 +1,8 @@
 {
-  "name": "@sys.packages/validate",
+  "name": "@packages/moment",
   "version": "1.0.0",
   "private": true,
-  "main": "./src/index.js",
+  "main": "./src/index.mjs",
   "dependencies": {
     "moment": "^2.24.0"
   }

@@ -2,6 +2,8 @@
 import types from 'prop-types';
 import React, { PureComponent } from 'react';
 
+import { Timeout } from '@ui.packages/timer';
+
 import cn from 'classnames';
 import styles from './defaults.module.scss';
 
@@ -19,31 +21,25 @@ class Notification extends PureComponent {
 
   static defaultProps = {
     index: '',
-    autoClose: false,
-    timeout: 4000,
+    autoClose: true,
+    timeout: 4, // sec
     title: '',
     content: '',
     mode: 'default',
   };
 
-  _timeout = null;
+  timeout = new Timeout();
 
   componentDidMount() {
-    const { autoClose, timeout } = this.props;
-
+    const { index, autoClose, timeout } = this.props;
     if (autoClose) {
-      this._timeout = setTimeout(() => this._handleClose(), timeout);
-    }
-  }
-
-  componentWillUnmount() {
-    if (this._timeout) {
-      clearTimeout(this._timeout);
+      this.timeout.start(() => this._handleClose(index), timeout);
     }
   }
 
   _handleClose() {
     const { index, onClose } = this.props;
+    this.timeout.reset();
     onClose(index);
   }
 
@@ -85,8 +81,8 @@ class Component extends PureComponent {
     return (
       <div className={styles['notifications']}>
         <div className={styles['notifications__content']}>
-          {notifications.map((notification, index) => {
-            return <Notification key={index} {...notification} onClose={this._handleCloseByIndex.bind(this)} />
+          {notifications.map((notification, ind) => {
+            return <Notification key={notification['index']} {...notification} onClose={this._handleCloseByIndex.bind(this)} />
           })}
         </div>
       </div>

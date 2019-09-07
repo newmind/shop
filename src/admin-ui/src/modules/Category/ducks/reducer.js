@@ -1,5 +1,7 @@
 
 import {
+  SIGN_OUT,
+
   GET_CATEGORIES_REQUEST,
   GET_CATEGORIES_REQUEST_FAIL,
   GET_CATEGORIES_REQUEST_SUCCESS,
@@ -29,7 +31,7 @@ const initialState = {
 
 export default (state = initialState, { type, payload }) => {
   switch (type) {
-    case 'RESET': return {
+    case SIGN_OUT: return {
       ...initialState,
     };
 
@@ -55,15 +57,10 @@ export default (state = initialState, { type, payload }) => {
       ...state,
       inProcess: false,
     };
-    case SOCKET_CATEGORY_CREATED:
-    case CREATE_CATEGORY_REQUEST_SUCCESS: {
-      const categories = [...state['categories']];
-      if ( ! categories.some(category => category['id'] === payload['id'])) {
-        categories.push(payload);
-      }
+    case SOCKET_CATEGORY_CREATED: {
       return {
         ...state,
-        categories,
+        categories: [...state['categories'], payload],
         inProcess: false,
       };
     }
@@ -76,8 +73,7 @@ export default (state = initialState, { type, payload }) => {
       ...state,
       inProcess: false,
     };
-    case SOCKET_CATEGORY_UPDATED:
-    case UPDATE_CATEGORY_REQUEST_SUCCESS: return {
+    case SOCKET_CATEGORY_UPDATED: return {
       ...state,
       categories: state['categories'].map(category => {
         if (category['id'] === payload['id']) {
@@ -96,16 +92,10 @@ export default (state = initialState, { type, payload }) => {
       ...state,
       inProcess: false,
     };
-    case SOCKET_CATEGORY_DELETED:
-    case DELETE_CATEGORY_REQUEST_SUCCESS: {
-      const categories = state['categories'];
-      const index = categories.findIndex(category => category['id'] === payload);
+    case SOCKET_CATEGORY_DELETED: {
       return {
         ...state,
-        categories: [
-          ...state.categories.slice(0, index),
-          ...state.categories.slice(index + 1)
-        ],
+        categories: state['categories'].filter((item) => item['id'] !== payload),
         inProcess: false,
       };
     }

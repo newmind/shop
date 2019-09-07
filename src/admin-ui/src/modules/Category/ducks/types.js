@@ -1,4 +1,8 @@
 
+export const SIGN_OUT = '@application/SIGN_OUT';
+
+export const PAGE_IN_PROCESS = '@page/PAGE_IN_PROCESS';
+
 export const GET_CATEGORIES_REQUEST = '@@category/GET_CATEGORIES_REQUEST';
 export const GET_CATEGORIES_REQUEST_FAIL = '@@category/GET_CATEGORIES_REQUEST_FAIL';
 export const GET_CATEGORIES_REQUEST_SUCCESS = '@@category/GET_CATEGORIES_REQUEST_SUCCESS';

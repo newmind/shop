@@ -4,10 +4,9 @@ import React, { PureComponent } from 'react';
 
 import { Field } from 'redux-form';
 
-import Input from '../../symbols/Input';
 
 import cn from "classnames";
-import styles from "../../symbols/Input/default.module.scss";
+import styles from "./default.module.scss";
 
 const PRIMARY_MODE = 'primary';
 const INFO_MODE = 'info';
@@ -16,9 +15,6 @@ const DANGER_MODE = 'danger';
 const SUCCESS_MODE = 'success';
 
 
-// const InputField = ({ input, label, mode, type, disabled, meta: { touched, error } }) => {
-
-// };
 
 class FieldComponent extends PureComponent {
   static propTypes = {
@@ -62,16 +58,16 @@ class FieldComponent extends PureComponent {
 
   _calculateTooltipPosition() {
 
-    const { message } = this.props;
+    const { meta: { error, valid, touched, pristine } } = this.props;
     const {current: containerElement} = this.containerRef;
     const {current: messageElement} = this.messageRef;
 
-    if (message) {
+    if (error && ! valid && touched && pristine) {
 
       const containerRect = containerElement.getBoundingClientRect();
       const messageRect = messageElement.getBoundingClientRect();
 
-      messageElement.style['top'] = containerRect['top'] - ((messageRect['height'] - containerRect['height']) / 2) + 2 + 'px';
+      messageElement.style['top'] = containerRect['top'] - ((messageRect['height'] - containerRect['height']) / 2) + 'px';
       messageElement.style['left'] = containerRect['right'] + 8 + 'px';
     }
   }
@@ -93,7 +89,17 @@ class FieldComponent extends PureComponent {
   }
 
   render() {
-    const { input, label, mode, type, disabled, meta: { touched, error }} = this.props;
+    const { input, label, disabled, child, meta: { touched, error, warning }, children, ...props} = this.props;
+    let mode = 'default';
+
+    if (touched && error) {
+      mode = 'danger';
+    }
+
+    if (touched && warning) {
+      mode = 'warning';
+    }
+
     const classNameInputWrapper = cn(styles['wrapper'], {
       [styles['wrapper--primary']]: mode === PRIMARY_MODE,
       [styles['wrapper--success']]: mode === SUCCESS_MODE,
@@ -109,8 +115,12 @@ class FieldComponent extends PureComponent {
           <p className={styles['label']}>{ label }</p>
         )}
         <div ref={this.containerRef} className={styles['container']}>
-          <Input type={type} {...input} mode={mode || (touched && error && 'danger' || 'default')} />
-          { ! disabled && error && (
+          {React.cloneElement(child, {
+            ...props,
+            ...input,
+            mode: mode,
+          })}
+          { ! disabled && error && touched && (
             <span ref={this.messageRef} className={styles['tooltip']}>
             <span className={styles['tooltip__message']}>{ error }</span>
           </span>
@@ -124,16 +134,13 @@ class FieldComponent extends PureComponent {
 class Component extends PureComponent {
   static propTypes = {
     name: types.string,
-    mode: types.string,
     label: types.string,
-    type: types.string,
-    disabled: types.bool,
   };
 
   render() {
-    const { name, label, type } = this.props;
+    const { name, label, type, children } = this.props;
     return (
-      <Field name={name} type={type} label={label} component={FieldComponent} />
+      <Field name={name} type={type} label={label} child={children} component={FieldComponent} />
     );
   }
 }

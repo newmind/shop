@@ -4,6 +4,7 @@ import { push } from 'react-router-redux';
 import request from "@ui.packages/request";
 
 import {
+  signOutAction,
   changeStateAction,
 
   applicationGetProfileRequestAction,
@@ -36,15 +37,8 @@ export const getProfile = () => async (dispatch) => {
 
   } catch(error) {
 
-    const { status } = error;
-
-    if (status === 404) {
-      dispatch(push('/error404'));
-    } else {
-      dispatch(push('/sign-in'));
-    }
-
     dispatch(applicationGetProfileRequestFailAction());
+    dispatch(push('/sign-in'));
   }
 };
 
@@ -58,6 +52,7 @@ export const signOut = () => async (dispatch) => {
       method: 'post'
     });
 
+    dispatch(signOutAction());
     dispatch(applicationSignOutRequestSuccessAction());
     dispatch(push('/sign-in'));
 

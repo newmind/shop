@@ -13,7 +13,5 @@ const mapActionsToProps = (dispatch) => {
 export default PageHOC({
   mapStateToProps,
   mapActionsToProps,
-  onEnter: ({ onLoading }) => {
-    onLoading(false);
-  },
+  onEnter: ({}) => {},
 })(Component);

@@ -2,8 +2,11 @@
 import types from 'prop-types';
 import React, { PureComponent } from 'react';
 
-import {Row, Col, Button} from '@ui.packages/ui';
+import { Row, Col, Button, Container } from '@ui.packages/ui';
+
 import ModifyForm from './ModifyForm';
+
+import styles from './default.module.scss';
 
 
 class Component extends PureComponent {
@@ -47,21 +50,23 @@ class Component extends PureComponent {
       )
       : (
         <div className="page">
-          <Row>
-            <Col>
-              <ModifyForm initialValues={product} units={units} onSubmit={this._handleSubmitProduct.bind(this)} />
-            </Col>
-          </Row>
-          <Row>
-            <Col>
-              <Button
-                type="submit"
-                disabled={isInvalid || isPristine}
-                mode="success"
-                onClick={this._handleSubmit.bind(this)}
-              >{hasId ? 'Сохранить' : 'Добавить'}</Button>
-            </Col>
-          </Row>
+          <Container className={styles['form']}>
+            <Row>
+              <Col>
+                <ModifyForm initialValues={product} units={units} onSubmit={this._handleSubmitProduct.bind(this)} />
+              </Col>
+            </Row>
+            <Row>
+              <Col>
+                <Button
+                  type="submit"
+                  disabled={isInvalid || isPristine}
+                  mode="success"
+                  onClick={this._handleSubmit.bind(this)}
+                >{hasId ? 'Сохранить' : 'Добавить'}</Button>
+              </Col>
+            </Row>
+          </Container>
         </div>
       ));
   }

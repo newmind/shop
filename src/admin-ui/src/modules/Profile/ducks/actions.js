@@ -1,5 +1,7 @@
 
 import {
+  PAGE_IN_PROCESS,
+
   GET_PROFILE_REQUEST,
   GET_PROFILE_REQUEST_FAIL,
   GET_PROFILE_REQUEST_SUCCESS,
@@ -10,6 +12,11 @@ import {
 } from './types';
 import {APPLICATION_GET_PROFILE_REQUEST_SUCCESS} from "../../../components/Application/ducks/types";
 
+
+export const pageInProcess = (status = true) => ({
+  type: PAGE_IN_PROCESS,
+  payload: status,
+});
 
 export const getProfileRequestAction = () => ({
   type: GET_PROFILE_REQUEST,

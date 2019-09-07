@@ -2,7 +2,7 @@
 import request from '@ui.packages/request';
 
 import {
-  destroyAction,
+  pageInProcess,
 
   getCurrenciesAction,
   getCurrenciestFailAction,
@@ -38,10 +38,6 @@ import {
 } from './actions';
 
 
-export const destroy = () => dispatch => {
-  dispatch(destroyAction());
-};
-
 export const getCategories = () => async dispatch => {
 
   dispatch(getCategoriesAction());
@@ -53,7 +49,7 @@ export const getCategories = () => async dispatch => {
       url: '/category'
     });
 
-    return dispatch(getCategoriesSuccessAction(result['items']));
+    dispatch(getCategoriesSuccessAction(result['items']));
 
   } catch (error) {
 
@@ -82,6 +78,7 @@ export const getCurrencies = () => async dispatch => {
 
 export const getStockProducts = () => async dispatch => {
 
+  dispatch(pageInProcess(true));
   dispatch(getStockProductsRequestAction());
 
   try {
@@ -91,12 +88,14 @@ export const getStockProducts = () => async dispatch => {
       url: '/stock/products'
     });
 
-    return dispatch(getStockProductsRequestSuccessAction(result['items']));
+    dispatch(getStockProductsRequestSuccessAction(result['items']));
 
   } catch (error) {
 
     dispatch(getStockProductsRequestFailAction(error));
   }
+
+  dispatch(pageInProcess(false));
 };
 
 export const getProducts = () => async dispatch => {

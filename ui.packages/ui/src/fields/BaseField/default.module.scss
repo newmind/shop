@@ -1,66 +1,108 @@
 
-.field {
+@import "~@ui.packages/theme";
 
-  position: relative;
-  display: block;
 
-  & + & {
-    margin: 15px 0 0;
+.wrapper {
+
+  display: flex;
+  flex: 1 0 auto;
+  flex-direction: column;
+
+  &--info {
+
+    .label,
+    .info__icon {
+      color: darken($info-color, 10%);
+    }
   }
 
-  &__label {
+  &--primary {
+
+    .label,
+    .info__icon {
+      color: darken($primary-color, 10%);
+    }
+  }
+
+  &--success {
+
+    .label,
+    .info__icon {
+      color: darken($success-color, 10%);
+    }
+  }
+
+  &--warning {
+
+    .label,
+    .info__icon {
+      color: darken($warning-color, 10%);
+    }
+  }
+
+  &--danger {
+
+    .label,
+    .info__icon {
+      color: darken($danger-color, 10%);
+    }
+  }
+
+  &--disabled {
+
+    background: $light-gray-color;
+
+    .label {
+      color: $gray-color;
+      text-shadow: -1px 1px 0 $white-color;
+    }
+  }
+}
+
+.label {
+
+  display: block;
+  font-size: 14px;
+  color: #222;
+  margin: 0 0 8px 1px;
+  transition: color 400ms;
+}
+
+
+.container {
+
+  display: block;
+}
+
+.tooltip {
+
+  position: fixed;
+  padding: 10px 16px;
+  display: block;
+  background: $danger-color;
+  border-radius: 4px;
+
+  &:before {
 
     position: absolute;
+    right: 100%;
+    top: 50%;
+    display: inline-block;
+    margin: -7px 0 0;
+    width: 0;
+    height: 0;
+    border: 6px solid transparent;
+    border-left: none;
+    border-right-color: $danger-color;
+    content: '';
+  }
+
+  &__message {
+
     display: inline-block;
     font-size: 13px;
+    color: $whitesmoke-color;
+    letter-spacing: .5px;
     font-weight: bold;
-    margin: 0 0 0 2px;
   }
-
-  &__container {
-
-    padding: 20px 0;
-  }
-
-  &__input {
-
-    display: block;
-    padding: 10px;
-    border: 1px solid #e5eef5;
-    border-radius: 3px;
-    width: 100%;
-    box-sizing: border-box;
-    outline: none;
-    font-size: 15px;
-    transition: border-color 400ms;
-
-    &:focus {
-
-      border-color: #c1cad1;
-    }
-  }
-
-  &__error {
-
-    position: absolute;
-    bottom: 0;
-    display: inline-block;
-    color: #d50000;
-    font-size: 12px;
-    font-weight: bold;
-
-    &:before {
-      content: '- ';
-    }
-  }
-
-
-  &--error &__label {
-    color: #d50000
-  }
-
-  &--error &__input {
-    border-color: #d50000;
-  }
-
 }

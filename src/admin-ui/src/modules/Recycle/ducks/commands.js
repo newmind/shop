@@ -3,6 +3,8 @@ import request from '@ui.packages/request';
 import { closeDialog } from '@ui.packages/dialog';
 
 import {
+  pageInProcess,
+
   getProductsRequestAction,
   getProductsRequestFailAction,
   getProductsRequestSuccessAction,
@@ -14,6 +16,9 @@ import {
 
 
 export const getProducts = () => async dispatch => {
+
+  dispatch(pageInProcess(true));
+
   try {
 
     dispatch(getProductsRequestAction());
@@ -29,8 +34,11 @@ export const getProducts = () => async dispatch => {
     dispatch(getProductsRequestSuccessAction(result['items']));
 
   } catch(error) {
+
     dispatch(getProductsRequestFailAction());
   }
+
+  dispatch(pageInProcess(false));
 };
 
 export const removeProductById = (id) => async dispatch => {

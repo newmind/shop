@@ -3,6 +3,8 @@ import request from '@ui.packages/request';
 import { closeDialog } from '@ui.packages/dialog';
 
 import {
+  pageInProcess,
+
   getUnitsRequestAction,
   getUnitsRequestFailAction,
   getUnitsRequestSuccessAction,
@@ -22,9 +24,11 @@ import {
 
 
 export const getUnits = () => async dispatch => {
-  try {
 
-    dispatch(getUnitsRequestAction());
+  dispatch(pageInProcess(true));
+  dispatch(getUnitsRequestAction());
+
+  try {
 
     const result = await request({
       method: 'get',
@@ -37,6 +41,8 @@ export const getUnits = () => async dispatch => {
 
     dispatch(getUnitsRequestFailAction(error));
   }
+
+  dispatch(pageInProcess(false));
 };
 
 

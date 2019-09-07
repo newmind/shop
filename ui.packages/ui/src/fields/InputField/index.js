@@ -1,16 +1,10 @@
 
 import types from 'prop-types';
 import React, { PureComponent } from 'react';
-import { Field } from 'redux-form';
 
+import BaseField from '../BaseField';
 import Input from '../../symbols/Input';
 
-
-const InputField = ({ input, label, mode, type, className, meta: { touched, error } }) => {
-  return (
-    <Input label={label} className={className} {...input} type={type} message={touched && error || ''} mode={mode || (touched && error && 'danger' || 'default')} />
-  );
-};
 
 class Component extends PureComponent {
   static propTypes = {
@@ -23,9 +17,11 @@ class Component extends PureComponent {
   };
 
   render() {
-    const { name, label, type, className } = this.props;
+    const { ...props } = this.props;
     return (
-      <Field className={className} name={name} type={type} label={label} component={InputField} />
+      <BaseField {...props}>
+        <Input />
+      </BaseField>
     );
   }
 }

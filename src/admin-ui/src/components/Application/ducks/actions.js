@@ -1,5 +1,6 @@
 
 import {
+  SIGN_OUT,
   APPLICATION_CHANGE_STATE,
 
   APPLICATION_GET_PROFILE_REQUEST,
@@ -11,6 +12,13 @@ import {
   APPLICATION_SIG_OUT_REQUEST_SUCCESS,
 } from './types';
 
+
+export const signOutAction = () => {
+  return{
+    type: SIGN_OUT,
+    payload: null,
+  }
+};
 
 export const changeStateAction = state => {
   return{

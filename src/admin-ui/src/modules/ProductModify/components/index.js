@@ -45,9 +45,8 @@ const mapActionsToProps = (dispatch) => {
 export default PageHOC({
   mapStateToProps,
   mapActionsToProps,
-  onEnter: ({ onLoading, getProductById, getUnits, match: { params: { id }} }) => {
+  onEnter: ({ getProductById, getUnits, match: { params: { id }} }) => {
     getProductById(id);
     getUnits();
-    onLoading(false);
   },
 })(Component);

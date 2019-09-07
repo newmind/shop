@@ -1,6 +1,6 @@
 
 import {
-  DESTROY,
+  SIGN_OUT,
 
   GET_CATEGORIES_REQUEST,
   GET_CATEGORIES_REQUEST_FAIL,
@@ -48,7 +48,7 @@ const initialState = {
 
 export default (state = initialState, { type, payload }) => {
   switch (type) {
-    case DESTROY: return {
+    case SIGN_OUT: return {
       ...initialState,
     };
 

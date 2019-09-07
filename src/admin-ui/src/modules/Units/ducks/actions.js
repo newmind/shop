@@ -1,5 +1,7 @@
 
 import {
+  PAGE_IN_PROCESS,
+
   GET_UNITS_REQUEST,
   GET_UNITS_REQUEST_FAIL,
   GET_UNITS_REQUEST_SUCCESS,
@@ -17,6 +19,11 @@ import {
   UPDATE_UNIT_REQUEST_SUCCESS,
 } from './types';
 
+
+export const pageInProcess = (status = true) => ({
+  type: PAGE_IN_PROCESS,
+  payload: status,
+});
 
 export const getUnitsRequestAction = () => ({
   type: GET_UNITS_REQUEST,

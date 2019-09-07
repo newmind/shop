@@ -25,9 +25,8 @@ const mapActionsToProps = (dispatch) => {
 export default PageHOC({
     mapStateToProps,
     mapActionsToProps,
-    onEnter: async ({ onLoading, checkCookies }) => {
+    onEnter: async ({ checkCookies }) => {
       await checkCookies();
-      onLoading(false);
     },
   }
 )(Component);

@@ -2,6 +2,8 @@
 import request from '@ui.packages/request';
 
 import {
+  pageInProcess,
+
   getAllRequestAction,
   getAllRequestFailAction,
   getAllRequestSuccessAction,
@@ -25,6 +27,9 @@ import {
 
 
 export const getAll = () => async dispatch => {
+
+  dispatch(pageInProcess(true));
+
   try {
 
     dispatch(getAllRequestAction());
@@ -39,6 +44,8 @@ export const getAll = () => async dispatch => {
   } catch(error) {
     dispatch(getAllRequestFailAction(error));
   }
+
+  dispatch(pageInProcess(false));
 };
 
 export const getById = (id) => async dispatch => {

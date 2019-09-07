@@ -1,5 +1,7 @@
 
 import {
+  PAGE_IN_PROCESS,
+
   OPEN_DIALOG,
   CLOSE_DIALOG,
 
@@ -16,6 +18,11 @@ import {
   REMOVE_PRODUCT_REQUEST_SUCCESS,
 } from './types';
 
+
+export const pageInProcess = (status = true) => ({
+  type: PAGE_IN_PROCESS,
+  payload: status,
+});
 
 export const openDialogAction = () => ({
   type: OPEN_DIALOG,

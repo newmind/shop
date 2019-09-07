@@ -1,5 +1,7 @@
 
 import {
+  PAGE_IN_PROCESS,
+
   GET_CURRENCIES_REQUEST,
   GET_CURRENCIES_REQUEST_FAIL,
   GET_CURRENCIES_REQUEST_SUCCESS,
@@ -21,6 +23,11 @@ import {
   DELETE_CURRENCY_REQUEST_SUCCESS,
 } from './types';
 
+
+export const pageInProcess = (status = true) => ({
+  type: PAGE_IN_PROCESS,
+  payload: status,
+});
 
 export const getAllRequestAction = () => ({
   type: GET_CURRENCIES_REQUEST,

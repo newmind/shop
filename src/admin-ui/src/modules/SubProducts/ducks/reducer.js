@@ -1,5 +1,7 @@
 
 import {
+  SIGN_OUT,
+
   GET_SUB_PRODUCTS_REQUEST,
   GET_SUB_PRODUCTS_REQUEST_FAIL,
   GET_SUB_PRODUCTS_REQUEST_SUCCESS,
@@ -17,7 +19,6 @@ import {
   SOCKET_SUB_PRODUCT_DELETED,
 } from './types';
 
-export const KEY = 'Products';
 
 const initialState = {
   products: [],
@@ -25,7 +26,7 @@ const initialState = {
 
 export default (state = initialState, { type, payload }) => {
   switch (type) {
-    case 'RESET': return {
+    case SIGN_OUT: return {
       ...initialState,
     };
 

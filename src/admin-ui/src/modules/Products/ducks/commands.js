@@ -3,6 +3,8 @@ import request from '@ui.packages/request';
 import { pushNotification } from '@ui.packages/notifications';
 
 import {
+  pageInProcess,
+
   openDialogAction,
   closeDialogAction,
 
@@ -30,6 +32,9 @@ export const closeDialog = () => dispatch => {
 
 
 export const getProducts = () => async dispatch => {
+
+  dispatch(pageInProcess(true));
+
   try {
 
     dispatch(getProductsRequestAction());
@@ -42,8 +47,11 @@ export const getProducts = () => async dispatch => {
     dispatch(getProductsRequestSuccessAction(result['items']));
 
   } catch(error) {
+
     dispatch(getProductsRequestFailAction());
   }
+
+  dispatch(pageInProcess(false));
 };
 
 export const createProducts = (data) => async dispatch => {

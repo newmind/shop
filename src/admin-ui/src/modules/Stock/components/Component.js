@@ -5,12 +5,12 @@ import React, { PureComponent } from 'react';
 import { nounDeclension } from '@ui.packages/utils';
 import { Dialog, Confirm } from '@ui.packages/dialog';
 import { Button, Col, Gallery, Row, Table } from "@ui.packages/ui";
+import numeral from "@packages/numeral";
 
 import ModifyDialog from './ModifyDialog';
 
 import cn from "classnames";
 import styles from "./default.module.scss";
-import numeral from "@ui.packages/numeral";
 
 
 class Component extends PureComponent {

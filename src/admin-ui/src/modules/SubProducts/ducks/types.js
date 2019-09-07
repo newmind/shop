@@ -1,4 +1,8 @@
 
+export const SIGN_OUT = '@application/SIGN_OUT';
+
+export const PAGE_IN_PROCESS = '@page/PAGE_IN_PROCESS';
+
 export const OPEN_DIALOG = '@sub-products/OPEN_DIALOG';
 export const CLOSE_DIALOG = '@sub-products/CLOSE_DIALOG';
 

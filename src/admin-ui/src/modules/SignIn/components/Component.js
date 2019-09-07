@@ -55,7 +55,7 @@ class Component extends PureComponent {
             <Form onSubmit={this.onSubmit.bind(this)} />
           </div>
           <div className={styles['dialog__controls']}>
-            <Button onClick={this._onSubmitForm.bind(this)} disabled={ ! isValid || isPristine}>Выполнить</Button>
+            <Button onClick={this._onSubmitForm.bind(this)} mode="primary" disabled={ ! isValid || isPristine}>Выполнить</Button>
           </div>
         </div>
       </div>

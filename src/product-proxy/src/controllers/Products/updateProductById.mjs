@@ -51,7 +51,7 @@ export default () => async (ctx) => {
 
     await saveFiles(files, { productId }, { transaction });
 
-    return await Product.findOne({
+    return Product.findOne({
       where: { id: productId },
       attributes: ['id', 'name', 'brand', 'description', 'status'],
       include: [
@@ -79,10 +79,12 @@ export default () => async (ctx) => {
       transaction });
   });
 
-  sendEvent(process.env['RABBIT_PRODUCT_PROXY_EXCHANGE_PRODUCT_UPDATED'], JSON.stringify(product));
+  const result = product.toJSON();
+
+  sendEvent(process.env['RABBIT_PRODUCT_PROXY_EXCHANGE_PRODUCT_UPDATED'], JSON.stringify(result));
 
   ctx.body = {
     success: true,
-    data: product,
+    data: result,
   };
 };
