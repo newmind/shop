@@ -11,6 +11,7 @@ COPY ./src/admin-gw/src               ./src/admin-gw/src
 COPY ./src/admin-gw/.env.production   ./src/admin-gw
 COPY ./src/admin-gw/package.json      ./src/admin-gw
 COPY ./sys.packages                   ./sys.packages
+COPY ./packages                       ./packages
 COPY ./package.json                   .
 COPY ./lerna.json                     .
 COPY ./yarn.lock                      .
