@@ -6,7 +6,7 @@ import koaCORS from "koa-cors2";
 import cookie from 'koa-cookie';
 
 import jwtToken from '@sys.packages/jwt';
-import createSocket from '@sys.packages/socket.io';
+import createSocket, { emitToRoom } from '@sys.packages/socket.io';
 import appServer, { initRouter } from '@sys.packages/server';
 import { connect as createConnection, channel as createChannel, createConsumer, bindQueueToExchange } from "@sys.packages/rabbit";
 
@@ -43,7 +43,11 @@ import routes from './routes';
 
         // QUEUES
 
-        await createConsumer(process.env['RABBIT_IDENTITY_SRV_QUEUE_PASSPORT_UPDATED'], (message) => io.emit('action', { type: process.env['SOCKET_PASSPORT_UPDATED'], payload: JSON.parse(message) }));
+        await createConsumer(process.env['RABBIT_IDENTITY_SRV_QUEUE_PASSPORT_UPDATED'], (message) => {
+          const passport = JSON.parse(message);
+          emitToRoom(passport['id'], process.env['SOCKET_PASSPORT_UPDATED'], passport);
+          // io.emit('action', { type: process.env['SOCKET_PASSPORT_UPDATED'], payload: passport })
+        });
 
         await createConsumer(process.env['RABBIT_ADMIN_GW_QUEUE_UNIT_UPDATED'], (message) => io.emit('action', { type: process.env['SOCKET_UNIT_UPDATED'], payload: JSON.parse(message) }));
         await createConsumer(process.env['RABBIT_ADMIN_GW_QUEUE_UNIT_CREATED'], (message) => io.emit('action', { type: process.env['SOCKET_UNIT_CREATED'], payload: JSON.parse(message) }));

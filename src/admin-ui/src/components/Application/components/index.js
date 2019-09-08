@@ -5,7 +5,7 @@ import { withRouter } from 'react-router';
 
 import Component from './Component';
 
-import { getProfile, changeState, signOut } from '../ducks/commands';
+import { getProfile, changeState, signIn, signOut } from '../ducks/commands';
 
 
 const mapStateToProps = (store) => {
@@ -18,6 +18,7 @@ const mapStateToProps = (store) => {
 };
 
 const mapActionsToProps = dispatch => ({
+  signIn: bindActionCreators(signIn, dispatch),
   signOut: bindActionCreators(signOut, dispatch),
   getProfile: bindActionCreators(getProfile, dispatch),
   changeState: bindActionCreators(changeState, dispatch),

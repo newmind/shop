@@ -61,14 +61,16 @@ class Component extends PureComponent {
   static childContextTypes = {
     profile: types.object,
     isAuth: types.bool,
+    signIn: types.func,
     signOut: types.func,
   };
 
   getChildContext() {
-    const { profile, isAuth, signOut } = this.props;
+    const { profile, isAuth, signIn, signOut } = this.props;
     return {
       profile,
       isAuth,
+      signIn,
       signOut,
     };
   }

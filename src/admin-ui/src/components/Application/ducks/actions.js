@@ -3,6 +3,10 @@ import {
   SIGN_OUT,
   APPLICATION_CHANGE_STATE,
 
+  APPLICATION_AUTH_REQUEST,
+  APPLICATION_AUTH_REQUEST_FAIL,
+  APPLICATION_AUTH_REQUEST_SUCCESS,
+
   APPLICATION_GET_PROFILE_REQUEST,
   APPLICATION_GET_PROFILE_REQUEST_FAIL,
   APPLICATION_GET_PROFILE_REQUEST_SUCCESS,
@@ -26,6 +30,20 @@ export const changeStateAction = state => {
     payload: state,
   }
 };
+
+export const applicationAuthRequestAction = () => ({
+  type: APPLICATION_AUTH_REQUEST,
+});
+
+export const applicationAuthRequestFailAction = (error) => ({
+  type: APPLICATION_AUTH_REQUEST_FAIL,
+  payload: error,
+});
+
+export const applicationAuthRequestSuccessAction = (data) => ({
+  type: APPLICATION_AUTH_REQUEST_SUCCESS,
+  payload: data,
+});
 
 export const applicationGetProfileRequestAction = () => ({
   type: APPLICATION_GET_PROFILE_REQUEST,

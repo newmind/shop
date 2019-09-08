@@ -10,7 +10,6 @@ export default () => async (ctx) => {
 
     const { data } = await get(id);
 
-    delete data['id'];
     delete data['userId'];
 
     ctx.body = data;

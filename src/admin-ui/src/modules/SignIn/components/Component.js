@@ -23,6 +23,7 @@ class Component extends PureComponent {
 
   static contextTypes = {
     isAuth: types.bool,
+    signIn: types.func,
   };
 
   componentDidMount() {
@@ -34,7 +35,7 @@ class Component extends PureComponent {
   }
 
   onSubmit(data) {
-    const { signIn } = this.props;
+    const { signIn } = this.context;
     signIn(data);
   }
 

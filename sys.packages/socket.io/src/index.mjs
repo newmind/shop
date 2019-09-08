@@ -19,6 +19,7 @@ export default async (server, options = {}) => {
     io.on('connection', client => {
 
       client.on('join', (room) => {
+        console.log('joined to room', room);
         client.join(room);
       });
 
@@ -37,15 +38,13 @@ export default async (server, options = {}) => {
 
 export const emitToRoom = (room, type, payload) => {
 
-  io.in(room).emit('action', {
-    type: `@@socket/${type}`,
+  io.sockets.in(room).emit('action', {
+    type: type,
     payload,
-  });
+  })
 };
 
 export const emit = (type, payload) => {
-
-  console.log(333, type);
 
   io.sockets.emit('action', {
     type: `@@socket/${type}`,
