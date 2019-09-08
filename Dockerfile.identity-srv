@@ -20,4 +20,6 @@ RUN yarn
 
 WORKDIR /app/src/identity-srv
 
+ENTRYPOINT ["yarn", "run", "migration"]
+ENTRYPOINT ["yarn", "run", "seed"]
 ENTRYPOINT ["yarn", "run", "start"]
