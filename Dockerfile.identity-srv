@@ -11,7 +11,7 @@ COPY ./src/identity-srv/db              ./src/identity-srv/db
 COPY ./src/identity-srv/src             ./src/identity-srv/src
 COPY ./src/identity-srv/.env.production ./src/identity-srv
 COPY ./src/identity-srv/package.json    ./src/identity-srv
-COPY ./.sequelizerc                     ./src/identity-srv
+COPY ./src/identity-srv/.sequelizerc    ./src/identity-srv
 COPY ./sys.packages                     ./sys.packages
 COPY ./packages                         ./packages
 COPY ./package.json                     ./
