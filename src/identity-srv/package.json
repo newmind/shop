@@ -6,9 +6,9 @@
     "migrations:dev": "node -r dotenv/config sequelize-cli db:seed:all dotenv_config_path=./.env",
     "start": "node -r dotenv/config --experimental-modules ./src/index.mjs dotenv_config_path=./.env.production",
     "start:dev": "nodemon --exec node -r dotenv/config --experimental-modules ./src/index.mjs dotenv_config_path=./.env.development",
-    "migration": "node -r dotenv/config ../../node_modules/.bin/sequelize-cli db:migrate dotenv_config_path=./.env.production",
+    "migration": "node -r dotenv/config sequelize-cli db:migrate dotenv_config_path=./.env.production",
     "migration:dev": "node -r dotenv/config ../../node_modules/.bin/sequelize-cli db:migrate dotenv_config_path=./.env.development",
-    "seed": "node -r dotenv/config ../../node_modules/.bin/sequelize-cli db:seed:all dotenv_config_path=./.env.production",
+    "seed": "node -r dotenv/config sequelize-cli db:seed:all dotenv_config_path=./.env.production",
     "seed:dev": "node -r dotenv/config ../../node_modules/.bin/sequelize-cli db:seed:all dotenv_config_path=./.env.development"
   },
   "dependencies": {
