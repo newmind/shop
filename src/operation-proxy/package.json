@@ -4,7 +4,9 @@
   "version": "1.0.0",
   "scripts": {
     "start": "node -r dotenv/config --experimental-modules ./src/index.mjs dotenv_config_path=./.env.production",
-    "start:dev": "nodemon --exec node -r dotenv/config --experimental-modules ./src/index.mjs dotenv_config_path=./.env.development"
+    "start:dev": "nodemon --exec node -r dotenv/config --experimental-modules ./src/index.mjs dotenv_config_path=./.env.development",
+    "migration:dev": "node -r dotenv/config ../../node_modules/.bin/sequelize-cli db:migrate dotenv_config_path=./.env.development",
+    "seed:dev": "node -r dotenv/config ../../node_modules/.bin/sequelize-cli db:seed:all dotenv_config_path=./.env.development"
   },
   "dependencies": {
     "@sys.packages/db": "^1.0.0",
@@ -13,9 +15,10 @@
     "@sys.packages/socket.io": "^1.0.0",
     "@sys.packages/sys.utils": "^1.0.0",
     "busboy": "^0.3.1",
-    "dotenv": "^7.0.0"
+    "dotenv": "^8.1.0"
   },
   "devDependencies": {
-    "nodemon": "1.19.1"
+    "nodemon": "1.19.1",
+    "sequelize-cli": "^5.5.1"
   }
 }

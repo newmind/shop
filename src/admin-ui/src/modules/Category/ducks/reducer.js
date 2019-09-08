@@ -8,15 +8,15 @@ import {
 
   CREATE_CATEGORY_REQUEST,
   CREATE_CATEGORY_REQUEST_FAIL,
-  // CREATE_CATEGORY_REQUEST_SUCCESS,
+  CREATE_CATEGORY_REQUEST_SUCCESS,
 
   UPDATE_CATEGORY_REQUEST,
   UPDATE_CATEGORY_REQUEST_FAIL,
-  // UPDATE_CATEGORY_REQUEST_SUCCESS,
+  UPDATE_CATEGORY_REQUEST_SUCCESS,
 
   DELETE_CATEGORY_REQUEST,
   DELETE_CATEGORY_REQUEST_FAIL,
-  // DELETE_CATEGORY_REQUEST_SUCCESS,
+  DELETE_CATEGORY_REQUEST_SUCCESS,
 
   SOCKET_CATEGORY_CREATED,
   SOCKET_CATEGORY_DELETED,
@@ -57,6 +57,10 @@ export default (state = initialState, { type, payload }) => {
       ...state,
       inProcess: false,
     };
+    case CREATE_CATEGORY_REQUEST_SUCCESS: return {
+      ...state,
+      inProcess: false,
+    };
     case SOCKET_CATEGORY_CREATED: {
       return {
         ...state,
@@ -70,6 +74,10 @@ export default (state = initialState, { type, payload }) => {
       inProcess: true,
     };
     case UPDATE_CATEGORY_REQUEST_FAIL: return {
+      ...state,
+      inProcess: false,
+    };
+    case UPDATE_CATEGORY_REQUEST_SUCCESS: return {
       ...state,
       inProcess: false,
     };
@@ -89,6 +97,10 @@ export default (state = initialState, { type, payload }) => {
       inProcess: true,
     };
     case DELETE_CATEGORY_REQUEST_FAIL: return {
+      ...state,
+      inProcess: false,
+    };
+    case DELETE_CATEGORY_REQUEST_SUCCESS: return {
       ...state,
       inProcess: false,
     };

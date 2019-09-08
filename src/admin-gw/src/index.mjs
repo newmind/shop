@@ -46,7 +46,6 @@ import routes from './routes';
         await createConsumer(process.env['RABBIT_IDENTITY_SRV_QUEUE_PASSPORT_UPDATED'], (message) => {
           const passport = JSON.parse(message);
           emitToRoom(passport['id'], process.env['SOCKET_PASSPORT_UPDATED'], passport);
-          // io.emit('action', { type: process.env['SOCKET_PASSPORT_UPDATED'], payload: passport })
         });
 
         await createConsumer(process.env['RABBIT_ADMIN_GW_QUEUE_UNIT_UPDATED'], (message) => io.emit('action', { type: process.env['SOCKET_UNIT_UPDATED'], payload: JSON.parse(message) }));

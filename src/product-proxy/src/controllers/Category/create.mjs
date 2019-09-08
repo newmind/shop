@@ -16,7 +16,7 @@ export default () => async (ctx) => {
       ...formData,
     }, { transaction });
 
-    return await Category.findOne({
+    return Category.findOne({
       attributes: ['id', 'name', 'description'],
       where: { id: id },
       transaction
