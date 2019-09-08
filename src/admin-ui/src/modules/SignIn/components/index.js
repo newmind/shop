@@ -21,6 +21,5 @@ const mapActionsToProps = (dispatch) => {
 export default PageHOC({
     mapStateToProps,
     mapActionsToProps,
-    onEnter: async ({}) => {},
   }
 )(Component);
