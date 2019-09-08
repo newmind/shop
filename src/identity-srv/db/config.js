@@ -10,7 +10,7 @@ module.exports = {
   },
   production: {
     port: 5432,
-    host: 'db',
+    host: `db`,
     database: 'identity',
     username: 'admin',
     password: '1Ctdfcnjgjkm',
