@@ -2,20 +2,22 @@
   "name": "identity-srv",
   "license": "MIT",
   "version": "1.0.0",
+  "bin": {
+    "sequelize-cli": "sequelize-cli"
+  },
   "scripts": {
     "migrations:dev": "node -r dotenv/config sequelize-cli db:seed:all dotenv_config_path=./.env",
     "start": "node -r dotenv/config --experimental-modules ./src/index.mjs dotenv_config_path=./.env.production",
     "start:dev": "nodemon --exec node -r dotenv/config --experimental-modules ./src/index.mjs dotenv_config_path=./.env.development",
-    "migration": "node -r dotenv/config sequelize-cli db:migrate dotenv_config_path=./.env.production",
-    "migration:dev": "node -r dotenv/config ../../node_modules/.bin/sequelize-cli db:migrate dotenv_config_path=./.env.development",
-    "seed": "node -r dotenv/config sequelize-cli db:seed:all dotenv_config_path=./.env.production",
-    "seed:dev": "node -r dotenv/config ../../node_modules/.bin/sequelize-cli db:seed:all dotenv_config_path=./.env.development"
+    "migration": "cross-env NODE_ENV=production sequelize-cli db:migrate",
+    "migration:dev": "cross-env NODE_ENV=development sequelize-cli db:migrate",
+    "seed": "cross-env NODE_ENV=production sequelize-cli db:seed:all",
+    "seed:dev": "cross-env NODE_ENV=development sequelize-cli db:seed:all"
   },
   "dependencies": {
     "@sys.packages/db": "^1.0.0",
     "@sys.packages/server": "^1.0.0",
     "@sys.packages/sys.utils": "^1.0.0",
-    "dotenv": "^7.0.0",
     "jsonwebtoken": "^8.5.1",
     "koa": "2.8.1",
     "koa-bodyparser": "^4.2.1",
@@ -26,6 +28,7 @@
     "sequelize": "^5.1.0"
   },
   "devDependencies": {
+    "cross-env": "^5.2.1",
     "nodemon": "1.19.1",
     "sequelize-cli": "^5.5.1"
   }
