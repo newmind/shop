@@ -19,7 +19,6 @@ class Component extends PureComponent {
   }
 
   render() {
-
     const { children, navigate }  = this.props;
     return (
       <section className={styles['wrapper']}>
