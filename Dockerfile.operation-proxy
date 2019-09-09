@@ -7,9 +7,11 @@ RUN npm i yarn -g --yes
 
 WORKDIR /app
 
+COPY ./src/operation-proxy/db                ./src/operation-proxy/db
 COPY ./src/operation-proxy/src               ./src/operation-proxy/src
 COPY ./src/operation-proxy/.env.production   ./src/operation-proxy
 COPY ./src/operation-proxy/package.json      ./src/operation-proxy
+COPY ./src/operation-proxy/.sequelizerc      ./src/identity-srv
 COPY ./sys.packages                          ./sys.packages
 COPY ./packages                              ./packages
 COPY ./package.json                          .
