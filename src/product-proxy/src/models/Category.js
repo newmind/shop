@@ -19,7 +19,7 @@ module.exports = (db, DataType) => {
     }
   });
 
-  // Category.sync({ force: true });
+  Category.associate = () => {};
 
   return Category;
 };

@@ -5,10 +5,10 @@
   "scripts": {
     "migration": "cross-env NODE_ENV=production sequelize-cli db:migrate",
     "migration:dev": "cross-env NODE_ENV=development sequelize-cli db:migrate",
-    "seed": "cross-env NODE_ENV=production sequelize-cli db:seed:up",
-    "seed:dev": "cross-env NODE_ENV=development sequelize-cli db:seed:up",
-    "start": "yarn run migration && yarn run seed && node -r dotenv/config --experimental-modules ./src/index.mjs dotenv_config_path=./.env.production",
-    "start:dev": "yarn run migration:dev && yarn run seed:dev && nodemon --exec node -r dotenv/config --experimental-modules ./src/index.mjs dotenv_config_path=./.env.development"
+    "seed": "cross-env NODE_ENV=production sequelize-cli db:seed:all",
+    "seed:dev": "cross-env NODE_ENV=development sequelize-cli db:seed:all",
+    "start": "yarn run migration && node -r dotenv/config --experimental-modules ./src/index.mjs dotenv_config_path=./.env.production",
+    "start:dev": "npx yarn run migration:dev && nodemon --exec node -r dotenv/config --experimental-modules ./src/index.mjs dotenv_config_path=./.env.development"
   },
   "dependencies": {
     "@sys.packages/db": "^1.0.0",

@@ -27,7 +27,5 @@ module.exports = (db, DataType) => {
     });
   };
 
-  // Attribute.sync({ force: true });
-
   return Attribute;
 };

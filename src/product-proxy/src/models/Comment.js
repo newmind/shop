@@ -23,7 +23,5 @@ module.exports = (db, DataType) => {
 
   Comment.associate = () => {};
 
-  // Comment.sync({ force: true });
-
   return Comment;
 };

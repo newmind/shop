@@ -16,7 +16,5 @@ module.exports = (db, DataType) => {
 
   Gallery.associate = ({}) => {};
 
-  // Gallery.sync({ force: true });
-
   return Gallery;
 };

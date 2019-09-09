@@ -45,7 +45,5 @@ module.exports = (db, DataType) => {
     })
   };
 
-  // Product.sync({ force: true });
-
   return Product;
 };

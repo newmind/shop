@@ -19,7 +19,7 @@ module.exports = (db, DataType) => {
     }
   });
 
-  // Currency.sync({ force: true });
+  Currency.associate = () => {};
 
   return Currency;
 };

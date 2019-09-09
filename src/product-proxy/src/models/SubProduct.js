@@ -23,11 +23,7 @@ module.exports = (db, DataType) => {
     },
   });
 
-  SubProduct.associate = function({ Attribute, Gallery, Stock }) {
-
-  };
-
-  // Product.sync({ force: true });
+  SubProduct.associate = function({ Attribute, Gallery, Stock }) {};
 
   return SubProduct;
 };

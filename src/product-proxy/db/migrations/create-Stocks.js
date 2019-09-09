@@ -4,17 +4,29 @@ module.exports = {
   async up(queryInterface, Sequelize) {
     const transaction = await queryInterface.sequelize.transaction();
     try {
-      await queryInterface.addColumn(
-        'Person',
-        'id',
-        {
-          allowNull: false,
-          autoIncrement: true,
+
+      await queryInterface.createTable('Stocks', {
+        id: {
+          type: Sequelize.INTEGER,
           primaryKey: true,
-          type: Sequelize.INTEGER
+          autoIncrement: true,
+          index: true,
         },
-        { transaction }
-      );
+        amount: {
+          type: Sequelize.DECIMAL(10, 2),
+          allowNull: false,
+        },
+        count: {
+          type: Sequelize.INTEGER,
+        },
+        createdAt: {
+          type: Sequelize.DATE,
+        },
+        updatedAt: {
+          type: Sequelize.DATE,
+        }
+      });
+
       await transaction.commit();
 
     } catch (err) {
@@ -24,17 +36,9 @@ module.exports = {
       throw err;
     }
   },
-  async down(queryInterface, Sequelize) {
+  async down(queryInterface) {
     const transaction = await queryInterface.sequelize.transaction();
     try {
-      await queryInterface.removeColumn(
-        'Person',
-        'petSurname',
-        {
-          type: Sequelize.STRING,
-        },
-        { transaction }
-      );
       await transaction.commit();
     } catch (err) {
       await transaction.rollback();
