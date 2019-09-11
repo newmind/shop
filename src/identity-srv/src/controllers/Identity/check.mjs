@@ -3,25 +3,41 @@
 import jwt from 'jsonwebtoken';
 
 
+const decode = (token) => {
+  return new Promise((resolve, reject) => {
+    jwt.verify(token, process.env['JWT_SECRET'], (err, decoded) => {
+      if (err) {
+        reject(err);
+      }
+      resolve(decoded);
+    });
+  });
+};
+
+
 export default () => async (ctx) => {
   try {
 
-    const { token } = ctx.request.body;
+    const { token } = ctx['request']['body'];
 
-    const user = await new Promise((resolve, reject) => {
+    // декодируем авторизационный токен
+    const user = await decode(token);
 
-      jwt.verify(token, process.env['JWT_SECRET'], (err, decoded) => {
-        if (err) {
-          reject(err);
-        }
-        resolve(decoded);
-      });
-    });
-
-    ctx.body = user;
+    ctx.status = 200;
+    ctx.body = {
+      success: true,
+      data: user,
+    };
 
   } catch (error) {
 
-    ctx.throw(403, { code: 403, message: 'token invalid' });
+    ctx.status = 500;
+    ctx.body = {
+      success: false,
+      error: {
+        code: '',
+        message: error['message'],
+      }
+    };
   }
 };

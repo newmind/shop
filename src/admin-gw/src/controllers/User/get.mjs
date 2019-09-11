@@ -1,6 +1,6 @@
 'use strict';
 
-import { get } from "../../requests/User";
+import { get } from "./requests";
 
 
 export default () => async (ctx) => {

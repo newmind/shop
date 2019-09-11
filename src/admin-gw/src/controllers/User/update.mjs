@@ -1,6 +1,6 @@
 'use strict';
 
-import { update } from "../../requests/User";
+import { update } from "./requests";
 
 
 export default () => async (ctx) => {

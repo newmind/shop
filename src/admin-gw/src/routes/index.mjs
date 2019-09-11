@@ -40,6 +40,7 @@ import {
   update as updateUser,
 } from '../controllers/User';
 
+
 export default (router) => {
 
   router.get('/stock/products', getStockProducts());

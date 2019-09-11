@@ -13,12 +13,21 @@ export default () => async (ctx) => {
       where: { userId: id }
     });
 
+    ctx.status = 200;
     ctx.body = {
       success: true,
-      data: passport ? passport.toJSON() : {},
+      data: passport ? passport.toJSON() : null,
     };
 
-  } catch(e) {
+  } catch(error) {
 
+    ctx.status = 500;
+    ctx.body = {
+      success: false,
+      error: {
+        code: '',
+        message: error['message'],
+      }
+    };
   }
 };

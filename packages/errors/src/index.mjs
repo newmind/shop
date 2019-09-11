@@ -35,3 +35,27 @@ export class ValidationError extends CustomError {
     Error.captureStackTrace(this, ValidationError);
   }
 }
+
+export class NotFoundError extends CustomError {
+  constructor(data) {
+    super(data);
+
+    this.name = this.constructor.name;
+    this.status = 401;
+    this.message = 'Не найдено';
+
+    Error.captureStackTrace(this, ValidationError);
+  }
+}
+
+export class InternalError extends CustomError {
+  constructor(data) {
+    super(data);
+
+    this.name = this.constructor.name;
+    this.status = 500;
+    this.message = 'Не найдено';
+
+    Error.captureStackTrace(this, ValidationError);
+  }
+}

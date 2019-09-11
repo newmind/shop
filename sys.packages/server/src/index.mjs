@@ -38,18 +38,10 @@ app.use(koaBodyParser({
 
 app.use(async (ctx, next) => {
   try {
-
     await next();
-
   } catch(error) {
-
-    const { status, message } = ctx.response;
-
-    ctx.status = error['status'] || status;
-    ctx.body = {
-      status: error['status'] || status,
-      message: error['message'] || message,
-    };
+    ctx.status = error['status'];
+    ctx.body = error['data'];
   }
 });
 

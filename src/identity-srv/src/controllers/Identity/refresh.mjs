@@ -2,48 +2,74 @@
 
 import jwt from 'jsonwebtoken';
 
-import { token } from '@sys.packages/sys.utils';
 import { models } from '@sys.packages/db';
 
 
+const decode = (token) => {
+  return new Promise((resolve, reject) => {
+    jwt.verify(token, process.env['JWT_SECRET'], (err, decoded) => {
+      if (err) {
+        reject(err);
+      }
+      resolve(decoded);
+    });
+  });
+};
+
 export default () => async (ctx) => {
-  const { User } = models;
-  const { token: refreshToken } = ctx.request.body;
+  try {
 
-  const user = await User.findOne({
-    where: { refreshToken }
-  });
+    const { User } = models;
+    const { token, refreshToken } = ctx['request']['body'];
 
-  if ( ! user) {
-    ctx.throw(401, { code: '401', message: 'Неверный рефрешь токен' });
-  }
+    const userFromToken = await decode(token);
+    const user = await User.findOne({ where: { id: userFromToken['id'], refreshToken }});
 
-  const today = new Date();
-  const expirationTime = parseInt((today.getTime() / 1000) + Number(process.env['JWT_EXP']), 10);
-  const newRefreshToken = token(process.env['JWT_SECRET']).digest('hex');
-
-  await User.update({ refreshToken }, {
-    where: { refreshToken: newRefreshToken }
-  });
-
-  const payload = {
-    id: user['id'],
-    login: user['login'],
-    password: user['password'],
-    exp: expirationTime,
-  };
-
-  const identityToken = jwt.sign(payload, process.env['JWT_SECRET'], {
-    // issuer:  'viktor',
-    // subject:  'shop',
-    // audience:  'ppp@mmm.ru',
-    algorithm:  "HS256"
-  });
-
-  ctx.body = {
-    data: {
-      token: identityToken,
-      refreshToken: newRefreshToken,
+    if ( ! user) {
+      ctx.status = 401;
+      return ctx.body = {
+        success: false,
+        error: {
+          code: '',
+          message: 'Пользователь не прошел верификацию'
+        }
+      };
     }
-  };
+
+    // обновляем токен
+    const today = new Date();
+    const expirationTime = parseInt((today.getTime() / 1000) + Number(process.env['JWT_EXP']), 10);
+    const newRefreshToken = token(process.env['JWT_SECRET']).digest('hex');
+
+    await User.update({ refreshToken }, { where: { id: userFromToken['id'], refreshToken: newRefreshToken }});
+
+
+    const payload = {
+      ...userFromToken,
+      exp: expirationTime,
+    };
+
+    const identityToken = jwt.sign(payload, process.env['JWT_SECRET'], {
+      algorithm:  "HS256"
+    });
+
+    ctx.status = 200;
+    ctx.body = {
+      data: {
+        token: identityToken,
+        refreshToken: newRefreshToken,
+      }
+    };
+
+  } catch(error) {
+
+    ctx.status = 500;
+    ctx.body = {
+      success: false,
+      error: {
+        code: '',
+        message: error['message'],
+      },
+    };
+  }
 };

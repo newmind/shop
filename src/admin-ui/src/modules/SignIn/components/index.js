@@ -2,6 +2,7 @@
 import PageHOC from '@ui.packages/hocs';
 
 import { bindActionCreators } from 'redux';
+import { push } from 'react-router-redux';
 import { isValid, isPristine, submit } from 'redux-form';
 
 import Component from './Component';
@@ -14,6 +15,7 @@ const mapStateToProps = state => ({
 
 const mapActionsToProps = (dispatch) => {
   return {
+    push: bindActionCreators(push, dispatch),
     submit: bindActionCreators(submit, dispatch),
   };
 };
