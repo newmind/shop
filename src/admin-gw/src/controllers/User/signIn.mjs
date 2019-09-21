@@ -1,8 +1,8 @@
 'use strict';
 
-import { decode } from '@sys.packages/jwt';
+import { NotFoundError } from '@packages/errors';
 
-import { signIn, get } from "./requests";
+import { signIn } from "./requests";
 
 
 export default () => async (ctx) => {
@@ -11,20 +11,23 @@ export default () => async (ctx) => {
     const formData = ctx['request']['body'];
 
     const { data } = await signIn(formData);
-    const { id } = await decode(data['token'], process.env['JWT_SECRET']);
-
-    const { data: profile } = await get(id);
 
     ctx.cookies.set(process.env['COOKIE_NAME'], encodeURIComponent(JSON.stringify(data)), {
       httpOnly: true,
     });
 
     ctx.status = 200;
-    ctx.body = {
-      ...profile,
-    };
+    ctx.body = {};
 
   } catch(error) {
+
+    if (error instanceof NotFoundError) {
+      ctx.status = 404;
+      return ctx.body = {
+        success: true,
+        data: error['data'],
+      };
+    }
 
     ctx.status = error['status'];
     ctx.body = {

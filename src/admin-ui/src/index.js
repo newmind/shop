@@ -24,7 +24,7 @@ import * as serviceWorker from './serviceWorker';
 
 
 const socket = createSocketIO(process.env['REACT_APP_SOCKET_HOST'], {
-  path: '/admin.socket.io',
+  path: process.env['REACT_APP_SOCKET_PATH'],
 });
 
 const history = createHistory();

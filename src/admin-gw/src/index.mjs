@@ -36,7 +36,9 @@ import routes from './routes';
     });
 
     const httpServer = http.createServer(appServer.callback());
-    const io = await createSocket(httpServer);
+    const io = await createSocket(httpServer, {
+      path: process.env['SOCKET_PATH'],
+    });
 
     createConnection(process.env['RABBIT_CONNECTION_HOST'], async (error, connection) => {
       createChannel(connection, async () => {

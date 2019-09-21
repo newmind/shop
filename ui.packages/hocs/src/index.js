@@ -12,19 +12,19 @@ class Wrapper extends Component {
     onDestroy: PropTypes.func,
   };
 
-  componentDidMount() {
+  async componentDidMount() {
     const { onEnter, children } = this.props;
-    onEnter && onEnter(children.props);
+    onEnter && await onEnter(children.props);
   }
-  componentWillUnmount() {
+  async componentWillUnmount() {
     const { onDestroy, children } = this.props;
-    onDestroy && onDestroy(children.props);
+    onDestroy && await onDestroy(children.props);
   }
-  componentDidUpdate(prevProps) {
+  async componentDidUpdate(prevProps) {
     const { onChange, children } = prevProps;
     const { location } = children.props;
     if (this.props.children.props.location.key !== location.key) {
-      onChange && onChange(children.props);
+      onChange && await onChange(children.props);
     }
   }
   render() {
@@ -32,7 +32,7 @@ class Wrapper extends Component {
   }
 }
 
-export default (options) => Component => {
+export default (options) => (Component) => {
 
   const defaultOptions = {
     module: null,
@@ -44,9 +44,9 @@ export default (options) => Component => {
   const HOComponent = (props) => {
     return (
       <Wrapper
-        onEnter={defaultOptions.onEnter}
-        onChange={defaultOptions.onChange}
-        onDestroy={defaultOptions.onDestroy}
+        onEnter={defaultOptions['onEnter']}
+        onChange={defaultOptions['onChange']}
+        onDestroy={defaultOptions['onDestroy']}
       >
         <Component {...props} />
       </Wrapper>

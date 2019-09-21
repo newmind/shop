@@ -18,7 +18,7 @@ export default () => async (ctx) => {
     const user = await User.findOne({ where: { login, password: hashPassword }});
 
     if ( ! user) {
-      ctx.status = 404;
+      ctx.status = 200;
       return ctx.body = {
         success: true,
         data: null,
@@ -30,7 +30,7 @@ export default () => async (ctx) => {
     const expirationTime = parseInt((today.getTime() / 1000) + Number(process.env['JWT_EXP']), 10);
     const refreshToken = token(process.env['JWT_SECRET']).digest('hex');
 
-    await User.update({ refreshToken }, { where: { id: user['id'] }});
+    // await User.update({ refreshToken }, { where: { id: user['id'] }});
 
 
     // организуем авторизационный объект

@@ -63,6 +63,14 @@ class Component extends PureComponent {
     isAuth: types.bool,
     signIn: types.func,
     signOut: types.func,
+    onNavLink: types.func,
+  };
+
+  static getDerivedStateFromError(error) {
+    return {
+      hasError: true,
+      error: error,
+    };
   };
 
   getChildContext() {
@@ -72,8 +80,14 @@ class Component extends PureComponent {
       isAuth,
       signIn,
       signOut,
+      onNavLink: this._handleBeforeDestroy.bind(this)
     };
   }
+
+  state = {
+    hasError: false,
+    error: null,
+  };
 
   async componentDidMount() {
     const { changeState, getProfile } = this.props;
@@ -82,13 +96,22 @@ class Component extends PureComponent {
     changeState(true);
   }
 
+  _handleBeforeDestroy() {
+    console.log(123);
+  }
+
   render() {
+    const { hasError, error } = this.state;
     const { isInit, ...props } = this.props;
     return (
       <div className={styles['wrapper']}>
         {
           isInit
-            ? <Routes {...props} />
+            ? (
+              ! hasError
+                ? <Routes {...props} />
+                : <p>Error: {error['message']}</p>
+              )
             : <Loader />
         }
         <Notifications />

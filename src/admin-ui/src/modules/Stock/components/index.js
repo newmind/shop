@@ -54,4 +54,7 @@ export default PageHOC({
     await getStockProducts();
     await getProducts();
   },
+  onBeforeDestroy: () => {
+    return true;
+  }
 })(Component);

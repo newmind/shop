@@ -11,11 +11,11 @@
     "start:dev": "npx yarn run migration:dev && nodemon --exec node -r dotenv/config --experimental-modules ./src/index.mjs dotenv_config_path=./.env.development"
   },
   "dependencies": {
+    "@packages/errors": "^1.0.0",
     "@sys.packages/db": "^1.0.0",
     "@sys.packages/server": "^1.0.0",
     "@sys.packages/sys.utils": "^1.0.0",
-    "@packages/errors": "^1.0.0",
-    "dotenv": "^7.0.0",
+    "dotenv": "8.1.0",
     "jsonwebtoken": "^8.5.1",
     "koa": "2.8.1",
     "koa-bodyparser": "^4.2.1",
@@ -26,7 +26,7 @@
     "sequelize": "^5.1.0"
   },
   "devDependencies": {
-    "cross-env": "^5.2.1",
+    "cross-env": "5.2.1",
     "nodemon": "1.19.1",
     "sequelize-cli": "^5.5.1"
   }

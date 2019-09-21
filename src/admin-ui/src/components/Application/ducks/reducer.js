@@ -1,6 +1,9 @@
 
 import {
   APPLICATION_CHANGE_STATE,
+
+  APPLICATION_AUTH_REQUEST,
+  APPLICATION_AUTH_REQUEST_FAIL,
   APPLICATION_AUTH_REQUEST_SUCCESS,
 
   APPLICATION_GET_PROFILE_REQUEST,
@@ -17,6 +20,7 @@ import {
 const initialState = {
   isInit: false,
   isAuth: false,
+  inProcess: false,
   profile: {},
 };
 
@@ -47,20 +51,32 @@ export default (state = initialState, { type, payload }) => {
 
     case APPLICATION_SIG_OUT_REQUEST: return {
       ...state,
+      inProcess: true,
     };
     case APPLICATION_SIG_OUT_REQUEST_FAIL: return {
       ...state,
       isAuth: true,
+      inProcess: false,
     };
     case APPLICATION_SIG_OUT_REQUEST_SUCCESS: return {
       ...state,
       isAuth: false,
+      inProcess: false,
       profile: {},
     };
 
+    case APPLICATION_AUTH_REQUEST: return {
+      ...state,
+      inProcess: true,
+    };
+    case APPLICATION_AUTH_REQUEST_FAIL: return {
+      ...state,
+      inProcess: false,
+    };
     case APPLICATION_AUTH_REQUEST_SUCCESS:
     case SOCKET_PASSPORT_UPDATED: return {
       ...state,
+      inProcess: false,
       profile: payload,
     };
 

@@ -9,7 +9,6 @@ module.exports = {
           {
             login: 'zemlya911@mail.ru',
             password: '77de38e4b50e618a0ebb95db61e2f42697391659d82c064a5f81b9f48d85ccd5',
-            refreshToken: null,
             createdAt: new Date(),
             updatedAt: new Date(),
           }

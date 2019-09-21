@@ -2,6 +2,8 @@
 
 import jwt from 'jsonwebtoken';
 
+const { TokenExpiredError } = jwt;
+
 
 const decode = (token) => {
   return new Promise((resolve, reject) => {
@@ -30,6 +32,17 @@ export default () => async (ctx) => {
     };
 
   } catch (error) {
+
+    console.log(error);
+
+    if (error instanceof TokenExpiredError) {
+
+      ctx.status = 400;
+      return ctx.body = {
+        success: true,
+        data: null,
+      };
+    }
 
     ctx.status = 500;
     ctx.body = {

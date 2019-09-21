@@ -8,16 +8,18 @@
     "start:dev": "node_modules/.bin/cross-env NODE_ENV=development babel ./src --out-dir ./lib --copy-files --watch"
   },
   "dependencies": {
-    "@ui.packages/theme": "^1.0.0",
     "@ui.packages/moment": "^1.0.0",
+    "@ui.packages/theme": "^1.0.0",
     "@ui.packages/utils": "^1.0.0",
+    "@ui.packages/hocs": "^1.0.0",
     "classnames": "^2.2.6",
-    "react": "16.9.0"
+    "react": "16.9.0",
+    "react-router-dom": "5.0.1"
   },
   "devDependencies": {
     "@babel/cli": "^7.5.5",
     "@babel/core": "7.2.2",
-    "cross-env": "^5.2.0",
+    "cross-env": "5.2.1",
     "prop-types": "^15.7.2",
     "resolve": "1.10.0"
   },

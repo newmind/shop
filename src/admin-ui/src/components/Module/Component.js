@@ -1,6 +1,6 @@
 
 import PropTypes from 'prop-types';
-import React, { PureComponent } from 'react';
+import React, { Suspense, PureComponent, lazy } from 'react';
 
 import { injectAsyncReducer, rejectAsyncReducer } from '../../bin/createStore';
 
@@ -35,16 +35,10 @@ class Component extends PureComponent {
     removable: false,
   };
 
-  state = {
-    Module: null,
-  };
-
   async componentDidMount() {
     const { module } = this.props;
     const { default: moduleReducer } = await import(`../../modules/${module}/ducks/reducer.js`);
-    const { default: Module } = await import(`../../modules/${module}/components`);
     await injectAsyncReducer(module, moduleReducer);
-    this.setState({ Module });
   }
 
   async componentWillUnmount() {
@@ -55,15 +49,17 @@ class Component extends PureComponent {
   }
 
   render() {
-    const { navigate, wrapper, location, match, dispatch } = this.props;
-    const { Module } = this.state;
+    const { navigate, wrapper, location, match, dispatch, module } = this.props;
     const Wrapper = createWrapper(wrapper);
+    const Module = lazy(() => import(`../../modules/${module}/components`));
     return (
-      <Wrapper navigate={navigate} location={location} match={match}>
-        <Page>
-          { Module && <Module dispatch={dispatch} /> }
-        </Page>
-      </Wrapper>
+      <Suspense>
+        <Wrapper navigate={navigate} location={location} match={match}>
+          <Page>
+            { Module && <Module dispatch={dispatch} /> }
+          </Page>
+        </Wrapper>
+      </Suspense>
     );
   }
 }

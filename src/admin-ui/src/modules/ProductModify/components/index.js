@@ -45,8 +45,8 @@ const mapActionsToProps = (dispatch) => {
 export default PageHOC({
   mapStateToProps,
   mapActionsToProps,
-  onEnter: ({ getProductById, getUnits, match: { params: { id }} }) => {
-    getProductById(id);
-    getUnits();
+  onEnter: async ({ getProductById, getUnits, match: { params: { id }} }) => {
+    await getProductById(id);
+    await getUnits();
   },
 })(Component);

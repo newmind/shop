@@ -5,11 +5,9 @@ import { withRouter } from 'react-router-dom';
 import Component from './Component';
 
 
-const mapStateToProps = state => ({});
+const mapStateToProps = () => ({});
 
-const mapActionsToProps = (dispatch) => {
-  return {};
-};
+const mapActionsToProps = () => ({});
 
 export default withRouter(connect(
   mapStateToProps,

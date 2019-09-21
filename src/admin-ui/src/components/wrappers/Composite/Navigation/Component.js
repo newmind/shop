@@ -22,6 +22,7 @@ class Component extends PureComponent {
           const itemClassName = cn(styles['navigate__item'], {
             [styles['navigate__item--active']]: matching,
           });
+
           return (
             <span key={index} className={itemClassName}>
               <Link to={item['path']} className={styles['navigate__link']}>

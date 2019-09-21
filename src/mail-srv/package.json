@@ -8,7 +8,7 @@
   },
   "dependencies": {
     "@sys.packages/server": "^1.0.0",
-    "dotenv": "^7.0.0",
+    "dotenv": "8.1.0",
     "nodemailer": "^6.1.1"
   },
   "devDependencies": {

@@ -63,6 +63,8 @@ export const signIn = (formData) => async dispatch => {
       }
     });
 
+    dispatch(getProfile());
+
     const socketInstance = instance();
 
     if ( ! socketInstance.connected) {

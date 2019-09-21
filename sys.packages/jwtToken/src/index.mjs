@@ -3,6 +3,82 @@
 import request from "axios";
 import jwt from 'jsonwebtoken';
 
+import { CustomError } from '@packages/errors';
+
+
+class NotAuthorize extends CustomError {
+  constructor(status, data) {
+    super(data);
+
+    this.name = NotAuthorize.name;
+    this.status = status;
+
+    Error.captureStackTrace(this, NotAuthorize);
+  }
+}
+
+
+const getCookie = async (ctx, name) => {
+
+  const cookies = ctx['cookie'] || {};
+  const cookie = cookies[name] || null;
+
+  if ( ! cookie) {
+    throw new NotAuthorize(401, { code: '', message: 'User not authorize' });
+  }
+
+  return JSON.parse(decodeURIComponent(cookie));
+};
+
+const checkCookie = async (cookie, { serviceUrl }) => {
+  try {
+
+    const { data } = await request({
+      url: `${serviceUrl}/check`,
+      method: 'post',
+      data: cookie,
+    });
+
+    return {
+      status: 200,
+      data: data,
+    };
+
+  } catch(error) {
+
+    const { response } = error;
+    const { status } = response;
+
+    return {
+      status: status,
+      data: null,
+    };
+  }
+};
+
+const refreshToken = async (cookie, { serviceUrl }) => {
+  try {
+
+    const { data } = await request({
+      url: `${serviceUrl}/refresh`,
+      method: 'post',
+      data: cookie,
+    });
+
+    return {
+      status: 200,
+      data: data['data'],
+    };
+
+  } catch(error) {
+
+    return {
+      status: 500,
+      data: null,
+    };
+  }
+};
+
 
 export default (options) => async (ctx, next) => {
 
@@ -10,40 +86,34 @@ export default (options) => async (ctx, next) => {
 
   try {
 
-    const cookies = ctx['cookie'] || {};
-    const cookie = cookies[name] || null;
+    const cookie = await getCookie(ctx, name);
+    const { status, data } = await checkCookie(cookie, { serviceUrl });
 
-    if ( ! cookie) {
+    let userData = data;
 
-      ctx.status = 401;
-      return ctx.body = {
-        success: true,
-        data: null,
-      };
+    if (status === 400) {
+      const { data } = await refreshToken(cookie, { serviceUrl });
+
+      ctx.cookies.set(name, encodeURIComponent(JSON.stringify(data)), {
+        httpOnly: true,
+      });
+
+      userData = data;
     }
 
-    const cookieObject = JSON.parse(decodeURIComponent(cookie));
-
-    if ( ! cookieObject['token'] ||  ! cookieObject['refreshToken']) {
-
-      ctx.status = 401;
-      return ctx.body = {
-        success: true,
-        data: null,
-      };
-    }
-
-    const { data } = await request({
-      url: `${serviceUrl}/check`,
-      method: 'post',
-      data: cookieObject,
-    });
-
-    ctx.user = data['data'];
+    ctx.user = userData['data'];
 
     return next();
 
   } catch(error) {
+
+    if (error instanceof NotAuthorize) {
+      ctx.status = 401;
+      return ctx.body = {
+        success: true,
+        data: error['data'],
+      };
+    }
 
     ctx.status = 500;
     ctx.body = {
@@ -54,52 +124,6 @@ export default (options) => async (ctx, next) => {
       },
     };
   }
-
-  //   let errorResult = {};
-  //
-  //   if (error['response']) {
-  //     const { data } = error.response;
-  //     errorResult = data;
-  //   } else {
-  //     errorResult = error;
-  //   }
-  //
-  //   if (errorResult['status'] === 403) {
-  //
-  //     const cookies = ctx['cookie'] || {};
-  //     const cookie = cookies[name] || null;
-  //
-  //     if ( ! cookie) {
-  //       ctx.throw(500, 'Неверный объект cookie');
-  //     }
-  //
-  //     const { refreshToken = null } = JSON.parse(decodeURIComponent(cookie));
-  //
-  //     if ( ! refreshToken) {
-  //       ctx.throw(500, 'Неверное свойство cookie');
-  //     }
-  //
-  //     const { data } = await request({
-  //       url: `${serviceUrl}/refresh`,
-  //       method: 'post',
-  //       data: {
-  //         token: refreshToken,
-  //       },
-  //     });
-  //
-  //     const jsonString = JSON.stringify(data['data']).replace(/[{}]/ig, '');
-  //
-  //     ctx.cookies.set(name, `{${encodeURI(jsonString)}}`, {
-  //       path: '/',
-  //       httpOnly: true,
-  //     });
-  //
-  //     return next();
-  //   } else {
-  //
-  //     ctx.throw(errorResult['status'], errorResult['message']);
-  //   }
-  // }
 };
 
 export const decode = (token, secret) => {
