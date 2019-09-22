@@ -18,7 +18,7 @@ class Component extends PureComponent {
           <Col>
             <h2 className={styles['block__header']}>Выбранные товары</h2>
             <div className={styles['information']}>
-              <p className={styles['paragraph']}>Вам необходимо выбрать дополнительные опции к товару:</p>
+              <p className={styles['paragraph']}>Вам необходимо выбрать дополнительные <b>опции</b> к товару:</p>
               <ol className={styles['list']}>
                 <li className={styles['list__item']}><b>Только оправа</b> - преобретается только оправа с предустановленными заводскими модификациями.</li>
                 <li className={styles['list__item']}><b>Имиджевые линзы</b> - преобретается оправа с линзами без диоптрий, но с выбранными защитами и паказателями.</li>

@@ -31,7 +31,7 @@ class Component extends PureComponent {
     };
   }
 
-  componentWillMount() {
+  componentDidMount() {
     const { name, defaultTab, createTabs } = this.props;
     createTabs(name, defaultTab);
   }

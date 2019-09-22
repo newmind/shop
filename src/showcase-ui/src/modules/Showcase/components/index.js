@@ -46,7 +46,7 @@ const mapActionsToProps = (dispatch) => {
 export default PageHOC({
   mapStateToProps,
   mapActionsToProps,
-  onEnter: async ({ onLoading, getProducts, getDataForFilter, location: { search } }) => {
+  onEnter: async ({ getProducts, getDataForFilter, location: { search } }) => {
 
     document.title = `${process.env['REACT_APP_WEBSITE_NAME']} - Витрина`;
 
@@ -60,7 +60,5 @@ export default PageHOC({
 
     await getProducts(searchParams);
     await getDataForFilter();
-
-    onLoading(false);
   },
 })(Component);

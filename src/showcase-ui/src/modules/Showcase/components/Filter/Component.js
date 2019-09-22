@@ -63,10 +63,10 @@ class Component extends PureComponent {
                   </span>
               </div>
             </Col>
-            <Col className={styles['controls']}>
-              <Button type="submit" mode="primary" disabled={ ! isValid}>Применить</Button>
-            </Col>
           </Row>
+        </div>
+        <div className={styles['controls']}>
+          <Button type="submit" mode="primary" disabled={ ! isValid}>Применить</Button>
         </div>
       </form>
     );

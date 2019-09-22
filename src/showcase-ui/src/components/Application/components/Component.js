@@ -1,8 +1,9 @@
 
+import types from 'prop-types';
 import React, { PureComponent } from 'react';
-
-import PropTypes from 'prop-types';
 import { Route, Switch } from "react-router";
+
+import { sleep } from '@ui.packages/utils';
 
 import Loader from '../../Loader';
 import Module from '../../Module/components';
@@ -40,31 +41,71 @@ const Routes = props => {
 
 class Component extends PureComponent {
   static propTypes = {
-    routes: PropTypes.array,
-    navigate: PropTypes.array,
-    isInitializing: PropTypes.bool,
-    authenticated: PropTypes.bool,
+    routes: types.array,
+    navigate: types.array,
+    isInit: types.bool,
+    profile: types.object,
+    changeState: types.func,
+    getProfile: types.func,
   };
 
   static defaultProps = {
     routes: [],
     navigate: [],
-    isInitializing: true,
+    isInit: false,
+    isAuth: false,
+    profile: {},
   };
 
-  componentDidMount() {
-    const { checkAuthState } = this.props;
-    checkAuthState();
+  static childContextTypes = {
+    profile: types.object,
+    isAuth: types.bool,
+    signIn: types.func,
+    signOut: types.func,
+    onNavLink: types.func,
+  };
+
+  static getDerivedStateFromError(error) {
+    return {
+      hasError: true,
+      error: error,
+    };
+  };
+
+  getChildContext() {
+    const { profile, isAuth, signIn, signOut } = this.props;
+    return {
+      profile,
+      isAuth,
+      signIn,
+      signOut,
+    };
+  }
+
+  state = {
+    hasError: false,
+    error: null,
+  };
+
+  async componentDidMount() {
+    const { changeState } = this.props;
+    await sleep(600);
+    changeState(true);
   }
 
   render() {
-    const { isInitializing, ...props } = this.props;
+    const { hasError, error } = this.state;
+    const { isInit, ...props } = this.props;
     return (
       <div className={styles['wrapper']}>
         {
-          isInitializing
-            ? <Loader />
-            : <Routes {...props} />
+          isInit
+            ? (
+              ! hasError
+                ? <Routes {...props} />
+                : <p>Error: {error['message']}</p>
+              )
+            : <Loader />
         }
       </div>
     );

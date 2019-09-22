@@ -56,8 +56,18 @@
   }
 }
 
-.table {
+.information {
 
-  table-layout: auto;
-  width: 100%;
+  margin: 30px 0;
+  color: $dark-gray-color;
+  font-size: 14px;
+  font-style: italic;
+
+  &:before {
+    content: '"';
+  }
+
+  &:after {
+    content: '"';
+  }
 }

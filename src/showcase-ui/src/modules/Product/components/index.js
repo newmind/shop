@@ -40,11 +40,10 @@ const mapActionsToProps = (dispatch) => {
 export default PageHOC({
   mapStateToProps,
   mapActionsToProps,
-  onEnter: ({ onLoading, getProductById, match: { params } }) => {
+  onEnter: ({ getProductById, match: { params } }) => {
     document.title = `${process.env['REACT_APP_WEBSITE_NAME']} - Продукт`;
     const { id } = params;
     getProductById(id);
-    onLoading(false);
   },
   onChange: () => { console.log('onChange')},
   onDestroy: () => {console.log('onDestroy')},

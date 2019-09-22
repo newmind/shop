@@ -26,8 +26,7 @@ const mapActionsToProps = (dispatch) => ({
 export default PageHOC({
   mapStateToProps,
   mapActionsToProps,
-  onEnter: ({ onLoading }) => {
+  onEnter: () => {
     document.title = `${process.env['REACT_APP_WEBSITE_NAME']} - Оформление заказа`;
-    onLoading(false);
   },
 })(Component);

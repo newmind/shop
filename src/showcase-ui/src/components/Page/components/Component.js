@@ -1,6 +1,6 @@
 
 import PropTypes from 'prop-types';
-import React, { cloneElement, PureComponent,  } from 'react';
+import React, { PureComponent } from 'react';
 
 import styles from './default.module.scss';
 
@@ -9,7 +9,6 @@ class Component extends PureComponent {
   static propTypes = {
     children: PropTypes.node,
     inProcess: PropTypes.bool,
-    setProcess: PropTypes.func,
   };
 
   static defaultProps = {
@@ -22,12 +21,16 @@ class Component extends PureComponent {
   }
 
   render() {
-    const { children } = this.props;
-    const child = children && cloneElement(children, {
-      onLoading: this.changeState.bind(this)
-    });
+    const { children, inProcess } = this.props;
     return (
-      <div className={styles['page']}>{ child }</div>
+      <div className={styles['page']}>
+        <div className={styles['page__content']}>{ children }</div>
+        {inProcess && (
+          <div className={styles['loading']}>
+            <span className={styles['spinner']}>Загрузка...</span>
+          </div>
+        )}
+      </div>
     );
   }
 }

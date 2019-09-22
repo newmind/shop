@@ -5,17 +5,24 @@ import { withRouter } from 'react-router';
 
 import Component from './Component';
 
-import { checkAuthState } from '../ducks/commands';
+import { getProfile, changeState, signIn, signOut } from '../ducks/commands';
 
 
 const mapStateToProps = (store) => {
+  const App = store['application'];
   return {
-    isInitializing: store['application']['isInitializing'],
+    isInit: App['isInit'],
+    isAuth: App['isAuth'],
+    profile: App['profile'],
   };
 };
 
 const mapActionsToProps = dispatch => ({
-  checkAuthState: bindActionCreators(checkAuthState, dispatch),
+  signIn: bindActionCreators(signIn, dispatch),
+  signOut: bindActionCreators(signOut, dispatch),
+  getProfile: bindActionCreators(getProfile, dispatch),
+  changeState: bindActionCreators(changeState, dispatch),
 });
 
 export default withRouter(connect(mapStateToProps, mapActionsToProps)(Component));
+

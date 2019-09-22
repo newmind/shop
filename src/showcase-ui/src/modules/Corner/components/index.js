@@ -13,8 +13,7 @@ const mapActionsToProps = () => {
 export default PageHOC({
   mapStateToProps,
   mapActionsToProps,
-  onEnter: ({ onLoading }) => {
-    document.title = `${process.env['REACT_APP_WEBSITE_NAME']}`;
-    onLoading(false);
+  onEnter: () => {
+    document.title = `${process.env['REACT_APP_WEBSITE_NAME']} - Информация для Вас`;
   },
 })(Component);

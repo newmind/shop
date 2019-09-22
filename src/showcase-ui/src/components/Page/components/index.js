@@ -4,8 +4,10 @@ import { connect } from 'react-redux';
 import Component from './Component';
 
 
-const mapStoreToAction = store => ({});
+const mapStoreToAction = (store) => ({
+  inProcess: store['page']['inProcess'],
+});
 
-const mapActionsToProps = dispatch => ({});
+const mapActionsToProps = () => ({});
 
 export default connect(mapStoreToAction, mapActionsToProps)(Component);

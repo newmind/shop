@@ -53,12 +53,7 @@ class Component extends PureComponent {
 
   _isValid() {
     const { type } = this.state;
-
-    if (type === -1) {
-      return false;
-    }
-
-    return true;
+    return type !== -1;
   }
 
   _handleSubmit() {
