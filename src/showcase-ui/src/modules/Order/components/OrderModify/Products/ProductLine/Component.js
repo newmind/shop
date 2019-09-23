@@ -42,7 +42,7 @@ class Component extends PureComponent {
         <tbody key={index} className={styles['table__body']}>
           <tr className={styles['table__line']}>
             <td className={styles['table__col']}>
-              <Product {...product['product']} />
+              <Product {...product['product']} isRecipe={isRecipe} recipe={product['recipe']} />
             </td>
             <td className={styles['table__col']} style={{ textAlign: 'left' }}>
               <div className={styles['recipe']}>
@@ -52,13 +52,20 @@ class Component extends PureComponent {
                   <Radio className={styles['recipe__type']} name="on-prescription" label="По рецепту" />
                 </RadioBoxField>
                 {isRecipe
-                  ? (<div className={styles['recipe__info']}>{
-                    hasRecipe
-                      ? <p className={cn(styles['recipe__success'])}><i className='fas fa-check' /> Рецепт заполнен</p>
-                      : <Button mode="success" size="s"
-                                onClick={this._handleOpenDialogRecipe.bind(this, `${field}-recipe`)}>Добавить
-                        рецепт</Button>
-                  }</div>)
+                  ? (
+                    <div className={styles['recipe__info']}>
+                      {hasRecipe
+                        ? <p className={cn(styles['recipe__success'])}><i className='fas fa-check' /> Рецепт заполнен</p>
+                        : <Button mode="success" size="s" onClick={this._handleOpenDialogRecipe.bind(this, `${field}-recipe`)}>Добавить рецепт</Button>}
+                      <Dialog name={`${field}-recipe`} title="Рецепт">
+                        <RecipeModify
+                          recipe={product['recipe']}
+                          onSubmit={this._handleCloseDialog.bind(this, `${field}-recipe`, `${field}.recipe`)}
+                          onClose={this._handleCloseDialog.bind(this, `${field}-recipe`)}
+                        />
+                      </Dialog>
+                    </div>
+                  )
                   : null}
               </div>
             </td>
@@ -67,15 +74,6 @@ class Component extends PureComponent {
                 <span className={styles['amount__number']}>{numeral(product['amount']).format()}</span>
                 <span className={styles['amount__currency']}>{product['currency']['value']}</span>
               </div>
-            </td>
-            <td>
-              <Dialog name={`${field}-recipe`} title="Рецепт">
-                <RecipeModify
-                  recipe={product['recipe']}
-                  onSubmit={this._handleCloseDialog.bind(this, `${field}-recipe`, `${field}.recipe`)}
-                  onClose={this._handleCloseDialog.bind(this, `${field}-recipe`)}
-                />
-              </Dialog>
             </td>
           </tr>
         </tbody>

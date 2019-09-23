@@ -10,7 +10,7 @@ const initialState = {
   inProcess: false,
 };
 
-export default (state = initialState, { type, payload}) => {
+export default (state = initialState, { type }) => {
   switch (type) {
     case CREATE_OPERATION_REQUEST: return {
       ...state,

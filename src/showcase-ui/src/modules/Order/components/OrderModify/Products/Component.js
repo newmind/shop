@@ -35,7 +35,6 @@ class Component extends PureComponent {
             <th className={cn(styles['table__col'], styles['amount'])}>
               <span className={styles['table__header']}>Цена</span>
             </th>
-            <th style={{width: 0}} />
           </tr>
         </thead>
         <FieldArray name="products" component={ProductLine} {...props} />

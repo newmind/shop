@@ -30,6 +30,7 @@ export default (state = initialState, { type, payload }) => {
       ...state,
       isOpen: false,
     };
+
     case ADD_PRODUCT_TO_CART: {
       const { localStorage } = window;
       const newItems = [

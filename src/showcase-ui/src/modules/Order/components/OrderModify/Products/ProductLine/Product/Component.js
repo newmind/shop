@@ -4,6 +4,8 @@ import React, { PureComponent } from 'react';
 
 import { Gallery } from '@ui.packages/ui';
 
+import Recipe from './Recipe';
+
 import styles from './default.module.scss';
 
 
@@ -17,6 +19,7 @@ class Component extends PureComponent {
     brand: types.string,
     name: types.string,
     description: types.string,
+    recipe: types.object,
     onView: types.func,
     onCart: types.func,
   };
@@ -29,11 +32,13 @@ class Component extends PureComponent {
     amount: 0.00,
     brand: 'None',
     name: 'None',
-    description: ''
+    description: '',
+    recipe: null,
   };
 
   render() {
-    const { gallery, brand, name } = this.props;
+    const { gallery, brand, name, recipe, isRecipe } = this.props;
+    const hasRecipe = !! Object.keys(recipe).length;
     return (
       <div className={styles['product']}>
         <div className={styles['product__promo']}>
@@ -42,6 +47,7 @@ class Component extends PureComponent {
         <div className={styles['product__info']}>
           <span className={styles['product__brand']}>{ brand }</span>
           <span className={styles['product__name']}>{ name }</span>
+          {hasRecipe && isRecipe && <Recipe {...recipe['recipe']} />}
         </div>
       </div>
     );
