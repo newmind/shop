@@ -1,11 +1,10 @@
 
 import {
-  SET_LOADING_PAGE,
+  PAGE_IN_PROCESS,
 } from './types';
 
 
-export const setLoadingPageAction = state => ({
-  type: SET_LOADING_PAGE,
-  payload: state,
+export const pageInProcessAction = (status) => ({
+  type: PAGE_IN_PROCESS,
+  payload: status,
 });
-

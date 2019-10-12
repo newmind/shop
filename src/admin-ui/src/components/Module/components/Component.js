@@ -25,6 +25,7 @@ class ModuleComponent extends PureComponent {
     navigate: PropTypes.array,
     module: PropTypes.object,
     wrapper: PropTypes.string,
+    setProcess: PropTypes.func,
   };
 
   static defaultProps = {
@@ -41,7 +42,8 @@ class ModuleComponent extends PureComponent {
   }
 
   async _createReducer() {
-    const { module } = this.props;
+    const { module, setProcess } = this.props;
+    setProcess();
     const Module = await module;
     injectAsyncReducer(Module['name'], Module['reducer']);
     return void 0;

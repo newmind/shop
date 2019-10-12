@@ -1,9 +1,9 @@
 
 import {
-  setLoadingPageAction,
+  pageInProcessAction,
 } from './actions';
 
 
 export const setProcess = (state = true) => dispatch => {
-  dispatch(setLoadingPageAction(state));
+  dispatch(pageInProcessAction(state));
 };

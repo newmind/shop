@@ -15,11 +15,6 @@ class Component extends PureComponent {
     inProcess: false,
   };
 
-  changeState(state = true) {
-    const { setProcess } = this.props;
-    setProcess(state);
-  }
-
   render() {
     const { children, inProcess } = this.props;
     return (
