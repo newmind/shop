@@ -3,7 +3,7 @@ import request from '@ui.packages/request';
 import { pushNotification } from '@ui.packages/notifications';
 
 import {
-  pageInProcess,
+  pageInProcessAction,
 
   getUnitsRequestAction,
   getUnitsRequestFailAction,
@@ -24,6 +24,10 @@ import {
 
 import { replace } from 'react-router-redux';
 
+
+export const pageInProcess = (status) => (dispatch) => {
+  dispatch(pageInProcessAction(status));
+};
 
 export const getUnits = () => async dispatch => {
   try {

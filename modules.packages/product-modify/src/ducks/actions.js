@@ -20,7 +20,7 @@ import {
 } from './types';
 
 
-export const pageInProcess = (status = true) => ({
+export const pageInProcessAction = (status = true) => ({
   type: PAGE_IN_PROCESS,
   payload: status,
 });

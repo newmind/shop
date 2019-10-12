@@ -10,7 +10,8 @@ import {
   getUnits,
   getProductById,
   updateProductsById,
-  createProduct
+  createProduct,
+  pageInProcess
 } from '../ducks/commands';
 
 
@@ -39,14 +40,16 @@ const mapActionsToProps = (dispatch) => {
     updateProductsById: bindActionCreators(updateProductsById, dispatch),
     createProduct: bindActionCreators(createProduct, dispatch),
     onSubmit: bindActionCreators(submit, dispatch),
+    pageInProcess: bindActionCreators(pageInProcess, dispatch),
   };
 };
 
 export default PageHOC({
   mapStateToProps,
   mapActionsToProps,
-  onEnter: async ({ getProductById, getUnits, match: { params: { id }} }) => {
+  onEnter: async ({ getProductById, getUnits, match: { params: { id }}, pageInProcess }) => {
     await getProductById(id);
     await getUnits();
+    pageInProcess(false);
   },
 })(Component);
