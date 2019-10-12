@@ -6,6 +6,7 @@
     "lerna-update-wizard": "^0.16.0"
   },
   "workspaces": [
+    "modules.packages/*",
     "sys.packages/*",
     "ui.packages/*",
     "packages/*",

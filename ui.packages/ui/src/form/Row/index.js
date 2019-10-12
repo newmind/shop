@@ -18,7 +18,7 @@ class Component extends PureComponent {
   render() {
     const { children, className } = this.props;
     return (
-      <span className={cn(styles['row'], className)}>
+      <span className={cn(className, styles['row'])}>
         {React.Children.map(children, child => {
           return React.cloneElement(child, {});
         })}

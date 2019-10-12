@@ -1,0 +1,64 @@
+
+@import "~@ui.packages/theme";
+
+
+.wrapper {
+
+  display: block;
+  padding: 40px 20px;
+}
+
+.block {
+
+  display: block;
+
+  & + & {
+
+    margin: 60px 0 0;
+  }
+
+  &__header {
+
+    display: block;
+    border-bottom: 2px solid $dark-color;
+    font-size: 20px;
+    text-transform: uppercase;
+    color: $dark-color;
+    padding: 0 0 4px;
+  }
+
+  &__content {
+
+    display: block;
+    margin: 50px 0 0;
+  }
+}
+
+.information {
+
+  margin: 30px 0 0;
+  color: $dark-gray-color;
+}
+
+.paragraph {
+
+  display: block;
+  font-size: 14px;
+  margin: 0 0 20px;
+}
+
+.list {
+
+  display: block;
+
+  &__item {
+
+    display: block;
+    font-size: 14px;
+
+    & + & {
+
+      margin: 10px 0 0;
+    }
+  }
+}

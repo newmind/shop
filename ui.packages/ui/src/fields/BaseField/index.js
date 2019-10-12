@@ -74,7 +74,7 @@ class FieldComponent extends PureComponent {
 
   componentDidMount() {
 
-    document.addEventListener('scroll', this._resizeEvent);
+    document.querySelector('#root').addEventListener('scroll', this._resizeEvent);
     window.addEventListener('resize', this._scrollEvent);
   }
 
@@ -84,7 +84,7 @@ class FieldComponent extends PureComponent {
 
   componentWillUnmount() {
 
-    document.removeEventListener('scroll', this._resizeEvent);
+    document.querySelector('#root').removeEventListener('scroll', this._resizeEvent);
     window.removeEventListener('resize', this._scrollEvent);
   }
 

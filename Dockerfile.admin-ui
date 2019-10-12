@@ -12,6 +12,7 @@ COPY ./src/admin-ui/public           ./src/admin-ui/public
 COPY ./src/admin-ui/package.json     ./src/admin-ui
 COPY ./src/admin-ui/.env.production  ./src/admin-ui
 COPY ./ui.packages                   ./ui.packages
+COPY ./modules.packages              ./modules.packages
 COPY ./packages                      ./packages
 COPY ./package.json                  .
 COPY ./lerna.json                    .
@@ -19,16 +20,62 @@ COPY ./yarn.lock                     .
 
 RUN yarn
 
-WORKDIR /app/src/admin-ui
-
-RUN ["yarn", "run", "ui:build"]
-RUN ["yarn", "run", "tabs:build"]
-RUN ["yarn", "run", "hocs:build"]
-RUN ["yarn", "run", "dialog:build"]
-RUN ["yarn", "run", "notification:build"]
-
+# BUILD COMPONENTS
+WORKDIR /app/ui.packages/dialog
 RUN ["yarn", "run", "build"]
 
+WORKDIR /app/ui.packages/hocs
+RUN ["yarn", "run", "build"]
+
+WORKDIR /app/ui.packages/notifications
+RUN ["yarn", "run", "build"]
+
+WORKDIR /app/ui.packages/tabs
+RUN ["yarn", "run", "build"]
+
+WORKDIR /app/ui.packages/ui
+RUN ["yarn", "run", "build"]
+
+# BUILD MODULES
+WORKDIR /app/modules.packages/categories
+RUN ["yarn", "run", "build"]
+
+WORKDIR /app/modules.packages/currencies
+RUN ["yarn", "run", "build"]
+
+WORKDIR /app/modules.packages/not-found
+RUN ["yarn", "run", "build"]
+
+WORKDIR /app/modules.packages/orders
+RUN ["yarn", "run", "build"]
+
+WORKDIR /app/modules.packages/product-modify
+RUN ["yarn", "run", "build"]
+
+WORKDIR /app/modules.packages/products
+RUN ["yarn", "run", "build"]
+
+WORKDIR /app/modules.packages/profile
+RUN ["yarn", "run", "build"]
+
+WORKDIR /app/modules.packages/recycle
+RUN ["yarn", "run", "build"]
+
+WORKDIR /app/modules.packages/sign-in
+RUN ["yarn", "run", "build"]
+
+WORKDIR /app/modules.packages/stock
+RUN ["yarn", "run", "build"]
+
+WORKDIR /app/modules.packages/sub-products
+RUN ["yarn", "run", "build"]
+
+WORKDIR /app/modules.packages/units
+RUN ["yarn", "run", "build"]
+
+# BUILD APPLICATION
+WORKDIR /app/src/admin-ui
+RUN ["yarn", "run", "build"]
 
 # START NGINX
 FROM nginx

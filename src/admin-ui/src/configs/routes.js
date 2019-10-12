@@ -3,63 +3,121 @@ export default [
   {
     path: '/',
     wrapper: 'Composite',
-    module: 'Stock',
+    module: import(
+      /* webpackMode: "lazy" */
+      /* webpackChunkName: "stock" */
+      /* webpackPrefetch: true */
+      '@modules.packages/stock'
+    ),
   },
   {
     path: '/products',
     wrapper: 'Composite',
-    module: 'Products',
+    module: import(
+      /* webpackMode: "lazy" */
+      /* webpackChunkName: "products" */
+      /* webpackPrefetch: true */
+      '@modules.packages/products'
+    ),
   },
   {
     path: '/sub-products',
     wrapper: 'Composite',
-    module: 'SubProducts',
+    module: import(
+      /* webpackMode: "lazy" */
+      /* webpackChunkName: "sub-products" */
+      /* webpackPrefetch: true */
+      '@modules.packages/sub-products'
+    ),
   },
   {
     path: '/recycle',
     wrapper: 'Composite',
-    module: 'Recycle',
+    module: import(
+      /* webpackMode: "lazy" */
+      /* webpackChunkName: "recycle" */
+      /* webpackPrefetch: true */
+      '@modules.packages/recycle'
+    ),
   },
   {
     path: '/products/create',
     wrapper: 'Composite',
-    module: 'ProductModify',
-    removable: true,
+    module: import(
+      /* webpackMode: "lazy" */
+      /* webpackChunkName: "product-modify" */
+      /* webpackPrefetch: true */
+      '@modules.packages/product-modify'
+    ),
   },
   {
     path: '/products/:id',
     wrapper: 'Composite',
-    module: 'ProductModify',
-    removable: true,
+    module: import(
+      /* webpackMode: "lazy" */
+      /* webpackChunkName: "product-modify" */
+      /* webpackPrefetch: true */
+      '@modules.packages/product-modify'
+    ),
   },
   {
     path: '/orders',
     wrapper: 'Navigate',
-    module: 'Orders',
+    module: import(
+      /* webpackMode: "lazy" */
+      /* webpackChunkName: "orders" */
+      /* webpackPrefetch: true */
+      '@modules.packages/orders'
+    ),
   },
   {
     path: '/categories',
     wrapper: 'Composite',
-    module: 'Category',
+    module: import(
+      /* webpackMode: "lazy" */
+      /* webpackChunkName: "categories" */
+      /* webpackPrefetch: true */
+      '@modules.packages/categories'
+    ),
   },
   {
     path: '/units',
     wrapper: 'Composite',
-    module: 'Units',
+    module: import(
+      /* webpackMode: "lazy" */
+      /* webpackChunkName: "units" */
+      /* webpackPrefetch: true */
+      '@modules.packages/units'
+    ),
   },
   {
     path: '/currency',
     wrapper: 'Composite',
-    module: 'Currency',
+    module: import(
+      /* webpackMode: "lazy" */
+      /* webpackChunkName: "currency" */
+      /* webpackPrefetch: true */
+      '@modules.packages/currencies'
+    ),
   },
   {
     path: '/sign-in',
     wrapper: 'Empty',
-    module: 'SignIn',
+    module: import(
+      /* webpackMode: "lazy" */
+      /* webpackChunkName: "sign-in" */
+      /* webpackPrefetch: true */
+      '@modules.packages/sign-in'
+    ),
   },
   {
     path: '/profile',
     wrapper: 'Navigate',
-    module: 'Profile',
+    module: import(
+      /* webpackMode: "lazy" */
+      /* webpackChunkName: "profile" */
+      /* webpackPrefetch: true */
+      '@modules.packages/profile'
+    ),
   },
 ];

@@ -33,9 +33,17 @@ export default (state = initialState, { type, payload }) => {
 
     case ADD_PRODUCT_TO_CART: {
       const { localStorage } = window;
+      const item = {
+        ...payload,
+        goal: '',
+        type: 'only-rim',
+        recipe: {},
+        lens: {},
+        file: null,
+      };
       const newItems = [
         ...state['items'],
-        payload,
+        item,
       ];
 
       localStorage.setItem('cart', JSON.stringify(newItems));

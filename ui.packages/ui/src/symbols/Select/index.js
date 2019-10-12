@@ -295,7 +295,9 @@ class Component extends PureComponent {
     return (
       <span className={styles['select__values']} onClick={this._handleOnFocus.bind(this)}>
         {selectedValue
-          ? <span className={styles['select__value']}>{selectedValue}</span>
+          ? (<span className={styles['select__value']}>
+              <span className={styles['select__text']}>{selectedValue}</span>
+            </span>)
           : <span className={styles['select__placeholder']}>Выбери значение</span>}
       </span>
     );

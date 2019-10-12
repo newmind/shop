@@ -22,7 +22,7 @@ class Component extends PureComponent {
       <span className={colClassName}>
         <span className={styles['wrapper']}>
           {children && React.Children.map(children, (child) => {
-            return React.cloneElement(child, {});
+            return child && React.cloneElement(child, {});
           })}
         </span>
       </span>

@@ -1,0 +1,45 @@
+
+@import "~@ui.packages/theme";
+
+
+.block {
+
+  display: block;
+
+  & + & {
+
+    margin: 60px 0 0;
+  }
+
+  &:last-child {
+
+    border: none;
+  }
+
+  &__header {
+
+    display: block;
+    font-size: 16px;
+    letter-spacing: .5px;
+    border-bottom: 1px solid $light-gray-color;
+    padding: 0 0 4px 0;
+    color: rgba($dark-color, .4);
+  }
+
+  &__content {
+
+    display: block;
+    margin: 40px 0;
+  }
+}
+
+.information {
+
+  margin: 0 0 40px;
+}
+
+.paragraph {
+
+  display: block;
+  font-size: 14px;
+}

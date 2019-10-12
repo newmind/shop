@@ -19,16 +19,25 @@ COPY ./yarn.lock                        .
 
 RUN yarn
 
-WORKDIR /app/src/showcase-ui
-
-RUN ["yarn", "run", "ui:build"]
-RUN ["yarn", "run", "tabs:build"]
-RUN ["yarn", "run", "hocs:build"]
-RUN ["yarn", "run", "dialog:build"]
-RUN ["yarn", "run", "notification:build"]
-
+# BUILD COMPONENTS
+WORKDIR /app/ui.packages/dialog
 RUN ["yarn", "run", "build"]
 
+WORKDIR /app/ui.packages/hocs
+RUN ["yarn", "run", "build"]
+
+WORKDIR /app/ui.packages/notifications
+RUN ["yarn", "run", "build"]
+
+WORKDIR /app/ui.packages/tabs
+RUN ["yarn", "run", "build"]
+
+WORKDIR /app/ui.packages/ui
+RUN ["yarn", "run", "build"]
+
+# BUILD APPLICATION
+WORKDIR /app/src/showcase-ui
+RUN ["yarn", "run", "build"]
 
 # START NGINX
 FROM nginx

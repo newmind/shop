@@ -1,82 +1,70 @@
 
 import PropTypes from 'prop-types';
-import React, { Component } from 'react';
+import React, { PureComponent, Suspense, lazy } from 'react';
 
-import { injectAsyncReducer } from '../../../bin/createStore';
+import { injectAsyncReducer, checkReducer } from '../../../bin/createStore';
 
 import Page from '../../Page/components'
 
-import None from '../../wrappers/None';
 import Empty from '../../wrappers/Empty';
 import Navigate from '../../wrappers/Navigate';
 import Composite from '../../wrappers/Composite';
 
 
-const createWrapper = type => props => {
-  switch (type) {
+const wrapperFactory = (module) => (props) => {
+  switch (module) {
     case 'Navigate': return <Navigate {...props} />;
     case 'Composite': return <Composite {...props} />;
     case 'Empty': return <Empty {...props} />;
-    default: return <None {...props} />;
+    default: return null;
   }
 };
 
-class ModuleComponent extends Component {
+class ModuleComponent extends PureComponent {
   static propTypes = {
     navigate: PropTypes.array,
-    module: PropTypes.string,
+    module: PropTypes.object,
     wrapper: PropTypes.string,
-    removable: PropTypes.bool,
   };
 
   static defaultProps = {
     navigate: [],
-    module: 'Error500',
-    removable: false,
+    module: 'Error',
+    wrapper: '',
   };
 
   constructor(...props) {
     super(...props);
 
-    this.state = {
-      Module: null,
-    };
+    this._createReducer()
+      .then(void 0);
   }
 
-  async componentDidMount() {
-    const { module, setProcess } = this.props;
-
-    setProcess();
-
-    const { default: moduleReducer } = await import(`../../../modules/${module}/ducks/reducer.js`);
-    const { default: Module } = await import(`../../../modules/${module}/components`);
-
-    injectAsyncReducer(module, moduleReducer);
-
-    this.setState({ Module });
+  async _createReducer() {
+    const { module } = this.props;
+    const Module = await module;
+    injectAsyncReducer(Module['name'], Module['reducer']);
+    return void 0;
   }
 
-  componentDidUpdate(prevProps, prevState, nextContext) {
-    const { Module } = this.state;
-    const { inProcess, setProcess } = prevProps;
-    if (Module && inProcess === this.props['inProcess']) {
-      setProcess();
+  async componentDidUpdate() {
+    const { module } = this.props;
+    const hasReducer = checkReducer(module);
+    if ( ! hasReducer) {
+      await this._createReducer();
     }
   }
 
-  shouldComponentUpdate(nextProps, nextState, nextContext) {
-    const { Module } = this.state;
-    return Module !== nextState['Module'];
-  }
-
   render() {
-    const { navigate, wrapper, location, dispatch, setProcess } = this.props;
-    const { Module } = this.state;
-    const Wrapper = createWrapper(wrapper);
+    const { navigate, wrapper, module, location, dispatch, setProcess } = this.props;
+    const Wrapper = wrapperFactory(wrapper);
+    const Module = lazy(() => module);
     return (
       <Wrapper navigate={navigate} location={location}>
         <Page setProcess={setProcess}>
-          { Module && <Module dispatch={dispatch} /> }
+          <Suspense fallback={null}>
+            <Module dispatch={dispatch} />
+          </Suspense>
         </Page>
       </Wrapper>
     );

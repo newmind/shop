@@ -5,7 +5,6 @@ import { composeWithDevTools } from 'redux-devtools-extension';
 
 
 let store = null;
-const RESET = 'RESET';
 
 export default (initialState, ...middleware) => {
   store = createStore(createReducer(), initialState, composeWithDevTools(applyMiddleware(...middleware)));
@@ -13,18 +12,14 @@ export default (initialState, ...middleware) => {
   return store;
 }
 
-export const injectAsyncReducer = async (name, asyncReducer) => {
-  return new Promise(resolve => {
-    store.asyncReducers[name] = asyncReducer;
-    store.replaceReducer(createReducer(store.asyncReducers));
-    resolve();
-  });
+export const injectAsyncReducer = (name, asyncReducer) => {
+  store.asyncReducers[name] = asyncReducer;
+  store.replaceReducer(createReducer(store.asyncReducers));
 };
 
-export const rejectAsyncReducer = async (name) => {
-  // delete store.asyncReducers[name];
-  // store.replaceReducer(createReducer(store.asyncReducers));
-  store.dispatch({ type: RESET });
+export const checkReducer = (name) => {
+  const container = store.getState();
+  return (name in container);
 };
 
 export const importReducer = async (component) => {

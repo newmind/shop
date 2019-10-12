@@ -1,0 +1,131 @@
+
+@import "~@ui.packages/theme";
+
+
+.product {
+
+  display: flex;
+  flex: 1 0;
+  min-height: 200px;
+
+  & + & {
+
+    border-top: 1px solid $light-gray-color;
+    margin: 20px 0 0;
+    padding: 20px 0 0;
+  }
+
+  &:last-child {
+
+    margin: 0 0 40px;
+  }
+
+  &__brand {
+
+    display: block;
+    font-size: 16px;
+    font-weight: bold;
+    margin: 0 0 10px;
+    color: $dark-color;
+  }
+
+  &__name {
+
+    display: block;
+    font-size: 14px;
+    color: $dark-color;
+  }
+}
+
+.gallery {
+
+  display: block;
+  width: 200px;
+  text-align: center;
+
+  &__images {
+
+    display: flex;
+    height: 150px;
+  }
+}
+
+.content {
+
+  display: flex;
+  flex: 1 0;
+  flex-direction: column;
+  margin: 0 20px;
+}
+
+.details {
+
+  display: block;
+  padding: 20px;
+  border-radius: 4px;
+  margin: 20px 0;
+  background: rgba($info-color, .1);
+
+  &__content {
+
+    margin: 20px 0 0;
+  }
+
+  &__info {
+
+    font-size: 14px;
+    line-height: 1.4;
+    color: $dark-color;
+
+    &:first-child + & {
+      margin: 10px 0 0;
+    }
+  }
+}
+
+.info {
+
+  display: block;
+}
+
+.type {
+
+  display: inline-block;
+
+  & + & {
+    margin: 0 0 0 20px;
+  }
+}
+
+.link {
+
+  color: $primary-color;
+  cursor: pointer;
+
+  &:hover {
+    text-decoration: underline;
+  }
+}
+
+.amount {
+
+  display: block;
+  text-align: center;
+  margin: 20px 0;
+
+  &__main {}
+
+  &__value {
+
+    display: inline-block;
+    font-size: 16px;
+    font-weight: bold;
+  }
+
+  &__currency {
+
+    display: inline-block;
+    font-size: 14px;
+    margin: 0 0 0 4px;
+  }
+}

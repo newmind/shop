@@ -19,9 +19,9 @@ class Component extends PureComponent {
   };
 
   render() {
-    const { name, label, ...props } = this.props;
+    const { name, ...props } = this.props;
     return (
-      <Field name={name} label={label} {...props} component={InputField} />
+      <Field name={name} {...props} component={InputField} />
     );
   }
 }

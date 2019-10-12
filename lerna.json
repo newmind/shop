@@ -2,6 +2,7 @@
   "lerna": "3.13.0",
   "version": "independent",
   "packages": [
+    "modules.packages/*",
     "sys.packages/*",
     "ui.packages/*",
     "packages/*",

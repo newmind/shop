@@ -35,6 +35,6 @@ export default [
     path: '/order',
     removable: true,
     wrapper: 'Navigate',
-    module: 'Order',
+    module: 'Order2',
   }
 ];
