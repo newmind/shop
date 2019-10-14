@@ -7,10 +7,10 @@ RUN npm i yarn -g --yes
 
 WORKDIR /app
 
-COPY ./src/admin-ui/src              ./src/admin-ui/src
-COPY ./src/admin-ui/public           ./src/admin-ui/public
-COPY ./src/admin-ui/package.json     ./src/admin-ui
-COPY ./src/admin-ui/.env.production  ./src/admin-ui
+COPY ./apps/admin-ui/src             ./apps/admin-ui/src
+COPY ./apps/admin-ui/public          ./apps/admin-ui/public
+COPY ./apps/admin-ui/package.json    ./apps/admin-ui
+COPY ./apps/admin-ui/.env.production ./apps/admin-ui
 COPY ./ui.packages                   ./ui.packages
 COPY ./modules.packages              ./modules.packages
 COPY ./packages                      ./packages
@@ -80,7 +80,7 @@ RUN ["yarn", "run", "build"]
 # START NGINX
 FROM nginx
 
-COPY --from=ui /app/src/admin-ui/build /app
+COPY --from=ui /app/apps/admin-ui/build /app
 
 WORKDIR /etc/nginx
 

@@ -7,19 +7,19 @@ RUN npm i yarn -g --yes
 
 WORKDIR /app
 
-COPY ./src/identity-srv/db              ./src/identity-srv/db
-COPY ./src/identity-srv/src             ./src/identity-srv/src
-COPY ./src/identity-srv/.env.production ./src/identity-srv
-COPY ./src/identity-srv/package.json    ./src/identity-srv
-COPY ./src/identity-srv/.sequelizerc    ./src/identity-srv
-COPY ./sys.packages                     ./sys.packages
-COPY ./packages                         ./packages
-COPY ./package.json                     ./
-COPY ./lerna.json                       ./
-COPY ./yarn.lock                        ./
+COPY ./apps/identity-srv/db              ./apps/identity-srv/db
+COPY ./apps/identity-srv/src             ./apps/identity-srv/src
+COPY ./apps/identity-srv/.env.production ./apps/identity-srv
+COPY ./apps/identity-srv/package.json    ./apps/identity-srv
+COPY ./apps/identity-srv/.sequelizerc    ./apps/identity-srv
+COPY ./sys.packages                      ./sys.packages
+COPY ./packages                          ./packages
+COPY ./package.json                      ./
+COPY ./lerna.json                        ./
+COPY ./yarn.lock                         ./
 
 RUN yarn
 
-WORKDIR /app/src/identity-srv
+WORKDIR /app/apps/identity-srv
 
 ENTRYPOINT ["yarn", "run", "start"]

@@ -101,7 +101,7 @@ services:
     links:
       - admin_gw
     volumes:
-      - /shop/src/admin-ui/nginx/conf.d:/etc/nginx/conf.d:ro
+      - /shop/apps/admin-ui/nginx/conf.d:/etc/nginx/conf.d:ro
     environment:
       - NODE_ENV=production
 
@@ -117,7 +117,7 @@ services:
     links:
       - showcase_gw
     volumes:
-      - /shop/src/showcase-ui/nginx/conf.d:/etc/nginx/conf.d:ro
+      - /shop/apps/showcase-ui/nginx/conf.d:/etc/nginx/conf.d:ro
     environment:
       - NODE_ENV=production
 

@@ -7,19 +7,19 @@ RUN npm i yarn -g --yes
 
 WORKDIR /app
 
-COPY ./src/product-proxy/db                ./src/product-proxy/db
-COPY ./src/product-proxy/src               ./src/product-proxy/src
-COPY ./src/product-proxy/.env.production   ./src/product-proxy
-COPY ./src/product-proxy/package.json      ./src/product-proxy
-COPY ./src/product-proxy/.sequelizerc      ./src/product-proxy
-COPY ./sys.packages                        ./sys.packages
-COPY ./packages                            ./packages
-COPY ./package.json                        .
-COPY ./lerna.json                          .
-COPY ./yarn.lock                           .
+COPY ./apps/product-proxy/db                ./apps/product-proxy/db
+COPY ./apps/product-proxy/src               ./apps/product-proxy/src
+COPY ./apps/product-proxy/.env.production   ./apps/product-proxy
+COPY ./apps/product-proxy/package.json      ./apps/product-proxy
+COPY ./apps/product-proxy/.sequelizerc      ./apps/product-proxy
+COPY ./sys.packages                         ./sys.packages
+COPY ./packages                             ./packages
+COPY ./package.json                         .
+COPY ./lerna.json                           .
+COPY ./yarn.lock                            .
 
 RUN yarn
 
-WORKDIR /app/src/product-proxy
+WORKDIR /app/apps/product-proxy
 
 ENTRYPOINT ["yarn", "run", "start"]
