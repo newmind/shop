@@ -13,6 +13,7 @@ COPY ./apps/showcase-ui/package.json     ./apps/showcase-ui
 COPY ./apps/showcase-ui/.env.production  ./apps/showcase-ui
 COPY ./ui.packages                       ./ui.packages
 COPY ./packages                          ./packages
+COPY ./shop.modules.packages             ./shop.modules.packages
 COPY ./package.json                      .
 COPY ./lerna.json                        .
 COPY ./yarn.lock                         .
@@ -35,8 +36,33 @@ RUN ["yarn", "run", "build"]
 WORKDIR /app/ui.packages/ui
 RUN ["yarn", "run", "build"]
 
+# BUILD MODULES
+WORKDIR /app/shop.modules.packages/about
+RUN ["yarn", "run", "build"]
+
+WORKDIR /app/shop.modules.packages/corner
+RUN ["yarn", "run", "build"]
+
+WORKDIR /app/shop.modules.packages/main
+RUN ["yarn", "run", "build"]
+
+WORKDIR /app/shop.modules.packages/not-found
+RUN ["yarn", "run", "build"]
+
+WORKDIR /app/shop.modules.packages/order
+RUN ["yarn", "run", "build"]
+
+WORKDIR /app/shop.modules.packages/produce
+RUN ["yarn", "run", "build"]
+
+WORKDIR /app/shop.modules.packages/product
+RUN ["yarn", "run", "build"]
+
+WORKDIR /app/shop.modules.packages/showcase
+RUN ["yarn", "run", "build"]
+
 # BUILD APPLICATION
-WORKDIR /app/src/showcase-ui
+WORKDIR /app/apps/showcase-ui
 RUN ["yarn", "run", "build"]
 
 # START NGINX

@@ -12,7 +12,7 @@ COPY ./apps/admin-ui/public          ./apps/admin-ui/public
 COPY ./apps/admin-ui/package.json    ./apps/admin-ui
 COPY ./apps/admin-ui/.env.production ./apps/admin-ui
 COPY ./ui.packages                   ./ui.packages
-COPY ./modules.packages              ./modules.packages
+COPY ./admin.modules.packages        ./admin.modules.packages
 COPY ./packages                      ./packages
 COPY ./package.json                  .
 COPY ./lerna.json                    .
@@ -37,40 +37,40 @@ WORKDIR /app/ui.packages/ui
 RUN ["yarn", "run", "build"]
 
 # BUILD MODULES
-WORKDIR /app/modules.packages/categories
+WORKDIR /app/admin.modules.packages/categories
 RUN ["yarn", "run", "build"]
 
-WORKDIR /app/modules.packages/currencies
+WORKDIR /app/admin.modules.packages/currencies
 RUN ["yarn", "run", "build"]
 
-WORKDIR /app/modules.packages/not-found
+WORKDIR /app/admin.modules.packages/not-found
 RUN ["yarn", "run", "build"]
 
-WORKDIR /app/modules.packages/orders
+WORKDIR /app/admin.modules.packages/orders
 RUN ["yarn", "run", "build"]
 
-WORKDIR /app/modules.packages/product-modify
+WORKDIR /app/admin.modules.packages/product-modify
 RUN ["yarn", "run", "build"]
 
-WORKDIR /app/modules.packages/products
+WORKDIR /app/admin.modules.packages/products
 RUN ["yarn", "run", "build"]
 
-WORKDIR /app/modules.packages/profile
+WORKDIR /app/admin.modules.packages/profile
 RUN ["yarn", "run", "build"]
 
-WORKDIR /app/modules.packages/recycle
+WORKDIR /app/admin.modules.packages/recycle
 RUN ["yarn", "run", "build"]
 
-WORKDIR /app/modules.packages/sign-in
+WORKDIR /app/admin.modules.packages/sign-in
 RUN ["yarn", "run", "build"]
 
-WORKDIR /app/modules.packages/stock
+WORKDIR /app/admin.modules.packages/stock
 RUN ["yarn", "run", "build"]
 
-WORKDIR /app/modules.packages/sub-products
+WORKDIR /app/admin.modules.packages/sub-products
 RUN ["yarn", "run", "build"]
 
-WORKDIR /app/modules.packages/units
+WORKDIR /app/admin.modules.packages/units
 RUN ["yarn", "run", "build"]
 
 # BUILD APPLICATION
