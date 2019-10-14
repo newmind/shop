@@ -1,10 +1,10 @@
 
 import React, { PureComponent } from 'react';
 
+import Header from "./Header";
+import Footer from "./Footer";
+
 import styles from './default.module.scss';
-import Header from "../Navigate/Header";
-import Navigation from "../Navigate/Navigation";
-import Footer from "../Navigate/Footer";
 
 
 class Component extends PureComponent {

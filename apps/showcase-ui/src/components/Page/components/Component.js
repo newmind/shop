@@ -2,6 +2,7 @@
 import PropTypes from 'prop-types';
 import React, { PureComponent } from 'react';
 
+import cn from 'classnames';
 import styles from './default.module.scss';
 
 
@@ -17,12 +18,20 @@ class Component extends PureComponent {
 
   render() {
     const { children, inProcess } = this.props;
+    const pageContentClassName = cn(styles['page__content'], {
+      [styles['page--blur']]: inProcess,
+    });
     return (
       <div className={styles['page']}>
-        <div className={styles['page__content']}>{ children }</div>
+        <div className={pageContentClassName}>{ children }</div>
         {inProcess && (
           <div className={styles['loading']}>
-            <span className={styles['spinner']}>Загрузка...</span>
+            <div className={styles['container']}>
+              <span className={styles['logotype']}>
+                <i className={cn('fas fa-glasses', styles['logotype__icon'])} />
+                <span className={styles['logotype__text']}>Магазин очков</span>
+              </span>
+            </div>
           </div>
         )}
       </div>

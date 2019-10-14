@@ -1,7 +1,6 @@
 
 import types from "prop-types";
 import React, { PureComponent } from 'react';
-import { Link } from 'react-router-dom';
 
 import { Gallery } from "@ui.packages/ui";
 import numeral from "@ui.packages/numeral";

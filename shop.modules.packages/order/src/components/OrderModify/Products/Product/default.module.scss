@@ -55,7 +55,7 @@
   display: flex;
   flex: 1 0;
   flex-direction: column;
-  margin: 0 20px;
+  margin: 0 0 0 20px;
 }
 
 .details {
@@ -65,6 +65,7 @@
   border-radius: 4px;
   margin: 20px 0;
   background: rgba($info-color, .1);
+  border: 1px solid #f9f3d9;
 
   &__content {
 
@@ -74,7 +75,7 @@
   &__info {
 
     font-size: 14px;
-    line-height: 1.4;
+    line-height: 1.6;
     color: $dark-color;
 
     &:first-child + & {
@@ -101,10 +102,7 @@
 
   color: $primary-color;
   cursor: pointer;
-
-  &:hover {
-    text-decoration: underline;
-  }
+  text-decoration: underline;
 }
 
 .amount {

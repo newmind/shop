@@ -9,6 +9,10 @@
   flex-direction: column;
   overflow: hidden;
 
+  &--blur {
+    filter: blur(3px);
+  }
+
   &__content {
 
     position: relative;
@@ -30,17 +34,39 @@
   bottom: 0;
   left: 0;
   display: flex;
-  background: rgba($dark-color, .15);
+  background: rgba($whitesmoke-color, .9);
   z-index: 20;
 }
 
-.spinner {
+.container {
 
   display: block;
-  margin: auto;
-  padding: 30px;
-  border-radius: 4px;
-  background: $whitesmoke-color;
-  color: $dark-color;
-  font-size: 14px;
+  width: 200px;
+  height: 40px;
+  margin: auto auto;
+}
+
+.logotype {
+
+  display: inline-block;
+  font-size: 0;
+  white-space: nowrap;
+
+  &__icon {
+
+    display: inline-block;
+    font-size: 20px;
+    margin: 0 15px 0 0;
+    vertical-align: baseline;
+    color: $dark-color;
+  }
+
+  &__text {
+
+    display: inline-block;
+    font-size: 20px;
+    font-weight: bold;
+    vertical-align: baseline;
+    color: $dark-color;
+  }
 }
