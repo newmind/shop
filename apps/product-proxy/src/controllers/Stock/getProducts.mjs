@@ -4,87 +4,93 @@ import { models, Sequelize } from '@sys.packages/db';
 
 
 export default () => async (ctx) => {
+  try {
+    let where = {};
+    let productWhere = {};
+    const {Op} = Sequelize;
+    const {Stock, Product, Currency, Category, Comment, Attribute, Gallery} = models;
+    const {categoryId, brand, amountFrom, amountTo} = ctx.request.query;
 
-  let where = {};
-  let productWhere = {};
-  const { Op } = Sequelize;
-  const { Stock, Product, Currency, Category, Comment, Attribute, Gallery } = models;
-  const { categoryId, brand, amountFrom, amountTo } = ctx.request.query;
+    if (categoryId) {
+      where['categoryId'] = categoryId;
+    }
 
-  if (categoryId) {
-    where['categoryId'] = categoryId;
-  }
+    if (brand) {
+      productWhere['brand'] = brand;
+    }
 
-  if (brand) {
-    productWhere['brand'] = brand;
-  }
+    if (amountFrom && !amountTo) {
+      where['amount'] = {
+        [Op.gte]: amountFrom
+      };
+    } else if (amountTo && !amountFrom) {
+      where['amount'] = {
+        [Op.lte]: amountTo
+      };
+    } else if (amountFrom && amountTo) {
+      where['amount'] = {
+        [Op.between]: [amountFrom, amountTo]
+      };
+    }
 
-  if (amountFrom && ! amountTo) {
-    where['amount'] = {
-      [Op.gte]: amountFrom
-    };
-  } else if (amountTo && ! amountFrom) {
-    where['amount'] = {
-      [Op.lte]: amountTo
-    };
-  } else if (amountFrom && amountTo) {
-    where['amount'] = {
-      [Op.between]: [amountFrom, amountTo]
-    };
-  }
+    const products = await Stock.findAll({
+      attributes: ['id', 'count', 'amount'],
+      where: {...where},
+      order: [
+        ['id', 'asc'],
+        ['product', 'gallery', 'id', 'asc']
+      ],
+      include: [
+        {
+          model: Currency,
+          required: false,
+          as: 'currency',
+          attributes: ['id', 'value']
+        },
+        {
+          model: Category,
+          required: false,
+          as: 'category',
+          attributes: ['id', 'name']
+        },
+        {
+          model: Comment,
+          required: false,
+          as: 'comments',
+          attributes: ['evaluation', 'person', 'comment'],
+        },
+        {
+          model: Product,
+          attributes: ['id', 'name', 'brand', 'description', 'status'],
+          required: true,
+          as: 'product',
+          where: {status: 1, ...productWhere},
+          include: [
+            {
+              model: Attribute,
+              required: false,
+              as: 'attributes',
+              attributes: ['id', 'name', 'value'],
+            },
+            {
+              model: Gallery,
+              required: false,
+              as: 'gallery',
+              attributes: ['id'],
+            },
+          ]
+        }
+      ],
+    });
 
-  const products = await Stock.findAll({
-    attributes: ['id', 'count', 'amount'],
-    where: { ...where },
-    order: [['id', 'DESC']],
-    include: [
-      {
-        model: Currency,
-        required: false,
-        as: 'currency',
-        attributes: ['id', 'value']
+    ctx.body = {
+      success: true,
+      data: {
+        products: products,
+        count: products['count'],
       },
-      {
-        model: Category,
-        required: false,
-        as: 'category',
-        attributes: ['id', 'name']
-      },
-      {
-        model: Comment,
-        required: false,
-        as: 'comments',
-        attributes: ['evaluation', 'person', 'comment'],
-      },
-      {
-        model: Product,
-        attributes: ['id', 'name', 'brand', 'description', 'status'],
-        required: true,
-        as: 'product',
-        where: { status: 1, ...productWhere },
-        include: [
-          {
-            model: Attribute,
-            required: false,
-            as: 'attributes',
-            attributes: ['id', 'name', 'value'],
-          },
-          {
-            model: Gallery,
-            required: false,
-            as: 'gallery',
-            attributes: ['id'],
-          },
-        ]
-      }
-    ],
-  });
-
-  ctx.body = {
-    success: true,
-    data: {
-      products: products,
-      count: products['count'],
-    },
-  };
+    };
+  } catch(error) {
+    ctx.throw(new Error(error['message']));
+  }
 };

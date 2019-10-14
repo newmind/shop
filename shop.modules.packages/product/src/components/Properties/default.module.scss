@@ -25,7 +25,19 @@
     display: flex;
     flex: 1 0 50%;
     flex-direction: column;
-    font: 14px "Opinion Pro";
     color: $dark-color;
+  }
+
+  &__title {
+
+    display: inline-block;
+    font-size: 14px;
+    font-weight: bold;
+  }
+
+  &__value {
+
+    display: inline-block;
+    font-size: 14px;
   }
 }

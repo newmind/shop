@@ -8,6 +8,7 @@ export default () => async (ctx) => {
   let where = {};
   let options = {};
   const { status = null, limit = null, offset = null } = ctx.request.query;
+  const { Product, Attribute, Units, Gallery } = models;
 
   if (status) {
     where['status'] = status;
@@ -21,22 +22,25 @@ export default () => async (ctx) => {
     options['offset'] = offset;
   }
 
-  const products = await models['Product'].findAndCountAll({
+  const products = await Product.findAndCountAll({
     attributes: ['id', 'name', 'brand', 'description', 'status', 'createdAt'],
-    order: [['id', 'ASC']],
+    order: [
+      ['id', 'asc'],
+      ['gallery', 'id', 'asc']
+    ],
     distinct: true,
     subQuery: false,
     ...options,
     where: { ...where },
     include: [
       {
-        model: models['Attribute'],
+        model: Attribute,
         required: false,
         as: 'attributes',
         attributes: ['id', 'name', 'value'],
         include: [
           {
-            model: models['Units'],
+            model: Units,
             required: false,
             as: 'unit',
             attributes: ['id', 'value']
@@ -44,7 +48,7 @@ export default () => async (ctx) => {
         ]
       },
       {
-        model: models['Gallery'],
+        model: Gallery,
         required: false,
         as: 'gallery',
         attributes: ['id'],
