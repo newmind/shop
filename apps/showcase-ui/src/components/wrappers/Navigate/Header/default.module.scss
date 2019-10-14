@@ -7,13 +7,13 @@
   flex: 1 0 auto;
   flex-direction: row;
   color: $white-color;
-  padding: 15px 20px;
   align-items: center;
 
   &__title {
 
     display: flex;
     flex: 1 0 auto;
+    padding: 20px 0;
     flex-direction: column;
   }
 

@@ -33,7 +33,18 @@ const Routes = props => {
           />
         );
       })}
-      <Route path="*" render={props => <Module module="NotFound" removable={true} {...props} />} />
+      <Route path="*" render={(props) => (
+        <Module
+          wrapper="Empty"
+          module={import(
+            /* webpackMode: "lazy" */
+            /* webpackChunkName: "not-found" */
+            /* webpackPrefetch: true */
+            '@modules.packages/not-found2'
+          )}
+          {...props}
+        />
+      )} />
     </Switch>
   );
 };

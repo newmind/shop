@@ -118,7 +118,7 @@ class Component extends PureComponent {
                       <p className={styles['cart__full-amount']}>Итого: { fullAmount } руб.</p>
                     </div>
                     <div className={styles['list__controls']}>
-                      <Button onClick={this._handleResetCart.bind(this)}>Отменить</Button>
+                      <Button onClick={this._handleResetCart.bind(this)}>Очистить</Button>
                       <Button onClick={this._handleGoToCart.bind(this)} mode="success">Перейти к оформлению заказа</Button>
                     </div>
                   </div>

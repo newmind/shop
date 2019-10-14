@@ -28,9 +28,7 @@ class Component extends PureComponent {
             </div>
           </aside>
           <article className={styles['content']}>
-            <div className={styles['center']}>
-              { children }
-            </div>
+            { children }
           </article>
         </section>
         <footer className={styles['footer']}>

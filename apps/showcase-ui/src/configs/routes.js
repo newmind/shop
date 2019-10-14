@@ -1,18 +1,19 @@
 
 export default [
+  // {
+  //   path: '/',
+  //   wrapper: 'Navigate',
+  //   module: import(
+  //     /* webpackMode: "lazy" */
+  //     /* webpackChunkName: "stock" */
+  //     /* webpackPrefetch: true */
+  //     '@modules.packages/main'
+  //   ),
+  // },
   {
+    // path: '/products',
     path: '/',
-    wrapper: 'Navigate',
-    module: import(
-      /* webpackMode: "lazy" */
-      /* webpackChunkName: "stock" */
-      /* webpackPrefetch: true */
-      '@modules.packages/main'
-    ),
-  },
-  {
-    path: '/products',
-    wrapper: 'Navigate',
+    wrapper: 'Empty',
     module: import(
       /* webpackMode: "lazy" */
       /* webpackChunkName: "stock" */
@@ -22,7 +23,7 @@ export default [
   },
   {
     path: '/products/:id',
-    wrapper: 'Navigate',
+    wrapper: 'Empty',
     module: import(
       /* webpackMode: "lazy" */
       /* webpackChunkName: "stock" */
@@ -30,29 +31,29 @@ export default [
       '@modules.packages/product'
     ),
   },
-  {
-    path: '/about',
-    wrapper: 'Navigate',
-    module: import(
-      /* webpackMode: "lazy" */
-      /* webpackChunkName: "stock" */
-      /* webpackPrefetch: true */
-      '@modules.packages/about'
-    ),
-  },
-  {
-    path: '/produce',
-    wrapper: 'Navigate',
-    module: import(
-      /* webpackMode: "lazy" */
-      /* webpackChunkName: "stock" */
-      /* webpackPrefetch: true */
-      '@modules.packages/produce'
-    ),
-  },
+  // {
+  //   path: '/about',
+  //   wrapper: 'Navigate',
+  //   module: import(
+  //     /* webpackMode: "lazy" */
+  //     /* webpackChunkName: "stock" */
+  //     /* webpackPrefetch: true */
+  //     '@modules.packages/about'
+  //   ),
+  // },
+  // {
+  //   path: '/produce',
+  //   wrapper: 'Navigate',
+  //   module: import(
+  //     /* webpackMode: "lazy" */
+  //     /* webpackChunkName: "stock" */
+  //     /* webpackPrefetch: true */
+  //     '@modules.packages/produce'
+  //   ),
+  // },
   {
     path: '/corner',
-    wrapper: 'Navigate',
+    wrapper: 'Empty',
     module: import(
       /* webpackMode: "lazy" */
       /* webpackChunkName: "stock" */

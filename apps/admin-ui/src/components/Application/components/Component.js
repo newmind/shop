@@ -36,9 +36,10 @@ const Routes = props => {
       })}
       <Route path="*" render={(props) => (
         <Module
+          wrapper="Empty"
           module={import(
             /* webpackMode: "lazy" */
-            /* webpackChunkName: "products" */
+            /* webpackChunkName: "not-found" */
             /* webpackPrefetch: true */
             '@modules.packages/not-found'
           )}

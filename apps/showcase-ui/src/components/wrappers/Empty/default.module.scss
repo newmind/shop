@@ -1,4 +1,6 @@
 
+@import "~@ui.packages/theme";
+
 .wrapper {
 
   display: flex;
@@ -6,14 +8,41 @@
   flex-direction: column;
 }
 
-.header {
+.center {
 
   position: relative;
+  display: flex;
+  flex: 1 0 auto;
+  flex-direction: column;
+  margin: 0 auto;
+  width: 1024px;
+}
+
+.header {
+
   display: block;
-  background: #d3dfeb;
-  padding: 15px 20px;
-  font: 16px 'Helvetica Neue',sans-serif;
-  font-weight: bold;
+  background: $dark-color;
+}
+
+.page {
+
+  position: relative;
+  display: flex;
+  flex: 1 0 auto;
+  flex-direction: column;
+  z-index: 10;
+}
+
+.aside {
+
+  display: block;
+}
+
+.navigate {
+
+  display: block;
+  background: $whitesmoke-color;
+  border-bottom: 1px solid $light-gray-color;
 }
 
 .content {
@@ -21,18 +50,16 @@
   display: flex;
   flex: 1 1 auto;
   flex-direction: column;
-  background: #e5eef5;
+  background: $white-color;
   width: 100%;
   z-index: 10;
 }
 
 .footer {
 
-  position: relative;
   display: block;
-  background: #d3dfeb;
+  background-image: linear-gradient($whitesmoke-color, #fff);
+  border-top: 1px solid $gray-color;
   padding: 20px;
-  box-shadow: 0 -1px 3px 0 rgba(150, 150, 150, .5);
-  font: 13px 'Helvetica Neue',sans-serif;
-  z-index: 20;
+  font-size: 13px;
 }

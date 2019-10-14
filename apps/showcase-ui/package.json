@@ -4,14 +4,17 @@
   "version": "0.1.0",
   "scripts": {
     "start": "react-scripts start",
-    "build": "react-scripts build",
-    "dialog:build": "cd ././../../ui.packages/dialog/ && yarn run build",
-    "hocs:build": "cd ././../../ui.packages/hocs/ && yarn run build",
-    "notification:build": "cd ././../../ui.packages/notifications/ && yarn run build",
-    "tabs:build": "cd ././../../ui.packages/tabs/ && yarn run build",
-    "ui:build": "cd ././../../ui.packages/ui/ && yarn run build"
+    "build": "react-scripts build"
   },
   "dependencies": {
+    "@modules.packages/about": "^1.0.0",
+    "@modules.packages/corner": "^1.0.0",
+    "@modules.packages/main": "^1.0.0",
+    "@modules.packages/not-found2": "^1.0.0",
+    "@modules.packages/order": "^1.0.0",
+    "@modules.packages/produce": "^1.0.0",
+    "@modules.packages/product": "^1.0.0",
+    "@modules.packages/showcase": "^1.0.0",
     "@ui.packages/dialog": "^1.0.0",
     "@ui.packages/hocs": "^1.0.0",
     "@ui.packages/moment": "^1.0.0",
