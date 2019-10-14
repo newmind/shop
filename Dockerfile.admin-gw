@@ -10,7 +10,7 @@ WORKDIR /app
 COPY ./apps/admin-gw/src              ./apps/admin-gw/src
 COPY ./apps/admin-gw/.env.production  ./apps/admin-gw
 COPY ./apps/admin-gw/package.json     ./apps/admin-gw
-COPY ./apps.packages                  ./sys.packages
+COPY ./sys.packages                   ./sys.packages
 COPY ./packages                       ./packages
 COPY ./package.json                   .
 COPY ./lerna.json                     .
