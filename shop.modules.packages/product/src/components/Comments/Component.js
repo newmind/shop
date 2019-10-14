@@ -29,7 +29,7 @@ class Component extends PureComponent {
               </div>
               <div className={styles['comment__wrapper']}>
                 <span className={styles['comment__person']}>{ comment['person'] }</span>
-                <span className={styles['comment__date']}>( { moment(comment['comment__date']).format('DD.MM.YYYY') } )</span>
+                <span className={styles['comment__date']}>( { moment(comment['createdAt']).format('DD.MM.YYYY') } )</span>
               </div>
             </div>
             <div className={styles['comment__content']}>

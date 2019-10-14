@@ -28,7 +28,7 @@ export default () => async (ctx) => {
         model: Comment,
         required: false,
         as: 'comments',
-        attributes: ['evaluation', 'person', 'comment'],
+        attributes: ['evaluation', 'person', 'comment', 'createdAt'],
       },
       {
         model: Product,
