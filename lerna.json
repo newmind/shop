@@ -2,11 +2,12 @@
   "lerna": "3.13.0",
   "version": "independent",
   "packages": [
-    "modules.packages/*",
+    "admin.modules.packages/*",
+    "shop.modules.packages/*",
     "sys.packages/*",
     "ui.packages/*",
     "packages/*",
-    "src/*"
+    "apps/*"
   ],
   "npmClient": "yarn",
   "useWorkspaces": true

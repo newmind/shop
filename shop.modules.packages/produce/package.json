@@ -1,0 +1,41 @@
+{
+  "private": true,
+  "name": "@modules.packages/produce",
+  "version": "1.0.0",
+  "main": "./lib/index.js",
+  "scripts": {
+    "build": "cross-env NODE_ENV=production babel ./src --out-dir ./lib --copy-files",
+    "start:dev": "cross-env NODE_ENV=development babel ./src --out-dir ./lib --copy-files --watch"
+  },
+  "dependencies": {
+    "@fortawesome/fontawesome-free": "^5.8.1",
+    "@ui.packages/dialog": "^1.0.0",
+    "@ui.packages/moment": "^1.0.0",
+    "@ui.packages/notifications": "^1.0.0",
+    "@ui.packages/request": "^1.0.0",
+    "@ui.packages/socket": "^1.0.0",
+    "@ui.packages/theme": "^1.0.0",
+    "@ui.packages/ui": "^1.0.0",
+    "@ui.packages/utils": "^1.0.0",
+    "@ui.packages/hocs": "^1.0.0",
+    "@packages/numeral": "^1.0.0",
+    "@packages/errors": "^1.0.0",
+    "prop-types": "^15.7.2",
+    "react": "^16.10.2",
+    "react-redux": "^7.1.1",
+    "react-router-dom": "^5.1.2",
+    "redux": "^4.0.4",
+    "redux-form": "^8.2.6"
+  },
+  "devDependencies": {
+    "@babel/cli": "^7.6.4",
+    "@babel/core": "^7.6.4",
+    "cross-env": "^6.0.3",
+    "resolve": "^1.12.0"
+  },
+  "babel": {
+    "presets": [
+      "react-app"
+    ]
+  }
+}
