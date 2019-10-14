@@ -74,7 +74,7 @@ WORKDIR /app/admin.modules.packages/units
 RUN ["yarn", "run", "build"]
 
 # BUILD APPLICATION
-WORKDIR /app/src/admin-ui
+WORKDIR /app/apps/admin-ui
 RUN ["yarn", "run", "build"]
 
 # START NGINX
