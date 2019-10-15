@@ -1,5 +1,6 @@
 
 import React, { Fragment, PureComponent } from 'react';
+import { Field } from 'redux-form';
 
 import numeral from "@ui.packages/numeral";
 import { Dialog } from "@ui.packages/dialog";
@@ -37,16 +38,17 @@ class Component extends PureComponent {
 
   _handleLensesSubmit(data) {
     const { field, change, closeDialog } = this.props;
-    change('order', `${field}.lens`, data['lens']);
+    change('order', `${field}.lens`, data);
     closeDialog(`${field}.select-lenses`);
   }
 
   render() {
-    const { field, product, amount, currency, type, recipe, lens } = this.props;
+    const { field, index, product, amount, currency, type, recipe, lens, errors } = this.props;
     const { name, brand, gallery } = product;
 
     const hasRecipe = !! Object.keys(recipe).length;
     const hasLens = !! Object.keys(lens).length;
+    const hasItemsErrors = !! errors['items'] && errors['items'][index];
 
     return(
       <div className={styles['product']}>
@@ -76,20 +78,27 @@ class Component extends PureComponent {
               {type === 'on-prescription' && (
                 <Fragment>
                   <p className={styles['details__info']}>Преобретается оправа с линзами и установкой линз по медицинскому рецепту.</p>
-                  <p className={styles['details__info']}>1. <span className={styles['link']} onClick={this._handlePrescriptionModifyOpenDialog.bind(this)}>{hasRecipe ? 'Изменить' : 'Заполинть'}</span> рецепт.</p>
+                  <p className={styles['details__info']}>
+                    1. <span className={styles['link']} onClick={this._handlePrescriptionModifyOpenDialog.bind(this)}>{hasRecipe ? 'Изменить' : 'Заполинть'}</span> рецепт.
+                    {hasItemsErrors && errors['items'][index]['recipe'] && <span className={styles['error']}>[{errors['items'][index]['recipe']}]</span>}
+                  </p>
                   {hasRecipe && <Recipe {...recipe} />}
-                  <p className={styles['details__info']}>2. <span className={styles['link']} onClick={this._handleSelectLensesOpenDialog.bind(this)}>{hasLens ? 'Заменить' : 'Выбрать'}</span> линзы.</p>
+                  <p className={styles['details__info']}>
+                    2. <span className={styles['link']} onClick={this._handleSelectLensesOpenDialog.bind(this)}>{hasLens ? 'Заменить' : 'Выбрать'}</span> линзы.
+                    {hasItemsErrors && errors['items'][index]['lens'] && <span className={styles['error']}>[{errors['items'][index]['lens']}]</span>}
+                  </p>
+                  {hasLens && <p>Pfgjkytyj</p>}
                 </Fragment>
               )}
             </div>
           </div>
         </div>
-        <Dialog title="Рецепт на изготовление очков" name={`${field}.prescription-modify`}>
+        <Field name={`${field}.recipe`} component={() => <Dialog title="Рецепт на изготовление очков" name={`${field}.prescription-modify`}>
           <PrescriptionFormModify value={recipe} onSubmit={this._handlePrescriptionSubmit.bind(this)} />
-        </Dialog>
-        <Dialog title="Выбор линз" name={`${field}.select-lenses`}>
+        </Dialog>} />
+        <Field name={`${field}.lens`} component={() => <Dialog title="Выбор линз" name={`${field}.select-lenses`}>
           <SelectLensesFormModify value={lens} onSubmit={this._handleLensesSubmit.bind(this)} />
-        </Dialog>
+        </Dialog>} />
       </div>
     );
   }

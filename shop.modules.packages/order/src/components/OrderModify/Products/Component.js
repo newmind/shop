@@ -19,7 +19,7 @@ class Component extends PureComponent {
     return fields.map((field, index) => {
       const product = fields.get(index);
       return (
-        <Product key={index} field={field} {...product} />
+        <Product key={index} index={index} field={field} {...product} />
       );
     });
   }

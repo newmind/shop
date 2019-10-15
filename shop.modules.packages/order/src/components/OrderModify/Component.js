@@ -1,6 +1,6 @@
 
 import React, { PureComponent } from 'react';
-import {FieldArray} from "redux-form";
+import { FieldArray } from "redux-form";
 
 import Products from "./Products";
 import Details from "./Details";

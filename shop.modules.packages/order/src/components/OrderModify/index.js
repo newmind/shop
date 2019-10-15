@@ -20,6 +20,23 @@ const mapStateToProps = (state) => {
 const validate = (values) => {
   const errors = {};
 
+  const itemsErrors = [];
+  if (values['items']) {
+    values['items'].forEach((item, index) => {
+      const itemErrors = {};
+      if (item['type'] === 'on-prescription') {
+        if ( ! Object.keys(item['recipe']).length) {
+          itemErrors['recipe'] = 'Необходимо сделать выбор';
+          itemsErrors[index] = itemErrors;
+        }
+        if ( ! Object.keys(item['lens']).length) {
+          itemErrors['lens'] = 'Необходимо сделать выбор';
+          itemsErrors[index] = itemErrors;
+        }
+      }
+    });
+  }
+
   if ( ! values['name']) {
     errors['name'] = 'Необходимо заполнить';
   }
@@ -34,6 +51,10 @@ const validate = (values) => {
 
   if ( ! values['email']) {
     errors['email'] = 'Необходимо заполнить';
+  }
+
+  if (!!itemsErrors.length) {
+    errors['items'] = itemsErrors;
   }
 
   return errors;

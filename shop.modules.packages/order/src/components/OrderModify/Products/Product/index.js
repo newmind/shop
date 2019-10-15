@@ -1,15 +1,17 @@
 
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import { change } from 'redux-form';
+import { change, getFormSyncErrors } from 'redux-form';
 
 import { closeDialog, openDialog } from '@ui.packages/dialog';
 
 import Component from './Component';
 
 
-const mapStateToProps = () => {
-  return {};
+const mapStateToProps = (state) => {
+  return {
+    errors: getFormSyncErrors('order')(state),
+  };
 };
 
 const mapActionsToProps = (dispatch) => ({

@@ -41,26 +41,26 @@ export default [
   //     '@modules.packages/about'
   //   ),
   // },
-  // {
-  //   path: '/produce',
-  //   wrapper: 'Navigate',
-  //   module: import(
-  //     /* webpackMode: "lazy" */
-  //     /* webpackChunkName: "stock" */
-  //     /* webpackPrefetch: true */
-  //     '@modules.packages/produce'
-  //   ),
-  // },
   {
-    path: '/corner',
-    wrapper: 'Empty',
+    path: '/produce',
+    wrapper: 'Navigate',
     module: import(
       /* webpackMode: "lazy" */
       /* webpackChunkName: "stock" */
       /* webpackPrefetch: true */
-      '@modules.packages/corner'
+      '@modules.packages/produce'
     ),
   },
+  // {
+  //   path: '/corner',
+  //   wrapper: 'Empty',
+  //   module: import(
+  //     /* webpackMode: "lazy" */
+  //     /* webpackChunkName: "stock" */
+  //     /* webpackPrefetch: true */
+  //     '@modules.packages/corner'
+  //   ),
+  // },
   {
     path: '/order',
     removable: true,
