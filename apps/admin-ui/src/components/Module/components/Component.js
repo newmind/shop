@@ -30,7 +30,6 @@ class ModuleComponent extends PureComponent {
 
   static defaultProps = {
     navigate: [],
-    module: 'Error',
     wrapper: '',
   };
 

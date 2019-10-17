@@ -73,7 +73,6 @@ class Component extends PureComponent {
                   <Product
                     key={index}
                     {...product}
-                    // onView={this._handleFastView.bind(this, product)}
                     onCart={this._handleCart.bind(this, product)} />
                 ))}
               </div>
@@ -85,9 +84,6 @@ class Component extends PureComponent {
             </div>
           )}
         </section>
-        {/*<Tabs name="product" title="Быстрый просмотр товара">*/}
-        {/*  <Form onCart={this._handleCart.bind(this)} />*/}
-        {/*</Tabs>*/}
       </section>
     );
   }

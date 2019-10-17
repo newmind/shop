@@ -6,8 +6,8 @@
 
   display: flex;
   flex-direction: row;
-  flex: 1 0 auto;
-  align-items: flex-end;
+  flex: 1 0;
+  align-items: flex-start;
 }
 
 .fields {
@@ -45,20 +45,22 @@
 .amounts {
 
   display: block;
-  width: 200px;
+  flex: 283px 0;
 }
 
 .amount {
 
   display: inline-flex;
-  flex-direction: column;
+  flex: 1 0;
+  flex-direction: row;
+  align-items: center;
 
   &__label {
 
     display: block;
     font-size: 14px;
-    color: #222;
-    margin: 0 0 8px 1px;
+    margin: 0 15px 0 0;
+    color: $dark-color;
     transition: color 400ms;
   }
 
@@ -78,4 +80,10 @@
     margin: 0 6px;
     color: $light-gray-color;
   }
+}
+
+.align-centered {
+
+  justify-content: center;
+  padding: 0 0 0 15px;
 }

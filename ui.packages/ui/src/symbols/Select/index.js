@@ -74,6 +74,7 @@ class Component extends PureComponent {
     options: types.array,
     optionKey: types.string,
     optionValue: types.string,
+    placeholder: types.string,
     optionTransform: types.func,
     optionTemplate: types.func,
     onChange: types.func,
@@ -93,6 +94,7 @@ class Component extends PureComponent {
     optionKey: 'id',
     optionValue: 'value',
     value: '',
+    placeholder: 'Выбери значение'
   };
 
   inputRef = React.createRef();
@@ -290,7 +292,7 @@ class Component extends PureComponent {
   // }
 
   _renderValue() {
-    const { value } = this.props;
+    const { value, placeholder } = this.props;
     const selectedValue = (value && this._getValue(value)) || null;
     return (
       <span className={styles['select__values']} onClick={this._handleOnFocus.bind(this)}>
@@ -298,7 +300,7 @@ class Component extends PureComponent {
           ? (<span className={styles['select__value']}>
               <span className={styles['select__text']}>{selectedValue}</span>
             </span>)
-          : <span className={styles['select__placeholder']}>Выбери значение</span>}
+          : <span className={styles['select__placeholder']}>{ placeholder }</span>}
       </span>
     );
   }

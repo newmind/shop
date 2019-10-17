@@ -2,7 +2,7 @@
 import types from 'prop-types';
 import React, { PureComponent } from 'react';
 
-import { SelectField, InputField, Row, Col, Button } from '@ui.packages/ui';
+import { SelectField, InputField, Row, Col, Button, CheckBoxField } from '@ui.packages/ui';
 
 import styles from './default.module.scss';
 
@@ -28,7 +28,7 @@ class Component extends PureComponent {
           <Row>
             <Col>
               <SelectField
-                label="Категория"
+                placeholder="Категория"
                 name="categoryId"
                 options={categories}
                 optionValue="name"
@@ -38,7 +38,7 @@ class Component extends PureComponent {
             </Col>
             <Col>
               <SelectField
-                label="Бренд"
+                placeholder="Бренд"
                 name="brand"
                 optionKey="brand"
                 optionValue="brand"
@@ -53,15 +53,33 @@ class Component extends PureComponent {
                 disabled={inProcess}
               />
             </Col>
+            <Col>
+              <SelectField
+                placeholder="Цвет"
+                name="color"
+                options={[]}
+                disabled={inProcess}
+              />
+            </Col>
+          </Row>
+          <Row>
             <Col className={styles['amounts']}>
               <div className={styles['amount']}>
                 <span className={styles['amount__label']}>Сумма</span>
                 <span className={styles['amount__wrapper']}>
-                    <InputField className={styles['amount__input']} name="amountFrom" disabled={inProcess} />
-                    <span className={styles['amount__delimiter']}>-</span>
-                    <InputField className={styles['amount__input']} name="amountTo" disabled={inProcess} />
-                  </span>
+                  <InputField className={styles['amount__input']} name="amountFrom" disabled={inProcess} />
+                  <span className={styles['amount__delimiter']}>-</span>
+                  <InputField className={styles['amount__input']} name="amountTo" disabled={inProcess} />
+                </span>
               </div>
+            </Col>
+            <Col className={styles['align-centered']}>
+              <Row>
+                <Col><CheckBoxField label="Новинки" name="new" disabled={inProcess} /></Col>
+                <Col><CheckBoxField label="Со скидкой" name="sale" disabled={inProcess} /></Col>
+                <Col/>
+                <Col/>
+              </Row>
             </Col>
           </Row>
         </div>

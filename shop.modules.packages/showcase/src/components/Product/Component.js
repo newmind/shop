@@ -35,12 +35,6 @@ class Component extends PureComponent {
     name: 'None',
   };
 
-  // _handleClickView(event) {
-  //   event.preventDefault();
-  //   const { onView } = this.props;
-  //   onView && onView();
-  // }
-
   _handleClickCart() {
     const { onCart } = this.props;
     onCart && onCart();
@@ -64,7 +58,6 @@ class Component extends PureComponent {
         </div>
         <div className={styles['product__promo']}>
           <Gallery items={gallery} isList={false} valueKey="id" path={`${process.env['REACT_APP_API_HOST']}/gallery`} />
-          {/*<span className={styles['product__view']} title="быстрый росмотр" onClick={this._handleClickView.bind(this)}>Быстрый просмотр</span>*/}
         </div>
         <div className={styles['product__amount']}>{ numeral(amount).format() } {currency['value']}</div>
         <div className={styles['product__controls']}>

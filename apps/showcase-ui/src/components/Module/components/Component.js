@@ -30,6 +30,7 @@ class ModuleComponent extends PureComponent {
 
   static defaultProps = {
     navigate: [],
+    module: import('../../NotModule'),
     wrapper: '',
   };
 
