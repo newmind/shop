@@ -3,8 +3,7 @@ import types from 'prop-types';
 import React, { PureComponent } from 'react';
 
 import numeral from '@ui.packages/numeral';
-
-import { Gallery } from '@ui.packages/ui';
+import { Gallery, Breadcrumbs } from '@ui.packages/ui';
 import { Dialog } from '@ui.packages/dialog';
 
 import Comments from './Comments';
@@ -62,10 +61,18 @@ class Component extends PureComponent {
   }
 
   render() {
-    const { product: { product, comments, amount, currency }, initialValues } = this.props;
+    const { product: { id, product, comments, amount, currency }, initialValues } = this.props;
     const { gallery, attributes, brand, name, description } = product;
     return (
       <article className={styles['product']}>
+        <div className={styles['product__breadcrumbs']}>
+          <Breadcrumbs
+            items={[
+              { title: 'Витрина', href: '/' },
+              { title: `${name} (${id})` },
+            ]}
+          />
+        </div>
         <div className={styles['product__common']}>
           <div className={styles['product__gallery']}>
             <Gallery items={gallery} valueKey="id" path={`${process.env['REACT_APP_API_HOST']}/gallery`} />

@@ -11,22 +11,23 @@
   & + & {
 
     border-top: 1px solid $light-gray-color;
-    margin: 20px 0 0;
-    padding: 20px 0 0;
+    margin: 40px 0 0;
+    padding: 40px 0 0;
   }
 
-  &:last-child {
-
-    margin: 0 0 40px;
-  }
+  //&:last-child {
+  //
+  //  margin: 0 0 40px;
+  //}
 
   &__brand {
 
     display: block;
     font-size: 16px;
     font-weight: bold;
-    margin: 0 0 10px;
+    margin: 0 0 15px;
     color: $dark-color;
+    letter-spacing: .5px;
   }
 
   &__name {
@@ -40,13 +41,13 @@
 .gallery {
 
   display: block;
-  width: 200px;
+  width: 250px;
   text-align: center;
 
   &__images {
 
     display: flex;
-    height: 150px;
+    height: 200px;
   }
 }
 
@@ -61,15 +62,15 @@
 .details {
 
   display: block;
-  padding: 20px;
+  padding: 30px;
   border-radius: 4px;
-  margin: 20px 0;
+  margin: 30px 0 0;
   background: rgba($info-color, .1);
   border: 1px solid #f9f3d9;
 
   &__content {
 
-    margin: 20px 0 0;
+    margin: 30px 0 0;
   }
 
   &__info {
@@ -130,8 +131,9 @@
 
 .error {
 
-  font-size: 12px;
-  color: $warning-color;
+  font-size: 11px;
+  color: #e86b20;
   margin: 0 0 0 20px;
   font-style: italic;
+  letter-spacing: .5px;
 }

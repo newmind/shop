@@ -18,7 +18,7 @@ class Component extends PureComponent {
 
     return (
       <form onSubmit={handleSubmit}>
-        <Row>
+        <Row className={styles['row']}>
           <Col>
             <h2 className={styles['block__header']}>Выбранные товары</h2>
             <div className={styles['block__content']}>
@@ -29,7 +29,7 @@ class Component extends PureComponent {
             </div>
           </Col>
         </Row>
-        <Row>
+        <Row className={styles['row']}>
           <Col>
             <h2 className={styles['block__header']}>Оформление заказа</h2>
             <div className={styles['block__content']}>

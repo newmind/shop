@@ -13,7 +13,7 @@ export default [
   {
     // path: '/products',
     path: '/',
-    wrapper: 'Empty',
+    wrapper: 'Navigate',
     module: import(
       /* webpackMode: "lazy" */
       /* webpackChunkName: "stock" */
@@ -23,7 +23,7 @@ export default [
   },
   {
     path: '/products/:id',
-    wrapper: 'Empty',
+    wrapper: 'Navigate',
     module: import(
       /* webpackMode: "lazy" */
       /* webpackChunkName: "stock" */

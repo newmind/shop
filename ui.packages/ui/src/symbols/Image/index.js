@@ -7,6 +7,7 @@ import Spinner from '../Spinner';
 import cn from 'classnames';
 import styles from './default.module.scss';
 
+
 const PRIMARY_MODE = 'primary';
 const INFO_MODE = 'info';
 const WARNING_MODE = 'warning';
@@ -47,22 +48,35 @@ class Component extends PureComponent {
       isLoading: true,
       isError: false,
     };
+
+    this._handleLoad = this._handleLoad.bind(this);
+    this._handleError = this._handleError.bind(this);
+  }
+
+  componentDidMount() {
+    const { current: imageElement } = this.imageRef;
+    imageElement.addEventListener('load', this._handleLoad);
+    imageElement.addEventListener('error', this._handleError);
   }
 
   componentDidUpdate(prevProps) {
     const { current: imageElement } = this.imageRef;
     const { src } = prevProps;
-    const state = { isError: false };
 
     if (src !== this.props['src']) {
 
       imageElement.style['width'] = 'auto';
       imageElement.style['height'] = 'auto';
 
-      state['isLoading'] = true;
+      this.setState({ isError: false, isLoading: true });
     }
+  }
 
-    this.setState(state);
+  componentWillUnmount() {
+    const { current: imageElement } = this.imageRef;
+    imageElement.addEventListener('load', this._handleLoad);
+    imageElement.addEventListener('error', this._handleError);
+    clearTimeout(this.timeOutInstance);
   }
 
   async _handleLoad() {
@@ -92,10 +106,6 @@ class Component extends PureComponent {
     this.timeOutInstance = setTimeout(() => this.setState({ isLoading: false, isError: false }), 10);
   }
 
-  componentWillUnmount() {
-    clearTimeout(this.timeOutInstance);
-  }
-
   _handleError() {
     this.setState({ isLoading: false, isError: true });
   }
@@ -112,10 +122,11 @@ class Component extends PureComponent {
       [styles['wrapper--danger']]: mode === DANGER_MODE,
       [styles['wrapper--warning']]: mode === WARNING_MODE,
     });
+    const errorIcon = cn(styles['error__icon'], 'far fa-image');
 
     return (
       <div ref={this.wrapperRef} className={classNameImageWrapper}>
-        <img ref={this.imageRef} className={styles['image']} alt={"No Image"} src={src} onLoad={this._handleLoad.bind(this)} onError={this._handleError.bind(this)} />
+        <img ref={this.imageRef} className={styles['image']} alt={"No Image"} src={src} />
         {isLoading && (
           <div className={styles['loading']}>
             <Spinner />
@@ -123,7 +134,7 @@ class Component extends PureComponent {
         )}
         {isError && (
           <div className={styles['error']}>
-            <span className={styles['error__title']}>Что-то пошло<br/>не так</span>
+            <i className={errorIcon} />
           </div>
         )}
       </div>

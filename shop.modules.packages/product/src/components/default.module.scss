@@ -5,16 +5,18 @@
 .header {
   
   display: block;
-  font: 16px 'Helvetica Neue',sans-serif;
+  font-size: 16px;
   color: $dark-color;
   font-weight: bold;
+  letter-spacing: .5px;
 }
 
 .paragraph {
 
   display: block;
-  font: 13px 'Helvetica Neue',sans-serif;
+  font-size: 14px;
   line-height: 1.4;
+  letter-spacing: .5px;
 }
 
 .features {
@@ -30,14 +32,20 @@
   display: flex;
   flex-direction: column;
   flex: 1 0 auto;
-  padding: 40px 0 90px;
+  padding: 20px 0 90px;
+
+  &__breadcrumbs {
+
+    display: block;
+  }
 
   &__brand {
 
     display: block;
-    font: 30px 'Helvetica Neue',sans-serif;
+    font-size: 30px;
     font-weight: bold;
     color: $dark-color;
+    letter-spacing: 1px;
   }
 
   &__name {
@@ -45,7 +53,7 @@
     display: block;
     font-size: 14px;
     color: $dark-color;
-    margin: 6px 0 0;
+    margin: 10px 0 0;
   }
 
   &__amount {
@@ -60,7 +68,7 @@
 
     display: block;
     padding: 30px 0 0;
-    margin: 20px 0 0;
+    margin: 30px 0 0;
     border-top: 1px solid $gray-color;
     width: 340px;
 
@@ -76,8 +84,9 @@
   &__common {
 
     display: flex;
-    flex: 0 0 auto;
+    flex: 1 0;
     flex-direction: row;
+    margin: 30px 0 0;
   }
 
   &__gallery {
@@ -123,7 +132,7 @@
   font-weight: bold;
   width: 160px;
   text-align: center;
-  margin: 14px 0 0;
+  margin: 30px 0 0;
   cursor: pointer;
   box-shadow: 0 0 4px 0 rgba($primary-color, .5);
   white-space: nowrap;

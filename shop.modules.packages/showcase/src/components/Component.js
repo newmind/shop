@@ -66,23 +66,27 @@ class Component extends PureComponent {
           <Filter inProcess={inProcess} initialValues={initialValues} onSubmit={this._handleFilter.bind(this)} />
         </aside>
         <section className={styles['products']}>
-          {products.map((lineWithProducts, index) => {
-            return (
-              <div key={index} className={styles['products__line']}>
-                {lineWithProducts.map((product, index) => (
-                  <Product
-                    key={index}
-                    {...product}
-                    onCart={this._handleCart.bind(this, product)} />
-                ))}
+          <div className={styles['main']}>
+            <h2 className={styles['main__header']}>Найдено предложений</h2>
+            {products.map((lineWithProducts, index) => {
+              return (
+                <div key={index} className={styles['products__line']}>
+                  {lineWithProducts.map((product, index) => (
+                    <Product
+                      key={index}
+                      {...product}
+                      onCart={this._handleCart.bind(this, product)} />
+                  ))}
+                </div>
+              );
+            })}
+            {(items.length < count) && (
+              <div className={styles['products__controls']}>
+                <button className={styles['products__more']} type="button" onClick={this._handleLoadingMore.bind(this)}>Показать еще 12 из {count}</button>
               </div>
-            );
-          })}
-          {(items.length < count) && (
-            <div className={styles['products__controls']}>
-              <button className={styles['products__more']} type="button" onClick={this._handleLoadingMore.bind(this)}>Показать еще 12 из {count}</button>
-            </div>
-          )}
+            )}
+          </div>
+
         </section>
       </section>
     );

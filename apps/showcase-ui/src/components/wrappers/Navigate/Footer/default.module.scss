@@ -17,7 +17,7 @@
     display: inline-block;
 
     & + & {
-      margin: 0 0 0 10px;
+      margin: 0 0 0 20px;
     }
   }
   
@@ -25,7 +25,7 @@
 
     display: block;
     font-size: 13px;
-    color: $dark-color;
+    color: $whitesmoke-color;
     text-decoration: none;
 
     &:hover {

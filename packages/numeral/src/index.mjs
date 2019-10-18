@@ -13,6 +13,6 @@ if (numeral.locale() !== 'my') {
 }
 
 numeral.locale('my');
-numeral.defaultFormat('0,0[.]00');
+numeral.defaultFormat('0,0.00');
 
 export default numeral;

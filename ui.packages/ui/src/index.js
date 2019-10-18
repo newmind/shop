@@ -13,6 +13,7 @@ export { default as RadioBox, Radio } from './symbols/RadioBox';
 export { default as DatePicker } from './symbols/DatePicker';
 
 export { default as Gallery } from './Gallery';
+export { default as Breadcrumbs } from './Breadcrumbs';
 
 export { default as BaseField } from './fields/BaseField';
 export { default as FileField } from './fields/FileField';

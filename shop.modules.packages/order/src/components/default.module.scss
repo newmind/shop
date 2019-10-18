@@ -5,8 +5,14 @@
 .wrapper {
 
   display: block;
-  padding: 40px 20px 120px;
+  padding: 20px 0 120px;
   box-sizing: border-box;
+}
+
+.breadcrumbs {
+
+  display: block;
+  margin: 0 0 40px;
 }
 
 .controls {
