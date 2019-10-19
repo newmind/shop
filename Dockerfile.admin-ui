@@ -58,9 +58,6 @@ RUN ["yarn", "run", "build"]
 WORKDIR /app/admin.modules.packages/profile
 RUN ["yarn", "run", "build"]
 
-WORKDIR /app/admin.modules.packages/recycle
-RUN ["yarn", "run", "build"]
-
 WORKDIR /app/admin.modules.packages/sign-in
 RUN ["yarn", "run", "build"]
 
