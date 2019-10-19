@@ -4,9 +4,7 @@ export default [
     path: '/',
     wrapper: 'Composite',
     module: import(
-      /* webpackMode: "lazy" */
       /* webpackChunkName: "stock" */
-      /* webpackPrefetch: true */
       '@modules.packages/stock'
     ),
   },
@@ -14,9 +12,7 @@ export default [
     path: '/products',
     wrapper: 'Composite',
     module: import(
-      /* webpackMode: "lazy" */
       /* webpackChunkName: "products" */
-      /* webpackPrefetch: true */
       '@modules.packages/products'
     ),
   },
@@ -24,9 +20,7 @@ export default [
     path: '/sub-products',
     wrapper: 'Composite',
     module: import(
-      /* webpackMode: "lazy" */
       /* webpackChunkName: "sub-products" */
-      /* webpackPrefetch: true */
       '@modules.packages/sub-products'
     ),
   },
@@ -34,9 +28,7 @@ export default [
     path: '/products/create',
     wrapper: 'Composite',
     module: import(
-      /* webpackMode: "lazy" */
       /* webpackChunkName: "product-modify" */
-      /* webpackPrefetch: true */
       '@modules.packages/product-modify'
     ),
   },
@@ -44,9 +36,7 @@ export default [
     path: '/products/:id',
     wrapper: 'Composite',
     module: import(
-      /* webpackMode: "lazy" */
       /* webpackChunkName: "product-modify" */
-      /* webpackPrefetch: true */
       '@modules.packages/product-modify'
     ),
   },
@@ -54,9 +44,7 @@ export default [
     path: '/orders',
     wrapper: 'Navigate',
     module: import(
-      /* webpackMode: "lazy" */
       /* webpackChunkName: "orders" */
-      /* webpackPrefetch: true */
       '@modules.packages/orders'
     ),
   },
@@ -64,9 +52,7 @@ export default [
     path: '/categories',
     wrapper: 'Composite',
     module: import(
-      /* webpackMode: "lazy" */
       /* webpackChunkName: "categories" */
-      /* webpackPrefetch: true */
       '@modules.packages/categories'
     ),
   },
@@ -74,9 +60,7 @@ export default [
     path: '/units',
     wrapper: 'Composite',
     module: import(
-      /* webpackMode: "lazy" */
       /* webpackChunkName: "units" */
-      /* webpackPrefetch: true */
       '@modules.packages/units'
     ),
   },
@@ -84,9 +68,7 @@ export default [
     path: '/currency',
     wrapper: 'Composite',
     module: import(
-      /* webpackMode: "lazy" */
       /* webpackChunkName: "currency" */
-      /* webpackPrefetch: true */
       '@modules.packages/currencies'
     ),
   },
@@ -94,9 +76,7 @@ export default [
     path: '/sign-in',
     wrapper: 'Empty',
     module: import(
-      /* webpackMode: "lazy" */
       /* webpackChunkName: "sign-in" */
-      /* webpackPrefetch: true */
       '@modules.packages/sign-in'
     ),
   },
@@ -104,9 +84,7 @@ export default [
     path: '/profile',
     wrapper: 'Navigate',
     module: import(
-      /* webpackMode: "lazy" */
       /* webpackChunkName: "profile" */
-      /* webpackPrefetch: true */
       '@modules.packages/profile'
     ),
   },
