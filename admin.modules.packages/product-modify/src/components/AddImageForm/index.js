@@ -50,14 +50,17 @@ class Component extends PureComponent {
         <Row>
           <Col>
             <div className={styles['content']}>
+              <span className={styles['add-image']} onClick={this._handleAddImages.bind(this)}>
+                <span className={cn('fas fa-plus', styles['add-image__icon'])}/>
+              </span>
               {(input['value'] || []).map((file, key) => {
                 return (
-                  <Image key={key} className={styles['image']} src={this._normalizeURI(file)}/>
+                  <div key={key} className={styles['image']}>
+                    <span className={cn(styles['remove-image'], 'fas fa-times')} />
+                    <Image src={this._normalizeURI(file)} />
+                  </div>
                 );
               })}
-              <span className={styles['add-image']} onClick={this._handleAddImages.bind(this)}>
-              <span className={cn('fas fa-plus', styles['add-image__icon'])}/>
-            </span>
             </div>
           </Col>
         </Row>

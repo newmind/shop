@@ -1,11 +1,11 @@
 
+import { Row, Col, Hr, InputField, TextareaField } from '@ui.packages/ui';
+
+import { Field, FieldArray } from 'redux-form';
 import React, { PureComponent } from 'react';
 
 import AddImageForm from '../AddImageForm';
 import AttrsForm from '../AttributesForm';
-
-import { Field, FieldArray } from 'redux-form';
-import { Row, Col, Hr, InputField, TextareaField } from '@ui.packages/ui';
 
 import styles from './default.module.scss';
 
@@ -40,6 +40,16 @@ class Component extends PureComponent {
           <Row>
             <Col>
               <InputField name="brand" label="Производитель" />
+            </Col>
+          </Row>
+          <Row>
+            <Col>
+              <InputField name="color" label="Цвет" />
+            </Col>
+          </Row>
+          <Row>
+            <Col>
+              <InputField name="form" label="Форма" />
             </Col>
           </Row>
           <Row>

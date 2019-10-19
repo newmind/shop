@@ -72,14 +72,10 @@ export default (state = initialState, { type, payload }) => {
     };
     case SOCKET_PRODUCT_DELETED:
     case REMOVE_PRODUCT_REQUEST_SUCCESS: {
-      const products = state['products'];
-      const index = products.findIndex(item => item['id'] === payload);
+      const products = [...state['products']].filter((item) => item['id'] !== payload);
       return {
         ...state,
-        products: [
-          ...products.slice(0, index),
-          ...products.slice(index + 1),
-        ],
+        products,
       };
     }
 

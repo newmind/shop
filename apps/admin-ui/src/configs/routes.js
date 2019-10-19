@@ -31,16 +31,6 @@ export default [
     ),
   },
   {
-    path: '/recycle',
-    wrapper: 'Composite',
-    module: import(
-      /* webpackMode: "lazy" */
-      /* webpackChunkName: "recycle" */
-      /* webpackPrefetch: true */
-      '@modules.packages/recycle'
-    ),
-  },
-  {
     path: '/products/create',
     wrapper: 'Composite',
     module: import(

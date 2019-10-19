@@ -83,8 +83,11 @@ class Component extends PureComponent {
     const { current: wrapperElement } = this.wrapperRef;
     const { current: imageElement } = this.imageRef;
 
-    const wrapperSize = Component.getSize(wrapperElement);
+    if ( ! wrapperElement || ! imageElement) {
+      return void 0;
+    }
 
+    const wrapperSize = Component.getSize(wrapperElement);
     imageElement.style['width'] = wrapperSize['width'] + 'px';
 
     let imageSize = Component.getSize(imageElement);

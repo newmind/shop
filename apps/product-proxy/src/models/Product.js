@@ -11,15 +11,23 @@ module.exports = (db, DataType) => {
     },
     name: {
       type: DataType.STRING(255),
-      allowNull: false,
+      allowNull: true,
     },
     brand: {
       type: DataType.STRING(255),
       allowNull: false,
     },
+    color: {
+      type: DataType.STRING(255),
+      allowNull: true,
+    },
+    form: {
+      type: DataType.STRING(255),
+      allowNull: true,
+    },
     description: {
       type: DataType.STRING(1024),
-      allowNull: false,
+      allowNull: true,
     },
     status: {
       type: DataType.INTEGER,

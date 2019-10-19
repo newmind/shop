@@ -1,11 +1,10 @@
 
+import { Confirm } from "@ui.packages/dialog";
+import { Gallery, Table, Button, Row, Col } from '@ui.packages/ui';
+
 import types from 'prop-types';
 import React, { PureComponent } from 'react';
-
-// import numeral from '@ui.packages/numeral';
-
 import { Link } from 'react-router-dom';
-import { Gallery, Table, Button, Row, Col } from '@ui.packages/ui';
 
 import cn from 'classnames';
 import styles from './default.module.scss';
@@ -20,14 +19,31 @@ class Component extends PureComponent {
     products: [],
   };
 
+  state = {
+    productId: null,
+    product: null,
+  };
+
   _handleAddProduct() {
     const { replaceURI } = this.props;
     replaceURI('/products/create');
   }
 
-  _handleRemoveProduct(id, status) {
-    const { removeProductById } = this.props;
-    removeProductById(id, status);
+  _handleCancelRemove() {
+    const { closeDialog } = this.props;
+    this.setState({ productId: null }, () => closeDialog('remove-confirm'));
+  }
+
+  _handleRemoveProduct(id) {
+    const { openDialog } = this.props;
+    this.setState({ productId: id }, () => openDialog('remove-confirm'));
+  }
+
+  async _handleConfirmRemove() {
+    const { productId } = this.state;
+    const { removeProductById, closeDialog } =  this.props;
+    await removeProductById(productId);
+    this.setState({ productId: null }, () => closeDialog('remove-confirm'));
   }
 
   render() {
@@ -36,7 +52,7 @@ class Component extends PureComponent {
       <div className="page">
         <Row>
           <Col>
-            <Button mode="primary" onClick={this._handleAddProduct.bind(this)}>Добавить товар</Button>
+            <Button mode="primary" onClick={this._handleAddProduct.bind(this)}>Добавить товар на склад</Button>
           </Col>
         </Row>
         <Row>
@@ -69,8 +85,17 @@ class Component extends PureComponent {
                   title: 'Бранд',
                 },
                 {
-                  alias: 'description',
                   title: 'Описание',
+                  template: ({ color, form, description }) => {
+                    console.log(color, form, description);
+                    return (
+                      <div>
+                        {color && <div>Цвет: { color }</div>}
+                        {form && <div>Цвет: { form }</div>}
+                        {description && <div>{ description }</div>}
+                      </div>
+                    );
+                  }
                 },
                 {
                   alias: 'attributes',
@@ -114,6 +139,12 @@ class Component extends PureComponent {
             />
           </Col>
         </Row>
+        <Confirm
+          name="remove-confirm"
+          message="Вы уверены, что хотите удалить товар со склада?"
+          onConfirm={this._handleConfirmRemove.bind(this)}
+          onCancel={this._handleCancelRemove.bind(this)}
+        />
       </div>
     );
   }

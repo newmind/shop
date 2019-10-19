@@ -7,11 +7,9 @@ import PageHOC from '@ui.packages/hocs';
 import Component from './Component';
 
 import { pushNotification } from '@ui.packages/notifications';
+import { openDialog, closeDialog } from '@ui.packages/dialog';
 
 import {
-  openDialog,
-  closeDialog,
-
   getProducts,
   createProducts,
   removeProductById,
@@ -29,11 +27,12 @@ const mapActionsToProps = (dispatch) => {
   return {
     openDialog: bindActionCreators(openDialog, dispatch),
     closeDialog: bindActionCreators(closeDialog, dispatch),
+
     replaceURI: bindActionCreators(replace, dispatch),
+
     getProducts: bindActionCreators(getProducts, dispatch),
     createProducts: bindActionCreators(createProducts, dispatch),
     removeProductById: bindActionCreators(removeProductById, dispatch),
-    pushNotification: bindActionCreators(pushNotification, dispatch),
   };
 };
 

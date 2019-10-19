@@ -92,7 +92,7 @@ class Component extends PureComponent {
       <div className="page">
         <Row>
           <Col>
-            <Button mode="primary" disabled={inProcess} onClick={this._handleOpenModifyProductDialog.bind(this)}>Добавить товар на склад</Button>
+            <Button mode="primary" disabled={inProcess} onClick={this._handleOpenModifyProductDialog.bind(this)}>Добавить товар на витрину</Button>
           </Col>
         </Row>
         <Row>
@@ -191,7 +191,7 @@ class Component extends PureComponent {
         </Dialog>
         <Confirm
           name="remove-confirm"
-          message="Вы уверены, что хотите удалить продукт со склада?"
+          message="Вы уверены, что хотите удалить товар с витрины?"
           onConfirm={this._handleConfirmRemove.bind(this)}
           onCancel={this._handleCancelRemove.bind(this)}
         />

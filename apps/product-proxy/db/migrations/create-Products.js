@@ -14,7 +14,7 @@ module.exports = {
         },
         name: {
           type: Sequelize.STRING(255),
-          allowNull: false,
+          allowNull: true,
         },
         brand: {
           type: Sequelize.STRING(255),
@@ -22,7 +22,7 @@ module.exports = {
         },
         description: {
           type: Sequelize.STRING(1024),
-          allowNull: false,
+          allowNull: true,
         },
         status: {
           type: Sequelize.INTEGER,
@@ -34,6 +34,8 @@ module.exports = {
         updatedAt: {
           type: Sequelize.DATE,
         }
+      }, {
+        transaction
       });
 
       await transaction.commit();

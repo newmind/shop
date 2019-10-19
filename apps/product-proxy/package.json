@@ -8,7 +8,7 @@
     "seed": "cross-env NODE_ENV=production sequelize-cli db:seed:all",
     "seed:dev": "cross-env NODE_ENV=development sequelize-cli db:seed:all",
     "start": "yarn run migration && node -r dotenv/config --experimental-modules ./src/index.mjs dotenv_config_path=./.env.production",
-    "start:dev": "npx yarn run migration:dev && nodemon --exec node -r dotenv/config --experimental-modules ./src/index.mjs dotenv_config_path=./.env.development"
+    "start:dev": "nodemon --exec node -r dotenv/config --experimental-modules ./src/index.mjs dotenv_config_path=./.env.development"
   },
   "dependencies": {
     "@sys.packages/db": "^1.0.0",

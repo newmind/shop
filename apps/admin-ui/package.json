@@ -14,7 +14,6 @@
     "@modules.packages/product-modify": "^1.0.0",
     "@modules.packages/products": "^1.0.0",
     "@modules.packages/profile": "^1.0.0",
-    "@modules.packages/recycle": "^1.0.0",
     "@modules.packages/sign-in": "^1.0.0",
     "@modules.packages/stock": "^1.0.0",
     "@modules.packages/sub-products": "^1.0.0",

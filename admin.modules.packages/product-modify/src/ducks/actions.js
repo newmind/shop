@@ -1,5 +1,7 @@
 
 import {
+  RESET,
+
   PAGE_IN_PROCESS,
 
   GET_UNITS_REQUEST,
@@ -23,6 +25,11 @@ import {
 export const pageInProcessAction = (status = true) => ({
   type: PAGE_IN_PROCESS,
   payload: status,
+});
+
+export const resetAction = () => ({
+  type: RESET,
+  payload: null,
 });
 
 export const getUnitsRequestAction = () => ({

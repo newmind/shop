@@ -51,7 +51,11 @@ class Component extends PureComponent {
             <InputField name="amount" label="Цена" />
           </Col>
           <Col>
-            <SelectField name="currency" label="Валюта" options={currencies} />
+            <SelectField
+              name="currency"
+              label="Валюта"
+              options={currencies}
+            />
           </Col>
         </Row>
         <Row>
@@ -61,6 +65,11 @@ class Component extends PureComponent {
               name="product"
               options={products}
               optionValue={'name'}
+              optionTemplate={({ brand, name}) => {
+                return (
+                  <div>{ brand } { name }</div>
+                );
+              }}
               disabled={disabled}
             />
           </Col>

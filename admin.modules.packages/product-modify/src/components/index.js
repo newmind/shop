@@ -1,12 +1,13 @@
 
 import { bindActionCreators } from 'redux';
-import { getFormValues, isInvalid, isPristine, submit } from 'redux-form';
+import { getFormValues, isInvalid, isPristine, submit, reset } from 'redux-form';
 
 import PageHOC from '@ui.packages/hocs';
 
 import Component from './Component';
 
 import {
+  resetData,
   getUnits,
   getProductById,
   updateProductsById,
@@ -35,6 +36,8 @@ const mapStateToProps = state => {
 
 const mapActionsToProps = (dispatch) => {
   return {
+    resetData: bindActionCreators(resetData, dispatch),
+    reset: bindActionCreators(reset, dispatch),
     getUnits: bindActionCreators(getUnits, dispatch),
     getProductById: bindActionCreators(getProductById, dispatch),
     updateProductsById: bindActionCreators(updateProductsById, dispatch),
@@ -48,8 +51,13 @@ export default PageHOC({
   mapStateToProps,
   mapActionsToProps,
   onEnter: async ({ getProductById, getUnits, match: { params: { id }}, pageInProcess }) => {
-    await getProductById(id);
+    if (id) {
+      await getProductById(id);
+    }
     await getUnits();
     pageInProcess(false);
   },
+  onDestroy: ({ resetData }) => {
+    resetData();
+  }
 })(Component);

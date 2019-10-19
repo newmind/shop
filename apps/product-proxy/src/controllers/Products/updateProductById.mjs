@@ -42,18 +42,28 @@ export default () => async (ctx) => {
     const attributes = [...JSON.parse(fields['attributes'])]
       .map(item => {
         item['productId'] = productId;
+        item['unitId'] < 0 && delete item['unitId'];
         return item;
       });
 
     await Attribute.bulkCreate(attributes, { transaction });
 
-    await Product.update(fields, { where: { id: productId }, transaction });
+    await Product.update({
+      name: fields['name'],
+      brand: fields['brand'],
+      color: fields['color'],
+      form: fields['form'],
+      description: fields['description'],
+      status: Number(fields['status']),
+    }, {
+      where: { id: productId }, transaction }
+    );
 
     await saveFiles(files, { productId }, { transaction });
 
     return Product.findOne({
       where: { id: productId },
-      attributes: ['id', 'name', 'brand', 'description', 'status'],
+      attributes: ['id', 'name', 'brand', 'color', 'form', 'description', 'status'],
       include: [
         {
           model: Attribute,

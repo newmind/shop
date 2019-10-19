@@ -71,6 +71,7 @@
 
 .container {
 
+  position: relative;
   display: block;
 }
 
@@ -105,4 +106,26 @@
     letter-spacing: .5px;
     font-weight: bold;
   }
+}
+
+.error {
+
+  position: absolute;
+  top: 100%;
+  right: 0;
+  display: block;
+  background: #e83841;
+  padding: 0 10px 3px;
+  border-radius: 0 0 3px 3px;
+
+  &__message {
+
+    font-size: 10px;
+    color: $white-color;
+  }
+}
+
+.border-right-bottom-none {
+
+  border-radius: 3px 3px 0;
 }

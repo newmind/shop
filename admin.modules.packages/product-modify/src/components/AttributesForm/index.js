@@ -37,7 +37,7 @@ class Attribute extends PureComponent {
           <InputField label="Значение" name={`${field}.value`} />
         </div>
         <div className={styles['attr__units']}>
-          <SelectField label="Значение" name={`${field}.unitId`} options={units} simple={true} optionKey="id" optionValue="value" />
+          <SelectField label="Единица измерения" name={`${field}.unitId`} options={units} simple={true} optionKey="id" optionValue="value" />
         </div>
         <div className={styles['attr__controls']}>
           <span className={classNameRemoveAttr} onClick={this._handleRemove.bind(this)} />

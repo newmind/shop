@@ -100,6 +100,7 @@ class FieldComponent extends PureComponent {
       mode = 'warning';
     }
 
+    const hasError = ! disabled && error && touched;
     const classNameInputWrapper = cn(styles['wrapper'], {
       [styles['wrapper--primary']]: mode === PRIMARY_MODE,
       [styles['wrapper--success']]: mode === SUCCESS_MODE,
@@ -119,18 +120,21 @@ class FieldComponent extends PureComponent {
             ...props,
             ...input,
             mode: mode,
+            className: hasError && styles['border-right-bottom-none']
           })}
-          { ! disabled && error && touched && (
-            <span ref={this.messageRef} className={styles['tooltip']}>
-            <span className={styles['tooltip__message']}>{ error }</span>
-          </span>
+          {hasError  && (
+            <span className={styles['error']}>
+              <span className={styles['error__message']}>{ error }</span>
+            </span>
           )}
         </div>
       </div>
     );
   }
 }
-
+// {/*<span ref={this.messageRef} className={styles['tooltip']}>*/}
+// {/*  <span className={styles['tooltip__message']}>{ error }</span>*/}
+// {/*</span>*/}
 class Component extends PureComponent {
   static propTypes = {
     name: types.string,

@@ -42,6 +42,11 @@ class Component extends PureComponent {
     onSubmit('modify-product');
   }
 
+  _handleReset() {
+    const { reset } = this.props;
+    reset('modify-product');
+  }
+
   render() {
     const { isError, hasId, isInvalid, isPristine, product, units } = this.props;
     return (isError
@@ -49,25 +54,27 @@ class Component extends PureComponent {
         <p>Error</p>
       )
       : (
-        <div className="page">
-          <Container className={styles['form']}>
-            <Row>
-              <Col>
-                <ModifyForm initialValues={product} units={units} onSubmit={this._handleSubmitProduct.bind(this)} />
-              </Col>
-            </Row>
-            <Row>
-              <Col>
-                <Button
-                  type="submit"
-                  disabled={isInvalid || isPristine}
-                  mode="success"
-                  onClick={this._handleSubmit.bind(this)}
-                >{hasId ? 'Сохранить' : 'Добавить'}</Button>
-              </Col>
-            </Row>
-          </Container>
-        </div>
+        <Container className={styles['form']}>
+          <Row>
+            <Col>
+              <ModifyForm initialValues={product} units={units} onSubmit={this._handleSubmitProduct.bind(this)} />
+            </Col>
+          </Row>
+          <Row>
+            <Col>
+              <Button
+                disabled={isPristine}
+                onClick={this._handleReset.bind(this)}
+              >Отмена</Button>
+              <Button
+                type="submit"
+                disabled={isInvalid || isPristine}
+                mode="success"
+                onClick={this._handleSubmit.bind(this)}
+              >{hasId ? 'Сохранить' : 'Добавить'}</Button>
+            </Col>
+          </Row>
+        </Container>
       ));
   }
 }

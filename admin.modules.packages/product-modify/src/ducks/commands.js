@@ -19,7 +19,7 @@ import {
 
   createProductRequestAction,
   createProductRequestFailAction,
-  createProductRequestSuccessAction,
+  createProductRequestSuccessAction, resetAction,
 } from './actions';
 
 import { replace } from 'react-router-redux';
@@ -29,7 +29,11 @@ export const pageInProcess = (status) => (dispatch) => {
   dispatch(pageInProcessAction(status));
 };
 
-export const getUnits = () => async dispatch => {
+export const resetData = () => async (dispatch) => {
+  dispatch(resetAction());
+};
+
+export const getUnits = () => async (dispatch) => {
   try {
 
     dispatch(getUnitsRequestAction());
@@ -72,7 +76,7 @@ export const getProductById = (id) => async dispatch => {
           id: item['id'],
           name: item['name'],
           value: item['value'],
-          unitId: item['unit'] ? item['unit']['id'] : -1,
+          unitId: item['unit'] ? item['unit']['id'] : null,
         };
       }) : []
     };
@@ -124,7 +128,7 @@ export const updateProductsById = (data) => async dispatch => {
           id: item['id'],
           name: item['name'],
           value: item['value'],
-          unitId: item['unit'] ? item['unit']['id'] : -1,
+          unitId: item['unit'] ? item['unit']['id'] : null,
         };
       }) : []
     };
@@ -178,7 +182,7 @@ export const createProduct = (data) => async dispatch => {
           id: item['id'],
           name: item['name'],
           value: item['value'],
-          unitId: item['unit'] ? item['unit']['id'] : -1,
+          unitId: item['unit'] ? item['unit']['id'] : null,
         };
       }) : []
     };

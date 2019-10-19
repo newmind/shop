@@ -9,7 +9,11 @@ const PRODUCT_API_SRV = process.env['PRODUCT_API_SRV'];
 export default async (id) => {
   try {
 
-    return await axios.delete(`${PRODUCT_API_SRV}/stock/products/${id}`);
+    return await axios({
+      url: `${PRODUCT_API_SRV}/stock/products/${id}`,
+      method: 'delete',
+      data: {}
+    });
 
   } catch (error) {
     throw error;
