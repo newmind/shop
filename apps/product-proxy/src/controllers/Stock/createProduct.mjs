@@ -1,12 +1,10 @@
 'use strict';
 
 import { sequelize, models } from '@sys.packages/db';
-
 import { sendEvent } from "@sys.packages/rabbit";
 
 
 export default () => async (ctx) => {
-
   try {
 
     const fields = ctx.request.body;
@@ -35,7 +33,7 @@ export default () => async (ctx) => {
           },
           {
             model: models['Product'],
-            attributes: ['id', 'name', 'brand', 'description', 'status'],
+            attributes: ['id', 'name', 'brand', 'color', 'form', 'material', 'description', 'status'],
             required: true,
             as: 'product',
             where: { status: 1 },
@@ -56,8 +54,6 @@ export default () => async (ctx) => {
           }
         ], transaction });
     });
-
-    console.log(product)
 
     sendEvent(process.env['RABBIT_PRODUCT_PROXY_EXCHANGE_STOCK_PRODUCT_CREATED'], JSON.stringify(product));
 

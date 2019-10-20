@@ -75,6 +75,7 @@ class Component extends PureComponent {
     optionKey: types.string,
     optionValue: types.string,
     placeholder: types.string,
+    valueTransform: types.func,
     optionTransform: types.func,
     optionTemplate: types.func,
     onChange: types.func,
@@ -228,7 +229,7 @@ class Component extends PureComponent {
   }
 
   _getValue(value) {
-    const { simple, options, optionKey, optionValue } = this.props;
+    const { simple, options, optionKey, optionValue, valueTransform } = this.props;
     const option = options.find(option => {
       if (simple) {
         return (option[optionKey] === value);
@@ -237,7 +238,10 @@ class Component extends PureComponent {
     });
 
     if (option) {
-      if (value instanceof Object) {
+      if (valueTransform) {
+        return valueTransform(option);
+      }
+      else if (value instanceof Object) {
         return option[optionValue];
       } else {
         if (simple) {
@@ -300,7 +304,10 @@ class Component extends PureComponent {
           ? (<span className={styles['select__value']}>
               <span className={styles['select__text']}>{selectedValue}</span>
             </span>)
-          : <span className={styles['select__placeholder']}>{ placeholder }</span>}
+          : (<span className={styles['select__placeholder']}>
+              <span className={styles['select__text']}>{ placeholder }</span>
+            </span>)
+        }
       </span>
     );
   }
@@ -350,7 +357,7 @@ class Component extends PureComponent {
         )}
         <div ref={this.selectRef} className={classNameSelect}>
           <span className={styles['select__content']}>
-            { this._renderValue() }
+            {this._renderValue()}
           </span>
           <span className={styles['select__controls']}>
             { !! value && this._renderCancel()}

@@ -52,6 +52,7 @@ export default () => async (ctx) => {
       name: fields['name'],
       brand: fields['brand'],
       color: fields['color'],
+      material: fields['material'],
       form: fields['form'],
       description: fields['description'],
       status: Number(fields['status']),
@@ -63,7 +64,7 @@ export default () => async (ctx) => {
 
     return Product.findOne({
       where: { id: productId },
-      attributes: ['id', 'name', 'brand', 'color', 'form', 'description', 'status'],
+      attributes: ['id', 'name', 'brand', 'color', 'material', 'form', 'description', 'status'],
       include: [
         {
           model: Attribute,

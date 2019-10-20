@@ -21,6 +21,10 @@ module.exports = (db, DataType) => {
       type: DataType.STRING(255),
       allowNull: true,
     },
+    material: {
+      type: DataType.STRING(255),
+      allowNull: true,
+    },
     form: {
       type: DataType.STRING(255),
       allowNull: true,

@@ -11,8 +11,6 @@ export default () => async (ctx) => {
   const { productId } = ctx.params;
   const { ...formData } = ctx.request.body;
 
-  console.log(111, formData);
-
   const component = await sequelize.transaction(async (transaction) => {
 
     return await Comment.create({

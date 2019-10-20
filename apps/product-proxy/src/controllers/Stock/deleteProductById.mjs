@@ -10,8 +10,6 @@ export default () => async (ctx) => {
   try {
     const { productId } = ctx['params'];
 
-    console.log(111, productId)
-
     await sequelize.transaction(async (transaction) => {
 
       await models['Stock'].destroy({

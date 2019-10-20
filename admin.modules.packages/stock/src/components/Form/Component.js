@@ -65,9 +65,16 @@ class Component extends PureComponent {
               name="product"
               options={products}
               optionValue={'name'}
-              optionTemplate={({ brand, name}) => {
+              valueTransform={({ id, brand, name }) => {
+                return `[${id}] ${brand}${name ? ` - ${name}` : ''}`;
+              }}
+              optionTemplate={({ id, brand, name}) => {
                 return (
-                  <div>{ brand } { name }</div>
+                  <div className={styles['product_option']}>
+                    <span className={styles['product_option__item']}>id: { id }</span>
+                    {brand && <span className={styles['product_option__item']}>Бренд: { brand }</span>}
+                    {name && <span className={styles['product_option__item']}>Имя: { name }</span>}
+                  </div>
                 );
               }}
               disabled={disabled}

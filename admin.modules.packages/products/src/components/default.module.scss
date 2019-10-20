@@ -111,3 +111,25 @@
     font-style: italic;
   }
 }
+
+.description {
+
+  display: block;
+  font-size: 13px;
+  line-height: 1.4;
+  padding: 10px;
+
+  &__label {
+
+    font-weight: bold;
+  }
+
+  &__item {
+
+    display: block;
+
+    & + & {
+      margin: 4px 0 0;
+    }
+  }
+}

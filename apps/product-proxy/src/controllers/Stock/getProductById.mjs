@@ -35,7 +35,7 @@ export default () => async (ctx) => {
         },
         {
           model: Product,
-          attributes: ['id', 'name', 'brand', 'description', 'status'],
+          attributes: ['id', 'name', 'brand', 'color', 'material', 'form', 'description', 'status'],
           required: true,
           as: 'product',
           where: { status: 1 },

@@ -102,10 +102,10 @@ class Component extends PureComponent {
               columns={[
                 {
                   title: 'ID',
-                  alias: 'id',
                   attrs: {
-                    width: '60px'
-                  }
+                    width: '80px'
+                  },
+                  transform: ({ id, product }) => `${id} [${product['id']}]`
                 },
                 {
                   title: 'Изображение',

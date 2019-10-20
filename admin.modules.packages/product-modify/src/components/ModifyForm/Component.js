@@ -49,6 +49,11 @@ class Component extends PureComponent {
           </Row>
           <Row>
             <Col>
+              <InputField name="material" label="Материал" />
+            </Col>
+          </Row>
+          <Row>
+            <Col>
               <InputField name="form" label="Форма" />
             </Col>
           </Row>

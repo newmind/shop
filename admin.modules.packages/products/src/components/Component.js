@@ -77,22 +77,22 @@ class Component extends PureComponent {
                   template: (items) => <Gallery className={styles['image']} valueKey={'id'} items={items} path={`${process.env['REACT_APP_API_HOST']}/gallery`} />
                 },
                 {
-                  alias: 'name',
-                  title: 'Наименование',
-                },
-                {
                   alias: 'brand',
                   title: 'Бранд',
                 },
                 {
+                  alias: 'name',
+                  title: 'Наименование',
+                },
+                {
                   title: 'Описание',
-                  template: ({ color, form, description }) => {
-                    console.log(color, form, description);
+                  template: ({ color, form, material, description }) => {
                     return (
-                      <div>
-                        {color && <div>Цвет: { color }</div>}
-                        {form && <div>Цвет: { form }</div>}
-                        {description && <div>{ description }</div>}
+                      <div className={styles['description']}>
+                        {color && <div className={styles['description__item']}><b className={styles['description__label']}>Цвет:</b> { color }</div>}
+                        {material && <div className={styles['description__item']}><b className={styles['description__label']}>Материал:</b> { material }</div>}
+                        {form && <div className={styles['description__item']}><b className={styles['description__label']}>Форма:</b> { form }</div>}
+                        <div className={styles['description__item']}>{ description }</div>
                       </div>
                     );
                   }

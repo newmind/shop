@@ -9,7 +9,7 @@ export default () => async (ctx) => {
 
   const product = await models['Product'].findOne({
     where: { id: productId },
-    attributes: ['id', 'name', 'brand', 'color', 'form', 'description', 'status'],
+    attributes: ['id', 'name', 'brand', 'color', 'material', 'form', 'description', 'status'],
     order: [
       ['gallery', 'id', 'asc']
     ],
