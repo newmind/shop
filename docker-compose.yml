@@ -42,20 +42,6 @@ services:
       - rabbit
 
 
-  operation_proxy:
-    container_name: operation_proxy
-    build:
-      context: ./
-      dockerfile: Dockerfile.operation-proxy
-    restart: always
-    depends_on:
-      - db
-      - rabbit
-    links:
-      - db
-      - rabbit
-
-
   admin_gw:
     container_name: admin_gw
     build:

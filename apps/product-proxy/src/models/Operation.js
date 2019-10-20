@@ -2,32 +2,35 @@
 
 module.exports = (db, DataType) => {
 
-  const Invoice = db.define('Invoice', {
+  const Operation = db.define('Operation', {
     id: {
-      type: DataType.INTEGER(11),
+      type: DataType.INTEGER,
       primaryKey: true,
       autoIncrement: true,
       index: true,
     },
     externalId: {
-      type: DataType.STRING(255),
+      type: DataType.INTEGER,
       allowNull: false,
     },
-    paymentMethodId: {
-      type: DataType.INTEGER,
+    details: {
+      type: DataType.TEXT,
+      allowNull: false,
+    },
+    paymentMethod: {
+      type: DataType.STRING(255),
+      allowNull: false,
     },
     amount: {
       type: DataType.DECIMAL(10, 2),
       allowNull: false,
+      defaultValue: 1,
     },
-    currencyId: {
+    status: {
       type: DataType.INTEGER,
-    },
-    statusCode: {
-      type: DataType.INTEGER(2),
       allowNull: false,
-    }
+    },
   });
 
-  return Invoice;
+  return Operation;
 };

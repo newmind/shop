@@ -40,6 +40,13 @@ import {
   update as updateUser,
 } from '../controllers/User';
 
+import {
+  getAll as getOperations,
+  getById as getOperationById,
+  create as createOperation,
+  updateById as updateOperationById,
+} from '../controllers/Operatons';
+
 
 export default (router) => {
 
@@ -53,6 +60,11 @@ export default (router) => {
   router.post('/products', createProduct());
   router.put('/products/:productId', updateProduct());
   router.delete('/products/:productId', deleteProductById());
+
+  router.get('/operations', getOperations());
+  router.get('/operations/:operationId', getOperationById());
+  router.post('/operations', createOperation());
+  router.put('/operations/:operationId', updateOperationById());
 
   router.get('/sub-products', getSubProducts());
   router.post('/sub-products', createSubProduct());

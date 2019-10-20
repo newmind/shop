@@ -1,33 +1,48 @@
 
+import { Col, Row, Table } from "@ui.packages/ui";
+
+import types from 'prop-types';
 import React, { PureComponent } from 'react';
 
-import { Col, Row, Table } from "@ui.packages/ui";
 
 
 class Component extends PureComponent {
+  static propTypes = {
+    items: types.array,
+  };
+
+  static defaultProps = {
+    items: [],
+  };
+
   render() {
-    const { products } = this.props;
+    const { items } = this.props;
     return (
       <div className="page">
         <Row>
           <Col>
             <Table
-              items={products}
+              items={items}
               columns={[
                 {
                   title: 'Номер',
+                  alias: 'externalId',
                 },
                 {
                   title: 'Детали',
+                  alias: 'details'
                 },
                 {
                   title: 'Способ оплаты',
+                  alias: 'paymentMethod'
                 },
                 {
                   title: 'Сумма',
+                  alias: 'amount'
                 },
                 {
                   title: 'Статус',
+                  alias: 'status'
                 },
               ]}
             />
