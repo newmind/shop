@@ -52,12 +52,10 @@ services:
       - rabbit
       - product_proxy
       - identity_srv
-      - operation_proxy
     links:
       - rabbit
       - product_proxy
       - identity_srv
-      - operation_proxy
 
 
   showcase_gw:
@@ -69,11 +67,9 @@ services:
     depends_on:
       - rabbit
       - product_proxy
-      - operation_proxy
     links:
       - rabbit
       - product_proxy
-      - operation_proxy
 
 
   admin_ui:
