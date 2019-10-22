@@ -2,14 +2,13 @@
 import types from 'prop-types';
 import React, { PureComponent } from 'react';
 
-import {Button, Container, Col, Row, Select} from "@ui.packages/ui";
+import {Button, Container, Col, Row, Select, TextareaField} from "@ui.packages/ui";
 
 import styles from "./default.module.scss";
 import cn from "classnames";
 
 
 const eyeAndNose = [
-  { id: 'average', value: 'Использовать среднее значение' },
   { id: '25.0', value: '25.0' },
   { id: '25.5', value: '25.5' },
   { id: '26.0', value: '26.0' },
@@ -43,7 +42,7 @@ const eyeAndNose = [
   { id: '40.0', value: '40.0' },
 ];
 const axis = [
-  { id: '0', value: 'Норма' },
+  { id: '0', value: 'Planum' },
   { id: '1', value: '001' },
   { id: '2', value: '002' },
   { id: '3', value: '003' },
@@ -250,7 +249,7 @@ const cylinder = [
   { id: '-0.75', value: '-0.75' },
   { id: '-0.50', value: '-0.50' },
   { id: '-0.25', value: '-0.25' },
-  { id: 'plano', value: 'Норма' },
+  { id: 'plano', value: 'Planum' },
   { id: '+0.25', value: '+0.25' },
   { id: '+0.50', value: '+0.50' },
   { id: '+0.75', value: '+0.75' },
@@ -277,7 +276,7 @@ const cylinder = [
   { id: '+6.00', value: '+6.00' },
 ];
 const addition = [
-  { id: '0.00', value: 'Норма' },
+  { id: '0.00', value: 'Planum' },
   { id: '0.25', value: '0.25' },
   { id: '0.50', value: '0.50' },
   { id: '0.75', value: '0.75' },
@@ -376,7 +375,7 @@ const spherical = [
   { id: '-00.75', value: '-00.75' },
   { id: '-00.50', value: '-00.50' },
   { id: '-00.25', value: '-00.25' },
-  { id: 'plano', value: 'Норма' },
+  { id: 'plano', value: 'Planum' },
   { id: '+00.25', value: '+00.25' },
   { id: '+00.50', value: '+00.50' },
   { id: '+00.75', value: '+00.75' },
@@ -477,7 +476,7 @@ class Component extends PureComponent {
         <Row>
           <Col className={styles['content']}>
             <div className={styles['eyes']}>
-              <h3 className={styles['eyes__header']}>Межзрачковое расстояние от переносицы</h3>
+              <h3 className={styles['eyes__header']}>Межзрачковое расстояние</h3>
               <div className={styles['eyes__content']}>
                 <div className={styles['eyes__row']}>
                   <Select
@@ -523,6 +522,12 @@ class Component extends PureComponent {
                 <div className={styles['blank__value']}><Select value={cylLeft} options={cylinder} simple={true} clearable={false} onChange={this._handleChange.bind(this, 'cylLeft')} /></div>
                 <div className={styles['blank__value']}><Select value={axisLeft} options={axis} simple={true} clearable={false} onChange={this._handleChange.bind(this, 'axisLeft')} /></div>
                 <div className={styles['blank__value']}><Select value={addLeft} options={addition} simple={true} clearable={false} onChange={this._handleChange.bind(this, 'addLeft')} /></div>
+              </div>
+            </div>
+            <div className={cn(styles['blank'])}>
+              <h3 className={styles['blank__top-header']}>Коментарий</h3>
+              <div className={styles['blank__line']}>
+                <TextareaField name="comment" />
               </div>
             </div>
           </Col>

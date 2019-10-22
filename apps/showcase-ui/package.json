@@ -15,6 +15,7 @@
     "@modules.packages/produce": "^1.0.0",
     "@modules.packages/product": "^1.0.0",
     "@modules.packages/showcase": "^1.0.0",
+    "@ui.packages/cart": "^1.0.0",
     "@ui.packages/dialog": "^1.0.0",
     "@ui.packages/hocs": "^1.0.0",
     "@ui.packages/moment": "^1.0.0",

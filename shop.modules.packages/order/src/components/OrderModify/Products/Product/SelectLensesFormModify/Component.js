@@ -1,9 +1,9 @@
 
-import types from 'prop-types';
-import React, { PureComponent } from 'react';
-
 import numeral from '@packages/numeral';
 import {Button, Container, Col, Row, Select} from "@ui.packages/ui";
+
+import types from 'prop-types';
+import React, { PureComponent } from 'react';
 
 import styles from "./default.module.scss";
 
@@ -24,12 +24,12 @@ const coatings = [
 ];
 
 const lensesTypes = [
-  { id: 'lenticular', value: 'Лентикулярные' },
-  { id: 'office', value: 'Офисные' },
-  { id: 'polarizing', value: 'Поляризационные' },
-  { id: 'polarization-photochrome', value: 'Поляризационные/Фотохромные' },
-  { id: 'progressive', value: 'Прогрессивы' },
-  { id: 'photochrome', value: 'Фотохромные' }
+  { id: 'lenticular', value: 'Лентикулярные', coast: 1000.00 },
+  { id: 'office', value: 'Офисные', coast: 1500.00 },
+  { id: 'polarizing', value: 'Поляризационные', coast: 1500.00 },
+  { id: 'polarization-photochrome', value: 'Поляризационные/Фотохромные', coast: 3000.00 },
+  { id: 'progressive', value: 'Прогрессивы', coast: 5000.00 },
+  { id: 'photochrome', value: 'Фотохромные', coast: 2500.00 }
 ];
 
 const designs = [

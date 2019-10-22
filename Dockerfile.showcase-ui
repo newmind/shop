@@ -24,6 +24,9 @@ RUN yarn
 WORKDIR /app/ui.packages/dialog
 RUN ["yarn", "run", "build"]
 
+WORKDIR /app/ui.packages/cart
+RUN ["yarn", "run", "build"]
+
 WORKDIR /app/ui.packages/hocs
 RUN ["yarn", "run", "build"]
 

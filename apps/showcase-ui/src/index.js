@@ -41,7 +41,6 @@ const store = createStore({},
   await importReducer('Application');
   await importReducer('Module');
   await importReducer('Page');
-  await importReducer('Cart');
 
   ReactDOM.render((
     <Provider store={store}>

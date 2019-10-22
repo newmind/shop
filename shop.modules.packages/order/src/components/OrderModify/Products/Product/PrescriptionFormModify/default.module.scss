@@ -32,6 +32,11 @@
   flex: 1 0;
   flex-direction: column;
 
+  & + & {
+
+    margin: 40px 0 0;
+  }
+
   &__top-header {
 
     display: block;

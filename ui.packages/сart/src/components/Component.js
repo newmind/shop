@@ -119,7 +119,7 @@ class Component extends PureComponent {
                     </div>
                     <div className={styles['list__controls']}>
                       <Button onClick={this._handleResetCart.bind(this)}>Очистить</Button>
-                      <Button onClick={this._handleGoToCart.bind(this)} mode="success">Перейти к оформлению заказа</Button>
+                      <Button onClick={this._handleGoToCart.bind(this)} mode="success">Оформить заказ</Button>
                     </div>
                   </div>
                 )
