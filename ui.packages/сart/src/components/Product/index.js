@@ -4,15 +4,9 @@ import { connect } from 'react-redux';
 import Component from './Component';
 
 
-const mapStateToProps = () => {
-  return {
+const mapStateToProps = () => ({});
 
-  };
-};
-
-const mapActionToProps = () => ({
-
-});
+const mapActionToProps = () => ({});
 
 export default connect(
   mapStateToProps,

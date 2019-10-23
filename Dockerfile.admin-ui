@@ -11,8 +11,8 @@ COPY ./apps/admin-ui/src             ./apps/admin-ui/src
 COPY ./apps/admin-ui/public          ./apps/admin-ui/public
 COPY ./apps/admin-ui/package.json    ./apps/admin-ui
 COPY ./apps/admin-ui/.env.production ./apps/admin-ui
-COPY ./ui.packages                   ./ui.packages
 COPY ./admin.modules.packages        ./admin.modules.packages
+COPY ./ui.packages                   ./ui.packages
 COPY ./packages                      ./packages
 COPY ./package.json                  .
 COPY ./lerna.json                    .
@@ -34,6 +34,9 @@ WORKDIR /app/ui.packages/tabs
 RUN ["yarn", "run", "build"]
 
 WORKDIR /app/ui.packages/ui
+RUN ["yarn", "run", "build"]
+
+WORKDIR /app/ui.packages/cart
 RUN ["yarn", "run", "build"]
 
 # BUILD MODULES
