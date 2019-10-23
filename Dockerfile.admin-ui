@@ -36,9 +36,6 @@ RUN ["yarn", "run", "build"]
 WORKDIR /app/ui.packages/ui
 RUN ["yarn", "run", "build"]
 
-WORKDIR /app/ui.packages/cart
-RUN ["yarn", "run", "build"]
-
 # BUILD MODULES
 WORKDIR /app/admin.modules.packages/categories
 RUN ["yarn", "run", "build"]

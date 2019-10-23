@@ -69,7 +69,7 @@ class Component extends PureComponent {
           <Breadcrumbs
             items={[
               { title: 'Витрина', href: '/' },
-              { title: `${name} (${id})` },
+              { title: `${brand}${name ? ` ${name}` : ''} (${id})` },
             ]}
           />
         </div>
