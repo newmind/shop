@@ -88,7 +88,7 @@ export const getStockProducts = () => async dispatch => {
       url: '/stock/products'
     });
 
-    dispatch(getStockProductsRequestSuccessAction(result['items']));
+    dispatch(getStockProductsRequestSuccessAction(result['data']));
 
   } catch (error) {
 

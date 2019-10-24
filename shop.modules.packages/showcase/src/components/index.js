@@ -23,6 +23,7 @@ const mapStateToProps = (state, props) => {
   return {
     inProcess: showcase['inProcess'],
     items: showcase['items'],
+    meta: showcase['meta'],
     count: showcase['count'],
     paging: showcase['paging'],
     query: queryToObject(search),

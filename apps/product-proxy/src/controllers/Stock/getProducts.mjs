@@ -9,7 +9,8 @@ export default () => async (ctx) => {
     let productWhere = {};
     const {Op} = Sequelize;
     const {Stock, Product, Currency, Category, Comment, Attribute, Gallery} = models;
-    const {categoryId, brand, amountFrom, amountTo} = ctx.request.query;
+    const {categoryId, brand, amountFrom, amountTo, skip, take} = ctx['request']['query'];
+    const offset = {};
 
     if (categoryId) {
       where['categoryId'] = categoryId;
@@ -33,11 +34,18 @@ export default () => async (ctx) => {
       };
     }
 
-    const products = await Stock.findAll({
-      attributes: ['id', 'count', 'amount'],
+    if (skip && take) {
+      offset['offset'] = skip;
+      offset['limit'] = take;
+    }
+
+    const products = await Stock.findAndCountAll({
+      attributes: ['id', 'count', 'amount', 'createdAt'],
       where: {...where},
+      ...offset,
+      distinct: true,
       order: [
-        ['id', 'asc'],
+        ['createdAt', 'asc'],
         ['product', 'gallery', 'id', 'asc']
       ],
       include: [
@@ -86,11 +94,14 @@ export default () => async (ctx) => {
     ctx.body = {
       success: true,
       data: {
-        products: products,
-        count: products['count'],
+        data: products['rows'],
+        meta: {
+          total: products['count'],
+        },
       },
     };
   } catch(error) {
+
     ctx.throw(new Error(error['message']));
   }
 };

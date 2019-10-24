@@ -79,16 +79,17 @@ class Component extends PureComponent {
           </div>
           <div className={styles['product__commands']}>
             <h3 className={styles['product__brand']}>{ brand }</h3>
-            <p className={styles['product__name']}>{ name }</p>
+            {name && <p className={styles['product__name']}>{ name }</p>}
             <p className={styles['product__amount']}>{ numeral(amount).format() } {currency['value']}</p>
             <span className={styles['cart']} onClick={this._handleClickCart.bind(this)}>
               <span className={styles['cart__caption']}>Добавить в корзину</span>
               <span className="fas fa-shopping-cart" />
             </span>
-            <div className={styles['product__description']}>
-              <h3 className={styles['product__description__header']}>О товаре</h3>
-              <p className={styles['paragraph']}>{ description }</p>
-            </div>
+            {description && (
+              <div className={styles['product__description']}>
+                <h3 className={styles['product__description__header']}>О товаре</h3>
+                <p className={styles['paragraph']}>{ description }</p>
+              </div>)}
           </div>
         </div>
         <div className={styles['features']}>

@@ -1,6 +1,6 @@
 'use strict';
 
-import requestUpdate from '../../requests/Stock/updateById';
+import requestUpdate from './requests/updateById';
 
 
 export default () => async (ctx) => {

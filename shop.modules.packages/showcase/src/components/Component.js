@@ -1,7 +1,7 @@
 
 import types from 'prop-types';
 import React, { PureComponent } from 'react';
-import { reduceToArray, objectToQuery } from '@ui.packages/utils';
+import { reduceToArray, objectToQuery, nounDeclension } from '@ui.packages/utils';
 
 import Product from './Product';
 import Filter from './Filter';
@@ -57,7 +57,7 @@ class Component extends PureComponent {
   }
 
   render() {
-    const { items, count, initialValues, inProcess } = this.props;
+    const { items, meta, initialValues, inProcess } = this.props;
     const products = reduceToArray(items, SIZE);
 
     return (
@@ -67,7 +67,7 @@ class Component extends PureComponent {
         </aside>
         <section className={styles['products']}>
           <div className={styles['main']}>
-            <h2 className={styles['main__header']}>Найдено предложений</h2>
+            <h2 className={styles['main__header']}>Найдено {meta['total']} {nounDeclension(meta['total'], ['предложение', 'предложения', 'предложений'])}</h2>
             {products.map((lineWithProducts, index) => {
               return (
                 <div key={index} className={styles['products__line']}>
@@ -80,9 +80,9 @@ class Component extends PureComponent {
                 </div>
               );
             })}
-            {(items.length < count) && (
+            {(items.length < meta['total']) && (
               <div className={styles['products__controls']}>
-                <button className={styles['products__more']} type="button" onClick={this._handleLoadingMore.bind(this)}>Показать еще 12 из {count}</button>
+                <button className={styles['products__more']} type="button" onClick={this._handleLoadingMore.bind(this)}>Показать еще 12 из {meta['total']}</button>
               </div>
             )}
           </div>

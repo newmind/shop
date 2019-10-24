@@ -1,6 +1,6 @@
 'use strict';
 
-import { create } from "../../requests/Stock/index";
+import { create } from "./requests";
 
 
 export default () => async (ctx) => {

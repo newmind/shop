@@ -16,10 +16,7 @@ const initialState = {
   items: [],
   categories: [],
   count: 0,
-  paging: {
-    page: 1,
-    pages: 1,
-  },
+  meta: {},
   inProcess: false,
   isInitialize: false,
 };
@@ -38,14 +35,8 @@ export default (state = initialState, { type, payload }) => {
     case GET_PRODUCTS_REQUEST_SUCCESS: {
       return {
         ...state,
-        items: [
-          ...payload['items']
-        ],//.concat(payload['items']),
-        count: payload['count'],
-        paging: {
-          page: Number(payload['paging']['page']),
-          pages: payload['paging']['pages'],
-        },
+        items: payload['data'],
+        meta: payload['meta'],
         isInitialize: true,
         inProcess: false,
       };

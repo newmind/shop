@@ -1,17 +1,13 @@
 'use strict';
 
-import { get } from '../../requests/Stock/index';
+import { get } from './requests';
 
 
 export default () => async (ctx) => {
 
-  const { data } = await get();
+  const { data, meta } = await get();
 
-  ctx.body = {
-    items: data['products'],
-    paging: {
-      page: 0,
-      pages: data['counts'],
-    },
-  };
+  console.log(data);
+
+  ctx.body = { data, meta };
 }

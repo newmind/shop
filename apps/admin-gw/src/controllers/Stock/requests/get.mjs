@@ -9,11 +9,13 @@ const PRODUCT_API_SRV = process.env['PRODUCT_API_SRV'];
 export default async (filter = {}) => {
   try {
 
-    return await axios({
+    const { data } = await axios({
       method: 'get',
       url: `${PRODUCT_API_SRV}/stock/products`,
       params: { ...filter }
     });
+
+    return data;
 
   } catch (error) {
 

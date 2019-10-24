@@ -48,7 +48,7 @@ export const getProducts = (params) => async dispatch => {
       params: params,
     });
 
-    dispatch(getProductsRequestSuccess(result));
+    dispatch(getProductsRequestSuccess(result['data']));
 
   } catch(error) {
     dispatch(getProductsRequestFail(error));
