@@ -1,5 +1,5 @@
 {
-  "lerna": "3.13.0",
+  "lerna": "3.18.3",
   "version": "independent",
   "packages": [
     "admin.modules.packages/*",
@@ -10,5 +10,8 @@
     "apps/*"
   ],
   "npmClient": "yarn",
-  "useWorkspaces": true
+  "useWorkspaces": true,
+  "command": {
+
+  }
 }

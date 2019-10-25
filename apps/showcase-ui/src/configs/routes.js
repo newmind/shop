@@ -5,7 +5,7 @@ export default [
   //   wrapper: 'Navigate',
   //   module: import(
   //     /* webpackMode: "lazy" */
-  //     /* webpackChunkName: "stock" */
+  //     /* webpackChunkName: "main" */
   //     /* webpackPrefetch: true */
   //     '@modules.packages/main'
   //   ),
@@ -16,7 +16,7 @@ export default [
     wrapper: 'Navigate',
     module: import(
       /* webpackMode: "lazy" */
-      /* webpackChunkName: "stock" */
+      /* webpackChunkName: "products" */
       /* webpackPrefetch: true */
       '@modules.packages/showcase'
       ),
@@ -26,7 +26,7 @@ export default [
     wrapper: 'Navigate',
     module: import(
       /* webpackMode: "lazy" */
-      /* webpackChunkName: "stock" */
+      /* webpackChunkName: "product" */
       /* webpackPrefetch: true */
       '@modules.packages/product'
     ),
@@ -36,7 +36,7 @@ export default [
   //   wrapper: 'Navigate',
   //   module: import(
   //     /* webpackMode: "lazy" */
-  //     /* webpackChunkName: "stock" */
+  //     /* webpackChunkName: "about" */
   //     /* webpackPrefetch: true */
   //     '@modules.packages/about'
   //   ),
@@ -46,28 +46,28 @@ export default [
     wrapper: 'Navigate',
     module: import(
       /* webpackMode: "lazy" */
-      /* webpackChunkName: "stock" */
+      /* webpackChunkName: "produce" */
       /* webpackPrefetch: true */
       '@modules.packages/produce'
     ),
   },
-  // {
-  //   path: '/corner',
-  //   wrapper: 'Empty',
-  //   module: import(
-  //     /* webpackMode: "lazy" */
-  //     /* webpackChunkName: "stock" */
-  //     /* webpackPrefetch: true */
-  //     '@modules.packages/corner'
-  //   ),
-  // },
+  {
+    path: '/corner',
+    wrapper: 'Empty',
+    module: import(
+      /* webpackMode: "lazy" */
+      /* webpackChunkName: "corner" */
+      /* webpackPrefetch: true */
+      '@modules.packages/corner'
+    ),
+  },
   {
     path: '/order',
     removable: true,
     wrapper: 'Navigate',
     module: import(
       /* webpackMode: "lazy" */
-      /* webpackChunkName: "stock" */
+      /* webpackChunkName: "order" */
       /* webpackPrefetch: true */
       '@modules.packages/order'
     ),

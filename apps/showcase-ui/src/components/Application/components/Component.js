@@ -4,6 +4,7 @@ import React, { PureComponent } from 'react';
 import { Route, Switch } from "react-router";
 
 import { sleep } from '@ui.packages/utils';
+import { ConfirmOrder } from '@ui.packages/confirm-order';
 
 import Loader from '../../Loader';
 import Module from '../../Module/components';
@@ -109,15 +110,14 @@ class Component extends PureComponent {
     const { isInit, ...props } = this.props;
     return (
       <div className={styles['wrapper']}>
-        {
-          isInit
-            ? (
-              ! hasError
-                ? <Routes {...props} />
-                : <p>Error: {error['message']}</p>
-              )
-            : <Loader />
-        }
+        {isInit
+          ? (
+            ! hasError
+              ? <Routes {...props} />
+              : <p>Error: {error['message']}</p>
+            )
+          : <Loader />}}
+        <ConfirmOrder />
       </div>
     );
   }
