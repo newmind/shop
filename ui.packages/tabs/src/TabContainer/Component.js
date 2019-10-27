@@ -24,7 +24,7 @@ class Comment extends PureComponent {
     const { tabsName } = this.context;
     const { children, to, tabs } = this.props;
     const activeTab = tabs[tabsName] && tabs[tabsName]['activeTab'];
-    const isShow = activeTab === to;
+    const isShow = (activeTab === to);
     return isShow && (
       <div className={styles['container']}>
         { children }

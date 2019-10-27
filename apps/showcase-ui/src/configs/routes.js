@@ -53,7 +53,7 @@ export default [
   },
   {
     path: '/corner',
-    wrapper: 'Empty',
+    wrapper: 'Navigate',
     module: import(
       /* webpackMode: "lazy" */
       /* webpackChunkName: "corner" */

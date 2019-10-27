@@ -111,12 +111,10 @@ class Component extends PureComponent {
     return (
       <div className={styles['wrapper']}>
         {isInit
-          ? (
-            ! hasError
+          ? ( ! hasError
               ? <Routes {...props} />
-              : <p>Error: {error['message']}</p>
-            )
-          : <Loader />}}
+              : <p>Error: {error['message']}</p>)
+          : <Loader />}
         <ConfirmOrder />
       </div>
     );

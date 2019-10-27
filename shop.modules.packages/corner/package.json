@@ -4,28 +4,27 @@
   "version": "1.0.0",
   "main": "./lib/index.js",
   "scripts": {
-    "build": "cross-env NODE_ENV=production babel ./src --out-dir ./lib --copy-files",
-    "start:dev": "cross-env NODE_ENV=development babel ./src --out-dir ./lib --copy-files --watch"
+    "build": "cross-env NODE_ENV=production babel ./src --out-dir ./lib --copy-files --extensions '.ts,.tsx,.js'",
+    "start:dev": "cross-env NODE_ENV=development babel ./src --out-dir ./lib --copy-files --watch --extensions '.ts,.tsx,.js'"
   },
   "dependencies": {
-    "@fortawesome/fontawesome-free": "^5.8.1",
-    "@ui.packages/dialog": "^1.0.0",
-    "@ui.packages/moment": "^1.0.0",
-    "@ui.packages/notifications": "^1.0.0",
-    "@ui.packages/request": "^1.0.0",
-    "@ui.packages/socket": "^1.0.0",
     "@ui.packages/theme": "^1.0.0",
-    "@ui.packages/ui": "^1.0.0",
-    "@ui.packages/utils": "^1.0.0",
+    "@ui.packages/tabs": "^1.0.0",
     "@ui.packages/hocs": "^1.0.0",
-    "@packages/numeral": "^1.0.0",
-    "@packages/errors": "^1.0.0",
+    "@types/jest": "^24.0.20",
+    "@types/node": "^12.11.7",
+    "@types/react": "^16.9.11",
+    "@types/react-dom": "^16.9.3",
+    "@types/redux": "^3.6.0",
+    "@types/react-redux": "^7.1.5",
     "prop-types": "^15.7.2",
     "react": "^16.10.2",
     "react-redux": "^7.1.1",
     "react-router-dom": "^5.1.2",
     "redux": "^4.0.4",
-    "redux-form": "^8.2.6"
+    "redux-form": "^8.2.6",
+    "react-scripts": "^3.2.0",
+    "typescript": "^3.6.4"
   },
   "devDependencies": {
     "@babel/cli": "^7.6.4",
@@ -37,5 +36,8 @@
     "presets": [
       "react-app"
     ]
+  },
+  "eslintConfig": {
+    "extends": "react-app"
   }
 }
