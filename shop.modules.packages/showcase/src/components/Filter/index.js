@@ -32,11 +32,13 @@ const mapStateToProps = (state, props) => {
   const { location: { search }} = props;
   const query = queryToObject(search);
   return {
+    initialValues: query,
     categories: Showcase['categories'],
     brands: Showcase['brands'],
-    initialValues: query,
+    inProcess: Showcase['inProcess'],
     isValid: isValid('filter-showcase-ui')(state),
     isPristine: isPristine('filter-showcase-ui')(state),
+
   }
 };
 

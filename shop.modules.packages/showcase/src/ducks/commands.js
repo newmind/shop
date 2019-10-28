@@ -4,10 +4,8 @@ import request from '@ui.packages/request';
 import {
   pageInProcessAction,
 
+  setNextPageAction,
   addProductToCartAction,
-
-  openDialogAction,
-  closeDialogAction,
 
   getProductsRequest,
   getProductsRequestFail,
@@ -29,18 +27,9 @@ export const addProductToCart = (product) => dispatch => {
   dispatch(addProductToCartAction(product));
 };
 
-export const openDialog = (product) => dispatch => {
-  dispatch(openDialogAction(product));
-};
-
-export const closeDialog = () => dispatch => {
-  dispatch(closeDialogAction());
-};
-
 
 export const getProducts = (params) => async dispatch => {
   try {
-
     dispatch(getProductsRequest());
 
     const result = await request({
@@ -48,9 +37,12 @@ export const getProducts = (params) => async dispatch => {
       params: params,
     });
 
+    if (params['page']) {
+      dispatch(setNextPageAction(params['page']));
+    }
     dispatch(getProductsRequestSuccess(result['data']));
-
-  } catch(error) {
+  }
+  catch(error) {
     dispatch(getProductsRequestFail(error));
   }
 };

@@ -1,5 +1,7 @@
 
 import {
+  NEXT_PAGE,
+
   GET_PRODUCTS_REQUEST,
   GET_PRODUCTS_REQUEST_FAIL,
   GET_PRODUCTS_REQUEST_SUCCESS,
@@ -12,11 +14,14 @@ import {
   SOCKET_STOCK_PRODUCT_UPDATED,
 } from './types';
 
+
 const initialState = {
   items: [],
   categories: [],
-  count: 0,
   meta: {},
+  paging: {
+    page: 0
+  },
   inProcess: false,
   isInitialize: false,
 };
@@ -24,6 +29,13 @@ const initialState = {
 
 export default (state = initialState, { type, payload }) => {
   switch(type) {
+    case NEXT_PAGE: return {
+      ...state,
+      paging: {
+        page: payload,
+      }
+    };
+
     case GET_PRODUCTS_REQUEST: return {
       ...state,
       inProcess: true,
@@ -35,7 +47,10 @@ export default (state = initialState, { type, payload }) => {
     case GET_PRODUCTS_REQUEST_SUCCESS: {
       return {
         ...state,
-        items: payload['data'],
+        items: [
+          ...state['items'],
+          ...payload['data']
+        ],
         meta: payload['meta'],
         isInitialize: true,
         inProcess: false,

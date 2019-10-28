@@ -9,15 +9,15 @@ import styles from './default.module.scss';
 
 class Component extends PureComponent {
   static propTypes = {
-    inProcess: types.bool,
     categories: types.array,
     brands: types.array,
+    inProcess: types.bool,
   };
 
   static defaultProps = {
-    inProcess: false,
     categories: [],
     brands: [],
+    inProcess: false,
   };
 
   render() {

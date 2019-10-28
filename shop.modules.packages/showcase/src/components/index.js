@@ -1,10 +1,8 @@
 
+import PageHOC from '@ui.packages/hocs';
+
 import { bindActionCreators } from 'redux';
 import { push } from 'react-router-redux';
-
-import PageHOC from '@ui.packages/hocs';
-import { queryToObject } from '@ui.packages/utils';
-import { openDialog, closeDialog } from '@ui.packages/dialog';
 
 import Component from './Component';
 
@@ -17,47 +15,35 @@ import {
 } from '../ducks/commands';
 
 
-const mapStateToProps = (state, props) => {
-  const { location: { search }} = props;
-  const showcase = state['showcase'];
-  return {
-    inProcess: showcase['inProcess'],
-    items: showcase['items'],
-    meta: showcase['meta'],
-    count: showcase['count'],
-    paging: showcase['paging'],
-    query: queryToObject(search),
-  };
-};
+const mapStateToProps = (state) => ({
+  count: state['showcase']['count'],
+  paging: state['showcase']['paging'],
+  inProcess: state['showcase']['inProcess'],
+});
 
-const mapActionsToProps = (dispatch) => {
-  return {
-    pageInProcess: bindActionCreators(pageInProcess, dispatch),
+const mapActionsToProps = (dispatch) => ({
+  pageInProcess: bindActionCreators(pageInProcess, dispatch),
 
-    pushSearch: bindActionCreators(push, dispatch),
+  pushSearch: bindActionCreators(push, dispatch),
 
-    openDialog: bindActionCreators(openDialog, dispatch),
-    closeDialog: bindActionCreators(closeDialog, dispatch),
+  getDataForFilter: bindActionCreators(getDataForFilter, dispatch),
+  getProducts: bindActionCreators(getProducts, dispatch),
+  addProductToCart: bindActionCreators(addProductToCart, dispatch),
+});
 
-    getDataForFilter: bindActionCreators(getDataForFilter, dispatch),
-    getProducts: bindActionCreators(getProducts, dispatch),
-    addProductToCart: bindActionCreators(addProductToCart, dispatch),
-  };
-};
 
 export default PageHOC({
   mapStateToProps,
   mapActionsToProps,
-  onEnter: async ({ pageInProcess, getProducts, getDataForFilter, location: { search } }) => {
+  onEnter: async ({ pageInProcess, getProducts, getDataForFilter, location: { search }}) => {
 
     document.title = `${process.env['REACT_APP_WEBSITE_NAME']} - Витрина`;
 
-    const params = new URLSearchParams(search);
     const searchParams = {};
+    const params = new URLSearchParams(search);
 
-    let p;
-    for (p of params) {
-      searchParams[p[0]] = p[1];
+    for (let [key, value] of params) {
+      searchParams[key] = value;
     }
 
     await getProducts(searchParams);

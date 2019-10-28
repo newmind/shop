@@ -1,0 +1,42 @@
+
+@import "~@ui.packages/theme";
+
+
+.block {
+
+  display: block;
+
+  &__header {
+
+    display: block;
+    font-size: 20px;
+    text-transform: uppercase;
+    color: $dark-color;
+    padding: 0 0 4px;
+    margin: 0 0 60px;
+  }
+
+  &__content {
+
+    display: block;
+  }
+
+  &__line {
+
+    display: flex;
+    flex: 1 0 auto;
+    flex-direction: row;
+
+    & + & {
+
+      margin: 36px 0 0;
+    }
+  }
+
+  &__controls {
+
+    display: block;
+    margin: 60px 0 90px;
+    text-align: center;
+  }
+}
