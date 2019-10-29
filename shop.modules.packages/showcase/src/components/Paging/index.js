@@ -4,9 +4,12 @@ import { connect } from 'react-redux';
 import Component from './Component';
 
 
+const take = process.env['REACT_APP_TAKE'];
+
+
 const mapStateToProps = (state) => ({
-  items: state['showcase']['items'],
-  meta: state['showcase']['meta'],
+  page: Number(state['showcase']['paging']['page'] || 1),
+  pages: Number(Math.ceil(state['showcase']['meta']['total'] / take) || 0),
 });
 
 const mapActionsToProps = () => ({});

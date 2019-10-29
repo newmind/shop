@@ -47,10 +47,7 @@ export default (state = initialState, { type, payload }) => {
     case GET_PRODUCTS_REQUEST_SUCCESS: {
       return {
         ...state,
-        items: [
-          ...state['items'],
-          ...payload['data']
-        ],
+        items: payload['data'],
         meta: payload['meta'],
         isInitialize: true,
         inProcess: false,

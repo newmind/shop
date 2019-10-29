@@ -38,7 +38,7 @@ export const getProducts = (params) => async dispatch => {
     });
 
     if (params['page']) {
-      dispatch(setNextPageAction(params['page']));
+      dispatch(setNextPageAction(Number(params['page'])));
     }
     dispatch(getProductsRequestSuccess(result['data']));
   }

@@ -31,10 +31,8 @@ class Component extends PureComponent {
 
   _handleFilter(formData) {
     const { getProducts, pushSearch } = this.props;
-    pushSearch({
-      path: '/product',
-      search: objectToQuery(formData),
-    });
+    formData['page'] = 1;
+    pushSearch({ search: objectToQuery(formData) });
     getProducts(formData);
   }
 
@@ -43,10 +41,17 @@ class Component extends PureComponent {
     addProductToCart(product);
   }
 
-  _handleLoadingMore() {
-    const { getProducts, paging: { page }} = this.props;
-    const newPage = page + 1;
-    getProducts({ page: newPage });
+  _handleLoadingMore(page) {
+    const { getProducts, location: { search }, pushSearch} = this.props;
+    const query = new URLSearchParams(search);
+    if (page > 1) {
+      query.set('page', String(page));
+    }
+    else {
+      query.delete('page');
+    }
+    pushSearch({ search: query.toString() });
+    getProducts({ page });
   }
 
   render() {
@@ -64,7 +69,7 @@ class Component extends PureComponent {
         </section>
         <div className={styles['controls']}>
           <Paging
-            onGetMore={this._handleLoadingMore.bind(this)}
+            onChange={this._handleLoadingMore.bind(this)}
           />
         </div>
       </section>

@@ -2,23 +2,86 @@
 @import "~@ui.packages/theme";
 
 
-.more {
+.paging {
 
   display: inline-block;
-  background: linear-gradient($whitesmoke-color, $white-color);
-  border: 1px solid $gray-color;
-  padding: 20px 40px 16px;
-  font: 13px 'Helvetica Neue',sans-serif;
-  letter-spacing: 1px;
-  text-transform: uppercase;
-  outline: none;
-  cursor: pointer;
-  border-radius: 3px;
+}
+
+.pages {
+
+  display: inline-block;
+}
+
+.start {
+
+  display: inline-block;
+  margin: 0 15px 0 0;
   color: $dark-color;
-  transition: background 400ms;
+  cursor: pointer;
+  font-size: 14px;
 
-  &:hover {
+  &--disabled {
 
-    background: linear-gradient(darken($whitesmoke-color, 10%), darken($white-color, 10%));
+    color: $dark-gray-color;
+  }
+}
+
+.prev {
+
+  display: inline-block;
+  margin: 0 25px 0 0;
+  color: $dark-color;
+  cursor: pointer;
+  font-size: 14px;
+
+  &--disabled {
+
+    color: $dark-gray-color;
+  }
+}
+
+.next {
+
+  display: inline-block;
+  margin: 0 0 0 25px;
+  color: $dark-color;
+  cursor: pointer;
+  font-size: 14px;
+
+  &--disabled {
+
+    color: $dark-gray-color;
+  }
+}
+
+.end {
+
+  display: inline-block;
+  margin: 0 0 0 15px;
+  color: $dark-color;
+  cursor: pointer;
+  font-size: 14px;
+
+  &--disabled {
+
+    color: $dark-gray-color;
+  }
+}
+
+.page {
+
+  display: inline-block;
+  color: $dark-color;
+  cursor: pointer;
+  font-size: 14px;
+
+  &--active {
+
+    color: $primary-color;
+    text-decoration: underline;
+  }
+
+  & + & {
+    margin: 0 0 0 15px;
   }
 }
