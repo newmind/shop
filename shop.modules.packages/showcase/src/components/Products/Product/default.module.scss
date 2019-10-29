@@ -163,19 +163,18 @@
   &__cart {
 
     display: block;
-    width: 42px;
-    font-size: 18px;
-    background: rgba($danger-color, 0.3);
-    color: $white-color;
+    width: 30px;
+    font-size: 26px;
+    color: rgba($danger-color, 0.3);;
     margin: 0 0 0 10px;
     cursor: pointer;
     border-radius: 3px;
-    transition: background 400ms;
+    transition: color 400ms;
     text-align: center;
-    padding: 12px 2px 0 0;
+    padding: 7px 0 0 0;
 
     &:hover {
-      background: $danger-color;
+      color: $danger-color;
     }
   }
 

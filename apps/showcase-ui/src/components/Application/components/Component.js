@@ -4,7 +4,7 @@ import React, { PureComponent } from 'react';
 import { Route, Switch } from "react-router";
 
 import { sleep } from '@ui.packages/utils';
-import { ConfirmOrder } from '@ui.packages/confirm-order';
+// import { ConfirmOrder } from '@ui.packages/confirm-order';
 
 import Loader from '../../Loader';
 import Module from '../../Module/components';
@@ -115,7 +115,7 @@ class Component extends PureComponent {
               ? <Routes {...props} />
               : <p>Error: {error['message']}</p>)
           : <Loader />}
-        <ConfirmOrder />
+        {/*<ConfirmOrder />*/}
       </div>
     );
   }
