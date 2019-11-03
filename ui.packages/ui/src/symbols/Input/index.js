@@ -38,7 +38,6 @@ class Component extends PureComponent {
 
   render() {
     const { className, disabled, mode, label, message, ...props } = this.props;
-
     const classNameInputContainer = cn(className, styles['container'], {
       [styles['container--primary']]: mode === PRIMARY_MODE,
       [styles['container--success']]: mode === SUCCESS_MODE,

@@ -75,38 +75,38 @@
   display: block;
 }
 
-.tooltip {
-
-  position: fixed;
-  padding: 10px 16px;
-  display: block;
-  background: $danger-color;
-  border-radius: 4px;
-
-  &:before {
-
-    position: absolute;
-    right: 100%;
-    top: 50%;
-    display: inline-block;
-    margin: -7px 0 0;
-    width: 0;
-    height: 0;
-    border: 6px solid transparent;
-    border-left: none;
-    border-right-color: $danger-color;
-    content: '';
-  }
-
-  &__message {
-
-    display: inline-block;
-    font-size: 13px;
-    color: $whitesmoke-color;
-    letter-spacing: .5px;
-    font-weight: bold;
-  }
-}
+//.tooltip {
+//
+//  position: fixed;
+//  padding: 10px 16px;
+//  display: block;
+//  background: $danger-color;
+//  border-radius: 4px;
+//
+//  &:before {
+//
+//    position: absolute;
+//    right: 100%;
+//    top: 50%;
+//    display: inline-block;
+//    margin: -7px 0 0;
+//    width: 0;
+//    height: 0;
+//    border: 6px solid transparent;
+//    border-left: none;
+//    border-right-color: $danger-color;
+//    content: '';
+//  }
+//
+//  &__message {
+//
+//    display: inline-block;
+//    font-size: 13px;
+//    color: $whitesmoke-color;
+//    letter-spacing: .5px;
+//    font-weight: bold;
+//  }
+//}
 
 .error {
 
@@ -115,13 +115,15 @@
   right: 0;
   display: block;
   background: #e83841;
-  padding: 0 10px 3px;
+  padding: 0 6px 2px 20px;
+  letter-spacing: .2px;
   border-radius: 0 0 3px 3px;
 
   &__message {
 
     font-size: 10px;
     color: $white-color;
+    font-weight: bold;
   }
 }
 

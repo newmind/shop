@@ -37,56 +37,56 @@ class FieldComponent extends PureComponent {
     disabled: false,
   };
 
-  messageRef = React.createRef();
-  containerRef = React.createRef();
+  // messageRef = React.createRef();
+  // containerRef = React.createRef();
 
   constructor(props) {
     super(props);
 
-    this._scrollEvent = this._scrollEvent.bind(this);
-    this._resizeEvent = this._resizeEvent.bind(this);
+    // this._scrollEvent = this._scrollEvent.bind(this);
+    // this._resizeEvent = this._resizeEvent.bind(this);
   }
 
-  _scrollEvent() {
-    this._calculateTooltipPosition();
-  }
+  // _scrollEvent() {
+  //   this._calculateTooltipPosition();
+  // }
 
-  _resizeEvent() {
-    this._calculateTooltipPosition();
-  }
+  // _resizeEvent() {
+  //   this._calculateTooltipPosition();
+  // }
 
-  _calculateTooltipPosition() {
-    const { meta: { error, valid, touched, pristine } } = this.props;
-    const { current: containerElement } = this.containerRef;
-    const { current: messageElement } = this.messageRef;
+  // _calculateTooltipPosition() {
+  //   const { meta: { error, valid, touched, pristine } } = this.props;
+  //   const { current: containerElement } = this.containerRef;
+  //   const { current: messageElement } = this.messageRef;
+  //
+  //   if (containerElement && messageElement) {
+  //     if (error && ! valid && touched && pristine) {
+  //
+  //       const containerRect = containerElement.getBoundingClientRect();
+  //       const messageRect = messageElement.getBoundingClientRect();
+  //
+  //       messageElement.style['top'] = containerRect['top'] - ((messageRect['height'] - containerRect['height']) / 2) + 'px';
+  //       messageElement.style['left'] = containerRect['right'] + 8 + 'px';
+  //     }
+  //   }
+  // }
 
-    if (containerElement && messageElement) {
-      if (error && ! valid && touched && pristine) {
+  // componentDidMount() {
+  //
+  //   document.querySelector('#root').addEventListener('scroll', this._resizeEvent);
+  //   window.addEventListener('resize', this._scrollEvent);
+  // }
 
-        const containerRect = containerElement.getBoundingClientRect();
-        const messageRect = messageElement.getBoundingClientRect();
+  // componentDidUpdate(prevProps, prevState, snapshot) {
+  //   this._calculateTooltipPosition();
+  // }
 
-        messageElement.style['top'] = containerRect['top'] - ((messageRect['height'] - containerRect['height']) / 2) + 'px';
-        messageElement.style['left'] = containerRect['right'] + 8 + 'px';
-      }
-    }
-  }
-
-  componentDidMount() {
-
-    document.querySelector('#root').addEventListener('scroll', this._resizeEvent);
-    window.addEventListener('resize', this._scrollEvent);
-  }
-
-  componentDidUpdate(prevProps, prevState, snapshot) {
-    this._calculateTooltipPosition();
-  }
-
-  componentWillUnmount() {
-
-    document.querySelector('#root').removeEventListener('scroll', this._resizeEvent);
-    window.removeEventListener('resize', this._scrollEvent);
-  }
+  // componentWillUnmount() {
+  //
+  //   document.querySelector('#root').removeEventListener('scroll', this._resizeEvent);
+  //   window.removeEventListener('resize', this._scrollEvent);
+  // }
 
   render() {
     const { input, label, disabled, meta: { touched, error, warning }, children, ...props} = this.props;

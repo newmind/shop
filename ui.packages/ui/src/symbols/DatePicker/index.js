@@ -1,20 +1,20 @@
 
+import moment from '@ui.packages/moment';
+
 import types from 'prop-types';
 import React, { Component as PureComponent } from 'react';
-
-import moment from '@ui.packages/moment';
 
 import Dashboard from './Dashboard';
 
 import cn from 'classnames';
 import styles from './default.module.scss';
 
+
 const PRIMARY_MODE = 'primary';
 const INFO_MODE = 'info';
 const WARNING_MODE = 'warning';
 const DANGER_MODE = 'danger';
 const SUCCESS_MODE = 'success';
-
 
 
 const DatePickerBoard = React.forwardRef((props, ref) => {
@@ -97,22 +97,6 @@ class Component extends PureComponent {
     document.querySelector('body').removeEventListener('scroll', this._eventHandleScrolling);
   }
 
-  _calculateTooltipPosition() {
-
-    const { message } = this.props;
-    const {current: selectRef} = this.selectRef;
-    const {current: messageElement} = this.messageRef;
-
-    if (message) {
-
-      const selectRect = selectRef.getBoundingClientRect();
-      const messageRect = messageElement.getBoundingClientRect();
-
-      messageElement.style['top'] = selectRect['top'] - ((messageRect['height'] - selectRect['height']) / 2) + 2 + 'px';
-      // messageElement.style['left'] = selectRect['right'] + 6 + 'px';
-    }
-  }
-
   _calculateDirection() {
 
     const { isDirectUp } = this.state;
@@ -150,7 +134,6 @@ class Component extends PureComponent {
     const { isOpen } = this.state;
     if (isOpen) {
       this._handleOnBlur();
-      this._calculateTooltipPosition();
     }
   }
 
@@ -158,22 +141,11 @@ class Component extends PureComponent {
     const { isOpen } = this.state;
     if (isOpen) {
       this._handleOnBlur();
-      this._calculateTooltipPosition();
     }
   }
 
   _handleSetFocus() {
     const { onFocus } = this.props;
-    // const { current: selectRef } = this.selectRef;
-    // const { current: inputRef } = this.inputRef;
-    // const { current: optionsRef } = this.optionsRef;
-
-    // const selectRect = selectRef.getBoundingClientRect();
-
-    // inputRef.focus();
-
-    // optionsRef.style['width'] = selectRect['width'] + 'px';
-
     onFocus && onFocus();
   }
 
@@ -232,7 +204,7 @@ class Component extends PureComponent {
 
   render() {
     const { isOpen } = this.state;
-    const { className, disabled, message, mode, value, label, minDate, maxDate } = this.props;
+    const { className, disabled, mode, value, minDate, maxDate } = this.props;
     const classNameSelectWrapper = cn(className, styles['wrapper'], {
       [styles['wrapper--primary']]: mode === PRIMARY_MODE,
       [styles['wrapper--success']]: mode === SUCCESS_MODE,
@@ -247,9 +219,6 @@ class Component extends PureComponent {
 
     return (
       <div className={classNameSelectWrapper}>
-        {label && (
-          <p className={styles['label']}>{ label }</p>
-        )}
         <div ref={this.selectRef} className={classNameSelect}>
           <span className={styles['select__content']}>
             { this._renderValue(value) }
@@ -258,11 +227,6 @@ class Component extends PureComponent {
             { !! value && this._renderCancel()}
             {this._renderMarker()}
           </span>
-          { ! disabled && message && (
-            <span ref={this.messageRef} className={styles['tooltip']}>
-              <span className={styles['tooltip__message']}>{ message }</span>
-            </span>
-          )}
           {isOpen && (
             <DatePickerBoard
               ref={this.optionsRef}

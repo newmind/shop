@@ -5,6 +5,7 @@ import React, { Component as PureComponent } from 'react';
 import cn from 'classnames';
 import styles from './default.module.scss';
 
+
 const PRIMARY_MODE = 'primary';
 const INFO_MODE = 'info';
 const WARNING_MODE = 'warning';
@@ -135,21 +136,21 @@ class Component extends PureComponent {
     document.querySelector('#root').removeEventListener('scroll', this._eventHandleScrolling);
   }
 
-  _calculateTooltipPosition() {
-
-    const { message } = this.props;
-    const {current: selectRef} = this.selectRef;
-    const {current: messageElement} = this.messageRef;
-
-    if (message) {
-
-      const selectRect = selectRef.getBoundingClientRect();
-      const messageRect = messageElement.getBoundingClientRect();
-
-      messageElement.style['top'] = selectRect['top'] - ((messageRect['height'] - selectRect['height']) / 2) + 2 + 'px';
-      messageElement.style['left'] = selectRect['right'] + 6 + 'px';
-    }
-  }
+  // _calculateTooltipPosition() {
+  //
+  //   const { message } = this.props;
+  //   const {current: selectRef} = this.selectRef;
+  //   const {current: messageElement} = this.messageRef;
+  //
+  //   if (message) {
+  //
+  //     const selectRect = selectRef.getBoundingClientRect();
+  //     const messageRect = messageElement.getBoundingClientRect();
+  //
+  //     messageElement.style['top'] = selectRect['top'] - ((messageRect['height'] - selectRect['height']) / 2) + 2 + 'px';
+  //     messageElement.style['left'] = selectRect['right'] + 6 + 'px';
+  //   }
+  // }
 
   _calculateDirection() {
 
@@ -337,7 +338,7 @@ class Component extends PureComponent {
 
   render() {
     const { isOpen } = this.state;
-    const { className, disabled, message, mode, options, optionKey, optionValue, value, label, optionTransform, optionTemplate } = this.props;
+    const { className, disabled, mode, options, optionKey, optionValue, value, optionTransform, optionTemplate } = this.props;
     const classNameSelectWrapper = cn(className, styles['wrapper'], {
       [styles['wrapper--primary']]: mode === PRIMARY_MODE,
       [styles['wrapper--success']]: mode === SUCCESS_MODE,
@@ -352,9 +353,6 @@ class Component extends PureComponent {
 
     return (
       <div className={classNameSelectWrapper}>
-        {label && (
-          <p className={styles['label']}>{ label }</p>
-        )}
         <div ref={this.selectRef} className={classNameSelect}>
           <span className={styles['select__content']}>
             {this._renderValue()}
@@ -363,11 +361,6 @@ class Component extends PureComponent {
             { !! value && this._renderCancel()}
             {this._renderMarker()}
           </span>
-          { ! disabled && message && (
-            <span ref={this.messageRef} className={styles['tooltip']}>
-              <span className={styles['tooltip__message']}>{ message }</span>
-            </span>
-          )}
           {isOpen && (
             <Options
               ref={this.optionsRef}
