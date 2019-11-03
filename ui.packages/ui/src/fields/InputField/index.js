@@ -16,6 +16,15 @@ class Component extends PureComponent {
     disabled: types.bool,
   };
 
+  static defaultProps = {
+    className: '',
+    name: 'field',
+    mode: 'default',
+    label: null,
+    disabled: false,
+    type: 'text'
+  };
+
   render() {
     const { ...props } = this.props;
     return (

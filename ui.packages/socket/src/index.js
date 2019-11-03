@@ -18,9 +18,9 @@ export default (host, options) => {
     if (room) {
       joinToRoom(room);
     }
-    console.log('Connected')
+    process.env['NODE_ENV'] === 'development' && console.log('Connected')
   });
-  socket.on('disconnect', () => console.log('Disconnected'));
+  socket.on('disconnect', () => process.env['NODE_ENV'] === 'development' && console.log('Disconnected'));
 
   return socket;
 }

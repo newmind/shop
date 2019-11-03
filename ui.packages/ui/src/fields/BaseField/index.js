@@ -1,12 +1,11 @@
 
 import types from 'prop-types';
 import React, { PureComponent } from 'react';
-
 import { Field } from 'redux-form';
-
 
 import cn from "classnames";
 import styles from "./default.module.scss";
+
 
 const PRIMARY_MODE = 'primary';
 const INFO_MODE = 'info';
@@ -57,18 +56,19 @@ class FieldComponent extends PureComponent {
   }
 
   _calculateTooltipPosition() {
-
     const { meta: { error, valid, touched, pristine } } = this.props;
-    const {current: containerElement} = this.containerRef;
-    const {current: messageElement} = this.messageRef;
+    const { current: containerElement } = this.containerRef;
+    const { current: messageElement } = this.messageRef;
 
-    if (error && ! valid && touched && pristine) {
+    if (containerElement && messageElement) {
+      if (error && ! valid && touched && pristine) {
 
-      const containerRect = containerElement.getBoundingClientRect();
-      const messageRect = messageElement.getBoundingClientRect();
+        const containerRect = containerElement.getBoundingClientRect();
+        const messageRect = messageElement.getBoundingClientRect();
 
-      messageElement.style['top'] = containerRect['top'] - ((messageRect['height'] - containerRect['height']) / 2) + 'px';
-      messageElement.style['left'] = containerRect['right'] + 8 + 'px';
+        messageElement.style['top'] = containerRect['top'] - ((messageRect['height'] - containerRect['height']) / 2) + 'px';
+        messageElement.style['left'] = containerRect['right'] + 8 + 'px';
+      }
     }
   }
 
@@ -89,7 +89,7 @@ class FieldComponent extends PureComponent {
   }
 
   render() {
-    const { input, label, disabled, child, meta: { touched, error, warning }, children, ...props} = this.props;
+    const { input, label, disabled, meta: { touched, error, warning }, children, ...props} = this.props;
     let mode = 'default';
 
     if (touched && error) {
@@ -116,11 +116,11 @@ class FieldComponent extends PureComponent {
           <p className={styles['label']}>{ label }</p>
         )}
         <div ref={this.containerRef} className={styles['container']}>
-          {React.cloneElement(child, {
+          {React.cloneElement(children, {
             ...props,
             ...input,
             mode: mode,
-            className: hasError && styles['border-right-bottom-none']
+            className: hasError ? styles['border-right-bottom-none'] : '',
           })}
           {hasError  && (
             <span className={styles['error']}>
@@ -132,9 +132,8 @@ class FieldComponent extends PureComponent {
     );
   }
 }
-// {/*<span ref={this.messageRef} className={styles['tooltip']}>*/}
-// {/*  <span className={styles['tooltip__message']}>{ error }</span>*/}
-// {/*</span>*/}
+
+
 class Component extends PureComponent {
   static propTypes = {
     name: types.string,
@@ -142,9 +141,11 @@ class Component extends PureComponent {
   };
 
   render() {
-    const { name, label, type, children } = this.props;
+    const { children, ...props } = this.props;
     return (
-      <Field name={name} type={type} label={label} child={children} component={FieldComponent} />
+      <Field {...props} component={FieldComponent}>
+        { children }
+      </Field>
     );
   }
 }
