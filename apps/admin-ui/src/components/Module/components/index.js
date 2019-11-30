@@ -5,7 +5,7 @@ import { withRouter } from 'react-router-dom';
 
 import Component from './Component';
 
-import { setProcess } from "../ducks/commands";
+import { pageInProcess } from "../ducks/commands";
 
 
 const mapStoreToAction = store => ({
@@ -13,7 +13,7 @@ const mapStoreToAction = store => ({
 });
 
 const mapActionsToProps = dispatch => ({
-  setProcess: bindActionCreators(setProcess, dispatch),
+  pageInProcess: bindActionCreators(pageInProcess, dispatch),
 });
 
 export default withRouter(connect(

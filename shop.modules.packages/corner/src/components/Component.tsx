@@ -1,5 +1,4 @@
 
-// @ts-ignore
 import { TabContainer, Tabs, Tab } from '@ui.packages/tabs';
 
 import React, { PureComponent } from 'react';
@@ -20,7 +19,7 @@ class Component extends PureComponent<IProps> {
           <Tab caption="HHHHH" name="#pay" />
           <Tab caption="jjjj" name="#return" />
           <TabContainer to="#pay">
-            <p>Pay</p>
+            <p>олорл</p>
           </TabContainer>
           <TabContainer to="#return">
             <p>Return</p>

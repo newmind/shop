@@ -122,6 +122,14 @@
   }
 }
 
+.controls {
+
+  display: flex;
+  flex-direction: row;
+  flex: 0 0;
+  margin: 30px 0 0;
+}
+
 .cart {
 
   display: block;
@@ -132,7 +140,6 @@
   font-weight: bold;
   width: 160px;
   text-align: center;
-  margin: 30px 0 0;
   cursor: pointer;
   box-shadow: 0 0 4px 0 rgba($primary-color, .5);
   white-space: nowrap;
@@ -147,6 +154,20 @@
     display: inline-block;
     margin: 0 10px 0 0;
   }
+}
+
+.to-order {
+
+  display: inline-block;
+  color: $primary-color;
+}
+
+.has-in-case {
+
+  display: block;
+  margin: 10px 0 0;
+  font-size: 12px;
+  color: $dark-gray-color;
 }
 
 .comments {

@@ -20,6 +20,7 @@ const mapStateToProps = state => {
   const Product = state['product'];
   return {
     product: Product['product'],
+    cart: state['cart']['items'],
     initialValues: {
       evaluation: 0,
       person: '',

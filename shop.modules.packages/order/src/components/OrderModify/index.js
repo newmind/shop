@@ -65,5 +65,6 @@ export default connect(
   mapStateToProps,
 )(reduxForm({
   form: 'order',
+  enableReinitialize: true,
   validate,
 })(Component));

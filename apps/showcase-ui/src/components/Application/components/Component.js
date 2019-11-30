@@ -1,10 +1,9 @@
 
+import { Notifications } from '@ui.packages/notifications';
+
 import types from 'prop-types';
 import React, { PureComponent } from 'react';
 import { Route, Switch } from "react-router";
-
-import { sleep } from '@ui.packages/utils';
-// import { ConfirmOrder } from '@ui.packages/confirm-order';
 
 import Loader from '../../Loader';
 import Module from '../../Module/components';
@@ -38,9 +37,7 @@ const Routes = props => {
         <Module
           wrapper="Empty"
           module={import(
-            /* webpackMode: "lazy" */
             /* webpackChunkName: "not-found" */
-            /* webpackPrefetch: true */
             '@modules.packages/not-found2'
           )}
           {...props}
@@ -63,13 +60,13 @@ class Component extends PureComponent {
 
   static defaultProps = {
     routes: [],
-    navigate: [],
     isInit: false,
     isAuth: false,
     profile: {},
   };
 
   static childContextTypes = {
+    navigate: types.array,
     profile: types.object,
     isAuth: types.bool,
     signIn: types.func,
@@ -85,8 +82,9 @@ class Component extends PureComponent {
   };
 
   getChildContext() {
-    const { profile, isAuth, signIn, signOut } = this.props;
+    const { profile, isAuth, signIn, signOut, navigate } = this.props;
     return {
+      navigate,
       profile,
       isAuth,
       signIn,
@@ -101,7 +99,6 @@ class Component extends PureComponent {
 
   async componentDidMount() {
     const { changeState } = this.props;
-    await sleep(600);
     changeState(true);
   }
 
@@ -115,7 +112,7 @@ class Component extends PureComponent {
               ? <Routes {...props} />
               : <p>Error: {error['message']}</p>)
           : <Loader />}
-        {/*<ConfirmOrder />*/}
+        <Notifications/>
       </div>
     );
   }

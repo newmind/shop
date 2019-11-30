@@ -5,6 +5,7 @@ import React, { PureComponent } from 'react';
 import cn from 'classnames';
 import styles from './default.module.scss';
 
+
 const PRIMARY_MODE = 'primary';
 const INFO_MODE = 'info';
 const WARNING_MODE = 'warning';

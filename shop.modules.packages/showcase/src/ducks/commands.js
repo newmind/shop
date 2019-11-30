@@ -1,5 +1,6 @@
 
 import request from '@ui.packages/request';
+import { pushNotification } from '@ui.packages/notifications';
 
 import {
   pageInProcessAction,
@@ -25,6 +26,9 @@ export const pageInProcess = (status) => (dispatch) => {
 export const addProductToCart = (product) => dispatch => {
   product['recipe'] = {};
   dispatch(addProductToCartAction(product));
+  dispatch(pushNotification({
+    title: 'Товар добавлен в корзину',
+  }));
 };
 
 

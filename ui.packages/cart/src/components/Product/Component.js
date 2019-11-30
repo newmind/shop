@@ -1,6 +1,7 @@
 
 import types from "prop-types";
 import React, { PureComponent } from 'react';
+import { Link } from 'react-router-dom';
 
 import { Gallery } from "@ui.packages/ui";
 import numeral from "@ui.packages/numeral";
@@ -17,6 +18,7 @@ class Component extends PureComponent {
     name: types.string,
     amount: types.number,
     onRemove: types.func,
+    removeProduct: types.func,
   };
 
   static defaultProps = {
@@ -37,7 +39,9 @@ class Component extends PureComponent {
         </div>
         <div className={styles['item__description']}>
           <div className={styles['item__names']}>
-            <p className={styles['item__brand']}>{ brand }</p>
+            <span className={styles['item__brand']}>
+              <Link className={styles['item__brand-link']} to={process.env['PUBLIC_URL'] + `/products/${id}`}>{ brand }</Link>
+            </span>
             <p className={styles['item__name']}>{ name }</p>
           </div>
           <div className={styles['item__count']}>

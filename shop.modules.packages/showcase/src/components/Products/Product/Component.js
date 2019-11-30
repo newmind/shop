@@ -17,6 +17,7 @@ class Component extends PureComponent {
     isSale: types.bool,
     isHit: types.bool,
     id: types.number,
+    cart: types.array,
     gallery: types.array,
     amount: types.number,
     brand: types.string,
@@ -29,6 +30,7 @@ class Component extends PureComponent {
     isSale: false,
     isHit: false,
     id: null,
+    cart: [],
     gallery: [],
     amount: 0.00,
     brand: 'None',
@@ -41,13 +43,20 @@ class Component extends PureComponent {
   }
 
   render() {
-    const { isSale, isHit, id, amount, currency, product } = this.props;
+    const { isSale, isHit, id, amount, currency, product, cart } = this.props;
     const { brand, name, gallery} = product;
     const classNameForSale = cn('fas fa-percent', styles['product__sale']);
     const classNameForHit = cn('fas fa-star', styles['product__hit']);
     const classNameForCart = cn('fas fa-shopping-cart', styles['product__cart']);
+
+    const countInCart = cart.filter(item => item['id'] === id).length;
+
+    const productClassName = cn(styles['product'], {
+      [styles['product--in-cart']]: !! countInCart,
+    });
+
     return (
-      <div className={styles['product']}>
+      <div className={productClassName}>
         <div className={styles['product__meta']}>
           {isHit && <span className={classNameForHit} title="хит продаж" />}
           {isSale && <span className={classNameForSale} title="распродажа" />}
@@ -62,7 +71,9 @@ class Component extends PureComponent {
         <div className={styles['product__amount']}>{ numeral(amount).format() } {currency['value']}</div>
         <div className={styles['product__controls']}>
           <Link className={styles['product__button']} to={`/products/${id}`}>Подробнее</Link>
-          <span className={classNameForCart} onClick={this._handleClickCart.bind(this, id)} />
+          <span className={classNameForCart} onClick={this._handleClickCart.bind(this, id)}>
+            { !! countInCart && <span className={styles['product__count']}>{countInCart}</span>}
+          </span>
         </div>
       </div>
     );

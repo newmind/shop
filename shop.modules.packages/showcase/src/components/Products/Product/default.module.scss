@@ -19,6 +19,12 @@
     margin: 0 0 0 35px;
   }
 
+  &--in-cart {
+
+    box-shadow: 0 0 6px 0 #e6e6e6,
+                inset 0 0 2px 1px rgba($primary-color, .6);
+  }
+
   &__meta {
 
     position: absolute;
@@ -162,10 +168,11 @@
 
   &__cart {
 
+    position: relative;
     display: block;
     width: 30px;
     font-size: 26px;
-    color: rgba($danger-color, 0.3);;
+    color: rgba($danger-color, 0.3);
     margin: 0 0 0 10px;
     cursor: pointer;
     border-radius: 3px;
@@ -176,6 +183,19 @@
     &:hover {
       color: $danger-color;
     }
+  }
+
+  &__count {
+
+    position: absolute;
+    top: 11px;
+    right: 4px;
+    display: block;
+    width: 16px;
+    height: 16px;
+    color: $whitesmoke-color;
+    font: 11px 'Helvetica Neue', sans-serif;
+    font-weight: bold;
   }
 
   &__button {

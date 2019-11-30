@@ -54,5 +54,6 @@ export default withRouter(connect(
   mapActionsToProps
 )(reduxForm({
   form: 'filter-showcase-ui',
+  destroyOnUnmount: false,
   validate,
 })(Component)));

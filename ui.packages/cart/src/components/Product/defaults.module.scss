@@ -196,6 +196,11 @@
     font-size: 14px;
     font-weight: bold;
     color: $dark-color;
+
+    &-link {
+
+      color: inherit;
+    }
   }
 
   &__name {

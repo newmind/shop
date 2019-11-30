@@ -27,6 +27,7 @@
   flex-direction: column;
   flex: 0 0 auto;
   background: $primary-color;
+  border: 1px solid darken($primary-color, 10%);
   padding: 10px 30px 10px 12px;
   border-radius: 4px;
   transform-origin: center center;
@@ -42,7 +43,6 @@
     font: 13px 'Helvetica Neue',sans-serif;
     font-weight: bold;
     letter-spacing: 1px;
-    margin: 0 0 10px;
     color: inherit;
   }
 
@@ -51,12 +51,13 @@
     display: block;
     font: 13px 'Helvetica Neue',sans-serif;
     color: inherit;
+    margin: 10px 0 0;
   }
 
   &__close {
 
     position: absolute;
-    top: 9px;
+    top: 11px;
     right: 11px;
     display: block;
     font-size: 13px;
@@ -78,17 +79,20 @@
   &--success {
 
     background: $success-color;
+    border: 1px solid darken($success-color, 5%);
   }
 
   &--danger {
 
     background: $danger-color;
+    border: 1px solid darken($danger-color, 10%);
   }
 
   &--info {
 
     background: $info-color;
     color: $dark-color;
+    border: 1px solid darken($info-color, 10%);
   }
 }
 

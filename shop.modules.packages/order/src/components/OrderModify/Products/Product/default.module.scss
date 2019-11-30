@@ -28,6 +28,11 @@
     margin: 0 0 15px;
     color: $dark-color;
     letter-spacing: .5px;
+
+    &-link {
+
+      color: inherit;
+    }
   }
 
   &__name {
@@ -53,6 +58,7 @@
 
 .content {
 
+  position: relative;
   display: flex;
   flex: 1 0;
   flex-direction: column;
@@ -156,4 +162,15 @@
   margin: 0 0 0 20px;
   font-style: italic;
   letter-spacing: .5px;
+}
+
+.remove {
+
+  position: absolute;
+  top: 0;
+  right: 0;
+  display: block;
+  font-size: 14px;
+  color: $danger-color;
+  cursor: pointer;
 }

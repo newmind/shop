@@ -51,4 +51,7 @@ export default PageHOC({
 
     pageInProcess(false);
   },
+  onDestroy: () => {
+    console.log(123)
+  }
 })(Component);

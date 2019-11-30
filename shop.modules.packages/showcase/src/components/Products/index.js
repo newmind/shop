@@ -6,7 +6,7 @@ import Component from './Component';
 
 const mapStateToProps = (state) => ({
   items: state['showcase']['items'],
-  meta: state['showcase']['meta'],
+  meta: state['showcase']['meta']
 });
 
 const mapActionsToProps = () => ({});

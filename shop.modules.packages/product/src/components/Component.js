@@ -1,10 +1,12 @@
 
-import types from 'prop-types';
-import React, { PureComponent } from 'react';
-
+import { nounDeclension } from "@ui.packages/utils";
 import numeral from '@ui.packages/numeral';
 import { Gallery, Breadcrumbs } from '@ui.packages/ui';
 import { Dialog } from '@ui.packages/dialog';
+
+import types from 'prop-types';
+import React, { PureComponent } from 'react';
+import { Link } from 'react-router-dom';
 
 import Comments from './Comments';
 import Properties from './Properties';
@@ -15,6 +17,7 @@ import styles from './default.module.scss';
 
 class Component extends PureComponent {
   static propTypes = {
+    cart: types.array,
     product: types.object,
     initialValues: types.object,
     closeDialog: types.func,
@@ -22,6 +25,7 @@ class Component extends PureComponent {
   };
 
   static defaultProps = {
+    cart: [],
     product: {
       id: null,
       isSale: false,
@@ -61,8 +65,11 @@ class Component extends PureComponent {
   }
 
   render() {
-    const { product: { id, product, comments, amount, currency }, initialValues } = this.props;
+    const { product: { id, product, comments, amount, currency }, cart, initialValues } = this.props;
     const { gallery, attributes, brand, name, description } = product;
+
+    const countInCart = cart.filter(item => item['id'] === id).length;
+
     return (
       <article className={styles['product']}>
         <div className={styles['product__breadcrumbs']}>
@@ -81,10 +88,18 @@ class Component extends PureComponent {
             <h3 className={styles['product__brand']}>{ brand }</h3>
             {name && <p className={styles['product__name']}>{ name }</p>}
             <p className={styles['product__amount']}>{ numeral(amount).format() } {currency['value']}</p>
-            <span className={styles['cart']} onClick={this._handleClickCart.bind(this)}>
-              <span className={styles['cart__caption']}>Добавить в корзину</span>
-              <span className="fas fa-shopping-cart" />
-            </span>
+            <div className={styles['controls']}>
+              <span className={styles['cart']} onClick={this._handleClickCart.bind(this)}>
+                <span className={styles['cart__caption']}>Добавить в корзину</span>
+                <span className="fas fa-shopping-cart" />
+              </span>
+            </div>
+            { !! countInCart && (
+              <span className={styles['has-in-case']}>
+                Уже {nounDeclension(countInCart, ['выбран', 'выбрано', 'выбрано'])} {countInCart} {nounDeclension(countInCart, ['товар', 'товара', 'товаров'])}.&nbsp;
+                <Link className={styles['to-order']} to={process.env['PUBLIC_URL'] + '/order'}>Перейти к оформлению заказа</Link>
+              </span>
+            )}
             {description && (
               <div className={styles['product__description']}>
                 <h3 className={styles['product__description__header']}>О товаре</h3>

@@ -5,3 +5,13 @@
   flex: 1 0;
   flex-direction: column;
 }
+
+:global {
+
+  .ScrollbarsCustom-Content {
+
+    display: flex;
+    flex: 1 0;
+    flex-direction: column;
+  }
+}

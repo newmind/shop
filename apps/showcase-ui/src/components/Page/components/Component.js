@@ -23,7 +23,9 @@ class Component extends PureComponent {
     });
     return (
       <div className={styles['page']}>
-        <div className={pageContentClassName}>{ children }</div>
+        <div className={pageContentClassName}>
+          { children }
+        </div>
         {inProcess && (
           <div className={styles['loading']}>
             <div className={styles['container']}>

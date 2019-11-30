@@ -4,9 +4,7 @@ export default [
   //   path: '/',
   //   wrapper: 'Navigate',
   //   module: import(
-  //     /* webpackMode: "lazy" */
   //     /* webpackChunkName: "main" */
-  //     /* webpackPrefetch: true */
   //     '@modules.packages/main'
   //   ),
   // },
@@ -15,19 +13,15 @@ export default [
     path: '/',
     wrapper: 'Navigate',
     module: import(
-      /* webpackMode: "lazy" */
       /* webpackChunkName: "products" */
-      /* webpackPrefetch: true */
       '@modules.packages/showcase'
-      ),
+    ),
   },
   {
     path: '/products/:id',
     wrapper: 'Navigate',
     module: import(
-      /* webpackMode: "lazy" */
       /* webpackChunkName: "product" */
-      /* webpackPrefetch: true */
       '@modules.packages/product'
     ),
   },
@@ -35,9 +29,7 @@ export default [
   //   path: '/about',
   //   wrapper: 'Navigate',
   //   module: import(
-  //     /* webpackMode: "lazy" */
   //     /* webpackChunkName: "about" */
-  //     /* webpackPrefetch: true */
   //     '@modules.packages/about'
   //   ),
   // },
@@ -45,9 +37,7 @@ export default [
     path: '/produce',
     wrapper: 'Navigate',
     module: import(
-      /* webpackMode: "lazy" */
       /* webpackChunkName: "produce" */
-      /* webpackPrefetch: true */
       '@modules.packages/produce'
     ),
   },
@@ -55,9 +45,7 @@ export default [
     path: '/corner',
     wrapper: 'Navigate',
     module: import(
-      /* webpackMode: "lazy" */
       /* webpackChunkName: "corner" */
-      /* webpackPrefetch: true */
       '@modules.packages/corner'
     ),
   },
@@ -66,9 +54,7 @@ export default [
     removable: true,
     wrapper: 'Navigate',
     module: import(
-      /* webpackMode: "lazy" */
       /* webpackChunkName: "order" */
-      /* webpackPrefetch: true */
       '@modules.packages/order'
     ),
   }

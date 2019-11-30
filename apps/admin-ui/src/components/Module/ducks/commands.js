@@ -4,6 +4,6 @@ import {
 } from './actions';
 
 
-export const setProcess = (state = true) => dispatch => {
+export const pageInProcess = (state = true) => dispatch => {
   dispatch(pageInProcessAction(state));
 };

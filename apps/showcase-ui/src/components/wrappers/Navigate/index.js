@@ -1,4 +1,5 @@
 
+import types from 'prop-types';
 import React, { PureComponent } from 'react';
 import { withRouter } from 'react-router-dom';
 
@@ -10,8 +11,14 @@ import styles from './default.module.scss';
 
 
 class Component extends PureComponent {
+  static contextTypes = {
+    navigate: types.array,
+  };
+
   render() {
-    const { children, navigate }  = this.props;
+    const { children }  = this.props;
+    const { navigate } = this.context;
+
     return (
       <section className={styles['wrapper']}>
         <section className={styles['page']}>

@@ -1,10 +1,11 @@
 
-import React, { Fragment, PureComponent } from 'react';
-import { Field } from 'redux-form';
-
 import numeral from "@ui.packages/numeral";
 import { Dialog } from "@ui.packages/dialog";
 import { Radio, RadioBoxField, Gallery } from "@ui.packages/ui";
+
+import React, { Fragment, PureComponent } from 'react';
+import { Field } from 'redux-form';
+import { Link } from 'react-router-dom';
 
 import PrescriptionFormModify from './PrescriptionFormModify';
 import SelectLensesFormModify from './SelectLensesFormModify';
@@ -12,6 +13,7 @@ import SelectLensesFormModify from './SelectLensesFormModify';
 import Recipe from './Recipe';
 import Lens from './Lens';
 
+import cn from 'classnames';
 import styles from "./default.module.scss";
 
 
@@ -62,13 +64,20 @@ class Component extends PureComponent {
     closeDialog(`${field}.select-lenses`);
   }
 
+  _handleRemoveFromCart() {
+    const { id, removeProduct } = this.props;
+    removeProduct(id);
+  }
+
   render() {
-    const { field, index, product, amount, currency, type, recipe, lens, errors } = this.props;
+    const { id, field, index, product, amount, currency, type, recipe, lens, errors } = this.props;
     const { name, brand, gallery } = product;
 
     const hasRecipe = !! Object.keys(recipe).length;
     const hasLens = !! Object.keys(lens).length;
     const hasItemsErrors = !! errors['items'] && errors['items'][index];
+
+    const removeFromCartClassName= cn(styles['remove'], 'far fa-trash-alt');
 
     return(
       <div className={styles['product']}>
@@ -81,7 +90,7 @@ class Component extends PureComponent {
               <span className={styles['amount__value']}>{numeral(amount).format()}</span>
               <span className={styles['amount__currency']}>{currency['value']}</span>
             </div>
-            {hasLens && (
+            {hasLens && type === 'on-prescription' && (
               <div className={styles['amount__add']}>
                 <span className={styles['amount__value']}>+ {numeral(this._getLensAmount()).format()}</span>
                 <span className={styles['amount__currency']}>{currency['value']}</span>
@@ -89,7 +98,10 @@ class Component extends PureComponent {
           </div>
         </div>
         <div className={styles['content']}>
-          <h3 className={styles['product__brand']}>{brand}</h3>
+          <span className={removeFromCartClassName} onClick={this._handleRemoveFromCart.bind(this)} />
+          <h3 className={styles['product__brand']}>
+            <Link className={styles['product__brand-link']} to={process.env['PUBLIC_URL'] + `/products/${id}`}>{brand}</Link>
+          </h3>
           <p className={styles['product__name']}>{name}</p>
           <div className={styles['details']}>
             <RadioBoxField name={`${field}.type`}>

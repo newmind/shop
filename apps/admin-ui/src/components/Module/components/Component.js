@@ -25,46 +25,55 @@ class ModuleComponent extends PureComponent {
     navigate: PropTypes.array,
     module: PropTypes.object,
     wrapper: PropTypes.string,
-    setProcess: PropTypes.func,
+    pageInProcess: PropTypes.func,
   };
 
   static defaultProps = {
     navigate: [],
+    module: null,
     wrapper: '',
   };
 
-  constructor(...props) {
-    super(...props);
+  state = {
+    Module: null,
+  };
 
-    this._createReducer()
-      .then(void 0);
+  async componentDidMount() {
+    await this._startProcess();
   }
 
   async _createReducer() {
-    const { module, setProcess } = this.props;
-    setProcess();
+    const { module } = this.props;
     const Module = await module;
     injectAsyncReducer(Module['name'], Module['reducer']);
     return void 0;
   }
 
-  async componentDidUpdate() {
+  async _attachModule() {
     const { module } = this.props;
+    const Module = lazy(() => module);
+    this.setState({ Module });
+  }
+
+  async _startProcess() {
+    const { module, pageInProcess } = this.props;
+    pageInProcess();
     const hasReducer = checkReducer(module);
     if ( ! hasReducer) {
       await this._createReducer();
     }
+    await this._attachModule();
   }
 
   render() {
-    const { navigate, wrapper, module, location } = this.props;
+    const { Module } = this.state;
+    const { navigate, wrapper, location, dispatch } = this.props;
     const Wrapper = wrapperFactory(wrapper);
-    const Module = lazy(() => module);
     return (
       <Wrapper navigate={navigate} location={location}>
         <Page>
           <Suspense fallback={null}>
-            <Module />
+            {Module && <Module dispatch={dispatch} />}
           </Suspense>
         </Page>
       </Wrapper>

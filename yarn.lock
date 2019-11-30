@@ -8698,6 +8698,11 @@ mem@^4.0.0:
     mimic-fn "^2.0.0"
     p-is-promise "^2.0.0"
 
+memoize-one@^5.1.1:
+  version "5.1.1"
+  resolved "https://registry.yarnpkg.com/memoize-one/-/memoize-one-5.1.1.tgz#047b6e3199b508eaec03504de71229b8eb1d75c0"
+  integrity sha512-HKeeBpWvqiVJD57ZUAsJNm71eHTykffzcLZVYWiVfQeI1rJtuEaS7hQiEpWfVVk18donPwJEcFKIkCmPJNOhHA==
+
 memoizee@^0.4.14:
   version "0.4.14"
   resolved "https://registry.yarnpkg.com/memoizee/-/memoizee-0.4.14.tgz#07a00f204699f9a95c2d9e77218271c7cd610d57"
@@ -11221,6 +11226,11 @@ react-app-polyfill@^1.0.4:
     raf "3.4.1"
     regenerator-runtime "0.13.3"
     whatwg-fetch "3.0.0"
+
+react-custom-scroll@^4.1.5:
+  version "4.1.5"
+  resolved "https://registry.yarnpkg.com/react-custom-scroll/-/react-custom-scroll-4.1.5.tgz#16eef65d1b14b62341231a1103de8045f4a405b6"
+  integrity sha512-l4cSVyp3EPuK9GC5nHqJbWZ3okzf8RV9rVZFR9tf+fM5G28a5zEcbMuXEQ1SwafqZXkgHIgXwuWVIm/NsMfknQ==
 
 react-dev-utils@^9.1.0:
   version "9.1.0"
