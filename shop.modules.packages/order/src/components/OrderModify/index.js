@@ -26,7 +26,7 @@ const validate = (values) => {
       const itemErrors = {};
       if (item['type'] === 'on-prescription') {
         if ( ! Object.keys(item['recipe']).length) {
-          itemErrors['recipe'] = 'Необходимо сделать выбор';
+          itemErrors['recipe'] = 'Необходимо заполнить';
           itemsErrors[index] = itemErrors;
         }
         if ( ! Object.keys(item['lens']).length) {

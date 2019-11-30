@@ -4,6 +4,6 @@
   "main": "./src/index.js",
   "dependencies": {
     "axios": "^0.18.0",
-    "react-router-redux": "^4.0.8"
+    "react-router-redux": "4.0.8"
   }
 }

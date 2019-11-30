@@ -57,5 +57,14 @@ export default [
       /* webpackChunkName: "order" */
       '@modules.packages/order'
     ),
+  },
+  {
+    path: '/order/:id',
+    removable: true,
+    wrapper: 'Navigate',
+    module: import(
+      /* webpackChunkName: "details-order" */
+      '@modules.packages/details-order'
+    ),
   }
 ];

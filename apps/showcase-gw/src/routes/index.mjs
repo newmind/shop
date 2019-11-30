@@ -2,8 +2,7 @@
 
 import { getProducts, getProductById, getProductsAdditionalData, createComment } from '../controllers/Products';
 import { getImageByFileName } from '../controllers/Gallery';
-import { create as createOperation } from '../controllers/Operation';
-import { get as getLenses } from '../controllers/Lenses';
+import { create as createOperation, get as getOperationById } from '../controllers/Operation';
 
 
 export default (router) => {
@@ -16,7 +15,6 @@ export default (router) => {
 
   router.get('/gallery/:fileName', getImageByFileName());
 
-  router.post('/operation', createOperation());
-
-  router.get('/lenses', getLenses());
+  router.post('/operations', createOperation());
+  router.get('/operations/:operationId', getOperationById());
 };

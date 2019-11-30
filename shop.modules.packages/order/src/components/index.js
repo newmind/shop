@@ -1,18 +1,19 @@
 
 import { bindActionCreators } from 'redux';
-import { submit, isValid } from 'redux-form';
+import { submit, isValid, getFormValues } from 'redux-form';
 
 import PageHOC from '@ui.packages/hocs';
 
 import Component from './Component';
 
-import { pageInProcess, createOperation, getLenses } from '../ducks/commands';
+import { pageInProcess, createOperation } from '../ducks/commands';
 
 
-const mapStateToProps = state => {
-  const cart = state['cart'];
+const mapStateToProps = (state) => {
   return {
-    products: cart['items'],
+    products: getFormValues('order')(state),
+    hasProducts: !! state['cart']['items'].length,
+    inProcess: state['order']['inProcess'],
     isValid: isValid('order')(state),
   };
 };
@@ -21,8 +22,6 @@ const mapActionsToProps = (dispatch) => ({
   pageInProcess: bindActionCreators(pageInProcess, dispatch),
 
   submit: bindActionCreators(submit, dispatch),
-
-  getLenses: bindActionCreators(getLenses, dispatch),
   createOperation: bindActionCreators(createOperation, dispatch),
 });
 

@@ -58,6 +58,9 @@ RUN ["yarn", "run", "build"]
 WORKDIR /app/shop.modules.packages/order
 RUN ["yarn", "run", "build"]
 
+WORKDIR /app/shop.modules.packages/order-details
+RUN ["yarn", "run", "build"]
+
 WORKDIR /app/shop.modules.packages/produce
 RUN ["yarn", "run", "build"]
 
