@@ -10,18 +10,18 @@ class Component extends PureComponent {
       <Container>
         <Row>
           <Col>
-            <InputField label="Имя" name="name" />
+            <InputField label="Имя" name="name" placeholder="Василий" />
           </Col>
           <Col>
-            <InputField label="Фамилия" name="surname" />
+            <InputField label="Фамилия" name="surname" placeholder="Петров" />
           </Col>
         </Row>
         <Row>
           <Col>
-            <InputField label="Номер телефона" name="phone" />
+            <InputField label="Номер телефона" name="phone" placeholder="+7 (xxx) xxx-xx-xx" />
           </Col>
           <Col>
-            <InputField label="E-Mail" name="email" />
+            <InputField label="E-Mail" name="email" placeholder="example@host.so" />
           </Col>
         </Row>
       </Container>

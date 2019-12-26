@@ -1,4 +1,6 @@
 
+import { validation } from '@ui.packages/utils';
+
 import { connect } from 'react-redux';
 import { reduxForm } from 'redux-form';
 
@@ -38,22 +40,32 @@ const validate = (values) => {
   }
 
   if ( ! values['name']) {
-    errors['name'] = 'Необходимо заполнить';
+    errors['name'] = 'Необходимо ввести имя';
   }
 
   if ( ! values['surname']) {
-    errors['surname'] = 'Необходимо заполнить';
+    errors['surname'] = 'Необходимо ввести фамилию';
   }
 
   if ( ! values['phone']) {
-    errors['phone'] = 'Необходимо заполнить';
+    errors['phone'] = 'Необходимо ввести номер телефона';
+  }
+  else if ( ! /^[+]\d+$/.test(values['phone'])) {
+    errors['phone'] = 'Неверный формат телефона +7 (xxx) xxx-xx-xx]';
   }
 
   if ( ! values['email']) {
-    errors['email'] = 'Необходимо заполнить';
+    errors['email'] = 'Необходимо ввести ваш E-Mail';
+  }
+  else if ( ! validation.email(values['email'])) {
+    errors['email'] = 'Неверный формат E-Mail';
   }
 
-  if (!!itemsErrors.length) {
+  if ( ! values['address']) {
+    errors['address'] = 'Необходимо ввести точный адресс доставки';
+  }
+
+  if ( !! itemsErrors.length) {
     errors['items'] = itemsErrors;
   }
 

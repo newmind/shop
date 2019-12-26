@@ -14,6 +14,7 @@ class Component extends PureComponent {
     label: types.string,
     type: types.string,
     disabled: types.bool,
+    error: types.string,
   };
 
   static defaultProps = {
@@ -22,13 +23,14 @@ class Component extends PureComponent {
     mode: 'default',
     label: null,
     disabled: false,
-    type: 'text'
+    type: 'text',
+    error: null,
   };
 
   render() {
-    const { ...props } = this.props;
+    const { error, ...props } = this.props;
     return (
-      <BaseField {...props}>
+      <BaseField {...props} message={error}>
         <Input />
       </BaseField>
     );

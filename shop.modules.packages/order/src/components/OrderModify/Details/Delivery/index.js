@@ -1,7 +1,8 @@
 
-import React, { PureComponent } from 'react';
-
+import { Suggest } from '@ui.packages/yandex-map';
 import { InputField, RadioBoxField, Radio, Container, Row, Col } from "@ui.packages/ui";
+
+import React, { PureComponent } from 'react';
 
 import cn from 'classnames';
 import styles from './default.module.scss';
@@ -28,7 +29,7 @@ class Component extends PureComponent {
       <Container>
         <Row>
           <Col>
-            <InputField name="address" label="Адрес доставки" />
+            <Suggest name="address" label="Адрес доставки" />
           </Col>
         </Row>
         <Row>

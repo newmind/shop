@@ -10,8 +10,6 @@ import Paging from './Paging';
 import styles from './default.module.scss';
 
 
-
-
 class Component extends PureComponent {
   static propTypes = {
     items: types.array,
@@ -58,9 +56,11 @@ class Component extends PureComponent {
     return (
       <section className={styles['wrapper']}>
         <aside className={styles['filters']}>
-          <Filter
-            onSubmit={this._handleFilter.bind(this)}
-          />
+          <div className={styles['filters__content']}>
+            <Filter
+              onSubmit={this._handleFilter.bind(this)}
+            />
+          </div>
         </aside>
         <section className={styles['products']}>
           <Products

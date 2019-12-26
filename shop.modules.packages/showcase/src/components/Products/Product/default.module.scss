@@ -11,7 +11,7 @@
   text-decoration: none;
   outline: none;
   border-radius: 4px;
-  padding: 40px 20px 20px;
+  padding: 15px 20px 20px;
   box-sizing: border-box;
   box-shadow: 0 0 6px 0 #e6e6e6;
 
@@ -61,7 +61,7 @@
     left: 50%;
     width: 140px;
     margin: 0 0 0 -70px;
-    font: 12px 'Helvetica Neue',sans-serif;
+    font-size: 12px;
     text-align: center;
     color: $gray-color;
     border: 1px solid $gray-color;
@@ -79,9 +79,11 @@
     position: relative;
     display: flex;
     width: 100%;
-    height: 230px;
+    height: 190px;
+    margin: 20px 0;
     transition: transform 200ms;
     overflow: hidden;
+    border-radius: 5px;
     z-index: 10;
   }
 
@@ -132,6 +134,15 @@
     display: block;
   }
 
+  &__uuid {
+
+    display: block;
+    font-size: 12px;
+    text-align: center;
+    color: rgba($gray-color, .6);
+    margin: 0 0 15px;
+  }
+
   &__brand {
 
     display: block;
@@ -147,11 +158,10 @@
   &__name {
 
     display: block;
-    font: 14px 'Helvetica Neue',sans-serif;
+    font-size: 13px;
     text-align: center;
     letter-spacing: .5px;
     height: 16px;
-    margin: 0 15px;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
@@ -194,7 +204,7 @@
     width: 16px;
     height: 16px;
     color: $whitesmoke-color;
-    font: 11px 'Helvetica Neue', sans-serif;
+    font-size: 11px;
     font-weight: bold;
   }
 
@@ -205,7 +215,7 @@
     border: 1px solid $gray-color;
     border-radius: 3px;
     padding: 10px 20px;
-    font: 16px 'Helvetica Neue',sans-serif;
+    font-size: 16px;
     justify-content: center;
     text-decoration: none;
     color: $dark-color;

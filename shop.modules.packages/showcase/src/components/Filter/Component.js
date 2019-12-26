@@ -7,6 +7,13 @@ import { SelectField, InputField, Row, Col, Button, CheckBoxField } from '@ui.pa
 import styles from './default.module.scss';
 
 
+const BrandOption = (option) => (
+  <span className={styles['option']}>
+    <span className={styles['option__title']}>{option['brand']}</span>
+    <span className={styles['option__count']}>{option['count']}</span>
+  </span>
+);
+
 class Component extends PureComponent {
   static propTypes = {
     categories: types.array,
@@ -19,6 +26,11 @@ class Component extends PureComponent {
     brands: [],
     inProcess: false,
   };
+
+  _handleSubmit() {
+    const { submit } = this.props;
+    submit('filter-showcase-ui');
+  }
 
   render() {
     const { handleSubmit, categories, brands, isValid, inProcess } = this.props;
@@ -38,32 +50,13 @@ class Component extends PureComponent {
             </Col>
             <Col>
               <SelectField
-                placeholder="Бренд"
-                name="brand"
-                optionKey="brand"
-                optionValue="brand"
-                options={brands}
-                simple={true}
-                optionTemplate={option => (
-                  <span className={styles['option']}>
-                    <span className={styles['option__title']}>{option['brand']}</span>
-                    <span className={styles['option__count']}>({option['count']})</span>
-                  </span>
-                )}
-                disabled={inProcess}
-              />
-            </Col>
-            <Col>
-              <SelectField
                 placeholder="Цвет"
                 name="color"
                 options={[]}
                 disabled={inProcess}
               />
             </Col>
-          </Row>
-          <Row>
-            <Col className={styles['amounts']}>
+            <Col>
               <div className={styles['amount']}>
                 <span className={styles['amount__label']}>Сумма</span>
                 <span className={styles['amount__wrapper']}>
@@ -73,12 +66,32 @@ class Component extends PureComponent {
                 </span>
               </div>
             </Col>
+          </Row>
+          <Row>
+            <Col>
+              <SelectField
+                placeholder="Бренд"
+                name="brand"
+                optionKey="brand"
+                optionValue="brand"
+                options={brands}
+                simple={true}
+                optionTemplate={BrandOption}
+                disabled={inProcess}
+              />
+            </Col>
+            <Col className={styles['amounts']}>
+              <SelectField
+                placeholder="Форма"
+                name="color"
+                options={[]}
+                disabled={inProcess}
+              />
+            </Col>
             <Col className={styles['align-centered']}>
               <Row>
                 <Col><CheckBoxField label="Новинки" name="new" disabled={inProcess} /></Col>
                 <Col><CheckBoxField label="Со скидкой" name="sale" disabled={inProcess} /></Col>
-                <Col/>
-                <Col/>
               </Row>
             </Col>
           </Row>

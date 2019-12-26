@@ -1,6 +1,6 @@
 {
   "private": true,
-  "name": "@modules.packages/order",
+  "name": "@ui.packages/yandex-map",
   "version": "1.0.0",
   "main": "./lib/index.js",
   "scripts": {
@@ -8,28 +8,14 @@
     "start:dev": "cross-env NODE_ENV=development babel ./src --out-dir ./lib --copy-files --watch"
   },
   "dependencies": {
-    "@fortawesome/fontawesome-free": "^5.8.1",
-    "@packages/errors": "^1.0.0",
-    "@packages/numeral": "^1.0.0",
-    "@ui.packages/cart": "^1.0.0",
-    "@ui.packages/dialog": "^1.0.0",
-    "@ui.packages/hocs": "^1.0.0",
-    "@ui.packages/moment": "^1.0.0",
-    "@ui.packages/notifications": "^1.0.0",
-    "@ui.packages/request": "^1.0.0",
-    "@ui.packages/socket": "^1.0.0",
+    "@ui.packages/utils": "^1.0.0",
     "@ui.packages/theme": "^1.0.0",
     "@ui.packages/ui": "^1.0.0",
-    "@ui.packages/utils": "^1.0.0",
-    "@ui.packages/yandex-map": "^1.0.0",
     "classnames": "^2.2.6",
     "prop-types": "^15.7.2",
     "react": "^16.10.2",
-    "react-redux": "^7.1.1",
-    "react-router-dom": "^5.1.2",
-    "react-router-redux": "4.0.8",
     "redux": "^4.0.4",
-    "redux-form": "^8.2.6"
+    "react-redux": "^7.1.1"
   },
   "devDependencies": {
     "@babel/cli": "^7.6.4",

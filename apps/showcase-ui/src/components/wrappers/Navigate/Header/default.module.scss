@@ -20,10 +20,11 @@
   .logotype {
 
     display: inline-block;
-    font-size: 20px;
+    font: 20px 'Exo 2', sans-serif;
     font-weight: bold;
     color: $white-color;
     text-decoration: none;
+    letter-spacing: .5px;
   }
 
   &__cart {

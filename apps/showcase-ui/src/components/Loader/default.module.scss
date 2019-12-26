@@ -18,7 +18,7 @@
   margin: auto auto;
   text-align: center;
   background: transparent;
-  font: 18px 'Helvetica Neue',sans-serif;
+  font-size: 18px;
 }
 
 .container {
@@ -49,7 +49,7 @@
   &__text {
 
     display: inline-block;
-    font: 30px 'Helvetica Neue',sans-serif;
+    font-size: 30px;
     font-weight: bold;
     vertical-align: baseline;
     color: $dark-color;
@@ -59,7 +59,7 @@
 .spinner {
 
   display: block;
-  font: 18px 'Helvetica Neue',sans-serif;
+  font-size: 18px;
   margin: 16px 0 0;
   color: $dark-color;
   letter-spacing: 1px;

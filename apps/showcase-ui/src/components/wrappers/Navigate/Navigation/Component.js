@@ -6,11 +6,29 @@ import cn from 'classnames';
 import styles from './default.module.scss';
 
 
+class HomeLink extends PureComponent {
+  render() {
+    const { location } = this.props;
+    const mainPath = location['pathname'];
+    const itemClassName = cn(styles['navigate__home'], {
+      [styles['navigate__item--active']]: mainPath === '/',
+    });
+    return (
+      <span className={itemClassName}>
+        <Link to={'/'} className={styles['navigate__home-link']}>
+          <span className={cn(styles['navigate__home-text'], "fas fa-home")} />
+        </Link>
+      </span>
+    );
+  }
+}
+
 class Component extends PureComponent {
   render() {
     const { items, location }  = this.props;
     return (
       <nav className={styles['navigate']}>
+        <HomeLink location={location} />
         {items.map((item, index) => {
 
           let match = null;

@@ -8,10 +8,10 @@ export default [
     title: 'О продукции',
     path: '/produce',
   },
-  // {
-  //   title: 'Информация для вас',
-  //   path: '/corner',
-  // },
+  {
+    title: 'Информация для вас',
+    path: '/corner',
+  },
   // {
   //   title: "О нас",
   //   path: '/about',

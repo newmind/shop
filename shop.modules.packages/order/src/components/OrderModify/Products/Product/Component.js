@@ -105,9 +105,9 @@ class Component extends PureComponent {
           <p className={styles['product__name']}>{name}</p>
           <div className={styles['details']}>
             <RadioBoxField name={`${field}.type`}>
-              <Radio className={styles['type']} name="only-rim" label="Только оправа" />
-              <Radio className={styles['type']} name="image-lenses" label="С имиджевыми линзами" />
               <Radio className={styles['type']} name="on-prescription" label="Очки по рецепту" />
+              <Radio className={styles['type']} name="image-lenses" label="С имиджевыми линзами" />
+              <Radio className={styles['type']} name="only-rim" label="Только оправа" />
             </RadioBoxField>
             <div className={styles['details__content']}>
               {type === 'only-rim' && <p className={styles['details__info']}>Преобретается только оправа.</p>}

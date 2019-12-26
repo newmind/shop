@@ -1,14 +1,14 @@
 'use strict';
 
-import fs from "fs";
-import BusBoy from 'busboy';
-
-const extensions = {
-  'image/jpeg': 'jpg',
-  'image/bmp': 'bmp',
-  'image/png': 'png'
-};
-
+// import fs from "fs";
+// import BusBoy from 'busboy';
+//
+//
+// const extensions = {
+//   'image/jpeg': 'jpg',
+//   'image/bmp': 'bmp',
+//   'image/png': 'png'
+// };
 
 export const UUID = () => {
   return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g,(c,r)=>('x'===c?(r=Math.random()*16|0):(r&0x3|0x8)).toString(16));
@@ -70,66 +70,76 @@ export const queryToObject = (query) => {
   return params;
 };
 
-export const getBuffer = (result) => {
-  return new Promise((response, reject) => {
+// export const getBuffer = (result) => {
+//   return new Promise((response, reject) => {
+//
+//     const buffer = [];
+//
+//     result.on('data', chunk => buffer.push(chunk));
+//     result.on('end', () => response(Buffer.concat(buffer)));
+//     result.on('error', error => reject(error));
+//   });
+// };
+//
+// export const saveFile = (buffer, path) => {
+//
+//   return new Promise((resolve) => {
+//
+//     const stream = fs.createWriteStream(path);
+//
+//     stream.write(buffer, 'utf16le', resolve);
+//   });
+// };
+//
+// export const getFiles = async (req) => {
+//
+//   return new Promise((resolve, reject) => {
+//
+//     const result = { files: {}, fields: {} };
+//     const bb = new BusBoy({ headers: req.headers });
+//
+//     bb.on('file', (fieldName, file, filename, encoding, mimeType) => {
+//
+//       const hashString = UUID();
+//       const fileName = `${hashString}.${extensions[mimeType]}`;
+//
+//       result['files'][fieldName] = {
+//         fileName: fileName,
+//         mimeType: mimeType,
+//         encoding: encoding,
+//         buffer: []
+//       };
+//
+//       file.on('data', (data) => {
+//         result['files'][fieldName]['buffer'].push(data);
+//       });
+//
+//       file.on('end', () => {
+//         result['files'][fieldName]['buffer'] = Buffer.concat(result['files'][fieldName]['buffer']);
+//       });
+//     });
+//
+//     // bb.on('field', function(fieldname, val, fieldnameTruncated, valTruncated, encoding, mimetype) {
+//     bb.on('field', function(fieldName, val) {
+//       result['fields'][fieldName] = val;
+//     });
+//
+//     bb.on('error', (error) => {
+//       reject(error);
+//     });
+//
+//     bb.on('finish', () => {
+//       resolve(result);
+//     });
+//
+//     req.pipe(bb);
+//   });
+// };
 
-    const buffer = [];
+export const validation = {
+  email: (value) => {
+    const regExp = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    return regExp.test(String(value).toLowerCase());
 
-    result.on('data', chunk => buffer.push(chunk));
-    result.on('end', () => response(Buffer.concat(buffer)));
-    result.on('error', error => reject(error));
-  });
-};
-
-export const saveFile = (buffer, path) => {
-
-  return new Promise((resolve) => {
-
-    const stream = fs.createWriteStream(path);
-
-    stream.write(buffer, 'utf16le', resolve);
-  });
-};
-
-export const getFiles = async (req) => {
-
-  return new Promise((resolve, reject) => {
-
-    const result = { files: {}, fields: {} };
-    const bb = new BusBoy({ headers: req.headers });
-
-    bb.on('file', (fieldName, file, filename, encoding, mimeType) => {
-
-      const hashString = UUID();
-      const fileName = `${hashString}.${extensions[mimeType]}`;
-
-      result['files'][fieldName] = {
-        fileName: fileName,
-        mimeType: mimeType,
-        encoding: encoding,
-        buffer: []
-      };
-
-      file.on('data', (data) => {
-        result['files'][fieldName]['buffer'].push(data);
-      });
-
-      file.on('end', () => {
-        result['files'][fieldName]['buffer'] = Buffer.concat(result['files'][fieldName]['buffer']);
-      });
-    });
-
-    // bb.on('field', function(fieldname, val, fieldnameTruncated, valTruncated, encoding, mimetype) {
-    bb.on('field', function(fieldname, val) {
-      result['fields'][fieldname] = val;
-    });
-
-    bb.on('error', error => reject(error));
-
-    bb.on('finish', () => {
-      resolve(result);
-    });
-
-    req.pipe(bb);
-  });
+  },
 };
