@@ -12,6 +12,7 @@ cd ../hocs && yarn build
 cd ../notifications && yarn build
 cd ../tabs && yarn build
 cd ../ui && yarn build
+cd ../yandex-map && yarn build
 
 echo ''
 echo 'Сборка модулей для приложения "Shop"'
