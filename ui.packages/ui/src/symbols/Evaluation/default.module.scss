@@ -32,10 +32,10 @@
 
   &--info  .evaluation__star {
 
-    color: $info-color;
+    color: darken($info-color, 10%);
 
     &:hover {
-      color: darken($info-color, 10%);
+      color: darken($info-color, 15%);
     }
   }
 

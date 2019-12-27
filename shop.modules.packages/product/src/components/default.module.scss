@@ -14,9 +14,8 @@
 .paragraph {
 
   display: block;
-  font-size: 14px;
+  font-size: 12px;
   line-height: 1.4;
-  letter-spacing: .5px;
 }
 
 .features {
@@ -27,23 +26,44 @@
   padding: 80px 0 0;
 }
 
+.breadcrumbs {
+
+  display: block;
+  box-shadow: 0 1px 20px 0 rgba($dark-color, .08);
+
+  &__content {
+
+    display: block;
+    width: 1024px;
+    margin: 20px auto;
+  }
+}
+
 .product {
 
   display: flex;
   flex-direction: column;
   flex: 1 0;
-  width: 1024px;
-  margin: 20px auto 190px;
 
-  &__breadcrumbs {
+  &__content {
 
     display: block;
+    width: 1024px;
+    margin: 20px auto 190px;
+  }
+
+  &__uuid {
+
+    display: block;
+    font-size: 12px;
+    color: $gray-color;
+    margin: 0 0 10px;
   }
 
   &__brand {
 
     display: block;
-    font-size: 30px;
+    font-size: 25px;
     font-weight: bold;
     color: $dark-color;
     letter-spacing: 1px;
@@ -52,7 +72,7 @@
   &__name {
 
     display: block;
-    font-size: 14px;
+    font-size: 13px;
     color: $dark-color;
     margin: 10px 0 0;
   }
@@ -60,8 +80,8 @@
   &__amount {
 
     display: block;
-    font-size: 22px;
-    margin: 35px 0 0;
+    font-size: 20px;
+    margin: 60px 0 0;
     color: $dark-color;
   }
 
@@ -101,7 +121,7 @@
   &__commands {
 
     display: flex;
-    flex: 0 1 auto;
+    flex: 0 1;
     flex-direction: column;
     border-left: 1px solid rgba($dark-color, .05);
     margin: 0 0 0 20px;
@@ -111,7 +131,7 @@
   &__feature {
 
     display: flex;
-    flex: 0 0 auto;
+    flex: 0 0;
     flex-direction: column;
     margin: 0 0 80px;
   }
@@ -178,14 +198,15 @@
   &__controls {
 
     display: flex;
-    flex: 1 0 auto;
-
+    flex: 1 0;
+    border-bottom: 1px solid rgba($dark-color, .05);
+    padding: 0 0 10px;
   }
 
   &__header {
 
     display: flex;
-    flex: 1 0 auto;
+    flex: 1 0;
     font-size: 16px;
     color: $dark-color;
     font-weight: bold;
@@ -196,8 +217,12 @@
     display: inline-block;
     font-size: 14px;
     color: $primary-color;
-    text-decoration: underline;
     cursor: pointer;
+
+    &:hover {
+
+      text-decoration: underline;
+    }
   }
 
   &__empty {
@@ -211,5 +236,12 @@
 
     display: block;
     margin: 30px 0 0;
+  }
+
+  &__count {
+
+    color: $dark-gray-color;
+    font-weight: normal;
+    padding: 0 0 0 20px;
   }
 }

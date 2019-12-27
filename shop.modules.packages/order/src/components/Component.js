@@ -1,5 +1,5 @@
 
-import { Button, Col, Container, Hr, Row, Breadcrumbs } from '@ui.packages/ui';
+import { Button, Col, Container, Row, Breadcrumbs } from '@ui.packages/ui';
 import numeral from '@packages/numeral';
 
 import types from 'prop-types';
@@ -66,35 +66,38 @@ class Component extends PureComponent {
     return (
       <section className={styles['wrapper']}>
         <div className={styles['breadcrumbs']}>
-          <Breadcrumbs
-            items={[
-              { title: 'Витрина', href: '/' },
-              { title: `Оформление заказа` },
-            ]}
-          />
+          <div className={styles['breadcrumbs__content']}>
+            <Breadcrumbs
+              items={[
+                { title: 'Витрина', href: '/' },
+                { title: `Оформление заказа` },
+              ]}
+            />
+          </div>
         </div>
-        {hasProducts
-          ? (
-            <Container>
-              <Row>
-                <Col>
-                  <OrderModify onSubmit={this._handleSendOrderData.bind(this)}/>
-                </Col>
-              </Row>
-              <Hr/>
-              <Row>
-                <Col className={styles['controls']}>
-                  <p className={styles['message']}>Нажимая на кнопку ”Оформить заказ”, Вы подтверждаете согласие на обработку Персональных данных.</p>
-                  <Button mode="success" size="l" disabled={ ! isValid || inProcess} onClick={this._handleSubmitOrder.bind(this)}>
-                    Оформить заказ на сумму {numeral(calculatedAmount).format()} руб.
-                  </Button>
-                </Col>
-              </Row>
-            </Container>
-          )
-          : (
-            <div>Для оформления заказа необходимо выбрать товар</div>
-          )}
+        <div className={styles['content']}>
+          {hasProducts
+            ? (
+              <Container>
+                <Row>
+                  <Col>
+                    <OrderModify onSubmit={this._handleSendOrderData.bind(this)}/>
+                  </Col>
+                </Row>
+                <Row>
+                  <Col className={styles['controls']}>
+                    <p className={styles['message']}>Нажимая на кнопку ”Оформить заказ”, Вы подтверждаете согласие на обработку Персональных данных.</p>
+                    <Button mode="success" size="l" disabled={ ! isValid || inProcess} onClick={this._handleSubmitOrder.bind(this)}>
+                      Оформить заказ на сумму {numeral(calculatedAmount).format()} руб.
+                    </Button>
+                  </Col>
+                </Row>
+              </Container>
+            )
+            : (
+              <div>Для оформления заказа необходимо выбрать товар</div>
+            )}
+        </div>
       </section>
     );
   }

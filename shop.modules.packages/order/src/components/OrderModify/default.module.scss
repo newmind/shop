@@ -20,8 +20,8 @@
   &__header {
 
     display: block;
-    border-bottom: 2px solid $dark-color;
-    font-size: 20px;
+    border-bottom: 1px solid $dark-color;
+    font-size: 18px;
     text-transform: uppercase;
     color: $dark-color;
     padding: 0 0 4px;
@@ -69,6 +69,6 @@
 
   & + & {
 
-    margin: 80px 0 0;
+    margin: 120px 0 0;
   }
 }
