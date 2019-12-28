@@ -2,8 +2,8 @@
   "name": "root",
   "private": true,
   "devDependencies": {
-    "lerna": "^3.18.3",
-    "lerna-update-wizard": "^0.17.5"
+    "lerna": "^3.20.0",
+    "lerna-update-wizard": "^0.17.6"
   },
   "license": "MIT",
   "homepage": "https://магазиночков.рф",
