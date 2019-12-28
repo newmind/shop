@@ -1,19 +1,30 @@
 
-import { connect } from 'react-redux';
-import { withRouter } from 'react-router-dom';
+import types from 'prop-types';
+import React, { PureComponent } from 'react';
+import { Field } from 'redux-form';
 
-import Component from './Component';
+import Input from './Input';
+
+// import styles from './defaults.module.scss';
 
 
-const mapStateToProps = () => {
-  return {}
-};
+class Component extends PureComponent {
+  static propTypes = {
+    name: types.string,
+    label: types.string,
+  };
 
-const mapActionsToProps = () => {
-  return {};
-};
+  static defaultProps = {
+    name: '',
+    label: '',
+  };
 
-export default connect(
-  mapStateToProps,
-  mapActionsToProps,
-)(withRouter(Component));
+  render() {
+    const { name, label } = this.props;
+    return (
+      <Field name={name} label={label} component={Input} />
+    );
+  }
+}
+
+export default Component;

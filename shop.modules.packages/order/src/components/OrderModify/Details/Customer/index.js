@@ -21,7 +21,7 @@ class Component extends PureComponent {
             <InputField label="Номер телефона" name="phone" placeholder="+7 (xxx) xxx-xx-xx" />
           </Col>
           <Col>
-            <InputField label="E-Mail" name="email" placeholder="example@host.so" />
+            <InputField label="E-Mail" name="email" placeholder="example@mail.su" />
           </Col>
         </Row>
       </Container>

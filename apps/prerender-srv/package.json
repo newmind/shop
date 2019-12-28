@@ -9,7 +9,7 @@
   "dependencies": {
     "chrome-launcher": "^0.11.1",
     "chrome-remote-interface": "^0.27.2",
-    "koa": "2.8.1"
+    "koa": "^2.11.0"
   },
   "devDependencies": {
     "nodemon": "1.19.1"

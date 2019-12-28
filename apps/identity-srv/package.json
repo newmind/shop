@@ -17,13 +17,13 @@
     "@sys.packages/sys.utils": "^1.0.0",
     "dotenv": "8.1.0",
     "jsonwebtoken": "^8.5.1",
-    "koa": "2.8.1",
+    "koa": "^2.11.0",
     "koa-bodyparser": "^4.2.1",
     "koa-logger": "^3.2.0",
     "koa-router": "^7.4.0",
-    "pg": "^7.9.0",
-    "pg-hstore": "^2.3.2",
-    "sequelize": "^5.1.0"
+    "pg": "^7.16.0",
+    "pg-hstore": "^2.3.3",
+    "sequelize": "^5.21.3"
   },
   "devDependencies": {
     "cross-env": "^6.0.3",

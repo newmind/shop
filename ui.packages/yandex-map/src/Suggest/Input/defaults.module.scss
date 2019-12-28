@@ -1,0 +1,133 @@
+
+@import "~@ui.packages/theme";
+
+
+.wrapper {
+
+  display: flex;
+  flex: 1 0;
+  flex-direction: column;
+
+  &--info {
+
+    .label,
+    .info__icon {
+      color: darken($info-color, 10%);
+    }
+  }
+
+  &--primary {
+
+    .label,
+    .info__icon {
+      color: darken($primary-color, 10%);
+    }
+  }
+
+  &--success {
+
+    .label,
+    .info__icon {
+      color: darken($success-color, 10%);
+    }
+  }
+
+  &--warning {
+
+    .label,
+    .info__icon {
+      color: darken($warning-color, 10%);
+    }
+  }
+
+  &--danger {
+
+    .label,
+    .info__icon {
+      color: darken($danger-color, 10%);
+    }
+  }
+
+  &--disabled {
+
+    background: $light-gray-color;
+
+    .label {
+      color: $gray-color;
+      text-shadow: -1px 1px 0 $white-color;
+    }
+  }
+}
+
+.label {
+
+  display: block;
+  font-size: 14px;
+  color: #222;
+  margin: 0 0 8px 1px;
+  transition: color 400ms;
+}
+
+
+.container {
+
+  position: relative;
+  display: block;
+}
+
+//.tooltip {
+//
+//  position: fixed;
+//  padding: 10px 16px;
+//  display: block;
+//  background: $danger-color;
+//  border-radius: 4px;
+//
+//  &:before {
+//
+//    position: absolute;
+//    right: 100%;
+//    top: 50%;
+//    display: inline-block;
+//    margin: -7px 0 0;
+//    width: 0;
+//    height: 0;
+//    border: 6px solid transparent;
+//    border-left: none;
+//    border-right-color: $danger-color;
+//    content: '';
+//  }
+//
+//  &__message {
+//
+//    display: inline-block;
+//    font-size: 13px;
+//    color: $whitesmoke-color;
+//    letter-spacing: .5px;
+//    font-weight: bold;
+//  }
+//}
+
+.error {
+
+  position: absolute;
+  top: 100%;
+  right: 0;
+  display: block;
+  background: $warning-color;
+  padding: 0 6px 2px 20px;
+  letter-spacing: .2px;
+  border-radius: 0 0 3px 3px;
+
+  &__message {
+
+    font-size: 10px;
+    color: $white-color;
+    font-weight: bold;
+  }
+}
+
+.border-right-bottom-none {
+
+  border-radius: 3px 3px 0;
+}
