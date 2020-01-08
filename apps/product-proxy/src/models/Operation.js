@@ -10,15 +10,27 @@ module.exports = (db, DataType) => {
       index: true,
     },
     externalId: {
-      type: DataType.INTEGER,
+      type: DataType.STRING(64),
       allowNull: false,
     },
-    details: {
-      type: DataType.TEXT,
+    address: {
+      type: DataType.STRING(512),
       allowNull: false,
     },
-    paymentMethod: {
-      type: DataType.STRING(255),
+    email: {
+      type: DataType.STRING(126),
+      allowNull: false,
+    },
+    phone: {
+      type: DataType.STRING(126),
+      allowNull: false,
+    },
+    name: {
+      type: DataType.STRING(126),
+      allowNull: false,
+    },
+    surname: {
+      type: DataType.STRING(126),
       allowNull: false,
     },
     amount: {
@@ -26,11 +38,27 @@ module.exports = (db, DataType) => {
       allowNull: false,
       defaultValue: 1,
     },
+    pay: {
+      type: DataType.STRING(32),
+      allowNull: false,
+    },
+    delivery: {
+      type: DataType.STRING(32),
+      allowNull: false,
+    },
     status: {
       type: DataType.INTEGER,
       allowNull: false,
     },
   });
+
+  Operation.associate = function({ OperationStock }) {
+
+    Operation.hasMany(OperationStock, {
+      foreignKey: 'operationId',
+      as: 'stock',
+    });
+  };
 
   return Operation;
 };

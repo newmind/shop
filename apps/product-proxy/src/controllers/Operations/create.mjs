@@ -1,5 +1,5 @@
-'use strict';
 
+import { UUID } from '@sys.packages/sys.utils';
 import { sequelize, models } from '@sys.packages/db';
 import { sendEvent } from "@sys.packages/rabbit";
 
@@ -9,61 +9,31 @@ export default () => async (ctx) => {
 
     const fields = ctx.request.body;
 
-    const product = await sequelize.transaction(async (transaction) => {
+    const externalId = await sequelize.transaction(async (transaction) => {
 
-      const { id } = await models['Stock'].create({
-        ...fields,
-      }, { transaction });
+      const externalId = UUID();
 
-      return await models['Stock'].findOne({
-        attributes: ['id', 'count', 'amount'],
-        where: { id: id },
-        include: [
-          {
-            model: models['Currency'],
-            required: true,
-            as: 'currency',
-            attributes: ['id', 'value']
-          },
-          {
-            model: models['Category'],
-            required: false,
-            as: 'category',
-            attributes: ['id', 'name']
-          },
-          {
-            model: models['Product'],
-            attributes: ['id', 'name', 'brand', 'color', 'form', 'material', 'description', 'status'],
-            required: true,
-            as: 'product',
-            where: { status: 1 },
-            include: [
-              {
-                model: models['Attribute'],
-                required: false,
-                as: 'attributes',
-                attributes: ['id', 'name', 'value'],
-              },
-              {
-                model: models['Gallery'],
-                required: false,
-                as: 'gallery',
-                attributes: ['id'],
-              },
-            ]
-          }
-        ], transaction });
+      const { id } = await models['Operation'].create({ externalId, ...fields }, { transaction });
+
+      const items = fields['items'].map((item) => ({ operationId: id, ...item }));
+
+      await models['OperationStock'].bulkCreate(items, { transaction });
+
+      return externalId;
     });
 
-    sendEvent(process.env['RABBIT_PRODUCT_PROXY_EXCHANGE_STOCK_PRODUCT_CREATED'], JSON.stringify(product));
+    sendEvent(process.env['RABBIT_PRODUCT_PROXY_EXCHANGE_OPERATION_CREATED'], JSON.stringify(externalId));
 
     ctx.body = {
       success: true,
-      data: product,
+      data: {
+        externalId,
+      }
     };
+  }
+  catch (error) {
 
-  } catch (error) {
-
+    ctx.status = 500;
     ctx.body = {
       success: false,
       error: {

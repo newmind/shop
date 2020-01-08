@@ -89,7 +89,7 @@ class Component extends PureComponent {
   render() {
     const { items, isOpen, match } = this.props;
 
-    if (match['path'] === '/order') {
+    if (/order/.test(match['url'])) {
       return null;
     }
 

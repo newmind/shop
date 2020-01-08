@@ -1,14 +1,26 @@
 
-import { sleep, UUID } from '@sys.packages/sys.utils';
+import request from "@sys.packages/request";
+
 
 export default () => async (ctx) => {
 
-  const externalId = UUID();
+  const { externalId } = ctx['params'];
 
-  await sleep(3000);
+  const result = await request({
+    url: process.env['PRODUCT_API_SRV'] + '/operations',
+    method: 'get',
+    params: {
+      externalId,
+    },
+  });
 
-  ctx.body = {
-    externalId,
-  };
+  const operation = result['data'][0];
+
+  if ( ! operation) {
+    ctx.status = 404;
+    ctx.body = {};
+  }
+
+  ctx.body = operation;
 };
 

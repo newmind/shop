@@ -5,26 +5,44 @@
 .wrapper {
 
   display: block;
-  padding: 20px 0 120px;
   box-sizing: border-box;
+}
+
+.content {
+
+  display: block;
+  width: 1024px;
+  margin: 0 auto;
+  padding: 60px 0 120px;
 }
 
 .breadcrumbs {
 
   display: block;
-  margin: 0 0 40px;
+  box-shadow: 0 1px 20px 0 rgba($dark-color, .08);
+
+  &__content {
+
+    display: block;
+    width: 1024px;
+    margin: 0 auto;
+    padding: 20px 0;
+  }
 }
 
-.controls {
-
-  margin-top: 80px;
-  text-align: right;
-}
-
-.message {
+.information {
 
   display: block;
-  font-size: 14px;
-  color: $dark-color;
-  margin: 0 0 20px;
+}
+
+.status {
+
+  display: block;
+  margin: 80px 0 0;
+}
+
+.products {
+
+  display: block;
+  margin: 80px 0 0;
 }

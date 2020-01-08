@@ -8,8 +8,8 @@
   "license": "MIT",
   "homepage": "https://магазиночков.рф",
   "bin": {
-    "lerna": "core/lerna/cli.js",
-    "yarn": "core/yarn/cli.js"
+    "lerna": "node_modules/lerna/cli.js",
+    "yarn": "node_modules/yarn/cli.js"
   },
   "repository": {
     "type": "git",

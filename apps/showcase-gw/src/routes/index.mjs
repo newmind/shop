@@ -16,5 +16,5 @@ export default (router) => {
   router.get('/gallery/:fileName', getImageByFileName());
 
   router.post('/operations', createOperation());
-  router.get('/operations/:operationId', getOperationById());
+  router.get('/operations/:externalId', getOperationById());
 };

@@ -1,0 +1,76 @@
+
+@import "~@ui.packages/theme";
+
+
+.product {
+
+  display: flex;
+  flex: 1 0;
+  min-height: 200px;
+
+  & + & {
+
+    border-top: 1px solid $light-gray-color;
+    margin: 40px 0 0;
+    padding: 40px 0 0;
+  }
+
+  &__name {
+
+    display: block;
+    font-size: 14px;
+    color: $dark-color;
+  }
+}
+
+.gallery {
+
+  display: block;
+  width: 250px;
+  text-align: center;
+
+  &__images {
+
+    display: flex;
+    height: 200px;
+  }
+}
+
+.content {
+
+  position: relative;
+  display: flex;
+  flex: 1 0;
+  flex-direction: column;
+  margin: 0 0 0 20px;
+}
+
+.brand {
+
+  display: block;
+  font-size: 16px;
+  font-weight: bold;
+  color: $dark-color;
+  letter-spacing: .5px;
+
+  &__link {
+
+    color: inherit;
+  }
+}
+
+.name {
+
+  display: block;
+  font-size: 14px;
+  color: $dark-color;
+  margin: 15px 0 0;
+}
+
+.type {
+
+  display: block;
+  font-size: 14px;
+  color: $dark-color;
+  margin: 15px 0 0;
+}

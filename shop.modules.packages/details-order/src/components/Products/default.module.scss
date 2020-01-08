@@ -1,0 +1,22 @@
+
+@import "~@ui.packages/theme";
+
+
+.products {
+
+  display: block;
+}
+
+.header {
+
+  display: block;
+  text-transform: uppercase;
+  font-size: 14px;
+  border-bottom: 1px solid $dark-color;
+}
+
+.content {
+
+  display: block;
+  padding: 40px 0 0;
+}

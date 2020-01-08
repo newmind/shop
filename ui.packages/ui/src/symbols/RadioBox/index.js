@@ -39,7 +39,9 @@ class Component extends PureComponent {
     const { children, value } = this.props;
     return (
       <div className={styles['container']}>
-        { React.Children.map(children, (child, key) => React.cloneElement(child, { key, value })) }
+        {React.Children.map(children, (child, key) => {
+          return child && React.cloneElement(child, { key, value });
+        })}
       </div>
     );
   }

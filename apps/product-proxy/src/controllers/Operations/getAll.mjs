@@ -1,71 +1,63 @@
 'use strict';
 
-import { models, Sequelize } from '@sys.packages/db';
+import { models } from '@sys.packages/db';
 
 
 export default () => async (ctx) => {
   try {
-    const { Operation } = models;
+    const { Operation, OperationStock, Stock, Product, Gallery, Currency } = models;
 
     const operations = await Operation.findAll({
-      attributes: ['id', 'externalId', 'details', 'paymentMethod', 'amount', 'status'],
-      // order: [
-      //   ['id', 'asc'],
-      //   ['product', 'gallery', 'id', 'asc']
-      // ],
-      // include: [
-      //   {
-      //     model: Currency,
-      //     required: false,
-      //     as: 'currency',
-      //     attributes: ['id', 'value']
-      //   },
-      //   {
-      //     model: Category,
-      //     required: false,
-      //     as: 'category',
-      //     attributes: ['id', 'name']
-      //   },
-      //   {
-      //     model: Comment,
-      //     required: false,
-      //     as: 'comments',
-      //     attributes: ['evaluation', 'person', 'comment'],
-      //   },
-      //   {
-      //     model: Product,
-      //     attributes: ['id', 'name', 'brand', 'color', 'material', 'form', 'description', 'status'],
-      //     required: true,
-      //     as: 'product',
-      //     where: { status: 1, ...productWhere },
-      //     include: [
-      //       {
-      //         model: Attribute,
-      //         required: false,
-      //         as: 'attributes',
-      //         attributes: ['id', 'name', 'value'],
-      //       },
-      //       {
-      //         model: Gallery,
-      //         required: false,
-      //         as: 'gallery',
-      //         attributes: ['id'],
-      //       },
-      //     ]
-      //   }
-      // ],
+      where: ctx['query'],
+      attributes: ['externalId', 'address', 'email', 'phone', 'name', 'surname', 'amount', 'pay', 'delivery', 'status', 'createdAt', 'updatedAt'],
+      include: [
+        {
+          model: OperationStock,
+          required: true,
+          as: 'stock',
+          attributes: ['id', 'type', 'recipe', 'lens'],
+          include: [
+            {
+              model: Stock,
+              required: true,
+              attributes: ['id', 'amount'],
+              as: 'product',
+              include: [
+                {
+                  model: Currency,
+                  required: false,
+                  as: 'currency',
+                  attributes: ['id', 'value']
+                },
+                {
+                  model: Product,
+                  attributes: ['id', 'name', 'brand'],
+                  required: true,
+                  as: 'product',
+                  include: [
+                    {
+                      model: Gallery,
+                      required: false,
+                      as: 'gallery',
+                      attributes: ['id'],
+                    },
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
     });
 
     ctx.body = {
       success: true,
-      data: {
-        items: operations,
-        meta: {
-          count: 0
-        }
-      },
+      data: operations,
     };
-  } catch(error) {
-    ctx.throw(new Error(error['message']));
+  }
+  catch(error) {
+
+    ctx.status = 500;
+    ctx.body = { code: '', message: '' };
   }
 };

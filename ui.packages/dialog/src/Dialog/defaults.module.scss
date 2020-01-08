@@ -9,10 +9,12 @@
   bottom: 0;
   left: 0;
   display: flex;
-  flex: 0 0 auto;
+  flex: 1 0;
+  padding: 40px 0;
   flex-direction: column;
   background: rgba($dark-color, .2);
   z-index: 99999;
+  overflow: auto;
 }
 
 .dialog {
@@ -23,8 +25,6 @@
   flex-direction: column;
   background: #fff;
   min-width: 500px;
-  min-height: 100px;
-  max-height: 90%;
   border-radius: 4px;
   margin: auto;
   box-shadow: 0 6px 10px 0 rgba(34, 34, 34, 0.3);

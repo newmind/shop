@@ -1,0 +1,56 @@
+
+@import "~@ui.packages/theme";
+
+
+.status {
+
+  display: block;
+}
+
+.header {
+
+  display: block;
+  text-transform: uppercase;
+  font-size: 14px;
+  border-bottom: 1px solid $dark-color;
+}
+
+.pay,
+.formed,
+.courier,
+.delivered,
+.finished {
+
+  display: block;
+  color: $white-color;
+  font-size: 12px;
+  text-align: center;
+  padding: 10px 10px 8px;
+  border-radius: 5px;
+  background: $gray-color;
+}
+
+.steps {
+
+  display: flex;
+  flex: 1 0;
+  flex-direction: row;
+  margin: 30px 0 0;
+
+  &__item {
+
+    display: flex;
+    flex: 1 0;
+    flex-direction: column;
+
+    & + & {
+
+      margin: 0 0 0 40px;
+    }
+  }
+
+  &--pay .pay {
+
+    background: $success-color;
+  }
+}
