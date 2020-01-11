@@ -1,16 +1,18 @@
 
 import { Gallery } from "@ui.packages/ui";
-import numeral from "@ui.packages/numeral";
 
 import { Link } from 'react-router-dom';
 import React, { PureComponent } from 'react';
+
+import Recipe from './Recipe';
+import Lens from './Lens';
 
 import styles from "./default.module.scss";
 
 
 class Component extends PureComponent {
   render() {
-    const { type, product: { id, product: { gallery, brand, name }}} = this.props;
+    const { type, recipe, lens, product: { id, product: { gallery, brand, name }}} = this.props;
 
     return (
       <div className={styles['product']}>
@@ -24,9 +26,30 @@ class Component extends PureComponent {
             <Link className={styles['brand__link']} to={process.env['PUBLIC_URL'] + `/products/${id}`}>{ brand }</Link>
           </p>
           {name && <p className={styles['name']}>{ name }</p>}
-          {(type === 'only-rim') && <p className={styles['type']}>Тип изготовления: Только оправа</p>}
-          {(type === 'on-prescription') && <p className={styles['type']}>Тип изготовления: Очки по рецепту</p>}
-          {(type === 'image-lenses') && <p className={styles['type']}>Тип изготовления: С имиджевыми линзами</p>}
+          {(type === 'only-rim') && (
+            <p className={styles['type']}>
+              <span className={styles['label']}>Тип изготовления:</span>
+              <span className={styles['value']}>Только оправа</span>
+            </p>
+          )}
+          {(type === 'on-prescription') && (
+            <p className={styles['type']}>
+              <span className={styles['label']}>Тип изготовления:</span>
+              <span className={styles['value']}>Очки по рецепту</span>
+            </p>
+          )}
+          {(type === 'image-lenses') && (
+            <p className={styles['type']}>
+              <span className={styles['label']}>Тип изготовления:</span>
+              <span className={styles['value']}>С имиджевыми линзами</span>
+            </p>
+          )}
+          {(type === 'on-prescription') && (
+            <div className={styles['prescription']}>
+              <Recipe {...recipe} />
+              <Lens {...lens} />
+            </div>
+          )}
         </div>
       </div>
     );

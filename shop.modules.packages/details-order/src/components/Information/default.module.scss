@@ -26,5 +26,19 @@
   display: block;
   font-size: 14px;
   color: $dark-color;
-  margin: 15px 0 0;
+  margin: 20px 0 0;
+
+  &__label {
+
+    display: inline-block;
+    vertical-align: middle;
+    font-weight: bold;
+  }
+
+  &__value {
+
+    display: inline-block;
+    vertical-align: middle;
+    margin: 0 0 0 10px;
+  }
 }

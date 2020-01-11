@@ -1,5 +1,4 @@
 
-import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 
 import Component from './Component';
@@ -7,7 +6,7 @@ import Component from './Component';
 
 const mapStateToProps = (state) => {
   return {
-    products: state['details-order']['products'],
+    products: state['details-order']['stock'],
   };
 };
 

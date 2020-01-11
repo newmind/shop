@@ -8,7 +8,7 @@ import {
 const initialState = {
   status: 0,
   delivery: null,
-  products: [],
+  stock: [],
 };
 
 export default (state = initialState, { type, payload }) => {

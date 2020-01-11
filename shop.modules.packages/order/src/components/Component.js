@@ -86,7 +86,7 @@ class Component extends PureComponent {
                 </Row>
                 <Row>
                   <Col className={styles['controls']}>
-                    <p className={styles['message']}>Нажимая на кнопку ”Оформить заказ”, Вы подтверждаете согласие на обработку Персональных данных.</p>
+                    <p className={styles['message']}>Нажимая на кнопку ”Оформить заказ”, Вы подтверждаете согласие на обработку "Персональных данных".</p>
                     <Button mode="success" size="l" disabled={ ! isValid || inProcess} onClick={this._handleSubmitOrder.bind(this)}>
                       Оформить заказ на сумму {numeral(calculatedAmount).format()} руб.
                     </Button>

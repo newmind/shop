@@ -74,3 +74,23 @@
   color: $dark-color;
   margin: 15px 0 0;
 }
+
+.label {
+
+  display: inline-block;
+  font-weight: bold;
+  vertical-align: middle;
+  margin: 0 10px 0 0;
+}
+
+.value {
+
+  display: inline-block;
+  vertical-align: middle;
+}
+
+.prescription {
+
+  display: block;
+  margin: 10px 0 0;
+}

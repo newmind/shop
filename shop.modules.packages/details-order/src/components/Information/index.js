@@ -8,6 +8,7 @@ import Component from './Component';
 const mapStateToProps = (state) => {
   const order = state['details-order'];
   return {
+    externalId: order['externalId'],
     address: order['address'],
     amount: order['amount'],
     delivery: order['delivery'],
@@ -20,8 +21,7 @@ const mapStateToProps = (state) => {
   };
 };
 
-const mapActionsToProps = () => ({
-});
+const mapActionsToProps = () => ({});
 
 
 export default connect(

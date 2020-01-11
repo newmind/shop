@@ -36,7 +36,11 @@ module.exports = (db, DataType) => {
     amount: {
       type: DataType.DECIMAL(10, 2),
       allowNull: false,
-      defaultValue: 1,
+      defaultValue: 0.00,
+      get() {
+        const amount = this.getDataValue('amount');
+        return Number(amount);
+      },
     },
     pay: {
       type: DataType.STRING(32),
