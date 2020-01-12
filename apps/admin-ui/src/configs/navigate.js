@@ -5,20 +5,6 @@ export default [
     path: '/',
   },
   {
-    title: 'Склад',
-    path: '/products',
-    navigate: [
-      {
-        title: 'Товары',
-        path: '/products',
-      },
-      {
-        title: 'Дополнительные продукты',
-        path: '/sub-products',
-      }
-    ]
-  },
-  {
     title: "Аттрибуты",
     path: '/categories',
     navigate: [

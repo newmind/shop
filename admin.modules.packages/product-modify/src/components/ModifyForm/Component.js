@@ -1,5 +1,5 @@
 
-import { Row, Col, Hr, InputField, TextareaField } from '@ui.packages/ui';
+import { Row, Col, Hr, InputField, TextareaField, SelectField } from '@ui.packages/ui';
 
 import { Field, FieldArray } from 'redux-form';
 import React, { PureComponent } from 'react';
@@ -34,12 +34,12 @@ class Component extends PureComponent {
           </Row>
           <Row>
             <Col>
-              <InputField name="name" label="Назвние" />
+              <InputField name="brand" label="Бренд" />
             </Col>
           </Row>
           <Row>
             <Col>
-              <InputField name="brand" label="Производитель" />
+              <InputField name="name" label="Назвние" />
             </Col>
           </Row>
           <Row>
@@ -60,6 +60,32 @@ class Component extends PureComponent {
           <Row>
             <Col>
               <TextareaField name="description" label="Описание" />
+            </Col>
+          </Row>
+          <Hr className={styles['delimiter']} />
+          <Row>
+            <Col>
+              <h3 className="header-3">Склад</h3>
+            </Col>
+          </Row>
+          <Row>
+            <Col>
+              <InputField name="amount" label="Цена" />
+            </Col>
+          </Row>
+          <Row>
+            <Col>
+              <InputField name="amountSale" label="Цена со скидкой" />
+            </Col>
+          </Row>
+          <Row>
+            <Col>
+              <SelectField name="currency" label="Валюта" options={[]} />
+            </Col>
+          </Row>
+          <Row>
+            <Col>
+              <InputField name="count" label="Количество" />
             </Col>
           </Row>
           <Hr className={styles['delimiter']} />

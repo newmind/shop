@@ -4,24 +4,8 @@ export default [
     path: '/',
     wrapper: 'Composite',
     module: import(
-      /* webpackChunkName: "stock" */
-      '@modules.packages/stock'
-    ),
-  },
-  {
-    path: '/products',
-    wrapper: 'Composite',
-    module: import(
       /* webpackChunkName: "products" */
       '@modules.packages/products'
-    ),
-  },
-  {
-    path: '/sub-products',
-    wrapper: 'Composite',
-    module: import(
-      /* webpackChunkName: "sub-products" */
-      '@modules.packages/sub-products'
     ),
   },
   {
