@@ -70,8 +70,7 @@ class Component extends PureComponent {
   }
 
   render() {
-    const { id, field, index, product, amount, currency, type, recipe, lens, errors } = this.props;
-    const { name, brand, gallery } = product;
+    const { id, field, index, name, brand, gallery, amount, currency, type, recipe, lens, errors } = this.props;
 
     const hasRecipe = !! Object.keys(recipe).length;
     const hasLens = !! Object.keys(lens).length;

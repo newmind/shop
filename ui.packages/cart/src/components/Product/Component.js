@@ -30,7 +30,7 @@ class Component extends PureComponent {
   };
 
   render() {
-    const { id, product: { gallery, brand, name }, amount, currency, onRemove } = this.props;
+    const { id, gallery, brand, name, amount, currency, onRemove } = this.props;
     const classNameRemoveProduct = cn(styles['remove'], 'far fa-trash-alt');
     return (
       <div className={styles['item']}>

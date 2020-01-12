@@ -5,7 +5,7 @@ import { models } from '@sys.packages/db';
 
 export default () => async (ctx) => {
   try {
-    const { Operation, OperationStock, Stock, Product, Gallery, Currency } = models;
+    const { Operation, OperationStock, Product, Gallery, Currency } = models;
 
     const operations = await Operation.findAll({
       where: ctx['query'],
@@ -18,9 +18,9 @@ export default () => async (ctx) => {
           attributes: ['id', 'type', 'recipe', 'lens'],
           include: [
             {
-              model: Stock,
+              model: Product,
+              attributes: ['id', 'name', 'brand'],
               required: true,
-              attributes: ['id', 'amount'],
               as: 'product',
               include: [
                 {
@@ -30,19 +30,11 @@ export default () => async (ctx) => {
                   attributes: ['id', 'value']
                 },
                 {
-                  model: Product,
-                  attributes: ['id', 'name', 'brand'],
-                  required: true,
-                  as: 'product',
-                  include: [
-                    {
-                      model: Gallery,
-                      required: false,
-                      as: 'gallery',
-                      attributes: ['id'],
-                    },
-                  ]
-                }
+                  model: Gallery,
+                  required: false,
+                  as: 'gallery',
+                  attributes: ['id'],
+                },
               ]
             }
           ]

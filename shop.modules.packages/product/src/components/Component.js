@@ -35,14 +35,11 @@ class Component extends PureComponent {
         value: '',
       },
       comments: [],
-      product: {
-        id: null,
-        gallery: [],
-        brand: 'None',
-        name: 'None',
-        description: '',
-        attributes: [],
-      }
+      gallery: [],
+      brand: 'None',
+      name: 'None',
+      description: '',
+      attributes: [],
     },
   };
 
@@ -65,8 +62,7 @@ class Component extends PureComponent {
   }
 
   render() {
-    const { product: { id, product, comments, amount, currency }, cart, initialValues } = this.props;
-    const { gallery, attributes, brand, name, description } = product;
+    const { cart, initialValues, product: { id, gallery, attributes, brand, name, description, comments, amount, currency }} = this.props;
 
     const countInCart = cart.filter(item => item['id'] === id).length;
 

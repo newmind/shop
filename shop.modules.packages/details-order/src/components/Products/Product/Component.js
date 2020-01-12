@@ -12,7 +12,7 @@ import styles from "./default.module.scss";
 
 class Component extends PureComponent {
   render() {
-    const { type, recipe, lens, product: { id, product: { gallery, brand, name }}} = this.props;
+    const { type, recipe, lens, product: { id, gallery, brand, name }} = this.props;
 
     return (
       <div className={styles['product']}>

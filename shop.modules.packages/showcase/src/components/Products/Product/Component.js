@@ -22,6 +22,7 @@ class Component extends PureComponent {
     amount: types.number,
     brand: types.string,
     name: types.string,
+
     onView: types.func,
     onCart: types.func,
   };
@@ -43,13 +44,13 @@ class Component extends PureComponent {
   }
 
   render() {
-    const { isSale, isHit, id, amount, currency, product, cart } = this.props;
-    const { brand, name, gallery} = product;
+    const { isSale, isHit, id, amount, currency, cart, brand, name, gallery } = this.props;
+
     const classNameForSale = cn('fas fa-percent', styles['product__sale']);
     const classNameForHit = cn('fas fa-star', styles['product__hit']);
     const classNameForCart = cn('fas fa-shopping-cart', styles['product__cart']);
 
-    const countInCart = cart.filter(item => item['id'] === id).length;
+    const countInCart = cart.filter((item) => (item['id'] === id)).length;
 
     const productClassName = cn(styles['product'], {
       [styles['product--in-cart']]: !! countInCart,

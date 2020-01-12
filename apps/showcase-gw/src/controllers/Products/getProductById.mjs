@@ -10,8 +10,19 @@ export default () => async (ctx) => {
 
   const { data } = await request({
     method: 'get',
-    url: `${PRODUCT_API_SRV}/stock/products/${productId}`
+    url: `${PRODUCT_API_SRV}/products`,
+    params: {
+      id: productId,
+      status: 1,
+    }
   });
 
-  ctx.body = data['data'];
+  const product = data['data']['data'][0];
+
+  if ( ! product) {
+    ctx.static = 404;
+    return ctx.body = {};
+  }
+
+  ctx.body = product;
 }

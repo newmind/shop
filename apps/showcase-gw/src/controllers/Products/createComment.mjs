@@ -11,7 +11,7 @@ export default () => async (ctx) => {
 
   const { data } = await request({
     method: 'post',
-    url: `${PRODUCT_API_SRV}/stock/products/${productId}/comments`,
+    url: `${PRODUCT_API_SRV}/products/${productId}/comments`,
     data: formData,
   });
 

@@ -34,13 +34,15 @@ class Component extends PureComponent {
           {products.map((lineWithProducts, index) => {
             return (
               <div key={index} className={styles['block__line']}>
-                {lineWithProducts.map((product, index) => (
-                  <Product
-                    key={index}
-                    {...product}
-                    onCart={onAddToCart.bind(this, product)}
-                  />
-                ))}
+                {lineWithProducts.map((product, index) => {
+                  return (
+                    <Product
+                      key={index}
+                      {...product}
+                      onCart={onAddToCart.bind(this, product)}
+                    />
+                  );
+                })}
               </div>
             );
           })}

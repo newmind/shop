@@ -12,7 +12,7 @@ module.exports = (db, DataType) => {
     operationId: {
       type: DataType.INTEGER,
     },
-    stockId: {
+    productId: {
       type: DataType.INTEGER,
     },
     type: {
@@ -26,10 +26,10 @@ module.exports = (db, DataType) => {
     }
   });
 
-  OperationStock.associate = ({ Stock }) => {
+  OperationStock.associate = ({ Product }) => {
 
-    OperationStock.belongsTo(Stock, {
-      foreignKey: 'stockId',
+    OperationStock.belongsTo(Product, {
+      foreignKey: 'productId',
       as: 'product',
     });
   };

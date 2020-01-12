@@ -26,13 +26,11 @@ const initialState = {
       value: '',
     },
     comments: [],
-    product: {
-      gallery: [],
-      brand: 'None',
-      name: 'None',
-      description: '',
-      attributes: [],
-    }
+    gallery: [],
+    brand: 'None',
+    name: 'None',
+    description: '',
+    attributes: [],
   },
   isInitialize: false,
 };

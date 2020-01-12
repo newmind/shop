@@ -5,16 +5,8 @@ import { Sequelize, models } from '@sys.packages/db';
 
 export default () => async (ctx) => {
 
-  const { Stock, Product } = models;
+  const { Product } = models;
   const brands = await Product.findAll({
-    include: [
-      {
-        model: Stock,
-        attributes: [],
-        required: true,
-        as: 'stock',
-      }
-    ],
     attributes: [
       'brand',
       [Sequelize.fn('count', Sequelize.col('Product.brand')), 'count']

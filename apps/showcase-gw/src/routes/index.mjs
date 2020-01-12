@@ -1,8 +1,8 @@
 'use strict';
 
-import { getProducts, getProductById, getProductsAdditionalData, createComment } from '../controllers/Products';
 import { getImageByFileName } from '../controllers/Gallery';
 import { create as createOperation, get as getOperationById } from '../controllers/Operation';
+import { getProducts, getProductById, getProductsAdditionalData, createComment } from '../controllers/Products';
 
 
 export default (router) => {

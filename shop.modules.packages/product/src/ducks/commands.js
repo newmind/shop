@@ -39,7 +39,9 @@ export const getProductById = (id) => async (dispatch) => {
 
     return void 0;
 
-  } catch(error) {
+  }
+  catch(error) {
+
     dispatch(getProductByIdRequestFail(error));
   }
 };

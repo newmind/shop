@@ -11,7 +11,7 @@ export default () => async (ctx) => {
 
     const { data } = await request({
       method: 'get',
-      url: `${PRODUCT_API_SRV}/stock/products`,
+      url: `${PRODUCT_API_SRV}/products`,
       params: {
         take: process.env['TAKE'],
         skip: (page > 0 ? page - 1 : 0) * process.env['TAKE'],
