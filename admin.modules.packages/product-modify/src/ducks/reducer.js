@@ -7,6 +7,10 @@ import {
   GET_UNITS_REQUEST_FAIL,
   GET_UNITS_REQUEST_SUCCESS,
 
+  GET_CURRENCIES_REQUEST,
+  GET_CURRENCIES_REQUEST_FAIL,
+  GET_CURRENCIES_REQUEST_SUCCESS,
+
   GET_PRODUCT_REQUEST,
   GET_PRODUCT_REQUEST_FAIL,
   GET_PRODUCT_REQUEST_SUCCESS,
@@ -25,6 +29,7 @@ import {
 
 const initialState = {
   units: [],
+  currencies: [],
   product: {},
   inProcess: false,
   isError: false,
@@ -47,6 +52,20 @@ export default (state = { ...initialState }, { type, payload }) => {
       ...state,
       units: [
         ...state['units'],
+        ...payload['items'],
+      ],
+    };
+
+    case GET_CURRENCIES_REQUEST: return {
+      ...state,
+    };
+    case GET_CURRENCIES_REQUEST_FAIL: return {
+      ...state,
+    };
+    case GET_CURRENCIES_REQUEST_SUCCESS: return {
+      ...state,
+      currencies: [
+        ...state['currencies'],
         ...payload['items'],
       ],
     };

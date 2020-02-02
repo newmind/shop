@@ -5,10 +5,10 @@ import { sendEvent } from "@sys.packages/rabbit";
 
 
 export default () => async (ctx) => {
-
-  const { categoryId } = ctx['params'];
-
   try {
+
+    const { categoryId } = ctx['params'];
+
     await sequelize.transaction(async (transaction) => {
 
       await models['Category'].destroy({

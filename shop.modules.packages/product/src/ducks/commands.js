@@ -35,10 +35,9 @@ export const getProductById = (id) => async (dispatch) => {
       url: `/products/${id}`
     });
 
-    dispatch(getProductByIdRequestSuccess(result));
+    dispatch(getProductByIdRequestSuccess(result['data']));
 
     return void 0;
-
   }
   catch(error) {
 

@@ -14,6 +14,21 @@ const BrandOption = (option) => (
   </span>
 );
 
+const ColorOption = (option) => (
+  <span className={styles['option']}>
+    <span className={styles['option__title']}>{option['color']}</span>
+    <span className={styles['option__count']}>{option['count']}</span>
+  </span>
+);
+
+const FormOption = (option) => (
+  <span className={styles['option']}>
+    <span className={styles['option__title']}>{option['form']}</span>
+    <span className={styles['option__count']}>{option['count']}</span>
+  </span>
+);
+
+
 class Component extends PureComponent {
   static propTypes = {
     categories: types.array,
@@ -33,7 +48,7 @@ class Component extends PureComponent {
   }
 
   render() {
-    const { handleSubmit, categories, brands, isValid, inProcess } = this.props;
+    const { handleSubmit, categories, brands, colors, forms, isValid, inProcess } = this.props;
     return (
       <form onSubmit={handleSubmit} className={styles['wrapper']}>
         <div className={styles['fields']}>
@@ -52,7 +67,10 @@ class Component extends PureComponent {
               <SelectField
                 placeholder="Цвет"
                 name="color"
-                options={[]}
+                options={colors}
+                optionValue="color"
+                simple={true}
+                optionTemplate={ColorOption}
                 disabled={inProcess}
               />
             </Col>
@@ -84,7 +102,9 @@ class Component extends PureComponent {
               <SelectField
                 placeholder="Форма"
                 name="color"
-                options={[]}
+                options={forms}
+                simple={true}
+                optionTemplate={FormOption}
                 disabled={inProcess}
               />
             </Col>

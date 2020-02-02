@@ -66,11 +66,11 @@ export default () => async (ctx) => {
 
     const products = await Product.findAndCountAll({
       attributes: ['id', 'brand', 'name', 'color', 'material', 'form', 'description', 'status', 'amount', 'count', 'isHit', 'isSale', 'createdAt'],
-      order: [
-        ['id', 'asc'],
-        ['createdAt', 'asc'],
-        ['gallery', 'id', 'asc']
-      ],
+      // order: [
+      //   ['id', 'asc'],
+      //   ['createdAt', 'asc'],
+      //   ['gallery', 'id', 'asc']
+      // ],
       distinct: true,
       subQuery: false,
       ...options,
@@ -114,11 +114,9 @@ export default () => async (ctx) => {
 
     ctx.body = {
       success: true,
-      data: {
-        data: products['rows'],
-        meta: {
-          total: products['count'],
-        },
+      data: products['rows'],
+      meta: {
+        total: products['count'],
       },
     };
   }

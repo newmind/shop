@@ -4,20 +4,27 @@ import { get } from '../../requests/Product';
 
 
 export default () => async (ctx) => {
+  try {
+    let filter = {};
+    const { status } = ctx.request.query;
 
-  let filter = {};
-  const { status } = ctx.request.query;
+    if (status) {
+      filter['status'] = status;
+    }
+    const { data } = await get(filter);
 
-  if (status) {
-    filter['status'] = status;
+    ctx.body = {
+      success: true,
+      data: data,
+      paging: {
+        page: 0,
+        pages: data['counts'],
+      },
+    };
   }
-  const { data } = await get(filter);
+  catch(error) {
 
-  ctx.body = {
-    items: data['products'],
-    paging: {
-      page: 0,
-      pages: data['counts'],
-    },
-  };
+    ctx.status = 500;
+    ctx.body = { success: false, error: { code: '500', message: error['message'] }};
+  }
 }

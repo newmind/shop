@@ -16,6 +16,7 @@ class Component extends PureComponent {
     isPristine: types.bool,
     product: types.object,
     units: types.array,
+    currencies: types.array,
     isError: types.bool,
     createProduct: types.func,
     updateProductsById: types.func,
@@ -25,6 +26,7 @@ class Component extends PureComponent {
   static defaultProps = {
     product: {},
     units: [],
+    currencies: [],
     isError: false,
   };
 
@@ -48,7 +50,7 @@ class Component extends PureComponent {
   }
 
   render() {
-    const { isError, hasId, isInvalid, isPristine, product, units } = this.props;
+    const { isError, hasId, isInvalid, isPristine, product, currencies, units } = this.props;
     return (isError
       ? (
         <p>Error</p>
@@ -57,7 +59,7 @@ class Component extends PureComponent {
         <Container className={styles['form']}>
           <Row>
             <Col>
-              <ModifyForm initialValues={product} units={units} onSubmit={this._handleSubmitProduct.bind(this)} />
+              <ModifyForm initialValues={product} units={units} currencies={currencies} onSubmit={this._handleSubmitProduct.bind(this)} />
             </Col>
           </Row>
           <Row>

@@ -44,7 +44,7 @@ export const getProducts = () => async dispatch => {
       url: '/products'
     });
 
-    dispatch(getProductsRequestSuccessAction(result['items']));
+    dispatch(getProductsRequestSuccessAction(result['data']));
 
   } catch(error) {
 

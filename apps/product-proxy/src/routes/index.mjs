@@ -9,7 +9,9 @@ import {
 } from '../controllers/Comments';
 
 import {
+  getForms,
   getBrands,
+  getColors,
   getProducts,
   createProduct,
   deleteProductById,
@@ -68,6 +70,8 @@ export default (router) => {
   router.delete('/v1/api/units/:unitId', deleteUnitById());
 
   router.get('/v1/api/brands', getBrands());
+  router.get('/v1/api/colors', getColors());
+  router.get('/v1/api/forms', getForms());
 
   router.get('/v1/api/category', getAllCategories());
   router.post('/v1/api/category', createCategory());

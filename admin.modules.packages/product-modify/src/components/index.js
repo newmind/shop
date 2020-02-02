@@ -9,6 +9,7 @@ import Component from './Component';
 import {
   resetData,
   getUnits,
+  getCurrencies,
   getProductById,
   updateProductsById,
   createProduct,
@@ -29,6 +30,7 @@ const mapStateToProps = state => {
     isInvalid: isFormInvalid,
     isPristine: isFormPristine,
     units: Product['units'],
+    currencies: Product['currencies'],
     product: Product['product'],
     isError: Product['isError'],
   };
@@ -39,6 +41,7 @@ const mapActionsToProps = (dispatch) => {
     resetData: bindActionCreators(resetData, dispatch),
     reset: bindActionCreators(reset, dispatch),
     getUnits: bindActionCreators(getUnits, dispatch),
+    getCurrencies: bindActionCreators(getCurrencies, dispatch),
     getProductById: bindActionCreators(getProductById, dispatch),
     updateProductsById: bindActionCreators(updateProductsById, dispatch),
     createProduct: bindActionCreators(createProduct, dispatch),
@@ -50,11 +53,12 @@ const mapActionsToProps = (dispatch) => {
 export default PageHOC({
   mapStateToProps,
   mapActionsToProps,
-  onEnter: async ({ getProductById, getUnits, match: { params: { id }}, pageInProcess }) => {
+  onEnter: async ({ getProductById, getUnits, getCurrencies, match: { params: { id }}, pageInProcess }) => {
     if (id) {
       await getProductById(id);
     }
     await getUnits();
+    await getCurrencies();
     pageInProcess(false);
   },
   onDestroy: ({ resetData }) => {

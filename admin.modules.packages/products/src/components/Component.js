@@ -77,22 +77,23 @@ class Component extends PureComponent {
                   template: (items) => <Gallery className={styles['image']} valueKey={'id'} items={items} path={`${process.env['REACT_APP_API_HOST']}/gallery`} />
                 },
                 {
-                  alias: 'brand',
-                  title: 'Бранд',
-                },
-                {
-                  alias: 'name',
-                  title: 'Наименование',
+                  title: 'Основное',
+                  template: ({ name, brand, description }) => (
+                    <div className={styles['common']}>
+                      {name && <p>{ name }</p>}
+                      {brand && <p>{ brand }</p>}
+                      {description && <p>{ description }</p>}
+                    </div>
+                  ),
                 },
                 {
                   title: 'Описание',
-                  template: ({ color, form, material, description }) => {
+                  template: ({ color, form, material }) => {
                     return (
                       <div className={styles['description']}>
                         {color && <div className={styles['description__item']}><b className={styles['description__label']}>Цвет:</b> { color }</div>}
                         {material && <div className={styles['description__item']}><b className={styles['description__label']}>Материал:</b> { material }</div>}
                         {form && <div className={styles['description__item']}><b className={styles['description__label']}>Форма:</b> { form }</div>}
-                        <div className={styles['description__item']}>{ description }</div>
                       </div>
                     );
                   }
@@ -101,7 +102,7 @@ class Component extends PureComponent {
                   alias: 'attributes',
                   title: 'Аттрибуты',
                   template: (attrs) => {
-                    return (
+                    return !! attrs.length ? (
                       <ul className={styles['attributes']}>
                         {attrs.map((attr, index) => (
                           <li key={index} className={styles['attributes__item']}>
@@ -111,7 +112,7 @@ class Component extends PureComponent {
                           </li>
                         ))}
                       </ul>
-                    );
+                    ) : 'нет данных';
                   },
                 },
                 {

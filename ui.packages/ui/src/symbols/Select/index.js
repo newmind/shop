@@ -136,22 +136,6 @@ class Component extends PureComponent {
     document.querySelector('#root').removeEventListener('scroll', this._eventHandleScrolling);
   }
 
-  // _calculateTooltipPosition() {
-  //
-  //   const { message } = this.props;
-  //   const {current: selectRef} = this.selectRef;
-  //   const {current: messageElement} = this.messageRef;
-  //
-  //   if (message) {
-  //
-  //     const selectRect = selectRef.getBoundingClientRect();
-  //     const messageRect = messageElement.getBoundingClientRect();
-  //
-  //     messageElement.style['top'] = selectRect['top'] - ((messageRect['height'] - selectRect['height']) / 2) + 2 + 'px';
-  //     messageElement.style['left'] = selectRect['right'] + 6 + 'px';
-  //   }
-  // }
-
   _calculateDirection() {
 
     const { isDirectUp } = this.state;
@@ -189,7 +173,6 @@ class Component extends PureComponent {
     const { isOpen } = this.state;
     if (isOpen) {
       this._handleOnBlur();
-      this._calculateTooltipPosition();
     }
   }
 

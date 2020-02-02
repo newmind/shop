@@ -9,6 +9,10 @@ module.exports = (db, DataType) => {
       autoIncrement: true,
       index: true,
     },
+    uuid: {
+      type: DataType.STRING,
+      index: true,
+    },
     categoryId: {
       type: DataType.INTEGER,
       allowNull: true,

@@ -48,10 +48,7 @@ export default PageHOC({
   onEnter: async ({ pageInProcess, getProductById, match: { params } }) => {
     document.title = `${process.env['REACT_APP_WEBSITE_NAME']} - Продукт`;
     const { id } = params;
-    console.log(await getProductById(id));
-
+    await getProductById(id);
     pageInProcess(false);
   },
-  onChange: () => { console.log('onChange')},
-  onDestroy: () => {console.log('onDestroy')},
 })(Component);

@@ -12,7 +12,7 @@ import styles from './default.module.scss';
 
 class Component extends PureComponent {
   render() {
-    const { handleSubmit, units } = this.props;
+    const { handleSubmit, units, currencies } = this.props;
     return (
       <form className={styles['wrapper']} onSubmit={handleSubmit}>
         <div className={styles['form']}>
@@ -80,7 +80,7 @@ class Component extends PureComponent {
           </Row>
           <Row>
             <Col>
-              <SelectField name="currency" label="Валюта" options={[]} />
+              <SelectField name="currency" label="Валюта" options={currencies} />
             </Col>
           </Row>
           <Row>

@@ -2,12 +2,19 @@
 import request from '@ui.packages/request';
 import { pushNotification } from '@ui.packages/notifications';
 
+import { replace } from 'react-router-redux';
+
 import {
+  resetAction,
   pageInProcessAction,
 
   getUnitsRequestAction,
   getUnitsRequestFailAction,
   getUnitsRequestSuccessAction,
+
+  getCurrenciesRequestAction,
+  getCurrenciesRequestFailAction,
+  getCurrenciesRequestSuccessAction,
 
   getProductRequestAction,
   getProductRequestFailAction,
@@ -19,10 +26,8 @@ import {
 
   createProductRequestAction,
   createProductRequestFailAction,
-  createProductRequestSuccessAction, resetAction,
+  createProductRequestSuccessAction,
 } from './actions';
-
-import { replace } from 'react-router-redux';
 
 
 export const pageInProcess = (status) => (dispatch) => {
@@ -32,6 +37,7 @@ export const pageInProcess = (status) => (dispatch) => {
 export const resetData = () => async (dispatch) => {
   dispatch(resetAction());
 };
+
 
 export const getUnits = () => async (dispatch) => {
   try {
@@ -44,10 +50,28 @@ export const getUnits = () => async (dispatch) => {
     });
 
     dispatch(getUnitsRequestSuccessAction(result));
-
-  } catch(error) {
+  }
+  catch(error) {
 
     dispatch(getUnitsRequestFailAction(error));
+  }
+};
+
+export const getCurrencies = () => async (dispatch) => {
+  try {
+
+    dispatch(getCurrenciesRequestAction());
+
+    const result = await request({
+      method: 'get',
+      url: '/currency'
+    });
+
+    dispatch(getCurrenciesRequestSuccessAction(result));
+  }
+  catch(error) {
+
+    dispatch(getCurrenciesRequestFailAction(error));
   }
 };
 
@@ -68,29 +92,29 @@ export const getProductById = (id) => async dispatch => {
     });
 
     const product = result['data'];
+
     const resultData = {
       ...product,
-      gallery: result['data']['gallery'].map(img => img['id']),
-      attributes: product['attributes'] ? product['attributes'].map(item => {
+      gallery: product['gallery'].map(img => img['id']),
+      attributes: product['attributes'].map(item => {
         return {
           id: item['id'],
           name: item['name'],
           value: item['value'],
           unitId: item['unit'] ? item['unit']['id'] : null,
         };
-      }) : []
+      }),
     };
 
     dispatch(getProductRequestSuccessAction(resultData));
     dispatch(pageInProcess(false));
-
-  } catch(error) {
+  }
+  catch(error) {
 
     dispatch(getProductRequestFailAction(error['message']));
     dispatch(pageInProcess(false));
   }
 };
-
 
 export const updateProductsById = (data) => async dispatch => {
   try {
@@ -135,8 +159,8 @@ export const updateProductsById = (data) => async dispatch => {
 
     dispatch(updateProductRequestSuccessAction(resultData));
     dispatch(pushNotification({ content: 'Товар успешно обновлен' }));
-
-  } catch(error) {
+  }
+  catch(error) {
 
     dispatch(updateProductRequestFailAction());
     dispatch(pushNotification({
@@ -161,9 +185,13 @@ export const createProduct = (data) => async dispatch => {
     });
 
     Object.keys(data).forEach(key => {
-      if (key !== 'gallery' && key !== 'attributes') {
+      if (key === 'currency') {
+        formData.append('currencyId', data[key]['id']);
+      }
+      else if (key !== 'gallery' && key !== 'attributes') {
         formData.append(key, data[key]);
-      } else if (key === 'attributes') {
+      }
+      else if (key === 'attributes') {
         formData.append(key, JSON.stringify(data[key]));
       }
     });
@@ -188,7 +216,7 @@ export const createProduct = (data) => async dispatch => {
     };
 
     dispatch(createProductRequestSuccessAction(resultData));
-    dispatch(replace('/products'));
+    dispatch(replace('/'));
 
   } catch(error) {
 

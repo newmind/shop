@@ -44,7 +44,7 @@ export const getProducts = (params) => async dispatch => {
     if (params['page']) {
       dispatch(setNextPageAction(Number(params['page'])));
     }
-    dispatch(getProductsRequestSuccess(result['data']));
+    dispatch(getProductsRequestSuccess(result));
   }
   catch(error) {
     dispatch(getProductsRequestFail(error));
@@ -61,7 +61,7 @@ export const getDataForFilter = () => async dispatch => {
       url: '/products/additional-data'
     });
 
-    dispatch(getAdditionalDataRequestSuccessAction(result));
+    dispatch(getAdditionalDataRequestSuccessAction(result['data']));
 
   } catch (error) {
 

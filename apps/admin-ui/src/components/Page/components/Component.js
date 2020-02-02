@@ -19,7 +19,7 @@ class Component extends PureComponent {
     const { children, inProcess } = this.props;
     return (
       <div className={styles['page']}>
-        <div className={styles['page__content']}>{ children }</div>
+        <div id="root" className={styles['page__content']}>{ children }</div>
         {inProcess && (
           <div className={styles['loading']}>
             <span className={styles['spinner']}>Загрузка...</span>

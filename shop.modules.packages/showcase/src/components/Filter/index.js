@@ -35,6 +35,8 @@ const mapStateToProps = (state, props) => {
     initialValues: query,
     categories: Showcase['categories'],
     brands: Showcase['brands'],
+    colors: Showcase['colors'],
+    forms: Showcase['forms'],
     inProcess: Showcase['inProcess'],
     isValid: isValid('filter-showcase-ui')(state),
     isPristine: isPristine('filter-showcase-ui')(state),

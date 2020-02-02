@@ -26,54 +26,58 @@ const saveFiles = (files, { productId }, { transaction }) => {
 };
 
 export default () => async (ctx) => {
+  try {
+    const { files, fields } = await getFiles(ctx.req);
+    const { Attribute, Product, Gallery } = models;
 
-  const { files, fields } = await getFiles(ctx.req);
-  const { Attribute, Product, Gallery } = models;
+    const product = await sequelize.transaction(async (transaction) => {
 
-  const product = await sequelize.transaction(async (transaction) => {
+      const { id } = await models['Product'].create(fields, { transaction });
 
-    const { id } = await models['Product'].create(fields, { transaction });
+      const { attributes = null } = fields;
 
-    const { attributes = null } = fields;
+      if (attributes) {
 
-    if (attributes) {
+        const attributes = [...JSON.parse(fields['attributes'])]
+          .map(item => {
+            item['productId'] = id;
+            return item;
+          });
 
-      const attributes = [...JSON.parse(fields['attributes'])]
-        .map(item => {
-          item['productId'] = id;
-          return item;
-        });
+        await Attribute.bulkCreate(attributes, { transaction });
+      }
 
-      await Attribute.bulkCreate(attributes, { transaction });
-    }
+      if (Object.keys(files).length) {
+        await saveFiles(files, { productId: id }, { transaction });
+      }
 
-    if (Object.keys(files).length) {
-      await saveFiles(files, { productId: id }, { transaction });
-    }
+      return Product.findOne({
+        where: { id },
+        attributes: ['id', 'name', 'brand', 'description', 'status'],
+        include: [
+          {
+            model: Attribute,
+            required: false,
+            as: 'attributes',
+            attributes: ['id', 'name'],
+          },
+          {
+            model: Gallery,
+            required: false,
+            as: 'gallery',
+            attributes: ['id'],
+          },
+        ], transaction });
+    });
 
-    return Product.findOne({
-      where: { id },
-      attributes: ['id', 'name', 'brand', 'description', 'status'],
-      include: [
-        {
-          model: Attribute,
-          required: false,
-          as: 'attributes',
-          attributes: ['id', 'name'],
-        },
-        {
-          model: Gallery,
-          required: false,
-          as: 'gallery',
-          attributes: ['id'],
-        },
-      ], transaction });
-  });
+    sendEvent(process.env['RABBIT_PRODUCT_PROXY_EXCHANGE_PRODUCT_CREATED'], JSON.stringify(product));
 
-  sendEvent(process.env['RABBIT_PRODUCT_PROXY_EXCHANGE_PRODUCT_CREATED'], JSON.stringify(product));
-
-  ctx.body = {
-    success: true,
-    data: product,
-  };
+    ctx.body = {
+      success: true,
+      data: product,
+    };
+  }
+  catch (e) {
+    console.log(e)
+  }
 };
