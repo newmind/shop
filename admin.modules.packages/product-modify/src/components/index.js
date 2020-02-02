@@ -10,6 +10,7 @@ import {
   resetData,
   getUnits,
   getCurrencies,
+  getCategories,
   getProductById,
   updateProductsById,
   createProduct,
@@ -31,6 +32,7 @@ const mapStateToProps = state => {
     isPristine: isFormPristine,
     units: Product['units'],
     currencies: Product['currencies'],
+    categories: Product['categories'],
     product: Product['product'],
     isError: Product['isError'],
   };
@@ -42,6 +44,7 @@ const mapActionsToProps = (dispatch) => {
     reset: bindActionCreators(reset, dispatch),
     getUnits: bindActionCreators(getUnits, dispatch),
     getCurrencies: bindActionCreators(getCurrencies, dispatch),
+    getCategories: bindActionCreators(getCategories, dispatch),
     getProductById: bindActionCreators(getProductById, dispatch),
     updateProductsById: bindActionCreators(updateProductsById, dispatch),
     createProduct: bindActionCreators(createProduct, dispatch),
@@ -53,12 +56,15 @@ const mapActionsToProps = (dispatch) => {
 export default PageHOC({
   mapStateToProps,
   mapActionsToProps,
-  onEnter: async ({ getProductById, getUnits, getCurrencies, match: { params: { id }}, pageInProcess }) => {
+  onEnter: async ({ getProductById, getUnits, getCurrencies, getCategories, match: { params: { id }}, pageInProcess }) => {
+
     if (id) {
       await getProductById(id);
     }
     await getUnits();
     await getCurrencies();
+    await getCategories();
+
     pageInProcess(false);
   },
   onDestroy: ({ resetData }) => {

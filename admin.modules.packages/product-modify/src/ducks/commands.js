@@ -12,6 +12,10 @@ import {
   getUnitsRequestFailAction,
   getUnitsRequestSuccessAction,
 
+  getCategoriesRequestAction,
+  getCategoriesRequestFailAction,
+  getCategoriesRequestSuccessAction,
+
   getCurrenciesRequestAction,
   getCurrenciesRequestFailAction,
   getCurrenciesRequestSuccessAction,
@@ -75,8 +79,26 @@ export const getCurrencies = () => async (dispatch) => {
   }
 };
 
+export const getCategories = () => async (dispatch) => {
+  try {
 
-export const getProductById = (id) => async dispatch => {
+    dispatch(getCategoriesRequestAction());
+
+    const result = await request({
+      method: 'get',
+      url: '/category'
+    });
+
+    dispatch(getCategoriesRequestSuccessAction(result));
+  }
+  catch(error) {
+
+    dispatch(getCategoriesRequestFailAction(error));
+  }
+};
+
+
+export const getProductById = (id) => async (dispatch) => {
   try {
 
     if ( ! id) {
@@ -116,7 +138,7 @@ export const getProductById = (id) => async dispatch => {
   }
 };
 
-export const updateProductsById = (data) => async dispatch => {
+export const updateProductsById = (data) => async (dispatch) => {
   try {
 
     dispatch(updateProductRequestAction());
@@ -125,16 +147,22 @@ export const updateProductsById = (data) => async dispatch => {
 
     (data['gallery'] || []).forEach((file, index) => {
       if (file.constructor === File) {
-
         formData.append(`file-${index}`, file);
       }
     });
 
-    Object.keys(data).forEach(key => {
-      if (key !== 'gallery' && key !== 'attributes') {
-        formData.append(key, data[key]);
-      } else if (key === 'attributes') {
+    Object.keys(data).forEach((key) => {
+      if (key === 'attributes') {
         formData.append(key, JSON.stringify(data[key]));
+      }
+      else if (key === 'category') {
+        formData.append('categoryId', data[key] ? data[key]['id'] : null);
+      }
+      else if (key === 'currency') {
+        formData.append('currencyId', data[key] ? data[key]['id'] : null);
+      }
+      else if (key !== 'gallery') {
+        formData.append(key, data[key]);
       }
     });
 

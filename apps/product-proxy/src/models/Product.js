@@ -20,7 +20,7 @@ module.exports = (db, DataType) => {
     },
     currencyId: {
       type: DataType.INTEGER,
-      allowNull: false,
+      allowNull: true,
     },
     brand: {
       type: DataType.STRING(255),
@@ -70,7 +70,7 @@ module.exports = (db, DataType) => {
       allowNull: false,
       defaultValue: 0,
       get() {
-        const amount = this.getDataValue('amount');
+        const amount = this.getDataValue('saleAmount');
         return Number(amount)
       },
     },

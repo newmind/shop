@@ -18,6 +18,7 @@ class Component extends PureComponent {
     name: types.string,
     amount: types.number,
     onRemove: types.func,
+    closeCart: types.func,
     removeProduct: types.func,
   };
 
@@ -30,7 +31,7 @@ class Component extends PureComponent {
   };
 
   render() {
-    const { id, gallery, brand, name, amount, currency, onRemove } = this.props;
+    const { id, gallery, brand, name, amount, currency, onRemove, closeCart } = this.props;
     const classNameRemoveProduct = cn(styles['remove'], 'far fa-trash-alt');
     return (
       <div className={styles['item']}>
@@ -40,7 +41,7 @@ class Component extends PureComponent {
         <div className={styles['item__description']}>
           <div className={styles['item__names']}>
             <span className={styles['item__brand']}>
-              <Link className={styles['item__brand-link']} to={process.env['PUBLIC_URL'] + `/products/${id}`}>{ brand }</Link>
+              <Link className={styles['item__brand-link']} to={process.env['PUBLIC_URL'] + `/products/${id}`} onClick={closeCart}>{ brand }</Link>
             </span>
             <p className={styles['item__name']}>{ name }</p>
           </div>

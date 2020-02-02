@@ -79,13 +79,10 @@ export default (state = initialState, { type, payload }) => {
       return {
         ...state,
         items: state['items'].map(product => {
-          if (product['product']['id'] === payload['id']) {
+          if (product['id'] === payload['id']) {
             return {
               ...product,
-              product: {
-                ...product['product'],
-                ...payload,
-              }
+              ...payload,
             };
           }
           return product;

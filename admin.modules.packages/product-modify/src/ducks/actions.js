@@ -8,6 +8,10 @@ import {
   GET_UNITS_REQUEST_FAIL,
   GET_UNITS_REQUEST_SUCCESS,
 
+  GET_CATEGORIES_REQUEST,
+  GET_CATEGORIES_REQUEST_FAIL,
+  GET_CATEGORIES_REQUEST_SUCCESS,
+
   GET_CURRENCIES_REQUEST,
   GET_CURRENCIES_REQUEST_FAIL,
   GET_CURRENCIES_REQUEST_SUCCESS,
@@ -47,6 +51,19 @@ export const getUnitsRequestFailAction = () => ({
 export const getUnitsRequestSuccessAction = (data) => {
   return {
     type: GET_UNITS_REQUEST_SUCCESS,
+    payload: data,
+  }
+};
+
+export const getCategoriesRequestAction = () => ({
+  type: GET_CATEGORIES_REQUEST,
+});
+export const getCategoriesRequestFailAction = () => ({
+  type: GET_CATEGORIES_REQUEST_FAIL,
+});
+export const getCategoriesRequestSuccessAction = (data) => {
+  return {
+    type: GET_CATEGORIES_REQUEST_SUCCESS,
     payload: data,
   }
 };

@@ -2,7 +2,7 @@
 import types from 'prop-types';
 import React, { PureComponent } from 'react';
 
-import { SelectField, InputField, Row, Col, Button, CheckBoxField } from '@ui.packages/ui';
+import { SelectField, InputField, Row, Col, Button } from '@ui.packages/ui';
 
 import styles from './default.module.scss';
 
@@ -28,6 +28,13 @@ const FormOption = (option) => (
   </span>
 );
 
+const MaterialOption = (option) => (
+  <span className={styles['option']}>
+    <span className={styles['option__title']}>{option['material']}</span>
+    <span className={styles['option__count']}>{option['count']}</span>
+  </span>
+);
+
 
 class Component extends PureComponent {
   static propTypes = {
@@ -48,7 +55,7 @@ class Component extends PureComponent {
   }
 
   render() {
-    const { handleSubmit, categories, brands, colors, forms, isValid, inProcess } = this.props;
+    const { handleSubmit, categories, brands, colors, forms, materials, isValid, inProcess } = this.props;
     return (
       <form onSubmit={handleSubmit} className={styles['wrapper']}>
         <div className={styles['fields']}>
@@ -67,22 +74,25 @@ class Component extends PureComponent {
               <SelectField
                 placeholder="Цвет"
                 name="color"
-                options={colors}
+                optionKey="color"
                 optionValue="color"
+                options={colors}
                 simple={true}
                 optionTemplate={ColorOption}
                 disabled={inProcess}
               />
             </Col>
             <Col>
-              <div className={styles['amount']}>
-                <span className={styles['amount__label']}>Сумма</span>
-                <span className={styles['amount__wrapper']}>
-                  <InputField className={styles['amount__input']} name="amountFrom" disabled={inProcess} />
-                  <span className={styles['amount__delimiter']}>-</span>
-                  <InputField className={styles['amount__input']} name="amountTo" disabled={inProcess} />
-                </span>
-              </div>
+              <SelectField
+                placeholder="Материал"
+                name="material"
+                optionKey="material"
+                optionValue="material"
+                options={materials}
+                simple={true}
+                optionTemplate={MaterialOption}
+                disabled={inProcess}
+              />
             </Col>
           </Row>
           <Row>
@@ -101,7 +111,9 @@ class Component extends PureComponent {
             <Col className={styles['amounts']}>
               <SelectField
                 placeholder="Форма"
-                name="color"
+                name="form"
+                optionKey="form"
+                optionValue="form"
                 options={forms}
                 simple={true}
                 optionTemplate={FormOption}
@@ -110,8 +122,19 @@ class Component extends PureComponent {
             </Col>
             <Col className={styles['align-centered']}>
               <Row>
-                <Col><CheckBoxField label="Новинки" name="new" disabled={inProcess} /></Col>
-                <Col><CheckBoxField label="Со скидкой" name="sale" disabled={inProcess} /></Col>
+                <Col>
+                  {/*<Col className={styles['amounts']}>*/}
+                  <div className={styles['amount']}>
+                    <span className={styles['amount__label']}>Сумма</span>
+                    <span className={styles['amount__wrapper']}>
+                      <InputField className={styles['amount__input']} name="amountFrom" disabled={inProcess} />
+                      <span className={styles['amount__delimiter']}>-</span>
+                      <InputField className={styles['amount__input']} name="amountTo" disabled={inProcess} />
+                    </span>
+                  </div>
+                </Col>
+                {/*<Col><CheckBoxField label="Новинки" name="new" disabled={inProcess} /></Col>*/}
+                {/*<Col><CheckBoxField label="Со скидкой" name="sale" disabled={inProcess} /></Col>*/}
               </Row>
             </Col>
           </Row>

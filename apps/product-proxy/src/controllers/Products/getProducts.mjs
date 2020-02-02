@@ -10,11 +10,11 @@ export default () => async (ctx) => {
     let options = {};
 
     const { Op } = Sequelize;
-    const { Product, Attribute, Units, Gallery, Currency, Comment } = models;
+    const { Product, Attribute, Units, Gallery, Currency, Category, Comment } = models;
     const {
       status = null, limit = null, skip = null, take = null,
       id = null, categoryId = null, brand = null, amountFrom = null,
-      amountTo = null, color = null, form = null,
+      amountTo = null, color = null, form = null, material = null,
     } = ctx['request']['query'];
 
     if (status) {
@@ -41,6 +41,10 @@ export default () => async (ctx) => {
       where['form'] = form;
     }
 
+    if (material) {
+      where['material'] = material;
+    }
+
     if (amountFrom && ! amountTo) {
       where['amount'] = {
         [Op.gte]: amountFrom
@@ -65,18 +69,19 @@ export default () => async (ctx) => {
     }
 
     const products = await Product.findAndCountAll({
-      attributes: ['id', 'brand', 'name', 'color', 'material', 'form', 'description', 'status', 'amount', 'count', 'isHit', 'isSale', 'createdAt'],
-      // order: [
-      //   ['id', 'asc'],
-      //   ['createdAt', 'asc'],
-      //   ['gallery', 'id', 'asc']
-      // ],
+      attributes: ['id', 'brand', 'name', 'color', 'material', 'form', 'description', 'status', 'amount', 'saleAmount', 'count', 'isHit', 'isSale', 'createdAt'],
       distinct: true,
       subQuery: false,
       ...options,
       ...offset,
       where: { ...where },
       include: [
+        {
+          model: Category,
+          required: false,
+          as: 'category',
+          attributes: ['id', 'name']
+        },
         {
           model: Currency,
           required: false,
@@ -121,6 +126,8 @@ export default () => async (ctx) => {
     };
   }
   catch (error) {
-    console.log(error);
+
+    ctx.status = 500;
+    ctx.body = { success: false, error: { code: '500', message: error['message'] }};
   }
 };

@@ -11,6 +11,7 @@ export default () => async (ctx) => {
     const { data: forms } = await request(`${PRODUCT_API_SRV}/forms`);
     const { data: colors } = await request(`${PRODUCT_API_SRV}/colors`);
     const { data: brands } = await request(`${PRODUCT_API_SRV}/brands`);
+    const { data: materials } = await request(`${PRODUCT_API_SRV}/materials`);
     const { data: categories } = await request(`${PRODUCT_API_SRV}/category`);
 
     ctx.body = {
@@ -19,6 +20,7 @@ export default () => async (ctx) => {
         forms: [...forms['data']],
         colors: [...colors['data']],
         brands: [...brands['data']],
+        materials: [...materials['data']],
         categories: [...categories['data']],
       },
     };

@@ -1,15 +1,15 @@
 
+import { queryToObject } from "@ui.packages/utils";
+
 import { bindActionCreators } from 'redux';
 import { reduxForm, reset, submit, isValid, isPristine } from 'redux-form';
 import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 
-import { queryToObject } from "@ui.packages/utils";
-
 import Component from './Component';
 
 
-const validate = values => {
+const validate = (values) => {
   const errors = {};
 
   if (values['amountFrom']) {
@@ -37,6 +37,7 @@ const mapStateToProps = (state, props) => {
     brands: Showcase['brands'],
     colors: Showcase['colors'],
     forms: Showcase['forms'],
+    materials: Showcase['materials'],
     inProcess: Showcase['inProcess'],
     isValid: isValid('filter-showcase-ui')(state),
     isPristine: isPristine('filter-showcase-ui')(state),
@@ -55,7 +56,7 @@ export default withRouter(connect(
   mapStateToProps,
   mapActionsToProps
 )(reduxForm({
-  form: 'filter-showcase-ui',
+  form: 'showcase-filter',
   destroyOnUnmount: false,
   validate,
 })(Component)));

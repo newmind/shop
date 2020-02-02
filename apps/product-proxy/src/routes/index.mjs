@@ -12,6 +12,7 @@ import {
   getForms,
   getBrands,
   getColors,
+  getMaterials,
   getProducts,
   createProduct,
   deleteProductById,
@@ -72,6 +73,7 @@ export default (router) => {
   router.get('/v1/api/brands', getBrands());
   router.get('/v1/api/colors', getColors());
   router.get('/v1/api/forms', getForms());
+  router.get('/v1/api/materials', getMaterials());
 
   router.get('/v1/api/category', getAllCategories());
   router.post('/v1/api/category', createCategory());

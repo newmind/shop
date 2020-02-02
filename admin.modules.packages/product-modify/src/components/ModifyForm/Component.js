@@ -12,7 +12,7 @@ import styles from './default.module.scss';
 
 class Component extends PureComponent {
   render() {
-    const { handleSubmit, units, currencies } = this.props;
+    const { handleSubmit, units, currencies, categories } = this.props;
     return (
       <form className={styles['wrapper']} onSubmit={handleSubmit}>
         <div className={styles['form']}>
@@ -30,6 +30,17 @@ class Component extends PureComponent {
           <Row>
             <Col>
               <h3 className="header-3">Основные аттрибуты</h3>
+            </Col>
+          </Row>
+          <Row>
+            <Col>
+              <SelectField
+                name="category"
+                label="Категория"
+                options={categories}
+                optionKey="id"
+                optionValue="name"
+              />
             </Col>
           </Row>
           <Row>
@@ -75,12 +86,18 @@ class Component extends PureComponent {
           </Row>
           <Row>
             <Col>
-              <InputField name="amountSale" label="Цена со скидкой" />
+              <InputField name="saleAmount" label="Цена со скидкой" />
             </Col>
           </Row>
           <Row>
             <Col>
-              <SelectField name="currency" label="Валюта" options={currencies} />
+              <SelectField
+                name="currency"
+                label="Валюта"
+                options={currencies}
+                optionKey="id"
+                optionValue="value"
+              />
             </Col>
           </Row>
           <Row>

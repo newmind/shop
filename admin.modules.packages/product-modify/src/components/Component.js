@@ -50,7 +50,7 @@ class Component extends PureComponent {
   }
 
   render() {
-    const { isError, hasId, isInvalid, isPristine, product, currencies, units } = this.props;
+    const { isError, hasId, isInvalid, isPristine, product, currencies, units, categories } = this.props;
     return (isError
       ? (
         <p>Error</p>
@@ -59,7 +59,7 @@ class Component extends PureComponent {
         <Container className={styles['form']}>
           <Row>
             <Col>
-              <ModifyForm initialValues={product} units={units} currencies={currencies} onSubmit={this._handleSubmitProduct.bind(this)} />
+              <ModifyForm initialValues={product} units={units} currencies={currencies} categories={categories} onSubmit={this._handleSubmitProduct.bind(this)} />
             </Col>
           </Row>
           <Row>
