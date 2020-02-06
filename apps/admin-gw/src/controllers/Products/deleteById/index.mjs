@@ -1,6 +1,6 @@
 'use strict';
 
-import { deleteById } from '../../requests/Product/index';
+import { deleteById } from '../../../requests/Product/index';
 
 
 export default () => async (ctx) => {
