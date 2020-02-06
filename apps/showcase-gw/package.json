@@ -7,16 +7,16 @@
     "start:dev": "nodemon --exec node -r dotenv/config --experimental-modules ./src/index.mjs dotenv_config_path=./.env.development"
   },
   "dependencies": {
-    "@sys.packages/db": "^1.0.0",
-    "@sys.packages/rabbit": "^1.0.0",
-    "@sys.packages/server": "^1.0.0",
-    "@sys.packages/socket.io": "^1.0.0",
-    "@sys.packages/sys.utils": "^1.0.0",
-    "axios": "^0.19.1",
-    "dotenv": "^8.2.0",
-    "koa-cors2": "^0.0.1"
+    "@sys.packages/db": "1.0.0",
+    "@sys.packages/rabbit": "1.0.0",
+    "@sys.packages/server": "1.0.0",
+    "@sys.packages/socket.io": "1.0.0",
+    "@sys.packages/sys.utils": "1.0.0",
+    "axios": "0.19.2",
+    "dotenv": "8.2.0",
+    "koa-cors2": "0.0.1"
   },
   "devDependencies": {
-    "nodemon": "^2.0.2"
+    "nodemon": "2.0.2"
   }
 }

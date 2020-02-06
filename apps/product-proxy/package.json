@@ -11,17 +11,17 @@
     "start:dev": "nodemon --exec node -r dotenv/config --experimental-modules ./src/index.mjs dotenv_config_path=./.env.development"
   },
   "dependencies": {
-    "@sys.packages/db": "^1.0.0",
-    "@sys.packages/rabbit": "^1.0.0",
-    "@sys.packages/server": "^1.0.0",
-    "@sys.packages/socket.io": "^1.0.0",
-    "@sys.packages/sys.utils": "^1.0.0",
-    "busboy": "^0.3.1",
-    "dotenv": "^8.2.0"
+    "@sys.packages/db": "1.0.0",
+    "@sys.packages/rabbit": "1.0.0",
+    "@sys.packages/server": "1.0.0",
+    "@sys.packages/socket.io": "1.0.0",
+    "@sys.packages/sys.utils": "1.0.0",
+    "busboy": "0.3.1",
+    "dotenv": "8.2.0"
   },
   "devDependencies": {
-    "cross-env": "^6.0.3",
-    "nodemon": "^2.0.2",
-    "sequelize-cli": "^5.5.1"
+    "cross-env": "7.0.0",
+    "nodemon": "2.0.2",
+    "sequelize-cli": "5.5.1"
   }
 }

@@ -74,6 +74,7 @@ export default () => async (ctx) => {
       subQuery: false,
       ...options,
       ...offset,
+      order: [['id', 'asc']],
       where: { ...where },
       include: [
         {

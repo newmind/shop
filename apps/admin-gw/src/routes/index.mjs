@@ -2,15 +2,6 @@
 
 import { addImages, getImageByFileName } from '../controllers/Gallery';
 import { getProducts, getProductById,  createProduct, updateProduct, deleteProductById } from '../controllers/Products';
-import { getProducts as getStockProducts, create as createStockProduct, deleteProductById as deleteStockProductById, updateProduct as updateStockProductById } from '../controllers/Stock';
-
-import {
-  getAll as getSubProducts,
-  getById as getSubProductById,
-  create as createSubProduct,
-  updateById as updateSubProductById,
-  deleteById as deleteSubProductById
-} from '../controllers/SubProducts';
 
 import {
   getAll as getCurrencies,
@@ -50,11 +41,6 @@ import {
 
 export default (router) => {
 
-  router.get('/stock/products', getStockProducts());
-  router.post('/stock/products', createStockProduct());
-  router.put('/stock/products/:productId', updateStockProductById());
-  router.delete('/stock/products/:productId', deleteStockProductById());
-
   router.get('/products', getProducts());
   router.get('/products/:productId', getProductById());
   router.post('/products', createProduct());
@@ -65,12 +51,6 @@ export default (router) => {
   router.get('/operations/:operationId', getOperationById());
   router.post('/operations', createOperation());
   router.put('/operations/:operationId', updateOperationById());
-
-  router.get('/sub-products', getSubProducts());
-  router.post('/sub-products', createSubProduct());
-  router.get('/sub-products/:productId', getSubProductById());
-  router.put('/sub-products/:productId', updateSubProductById());
-  router.delete('/sub-products/:productId', deleteSubProductById());
 
   router.get('/gallery/:fileName', getImageByFileName());
   router.post('/gallery', addImages());

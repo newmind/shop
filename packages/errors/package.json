@@ -1,6 +1,5 @@
 {
   "name": "@packages/errors",
   "version": "1.0.0",
-  "main": "src/index.mjs",
-  "dependencies": {}
+  "main": "./src/index.mjs"
 }

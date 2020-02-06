@@ -4,6 +4,6 @@
   "private": true,
   "main": "./src/index.js",
   "dependencies": {
-    "numeral": "^2.0.6"
+    "numeral": "2.0.6"
   }
 }

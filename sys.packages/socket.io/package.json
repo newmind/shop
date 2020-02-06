@@ -3,6 +3,6 @@
   "version": "1.0.0",
   "main": "src/index.mjs",
   "dependencies": {
-    "socket.io": "^2.3.0"
+    "socket.io": "2.3.0"
   }
 }

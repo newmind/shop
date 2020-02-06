@@ -79,10 +79,10 @@ class Component extends PureComponent {
                 {
                   title: 'Основное',
                   template: ({ name, brand, description }) => (
-                    <div className={styles['common']}>
-                      {name && <p>{ name }</p>}
-                      {brand && <p>{ brand }</p>}
-                      {description && <p>{ description }</p>}
+                    <div className={styles['description']}>
+                      {brand && <div className={styles['description__item']}><b className={styles['description__label']}>Бренд:</b> { brand }</div>}
+                      {name && <div className={styles['description__item']}><b className={styles['description__label']}>Название:</b> { name }</div>}
+                      {description && <div className={styles['description__item']}><b className={styles['description__label']}>Описание:</b> { description }</div>}
                     </div>
                   ),
                 },
@@ -102,8 +102,9 @@ class Component extends PureComponent {
                   alias: 'attributes',
                   title: 'Аттрибуты',
                   template: (attrs) => {
-                    return !! attrs.length ? (
+                    return (
                       <ul className={styles['attributes']}>
+                        { ! attrs.length && <li className={styles['attributes__item']}>Нет данных</li>}
                         {attrs.map((attr, index) => (
                           <li key={index} className={styles['attributes__item']}>
                             <span className={styles['attributes__name']}>{ attr['name'] }:</span>
@@ -112,7 +113,7 @@ class Component extends PureComponent {
                           </li>
                         ))}
                       </ul>
-                    ) : 'нет данных';
+                    );
                   },
                 },
                 {

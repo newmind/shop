@@ -11,23 +11,23 @@
     "start:dev": "npx yarn run migration:dev && nodemon --exec node -r dotenv/config --experimental-modules ./src/index.mjs dotenv_config_path=./.env.development"
   },
   "dependencies": {
-    "@packages/errors": "^1.0.0",
-    "@sys.packages/db": "^1.0.0",
-    "@sys.packages/server": "^1.0.0",
-    "@sys.packages/sys.utils": "^1.0.0",
-    "dotenv": "^8.2.0",
-    "jsonwebtoken": "^8.5.1",
-    "koa": "^2.11.0",
-    "koa-bodyparser": "^4.2.1",
-    "koa-logger": "^3.2.1",
-    "koa-router": "^7.4.0",
-    "pg": "^7.17.1",
-    "pg-hstore": "^2.3.3",
-    "sequelize": "^5.21.3"
+    "@packages/errors": "1.0.0",
+    "@sys.packages/db": "1.0.0",
+    "@sys.packages/server": "1.0.0",
+    "@sys.packages/sys.utils": "1.0.0",
+    "dotenv": "8.2.0",
+    "jsonwebtoken": "8.5.1",
+    "koa": "2.11.0",
+    "koa-bodyparser": "4.2.1",
+    "koa-logger": "3.2.1",
+    "koa-router": "8.0.7",
+    "pg": "7.18.1",
+    "pg-hstore": "2.3.3",
+    "sequelize": "5.21.3"
   },
   "devDependencies": {
-    "cross-env": "^6.0.3",
-    "nodemon": "^2.0.2",
-    "sequelize-cli": "^5.5.1"
+    "cross-env": "7.0.0",
+    "nodemon": "2.0.2",
+    "sequelize-cli": "5.5.1"
   }
 }
