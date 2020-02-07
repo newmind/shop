@@ -1,7 +1,7 @@
 
 import types from 'prop-types';
 import React, { PureComponent } from 'react';
-import { Route, Switch } from "react-router";
+import { Route, Switch } from "react-router-dom";
 
 import { sleep } from '@ui.packages/utils';
 import { Notifications } from '@ui.packages/notifications';
@@ -22,17 +22,32 @@ const Routes = props => {
             exact
             key={index}
             path={route['path']}
-            render={props => (
-              <Module
-                navigate={navigate}
-                removable={route['removable']}
-                wrapper={route['wrapper']}
-                module={route['module']}
-                {...props}
-              />
-            )}
-          />
+          >
+            <Module
+              navigate={navigate}
+              removable={route['removable']}
+              wrapper={route['wrapper']}
+              module={route['module']}
+              {...props}
+            />
+          </Route>
         );
+        // return (
+        //   <Route
+        //     exact
+        //     key={index}
+        //     path={route['path']}
+        //     render={props => (
+        //       <Module
+        //         navigate={navigate}
+        //         removable={route['removable']}
+        //         wrapper={route['wrapper']}
+        //         module={route['module']}
+        //         {...props}
+        //       />
+        //     )}
+        //   />
+        // );
       })}
       <Route path="*" render={(props) => (
         <Module
