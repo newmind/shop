@@ -36,12 +36,10 @@ cd ../../admin.modules.packages || return
 cd ./categories && npx yarn build
 cd ../currencies && npx yarn build
 cd ../not-found && npx yarn build
-cd ../not-found && npx yarn build
 cd ../orders && npx yarn build
 cd ../product-modify && npx yarn build
 cd ../products && npx yarn build
 cd ../profile && npx yarn build
-cd ../stock && npx yarn build
 cd ../units && npx yarn build
 
 exit 0
