@@ -65,12 +65,12 @@ class Component extends PureComponent {
   }
 
   _handleRemoveFromCart() {
-    const { id, removeProduct } = this.props;
-    removeProduct(id);
+    const { uuid, removeProduct } = this.props;
+    removeProduct(uuid);
   }
 
   render() {
-    const { id, field, index, name, brand, gallery, amount, currency, type, recipe, lens, errors } = this.props;
+    const { uuid, field, index, name, brand, gallery, amount, currency, type, recipe, lens, errors } = this.props;
 
     const hasRecipe = !! Object.keys(recipe).length;
     const hasLens = !! Object.keys(lens).length;
@@ -99,7 +99,7 @@ class Component extends PureComponent {
         <div className={styles['content']}>
           <span className={removeFromCartClassName} onClick={this._handleRemoveFromCart.bind(this)} />
           <h3 className={styles['product__brand']}>
-            <Link className={styles['product__brand-link']} to={process.env['PUBLIC_URL'] + `/products/${id}`}>{brand}</Link>
+            <Link className={styles['product__brand-link']} to={process.env['PUBLIC_URL'] + `/products/${uuid}`}>{brand}</Link>
           </h3>
           <p className={styles['product__name']}>{name}</p>
           <div className={styles['details']}>

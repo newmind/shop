@@ -3,6 +3,10 @@ import {
   SIGN_OUT,
   RESET,
 
+  GET_TYPES_REQUEST,
+  GET_TYPES_REQUEST_FAIL,
+  GET_TYPES_REQUEST_SUCCESS,
+
   GET_UNITS_REQUEST,
   GET_UNITS_REQUEST_FAIL,
   GET_UNITS_REQUEST_SUCCESS,
@@ -10,6 +14,18 @@ import {
   GET_CATEGORIES_REQUEST,
   GET_CATEGORIES_REQUEST_FAIL,
   GET_CATEGORIES_REQUEST_SUCCESS,
+
+  GET_COLORS_REQUEST,
+  GET_COLORS_REQUEST_FAIL,
+  GET_COLORS_REQUEST_SUCCESS,
+
+  GET_MATERIALS_REQUEST,
+  GET_MATERIALS_REQUEST_FAIL,
+  GET_MATERIALS_REQUEST_SUCCESS,
+
+  GET_FORMS_REQUEST,
+  GET_FORMS_REQUEST_FAIL,
+  GET_FORMS_REQUEST_SUCCESS,
 
   GET_CURRENCIES_REQUEST,
   GET_CURRENCIES_REQUEST_FAIL,
@@ -27,14 +43,20 @@ import {
   CREATE_PRODUCT_REQUEST_FAIL,
   CREATE_PRODUCT_REQUEST_SUCCESS,
 
-  SOCKET_PRODUCT_UPDATED,
+  DELETE_IMAGES_REQUEST,
+  DELETE_IMAGES_REQUEST_FAIL,
+  DELETE_IMAGES_REQUEST_SUCCESS,
 } from './types';
 
 
 const initialState = {
+  types: [],
   units: [],
   currencies: [],
   categories: [],
+  colors: [],
+  materials: [],
+  forms: [],
   product: {},
   inProcess: false,
   isError: false,
@@ -47,6 +69,20 @@ export default (state = { ...initialState }, { type, payload }) => {
       ...initialState,
     };
 
+    case GET_TYPES_REQUEST: return {
+      ...state,
+    };
+    case GET_TYPES_REQUEST_FAIL: return {
+      ...state,
+    };
+    case GET_TYPES_REQUEST_SUCCESS: return {
+      ...state,
+      types: [
+        ...state['types'],
+        ...payload,
+      ],
+    };
+
     case GET_UNITS_REQUEST: return {
       ...state,
     };
@@ -57,7 +93,7 @@ export default (state = { ...initialState }, { type, payload }) => {
       ...state,
       units: [
         ...state['units'],
-        ...payload['items'],
+        ...payload,
       ],
     };
 
@@ -71,7 +107,49 @@ export default (state = { ...initialState }, { type, payload }) => {
       ...state,
       categories: [
         ...state['categories'],
-        ...payload['items'],
+        ...payload,
+      ],
+    };
+
+    case GET_COLORS_REQUEST: return {
+      ...state,
+    };
+    case GET_COLORS_REQUEST_FAIL: return {
+      ...state,
+    };
+    case GET_COLORS_REQUEST_SUCCESS: return {
+      ...state,
+      colors: [
+        ...state['colors'],
+        ...payload,
+      ],
+    };
+
+    case GET_MATERIALS_REQUEST: return {
+      ...state,
+    };
+    case GET_MATERIALS_REQUEST_FAIL: return {
+      ...state,
+    };
+    case GET_MATERIALS_REQUEST_SUCCESS: return {
+      ...state,
+      materials: [
+        ...state['materials'],
+        ...payload,
+      ],
+    };
+
+    case GET_FORMS_REQUEST: return {
+      ...state,
+    };
+    case GET_FORMS_REQUEST_FAIL: return {
+      ...state,
+    };
+    case GET_FORMS_REQUEST_SUCCESS: return {
+      ...state,
+      forms: [
+        ...state['forms'],
+        ...payload,
       ],
     };
 
@@ -85,7 +163,7 @@ export default (state = { ...initialState }, { type, payload }) => {
       ...state,
       currencies: [
         ...state['currencies'],
-        ...payload['items'],
+        ...payload,
       ],
     };
 
@@ -131,14 +209,22 @@ export default (state = { ...initialState }, { type, payload }) => {
       inProcess: false,
     };
 
-    case SOCKET_PRODUCT_UPDATED: {
+    case DELETE_IMAGES_REQUEST: return {
+      ...state,
+      inProcess: true,
+    };
+    case DELETE_IMAGES_REQUEST_FAIL: return {
+      ...state,
+      inProcess: false,
+    };
+    case DELETE_IMAGES_REQUEST_SUCCESS: {
       return {
         ...state,
         product: {
           ...state['product'],
-          ...payload,
-          gallery: payload['gallery'].map(img => img['id'])
+          gallery: state['product']['gallery'].filter((item) => (payload.indexOf(item) === -1)),
         },
+        inProcess: false,
       };
     }
 

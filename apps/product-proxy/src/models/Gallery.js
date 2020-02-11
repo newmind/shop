@@ -9,6 +9,9 @@ module.exports = (db, DataType) => {
       autoIncrement: true,
       index: true,
     },
+    productId: {
+      type: DataType.INTEGER,
+    },
     file: {
       type: DataType.BLOB,
     }

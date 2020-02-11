@@ -11,6 +11,10 @@ const validate = (values) => {
     errors['brand'] = 'Неоходимо заполнить';
   }
 
+  if ( ! values['type']) {
+    errors['type'] = 'Неоходимо заполнить';
+  }
+
   if ( ! values['description']) {
     errors['description'] = 'Неоходимо заполнить';
   }

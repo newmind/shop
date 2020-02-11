@@ -1,0 +1,33 @@
+
+@import "~@ui.packages/theme";
+
+
+.col {
+
+  background: transparent;
+  vertical-align: top;
+
+  //&:first-child .content {
+  //  margin-left: 0;
+  //}
+  //
+  //&:last-child .content {
+  //  margin-right: 0;
+  //}
+}
+
+.content {
+
+  display: block;
+  margin: 16px 8px 14px;
+  text-align: center;
+  font-size: 12px;
+
+  &--left {
+    text-align: left;
+  }
+
+  &--right {
+    text-align: right;
+  }
+}

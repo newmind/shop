@@ -1,0 +1,17 @@
+
+@import "~@ui.packages/theme";
+
+
+.row {
+
+  & + & {
+    background: transparent;
+    border-top: 1px solid $pale-grey-three;
+  }
+}
+
+.line {
+
+  padding: 0;
+  background: transparent;
+}

@@ -1,0 +1,32 @@
+
+@import "~@ui.packages/theme";
+
+
+.block {
+
+  display: inline-block;
+}
+
+.action {
+
+  display: inline-block;
+  font-size: 14px;
+  cursor: pointer;
+  transition: color 200ms;
+
+  &--edit {
+    color: $gray-color;
+
+    &:hover {
+      color: $success;
+    }
+  }
+
+  &--delete {
+    color: $gray-color;
+
+    &:hover {
+      color: $danger;
+    }
+  }
+}

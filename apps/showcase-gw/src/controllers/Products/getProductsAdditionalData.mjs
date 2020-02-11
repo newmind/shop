@@ -8,11 +8,31 @@ const PRODUCT_API_SRV = process.env['PRODUCT_API_SRV'];
 export default () => async (ctx) => {
   try {
 
-    const { data: forms } = await request(`${PRODUCT_API_SRV}/forms`);
-    const { data: colors } = await request(`${PRODUCT_API_SRV}/colors`);
-    const { data: brands } = await request(`${PRODUCT_API_SRV}/brands`);
-    const { data: materials } = await request(`${PRODUCT_API_SRV}/materials`);
-    const { data: categories } = await request(`${PRODUCT_API_SRV}/category`);
+    const { data: forms } = await request({
+      url: `${PRODUCT_API_SRV}/products/forms`,
+      method: 'get',
+      params: ctx['request']['query'],
+    });
+    const { data: colors } = await request({
+      url: `${PRODUCT_API_SRV}/products/colors`,
+      method: 'get',
+      params: ctx['request']['query'],
+    });
+    const { data: brands } = await request({
+      url: `${PRODUCT_API_SRV}/products/brands`,
+      method: 'get',
+      params: ctx['request']['query'],
+    });
+    const { data: materials } = await request({
+      url: `${PRODUCT_API_SRV}/products/materials`,
+      method: 'get',
+      params: ctx['request']['query'],
+    });
+    const { data: categories } = await request({
+      url: `${PRODUCT_API_SRV}/products/categories`,
+      method: 'get',
+      params: ctx['request']['query'],
+    });
 
     ctx.body = {
       success: true,
@@ -26,6 +46,8 @@ export default () => async (ctx) => {
     };
   }
   catch(error) {
+
+    console.log(error)
 
     ctx.status = 500;
     ctx.body = { success: false, error: { code: '500', message: error['message'] }};

@@ -7,13 +7,13 @@ const PRODUCT_API_SRV = process.env['PRODUCT_API_SRV'];
 
 export default () => async (ctx) => {
   try {
-    const { productId } = ctx['params'];
+    const { uuid } = ctx['params'];
 
     const { data } = await request({
       method: 'get',
       url: `${PRODUCT_API_SRV}/products`,
       params: {
-        id: productId,
+        uuid,
         status: 1,
       }
     });
@@ -23,7 +23,7 @@ export default () => async (ctx) => {
     if ( ! product) {
 
       ctx.static = 404;
-      return ctx.body = {};
+      return ctx.body = { code: '404', message: 'Продукт не найден' };
     }
 
     ctx.body = {

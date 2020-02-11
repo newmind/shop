@@ -1,7 +1,7 @@
 'use strict';
 
 export { default as getProducts } from './getAll';
-export { default as getProductById } from './getById';
+export { default as getProduct } from './getById';
 export { default as createProduct } from './create';
-export { default as updateProduct } from './updateById';
-export { default as deleteProductById } from './deleteById';
+export { default as updateProduct } from './update';
+export { default as deleteProducts } from './delete';

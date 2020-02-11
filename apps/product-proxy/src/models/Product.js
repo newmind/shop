@@ -10,17 +10,10 @@ module.exports = (db, DataType) => {
       index: true,
     },
     uuid: {
-      type: DataType.STRING,
+      type: DataType.STRING(9),
+      allowNull: false,
       index: true,
-    },
-    categoryId: {
-      type: DataType.INTEGER,
-      allowNull: true,
-      index: true,
-    },
-    currencyId: {
-      type: DataType.INTEGER,
-      allowNull: true,
+      unique: true,
     },
     brand: {
       type: DataType.STRING(255),
@@ -32,18 +25,32 @@ module.exports = (db, DataType) => {
       allowNull: true,
       index: true,
     },
-    color: {
-      type: DataType.STRING(255),
+    typeId: {
+      type: DataType.INTEGER,
+      allowNull: false,
+      index: true,
+    },
+    categoryId: {
+      type: DataType.INTEGER,
       allowNull: true,
       index: true,
     },
-    material: {
-      type: DataType.STRING(255),
+    currencyId: {
+      type: DataType.INTEGER,
+      allowNull: false,
+    },
+    colorId: {
+      type: DataType.INTEGER,
       allowNull: true,
       index: true,
     },
-    form: {
-      type: DataType.STRING(255),
+    materialId: {
+      type: DataType.INTEGER,
+      allowNull: true,
+      index: true,
+    },
+    formId: {
+      type: DataType.INTEGER,
       allowNull: true,
       index: true,
     },
@@ -67,11 +74,11 @@ module.exports = (db, DataType) => {
     },
     saleAmount: {
       type: DataType.DECIMAL(10, 2),
-      allowNull: false,
+      allowNull: true,
       defaultValue: 0,
       get() {
         const amount = this.getDataValue('saleAmount');
-        return Number(amount)
+        return amount ? Number(amount) : '';
       },
     },
     count: {
@@ -89,7 +96,7 @@ module.exports = (db, DataType) => {
     },
   });
 
-  Product.associate = function({ Attribute, Gallery, Category, Currency, Comment }) {
+  Product.associate = function({ Attribute, Gallery, Category, Type, Material, Form, Color, Currency, Comment }) {
 
 
     Product.belongsTo(Currency, {
@@ -100,6 +107,26 @@ module.exports = (db, DataType) => {
     Product.belongsTo(Category, {
       foreignKey: 'categoryId',
       as: 'category',
+    });
+
+    Product.belongsTo(Material, {
+      foreignKey: 'materialId',
+      as: 'material',
+    });
+
+    Product.belongsTo(Color, {
+      foreignKey: 'colorId',
+      as: 'color',
+    });
+
+    Product.belongsTo(Form, {
+      foreignKey: 'formId',
+      as: 'form',
+    });
+
+    Product.belongsTo(Type, {
+      foreignKey: 'typeId',
+      as: 'type',
     });
 
     Product.hasMany(Attribute, {

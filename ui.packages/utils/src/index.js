@@ -14,6 +14,15 @@ export const UUID = () => {
   return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g,(c,r)=>('x'===c?(r=Math.random()*16|0):(r&0x3|0x8)).toString(16));
 };
 
+export const uniqName = () => {
+  const letters = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'K', 'L', 'M', 'N', 'W', 'X', 'Y', 'Z'];
+  const firstLetter = letters[Math.round(Math.random() * (letters.length - 1))];
+  const secondLetter = letters[Math.round(Math.random() * (letters.length - 1))];
+  const number = String(Date.now()).slice(-6);
+
+  return `${firstLetter}${secondLetter}-${number}`;
+};
+
 export const sleep = async (time) => {
   return new Promise(resolve => setTimeout(resolve, time));
 };

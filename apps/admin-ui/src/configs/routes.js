@@ -33,11 +33,11 @@ export default [
     ),
   },
   {
-    path: '/categories',
-    wrapper: 'Composite',
+    path: '/attributes',
+    wrapper: 'Navigate',
     module: import(
       /* webpackChunkName: "categories" */
-      '@modules.packages/categories'
+      '@modules.packages/attributes'
     ),
   },
   {

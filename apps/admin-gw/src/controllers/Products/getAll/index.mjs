@@ -1,6 +1,9 @@
 'use strict';
 
-import { get } from '../../../requests/Product';
+import request from '@sys.packages/request';
+
+
+const PRODUCT_API_SRV = process.env['PRODUCT_API_SRV'];
 
 
 export default () => async (ctx) => {
@@ -11,20 +14,30 @@ export default () => async (ctx) => {
     if (status) {
       filter['status'] = status;
     }
-    const { data } = await get(filter);
+
+    const { data, meta } = await request({
+      method: 'get',
+      url: PRODUCT_API_SRV + '/products',
+      params: filter,
+    });
 
     ctx.body = {
       success: true,
       data: data,
-      paging: {
-        page: 0,
-        pages: data['counts'],
+      meta: {
+        total: meta['total'],
       },
     };
   }
   catch(error) {
 
     ctx.status = 500;
-    ctx.body = { success: false, error: { code: '500', message: error['message'] }};
+    ctx.body = {
+      success: false,
+      error: {
+        code: '500',
+        message: error['message']
+      }
+    };
   }
 }

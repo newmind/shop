@@ -12,7 +12,7 @@ import styles from "./defaults.module.scss";
 
 class Component extends PureComponent {
   static propTypes = {
-    id: types.number,
+    uuid: types.string,
     gallery: types.array,
     brand: types.string,
     name: types.string,
@@ -23,7 +23,7 @@ class Component extends PureComponent {
   };
 
   static defaultProps = {
-    id: null,
+    uuid: null,
     gallery: [],
     brand: '',
     name: '',
@@ -31,7 +31,7 @@ class Component extends PureComponent {
   };
 
   render() {
-    const { id, gallery, brand, name, amount, currency, onRemove, closeCart } = this.props;
+    const { uuid, gallery, brand, name, amount, currency, onRemove, closeCart } = this.props;
     const classNameRemoveProduct = cn(styles['remove'], 'far fa-trash-alt');
     return (
       <div className={styles['item']}>
@@ -41,7 +41,7 @@ class Component extends PureComponent {
         <div className={styles['item__description']}>
           <div className={styles['item__names']}>
             <span className={styles['item__brand']}>
-              <Link className={styles['item__brand-link']} to={process.env['PUBLIC_URL'] + `/products/${id}`} onClick={closeCart}>{ brand }</Link>
+              <Link className={styles['item__brand-link']} to={process.env['PUBLIC_URL'] + `/products/${uuid}`} onClick={closeCart}>{ brand }</Link>
             </span>
             <p className={styles['item__name']}>{ name }</p>
           </div>
@@ -50,7 +50,7 @@ class Component extends PureComponent {
           </div>
         </div>
         <div className={styles['item__controls']}>
-          <span className={classNameRemoveProduct} onClick={onRemove.bind(this, id)} />
+          <span className={classNameRemoveProduct} onClick={onRemove.bind(this, uuid)} />
         </div>
       </div>
     );

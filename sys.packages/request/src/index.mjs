@@ -70,24 +70,17 @@ const request = async (options) => {
     ...options,
   };
 
-  let headers = {};
-
-  if (options['headers']) {
-    headers = options['headers'];
-  }
-
   const instance = axios.create({
+    ...options,
     timeout: 24000,
-    headers: headers,
-    withCredentials: options['withCredentials'],
   });
 
   instance.interceptors.request.use(requestLogger, errorLogger);
   instance.interceptors.response.use(responseLogger, errorLogger);
 
-  const { data } = await instance(options);
+  const result = await instance(options);
 
-  return data;
+  return result['data'];
 };
 
 export default request;

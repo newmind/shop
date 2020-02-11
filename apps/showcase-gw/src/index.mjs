@@ -1,16 +1,16 @@
-'use strict';
 
-import http from 'http';
-import koaCORS from "koa-cors2";
-
-import createSocket from '@sys.packages/socket.io';
-import appServer, { initRouter } from '@sys.packages/server';
 import {
   connect as createConnection,
   channel as createChannel,
   createConsumer,
   bindQueueToExchange
 } from '@sys.packages/rabbit';
+
+import http from 'http';
+import koaCORS from "koa-cors2";
+
+import createSocket from '@sys.packages/socket.io';
+import appServer, { initRouter } from '@sys.packages/server';
 
 import routes from './routes';
 

@@ -1,15 +1,16 @@
 
+import PageHOC from '@ui.packages/hocs';
+
 import { bindActionCreators } from 'redux';
 import { replace } from 'react-router-redux';
 
-import PageHOC from '@ui.packages/hocs';
-
 import Component from './Component';
 
-import { pushNotification } from '@ui.packages/notifications';
 import { openDialog, closeDialog } from '@ui.packages/dialog';
 
 import {
+  pageInProcess,
+
   getProducts,
   createProducts,
   removeProductById,
@@ -19,12 +20,14 @@ import {
 const mapStateToProps = state => {
   const Products = state['products'];
   return {
-    products: Products['products'],
+    items: Products['items'],
   };
 };
 
 const mapActionsToProps = (dispatch) => {
   return {
+    pageInProcess: bindActionCreators(pageInProcess, dispatch),
+
     openDialog: bindActionCreators(openDialog, dispatch),
     closeDialog: bindActionCreators(closeDialog, dispatch),
 
@@ -39,7 +42,9 @@ const mapActionsToProps = (dispatch) => {
 export default PageHOC({
   mapStateToProps,
   mapActionsToProps,
-  onEnter: ({ getProducts }) => {
-    getProducts();
+  onEnter: async ({ pageInProcess, getProducts }) => {
+    pageInProcess(false);
+    await getProducts();
+    pageInProcess(false);
   },
 })(Component);

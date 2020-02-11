@@ -12,6 +12,9 @@ module.exports = (db, DataType) => {
     productId: {
       type: DataType.INTEGER,
     },
+    unitId: {
+      type: DataType.INTEGER,
+    },
     name: {
       type: DataType.STRING(256),
     },

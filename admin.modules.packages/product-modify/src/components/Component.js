@@ -14,19 +14,25 @@ class Component extends PureComponent {
     hasId: types.bool,
     isInvalid: types.bool,
     isPristine: types.bool,
+    types: types.array,
+    colors: types.array,
     product: types.object,
     units: types.array,
     currencies: types.array,
+    materials: types.array,
     isError: types.bool,
+    submit: types.func,
     createProduct: types.func,
     updateProductsById: types.func,
-    onSubmit: types.func,
   };
 
   static defaultProps = {
     product: {},
+    types: [],
+    colors: [],
     units: [],
     currencies: [],
+    materials: [],
     isError: false,
   };
 
@@ -39,9 +45,14 @@ class Component extends PureComponent {
     }
   }
 
+  _handleDeleteImages(id) {
+    const { deleteImages } = this.props;
+    deleteImages([ id ]);
+  }
+
   _handleSubmit() {
-    const { onSubmit } = this.props;
-    onSubmit('modify-product');
+    const { submit } = this.props;
+    submit('modify-product');
   }
 
   _handleReset() {
@@ -50,7 +61,8 @@ class Component extends PureComponent {
   }
 
   render() {
-    const { isError, hasId, isInvalid, isPristine, product, currencies, units, categories } = this.props;
+    const { isError, hasId, isInvalid, isPristine, product, currencies, units, colors, materials, types, forms, categories } = this.props;
+
     return (isError
       ? (
         <p>Error</p>
@@ -59,7 +71,18 @@ class Component extends PureComponent {
         <Container className={styles['form']}>
           <Row>
             <Col>
-              <ModifyForm initialValues={product} units={units} currencies={currencies} categories={categories} onSubmit={this._handleSubmitProduct.bind(this)} />
+              <ModifyForm
+                types={types}
+                forms={forms}
+                units={units}
+                colors={colors}
+                materials={materials}
+                currencies={currencies}
+                categories={categories}
+                initialValues={product}
+                onDelete={this._handleDeleteImages.bind(this)}
+                onSubmit={this._handleSubmitProduct.bind(this)}
+              />
             </Col>
           </Row>
           <Row>

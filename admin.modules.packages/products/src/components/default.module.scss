@@ -4,7 +4,7 @@
 
 .actions {
 
-  display: block;
+  display: inline-block;
   text-align: center;
   font-size: 0;
 
@@ -51,7 +51,6 @@
   text-align: right;
   color: $dark-color;
   font-size: 0;
-  padding: 10px;
 
   &__value {
 
@@ -71,7 +70,6 @@
 
 .image {
 
-  margin: 20px 0;
   width: 140px;
   height: 105px;
 }
@@ -79,7 +77,6 @@
 .attributes {
 
   display: block;
-  padding: 10px;
 
   &__item {
 
@@ -97,7 +94,7 @@
 
     display: inline-block;
     font-weight: bold;
-    margin: 0 4px 0 0;
+    margin: 0 8px 0 0;
   }
 
   &__value {
@@ -118,7 +115,6 @@
   display: block;
   font-size: 13px;
   line-height: 1.4;
-  padding: 10px;
 
   &__label {
 
@@ -130,7 +126,7 @@
     display: block;
 
     & + & {
-      margin: 4px 0 0;
+      margin: 8px 0 0;
     }
   }
 }

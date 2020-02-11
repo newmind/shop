@@ -3,7 +3,7 @@ import request from '@ui.packages/request';
 import { pushNotification } from '@ui.packages/notifications';
 
 import {
-  pageInProcess,
+  pageInProcessAction,
 
   openDialogAction,
   closeDialogAction,
@@ -22,36 +22,27 @@ import {
 } from './actions';
 
 
-export const openDialog = () => dispatch => {
-  dispatch(openDialogAction());
-};
+export const pageInProcess = (state) => (dispatch) => dispatch(pageInProcessAction(state));
 
-export const closeDialog = () => dispatch => {
-  dispatch(closeDialogAction());
-};
+export const openDialog = () => (dispatch) => dispatch(openDialogAction());
+
+export const closeDialog = () => (dispatch) => dispatch(closeDialogAction());
 
 
-export const getProducts = () => async dispatch => {
-
-  dispatch(pageInProcess(true));
-
+export const getProducts = () => async (dispatch) => {
   try {
-
     dispatch(getProductsRequestAction());
 
     const result = await request({
+      url: '/products',
       method: 'get',
-      url: '/products'
     });
 
-    dispatch(getProductsRequestSuccessAction(result['data']));
-
-  } catch(error) {
-
+    dispatch(getProductsRequestSuccessAction(result));
+  }
+  catch(error) {
     dispatch(getProductsRequestFailAction());
   }
-
-  dispatch(pageInProcess(false));
 };
 
 export const createProducts = (data) => async dispatch => {
@@ -65,7 +56,7 @@ export const createProducts = (data) => async dispatch => {
       data: data,
     });
 
-    dispatch(createProductsRequestSuccessAction(result));
+    dispatch(createProductsRequestSuccessAction(result['data']));
     dispatch(closeDialog());
 
   } catch(error) {
@@ -80,18 +71,17 @@ export const createProducts = (data) => async dispatch => {
 
 export const removeProductById = (id) => async dispatch => {
   try {
-
     dispatch(removeProductsRequestAction());
 
-    const product = await request({
+    const result = await request({
       method: 'delete',
-      url: `/products/${id}`,
+      url: `/products`,
+      data: { id },
     });
 
-    dispatch(removeProductsRequestSuccessAction(product));
-
-  } catch(error) {
-
+    dispatch(removeProductsRequestSuccessAction(result['data']));
+  }
+  catch(error) {
     dispatch(removeProductsRequestFailAction());
   }
 };

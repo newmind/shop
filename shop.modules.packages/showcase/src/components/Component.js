@@ -28,10 +28,9 @@ class Component extends PureComponent {
   };
 
   _handleFilter(formData) {
-    const { getProducts, pushSearch } = this.props;
+    const { pushSearch } = this.props;
     formData['page'] = 1;
     pushSearch({ search: objectToQuery(formData) });
-    getProducts(formData);
   }
 
   _handleCart(product) {
@@ -49,7 +48,6 @@ class Component extends PureComponent {
       query.delete('page');
     }
     pushSearch({ search: query.toString() });
-    getProducts({ page });
   }
 
   render() {

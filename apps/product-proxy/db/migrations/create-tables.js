@@ -75,6 +75,106 @@ module.exports = {
         transaction
       });
 
+      await queryInterface.createTable('Colors', {
+        id: {
+          type: Sequelize.INTEGER,
+          primaryKey: true,
+          autoIncrement: true,
+          index: true,
+        },
+        value: {
+          type: Sequelize.STRING(255),
+          allowNull: false,
+        },
+        description: {
+          type: Sequelize.STRING(1024),
+          defaultValue: ''
+        },
+        createdAt: {
+          type: Sequelize.DATE,
+        },
+        updatedAt: {
+          type: Sequelize.DATE,
+        }
+      }, {
+        transaction
+      });
+
+      await queryInterface.createTable('Materials', {
+        id: {
+          type: Sequelize.INTEGER,
+          primaryKey: true,
+          autoIncrement: true,
+          index: true,
+        },
+        value: {
+          type: Sequelize.STRING(255),
+          allowNull: false,
+        },
+        description: {
+          type: Sequelize.STRING(1024),
+          defaultValue: ''
+        },
+        createdAt: {
+          type: Sequelize.DATE,
+        },
+        updatedAt: {
+          type: Sequelize.DATE,
+        }
+      }, {
+        transaction
+      });
+
+      await queryInterface.createTable('Types', {
+        id: {
+          type: Sequelize.INTEGER,
+          primaryKey: true,
+          autoIncrement: true,
+          index: true,
+        },
+        value: {
+          type: Sequelize.STRING(255),
+          allowNull: false,
+        },
+        description: {
+          type: Sequelize.STRING(1024),
+          defaultValue: ''
+        },
+        createdAt: {
+          type: Sequelize.DATE,
+        },
+        updatedAt: {
+          type: Sequelize.DATE,
+        }
+      }, {
+        transaction
+      });
+
+      await queryInterface.createTable('Forms', {
+        id: {
+          type: Sequelize.INTEGER,
+          primaryKey: true,
+          autoIncrement: true,
+          index: true,
+        },
+        value: {
+          type: Sequelize.STRING(255),
+          allowNull: false,
+        },
+        description: {
+          type: Sequelize.STRING(1024),
+          defaultValue: ''
+        },
+        createdAt: {
+          type: Sequelize.DATE,
+        },
+        updatedAt: {
+          type: Sequelize.DATE,
+        }
+      }, {
+        transaction
+      });
+
       await queryInterface.createTable('Comments', {
         id: {
           type: Sequelize.INTEGER,
@@ -113,7 +213,7 @@ module.exports = {
           autoIncrement: true,
           index: true,
         },
-        name: {
+        value: {
           type: Sequelize.STRING(255),
           allowNull: false,
         },
@@ -140,13 +240,10 @@ module.exports = {
         },
         productId: {
           type: Sequelize.INTEGER,
-          references: {
-            model: {
-              tableName: 'Units',
-              schema: 'schema'
-            },
-            key: 'id'
-          },
+          allowNull: false
+        },
+        unitId: {
+          type: Sequelize.INTEGER,
           allowNull: false
         },
         name: {
@@ -172,14 +269,10 @@ module.exports = {
           autoIncrement: true,
           index: true,
         },
-        categoryId: {
-          type: Sequelize.INTEGER,
-          allowNull: true,
-          index: true,
-        },
-        currencyId: {
-          type: Sequelize.INTEGER,
+        uuid: {
+          type: Sequelize.STRING(9),
           allowNull: false,
+          index: true,
         },
         brand: {
           type: Sequelize.STRING(255),
@@ -191,18 +284,32 @@ module.exports = {
           allowNull: true,
           index: true,
         },
-        color: {
-          type: Sequelize.STRING(255),
+        typeId: {
+          type: Sequelize.INTEGER,
+          allowNull: false,
+          index: true,
+        },
+        categoryId: {
+          type: Sequelize.INTEGER,
           allowNull: true,
           index: true,
         },
-        material: {
-          type: Sequelize.STRING(255),
+        currencyId: {
+          type: Sequelize.INTEGER,
+          allowNull: false,
+        },
+        colorId: {
+          type: Sequelize.INTEGER,
           allowNull: true,
           index: true,
         },
-        form: {
-          type: Sequelize.STRING(255),
+        materialId: {
+          type: Sequelize.INTEGER,
+          allowNull: true,
+          index: true,
+        },
+        formId: {
+          type: Sequelize.INTEGER,
           allowNull: true,
           index: true,
         },
@@ -221,7 +328,7 @@ module.exports = {
         },
         saleAmount: {
           type: Sequelize.DECIMAL(10, 2),
-          allowNull: false,
+          allowNull: true,
         },
         count: {
           type: Sequelize.INTEGER,

@@ -38,7 +38,7 @@ export default () => async (ctx) => {
   catch(error) {
 
     ctx.status = 500;
-    ctx.body = { code: '', message: '' };
+    ctx.body = { code: '500', message: error['message'] };
   }
 };
 

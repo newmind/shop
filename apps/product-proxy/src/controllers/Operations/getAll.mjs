@@ -5,10 +5,17 @@ import { models } from '@sys.packages/db';
 
 export default () => async (ctx) => {
   try {
+    const where = {};
+
     const { Operation, OperationStock, Product, Gallery, Currency } = models;
+    const { externalId } = ctx['request']['query'];
+
+    if (externalId) {
+      where['externalId'] = externalId;
+    }
 
     const operations = await Operation.findAll({
-      where: ctx['query'],
+      where: { ...where },
       attributes: ['externalId', 'address', 'email', 'phone', 'name', 'surname', 'amount', 'pay', 'delivery', 'status', 'createdAt', 'updatedAt'],
       include: [
         {
@@ -50,6 +57,6 @@ export default () => async (ctx) => {
   catch(error) {
 
     ctx.status = 500;
-    ctx.body = { code: '', message: '' };
+    ctx.body = { code: '500', message: error['message'] };
   }
 };

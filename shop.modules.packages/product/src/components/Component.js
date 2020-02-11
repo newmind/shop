@@ -27,7 +27,7 @@ class Component extends PureComponent {
   static defaultProps = {
     cart: [],
     product: {
-      id: null,
+      uuid: null,
       isSale: false,
       isHit: false,
       amount: 0.00,
@@ -56,15 +56,15 @@ class Component extends PureComponent {
 
   async _handleCreateComment(formData) {
     const { closeDialog } = this.props;
-    const { product: { id }, createComment } = this.props;
-    await createComment(id, formData);
+    const { product: { uuid }, createComment } = this.props;
+    await createComment(uuid, formData);
     closeDialog('comment');
   }
 
   render() {
-    const { cart, initialValues, product: { id, gallery, attributes, brand, name, description, comments, amount, currency }} = this.props;
+    const { cart, initialValues, product: { uuid, gallery, attributes, brand, name, description, comments, amount, currency }} = this.props;
 
-    const countInCart = cart.filter(item => item['id'] === id).length;
+    const countInCart = cart.filter(item => item['uuid'] === uuid).length;
 
     return (
       <article className={styles['product']}>
@@ -84,7 +84,7 @@ class Component extends PureComponent {
               <Gallery items={gallery} valueKey="id" path={`${process.env['REACT_APP_API_HOST']}/gallery`} />
             </div>
             <div className={styles['product__commands']}>
-              <span className={styles['product__uuid']}>#{ id }</span>
+              <span className={styles['product__uuid']}>#{ uuid }</span>
               <h3 className={styles['product__brand']}>{ brand }</h3>
               {name && <p className={styles['product__name']}>{ name }</p>}
               <p className={styles['product__amount']}>{ numeral(amount).format() } {currency['value']}</p>

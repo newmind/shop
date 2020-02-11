@@ -1,28 +1,3 @@
-'use strict';
-
-import { addImages, getImageByFileName } from '../controllers/Gallery';
-import { getProducts, getProductById,  createProduct, updateProduct, deleteProductById } from '../controllers/Products';
-
-import {
-  getAll as getCurrencies,
-  create as createCurrency,
-  deleteById as deleteCurrencyById,
-  updateById as updateCurrencyById,
-} from '../controllers/Currency';
-
-import {
-  getAll as getUnits,
-  create as createUnit,
-  deleteById as deleteUnitById,
-  updateById as updateUnitById,
-} from '../controllers/Units';
-
-import {
-  getAll as getAllCategories,
-  create as createCategory,
-  deleteById as deleteCategoryById,
-  updateById as updateCategoryById,
-} from '../controllers/Category';
 
 import {
   signIn,
@@ -38,37 +13,71 @@ import {
   updateById as updateOperationById,
 } from '../controllers/Operatons';
 
+import { getAllTypes, createType, updateType, deleteType } from '../controllers/Types';
+import { getAllForms, createForm, updateForm, deleteForms } from '../controllers/Forms';
+import { getAllUnits, createUnit, updateUnit, deleteUnits } from '../controllers/Units';
+import { getAllColors, createColor, updateColor, deleteColors } from '../controllers/Colors';
+import { getAllMaterials, createMaterial, updateMaterial, deleteMaterials } from '../controllers/Meterials';
+import { getAllCategories, createCategory, updateCategory, deleteCategories } from '../controllers/Category';
+import { getAllCurrencies, createCurrency, updateCurrency, deleteCurrencies } from '../controllers/Currency';
+
+import { getProducts, getProduct,  createProduct, updateProduct, deleteProducts } from '../controllers/Products';
+
+import { getImage, deleteImages } from '../controllers/Gallery';
+
 
 export default (router) => {
 
+  router.get('/types', getAllTypes());
+  router.post('/types', createType());
+  router.put('/types/:id', updateType());
+  router.delete('/types', deleteType());
+
+  router.get('/categories', getAllCategories());
+  router.post('/categories', createCategory());
+  router.put('/categories/:id', updateCategory());
+  router.delete('/categories', deleteCategories());
+
+  router.get('/colors', getAllColors());
+  router.post('/colors', createColor());
+  router.put('/colors/:id', updateColor());
+  router.delete('/colors', deleteColors());
+
+  router.get('/materials', getAllMaterials());
+  router.post('/materials', createMaterial());
+  router.put('/materials/:id', updateMaterial());
+  router.delete('/materials', deleteMaterials());
+
+  router.get('/forms', getAllForms());
+  router.post('/forms', createForm());
+  router.put('/forms/:id', updateForm());
+  router.delete('/forms', deleteForms());
+
+  router.get('/currencies', getAllCurrencies());
+  router.post('/currencies', createCurrency());
+  router.put('/currencies/:id', updateCurrency());
+  router.delete('/currencies', deleteCurrencies());
+
+  router.get('/units', getAllUnits());
+  router.post('/units', createUnit());
+  router.put('/units/:id', updateUnit());
+  router.delete('/units', deleteUnits());
+
   router.get('/products', getProducts());
-  router.get('/products/:productId', getProductById());
+  router.get('/products/:id', getProduct());
   router.post('/products', createProduct());
-  router.put('/products/:productId', updateProduct());
-  router.delete('/products/:productId', deleteProductById());
+  router.put('/products/:id', updateProduct());
+  router.delete('/products', deleteProducts());
 
   router.get('/operations', getOperations());
   router.get('/operations/:operationId', getOperationById());
   router.post('/operations', createOperation());
   router.put('/operations/:operationId', updateOperationById());
 
-  router.get('/gallery/:fileName', getImageByFileName());
-  router.post('/gallery', addImages());
 
-  router.get('/currency', getCurrencies());
-  router.post('/currency', createCurrency());
-  router.put('/currency/:currencyId', updateCurrencyById());
-  router.delete('/currency/:currencyId', deleteCurrencyById());
+  router.get('/gallery/:id', getImage());
+  router.delete('/gallery', deleteImages());
 
-  router.get('/units', getUnits());
-  router.post('/units', createUnit());
-  router.put('/units/:unitId', updateUnitById());
-  router.delete('/units/:unitId', deleteUnitById());
-
-  router.get('/category', getAllCategories());
-  router.post('/category', createCategory());
-  router.put('/category/:categoryId', updateCategoryById());
-  router.delete('/category/:categoryId', deleteCategoryById());
 
   router.post('/sign-in', signIn());
   router.post('/sign-out', signOut());

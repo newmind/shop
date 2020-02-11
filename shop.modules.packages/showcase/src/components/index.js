@@ -46,12 +46,9 @@ export default PageHOC({
       searchParams[key] = value;
     }
 
+    await getDataForFilter(searchParams);
     await getProducts(searchParams);
-    await getDataForFilter();
 
     pageInProcess(false);
   },
-  onDestroy: () => {
-    console.log(123)
-  }
 })(Component);

@@ -19,11 +19,15 @@ import {
   SOCKET_PRODUCT_DELETED,
 } from './types';
 
+
 export const KEY = 'Products';
 
+
 const initialState = {
-  products: [],
+  items: [],
+  meta: {},
 };
+
 
 export default (state = initialState, { type, payload }) => {
   switch (type) {
@@ -37,12 +41,11 @@ export default (state = initialState, { type, payload }) => {
     case GET_PRODUCTS_REQUEST_FAIL: return {
       ...state,
     };
-    case GET_PRODUCTS_REQUEST_SUCCESS: {
-      return {
-        ...state,
-        products: payload,
-      };
-    }
+    case GET_PRODUCTS_REQUEST_SUCCESS: return {
+      ...state,
+      items: payload['data'],
+      meta: payload['meta'],
+    };
 
     case CREATE_PRODUCTS_REQUEST: return {
       ...state,
@@ -50,19 +53,18 @@ export default (state = initialState, { type, payload }) => {
     case CREATE_PRODUCTS_REQUEST_FAIL: return {
       ...state,
     };
-    case SOCKET_PRODUCT_CREATED:
-    case CREATE_PRODUCTS_REQUEST_SUCCESS: {
-      const products = state['products'];
-      if ( ! products.some(item => item['id'] === payload['id'])) {
-        products.unshift(payload);
-      }
-      return {
-        ...state,
-        products: [
-          ...products,
-        ],
-      };
-    }
+    case CREATE_PRODUCTS_REQUEST_SUCCESS: return {
+      ...state,
+      items: [...state['items'], payload].sort((left, right) => {
+        if (left['id'] > right['id']) {
+          return 1;
+        }
+        else if (left['id'] < right['id']) {
+          return -1;
+        }
+        return 0;
+      }),
+    };
 
     case REMOVE_PRODUCT_REQUEST: return {
       ...state,
@@ -70,30 +72,10 @@ export default (state = initialState, { type, payload }) => {
     case REMOVE_PRODUCT_REQUEST_FAIL: return {
       ...state,
     };
-    case SOCKET_PRODUCT_DELETED:
-    case REMOVE_PRODUCT_REQUEST_SUCCESS: {
-      const products = [...state['products']].filter((item) => item['id'] !== payload);
-      return {
-        ...state,
-        products,
-      };
-    }
-
-    case SOCKET_PRODUCT_UPDATED: {
-      const products = state['products']
-        .map(item => {
-          if (item['id'] === payload['id']) {
-            return payload;
-          }
-          return item;
-        });
-      return {
-        ...state,
-        products: [
-          ...products,
-        ],
-      };
-    }
+    case REMOVE_PRODUCT_REQUEST_SUCCESS: return {
+      ...state,
+      items: [...state['items']].filter((item) => (payload.indexOf(item['id']) === -1)),
+    };
 
     default: return { ...state };
   }

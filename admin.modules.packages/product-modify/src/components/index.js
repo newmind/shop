@@ -7,14 +7,20 @@ import PageHOC from '@ui.packages/hocs';
 import Component from './Component';
 
 import {
+  pageInProcess,
+
   resetData,
+  getTypes,
   getUnits,
+  getColors,
   getCurrencies,
   getCategories,
+  getMaterials,
+  getForms,
   getProductById,
   updateProductsById,
   createProduct,
-  pageInProcess
+  deleteImages,
 } from '../ducks/commands';
 
 
@@ -31,6 +37,10 @@ const mapStateToProps = state => {
     isInvalid: isFormInvalid,
     isPristine: isFormPristine,
     units: Product['units'],
+    colors: Product['colors'],
+    forms: Product['forms'],
+    types: Product['types'],
+    materials: Product['materials'],
     currencies: Product['currencies'],
     categories: Product['categories'],
     product: Product['product'],
@@ -38,30 +48,28 @@ const mapStateToProps = state => {
   };
 };
 
-const mapActionsToProps = (dispatch) => {
-  return {
-    resetData: bindActionCreators(resetData, dispatch),
-    reset: bindActionCreators(reset, dispatch),
-    getUnits: bindActionCreators(getUnits, dispatch),
-    getCurrencies: bindActionCreators(getCurrencies, dispatch),
-    getCategories: bindActionCreators(getCategories, dispatch),
-    getProductById: bindActionCreators(getProductById, dispatch),
-    updateProductsById: bindActionCreators(updateProductsById, dispatch),
-    createProduct: bindActionCreators(createProduct, dispatch),
-    onSubmit: bindActionCreators(submit, dispatch),
-    pageInProcess: bindActionCreators(pageInProcess, dispatch),
-  };
-};
+const mapActionsToProps = (dispatch) => bindActionCreators({
+  pageInProcess,
+  reset, submit,
+  resetData,
+  getTypes, getUnits, getCurrencies, getCategories, getMaterials, getColors, getForms, deleteImages,
+  getProductById, updateProductsById, createProduct,
+}, dispatch);
 
 export default PageHOC({
   mapStateToProps,
   mapActionsToProps,
-  onEnter: async ({ getProductById, getUnits, getCurrencies, getCategories, match: { params: { id }}, pageInProcess }) => {
+  onEnter: async ({ getProductById, getUnits, getTypes, getCurrencies, getCategories, getMaterials, getColors, getForms, match: { params: { id }}, pageInProcess }) => {
 
     if (id) {
       await getProductById(id);
     }
+
+    await getTypes();
     await getUnits();
+    await getForms();
+    await getColors();
+    await getMaterials();
     await getCurrencies();
     await getCategories();
 

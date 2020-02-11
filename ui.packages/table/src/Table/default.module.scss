@@ -1,0 +1,17 @@
+
+@import "~@ui.packages/theme";
+
+
+.wrapper {
+
+  background: $white;
+  overflow: hidden;
+}
+
+.table {
+
+  table-layout: fixed;
+  width: 100%;
+  border: none;
+  background: transparent;
+}

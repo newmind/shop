@@ -1,6 +1,6 @@
 'use strict';
 
-export { default as getAll } from './getAll';
-export { default as create } from './create';
-export { default as deleteById } from './deleteById';
-export { default as updateById } from './updateById';
+export { default as getAllUnits } from './getAll';
+export { default as createUnit } from './create';
+export { default as deleteUnits } from './delete';
+export { default as updateUnit } from './update';

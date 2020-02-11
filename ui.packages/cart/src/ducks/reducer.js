@@ -54,7 +54,7 @@ export default (state = initialState, { type, payload }) => {
       };
     }
     case REMOVE_PRODUCT_FROM_CART: {
-      const itemIndex = state['items'].findIndex(item => item['id'] === payload);
+      const itemIndex = state['items'].findIndex(item => item['uuid'] === payload);
       const newItems = [
         ...state['items'].slice(0, itemIndex),
         ...state['items'].slice(itemIndex + 1),
@@ -69,7 +69,7 @@ export default (state = initialState, { type, payload }) => {
     }
     case UPDATE_PRODUCT_IN_CART: {
       const products = state['items'].map(product => {
-        if (product['id'] === payload['id']) {
+        if (product['uuid'] === payload['uuid']) {
           return {
             ...product,
             ...payload,

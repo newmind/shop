@@ -51,20 +51,20 @@ export const getProducts = (params) => async dispatch => {
   }
 };
 
-export const getDataForFilter = () => async dispatch => {
+export const getDataForFilter = (params) => async dispatch => {
   try {
 
     dispatch(getAdditionalDataRequestAction());
 
     const result = await request({
       method: 'get',
-      url: '/products/additional-data'
+      url: '/products/additional-data',
+      params,
     });
 
     dispatch(getAdditionalDataRequestSuccessAction(result['data']));
-
-  } catch (error) {
-
+  }
+  catch (error) {
     dispatch(getAdditionalDataRequestFailAction(error));
   }
 };

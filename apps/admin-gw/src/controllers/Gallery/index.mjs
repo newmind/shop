@@ -1,5 +1,4 @@
 'use strict';
 
-export { default as getImageByFileName } from './getImageByFileName';
-export { default as addImages } from './addImages';
-export { default as deleteImageById } from './deleteImageById';
+export { default as getImage } from './get';
+export { default as deleteImages } from './delete';

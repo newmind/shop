@@ -1,8 +1,8 @@
 
+import { Image, Row, Col } from '@ui.packages/ui';
+
 import types from 'prop-types';
 import React, { PureComponent } from 'react';
-
-import { Image, Row, Col } from '@ui.packages/ui';
 
 import cn from 'classnames';
 import styles from './default.module.scss';
@@ -44,7 +44,7 @@ class Component extends PureComponent {
   }
 
   render() {
-    const { input } = this.props;
+    const { input, onDelete } = this.props;
     return (
       <div className={styles['wrapper']}>
         <Row>
@@ -53,11 +53,11 @@ class Component extends PureComponent {
               <span className={styles['add-image']} onClick={this._handleAddImages.bind(this)}>
                 <span className={cn('fas fa-plus', styles['add-image__icon'])}/>
               </span>
-              {(input['value'] || []).map((file, key) => {
+              {(input['value'] || []).map((id, key) => {
                 return (
                   <div key={key} className={styles['image']}>
-                    <span className={cn(styles['remove-image'], 'fas fa-times')} />
-                    <Image src={this._normalizeURI(file)} />
+                    {(id.constructor !== File) && <span className={cn(styles['remove-image'], 'fas fa-times')} onClick={onDelete.bind(this, id)} />}
+                    <Image src={this._normalizeURI(id)} />
                   </div>
                 );
               })}

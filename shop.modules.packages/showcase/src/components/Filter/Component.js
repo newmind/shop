@@ -7,30 +7,9 @@ import { SelectField, InputField, Row, Col, Button } from '@ui.packages/ui';
 import styles from './default.module.scss';
 
 
-const BrandOption = (option) => (
+const Option = (option) => (
   <span className={styles['option']}>
-    <span className={styles['option__title']}>{option['brand']}</span>
-    <span className={styles['option__count']}>{option['count']}</span>
-  </span>
-);
-
-const ColorOption = (option) => (
-  <span className={styles['option']}>
-    <span className={styles['option__title']}>{option['color']}</span>
-    <span className={styles['option__count']}>{option['count']}</span>
-  </span>
-);
-
-const FormOption = (option) => (
-  <span className={styles['option']}>
-    <span className={styles['option__title']}>{option['form']}</span>
-    <span className={styles['option__count']}>{option['count']}</span>
-  </span>
-);
-
-const MaterialOption = (option) => (
-  <span className={styles['option']}>
-    <span className={styles['option__title']}>{option['material']}</span>
+    <span className={styles['option__title']}>{option['value']}</span>
     <span className={styles['option__count']}>{option['count']}</span>
   </span>
 );
@@ -65,32 +44,34 @@ class Component extends PureComponent {
                 placeholder="Категория"
                 name="categoryId"
                 options={categories}
-                optionValue="name"
+                optionKey="id"
+                optionValue="value"
                 simple={true}
+                optionTemplate={Option}
                 disabled={inProcess}
               />
             </Col>
             <Col>
               <SelectField
                 placeholder="Цвет"
-                name="color"
-                optionKey="color"
-                optionValue="color"
+                name="colorId"
+                optionKey="id"
+                optionValue="value"
                 options={colors}
                 simple={true}
-                optionTemplate={ColorOption}
+                optionTemplate={Option}
                 disabled={inProcess}
               />
             </Col>
             <Col>
               <SelectField
                 placeholder="Материал"
-                name="material"
-                optionKey="material"
-                optionValue="material"
+                name="materialId"
+                optionKey="id"
+                optionValue="value"
                 options={materials}
                 simple={true}
-                optionTemplate={MaterialOption}
+                optionTemplate={Option}
                 disabled={inProcess}
               />
             </Col>
@@ -100,23 +81,23 @@ class Component extends PureComponent {
               <SelectField
                 placeholder="Бренд"
                 name="brand"
-                optionKey="brand"
-                optionValue="brand"
+                optionKey="value"
+                optionValue="value"
                 options={brands}
                 simple={true}
-                optionTemplate={BrandOption}
+                optionTemplate={Option}
                 disabled={inProcess}
               />
             </Col>
             <Col className={styles['amounts']}>
               <SelectField
                 placeholder="Форма"
-                name="form"
-                optionKey="form"
-                optionValue="form"
+                name="formId"
+                optionKey="id"
+                optionValue="value"
                 options={forms}
                 simple={true}
-                optionTemplate={FormOption}
+                optionTemplate={Option}
                 disabled={inProcess}
               />
             </Col>

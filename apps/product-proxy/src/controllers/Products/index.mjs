@@ -1,11 +1,11 @@
-'use strict';
 
-export { default as getForms } from './getForms';
-export { default as getBrands } from './getBrands';
-export { default as getColors } from './getColors';
-export { default as getMaterials } from './getMaterials';
+export { default as getProducts } from './getAll';
+export { default as createProduct } from './create';
+export { default as deleteProductById } from './delete';
+export { default as updateProductById } from './update';
 
-export { default as getProducts } from './getProducts';
-export { default as createProduct } from './createProduct';
-export { default as deleteProductById } from './deleteProductById';
-export { default as updateProductById } from './updateProductById';
+export { default as getFormsCount } from './attributes/getForms';
+export { default as getBrandsCount } from './attributes/getBrands';
+export { default as getColorsCount } from './attributes/getColors';
+export { default as getMaterialsCount } from './attributes/getMaterials';
+export { default as getCategoriesCount } from './attributes/getCategories';

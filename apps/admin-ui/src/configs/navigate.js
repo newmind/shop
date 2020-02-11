@@ -6,21 +6,7 @@ export default [
   },
   {
     title: "Аттрибуты",
-    path: '/categories',
-    navigate: [
-      {
-        title: 'Категории',
-        path: '/categories',
-      },
-      {
-        title: 'Единицы измерения',
-        path: '/units',
-      },
-      {
-        title: 'Валюта',
-        path: '/currency',
-      }
-    ]
+    path: '/attributes',
   },
   {
     title: "Заказы",

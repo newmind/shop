@@ -9,7 +9,7 @@ module.exports = (db, DataType) => {
       autoIncrement: true,
       index: true,
     },
-    name: {
+    value: {
       type: DataType.STRING(255),
       allowNull: false,
     },
@@ -19,7 +19,13 @@ module.exports = (db, DataType) => {
     }
   });
 
-  Category.associate = () => {};
+  Category.associate = ({ Product }) => {
+
+    Category.hasMany(Product, {
+      foreignKey: 'categoryId',
+      as: 'product',
+    });
+  };
 
   return Category;
 };
