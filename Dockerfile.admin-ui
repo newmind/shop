@@ -21,6 +21,10 @@ COPY ./yarn.lock                     .
 RUN yarn
 
 # BUILD COMPONENTS
+WORKDIR /app/ui.packages/table
+RUN ["yarn", "run", "build"]
+
+# BUILD COMPONENTS
 WORKDIR /app/ui.packages/dialog
 RUN ["yarn", "run", "build"]
 
