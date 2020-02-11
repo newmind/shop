@@ -37,6 +37,9 @@ module.exports = {
           autoIncrement: true,
           index: true,
         },
+        productId: {
+          type: Sequelize.INTEGER,
+        },
         file: {
           type: Sequelize.BLOB,
         },
