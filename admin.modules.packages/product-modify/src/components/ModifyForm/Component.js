@@ -126,6 +126,22 @@ class Component extends PureComponent {
           <Hr className={styles['delimiter']} />
           <Row>
             <Col>
+              <h3 className="header-3">Дополнительно</h3>
+            </Col>
+          </Row>
+          <Row>
+            <Col>
+              <SelectField
+                label="Дополнительные данные"
+                simple
+                options={[{ id: 'further', value: 'Рецепт' }]}
+                name="params"
+              />
+            </Col>
+          </Row>
+          <Hr className={styles['delimiter']} />
+          <Row>
+            <Col>
               <h3 className="header-3">Склад</h3>
             </Col>
           </Row>

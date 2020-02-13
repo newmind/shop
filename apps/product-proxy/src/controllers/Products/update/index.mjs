@@ -39,6 +39,7 @@ export default () => async (ctx) => {
     await Attribute.destroy({ where: { productId: id }}, { transaction });
 
     const attributes = [...JSON.parse(fields['attributes'])].map(item => {
+      delete item['id'];
       item['productId'] = id;
       item['unitId'] < 0 && delete item['unitId'];
       return item;
@@ -67,7 +68,7 @@ export default () => async (ctx) => {
 
     const product = await Product.findOne({
       where: { id },
-      attributes: ['id', 'uuid', 'brand', 'name', 'description', 'status', 'amount', 'saleAmount', 'count', 'isHit', 'isSale', 'createdAt'],
+      attributes: ['id', 'uuid', 'brand', 'name', 'description', 'status', 'amount', 'saleAmount', 'count', 'params', 'isHit', 'isSale', 'createdAt'],
       include: [
         {
           model: Category,

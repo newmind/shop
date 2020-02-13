@@ -38,6 +38,7 @@ class Component extends PureComponent {
 
   _handleSubmitProduct(formData) {
     const { updateProductsById, createProduct } = this.props;
+
     if (formData['id']) {
       updateProductsById(formData);
     } else {

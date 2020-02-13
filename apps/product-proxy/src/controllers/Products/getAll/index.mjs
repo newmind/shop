@@ -12,7 +12,7 @@ export default () => async (ctx) => {
     const { Product, Attribute, Units, Gallery, Currency, Category, Type, Color, Material, Form, Comment } = models;
     const {
       status = null, limit = null, skip = null, take = null,
-      id = null, categoryId = null, brand = null, amountFrom = null,
+      uuid = null, id = null, categoryId = null, brand = null, amountFrom = null,
       amountTo = null, colorId = null, formId = null, materialId = null,
     } = ctx['request']['query'];
 
@@ -22,6 +22,10 @@ export default () => async (ctx) => {
 
     if (id) {
       where['id'] = id;
+    }
+
+    if (uuid) {
+      where['uuid'] = uuid;
     }
 
     if (categoryId) {
@@ -68,12 +72,11 @@ export default () => async (ctx) => {
     }
 
     const products = await Product.findAndCountAll({
-      attributes: ['uuid', 'brand', 'name', 'description', 'status', 'amount', 'saleAmount', 'count', 'isHit', 'isSale', 'createdAt'],
+      attributes: ['id', 'uuid', 'brand', 'name', 'description', 'status', 'amount', 'saleAmount', 'count', 'params', 'isHit', 'isSale', 'createdAt'],
       distinct: true,
       subQuery: false,
       ...options,
       ...offset,
-      order: [['id', 'asc']],
       where: { ...where },
       include: [
         {

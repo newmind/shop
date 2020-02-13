@@ -13,7 +13,7 @@ module.exports = (db, DataType) => {
       type: DataType.STRING(9),
       allowNull: false,
       index: true,
-      unique: true,
+      unique: 'compositeIndex',
     },
     brand: {
       type: DataType.STRING(255),
@@ -85,6 +85,11 @@ module.exports = (db, DataType) => {
       type: DataType.INTEGER,
       allowNull: false,
       defaultValue: 0,
+    },
+    params: {
+      type: DataType.ENUM,
+      values: ['further'],
+      allowNull: true,
     },
     isHit: {
       type: DataType.BOOLEAN,
