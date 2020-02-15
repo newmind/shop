@@ -101,7 +101,7 @@ class Component extends PureComponent {
           <span className={removeFromCartClassName} onClick={this._handleRemoveFromCart.bind(this)} />
           <h3 className={styles['product__brand']}>
             <Link className={styles['product__brand-link']} to={process.env['PUBLIC_URL'] + `/products/${uuid}`}>{brand}</Link>
-            <span className={styles['product__name']}>({name})</span>
+            {name && <span className={styles['product__name']}>({name})</span>}
           </h3>
           {(params === 'further') && (
             <div className={styles['details']}>
