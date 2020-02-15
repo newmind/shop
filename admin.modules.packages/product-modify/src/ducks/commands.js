@@ -181,7 +181,6 @@ export const getForms = () => async (dispatch) => {
 
 export const getProductById = (id) => async (dispatch) => {
   try {
-
     if ( ! id) {
       return;
     }
@@ -221,6 +220,8 @@ export const getProductById = (id) => async (dispatch) => {
 
 export const updateProductsById = (data) => async (dispatch) => {
   try {
+
+    console.log(data);
 
     dispatch(updateProductRequestAction());
 
@@ -309,7 +310,6 @@ export const createProduct = (data) => async dispatch => {
     data['saleAmount'] && formData.append('saleAmount', data['saleAmount']);
     data['category'] && formData.append('categoryId', data['category']['id']);
     data['material'] && formData.append('materialId', data['material']['id']);
-
 
     const result = await request({
       method: 'post',

@@ -70,7 +70,7 @@ class Component extends PureComponent {
   }
 
   render() {
-    const { uuid, field, index, name, brand, gallery, amount, currency, type, recipe, lens, errors } = this.props;
+    const { uuid, field, index, name, brand, gallery, amount, currency, type, recipe, lens, errors, params } = this.props;
 
     const hasRecipe = !! Object.keys(recipe).length;
     const hasLens = !! Object.keys(lens).length;
@@ -81,6 +81,7 @@ class Component extends PureComponent {
     return(
       <div className={styles['product']}>
         <div className={styles['gallery']}>
+          <span className={styles['product__uuid']}># { uuid }</span>
           <div className={styles['gallery__images']}>
             <Gallery items={gallery} valueKey="id" path={`${process.env['REACT_APP_API_HOST']}/gallery`} />
           </div>
@@ -100,36 +101,38 @@ class Component extends PureComponent {
           <span className={removeFromCartClassName} onClick={this._handleRemoveFromCart.bind(this)} />
           <h3 className={styles['product__brand']}>
             <Link className={styles['product__brand-link']} to={process.env['PUBLIC_URL'] + `/products/${uuid}`}>{brand}</Link>
+            <span className={styles['product__name']}>({name})</span>
           </h3>
-          <p className={styles['product__name']}>{name}</p>
-          <div className={styles['details']}>
-            <RadioBoxField name={`${field}.type`}>
-              <Radio className={styles['type']} name="on-prescription" label="Очки по рецепту" />
-              <Radio className={styles['type']} name="image-lenses" label="С имиджевыми линзами" />
-              <Radio className={styles['type']} name="only-rim" label="Только оправа" />
-            </RadioBoxField>
-            <div className={styles['details__content']}>
-              {type === 'only-rim' && <p className={styles['details__info']}>Преобретается только оправа.</p>}
-              {type === 'image-lenses' && <p className={styles['details__info']}>Преобретается оправа с линзами без диоптрий, но с основными защитами.</p>}
-              {type === 'on-prescription' && (
-                <Fragment>
-                  <p className={styles['details__info']}>Преобретается оправа с линзами по рецепту.</p>
-                  <p className={styles['details__info']}>
-                    1. <span className={styles['link']} onClick={this._handlePrescriptionModifyOpenDialog.bind(this)}>{hasRecipe ? 'Изменить' : 'Заполинть'}</span> рецепт.
-                    {hasRecipe && <i className="fas fa-check-circle" />}
-                    {hasItemsErrors && errors['items'][index]['recipe'] && <span className={styles['error']}>[{errors['items'][index]['recipe']}]</span>}
-                  </p>
-                  {hasRecipe && <Recipe {...recipe} />}
-                  <p className={styles['details__info']}>
-                    2. <span className={styles['link']} onClick={this._handleSelectLensesOpenDialog.bind(this)}>{hasLens ? 'Заменить' : 'Выбрать'}</span> линзы.
-                    {hasLens && <i className="fas fa-check-circle" />}
-                    {hasItemsErrors && errors['items'][index]['lens'] && <span className={styles['error']}>[{errors['items'][index]['lens']}]</span>}
-                  </p>
-                  {hasLens && <Lens {...lens} />}
-                </Fragment>
-              )}
+          {(params === 'further') && (
+            <div className={styles['details']}>
+              <RadioBoxField name={`${field}.type`}>
+                <Radio className={styles['type']} name="on-prescription" label="Очки по рецепту" />
+                <Radio className={styles['type']} name="image-lenses" label="С имиджевыми линзами" />
+                <Radio className={styles['type']} name="only-rim" label="Только оправа" />
+              </RadioBoxField>
+              <div className={styles['details__content']}>
+                {type === 'only-rim' && <p className={styles['details__info']}>Преобретается только оправа.</p>}
+                {type === 'image-lenses' && <p className={styles['details__info']}>Преобретается оправа с линзами без диоптрий, но с основными защитами.</p>}
+                {type === 'on-prescription' && (
+                  <Fragment>
+                    <p className={styles['details__info']}>Преобретается оправа с линзами по рецепту.</p>
+                    <p className={styles['details__info']}>
+                      1. <span className={styles['link']} onClick={this._handlePrescriptionModifyOpenDialog.bind(this)}>{hasRecipe ? 'Изменить' : 'Заполинть'}</span> рецепт.
+                      {hasRecipe && <i className="fas fa-check-circle" />}
+                      {hasItemsErrors && errors['items'][index]['recipe'] && <span className={styles['error']}>[{errors['items'][index]['recipe']}]</span>}
+                    </p>
+                    {hasRecipe && <Recipe {...recipe} />}
+                    <p className={styles['details__info']}>
+                      2. <span className={styles['link']} onClick={this._handleSelectLensesOpenDialog.bind(this)}>{hasLens ? 'Заменить' : 'Выбрать'}</span> линзы.
+                      {hasLens && <i className="fas fa-check-circle" />}
+                      {hasItemsErrors && errors['items'][index]['lens'] && <span className={styles['error']}>[{errors['items'][index]['lens']}]</span>}
+                    </p>
+                    {hasLens && <Lens {...lens} />}
+                  </Fragment>
+                )}
+              </div>
             </div>
-          </div>
+          )}
         </div>
         <Field name={`${field}.recipe`} component={() => <Dialog title="Рецепт на изготовление очков" name={`${field}.prescription-modify`}>
           <PrescriptionFormModify value={recipe} onSubmit={this._handlePrescriptionSubmit.bind(this)} />

@@ -26,7 +26,7 @@ export default () => async (ctx) => {
           include: [
             {
               model: Product,
-              attributes: ['id', 'name', 'brand'],
+              attributes: ['uuid', 'name', 'brand', 'params'],
               required: true,
               as: 'product',
               include: [

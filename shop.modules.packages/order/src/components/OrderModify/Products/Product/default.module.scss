@@ -20,6 +20,15 @@
   //  margin: 0 0 40px;
   //}
 
+  &__uuid {
+
+    display: block;
+    font-size: 12px;
+    text-align: center;
+    color: rgba($gray-color, .6);
+    margin: 6px 0 15px;
+  }
+
   &__brand {
 
     display: block;
@@ -37,9 +46,13 @@
 
   &__name {
 
-    display: block;
+    display: inline-block;
     font-size: 14px;
-    color: $dark-color;
+    font-weight: normal;
+    color: $dark-gray-color;
+    margin: 0 0 0 14px;
+    vertical-align: middle;
+    padding: 0 0 2px;
   }
 }
 

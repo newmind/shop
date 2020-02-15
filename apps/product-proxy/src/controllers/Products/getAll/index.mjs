@@ -78,6 +78,7 @@ export default () => async (ctx) => {
       ...options,
       ...offset,
       where: { ...where },
+      order: [['createdAt', 'desc']],
       include: [
         {
           model: Category,

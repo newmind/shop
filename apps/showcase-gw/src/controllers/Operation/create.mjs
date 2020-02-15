@@ -8,10 +8,10 @@ export default () => async (ctx) => {
 
     const items = data['items'].map((item) => {
       return {
-        productId: item['id'],
         type: item['type'],
-        recipe: item['recipe'],
         lens: item['lens'],
+        productId: item['id'],
+        recipe: item['recipe'],
       };
     });
 
@@ -19,15 +19,16 @@ export default () => async (ctx) => {
       url: process.env['PRODUCT_API_SRV'] + '/operations',
       method: 'post',
       data: {
-        delivery: data['delivery'],
-        pay: data['pay'],
-        name: data['name'],
-        surname: data['surname'],
-        phone: data['phone'],
-        email: data['email'],
-        address: data['address'],
         status: 1,
         items: items,
+        pay: data['pay'],
+        name: data['name'],
+        phone: data['phone'],
+        email: data['email'],
+        surname: data['surname'],
+        address: data['address'],
+        delivery: data['delivery'],
+        amount: Number(data['amount']),
       },
     });
 

@@ -34,6 +34,8 @@ export default () => async (ctx) => {
     const { files, fields } = await getFiles(ctx['req']);
     const { Product, Attribute, Units, Gallery, Currency, Category, Type, Color, Material, Form } = models;
 
+    console.log(12345, id);
+
     const transaction = await sequelize.transaction();
 
     await Attribute.destroy({ where: { productId: id }}, { transaction });

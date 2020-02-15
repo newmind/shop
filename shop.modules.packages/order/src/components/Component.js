@@ -51,7 +51,11 @@ class Component extends PureComponent {
 
   _handleSendOrderData(formData) {
     const {createOperation} = this.props;
-    createOperation(formData);
+
+    createOperation({
+      ...formData,
+      amount: calculateFullAmount(formData['items']),
+    });
   }
 
   _handleSubmitOrder() {

@@ -4,12 +4,6 @@ import {
   create as createComment,
 } from '../controllers/Comments';
 
-import {
-  getAll as getAllOperations,
-  create as createOperation,
-  updateById as updateOperationById,
-} from '../controllers/Operations';
-
 import { getAllTypes, createType, updateType, deleteType } from '../controllers/Types';
 import { getAllForms, createForm, updateForm, deleteForms } from '../controllers/Forms';
 import { getAllUnits, createUnit, updateUnit, deleteUnits } from '../controllers/Units';
@@ -17,6 +11,8 @@ import { getAllColors, createColor, updateColor, deleteColor } from '../controll
 import { getAllMaterials, createMaterial, updateMaterial, deleteMaterials } from '../controllers/Materials';
 import { getAllCategories, createCategory, updateCategory, deleteCategories } from '../controllers/Category';
 import { getAllCurrencies, createCurrency, updateCurrency, deleteCurrencies } from '../controllers/Currency';
+
+import { getAllOrders, createOrder, updateOrder } from '../controllers/Operations';
 
 import { getProducts, createProduct, deleteProductById, updateProductById } from '../controllers/Products';
 import { getFormsCount, getBrandsCount, getColorsCount, getMaterialsCount, getCategoriesCount } from '../controllers/Products';
@@ -78,7 +74,7 @@ export default (router) => {
 
   // router.post('/v1/api/products/:productId/comments', createComment());
 
-  router.get('/v1/api/operations', getAllOperations());
-  router.post('/v1/api/operations', createOperation());
-  router.put('/v1/api/operations/:operationId', updateOperationById());
+  router.get('/v1/api/operations', getAllOrders());
+  router.post('/v1/api/operations', createOrder());
+  router.put('/v1/api/operations/:operationId', updateOrder());
 };

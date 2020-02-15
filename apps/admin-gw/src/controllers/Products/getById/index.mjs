@@ -7,13 +7,13 @@ const PRODUCT_API_SRV = process.env['PRODUCT_API_SRV'];
 
 export default () => async (ctx) => {
   try {
-    const { productId } = ctx['params'];
+    const { id } = ctx['params'];
 
     const { data } = await request({
       url: PRODUCT_API_SRV + '/products',
       method: 'get',
       params: {
-        id: productId,
+        id,
       }
     });
 
