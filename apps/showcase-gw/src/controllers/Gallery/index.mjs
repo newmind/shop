@@ -1,3 +1,2 @@
-'use strict';
 
-export { default as getImageByFileName } from './getImageByFileName';
+export { default as getImageByFileName } from './get';

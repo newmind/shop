@@ -1,9 +1,4 @@
 
-
-import {
-  create as createComment,
-} from '../controllers/Comments';
-
 import { getAllTypes, createType, updateType, deleteType } from '../controllers/Types';
 import { getAllForms, createForm, updateForm, deleteForms } from '../controllers/Forms';
 import { getAllUnits, createUnit, updateUnit, deleteUnits } from '../controllers/Units';
@@ -18,6 +13,8 @@ import { getProducts, createProduct, deleteProductById, updateProductById } from
 import { getFormsCount, getBrandsCount, getColorsCount, getMaterialsCount, getCategoriesCount } from '../controllers/Products';
 
 import { getImage, deleteImages } from '../controllers/Gallery';
+
+import { getAllComments, deleteComments, createComment, updateComment } from '../controllers/Comments';
 
 
 export default (router) => {
@@ -68,13 +65,15 @@ export default (router) => {
   router.put('/v1/api/products/:id', updateProductById());
   router.delete('/v1/api/products', deleteProductById());
 
+  router.get('/v1/api/operations', getAllOrders());
+  router.post('/v1/api/operations', createOrder());
+  router.put('/v1/api/operations/:operationId', updateOrder());
 
   router.get('/v1/api/gallery/:id', getImage());
   router.delete('/v1/api/gallery', deleteImages());
 
-  // router.post('/v1/api/products/:productId/comments', createComment());
-
-  router.get('/v1/api/operations', getAllOrders());
-  router.post('/v1/api/operations', createOrder());
-  router.put('/v1/api/operations/:operationId', updateOrder());
+  router.get('/v1/api/comments', getAllComments());
+  router.post('/v1/api/comments', createComment());
+  router.put('/v1/api/comments/:id', updateComment());
+  router.delete('/v1/api/comments', deleteComments());
 };

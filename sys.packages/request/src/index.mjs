@@ -1,4 +1,6 @@
 
+import { NetworkError } from '@packages/errors';
+
 import axios from 'axios';
 
 
@@ -44,7 +46,6 @@ const responseLogger = (response) => {
 };
 
 const errorLogger = (error) => {
-
   const {config: { url, method }, response } = error;
 
   let status = 0;
@@ -59,7 +60,13 @@ const errorLogger = (error) => {
 
   console.log(`[${method.toLocaleUpperCase()}] <--- "${url}" [${status}] (${data})`);
 
-  return Promise.reject(error);
+  if ('errno' in error) {
+    if (error['errno'] === 'ECONNREFUSED') {
+      return Promise.reject(new NetworkError(500, 'Сервис временно недоступен'));
+    }
+  }
+
+  return Promise.reject(new NetworkError(error['status'], error['message']));
 };
 
 

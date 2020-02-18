@@ -33,6 +33,14 @@ export default [
     ),
   },
   {
+    path: '/comments',
+    wrapper: 'Navigate',
+    module: import(
+      /* webpackChunkName: "comments" */
+      '@modules.packages/comments'
+    ),
+  },
+  {
     path: '/attributes',
     wrapper: 'Navigate',
     module: import(

@@ -41,6 +41,10 @@ WORKDIR /app/ui.packages/ui
 RUN ["yarn", "run", "build"]
 
 # BUILD MODULES
+WORKDIR /app/admin.modules.packages/comments
+RUN ["yarn", "run", "build"]
+
+# BUILD MODULES
 WORKDIR /app/admin.modules.packages/attributes
 RUN ["yarn", "run", "build"]
 

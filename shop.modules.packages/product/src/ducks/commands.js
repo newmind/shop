@@ -14,20 +14,17 @@ import {
   createCommentRequestFailAction,
   createCommentRequestSuccessAction,
 } from './actions';
+import {pushNotification} from "@ui.packages/notifications";
 
 
-export const pageInProcess = (status) => (dispatch) => {
-  dispatch(pageInProcessAction(status));
-};
+export const pageInProcess = (status) => (dispatch) => dispatch(pageInProcessAction(status));
 
 
-export const addProductToCart = (product) => (dispatch) => {
-  dispatch(addProductToCartAction(product));
-};
+export const addProductToCart = (product) => (dispatch) => dispatch(addProductToCartAction(product));
+
 
 export const getProductById = (id) => async (dispatch) => {
   try {
-
     dispatch(getProductByIdRequest());
 
     const result = await request({
@@ -48,7 +45,6 @@ export const getProductById = (id) => async (dispatch) => {
 
 export const createComment = (productId, formData) => async dispatch => {
   try {
-
     dispatch(createCommentRequestAction());
 
     const result = await request({
@@ -57,10 +53,14 @@ export const createComment = (productId, formData) => async dispatch => {
       data: formData,
     });
 
-    dispatch(createCommentRequestSuccessAction(result));
-
-  } catch(error) {
+    dispatch(createCommentRequestSuccessAction(result['data']));
+  }
+  catch(error) {
 
     dispatch(createCommentRequestFailAction(error));
+    dispatch(pushNotification({
+      title: 'Ошибка при сохранении комментария',
+      mode: 'danger',
+    }));
   }
 };

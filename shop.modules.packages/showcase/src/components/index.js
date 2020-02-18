@@ -11,7 +11,6 @@ import {
   pageInProcess,
   addProductToCart,
   getProducts,
-  getDataForFilter,
 } from '../ducks/commands';
 
 
@@ -26,7 +25,6 @@ const mapActionsToProps = (dispatch) => ({
 
   pushSearch: bindActionCreators(push, dispatch),
 
-  getDataForFilter: bindActionCreators(getDataForFilter, dispatch),
   getProducts: bindActionCreators(getProducts, dispatch),
   addProductToCart: bindActionCreators(addProductToCart, dispatch),
 });
@@ -35,7 +33,7 @@ const mapActionsToProps = (dispatch) => ({
 export default PageHOC({
   mapStateToProps,
   mapActionsToProps,
-  onEnter: async ({ pageInProcess, getProducts, getDataForFilter, location: { search }}) => {
+  onEnter: async ({ pageInProcess, getProducts, location: { search }}) => {
 
     document.title = `${process.env['REACT_APP_WEBSITE_NAME']} - Витрина`;
 
@@ -46,7 +44,6 @@ export default PageHOC({
       searchParams[key] = value;
     }
 
-    await getDataForFilter(searchParams);
     await getProducts(searchParams);
 
     pageInProcess(false);

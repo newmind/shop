@@ -48,7 +48,7 @@ class Comment extends PureComponent {
         <div className={styles['comment__header']}>
           <div className={styles['comment__wrapper']}>
             <span className={styles['comment__person']}>{ person }</span>
-            <span className={styles['comment__date']}>( { moment(createdAt).format('DD.MM.YYYY') } )</span>
+            <span className={styles['comment__date']}>({ moment(createdAt).format('DD.MM.YYYY HH:mm') })</span>
           </div>
           <div className={styles['comment__evaluation']}>
             <Evaluation mode={mode} size="s" value={ evaluation } />
@@ -74,6 +74,7 @@ class Component extends PureComponent {
 
   render() {
     const { comments } = this.props;
+
     return (
       <div className={styles['comments']}>
         {comments.map((comment, index) => <Comment key={index} {...comment} />)}

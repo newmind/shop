@@ -35,6 +35,7 @@ class Component extends PureComponent {
 
   render() {
     const { handleSubmit, categories, brands, colors, forms, materials, isValid, inProcess } = this.props;
+
     return (
       <form onSubmit={handleSubmit} className={styles['wrapper']}>
         <div className={styles['fields']}>

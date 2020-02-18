@@ -33,6 +33,7 @@ const mapStateToProps = (state, props) => {
   const query = queryToObject(search);
   return {
     initialValues: query,
+    types: Showcase['types'],
     categories: Showcase['categories'],
     brands: Showcase['brands'],
     colors: Showcase['colors'],

@@ -24,6 +24,7 @@ import { getAllCurrencies, createCurrency, updateCurrency, deleteCurrencies } fr
 import { getProducts, getProduct,  createProduct, updateProduct, deleteProducts } from '../controllers/Products';
 
 import { getImage, deleteImages } from '../controllers/Gallery';
+import { getComments, createComment, updateComment, deleteComments } from '../controllers/Comments';
 
 
 export default (router) => {
@@ -73,6 +74,12 @@ export default (router) => {
   router.get('/operations/:operationId', getOperationById());
   router.post('/operations', createOperation());
   router.put('/operations/:operationId', updateOperationById());
+
+
+  router.get('/comments', getComments());
+  router.post('/comments', createComment());
+  router.put('/comments/:id', updateComment());
+  router.delete('/comments', deleteComments());
 
 
   router.get('/gallery/:id', getImage());

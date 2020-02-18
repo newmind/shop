@@ -78,14 +78,17 @@ class Component extends PureComponent {
                 title="Основное"
                 align="left"
               >
-                {({ uuid, name, brand, description }) => (
-                  <div className={styles['description']}>
-                    {uuid && <div className={styles['description__item']}><b className={styles['description__label']}># </b>{ uuid }</div>}
-                    {brand && <div className={styles['description__item']}><b className={styles['description__label']}>Бренд:</b> { brand }</div>}
-                    {name && <div className={styles['description__item']}><b className={styles['description__label']}>Название:</b> { name }</div>}
-                    {description && <div className={styles['description__item']}><b className={styles['description__label']}>Описание:</b> { description }</div>}
-                  </div>
-                )}
+                {({ uuid, name, brand, description, amount, currency }) => {
+                  return (
+                    <div className={styles['description']}>
+                      {uuid && <div className={styles['description__item']}><b className={styles['description__label']}># </b>{ uuid }</div>}
+                      {brand && <div className={styles['description__item']}><b className={styles['description__label']}>Бренд:</b> { brand }</div>}
+                      {name && <div className={styles['description__item']}><b className={styles['description__label']}>Название:</b> { name }</div>}
+                      {name && <div className={styles['description__item']}><b className={styles['description__label']}>Цена:</b> { amount } { currency['value'] }</div>}
+                      {description && <div className={styles['description__item']}><b className={styles['description__label']}>Описание:</b> { description }</div>}
+                    </div>
+                  )
+                }}
               </Column>
               <Column
                 title="Описание"

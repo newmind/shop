@@ -12,6 +12,7 @@ export { default as Select } from './symbols/Select';
 export { default as RadioBox, Radio } from './symbols/RadioBox';
 export { default as DatePicker } from './symbols/DatePicker';
 
+export { default as Actions } from './Actions';
 export { default as Gallery } from './Gallery';
 export { default as Breadcrumbs } from './Breadcrumbs';
 

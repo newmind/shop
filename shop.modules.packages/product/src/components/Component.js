@@ -56,8 +56,8 @@ class Component extends PureComponent {
 
   async _handleCreateComment(formData) {
     const { closeDialog } = this.props;
-    const { product: { uuid }, createComment } = this.props;
-    await createComment(uuid, formData);
+    const { product: { id }, createComment } = this.props;
+    await createComment(id, formData);
     closeDialog('comment');
   }
 
@@ -111,7 +111,7 @@ class Component extends PureComponent {
             {attributes.length
               ? (
                 <div className={styles['product__feature']}>
-                  <h4 className={styles['header']}>Харастеристика товара:</h4>
+                  <h4 className={styles['header']}>Характеристика товара:</h4>
                   <div className={styles['product__list']}>
                     <Properties list={attributes} />
                   </div>
@@ -120,7 +120,7 @@ class Component extends PureComponent {
               : null}
             <div className={styles['comments']}>
               <div className={styles['comments__controls']}>
-                <h4 className={styles['comments__header']}>Отзывы о товаре {comments.length ? <span className={styles['comments__count']}>{ comments.length }</span> : null}</h4>
+                <h4 className={styles['comments__header']}>Отзывы о товаре {comments.length ? <span className={styles['comments__count']}>({ comments.length })</span> : null}</h4>
                 <span className={styles['comments__link']} onClick={this._handleOpenCommentDialog.bind(this)}>Оставить отзыв</span>
               </div>
               <div className={styles['comments__content']}>

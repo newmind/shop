@@ -5,18 +5,16 @@ import {
   GET_PRODUCTS_REQUEST,
   GET_PRODUCTS_REQUEST_FAIL,
   GET_PRODUCTS_REQUEST_SUCCESS,
-
-  GET_ADDITIONAL_DATA_REQUEST,
-  GET_ADDITIONAL_DATA_REQUEST_FAIL,
-  GET_ADDITIONAL_DATA_REQUEST_SUCCESS,
-
-  SOCKET_PRODUCT_UPDATED,
-  SOCKET_STOCK_PRODUCT_UPDATED,
 } from './types';
 
 
 const initialState = {
   items: [],
+  types: [],
+  forms: [],
+  brands: [],
+  colors: [],
+  materials: [],
   categories: [],
   meta: {},
   paging: {
@@ -49,44 +47,14 @@ export default (state = initialState, { type, payload }) => {
         ...state,
         items: payload['data'],
         meta: payload['meta'],
+        types: payload['filter']['types'],
+        forms: payload['filter']['forms'],
+        brands: payload['filter']['brands'],
+        colors: payload['filter']['colors'],
+        materials: payload['filter']['materials'],
+        categories: payload['filter']['categories'],
         isInitialize: true,
         inProcess: false,
-      };
-    }
-
-    case GET_ADDITIONAL_DATA_REQUEST: return {
-      ...state,
-    };
-    case GET_ADDITIONAL_DATA_REQUEST_FAIL: return {
-      ...state,
-    };
-    case GET_ADDITIONAL_DATA_REQUEST_SUCCESS: return {
-      ...state,
-      ...payload,
-    };
-
-    case SOCKET_STOCK_PRODUCT_UPDATED: return {
-      ...state,
-      items: state['items'].map(product => {
-        if (product['id'] === payload['id']) {
-          return payload;
-        }
-        return product;
-      }),
-    };
-
-    case SOCKET_PRODUCT_UPDATED: {
-      return {
-        ...state,
-        items: state['items'].map(product => {
-          if (product['id'] === payload['id']) {
-            return {
-              ...product,
-              ...payload,
-            };
-          }
-          return product;
-        }),
       };
     }
 

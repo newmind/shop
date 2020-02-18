@@ -18,6 +18,7 @@
     "@modules.packages/profile": "1.0.0",
     "@modules.packages/sign-in": "1.0.0",
     "@modules.packages/units": "1.0.0",
+    "@modules.packages/comments": "1.0.0",
     "@packages/errors": "1.0.0",
     "@packages/numeral": "1.0.0",
     "@ui.packages/dialog": "1.0.0",

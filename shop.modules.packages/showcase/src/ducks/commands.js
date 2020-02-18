@@ -11,16 +11,10 @@ import {
   getProductsRequest,
   getProductsRequestFail,
   getProductsRequestSuccess,
-
-  getAdditionalDataRequestAction,
-  getAdditionalDataRequestFailAction,
-  getAdditionalDataRequestSuccessAction,
 } from './actions';
 
 
-export const pageInProcess = (status) => (dispatch) => {
-  dispatch(pageInProcessAction(status));
-};
+export const pageInProcess = (status) => (dispatch) => dispatch(pageInProcessAction(status));
 
 
 export const addProductToCart = (product) => dispatch => {
@@ -44,27 +38,11 @@ export const getProducts = (params) => async dispatch => {
     if (params['page']) {
       dispatch(setNextPageAction(Number(params['page'])));
     }
+
     dispatch(getProductsRequestSuccess(result));
   }
   catch(error) {
+
     dispatch(getProductsRequestFail(error));
-  }
-};
-
-export const getDataForFilter = (params) => async dispatch => {
-  try {
-
-    dispatch(getAdditionalDataRequestAction());
-
-    const result = await request({
-      method: 'get',
-      url: '/products/additional-data',
-      params,
-    });
-
-    dispatch(getAdditionalDataRequestSuccessAction(result['data']));
-  }
-  catch (error) {
-    dispatch(getAdditionalDataRequestFailAction(error));
   }
 };
