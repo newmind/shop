@@ -1,13 +1,5 @@
 
 export default [
-  // {
-  //   path: '/',
-  //   wrapper: 'Navigate',
-  //   module: import(
-  //     /* webpackChunkName: "main" */
-  //     '@modules.packages/main'
-  //   ),
-  // },
   {
     // path: '/products',
     path: '/',
@@ -39,14 +31,6 @@ export default [
     module: import(
       /* webpackChunkName: "produce" */
       '@modules.packages/produce'
-    ),
-  },
-  {
-    path: '/corner',
-    wrapper: 'Navigate',
-    module: import(
-      /* webpackChunkName: "corner" */
-      '@modules.packages/corner'
     ),
   },
   {
