@@ -19,14 +19,13 @@ echo 'Сборка модулей для приложения "Shop"'
 echo '------------------------------------'
 
 cd ../../shop.modules.packages || return
-cd ./about && npx yarn build
-cd ../corner && npx yarn build
-cd ../main && npx yarn build
+cd ./details-order && npx yarn build
 cd ../not-found && npx yarn build
-cd ../order && npx yarn build
+cd ../showcase && npx yarn build
 cd ../produce && npx yarn build
 cd ../product && npx yarn build
-cd ../showcase && npx yarn build
+cd ../order && npx yarn build
+cd ../about && npx yarn build
 
 echo ''
 echo 'Сборка модулей для приложения "Shop.Admin"'
