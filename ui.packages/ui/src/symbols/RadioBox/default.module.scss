@@ -16,7 +16,7 @@
 
   display: inline-block;
   font-size: 14px;
-  color: $dark-color;
+  color: $coal-dark;
   margin: 0 0 0 10px;
   vertical-align: middle;
   cursor: pointer;
@@ -28,10 +28,10 @@
   flex: 0 0 auto;
   width: 16px;
   height: 16px;
-  border: 1px solid $gray-color;
+  border: 1px solid $gray;
   border-radius: 50%;
-  background: $white-color;
-  color: $dark-color;
+  background: $white;
+  color: $coal-dark;
   font-size: 0;
   outline: none;
   justify-content: center;
@@ -48,7 +48,7 @@
     display: block;
     width: 10px;
     height: 10px;
-    background: $dark-color;
+    background: $coal-dark;
     border-radius: 50%;
   }
 
@@ -59,65 +59,65 @@
 
   &--disabled {
 
-    background: $light-gray-color;
-    border-color: $gray-color;
-    color: $gray-color;
-    text-shadow: -1px 1px 0 $white-color;
+    background: $pale-lilac;
+    border-color: $gray;
+    color: $gray;
+    text-shadow: -1px 1px 0 $white;
     cursor: default;
   }
 
   &--info {
 
-    border-color: $info-color;
-    background: $info-color;
-    color: $dark-color;
+    border-color: $information;
+    background: $information;
+    color: $coal-dark;
 
     &:hover {
-      background: darken($info-color, 10%);
+      background: darken($information, 10%);
     }
   }
 
   &--primary {
 
-    border-color: $primary-color;
-    background: $primary-color;
-    color: $white-color;
+    border-color: $primary;
+    background: $primary;
+    color: $white;
 
     &:hover {
-      background: darken($primary-color, 10%);
+      background: darken($primary, 10%);
     }
   }
 
   &--success {
 
-    border-color: $success-color;
-    background: $success-color;
-    color: $white-color;
+    border-color: $success;
+    background: $success;
+    color: $white;
 
     &:hover {
-      background: darken($success-color, 10%);
+      background: darken($success, 10%);
     }
   }
 
   &--warning {
 
-    border-color: $warning-color;
-    background: $warning-color;
-    color: $white-color;
+    border-color: $warning;
+    background: $warning;
+    color: $white;
 
     &:hover {
-      background: darken($warning-color, 10%);
+      background: darken($warning, 10%);
     }
   }
 
   &--danger {
 
-    border-color: $danger-color;
-    background: $danger-color;
-    color: $white-color;
+    border-color: $danger;
+    background: $danger;
+    color: $white;
 
     &:hover {
-      background: darken($danger-color, 10%);
+      background: darken($danger, 10%);
     }
   }
 }

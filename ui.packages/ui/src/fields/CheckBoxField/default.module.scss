@@ -1,10 +1,14 @@
 
+@import "~@ui.packages/theme";
+
+
 .field {
 
   position: relative;
   display: block;
 
   & + & {
+
     margin: 15px 0 0;
   }
 
@@ -26,17 +30,17 @@
 
     display: block;
     padding: 10px;
-    border: 1px solid #e5eef5;
+    border: 1px solid $gray;
     border-radius: 3px;
     width: 100%;
     box-sizing: border-box;
     outline: none;
     font-size: 15px;
-    transition: border-color 400ms;
+    transition: border-color 200ms;
 
     &:focus {
 
-      border-color: #c1cad1;
+      border-color: $blue-grey;
     }
   }
 
@@ -45,22 +49,24 @@
     position: absolute;
     bottom: 0;
     display: inline-block;
-    color: #d50000;
+    color: $danger;
     font-size: 12px;
     font-weight: bold;
 
     &:before {
+
       content: '- ';
     }
   }
 
-
   &--error &__label {
-    color: #d50000
+
+    color: $danger
   }
 
   &--error &__input {
-    border-color: #d50000;
+
+    border-color: $danger;
   }
 
 }

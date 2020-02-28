@@ -11,11 +11,11 @@
     display: inline-block;
     vertical-align: middle;
     font-size: 14px;
-    color: $gray-color;
+    color: $gray;
     transition: color 200ms;
 
     &:hover {
-      color: $dark-color;
+      color: $coal-dark;
     }
   }
 
@@ -32,11 +32,11 @@
     display: inline-block;
     vertical-align: middle;
     font-size: 14px;
-    color: $gray-color;
+    color: $gray;
     transition: color 200ms;
 
     &:hover {
-      color: $dark-color;
+      color: $coal-dark;
     }
   }
 }

@@ -15,7 +15,7 @@
   transition: color 200ms;
 
   &--edit {
-    color: $gray-color;
+    color: $gray;
 
     &:hover {
       color: $success;
@@ -23,7 +23,7 @@
   }
 
   &--delete {
-    color: $gray-color;
+    color: $gray;
 
     &:hover {
       color: $danger;

@@ -1,6 +1,7 @@
 
 @import "~@ui.packages/theme";
 
+
 .cart {
 
   position: relative;
@@ -19,7 +20,7 @@
 
     &--open,
     &:hover {
-      background: $white-color
+      background: $white
     }
   }
 
@@ -38,9 +39,9 @@
     display: block;
     padding: 20px;
     font-size: 14px;
-    color: $dark-color;
+    color: $coal-dark;
     text-align: center;
-    background: $white-color;
+    background: $white;
   }
 
   &__full-amount {
@@ -48,7 +49,7 @@
     text-align: right;
     font-size: 14px;
     font-weight: bold;
-    color: $dark-color;
+    color: $coal-dark;
   }
 
   &__link {
@@ -57,17 +58,17 @@
     vertical-align: middle;
     padding: 10px 10px 8px;
     font-size: 12px;
-    border: 1px solid $light-gray-color;
+    border: 1px solid $gray;
     text-decoration: none;
     outline: none;
-    color: $dark-color;
-    background: $light-gray-color;
+    color: $coal-dark;
+    background: $gray;
     font-weight: bold;
     letter-spacing: .5px;
     cursor: pointer;
 
     &:hover {
-      background: $light-gray-color;
+      background: $gray;
     }
   }
 
@@ -80,15 +81,16 @@
     font-size: 12px;
     text-decoration: none;
     outline: none;
-    color: $white-color;
-    background: $primary-color;
+    color: $white;
+    background: $primary;
     margin: 0 0 0 10px;
     cursor: pointer;
     font-weight: bold;
     letter-spacing: .5px;
 
     &:hover {
-      background: darken($primary-color, 5%);
+
+      background: darken($primary, 5%);
     }
   }
 }
@@ -97,8 +99,8 @@
 
   position: relative;
   display: block;
-  background: $white-color;
-  box-shadow: 0 6px 10px 2px rgba(34, 34, 34, .2);
+  background: $white;
+  box-shadow: 0 6px 10px 2px rgba($dark-grey, .2);
 
   &:before {
 
@@ -110,7 +112,7 @@
     width: 0;
     height: 0;
     border: 5px solid transparent;
-    border-bottom-color: $white-color;
+    border-bottom-color: $white;
     border-top: none;
   }
 
@@ -125,7 +127,7 @@
   &__info {
 
     display: block;
-    border-top: 1px solid $gray-color;
+    border-top: 1px solid $gray;
     padding: 20px;
   }
 
@@ -133,7 +135,7 @@
 
     display: block;
     padding: 20px;
-    border-top: 1px solid $gray-color;
+    border-top: 1px solid $gray;
     text-align: right;
   }
 }
@@ -148,7 +150,7 @@
   & + & {
 
     margin: 10px 0 0;
-    border-top: 1px solid #eee;
+    border-top: 1px solid $gray;
     padding: 10px 0 0;
   }
 
@@ -187,7 +189,7 @@
     display: block;
     text-align: right;
     font-size: 13px;
-    color: $dark-color;
+    color: $coal-dark;
   }
 
   &__brand {
@@ -195,7 +197,7 @@
     display: block;
     font-size: 14px;
     font-weight: bold;
-    color: $dark-color;
+    color: $coal-dark;
 
     &-link {
 
@@ -208,7 +210,7 @@
     display: block;
     font-size: 12px;
     line-height: 1.4;
-    color: $dark-color;
+    color: $coal-dark;
     margin: 5px 0 0;
     white-space: nowrap;
     text-overflow: ellipsis;
@@ -219,6 +221,12 @@
 .remove {
 
   font-size: 14px;
-  color: $danger-color;
+  color: $gray;
   cursor: pointer;
+  transition: color 200ms;
+
+  &:hover {
+
+    color: $danger;
+  }
 }

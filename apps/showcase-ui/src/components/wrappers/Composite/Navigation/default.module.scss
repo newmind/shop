@@ -1,4 +1,7 @@
 
+@import "~@ui.packages/theme";
+
+
 .navigate {
 
   display: block;
@@ -6,20 +9,20 @@
   &__item {
 
     display: inline-block;
-    color: #121921;
+    color: $coal-dark;
     cursor: pointer;
     transition: background 400ms;
 
     &:hover {
 
-      background: rgba(#248098, .3);
+      background: rgba($coal-dark, .3);
     }
 
     &--active,
     &--active:hover {
 
-      color: #d3dfeb;
-      background: #248098;
+      color: $whitesmoke;
+      background: $primary;
     }
   }
 

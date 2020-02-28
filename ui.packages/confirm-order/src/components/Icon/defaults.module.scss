@@ -16,7 +16,7 @@
 
     &--open,
     &:hover {
-      background: $white-color
+      background: $white;
     }
   }
 
@@ -24,14 +24,14 @@
   &__wrapper:hover &__count,
   &__wrapper--open &__amount,
   &__wrapper:hover &__amount {
-    color: $dark-color;
+    color: $coal-dark;
   }
 
   &__icon {
 
     display: inline-block;
     font-size: 16px;
-    color: $danger-color;
+    color: $danger;
     margin: 0 10px 0 0;
   }
 
@@ -44,7 +44,7 @@
   &__count {
 
     display: inline-block;
-    color: $white-color;
+    color: $white;
     font-size: 13px;
     transition: color 400ms;
   }
@@ -52,7 +52,7 @@
   &__amount {
 
     display: block;
-    color: $white-color;
+    color: $white;
     font-size: 13px;
     transition: color 400ms;
   }

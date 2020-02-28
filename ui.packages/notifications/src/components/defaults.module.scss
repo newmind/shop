@@ -26,16 +26,16 @@
   display: flex;
   flex-direction: column;
   flex: 0 0 auto;
-  background: $primary-color;
-  border: 1px solid darken($primary-color, 10%);
+  background: $primary;
+  border: 1px solid darken($primary, 10%);
   padding: 10px 30px 10px 12px;
   border-radius: 4px;
   transform-origin: center center;
   animation-name: showing;
   animation-duration: 150ms;
   animation-timing-function: ease-in-out;
-  color: $whitesmoke-color;
-  box-shadow: 0 4px 10px 0 rgba($dark-color, .3);
+  color: $whitesmoke;
+  box-shadow: 0 4px 10px 0 rgba($coal-dark, .3);
 
   &__title {
 
@@ -78,21 +78,21 @@
 
   &--success {
 
-    background: $success-color;
-    border: 1px solid darken($success-color, 5%);
+    background: $success;
+    border: 1px solid darken($success, 5%);
   }
 
   &--danger {
 
-    background: $danger-color;
-    border: 1px solid darken($danger-color, 10%);
+    background: $danger;
+    border: 1px solid darken($danger, 10%);
   }
 
   &--info {
 
-    background: $info-color;
-    color: $dark-color;
-    border: 1px solid darken($info-color, 10%);
+    background: $information;
+    color: $coal-dark;
+    border: 1px solid darken($information, 10%);
   }
 }
 

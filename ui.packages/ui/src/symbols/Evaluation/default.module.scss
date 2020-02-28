@@ -10,11 +10,11 @@
 
     display: inline-block;
     font-size: 16px;
-    color: $gray-color;
+    color: $gray;
     transition: color 400ms;
 
     &:hover {
-      color: darken($gray-color, 10%);
+      color: darken($gray, 10%);
       cursor: pointer;
     }
 
@@ -32,46 +32,46 @@
 
   &--info  .evaluation__star {
 
-    color: darken($info-color, 10%);
+    color: darken($information, 10%);
 
     &:hover {
-      color: darken($info-color, 15%);
+      color: darken($information, 15%);
     }
   }
 
   &--primary .evaluation__star {
 
-    color: $primary-color;
+    color: $primary;
 
     &:hover {
-      color: darken($primary-color, 10%);
+      color: darken($primary, 10%);
     }
   }
 
   &--success .evaluation__star {
 
-    color: $success-color;
+    color: $success;
 
     &:hover {
-      color: darken($success-color, 10%);
+      color: darken($success, 10%);
     }
   }
 
   &--warning .evaluation__star {
 
-    color: $warning-color;
+    color: $warning;
 
     &:hover {
-      color: darken($warning-color, 10%);
+      color: darken($warning, 10%);
     }
   }
 
   &--danger .evaluation__star {
 
-    color: $danger-color;
+    color: $danger;
 
     &:hover {
-      color: darken($danger-color, 10%);
+      color: darken($danger, 10%);
     }
   }
 
@@ -100,7 +100,7 @@
   position: fixed;
   padding: 10px 16px;
   display: block;
-  background: $danger-color;
+  background: $danger;
   border-radius: 4px;
 
   &:before {
@@ -114,7 +114,7 @@
     height: 0;
     border: 6px solid transparent;
     border-left: none;
-    border-right-color: $danger-color;
+    border-right-color: $danger;
     content: '';
   }
 
@@ -122,7 +122,7 @@
 
     display: inline-block;
     font-size: 13px;
-    color: $whitesmoke-color;
+    color: $whitesmoke;
     letter-spacing: .5px;
     font-weight: bold;
   }

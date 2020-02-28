@@ -7,13 +7,13 @@
   display: flex;
   flex-direction: column;
   width: 318px;
-  background: #fff;
+  background: $white;
   text-decoration: none;
   outline: none;
   border-radius: 15px;
   padding: 15px 20px 20px;
   box-sizing: border-box;
-  box-shadow: 0 0 6px 0 #e6e6e6;
+  box-shadow: 0 0 6px 0 $pale-lilac;
 
   & + & {
     margin: 0 0 0 35px;
@@ -21,8 +21,8 @@
 
   &--in-cart {
 
-    box-shadow: 0 0 6px 0 #e6e6e6,
-                inset 0 0 2px 1px rgba($primary-color, .6);
+    box-shadow: 0 0 6px 0 rgba($primary, .1),
+                inset 0 0 2px 1px rgba($primary, .6);
   }
 
   &__meta {
@@ -43,14 +43,14 @@
 
     display: inline-block;
     font-size: 15px;
-    color: $primary-color;
+    color: $primary;
   }
 
   &__sale {
 
     display: inline-block;
     font-size: 15px;
-    color: $danger-color;
+    color: $danger;
   }
 
   &__view {
@@ -63,8 +63,8 @@
     margin: 0 0 0 -70px;
     font-size: 12px;
     text-align: center;
-    color: $gray-color;
-    border: 1px solid $gray-color;
+    color: $gray;
+    border: 1px solid $gray;
     border-radius: 3px;
     padding: 6px 0;
     box-sizing: border-box;
@@ -106,9 +106,9 @@
     flex: 1 0 auto;
     flex-direction: row;
     margin: 16px 0 0;
-    color: $dark-color;
+    color: $coal-dark;
     align-items: flex-end;
-    border-top: 1px solid $light-gray-color;
+    border-top: 1px solid $pale-lilac;
     padding: 15px 0 0;
   }
 
@@ -125,7 +125,7 @@
     font-size: 16px;
     font-weight: bold;
     text-align: center;
-    color: $dark-color;
+    color: $coal-dark;
     letter-spacing: .5px;
   }
 
@@ -139,7 +139,7 @@
     display: block;
     font-size: 12px;
     text-align: center;
-    color: rgba($gray-color, .6);
+    color: rgba($gray, .6);
     margin: 0 0 15px;
   }
 
@@ -152,7 +152,7 @@
     margin: 0 0 15px;
     text-transform: uppercase;
     letter-spacing: 1px;
-    color: $dark-color;
+    color: $coal-dark;
   }
 
   &__name {
@@ -165,7 +165,7 @@
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
-    color: #5a5a5a;
+    color: $dark-grey;
   }
 
   &__controls {
@@ -182,7 +182,7 @@
     display: block;
     width: 30px;
     font-size: 26px;
-    color: rgba($danger-color, 0.3);
+    color: rgba($danger, 0.3);
     margin: 0 0 0 10px;
     cursor: pointer;
     border-radius: 3px;
@@ -191,7 +191,7 @@
     padding: 7px 0 0 0;
 
     &:hover {
-      color: $danger-color;
+      color: $danger;
     }
   }
 
@@ -203,7 +203,7 @@
     display: block;
     width: 16px;
     height: 16px;
-    color: $whitesmoke-color;
+    color: $whitesmoke;
     font-size: 11px;
     font-weight: bold;
   }
@@ -212,13 +212,13 @@
 
     display: flex;
     flex: 1 0 auto;
-    //border: 1px solid $gray-color;
+    //border: 1px solid $gray;
     //border-radius: 3px;
     padding: 10px 20px;
     margin: 0 40px 0 70px;
     font-size: 16px;
     justify-content: center;
-    color: #5883f0;
+    color: $primary;
     text-decoration: underline;
     letter-spacing: .3px;
     cursor: pointer;

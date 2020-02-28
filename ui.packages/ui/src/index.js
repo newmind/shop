@@ -4,7 +4,6 @@ export { default as FileInput } from './symbols/FileInput';
 export { default as Textarea } from './symbols/Textarea';
 export { default as Button } from './symbols/Button';
 export { default as Evaluation } from './symbols/Evaluation';
-export { default as Table } from './symbols/Table';
 export { default as CheckBox } from './symbols/CheckBox';
 export { default as Image } from './symbols/Image';
 export { default as Spinner } from './symbols/Spinner';

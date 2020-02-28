@@ -8,7 +8,7 @@
   display: flex;
   flex: 1 0 auto;
   flex-direction: row;
-  border: 1px solid $light-gray-color;
+  border: 1px solid $pale-lilac;
   border-radius: 4px;
   overflow: hidden;
   transition: border 400ms;
@@ -17,72 +17,72 @@
 
   &--info {
 
-    border-color: $info-color;
+    border-color: $information;
 
     .label,
     .input,
     .info__icon {
-      color: darken($info-color, 10%);
+      color: darken($information, 10%);
     }
   }
 
   &--primary {
 
-    border-color: $primary-color;
+    border-color: $primary;
 
     .label,
     .input,
     .info__icon {
-      color: darken($primary-color, 10%);
+      color: darken($primary, 10%);
     }
   }
 
   &--success {
 
-    border-color: $success-color;
+    border-color: $success;
 
     .label,
     .input,
     .info__icon {
-      color: darken($success-color, 10%);
+      color: darken($success, 10%);
     }
   }
 
   &--warning {
 
-    border-color: $warning-color;
+    border-color: $warning;
 
     .label,
     .input,
     .info__icon {
-      color: darken($warning-color, 10%);
+      color: darken($warning, 10%);
     }
   }
 
   &--danger {
 
-    border-color: $danger-color;
+    border-color: $danger;
 
     .label,
     .input,
     .info__icon {
-      color: darken($danger-color, 10%);
+      color: darken($danger, 10%);
     }
   }
 
   &--disabled {
 
-    background: $light-gray-color;
-    border-color: $gray-color;
+    background: $pale-lilac;
+    border-color: $gray;
 
     .label {
-      color: $gray-color;
-      text-shadow: -1px 1px 0 $white-color;
+      color: $gray;
+      text-shadow: -1px 1px 0 $white;
     }
 
     .input {
-      color: $gray-color;
-      text-shadow: -1px 1px 0 $white-color;
+      color: $gray;
+      text-shadow: -1px 1px 0 $white;
     }
   }
 }
@@ -104,7 +104,7 @@
   display: inline-block;
   position: absolute;
   top: 0;
-  background-color: $dark-color;
+  background-color: $coal-dark;
   border-radius: 100%;
 
   animation: sk-bounce 2.0s infinite ease-in-out;

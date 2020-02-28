@@ -16,13 +16,13 @@
 
   display: inline-block;
   margin: 0 15px 0 0;
-  color: $dark-color;
+  color: $coal-dark;
   cursor: pointer;
   font-size: 14px;
 
   &--disabled {
 
-    color: $dark-gray-color;
+    color: $blue-grey;
   }
 }
 
@@ -30,13 +30,13 @@
 
   display: inline-block;
   margin: 0 25px 0 0;
-  color: $dark-color;
+  color: $coal-dark;
   cursor: pointer;
   font-size: 14px;
 
   &--disabled {
 
-    color: $dark-gray-color;
+    color: $blue-grey;
   }
 }
 
@@ -44,13 +44,13 @@
 
   display: inline-block;
   margin: 0 0 0 25px;
-  color: $dark-color;
+  color: $coal-dark;
   cursor: pointer;
   font-size: 14px;
 
   &--disabled {
 
-    color: $dark-gray-color;
+    color: $blue-grey;
   }
 }
 
@@ -58,26 +58,26 @@
 
   display: inline-block;
   margin: 0 0 0 15px;
-  color: $dark-color;
+  color: $coal-dark;
   cursor: pointer;
   font-size: 14px;
 
   &--disabled {
 
-    color: $dark-gray-color;
+    color: $blue-grey;
   }
 }
 
 .page {
 
   display: inline-block;
-  color: $dark-color;
+  color: $coal-dark;
   cursor: pointer;
   font-size: 14px;
 
   &--active {
 
-    color: $primary-color;
+    color: $primary;
     text-decoration: underline;
   }
 

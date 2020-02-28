@@ -7,11 +7,11 @@
   display: block;
   margin: 20px 0;
   width: 350px;
-  background: $white-color;
+  background: $white;
   padding: 4px;
   border-radius: 3px;
-  color: $dark-color;
-  box-shadow: 0 1px 3px 0 rgba($dark-color, .4);
+  color: $coal-dark;
+  box-shadow: 0 1px 3px 0 rgba($coal-dark, .4);
 
   &__line {
 
@@ -20,7 +20,7 @@
     flex-direction: row;
 
     & + & {
-      border-top: 1px solid $light-gray-color;
+      border-top: 1px solid $pale-lilac;
     }
   }
 

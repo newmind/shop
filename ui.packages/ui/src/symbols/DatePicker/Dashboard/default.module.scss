@@ -9,7 +9,7 @@
     display: flex;
     flex: 1 0 auto;
     flex-direction: row;
-    border-bottom: 1px solid $light-gray-color;
+    border-bottom: 1px solid $pale-lilac;
   }
 
   &__left,
@@ -17,11 +17,11 @@
 
     display: block;
     padding: 12px;
-    color: $gray-color;
+    color: $gray;
     transition: color 200ms;
 
     &:hover {
-      color: $dark-color;
+      color: $coal-dark;
     }
   }
 

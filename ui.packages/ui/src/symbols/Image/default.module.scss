@@ -15,56 +15,56 @@
 
   &--info {
 
-    border-color: $info-color;
+    border-color: $information;
 
     .label,
     .input,
     .info__icon {
-      color: darken($info-color, 10%);
+      color: darken($information, 10%);
     }
   }
 
   &--primary {
 
-    border-color: $primary-color;
+    border-color: $primary;
 
     .label,
     .input,
     .info__icon {
-      color: darken($primary-color, 10%);
+      color: darken($primary, 10%);
     }
   }
 
   &--success {
 
-    border-color: $success-color;
+    border-color: $success;
 
     .label,
     .input,
     .info__icon {
-      color: darken($success-color, 10%);
+      color: darken($success, 10%);
     }
   }
 
   &--warning {
 
-    border-color: $warning-color;
+    border-color: $warning;
 
     .label,
     .input,
     .info__icon {
-      color: darken($warning-color, 10%);
+      color: darken($warning, 10%);
     }
   }
 
   &--danger {
 
-    border-color: $danger-color;
+    border-color: $danger;
 
     .label,
     .input,
     .info__icon {
-      color: darken($danger-color, 10%);
+      color: darken($danger, 10%);
     }
   }
 }
@@ -86,7 +86,7 @@
   bottom: 0;
   left: 0;
   display: flex;
-  background: $whitesmoke-color;
+  background: $whitesmoke;
   z-index: 20;
 }
 
@@ -100,14 +100,14 @@
   display: flex;
   flex-direction: column;
   justify-content: center;
-  background: #fff;
+  background: $white;
   align-items: center;
   z-index: 20;
 
   &__icon {
 
     font-size: 60px;
-    color: $light-gray-color;
+    color: $pale-lilac;
   }
 }
 

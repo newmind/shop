@@ -6,7 +6,7 @@
   
   display: block;
   font-size: 16px;
-  color: $dark-color;
+  color: $coal-dark;
   font-weight: bold;
   letter-spacing: .5px;
 }
@@ -28,7 +28,7 @@
 .breadcrumbs {
 
   display: block;
-  box-shadow: 0 1px 20px 0 rgba($dark-color, .08);
+  box-shadow: 0 1px 20px 0 rgba($coal-dark, .08);
 
   &__content {
 
@@ -55,7 +55,7 @@
 
     display: block;
     font-size: 12px;
-    color: $gray-color;
+    color: $gray;
     margin: 0 0 10px;
   }
 
@@ -64,7 +64,7 @@
     display: block;
     font-size: 25px;
     font-weight: bold;
-    color: $dark-color;
+    color: $coal-dark;
     letter-spacing: 1px;
   }
 
@@ -72,7 +72,7 @@
 
     display: block;
     font-size: 13px;
-    color: $dark-color;
+    color: $coal-dark;
     margin: 10px 0 0;
   }
 
@@ -81,7 +81,7 @@
     display: block;
     font-size: 20px;
     margin: 60px 0 0;
-    color: $dark-color;
+    color: $coal-dark;
   }
 
   &__description {
@@ -89,7 +89,7 @@
     display: block;
     padding: 30px 0 0;
     margin: 30px 0 0;
-    border-top: 1px solid rgba($dark-color, .05);
+    border-top: 1px solid rgba($coal-dark, .05);
     width: 340px;
 
     &__header {
@@ -114,7 +114,7 @@
     display: flex;
     width: 700px;
     height: 600px;
-    background: $light-gray-color;
+    background: $pale-lilac;
   }
 
   &__commands {
@@ -123,7 +123,7 @@
     flex: 0 1;
     flex-direction: column;
     border-radius: 15px;
-    border: 1px solid rgba($dark-color, .05);
+    border: 1px solid rgba($coal-dark, .05);
     margin: 0 0 0 20px;
     padding: 30px;
   }
@@ -135,7 +135,7 @@
     flex-direction: column;
     margin: 0 0 80px;
     border-radius: 15px;
-    border: 1px solid rgba($dark-color, .05);
+    border: 1px solid rgba($coal-dark, .05);
     padding: 30px;
   }
 
@@ -157,20 +157,21 @@
 .cart {
 
   display: block;
-  background: $primary-color;
-  color: $white-color;
+  background: $primary;
+  color: $white;
   font-size: 14px;
+  border-radius: 8px;
   padding: 16px 20px;
   font-weight: bold;
   width: 160px;
   text-align: center;
   cursor: pointer;
-  box-shadow: 0 0 4px 0 rgba($primary-color, .5);
+  box-shadow: 0 0 4px 0 rgba($primary, .5);
   white-space: nowrap;
   transition: background 400ms;
 
   &:hover {
-    background: darken($primary-color, 10%);
+    background: darken($primary, 10%);
   }
 
   &__caption {
@@ -183,7 +184,7 @@
 .to-order {
 
   display: inline-block;
-  color: $primary-color;
+  color: $primary;
 }
 
 .has-in-case {
@@ -191,13 +192,13 @@
   display: block;
   margin: 10px 0 0;
   font-size: 12px;
-  color: $dark-gray-color;
+  color: $blue-grey;
 }
 
 .comments {
 
   display: block;
-  border: 1px solid rgba($dark-color, .05);
+  border: 1px solid rgba($coal-dark, .05);
   padding: 30px 30px 70px;
   border-radius: 15px;
 
@@ -205,7 +206,7 @@
 
     display: flex;
     flex: 1 0;
-    border-bottom: 1px solid rgba($dark-color, .05);
+    border-bottom: 1px solid rgba($coal-dark, .05);
     padding: 0 0 25px;
     align-items: center;
   }
@@ -215,7 +216,7 @@
     display: flex;
     flex: 1 0;
     font-size: 16px;
-    color: $dark-color;
+    color: $coal-dark;
     font-weight: bold;
   }
 
@@ -240,7 +241,7 @@
 
     display: inline-block;
     font-size: 14px;
-    color: $dark-color;
+    color: $coal-dark;
   }
 
   &__content {
@@ -251,7 +252,7 @@
 
   &__count {
 
-    color: $dark-gray-color;
+    color: $blue-grey;
     font-weight: normal;
     padding: 0 0 0 20px;
   }

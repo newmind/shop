@@ -12,7 +12,7 @@
   flex: 1 0;
   padding: 40px 0;
   flex-direction: column;
-  background: rgba($dark-color, .2);
+  background: rgba($coal-dark, .2);
   z-index: 99999;
   overflow: auto;
 }
@@ -23,32 +23,32 @@
   display: flex;
   flex: 0 0 auto;
   flex-direction: column;
-  background: #fff;
+  background: $white;
   min-width: 500px;
   border-radius: 15px;
   margin: auto;
-  box-shadow: 0 6px 10px 0 rgba(34, 34, 34, 0.3);
+  box-shadow: 0 6px 10px 0 rgba($dark-grey, 0.3);
   overflow: hidden;
 
 
-  &--info { background: lighten($info-color, 30%); }
-  &--info &__header { background: $info-color;  }
+  &--info { background: lighten($information, 30%); }
+  &--info &__header { background: $information;  }
 
-  &--primary { background: lighten($primary-color, 40%); }
-  &--primary &__header { background: $primary-color; color: $white-color; }
-  &--primary &__close:hover { color: $white-color; }
+  &--primary { background: lighten($primary, 40%); }
+  &--primary &__header { background: $primary; color: $white; }
+  &--primary &__close:hover { color: $white; }
 
-  &--success { background: lighten($success-color, 40%); }
-  &--success &__header { background: $success-color; color: $white-color; }
-  &--success &__close:hover { color: $white-color; }
+  &--success { background: lighten($success, 40%); }
+  &--success &__header { background: $success; color: $white; }
+  &--success &__close:hover { color: $white; }
 
-  &--warning { background: lighten($warning-color, 40%); }
-  &--warning &__header { background: $warning-color; color: $white-color; }
-  &--warning &__close:hover { color: $white-color; }
+  &--warning { background: lighten($warning, 40%); }
+  &--warning &__header { background: $warning; color: $white; }
+  &--warning &__close:hover { color: $white; }
 
-  &--danger { background: lighten($danger-color, 40%); }
-  &--danger &__header { background: $danger-color; color: $white-color; }
-  &--danger &__close:hover { color: $white-color; }
+  &--danger { background: lighten($danger, 40%); }
+  &--danger &__header { background: $danger; color: $white; }
+  &--danger &__close:hover { color: $white; }
 
 
   &__close {
@@ -60,12 +60,12 @@
     width: 16px;
     height: 16px;
     font-size: 20px;
-    color: $light-gray-color;
+    color: $pale-lilac;
     cursor: pointer;
     transition: color 400ms;
 
     &:hover {
-      color: $dark-color;
+      color: $coal-dark;
     }
   }
 
@@ -75,7 +75,7 @@
     font-size: 14px;
     padding: 28px 40px 26px 30px;
     letter-spacing: .5px;
-    color: #151b23;
+    color: $coal-dark;
     text-transform: uppercase;
   }
 

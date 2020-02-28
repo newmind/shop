@@ -12,7 +12,8 @@
 
     .label,
     .info__icon {
-      color: darken($info-color, 10%);
+
+      color: darken($information, 10%);
     }
   }
 
@@ -20,7 +21,8 @@
 
     .label,
     .info__icon {
-      color: darken($primary-color, 10%);
+
+      color: darken($primary, 10%);
     }
   }
 
@@ -28,7 +30,8 @@
 
     .label,
     .info__icon {
-      color: darken($success-color, 10%);
+
+      color: darken($success, 10%);
     }
   }
 
@@ -36,7 +39,7 @@
 
     .label,
     .info__icon {
-      color: darken($warning-color, 10%);
+      color: darken($warning, 10%);
     }
   }
 
@@ -44,17 +47,17 @@
 
     .label,
     .info__icon {
-      color: darken($danger-color, 10%);
+      color: darken($danger, 10%);
     }
   }
 
   &--disabled {
 
-    background: $light-gray-color;
+    background: $very-light-pink;
 
     .label {
-      color: $gray-color;
-      text-shadow: -1px 1px 0 $white-color;
+      color: $gray;
+      text-shadow: -1px 1px 0 $white;
     }
   }
 }
@@ -63,7 +66,7 @@
 
   display: block;
   font-size: 14px;
-  color: #222;
+  color: $coal-dark;
   margin: 0 0 8px 1px;
   transition: color 400ms;
 }
@@ -102,7 +105,7 @@
 //
 //    display: inline-block;
 //    font-size: 13px;
-//    color: $whitesmoke-color;
+//    color: $whitesmoke;
 //    letter-spacing: .5px;
 //    font-weight: bold;
 //  }
@@ -114,7 +117,7 @@
   top: 100%;
   right: 0;
   display: block;
-  background: #e83841;
+  background: $danger;
   padding: 0 6px 2px 20px;
   letter-spacing: .2px;
   border-radius: 0 0 3px 3px;
@@ -122,7 +125,7 @@
   &__message {
 
     font-size: 10px;
-    color: $white-color;
+    color: $white;
     font-weight: bold;
   }
 }

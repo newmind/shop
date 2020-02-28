@@ -16,11 +16,11 @@
 
     &:first-child {
       font-size: 14px;
-      background: $light-gray-color;
+      background: $pale-lilac;
     }
 
     & + & {
-      border-top: 1px solid $light-gray-color;
+      border-top: 1px solid $pale-lilac;
     }
   }
 
@@ -35,7 +35,7 @@
     font-size: 13px;
 
     & + & {
-      border-left: 1px solid $light-gray-color;
+      border-left: 1px solid $pale-lilac;
     }
 
     &--today {
@@ -44,16 +44,16 @@
     }
 
     &--weekend {
-      color: $danger-color
+      color: $danger;
     }
 
     &--selected {
-      background: $primary-color;
-      color: $white-color;
+      background: $primary;
+      color: $white;
     }
 
     &--disabled {
-      color: darken($light-gray-color, 5%);
+      color: darken($pale-lilac, 5%);
     }
   }
 }

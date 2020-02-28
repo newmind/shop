@@ -10,7 +10,7 @@
 
   & + & {
 
-    border-top: 1px solid $light-gray-color;
+    border-top: 1px solid $pale-lilac;
     margin: 40px 0 0;
     padding: 40px 0 0;
   }
@@ -25,7 +25,7 @@
     display: block;
     font-size: 12px;
     text-align: center;
-    color: rgba($gray-color, .6);
+    color: rgba($gray, .6);
     margin: 6px 0 15px;
   }
 
@@ -35,7 +35,7 @@
     font-size: 16px;
     font-weight: bold;
     margin: 0 0 15px;
-    color: $dark-color;
+    color: $coal-dark;
     letter-spacing: .5px;
 
     &-link {
@@ -49,7 +49,7 @@
     display: inline-block;
     font-size: 14px;
     font-weight: normal;
-    color: $dark-gray-color;
+    color: $blue-grey;
     margin: 0 0 0 14px;
     vertical-align: middle;
     padding: 0 0 2px;
@@ -84,8 +84,8 @@
   padding: 30px;
   border-radius: 4px;
   margin: 30px 0 0;
-  background: rgba($info-color, .1);
-  border: 1px solid #f9f3d9;
+  background: rgba($information, .1);
+  border: 1px solid $very-light-pink;
 
   &__content {
 
@@ -96,7 +96,7 @@
 
     font-size: 14px;
     line-height: 1.6;
-    color: $dark-color;
+    color: $coal-dark;
 
     &:first-child + & {
       margin: 20px 0 0;
@@ -125,7 +125,7 @@
 
 .link {
 
-  color: $primary-color;
+  color: $primary;
   cursor: pointer;
   text-decoration: underline;
 }
@@ -145,7 +145,7 @@
 
     display: block;
     margin: 10px 0 0;
-    color: $success-color;
+    color: $success;
   }
 
   &__value {
@@ -171,7 +171,7 @@
 .error {
 
   font-size: 11px;
-  color: #e86b20;
+  color: $warning;
   margin: 0 0 0 20px;
   font-style: italic;
   letter-spacing: .5px;
@@ -184,6 +184,6 @@
   right: 0;
   display: block;
   font-size: 14px;
-  color: $danger-color;
+  color: $danger;
   cursor: pointer;
 }

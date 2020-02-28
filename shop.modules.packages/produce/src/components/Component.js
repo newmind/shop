@@ -1,13 +1,17 @@
 
 import React, { PureComponent } from 'react';
 
+import styles from "./default.module.scss";
+
 
 class Component extends PureComponent {
   render() {
     return (
-      <div className="page">
-        <p>Компоненты</p>
-      </div>
+      <section className={styles['wrapper']}>
+        <div className={styles['content']}>
+          <p>Сервис и поддержка</p>
+        </div>
+      </section>
     );
   }
 }

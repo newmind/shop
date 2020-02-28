@@ -5,12 +5,12 @@ export default [
   //   path: '/products',
   // },
   {
-    title: 'О продукции',
+    title: 'Сервис и поддержка',
     path: '/produce',
   },
   {
-    title: 'Информация для вас',
-    path: '/corner',
+    title: 'О компании',
+    path: '/about',
   },
   // {
   //   title: "О нас",

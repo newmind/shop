@@ -8,66 +8,66 @@
 
   &--info {
 
-    .select { border-color: $info-color; }
-    .label { color: $info-color; }
+    .select { border-color: $information; }
+    .label { color: $information; }
 
     &:hover {
-      border-color: darken($info-color, 10%);
+      border-color: darken($information, 10%);
     }
   }
   &--info &__value,
   &--info &__placeholder {
-    color: $info-color;
+    color: $information;
   }
 
   &--primary {
 
-    border-color: $primary-color;
+    border-color: $primary;
 
     &:hover {
-      border-color: darken($primary-color, 10%);
+      border-color: darken($primary, 10%);
     }
   }
   &--primary &__value,
   &--primary &__placeholder {
-    color: $primary-color;
+    color: $primary;
   }
 
   &--success {
 
-    border-color: $success-color;
+    border-color: $success;
 
     &:hover {
-      border-color: darken($success-color, 10%);
+      border-color: darken($success, 10%);
     }
   }
   &--success &__value,
   &--success &__placeholder {
-    color: $success-color;
+    color: $success;
   }
 
   &--warning {
 
-    border-color: $warning-color;
+    border-color: $warning;
 
     &:hover {
-      border-color: darken($warning-color, 10%);
+      border-color: darken($warning, 10%);
     }
   }
   &--warning &__value,
   &--warning &__placeholder {
-    color: $warning-color;
+    color: $warning;
   }
 
   &--danger {
 
-    .select { border-color: $danger-color; }
+    .select { border-color: $danger; }
     .label,
     .select__value,
-    .select__placeholder { color: $danger-color; }
+    .select__placeholder { color: $danger; }
 
     &:hover {
-      border-color: darken($danger-color, 10%);
+      border-color: darken($danger, 10%);
     }
   }
 }
@@ -76,7 +76,7 @@
 
   display: block;
   font-size: 14px;
-  color: #222;
+  color: $black;
   margin: 0 0 8px 1px;
   transition: color 400ms;
 }
@@ -85,20 +85,20 @@
 
   display: flex;
   flex: 1 0 auto;
-  border: 1px solid $light-gray-color;
+  border: 1px solid $pale-lilac;
   border-radius: 3px;
   cursor: pointer;
-  background: $white-color;
+  background: $white;
   transition: border-color 400ms;
 
   &:hover &__angle {
 
-    color: $dark-color;
+    color: $coal-dark;
   }
 
   &:hover &__cross {
 
-    color: $danger-color;
+    color: $danger;
   }
 
   & + & {
@@ -107,12 +107,12 @@
 
   &--is-focus &__angle {
 
-    color: $dark-color;
+    color: $coal-dark;
   }
 
   &--is-focus &__cross {
 
-    color: $danger-color;
+    color: $danger;
   }
 
   &__content {
@@ -162,7 +162,7 @@
 
   &__placeholder {
 
-    color: lighten($dark-color, 40%);
+    color: lighten($coal-dark, 40%);
   }
 
   &__angle {
@@ -173,7 +173,7 @@
     align-items: center;
     justify-content: center;
     padding: 0 8px;
-    color: $light-gray-color;
+    color: $pale-lilac;
     transition: color 200ms;
   }
 
@@ -185,7 +185,7 @@
     align-items: center;
     justify-content: center;
     padding: 0;
-    color: rgba($danger-color, .1);
+    color: rgba($danger, .1);
     transition: color 200ms;
   }
 
@@ -197,10 +197,10 @@
 
   &--disabled {
 
-    background: $light-gray-color;
-    border-color: $gray-color;
-    color: $gray-color;
-    text-shadow: -1px 1px 0 $white-color;
+    background: $pale-lilac;
+    border-color: $gray;
+    color: $gray;
+    text-shadow: -1px 1px 0 $white;
     cursor: default;
   }
 }
@@ -271,10 +271,10 @@
   &__content {
 
     display: block;
-    border: 1px solid $light-gray-color;
+    border: 1px solid $pale-lilac;
     border-radius: 4px;
-    box-shadow: 0 2px 4px 1px rgba($dark-color, .4);
-    background: $whitesmoke-color;
+    box-shadow: 0 2px 4px 1px rgba($coal-dark, .4);
+    background: $whitesmoke;
     //height: 200px;
     overflow: auto;
   }
@@ -284,7 +284,7 @@
     display: flex;
     flex: 1 0 auto;
     flex-direction: row;
-    border-bottom: 1px solid $light-gray-color;
+    border-bottom: 1px solid $pale-lilac;
   }
 
   &__left,
@@ -337,25 +337,25 @@
 
   &:hover {
 
-    background: rgba($info-color, .2);
+    background: rgba($information, .2);
   }
 
   &--selected,
   &--selected:hover {
 
-    background: $info-color;
+    background: $information;
   }
 
   & + & {
 
-    border-top: 1px solid $light-gray-color;
+    border-top: 1px solid $pale-lilac;
   }
 
   &__value {
 
     display: block;
     font-size: 13px;
-    color: $dark-color;
+    color: $coal-dark;
   }
 }
 
@@ -365,7 +365,7 @@
   padding: 10px 16px;
   display: block;
   max-width: 200px;
-  background: $danger-color;
+  background: $danger;
   border-radius: 4px;
 
   &:before {
@@ -379,7 +379,7 @@
     height: 0;
     border: 6px solid transparent;
     border-left: none;
-    border-right-color: $danger-color;
+    border-right-color: $danger;
     content: '';
   }
 
@@ -387,7 +387,7 @@
 
     display: inline-block;
     font-size: 13px;
-    color: $whitesmoke-color;
+    color: $whitesmoke;
     letter-spacing: .5px;
     font-weight: bold;
   }
