@@ -1,11 +1,14 @@
 
+@import "~@ui.packages/theme";
+
+
 .dialog {
 
   display: block;
   margin: auto;
   width: 450px;
-  background: #fff;
-  box-shadow: 0 0 3px 1px rgba(#d4dae1, .8);
+  background: $white;
+  box-shadow: 0 0 3px 1px rgba($pale-lilac, .8);
   border-radius: 4px;
   overflow: hidden;
 

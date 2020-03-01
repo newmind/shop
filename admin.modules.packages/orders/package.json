@@ -14,6 +14,7 @@
     "@ui.packages/dialog": "1.0.0",
     "@ui.packages/hocs": "1.0.0",
     "@ui.packages/moment": "1.0.0",
+    "@ui.packages/table": "1.0.0",
     "@ui.packages/notifications": "1.0.0",
     "@ui.packages/request": "1.0.0",
     "@ui.packages/socket": "1.0.0",

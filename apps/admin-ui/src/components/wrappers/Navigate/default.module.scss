@@ -20,7 +20,7 @@
 .header {
 
   display: block;
-  background: $dark-color;
+  background: $coal-dark;
 }
 
 .page {
@@ -36,8 +36,8 @@
 .aside {
 
   display: block;
-  background: $whitesmoke-color;
-  border-right: 1px solid $light-gray-color;
+  background: $whitesmoke;
+  border-right: 1px solid $pale-lilac;
   width: 300px;
 
   &__wrapper {
@@ -61,7 +61,7 @@
   display: flex;
   flex: 1 1;
   flex-direction: column;
-  background: $white-color;
+  background: $white;
   width: 100%;
   overflow: auto;
   z-index: 10;

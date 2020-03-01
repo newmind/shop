@@ -23,23 +23,23 @@
     }
 
     &--trash {
-      color: lighten($danger-color, 30%);
+      color: lighten($danger, 30%);
       &:hover {
-        color: $danger-color;
+        color: $danger;
       }
     }
 
     &--return {
-      color: lighten($primary-color, 30%);
+      color: lighten($primary, 30%);
       &:hover {
-        color: $primary-color;
+        color: $primary;
       }
     }
 
     &--edit {
-      color: lighten($success-color, 30%);
+      color: lighten($success, 30%);
       &:hover {
-        color: $success-color;
+        color: $success;
       }
     }
   }
@@ -49,7 +49,7 @@
 
   display: block;
   text-align: right;
-  color: $dark-color;
+  color: $coal-dark;
   font-size: 0;
 
   &__value {

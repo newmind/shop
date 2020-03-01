@@ -7,7 +7,7 @@
   display: flex;
   flex: 1 0 auto;
   flex-direction: column;
-  background: $whitesmoke-color;
+  background: $whitesmoke;
 }
 
 .loader {
@@ -43,7 +43,7 @@
     font-size: 30px;
     margin: 0 15px 0 0;
     vertical-align: baseline;
-    color: $dark-color;
+    color: $coal-dark;
   }
 
   &__text {
@@ -52,7 +52,7 @@
     font: 30px 'Helvetica Neue',sans-serif;
     font-weight: bold;
     vertical-align: baseline;
-    color: $dark-color;
+    color: $coal-dark;
   }
 }
 
@@ -61,6 +61,6 @@
   display: block;
   font: 18px 'Helvetica Neue',sans-serif;
   margin: 16px 0 0;
-  color: $dark-color;
+  color: $coal-dark;
   letter-spacing: 1px;
 }

@@ -11,7 +11,7 @@
 .header {
 
   display: block;
-  background: $dark-color;
+  background: $coal-dark;
   padding: 15px 20px;
   font-size: 16px;
   font-weight: bold;
@@ -22,7 +22,7 @@
   display: flex;
   flex: 1 1 auto;
   flex-direction: column;
-  background: $whitesmoke-color;
+  background: $whitesmoke;
   width: 100%;
   z-index: 10;
 }

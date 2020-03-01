@@ -44,15 +44,7 @@ RUN ["yarn", "run", "build"]
 WORKDIR /app/admin.modules.packages/comments
 RUN ["yarn", "run", "build"]
 
-# BUILD MODULES
 WORKDIR /app/admin.modules.packages/attributes
-RUN ["yarn", "run", "build"]
-
-# BUILD MODULES
-WORKDIR /app/admin.modules.packages/categories
-RUN ["yarn", "run", "build"]
-
-WORKDIR /app/admin.modules.packages/currencies
 RUN ["yarn", "run", "build"]
 
 WORKDIR /app/admin.modules.packages/not-found
@@ -73,8 +65,6 @@ RUN ["yarn", "run", "build"]
 WORKDIR /app/admin.modules.packages/sign-in
 RUN ["yarn", "run", "build"]
 
-WORKDIR /app/admin.modules.packages/units
-RUN ["yarn", "run", "build"]
 
 # BUILD APPLICATION
 WORKDIR /app/apps/admin-ui

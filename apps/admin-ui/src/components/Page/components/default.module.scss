@@ -28,7 +28,7 @@
   bottom: 0;
   left: 0;
   display: flex;
-  background: rgba($dark-color, .15);
+  background: rgba($coal-dark, .15);
   z-index: 20;
 }
 
@@ -38,7 +38,7 @@
   margin: auto;
   padding: 30px;
   border-radius: 4px;
-  background: $whitesmoke-color;
-  color: $dark-color;
+  background: $whitesmoke;
+  color: $coal-dark;
   font-size: 14px;
 }

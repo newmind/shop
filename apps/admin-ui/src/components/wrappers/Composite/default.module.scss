@@ -13,7 +13,7 @@
 .header {
 
   display: block;
-  background: #cbcbcb;
+  background: $whitesmoke;
 }
 
 .page {
@@ -27,8 +27,8 @@
 .aside {
 
   display: block;
-  background: $primary-color;
-  box-shadow: 0 3px 10px 0 rgba($dark-color, .3);
+  background: $primary;
+  box-shadow: 0 3px 10px 0 rgba($coal-dark, .3);
 }
 
 .content {
@@ -43,5 +43,5 @@
 .footer {
 
   display: block;
-  background: #cbcbcb;
+  background: $whitesmoke;
 }

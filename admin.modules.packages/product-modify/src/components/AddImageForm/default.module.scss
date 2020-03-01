@@ -17,7 +17,7 @@
   display: inline-flex;
   width: 200px;
   height: 150px;
-  border: 1px solid $light-gray-color;
+  border: 1px solid $pale-lilac;
 
   & + & {
 
@@ -32,13 +32,13 @@
   top: 10px;
   right: 10px;
   font-size: 20px;
-  color: $dark-gray-color;
+  color: $blue-grey;
   cursor: pointer;
   z-index: 20;
   transition: color 200ms;
 
   &:hover {
-    color: $dark-color;
+    color: $coal-dark;
   }
 }
 
@@ -48,7 +48,7 @@
   width: 200px;
   height: 150px;
   margin: 0 20px 0 0;
-  background: $light-gray-color;
+  background: $pale-lilac;
   border: 1px solid $gray;
   border-radius: 3px;
   cursor: pointer;
@@ -57,7 +57,7 @@
 
   &:hover {
 
-    background: darken($light-gray-color, 2%);
+    background: darken($pale-lilac, 2%);
   }
 
   &__icon {

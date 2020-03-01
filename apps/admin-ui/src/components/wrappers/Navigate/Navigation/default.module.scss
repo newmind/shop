@@ -9,20 +9,20 @@
   &__item {
 
     display: block;
-    color: $dark-color;
+    color: $coal-dark;
     background: transparent;
     cursor: pointer;
     transition: background 400ms;
 
     &:hover {
 
-      background: rgba($info-color, .2);
+      background: rgba($information, .2);
     }
 
     &--active,
     &--active:hover {
 
-      background: $info-color;
+      background: $information;
     }
   }
 

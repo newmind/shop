@@ -8,20 +8,20 @@
   &__item {
 
     display: inline-block;
-    color: $dark-color;
+    color: $coal-dark;
     cursor: pointer;
     transition: background 400ms;
 
     &:hover {
 
-      background: lighten($primary-color, 3%);
+      background: lighten($primary, 3%);
     }
 
     &--active,
     &--active:hover {
 
-      color: $whitesmoke-color;
-      background: darken($primary-color, 5%);
+      color: $whitesmoke;
+      background: darken($primary, 5%);
     }
   }
 

@@ -48,22 +48,22 @@ export default [
       '@modules.packages/attributes'
     ),
   },
-  {
-    path: '/units',
-    wrapper: 'Composite',
-    module: import(
-      /* webpackChunkName: "units" */
-      '@modules.packages/units'
-    ),
-  },
-  {
-    path: '/currency',
-    wrapper: 'Composite',
-    module: import(
-      /* webpackChunkName: "currency" */
-      '@modules.packages/currencies'
-    ),
-  },
+  // {
+  //   path: '/units',
+  //   wrapper: 'Composite',
+  //   module: import(
+  //     /* webpackChunkName: "units" */
+  //     '@modules.packages/units'
+  //   ),
+  // },
+  // {
+  //   path: '/currency',
+  //   wrapper: 'Composite',
+  //   module: import(
+  //     /* webpackChunkName: "currency" */
+  //     '@modules.packages/currencies'
+  //   ),
+  // },
   {
     path: '/sign-in',
     wrapper: 'Empty',
