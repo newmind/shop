@@ -1,12 +1,24 @@
-'use strict';
 
-import requestUpdate from '../../requests/Product/updateById';
+import request from "@sys.packages/request";
+
+const PRODUCT_API_SRV = process.env['PRODUCT_API_SRV'];
 
 
 export default () => async (ctx) => {
-  const { productId } = ctx.params;
+  try {
+    const formData = ctx['request']['body'];
 
-  const { data } = await requestUpdate(productId, ctx.req);
+    const result = await request({
+      url: `${PRODUCT_API_SRV}/operations`,
+      method: 'put',
+      data: formData,
+    });
 
-  ctx.body = data;
+    ctx.body = { success: true, data: result['data'] };
+  }
+  catch(e) {
+
+    ctx.status = 500;
+    ctx.body = { success: false, error: { code: '500', message: e['message'] }};
+  }
 }
