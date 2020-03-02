@@ -17,6 +17,7 @@ class Component extends PureComponent {
   static propTypes = {
     className: types.string,
     type: types.oneOf(['text', 'password']),
+    format: types.oneOf(['string', 'number']),
     mode: types.oneOf(['info', 'primary', 'danger', 'warning', 'success', 'default']),
     value: types.any,
     disabled: types.bool,
@@ -29,6 +30,7 @@ class Component extends PureComponent {
   static defaultProps = {
     className: '',
     type: 'text',
+    format: 'string',
     mode: 'default',
     label: null,
     message: null,
@@ -36,9 +38,35 @@ class Component extends PureComponent {
     disabled: false,
   };
 
+  state = {
+    isFocus: false,
+  };
+
+  _handleFocus = (event) => {
+    const { onFocus } = this.props;
+
+    event.stopPropagation();
+
+    onFocus && onFocus(event);
+    this.setState({ isFocus: true });
+  };
+
+  _handleBlur = (event) => {
+    const { onBlur } = this.props;
+
+    event.stopPropagation();
+
+    onBlur && onBlur(event);
+    this.setState({ isFocus: false });
+  };
+
   render() {
+    const { isFocus } = this.state;
     const { className, disabled, mode, label, message, ...props } = this.props;
+
     const classNameInputContainer = cn(className, styles['container'], {
+      [styles['container--focus']]: isFocus,
+    }, {
       [styles['container--primary']]: mode === PRIMARY_MODE,
       [styles['container--success']]: mode === SUCCESS_MODE,
       [styles['container--info']]: mode === INFO_MODE,
@@ -50,7 +78,13 @@ class Component extends PureComponent {
 
     return (
       <div className={classNameInputContainer}>
-        <input className={styles['input']} disabled={disabled}  {...props} />
+        <input
+          className={styles['input']}
+          disabled={disabled}
+          {...props}
+          onFocus={this._handleFocus.bind(this)}
+          onBlur={this._handleBlur.bind(this)}
+        />
       </div>
     );
   }

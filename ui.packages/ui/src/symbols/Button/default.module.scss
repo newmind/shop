@@ -24,15 +24,6 @@
     background: darken($white, 5%);
   }
 
-  &:disabled {
-
-    background: $pale-lilac !important;
-    border-color: $gray !important;
-    color: $gray !important;
-    text-shadow: -1px 1px 0 $white !important;
-    cursor: default;
-  }
-
   &--info {
 
     border-color: $information;
@@ -98,5 +89,14 @@
 
     font-size: 16px;
     padding: 16px 25px;
+  }
+
+  &:disabled {
+
+    background: $pale-lilac;
+    border-color: $pale-lilac;
+    color: $gray;
+    text-shadow: -1px 1px 0 $white;
+    cursor: default;
   }
 }

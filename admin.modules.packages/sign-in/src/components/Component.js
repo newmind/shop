@@ -49,9 +49,6 @@ class Component extends PureComponent {
     return (
       <div className="page">
         <div className={styles['dialog']}>
-          <div className={styles['dialog__header']}>
-            <h3>Авторизация</h3>
-          </div>
           <div className={styles['dialog__content']}>
             <Form onSubmit={this.onSubmit.bind(this)} />
           </div>

@@ -163,7 +163,9 @@ class Component extends PureComponent {
   _eventReset(event) {
     const { isOpen } = this.state;
     const {current: selectElement} = this.selectRef;
+
     const target = event.target;
+
     if (selectElement && ! selectElement.contains(target)) {
       isOpen && this._handleOnBlur();
     }
@@ -265,25 +267,11 @@ class Component extends PureComponent {
     this.setState({ isOpen: false, isDirectUp: false }, () => onChange && onChange(null));
   }
 
-  // _renderInput() {
-  //   const { value: inputValue } = this.state;
-  //   const { value, optionValue } = this.props;
-  //   return (
-  //     <input
-  //       ref={this.inputRef}
-  //       className={styles['select__input']}
-  //       value={inputValue || value && value[optionValue]}
-  //       onBlur={this._handleOnBlur.bind(this)}
-  //       onChange={this._handleInputOnChange.bind(this)}
-  //     />
-  //   );
-  // }
-
   _renderValue() {
     const { value, placeholder } = this.props;
     const selectedValue = (value && this._getValue(value)) || null;
     return (
-      <span className={styles['select__values']} onClick={this._handleOnFocus.bind(this)}>
+      <span className={styles['select__values']}>
         {selectedValue
           ? (<span className={styles['select__value']}>
               <span className={styles['select__text']}>{selectedValue}</span>
@@ -298,7 +286,9 @@ class Component extends PureComponent {
 
   _renderCancel() {
     const { clearable } = this.props;
+
     const classNameMarker = cn(styles['select__marker'], 'fas fa-times');
+
     return clearable && (
       <span className={styles['select__cross']} onClick={this._handleResetValue.bind(this)}>
         <span className={classNameMarker}/>
@@ -308,12 +298,14 @@ class Component extends PureComponent {
 
   _renderMarker() {
     const { isOpen } = this.state;
+
     const classNameMarker = cn(styles['select__marker'], {
       'fas fa-angle-down': ! isOpen,
       'fas fa-angle-up': isOpen,
     });
+
     return (
-      <span className={styles['select__angle']} onClick={this._handleOnFocus.bind(this)}>
+      <span className={styles['select__angle']}>
         <span className={classNameMarker} />
       </span>
     );
@@ -322,6 +314,7 @@ class Component extends PureComponent {
   render() {
     const { isOpen } = this.state;
     const { className, disabled, mode, options, optionKey, optionValue, value, optionTransform, optionTemplate } = this.props;
+
     const classNameSelectWrapper = cn(className, styles['wrapper'], {
       [styles['wrapper--primary']]: mode === PRIMARY_MODE,
       [styles['wrapper--success']]: mode === SUCCESS_MODE,
@@ -337,13 +330,15 @@ class Component extends PureComponent {
     return (
       <div className={classNameSelectWrapper}>
         <div ref={this.selectRef} className={classNameSelect}>
-          <span className={styles['select__content']}>
-            {this._renderValue()}
-          </span>
-          <span className={styles['select__controls']}>
+          <div className={styles['select__container']} tabIndex={0} onClick={this._handleOnFocus.bind(this)}>
+            <span className={styles['select__content']}>
+              {this._renderValue()}
+            </span>
+            <span className={styles['select__controls']}>
             { !! value && this._renderCancel()}
-            {this._renderMarker()}
-          </span>
+              {this._renderMarker()}
+            </span>
+          </div>
           {isOpen && (
             <Options
               ref={this.optionsRef}

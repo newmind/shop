@@ -12,10 +12,10 @@
   overflow: hidden;
   transition: border 400ms;
 
-  //&:hover {
-  //
-  //  border-color: $gray;
-  //}
+  &:hover {
+
+    border-color: $coal-dark;
+  }
 
   & + & {
 

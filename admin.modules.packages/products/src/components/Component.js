@@ -1,13 +1,11 @@
 
 import { Confirm } from "@ui.packages/dialog";
 import { Table, Column } from "@ui.packages/table";
-import { Gallery, Button, Row, Col } from '@ui.packages/ui';
+import { Gallery, Button, Row, Col, Actions } from '@ui.packages/ui';
 
 import types from 'prop-types';
 import React, { PureComponent } from 'react';
-import { Link } from 'react-router-dom';
 
-import cn from 'classnames';
 import styles from './default.module.scss';
 
 
@@ -46,6 +44,12 @@ class Component extends PureComponent {
     await removeProductById([ productId ]);
 
     this.setState({ productId: null }, () => closeDialog('remove-confirm'));
+  }
+
+  _handleEdit(id) {
+    const { replaceURI } = this.props;
+
+    replaceURI('/products/' + id);
   }
 
   render() {
@@ -132,21 +136,12 @@ class Component extends PureComponent {
                 align="right"
                 width="70"
               >
-                {({ id, status }) => {
-                  const toArchiveClassName = cn(styles['actions__item'], {
-                    [styles['actions__item--trash']]: status === 1,
-                    [styles['actions__item--return']]: status === 0,
-                    'far fa-trash-alt': status === 1,
-                    'fas fa-check': status === 0,
-                  });
-                  const newStatus = status === 1 ? 0 : 1;
-                  return (
-                    <div className={styles['actions']}>
-                      <Link className={cn(styles['actions__item'], styles['actions__item--edit'], "fas fa-pencil-alt")} to={`/products/${id}`} />
-                      <span className={toArchiveClassName} onClick={this._handleRemoveProduct.bind(this, id, newStatus)} />
-                    </div>
-                  );
-                }}
+                {({ id }) => (
+                  <Actions
+                    onEdit={this._handleEdit.bind(this, id)}
+                    onDelete={this._handleRemoveProduct.bind(this, id, 0)}
+                  />
+                )}
               </Column>
             </Table>
           </Col>

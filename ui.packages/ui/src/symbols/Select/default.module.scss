@@ -82,24 +82,21 @@
   }
 }
 
-.label {
-
-  display: block;
-  font-size: 14px;
-  color: $blue-grey;
-  margin: 0 0 8px 1px;
-  transition: color 200ms;
-}
-
 .select {
 
   display: flex;
   flex: 1 0;
   border: 1px solid $pale-lilac;
-  border-radius: 3px;
+  border-radius: 5px;
   cursor: pointer;
   background: $white;
   transition: border-color 200ms;
+
+  &:hover,
+  &--is-focus {
+
+    border-color: $coal-dark;
+  }
 
   &:hover &__angle {
 
@@ -117,12 +114,21 @@
 
   &--is-focus &__angle {
 
-    color: $coal-dark;
+    color: $black;
+    border-color: $coal-dark;
   }
 
   &--is-focus &__cross {
 
     color: $danger;
+  }
+
+  &__container {
+
+    display: flex;
+    flex: 1 0;
+    flex-direction: row;
+    outline: none;
   }
 
   &__content {
@@ -150,8 +156,8 @@
   &__placeholder {
 
     display: block;
-    font-size: 13px;
-    padding: 8px 9px 7px 11px;
+    font-size: 14px;
+    padding: 10px 14px 9px;
     width: 100%;
     box-sizing: border-box;
     transition: color 200ms;
@@ -172,7 +178,7 @@
 
   &__placeholder {
 
-    color: rgba($coal-dark, .8);
+    color: $blue-grey;
   }
 
   &__text {
@@ -191,8 +197,9 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    padding: 0 8px;
+    padding: 1px 14px 0 8px;
     color: $pale-lilac;
+    pointer-events: all;
     transition: color 200ms;
   }
 
@@ -204,7 +211,7 @@
     align-items: center;
     justify-content: center;
     padding: 0;
-    color: rgba($danger, .1);
+    color: rgba($danger, .2);
     transition: color 200ms;
   }
 
@@ -255,73 +262,39 @@
 .option {
 
   display: block;
-  padding: 10px 20px;
+  padding: 14px 20px;
   transition: background 200ms;
 
   &:first-child {
 
-    padding-top: 12px;
+    margin-top: 6px;
   }
 
   &:last-child {
 
-    padding-bottom: 12px;
+    margin-bottom: 6px;
   }
 
   &:hover {
 
-    background: rgba($primary, .2);
+    background: $very-light-pink;
   }
 
   &--selected,
   &--selected:hover {
 
-    background: rgba($primary, .4);
+    background: rgba($information, .2);
   }
 
   & + & {
 
-    border-top: 1px solid rgba($coal-dark, .04);
+    border-top: 1px solid $very-light-pink;
   }
 
   &__value {
 
     display: block;
-    font-size: 13px;
-    color: $coal-dark;
-  }
-}
-
-.tooltip {
-
-  position: fixed;
-  padding: 10px 16px;
-  display: block;
-  max-width: 200px;
-  background: $danger;
-  border-radius: 4px;
-
-  &:before {
-
-    position: absolute;
-    right: 100%;
-    top: 50%;
-    display: inline-block;
-    margin: -7px 0 0;
-    width: 0;
-    height: 0;
-    border: 6px solid transparent;
-    border-left: none;
-    border-right-color: $danger;
-    content: '';
-  }
-
-  &__message {
-
-    display: inline-block;
-    font-size: 13px;
-    color: $whitesmoke;
-    letter-spacing: .5px;
-    font-weight: bold;
+    font-size: 14px;
+    color: $black;
   }
 }

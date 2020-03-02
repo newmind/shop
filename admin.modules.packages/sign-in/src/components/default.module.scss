@@ -5,11 +5,11 @@
 .dialog {
 
   display: block;
-  margin: auto;
-  width: 450px;
+  margin: 100px auto;
+  width: 340px;
   background: $white;
   box-shadow: 0 0 3px 1px rgba($pale-lilac, .8);
-  border-radius: 4px;
+  border-radius: 15px;
   overflow: hidden;
 
   &__header {
@@ -23,7 +23,7 @@
   &__content {
 
     display: block;
-    padding: 40px 60px 25px;
+    padding: 60px 60px 25px;
   }
 
   &__controls {

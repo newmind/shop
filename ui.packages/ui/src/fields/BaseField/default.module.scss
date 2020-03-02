@@ -65,9 +65,9 @@
 .label {
 
   display: block;
-  font-size: 14px;
-  color: $coal-dark;
-  margin: 0 0 8px 1px;
+  font-size: 13px;
+  color: $blue-grey;
+  margin: 0 0 8px 15px;
   transition: color 400ms;
 }
 
@@ -115,22 +115,13 @@
 
   position: absolute;
   top: 100%;
-  right: 0;
+  right: 15px;
   display: block;
-  background: $danger;
-  padding: 0 6px 2px 20px;
-  letter-spacing: .2px;
-  border-radius: 0 0 3px 3px;
 
   &__message {
 
     font-size: 10px;
-    color: $white;
-    font-weight: bold;
+    color: $danger;
+    letter-spacing: .5px;
   }
-}
-
-.border-right-bottom-none {
-
-  border-radius: 3px 3px 0;
 }
