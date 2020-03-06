@@ -59,45 +59,59 @@ class Component extends PureComponent {
     const { items } = this.props;
 
     return (
-      <div className="page">
+      <div className={styles['wrapper']}>
         <Row>
           <Col>
-            <Table columns={items}>
-              <Column
-                title="ID"
-                alias="id"
-                width="30"
-                align="left"
-              />
-              <Column
-                title="Оценка"
-                alias="evaluation"
-                width="80"
-                align="left"
-              />
-              <Column
-                title="Имя комментирующего"
-                alias="person"
-                width="200"
-                align="left"
-              />
-              <Column
-                title="Текст комментария"
-                alias="comment"
-                align="left"
-              />
-              <Column
-                align="right"
-                width="70"
-              >
-                {({ id }) => (
-                  <Actions
-                    onEdit={this._handleEditComment.bind(this, id)}
-                    onDelete={this._handleRemoveComment.bind(this, id)}
-                  />
-                )}
-              </Column>
-            </Table>
+            <div className={styles['block']}>
+              <Table columns={items}>
+                <Column
+                  title="ID"
+                  alias="id"
+                  width="30"
+                  align="left"
+                />
+                <Column
+                  title="Оценка"
+                  alias="evaluation"
+                  width="80"
+                  align="left"
+                />
+                <Column
+                  title="Автор"
+                  alias="person"
+                  width="200"
+                  align="left"
+                />
+                <Column
+                  title="Комментарий"
+                  alias="comment"
+                  align="left"
+                />
+                <Column
+                  title="Продукт"
+                  alias="product"
+                >
+                  {(product) => {
+                    return product && (
+                      <div>
+                        <Link to={'/products/' + product['id']}>{ product['brand'] }</Link>
+                      </div>
+                    )
+                  }}
+                </Column>
+                <Column
+                  align="right"
+                  width="70"
+                >
+                  {({ id }) => (
+                    <Actions
+                      onEdit={this._handleEditComment.bind(this, id)}
+                      onDelete={this._handleRemoveComment.bind(this, id)}
+                    />
+                  )}
+                </Column>
+              </Table>
+            </div>
           </Col>
         </Row>
         <Confirm

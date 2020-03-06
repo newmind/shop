@@ -25,7 +25,13 @@ module.exports = (db, DataType) => {
     },
   });
 
-  Comment.associate = () => {};
+  Comment.associate = ({ Product }) => {
+
+    Comment.belongsTo(Product, {
+      foreignKey: 'productId',
+      as: 'product',
+    });
+  };
 
   return Comment;
 };

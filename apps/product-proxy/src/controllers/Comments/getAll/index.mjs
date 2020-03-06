@@ -8,7 +8,7 @@ export default () => async (ctx) => {
     const offset = {};
     const options = {};
 
-    const { Comment } = models;
+    const { Comment, Product } = models;
     const { limit = null, take = null, skip = null, id = null, uuid = null, evaluation = null, person = null, createAt = null } = ctx['request']['query'];
 
     if (id) {
@@ -48,6 +48,11 @@ export default () => async (ctx) => {
       ...offset,
       where: { ...where },
       order: [['createdAt', 'desc']],
+      include: [{
+        model: Product,
+        as: 'product',
+        attributes: ['id', 'uuid', 'brand']
+      }],
     });
 
     ctx.body = {

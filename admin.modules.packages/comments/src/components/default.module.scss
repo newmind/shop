@@ -2,131 +2,16 @@
 @import "~@ui.packages/theme";
 
 
-.actions {
-
-  display: inline-block;
-  text-align: center;
-  font-size: 0;
-
-  &__item {
-
-    display: inline-block;
-    font-size: 15px;
-    outline: none;
-    color: $gray;
-    cursor: pointer;
-    transition: color 200ms;
-
-    & + & {
-
-      margin: 0 0 0 10px;
-    }
-
-    &--trash {
-      color: lighten($danger, 30%);
-      &:hover {
-        color: $danger;
-      }
-    }
-
-    &--return {
-      color: lighten($primary, 30%);
-      &:hover {
-        color: $primary;
-      }
-    }
-
-    &--edit {
-      color: lighten($success, 30%);
-      &:hover {
-        color: $success;
-      }
-    }
-  }
-}
-
-.amount {
+.wrapper {
 
   display: block;
-  text-align: right;
-  color: $coal-dark;
-  font-size: 0;
-
-  &__value {
-
-    display: inline-block;
-    font-size: 13px;
-    //font-weight: bold;
-    margin: 0 4px 0 0;
-  }
-
-  &__currency {
-
-    display: inline-block;
-    font-size: 13px;
-    //font-weight: bold;
-  }
+  padding: 40px 40px 180px;
 }
 
-.image {
-
-  width: 140px;
-  height: 105px;
-}
-
-.attributes {
+.block {
 
   display: block;
-
-  &__item {
-
-    display: block;
-    font-size: 12px;
-    white-space: nowrap;
-
-    & + & {
-
-      margin: 10px 0 0;
-    }
-  }
-
-  &__name {
-
-    display: inline-block;
-    font-weight: bold;
-    margin: 0 8px 0 0;
-  }
-
-  &__value {
-
-    display: inline-block;
-  }
-
-  &__unit {
-
-    display: inline-block;
-    margin: 0 0 0 4px;
-    font-style: italic;
-  }
-}
-
-.description {
-
-  display: block;
-  font-size: 13px;
-  line-height: 1.4;
-
-  &__label {
-
-    font-weight: bold;
-  }
-
-  &__item {
-
-    display: block;
-
-    & + & {
-      margin: 8px 0 0;
-    }
-  }
+  border: 1px solid $pale-lilac;
+  border-radius: 15px;
+  padding: 20px;
 }

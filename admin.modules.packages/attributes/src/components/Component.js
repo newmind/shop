@@ -20,8 +20,9 @@ class Component extends PureComponent {
 
   render() {
     const {} = this.props;
+
     return (
-      <section className="page">
+      <section className={styles['wrapper']}>
         <section className={styles['block']}>
           <h3 className={styles['block__header']}>Тип</h3>
           <article className={styles['block__content']}>

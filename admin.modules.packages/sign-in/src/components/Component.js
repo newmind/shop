@@ -48,12 +48,18 @@ class Component extends PureComponent {
     const { isValid, isPristine } = this.props;
     return (
       <div className="page">
-        <div className={styles['dialog']}>
-          <div className={styles['dialog__content']}>
-            <Form onSubmit={this.onSubmit.bind(this)} />
-          </div>
-          <div className={styles['dialog__controls']}>
-            <Button onClick={this._onSubmitForm.bind(this)} mode="primary" disabled={ ! isValid || isPristine}>Выполнить</Button>
+        <div className={styles['wrapper']}>
+          <div className={styles['dialog']}>
+            <h2 className={styles['header']}>Авторизация</h2>
+            <div className={styles['dialog__content']}>
+              <Form onSubmit={this.onSubmit.bind(this)} />
+            </div>
+            <div className={styles['dialog__controls']}>
+              <Button
+                mode="success"
+                disabled={ ! isValid || isPristine}
+                onClick={this._onSubmitForm.bind(this)}>Выполнить</Button>
+            </div>
           </div>
         </div>
       </div>

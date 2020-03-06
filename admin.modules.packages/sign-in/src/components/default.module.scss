@@ -2,34 +2,44 @@
 @import "~@ui.packages/theme";
 
 
+.wrapper {
+
+  display: flex;
+  flex: 1 0;
+  flex-direction: column;
+  background: $very-light-pink;
+}
+
 .dialog {
 
   display: block;
   margin: 100px auto;
   width: 340px;
   background: $white;
-  box-shadow: 0 0 3px 1px rgba($pale-lilac, .8);
+  border: 1px solid $pale-lilac;
   border-radius: 15px;
   overflow: hidden;
-
-  &__header {
-
-    display: block;
-    padding: 18px 20px 14px;
-    font-size: 16px;
-    font-weight: bold;
-  }
 
   &__content {
 
     display: block;
-    padding: 60px 60px 25px;
+    padding: 40px 60px 0;
   }
 
   &__controls {
 
     display: block;
-    padding: 10px 20px 30px;
+    padding: 50px 0 30px;
     text-align: center;
   }
+}
+
+.header {
+
+  display: block;
+  padding: 30px 0 0;
+  font-size: 14px;
+  text-align: center;
+  text-transform: uppercase;
+  letter-spacing: .8px;
 }

@@ -6,6 +6,8 @@ import { Gallery, Button, Row, Col, Actions } from '@ui.packages/ui';
 import types from 'prop-types';
 import React, { PureComponent } from 'react';
 
+import Filter from './Filter';
+
 import styles from './default.module.scss';
 
 
@@ -56,103 +58,97 @@ class Component extends PureComponent {
     const { items } = this.props;
 
     return (
-      <div className="page">
-        <Row>
-          <Col>
-            <Button mode="primary" onClick={this._handleAddProduct.bind(this)}>Добавить товар на склад</Button>
-          </Col>
-        </Row>
-        <Row>
-          <Col>
-            <Table columns={items}>
-              <Column
-                title="ID"
-                alias="id"
-                width="30"
-                align="left"
-              />
-              <Column
-                title="Фото"
-                alias="gallery"
-                width="140"
-              >
-                {(items) => <Gallery className={styles['image']} valueKey={'id'} items={items} path={`${process.env['REACT_APP_API_HOST']}/gallery`} />}
-              </Column>
-              <Column
-                title="Основное"
-                align="left"
-              >
-                {({ uuid, name, brand, description, amount, currency }) => {
-                  return (
-                    <div className={styles['description']}>
-                      {uuid && <div className={styles['description__item']}><b className={styles['description__label']}># </b>{ uuid }</div>}
-                      {brand && <div className={styles['description__item']}><b className={styles['description__label']}>Бренд:</b> { brand }</div>}
-                      {name && <div className={styles['description__item']}><b className={styles['description__label']}>Название:</b> { name }</div>}
-                      {name && <div className={styles['description__item']}><b className={styles['description__label']}>Цена:</b> { amount } { currency['value'] }</div>}
-                      {description && <div className={styles['description__item']}><b className={styles['description__label']}>Описание:</b> { description }</div>}
-                    </div>
-                  )
-                }}
-              </Column>
-              <Column
-                title="Описание"
-                align="left"
-                width="200"
-              >
-                {({ type, category, color, form, material }) => {
-                  return (
-                    <div className={styles['description']}>
-                      {type && <div className={styles['description__item']}><b className={styles['description__label']}>Тип:</b> { type['value'] }</div>}
-                      {category && <div className={styles['description__item']}><b className={styles['description__label']}>Категория:</b> { category['value'] }</div>}
-                      {color && <div className={styles['description__item']}><b className={styles['description__label']}>Цвет:</b> { color['value'] }</div>}
-                      {form && <div className={styles['description__item']}><b className={styles['description__label']}>Форма:</b> { form['value'] }</div>}
-                      {material && <div className={styles['description__item']}><b className={styles['description__label']}>Материал:</b> { material['value'] }</div>}
-                    </div>
-                  );
-                }}
-              </Column>
-              <Column
-                title="Аттрибуты"
-                alias="attributes"
-                align="left"
-                width="200"
-              >
-                {(attrs) => {
-                  return (
-                    <ul className={styles['attributes']}>
-                      { ! attrs.length && <li className={styles['attributes__item']}>Нет данных</li>}
-                      {attrs.map((attr, index) => (
-                        <li key={index} className={styles['attributes__item']}>
-                          <span className={styles['attributes__name']}>{ attr['name'] }:</span>
-                          <span className={styles['attributes__value']}>{ attr['value'] }</span>
-                          {attr['unit'] && <span className={styles['attributes__unit']}>{ attr['unit']['value'] }</span>}
-                        </li>
-                      ))}
-                    </ul>
-                  );
-                }}
-              </Column>
-              <Column
-                align="right"
-                width="70"
-              >
-                {({ id }) => (
-                  <Actions
-                    onEdit={this._handleEdit.bind(this, id)}
-                    onDelete={this._handleRemoveProduct.bind(this, id, 0)}
-                  />
-                )}
-              </Column>
-            </Table>
-          </Col>
-        </Row>
+      <section className={styles['wrapper']}>
+        <aside className={styles['controls']}>
+          <Button
+            mode="success"
+            onClick={this._handleAddProduct.bind(this)}
+          >Добавить товар</Button>
+        </aside>
+        <article className={styles['content']}>
+          <Filter onSubmit={(data) => console.log(data)}/>
+          <Table columns={items}>
+            <Column
+              title="Фото"
+              alias="gallery"
+              width="140"
+            >
+              {(items) => <Gallery className={styles['image']} valueKey={'id'} items={items} path={`${process.env['REACT_APP_API_HOST']}/gallery`} />}
+            </Column>
+            <Column
+              title="Основное"
+              align="left"
+            >
+              {({ id, uuid, name, brand, description, amount, currency }) => {
+                return (
+                  <div className={styles['description']}>
+                    {uuid && <div className={styles['description__item']}>[ID: { id }] <b className={styles['description__label']}>{ uuid }</b></div>}
+                    {brand && <div className={styles['description__item']}><b className={styles['description__label']}>Бренд:</b> { brand }</div>}
+                    {name && <div className={styles['description__item']}><b className={styles['description__label']}>Название:</b> { name }</div>}
+                    {name && <div className={styles['description__item']}><b className={styles['description__label']}>Цена:</b> { amount } { currency['value'] }</div>}
+                    {description && <div className={styles['description__item']}><b className={styles['description__label']}>Описание:</b> { description }</div>}
+                  </div>
+                )
+              }}
+            </Column>
+            <Column
+              title="Описание"
+              align="left"
+              width="200"
+            >
+              {({ type, category, color, form, material }) => {
+                return (
+                  <div className={styles['description']}>
+                    {type && <div className={styles['description__item']}><b className={styles['description__label']}>Тип:</b> { type['value'] }</div>}
+                    {category && <div className={styles['description__item']}><b className={styles['description__label']}>Категория:</b> { category['value'] }</div>}
+                    {color && <div className={styles['description__item']}><b className={styles['description__label']}>Цвет:</b> { color['value'] }</div>}
+                    {form && <div className={styles['description__item']}><b className={styles['description__label']}>Форма:</b> { form['value'] }</div>}
+                    {material && <div className={styles['description__item']}><b className={styles['description__label']}>Материал:</b> { material['value'] }</div>}
+                  </div>
+                );
+              }}
+            </Column>
+            <Column
+              title="Аттрибуты"
+              alias="attributes"
+              align="left"
+              width="200"
+            >
+              {(attrs) => {
+                return (
+                  <ul className={styles['attributes']}>
+                    { ! attrs.length && <li className={styles['attributes__item']}>Нет данных</li>}
+                    {attrs.map((attr, index) => (
+                      <li key={index} className={styles['attributes__item']}>
+                        <span className={styles['attributes__name']}>{ attr['name'] }:</span>
+                        <span className={styles['attributes__value']}>{ attr['value'] }</span>
+                        {attr['unit'] && <span className={styles['attributes__unit']}>{ attr['unit']['value'] }</span>}
+                      </li>
+                    ))}
+                  </ul>
+                );
+              }}
+            </Column>
+            <Column
+              align="right"
+              width="70"
+            >
+              {({ id }) => (
+                <Actions
+                  onEdit={this._handleEdit.bind(this, id)}
+                  onDelete={this._handleRemoveProduct.bind(this, id, 0)}
+                />
+              )}
+            </Column>
+          </Table>
+        </article>
         <Confirm
           name="remove-confirm"
           message="Вы уверены, что хотите удалить товар?"
           onConfirm={this._handleConfirmRemove.bind(this)}
           onCancel={this._handleCancelRemove.bind(this)}
         />
-      </div>
+      </section>
     );
   }
 }
