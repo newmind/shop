@@ -5,6 +5,8 @@ import {
   GET_PRODUCTS_REQUEST,
   GET_PRODUCTS_REQUEST_FAIL,
   GET_PRODUCTS_REQUEST_SUCCESS,
+
+  SOCKET_PRODUCT_UPDATED,
 } from './types';
 
 
@@ -57,6 +59,16 @@ export default (state = initialState, { type, payload }) => {
         inProcess: false,
       };
     }
+
+    case SOCKET_PRODUCT_UPDATED: return {
+      ...state,
+      items: state['items'].map((item) => {
+        if (item['id'] === payload['id']) {
+          return payload;
+        }
+        return item;
+      })
+    };
 
     default: return state;
   }

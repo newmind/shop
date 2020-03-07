@@ -13,7 +13,7 @@ export default () => async (ctx) => {
     const {
       status = null, limit = null, skip = null, take = null,
       uuid = null, id = null, categoryId = null, brand = null, amountFrom = null,
-      amountTo = null, colorId = null, formId = null, materialId = null,
+      amountTo = null, colorId = null, formId = null, materialId = null, typeId = null,
     } = ctx['request']['query'];
 
     if (status) {
@@ -48,6 +48,10 @@ export default () => async (ctx) => {
       where['materialId'] = materialId;
     }
 
+    if (typeId) {
+      where['typeId'] = typeId;
+    }
+
     if (amountFrom && ! amountTo) {
       where['amount'] = {
         [Op.gte]: amountFrom
@@ -73,8 +77,6 @@ export default () => async (ctx) => {
 
     const products = await Product.findAndCountAll({
       attributes: ['id', 'uuid', 'brand', 'name', 'description', 'status', 'amount', 'saleAmount', 'count', 'params', 'isHit', 'isSale', 'createdAt'],
-      distinct: true,
-      subQuery: false,
       ...options,
       ...offset,
       where: { ...where },

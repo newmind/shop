@@ -1,4 +1,3 @@
-'use strict';
 
 import amqp from 'amqplib/callback_api';
 
@@ -121,6 +120,7 @@ export const createExchange = (exchange) => {
 };
 
 export const sendEvent = (exchange, content) => {
+  console.log('RabbitMQ send ', exchange, content);
   content = Buffer.from(content);
   channelConnect.publish(exchange, '', content, { percistent: true }, function(error) {
     if (error) {

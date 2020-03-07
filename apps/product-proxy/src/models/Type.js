@@ -2,7 +2,7 @@
 
 module.exports = (db, DataType) => {
 
-  const Category = db.define('Type', {
+  const Type = db.define('Type', {
     id: {
       type: DataType.INTEGER,
       primaryKey: true,
@@ -19,7 +19,13 @@ module.exports = (db, DataType) => {
     }
   });
 
-  Category.associate = () => {};
+  Type.associate = ({ Product }) => {
 
-  return Category;
+    Type.hasMany(Product, {
+      foreignKey: 'typeId',
+      as: 'product',
+    });
+  };
+
+  return Type;
 };

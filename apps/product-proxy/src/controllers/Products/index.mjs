@@ -4,6 +4,7 @@ export { default as createProduct } from './create';
 export { default as deleteProductById } from './delete';
 export { default as updateProductById } from './update';
 
+export { default as getTypesCount } from './attributes/getTypes';
 export { default as getFormsCount } from './attributes/getForms';
 export { default as getBrandsCount } from './attributes/getBrands';
 export { default as getColorsCount } from './attributes/getColors';

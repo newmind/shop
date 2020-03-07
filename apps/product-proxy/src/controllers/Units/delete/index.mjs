@@ -1,6 +1,6 @@
 
-import { sequelize, models } from '@sys.packages/db';
 import { sendEvent } from "@sys.packages/rabbit";
+import { sequelize, models } from '@sys.packages/db';
 
 
 export default () => async (ctx) => {

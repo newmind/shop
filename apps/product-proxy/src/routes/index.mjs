@@ -10,7 +10,7 @@ import { getAllCurrencies, createCurrency, updateCurrency, deleteCurrencies } fr
 import { getAllOrders, createOrder, updateOrder } from '../controllers/Operations';
 
 import { getProducts, createProduct, deleteProductById, updateProductById } from '../controllers/Products';
-import { getFormsCount, getBrandsCount, getColorsCount, getMaterialsCount, getCategoriesCount } from '../controllers/Products';
+import { getTypesCount, getFormsCount, getBrandsCount, getColorsCount, getMaterialsCount, getCategoriesCount } from '../controllers/Products';
 
 import { getImage, deleteImages } from '../controllers/Gallery';
 
@@ -54,6 +54,7 @@ export default (router) => {
   router.put('/v1/api/units/:id', updateUnit());
   router.delete('/v1/api/units', deleteUnits());
 
+  router.get('/v1/api/products/types', getTypesCount());
   router.get('/v1/api/products/forms', getFormsCount());
   router.get('/v1/api/products/brands', getBrandsCount());
   router.get('/v1/api/products/colors', getColorsCount());

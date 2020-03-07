@@ -9,7 +9,7 @@ export default () => async (ctx) => {
     const { Op } = Sequelize;
     const { Product, Category } = models;
     const {
-      status = null, brand = null, amountFrom = null,
+      status = null, brand = null, amountFrom = null, typeId = null,
       amountTo = null, colorId = null, formId = null, materialId = null,
     } = ctx['request']['query'];
 
@@ -19,6 +19,10 @@ export default () => async (ctx) => {
 
     if (brand) {
       where['brand'] = brand;
+    }
+
+    if (typeId) {
+      where['typeId'] = typeId;
     }
 
     if (colorId) {

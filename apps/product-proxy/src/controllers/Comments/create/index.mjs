@@ -1,7 +1,6 @@
 
 import { models } from '@sys.packages/db';
-
-// import { sendEvent } from "@sys.packages/rabbit";
+import { sendEvent } from "@sys.packages/rabbit";
 
 
 export default () => async (ctx) => {
@@ -17,7 +16,7 @@ export default () => async (ctx) => {
       attributes: ['id', 'evaluation', 'person', 'comment', 'createdAt'],
     });
 
-    // sendEvent(process.env['RABBIT_PRODUCT_PROXY_EXCHANGE_PRODUCT_CREATED'], JSON.stringify(component));
+    sendEvent(process.env['RABBIT_PRODUCT_PROXY_EXCHANGE_COMMENT_CREATED'], JSON.stringify(result.toJSON()));
 
     ctx.body = {
       success: true,

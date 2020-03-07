@@ -1,4 +1,3 @@
-'use strict';
 
 import { sequelize, models } from '@sys.packages/db';
 import { getFiles } from "@sys.packages/sys.utils";

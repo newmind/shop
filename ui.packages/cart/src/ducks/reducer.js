@@ -9,6 +9,8 @@ import {
   ADD_PRODUCT_TO_CART,
   UPDATE_PRODUCT_IN_CART,
   REMOVE_PRODUCT_FROM_CART,
+
+  SOCKET_PRODUCT_UPDATED,
 } from './types';
 
 
@@ -36,7 +38,7 @@ export default (state = initialState, { type, payload }) => {
       const item = {
         ...payload,
         goal: '',
-        type: 'on-prescription',
+        productType: 'on-prescription',
         recipe: {},
         lens: {},
         file: null,
@@ -90,6 +92,19 @@ export default (state = initialState, { type, payload }) => {
     case RESET_CART: return {
       ...state,
       items: [],
+    };
+
+    case SOCKET_PRODUCT_UPDATED: return {
+      ...state,
+      items: state['items'].map((item) => {
+        if (item['id'] === payload['id']) {
+          return {
+            ...item,
+            ...payload,
+          };
+        }
+        return item;
+      }),
     };
 
     default: return state;

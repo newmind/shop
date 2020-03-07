@@ -1,5 +1,5 @@
 
-import { models, sequelize, Sequelize } from '@sys.packages/db';
+import {models, sequelize, Sequelize } from '@sys.packages/db';
 
 
 export default () => async (ctx) => {
@@ -7,18 +7,14 @@ export default () => async (ctx) => {
     const where = {};
 
     const { Op } = Sequelize;
-    const { Product, Form } = models;
+    const { Product, Type } = models;
     const {
       status = null, categoryId = null, brand = null, amountFrom = null,
-      amountTo = null, colorId = null, materialId = null, typeId = null,
+      amountTo = null, colorId = null, formId = null, typeId = null,
     } = ctx['request']['query'];
 
     if (status) {
       where['status'] = status;
-    }
-
-    if (typeId) {
-      where['typeId'] = typeId;
     }
 
     if (categoryId) {
@@ -33,8 +29,12 @@ export default () => async (ctx) => {
       where['colorId'] = colorId;
     }
 
-    if (materialId) {
-      where['materialId'] = materialId;
+    if (formId) {
+      where['formId'] = formId;
+    }
+
+    if (formId) {
+      where['typeId'] = typeId;
     }
 
     if (amountFrom && ! amountTo) {
@@ -51,10 +51,10 @@ export default () => async (ctx) => {
       };
     }
 
-    const result = await Form.findAll({
+    const result = await Type.findAll({
       raw: true,
-      group: ['Form.id'],
-      attributes: ['id', 'value', [sequelize.fn('COUNT', sequelize.col('product.formId')), 'count']],
+      group: ['Type.id'],
+      attributes: ['id', 'value', [sequelize.fn('COUNT', sequelize.col('product.typeId')), 'count']],
       include: [
         {
           model: Product,
@@ -65,7 +65,7 @@ export default () => async (ctx) => {
         }
       ],
     });
-
+    
     ctx.body = {
       success: true,
       data: result,

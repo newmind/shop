@@ -5,12 +5,11 @@ import {
   createConsumer,
   bindQueueToExchange
 } from '@sys.packages/rabbit';
+import createSocket from '@sys.packages/socket.io';
+import appServer, { initRouter } from '@sys.packages/server';
 
 import http from 'http';
 import koaCORS from "koa-cors2";
-
-import createSocket from '@sys.packages/socket.io';
-import appServer, { initRouter } from '@sys.packages/server';
 
 import routes from './routes';
 
@@ -20,42 +19,27 @@ import routes from './routes';
   createConnection(process.env['RABBIT_CONNECTION_HOST'], async (error, connection) => {
     createChannel(connection, async () => {
 
-      // QUEUES
-
-      await createConsumer(process.env['RABBIT_SHOWCASE_GW_QUEUE_UNIT_UPDATED'], (message) => io.emit('action', { type: process.env['SOCKET_UNIT_UPDATED'], payload: JSON.parse(message) }));
-      await createConsumer(process.env['RABBIT_SHOWCASE_GW_QUEUE_UNIT_CREATED'], (message) => io.emit('action', { type: process.env['SOCKET_UNIT_CREATED'], payload: JSON.parse(message) }));
-      await createConsumer(process.env['RABBIT_SHOWCASE_GW_QUEUE_UNIT_DELETED'], (message) => io.emit('action', { type: process.env['SOCKET_UNIT_DELETED'], payload: Number(message) }));
-
-      await createConsumer(process.env['RABBIT_SHOWCASE_GW_QUEUE_CATEGORY_UPDATED'], (message) => io.emit('action', { type: process.env['SOCKET_CATEGORY_UPDATED'], payload: JSON.parse(message) }));
-      await createConsumer(process.env['RABBIT_SHOWCASE_GW_QUEUE_CATEGORY_CREATED'], (message) => io.emit('action', { type: process.env['SOCKET_CATEGORY_CREATED'], payload: JSON.parse(message) }));
-      await createConsumer(process.env['RABBIT_SHOWCASE_GW_QUEUE_CATEGORY_DELETED'], (message) => io.emit('action', { type: process.env['SOCKET_CATEGORY_DELETED'], payload: Number(message) }));
-
-      await createConsumer(process.env['RABBIT_SHOWCASE_GW_QUEUE_PRODUCT_UPDATED'], (message) => io.emit('action', { type: process.env['SOCKET_PRODUCT_UPDATED'], payload: JSON.parse(message) }));
-      await createConsumer(process.env['RABBIT_SHOWCASE_GW_QUEUE_PRODUCT_CREATED'], (message) => io.emit('action', { type: process.env['SOCKET_PRODUCT_CREATED'], payload: JSON.parse(message) }));
-      await createConsumer(process.env['RABBIT_SHOWCASE_GW_QUEUE_PRODUCT_DELETED'], (message) => io.emit('action', { type: process.env['SOCKET_PRODUCT_DELETED'], payload: Number(message) }));
-
-      await createConsumer(process.env['RABBIT_SHOWCASE_GW_QUEUE_STOCK_PRODUCT_CREATED'], (message) => io.emit('action', { type: process.env['SOCKET_STOCK_PRODUCT_CREATED'], payload: JSON.parse(message) }));
-      await createConsumer(process.env['RABBIT_SHOWCASE_GW_QUEUE_STOCK_PRODUCT_UPDATED'], (message) => io.emit('action', { type: process.env['SOCKET_STOCK_PRODUCT_UPDATED'], payload: JSON.parse(message) }));
-      await createConsumer(process.env['RABBIT_SHOWCASE_GW_QUEUE_STOCK_PRODUCT_DELETED'], (message) => io.emit('action', { type: process.env['SOCKET_STOCK_PRODUCT_DELETED'], payload: Number(message) }));
-
+      await createConsumer(process.env['RABBIT_CLIENT_GW_QUEUE_CATEGORY_UPDATED'], (message) => io.emit('action', { type: process.env['SOCKET_CATEGORY_UPDATED'], payload: JSON.parse(message) }));
+      await createConsumer(process.env['RABBIT_CLIENT_GW_QUEUE_COLOR_UPDATED'], (message) => io.emit('action', { type: process.env['SOCKET_COLOR_UPDATED'], payload: JSON.parse(message) }));
+      await createConsumer(process.env['RABBIT_CLIENT_GW_QUEUE_COMMENT_UPDATED'], (message) => io.emit('action', { type: process.env['SOCKET_COMMENT_UPDATED'], payload: JSON.parse(message) }));
+      await createConsumer(process.env['RABBIT_CLIENT_GW_QUEUE_CURRENCY_UPDATED'], (message) => io.emit('action', { type: process.env['SOCKET_CURRENCY_UPDATED'], payload: JSON.parse(message) }));
+      await createConsumer(process.env['RABBIT_CLIENT_GW_QUEUE_FORM_UPDATED'], (message) => io.emit('action', { type: process.env['SOCKET_FORM_UPDATED'], payload: JSON.parse(message) }));
+      await createConsumer(process.env['RABBIT_CLIENT_GW_QUEUE_MATERIAL_UPDATED'], (message) => io.emit('action', { type: process.env['SOCKET_MATERIAL_UPDATED'], payload: JSON.parse(message) }));
+      await createConsumer(process.env['RABBIT_CLIENT_GW_QUEUE_PRODUCT_UPDATED'], (message) => io.emit('action', { type: process.env['SOCKET_PRODUCT_UPDATED'], payload: JSON.parse(message) }));
+      await createConsumer(process.env['RABBIT_CLIENT_GW_QUEUE_TYPE_UPDATED'], (message) => io.emit('action', { type: process.env['SOCKET_TYPE_UPDATED'], payload: JSON.parse(message) }));
+      await createConsumer(process.env['RABBIT_CLIENT_GW_QUEUE_UNIT_UPDATED'], (message) => io.emit('action', { type: process.env['SOCKET_UNIT_UPDATED'], payload: JSON.parse(message) }));
 
       // EXCHANGES
 
-      await bindQueueToExchange(process.env['RABBIT_PRODUCT_PROXY_EXCHANGE_UNIT_CREATED'], process.env['RABBIT_SHOWCASE_GW_QUEUE_UNIT_CREATED']);
-      await bindQueueToExchange(process.env['RABBIT_PRODUCT_PROXY_EXCHANGE_UNIT_UPDATED'], process.env['RABBIT_SHOWCASE_GW_QUEUE_UNIT_UPDATED']);
-      await bindQueueToExchange(process.env['RABBIT_PRODUCT_PROXY_EXCHANGE_UNIT_DELETED'], process.env['RABBIT_SHOWCASE_GW_QUEUE_UNIT_DELETED']);
-
-      await bindQueueToExchange(process.env['RABBIT_PRODUCT_PROXY_EXCHANGE_CATEGORY_CREATED'], process.env['RABBIT_SHOWCASE_GW_QUEUE_CATEGORY_CREATED']);
-      await bindQueueToExchange(process.env['RABBIT_PRODUCT_PROXY_EXCHANGE_CATEGORY_UPDATED'], process.env['RABBIT_SHOWCASE_GW_QUEUE_CATEGORY_UPDATED']);
-      await bindQueueToExchange(process.env['RABBIT_PRODUCT_PROXY_EXCHANGE_CATEGORY_DELETED'], process.env['RABBIT_SHOWCASE_GW_QUEUE_CATEGORY_DELETED']);
-
-      await bindQueueToExchange(process.env['RABBIT_PRODUCT_PROXY_EXCHANGE_PRODUCT_CREATED'], process.env['RABBIT_SHOWCASE_GW_QUEUE_PRODUCT_CREATED']);
-      await bindQueueToExchange(process.env['RABBIT_PRODUCT_PROXY_EXCHANGE_PRODUCT_UPDATED'], process.env['RABBIT_SHOWCASE_GW_QUEUE_PRODUCT_UPDATED']);
-      await bindQueueToExchange(process.env['RABBIT_PRODUCT_PROXY_EXCHANGE_PRODUCT_DELETED'], process.env['RABBIT_SHOWCASE_GW_QUEUE_PRODUCT_DELETED']);
-
-      await bindQueueToExchange(process.env['RABBIT_PRODUCT_PROXY_EXCHANGE_STOCK_PRODUCT_CREATED'], process.env['RABBIT_SHOWCASE_GW_QUEUE_STOCK_PRODUCT_CREATED']);
-      await bindQueueToExchange(process.env['RABBIT_PRODUCT_PROXY_EXCHANGE_STOCK_PRODUCT_UPDATED'], process.env['RABBIT_SHOWCASE_GW_QUEUE_STOCK_PRODUCT_UPDATED']);
-      await bindQueueToExchange(process.env['RABBIT_PRODUCT_PROXY_EXCHANGE_STOCK_PRODUCT_DELETED'], process.env['RABBIT_SHOWCASE_GW_QUEUE_STOCK_PRODUCT_DELETED']);
+      await bindQueueToExchange(process.env['RABBIT_PRODUCT_PROXY_EXCHANGE_CATEGORY_UPDATED'], process.env['RABBIT_CLIENT_GW_QUEUE_CATEGORY_UPDATED']);
+      await bindQueueToExchange(process.env['RABBIT_PRODUCT_PROXY_EXCHANGE_COLOR_UPDATED'], process.env['RABBIT_CLIENT_GW_QUEUE_COLOR_UPDATED']);
+      await bindQueueToExchange(process.env['RABBIT_PRODUCT_PROXY_EXCHANGE_COMMENT_UPDATED'], process.env['RABBIT_CLIENT_GW_QUEUE_COMMENT_UPDATED']);
+      await bindQueueToExchange(process.env['RABBIT_PRODUCT_PROXY_EXCHANGE_CURRENCY_UPDATED'], process.env['RABBIT_CLIENT_GW_QUEUE_CURRENCY_UPDATED']);
+      await bindQueueToExchange(process.env['RABBIT_PRODUCT_PROXY_EXCHANGE_FORM_UPDATED'], process.env['RABBIT_CLIENT_GW_QUEUE_FORM_UPDATED']);
+      await bindQueueToExchange(process.env['RABBIT_PRODUCT_PROXY_EXCHANGE_MATERIAL_UPDATED'], process.env['RABBIT_CLIENT_GW_QUEUE_MATERIAL_UPDATED']);
+      await bindQueueToExchange(process.env['RABBIT_PRODUCT_PROXY_EXCHANGE_PRODUCT_UPDATED'], process.env['RABBIT_CLIENT_GW_QUEUE_PRODUCT_UPDATED']);
+      await bindQueueToExchange(process.env['RABBIT_PRODUCT_PROXY_EXCHANGE_TYPE_UPDATED'], process.env['RABBIT_CLIENT_GW_QUEUE_TYPE_UPDATED']);
+      await bindQueueToExchange(process.env['RABBIT_PRODUCT_PROXY_EXCHANGE_UNIT_UPDATED'], process.env['RABBIT_CLIENT_GW_QUEUE_UNIT_UPDATED']);
     });
   });
 

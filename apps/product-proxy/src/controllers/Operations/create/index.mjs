@@ -1,7 +1,7 @@
 
 import request from '@sys.packages/request';
 import { UUID } from '@sys.packages/sys.utils';
-import { sequelize, models } from '@sys.packages/db';
+// import { sequelize, models } from '@sys.packages/db';
 // import { sendEvent } from "@sys.packages/rabbit";
 
 import { createHash } from 'crypto';
@@ -74,8 +74,6 @@ export default () => async (ctx) => {
     };
   }
   catch (error) {
-
-    console.log(error)
 
     ctx.status = 500;
     ctx.body = {

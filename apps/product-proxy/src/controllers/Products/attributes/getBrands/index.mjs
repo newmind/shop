@@ -9,12 +9,16 @@ export default () => async (ctx) => {
     const { Op } = Sequelize;
     const { Product } = models;
     const {
-      status = null, categoryId = null, amountFrom = null,
+      status = null, categoryId = null, amountFrom = null, typeId = null,
       amountTo = null, colorId = null, formId = null, materialId = null,
     } = ctx['request']['query'];
 
     if (status) {
       where['status'] = status;
+    }
+
+    if (typeId) {
+      where['typeId'] = typeId;
     }
 
     if (categoryId) {

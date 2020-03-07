@@ -3,6 +3,7 @@ import numeral from "@ui.packages/numeral";
 import { Dialog } from "@ui.packages/dialog";
 import { Radio, RadioBoxField, Gallery } from "@ui.packages/ui";
 
+import types from 'prop-types';
 import React, { Fragment, PureComponent } from 'react';
 import { Field } from 'redux-form';
 import { Link } from 'react-router-dom';
@@ -18,6 +19,31 @@ import styles from "./default.module.scss";
 
 
 class Component extends PureComponent {
+  static propTypes = {
+    uuid: types.string,
+    name: types.string,
+    brand: types.string,
+    gallery: types.array,
+    amount: types.number,
+    currency: types.object,
+    productType: types.string,
+    recipe: types.object,
+    lens: types.object,
+    params: types.string,
+  };
+
+  static defaultProps = {
+    uuid: '',
+    name: '',
+    brand: '',
+    gallery: [],
+    amount: 0,
+    currency: {},
+    productType: '',
+    recipe: {},
+    lens: {},
+    params: '',
+  };
 
   _getLensAmount() {
     let amount = 0;
@@ -70,7 +96,7 @@ class Component extends PureComponent {
   }
 
   render() {
-    const { uuid, field, index, name, brand, gallery, amount, currency, type, recipe, lens, errors, params } = this.props;
+    const { uuid, field, index, name, brand, gallery, amount, currency, productType, recipe, lens, errors, params } = this.props;
 
     const hasRecipe = !! Object.keys(recipe).length;
     const hasLens = !! Object.keys(lens).length;
@@ -90,7 +116,7 @@ class Component extends PureComponent {
               <span className={styles['amount__value']}>{numeral(amount).format()}</span>
               <span className={styles['amount__currency']}>{currency['value']}</span>
             </div>
-            {hasLens && type === 'on-prescription' && (
+            {hasLens && productType === 'on-prescription' && (
               <div className={styles['amount__add']}>
                 <span className={styles['amount__value']}>+ {numeral(this._getLensAmount()).format()}</span>
                 <span className={styles['amount__currency']}>{currency['value']}</span>
@@ -105,15 +131,15 @@ class Component extends PureComponent {
           </h3>
           {(params === 'further') && (
             <div className={styles['details']}>
-              <RadioBoxField name={`${field}.type`}>
+              <RadioBoxField name={`${field}.productType`}>
                 <Radio className={styles['type']} name="on-prescription" label="Очки по рецепту" />
                 <Radio className={styles['type']} name="image-lenses" label="С имиджевыми линзами" />
                 <Radio className={styles['type']} name="only-rim" label="Только оправа" />
               </RadioBoxField>
               <div className={styles['details__content']}>
-                {type === 'only-rim' && <p className={styles['details__info']}>Преобретается только оправа.</p>}
-                {type === 'image-lenses' && <p className={styles['details__info']}>Преобретается оправа с линзами без диоптрий, но с основными защитами.</p>}
-                {type === 'on-prescription' && (
+                {productType === 'only-rim' && <p className={styles['details__info']}>Преобретается только оправа.</p>}
+                {productType === 'image-lenses' && <p className={styles['details__info']}>Преобретается оправа с линзами без диоптрий, но с основными защитами.</p>}
+                {productType === 'on-prescription' && (
                   <Fragment>
                     <p className={styles['details__info']}>Преобретается оправа с линзами по рецепту.</p>
                     <p className={styles['details__info']}>

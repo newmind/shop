@@ -18,6 +18,7 @@ class Component extends PureComponent {
     optionKey: types.string,
     optionValue: types.string,
     optionTransform: types.func,
+    onChange: types.func,
   };
 
   render() {

@@ -37,56 +37,13 @@ class FieldComponent extends PureComponent {
     disabled: false,
   };
 
-  // messageRef = React.createRef();
-  // containerRef = React.createRef();
-
-  constructor(props) {
-    super(props);
-
-    // this._scrollEvent = this._scrollEvent.bind(this);
-    // this._resizeEvent = this._resizeEvent.bind(this);
+  _handleChange(value) {
+    const { onChange, input } = this.props;
+    if ('onChange' in input) {
+      input.onChange(value);
+    }
+    onChange && onChange(value);
   }
-
-  // _scrollEvent() {
-  //   this._calculateTooltipPosition();
-  // }
-
-  // _resizeEvent() {
-  //   this._calculateTooltipPosition();
-  // }
-
-  // _calculateTooltipPosition() {
-  //   const { meta: { error, valid, touched, pristine } } = this.props;
-  //   const { current: containerElement } = this.containerRef;
-  //   const { current: messageElement } = this.messageRef;
-  //
-  //   if (containerElement && messageElement) {
-  //     if (error && ! valid && touched && pristine) {
-  //
-  //       const containerRect = containerElement.getBoundingClientRect();
-  //       const messageRect = messageElement.getBoundingClientRect();
-  //
-  //       messageElement.style['top'] = containerRect['top'] - ((messageRect['height'] - containerRect['height']) / 2) + 'px';
-  //       messageElement.style['left'] = containerRect['right'] + 8 + 'px';
-  //     }
-  //   }
-  // }
-
-  // componentDidMount() {
-  //
-  //   document.querySelector('#root').addEventListener('scroll', this._resizeEvent);
-  //   window.addEventListener('resize', this._scrollEvent);
-  // }
-
-  // componentDidUpdate(prevProps, prevState, snapshot) {
-  //   this._calculateTooltipPosition();
-  // }
-
-  // componentWillUnmount() {
-  //
-  //   document.querySelector('#root').removeEventListener('scroll', this._resizeEvent);
-  //   window.removeEventListener('resize', this._scrollEvent);
-  // }
 
   render() {
     const { input, label, disabled, message, meta: { touched, error, warning }, children, ...props} = this.props;
@@ -121,6 +78,7 @@ class FieldComponent extends PureComponent {
             ...input,
             mode: mode,
             className: hasError ? styles['border-right-bottom-none'] : '',
+            onChange: this._handleChange.bind(this),
           })}
           {hasError && (
             <span className={styles['error']}>

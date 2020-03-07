@@ -2,7 +2,7 @@
 import types from 'prop-types';
 import React, { PureComponent } from 'react';
 
-import { SelectField, InputField, Row, Col, Button } from '@ui.packages/ui';
+import { SelectField, InputField, Row, Col } from '@ui.packages/ui';
 
 import styles from './default.module.scss';
 
@@ -17,30 +17,53 @@ const Option = (option) => (
 
 class Component extends PureComponent {
   static propTypes = {
+    types: types.array,
     categories: types.array,
     brands: types.array,
+    colors: types.array,
+    forms: types.array,
+    materials: types.array,
+    isValid: types.bool,
     inProcess: types.bool,
   };
 
   static defaultProps = {
+    types: [],
     categories: [],
     brands: [],
+    colors: [],
+    forms: [],
+    materials: [],
+    isValid: false,
     inProcess: false,
   };
 
   _handleSubmit() {
     const { submit } = this.props;
-    submit('filter-showcase-ui');
+    setTimeout(() => submit('filter-showcase-ui'), 100);
   }
 
   render() {
-    const { handleSubmit, categories, brands, colors, forms, materials, isValid, inProcess } = this.props;
+    const { handleSubmit, types, categories, brands, colors, forms, materials, inProcess } = this.props;
 
     return (
       <form onSubmit={handleSubmit} className={styles['wrapper']}>
         <div className={styles['fields']}>
-          <Row>
-            <Col>
+          <div className={styles['line']}>
+            <div className={styles['col']}>
+              <SelectField
+                placeholder="Тип"
+                name="typeId"
+                options={types}
+                optionKey="id"
+                optionValue="value"
+                simple={true}
+                optionTemplate={Option}
+                disabled={inProcess}
+                onChange={this._handleSubmit.bind(this)}
+              />
+            </div>
+            <div className={styles['col']}>
               <SelectField
                 placeholder="Категория"
                 name="categoryId"
@@ -50,9 +73,10 @@ class Component extends PureComponent {
                 simple={true}
                 optionTemplate={Option}
                 disabled={inProcess}
+                onChange={this._handleSubmit.bind(this)}
               />
-            </Col>
-            <Col>
+            </div>
+            <div className={styles['col']}>
               <SelectField
                 placeholder="Цвет"
                 name="colorId"
@@ -62,9 +86,10 @@ class Component extends PureComponent {
                 simple={true}
                 optionTemplate={Option}
                 disabled={inProcess}
+                onChange={this._handleSubmit.bind(this)}
               />
-            </Col>
-            <Col>
+            </div>
+            <div className={styles['col']}>
               <SelectField
                 placeholder="Материал"
                 name="materialId"
@@ -74,11 +99,12 @@ class Component extends PureComponent {
                 simple={true}
                 optionTemplate={Option}
                 disabled={inProcess}
+                onChange={this._handleSubmit.bind(this)}
               />
-            </Col>
-          </Row>
-          <Row>
-            <Col>
+            </div>
+          </div>
+          <div className={styles['line']}>
+            <div className={styles['col']}>
               <SelectField
                 placeholder="Бренд"
                 name="brand"
@@ -88,9 +114,10 @@ class Component extends PureComponent {
                 simple={true}
                 optionTemplate={Option}
                 disabled={inProcess}
+                onChange={this._handleSubmit.bind(this)}
               />
-            </Col>
-            <Col className={styles['amounts']}>
+            </div>
+            <div className={styles['col']}>
               <SelectField
                 placeholder="Форма"
                 name="formId"
@@ -100,12 +127,12 @@ class Component extends PureComponent {
                 simple={true}
                 optionTemplate={Option}
                 disabled={inProcess}
+                onChange={this._handleSubmit.bind(this)}
               />
-            </Col>
-            <Col className={styles['align-centered']}>
+            </div>
+            <div className={styles['col']}>
               <Row>
                 <Col>
-                  {/*<Col className={styles['amounts']}>*/}
                   <div className={styles['amount']}>
                     <span className={styles['amount__label']}>Сумма</span>
                     <span className={styles['amount__wrapper']}>
@@ -115,14 +142,12 @@ class Component extends PureComponent {
                     </span>
                   </div>
                 </Col>
-                {/*<Col><CheckBoxField label="Новинки" name="new" disabled={inProcess} /></Col>*/}
-                {/*<Col><CheckBoxField label="Со скидкой" name="sale" disabled={inProcess} /></Col>*/}
               </Row>
-            </Col>
-          </Row>
-        </div>
-        <div className={styles['controls']}>
-          <Button type="submit" mode="primary" disabled={ ! isValid}>Применить</Button>
+            </div>
+            <div className={styles['col']}>
+              <p>more</p>
+            </div>
+          </div>
         </div>
       </form>
     );

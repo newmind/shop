@@ -10,11 +10,15 @@ export default () => async (ctx) => {
     const { Product, Color } = models;
     const {
       status = null, categoryId = null, brand = null, amountFrom = null,
-      amountTo = null, formId = null, materialId = null,
+      amountTo = null, formId = null, materialId = null, typeId = null,
     } = ctx['request']['query'];
 
     if (status) {
       where['status'] = status;
+    }
+
+    if (typeId) {
+      where['typeId'] = typeId;
     }
 
     if (categoryId) {

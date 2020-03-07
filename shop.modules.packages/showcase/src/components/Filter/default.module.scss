@@ -5,9 +5,8 @@
 .wrapper {
 
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   flex: 1 0;
-  align-items: flex-start;
 }
 
 .fields {
@@ -15,8 +14,51 @@
   display: flex;
   flex-direction: column;
   flex: 1 0;
-  margin: 0 20px 0 0;
 }
+
+.line {
+
+  display: flex;
+  flex-direction: row;
+  flex: 1 0;
+
+  & + & {
+    margin: 20px 0 0;
+  }
+}
+
+.col {
+
+  display: block;
+  flex-direction: column;
+  flex: 1 0;
+
+  & + & {
+    margin: 0 0 0 20px;
+  }
+}
+
+.controls {
+
+  position: relative;
+  display: block;
+}
+
+.apply {
+
+  position: absolute;
+  top: 12px;
+  right: 0;
+  display: block;
+  font-size: 20px;
+  color: $white;
+  background: $primary;
+  border-radius: 50%;
+  padding: 15px;
+  box-shadow: 0 4px 5px 0 rgba($coal-dark, 0.08);
+  cursor: pointer;
+}
+
 
 .option {
 
@@ -33,12 +75,6 @@
     margin: 0 0 0 12px;
     color: $blue-grey;
   }
-}
-
-.controls {
-
-  flex: 0;
-  justify-content: flex-end;
 }
 
 .amounts {

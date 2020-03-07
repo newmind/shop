@@ -1,7 +1,6 @@
-'use strict';
 
-import { sequelize, models } from '@sys.packages/db';
 import { sendEvent } from "@sys.packages/rabbit";
+import { sequelize, models } from '@sys.packages/db';
 
 
 export default () => async (ctx) => {
@@ -17,7 +16,7 @@ export default () => async (ctx) => {
       });
     });
 
-    sendEvent(process.env['RABBIT_PRODUCT_PROXY_EXCHANGE_CATEGORY_DELETED'], id);
+    sendEvent(process.env['RABBIT_PRODUCT_PROXY_EXCHANGE_CATEGORY_DELETED'], JSON.stringify(id));
 
     ctx.body = {
       success: true,

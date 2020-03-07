@@ -27,7 +27,7 @@ const validate = (values) => {
     values['items'].forEach((item, index) => {
       const itemErrors = {};
       if (item['params'] === 'further') {
-        if (item['type'] === 'on-prescription') {
+        if (item['productType'] === 'on-prescription') {
           if ( ! Object.keys(item['recipe']).length) {
             itemErrors['recipe'] = 'Необходимо заполнить';
             itemsErrors[index] = itemErrors;

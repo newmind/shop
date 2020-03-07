@@ -1,19 +1,19 @@
 
 import { models } from '@sys.packages/db';
 
-// import { sendEvent } from "@sys.packages/rabbit";
+import { sendEvent } from "@sys.packages/rabbit";
 
 
 export default () => async (ctx) => {
   try {
     const { Comment } = models;
-    const { id = [] } = ctx['request']['body'];
+    const { id } = ctx['request']['body'];
 
     await Comment.destroy({
       where: { id }
     });
 
-    // sendEvent(process.env['RABBIT_PRODUCT_PROXY_EXCHANGE_PRODUCT_CREATED'], JSON.stringify(component));
+    sendEvent(process.env['RABBIT_PRODUCT_PROXY_EXCHANGE_COMMENT_DELETED'], JSON.stringify(id));
 
     ctx.body = {
       success: true,

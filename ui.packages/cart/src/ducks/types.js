@@ -8,3 +8,5 @@ export const REMOVE_PRODUCT_FROM_CART = 'REMOVE_PRODUCT_FROM_CART';
 
 export const RESTORE_CART = '@cart/RESTORE_CART';
 export const RESET_CART = '@cart/RESET_CART';
+
+export const SOCKET_PRODUCT_UPDATED = process.env['REACT_APP_SOCKET_PRODUCT_UPDATED'];

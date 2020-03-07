@@ -9,6 +9,11 @@ export default () => async (ctx) => {
   try {
     const { page = 0, ...params } = ctx.request.query;
 
+    const { data: types } = await request({
+      url: `${PRODUCT_API_SRV}/products/types`,
+      method: 'get',
+      params: ctx['request']['query'],
+    });
     const { data: forms } = await request({
       url: `${PRODUCT_API_SRV}/products/forms`,
       method: 'get',
@@ -50,6 +55,7 @@ export default () => async (ctx) => {
       data: data['data'],
       meta: data['meta'],
       filter: {
+        types: types['data'],
         forms: forms['data'],
         colors: colors['data'],
         brands: brands['data'],
@@ -61,6 +67,6 @@ export default () => async (ctx) => {
   catch(error) {
 
     ctx.status = 500;
-    ctx.body = { ...error['data'] };
+    ctx.body = { success: false, error: { code: '500', error: error['message'] }};
   }
 }

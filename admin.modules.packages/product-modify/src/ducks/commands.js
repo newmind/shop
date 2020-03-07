@@ -220,9 +220,6 @@ export const getProductById = (id) => async (dispatch) => {
 
 export const updateProductsById = (data) => async (dispatch) => {
   try {
-
-    console.log(data);
-
     dispatch(updateProductRequestAction());
 
     const formData = new FormData();

@@ -1,8 +1,6 @@
-'use strict';
 
+import { sendEvent } from "@sys.packages/rabbit";
 import { sequelize, models } from '@sys.packages/db';
-
-// import { sendEvent } from "@sys.packages/rabbit";
 
 
 export default () => async (ctx) => {
@@ -11,18 +9,19 @@ export default () => async (ctx) => {
   const { productId } = ctx.params;
   const { ...formData } = ctx.request.body;
 
-  const component = await sequelize.transaction(async (transaction) => {
+  const transaction = await sequelize.transaction();
 
-    return await Comment.create({
-      productId,
-      ...formData
-    }, { transaction });
-  });
+  const result = await Comment.create({
+    productId,
+    ...formData
+  }, { transaction });
 
-  // sendEvent(process.env['RABBIT_PRODUCT_PROXY_EXCHANGE_PRODUCT_CREATED'], JSON.stringify(component));
+  await transaction.commit();
+
+  sendEvent(process.env['RABBIT_PRODUCT_PROXY_EXCHANGE_COMMENT_UPDATED'], JSON.stringify(result.toJSON()));
 
   ctx.body = {
     success: true,
-    data: component,
+    data: result.toJSON(),
   };
 };
