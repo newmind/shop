@@ -1,5 +1,6 @@
 
 export { default as Input } from './symbols/Input';
+export { default as MaskInput } from './symbols/InputMask';
 export { default as FileInput } from './symbols/FileInput';
 export { default as Textarea } from './symbols/Textarea';
 export { default as Button } from './symbols/Button';
@@ -18,6 +19,7 @@ export { default as Breadcrumbs } from './Breadcrumbs';
 export { default as BaseField } from './fields/BaseField';
 export { default as FileField } from './fields/FileField';
 export { default as InputField } from './fields/InputField';
+export { default as MaskInputField } from './fields/InputMaskField';
 export { default as TextareaField } from './fields/TextareaField';
 export { default as EvaluationField } from './fields/EvaluationField';
 export { default as SelectField } from './fields/SelectField';

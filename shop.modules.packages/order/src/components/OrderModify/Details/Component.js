@@ -18,9 +18,6 @@ class Component extends PureComponent {
           <Col>
             <h2 className={styles['block__header']}>Покупатель</h2>
             <div className={styles['block__content']}>
-              <div className={styles['information']}>
-                <p className={styles['paragraph']}>Необходимо указать информацию о покупателе.</p>
-              </div>
               <Customer />
             </div>
           </Col>
@@ -29,9 +26,6 @@ class Component extends PureComponent {
           <Col>
             <h2 className={styles['block__header']}>Доставка</h2>
             <div className={styles['block__content']}>
-              <div className={styles['information']}>
-                <p className={styles['paragraph']}>Необходимо выбрать способ доставки товара.</p>
-              </div>
               <Delivery />
             </div>
           </Col>
@@ -40,9 +34,6 @@ class Component extends PureComponent {
           <Col>
             <h2 className={styles['block__header']}>Способ оплаты</h2>
             <div className={styles['block__content']}>
-              <div className={styles['information']}>
-                <p className={styles['paragraph']}>Необходимо выбрать способ оплаты.</p>
-              </div>
               <Pay />
             </div>
           </Col>

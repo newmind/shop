@@ -12,6 +12,7 @@
 
   display: block;
 
+
   & + & {
 
     margin: 60px 0 0;
@@ -20,31 +21,22 @@
   &__header {
 
     display: block;
-    border-bottom: 1px solid $coal-dark;
-    font-size: 18px;
+    font-size: 14px;
+    font-weight: 700;
     text-transform: uppercase;
+    letter-spacing: 1px;
     color: $coal-dark;
-    padding: 0 0 4px;
+    padding: 0 0 4px 20px;
   }
 
   &__content {
 
     display: block;
-    margin: 50px 0 0;
+    margin: 10px 0 0;
+    border: 1px solid $pale-lilac;
+    border-radius: 15px;
+    padding: 40px 40px 80px;
   }
-}
-
-.information {
-
-  margin: 30px 0 0;
-  color: $blue-grey;
-}
-
-.paragraph {
-
-  display: block;
-  font-size: 14px;
-  margin: 0 0 20px;
 }
 
 .list {

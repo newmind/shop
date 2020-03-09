@@ -52,8 +52,8 @@ const validate = (values) => {
   if ( ! values['phone']) {
     errors['phone'] = 'Необходимо ввести номер телефона';
   }
-  else if ( ! /^[+]\d+$/.test(values['phone'])) {
-    errors['phone'] = 'Неверный формат телефона +7 (xxx) xxx-xx-xx]';
+  else if ( ! /^\+7\d{10}$/.test(values['phone'])) {
+    errors['phone'] = 'Неверный формат телефона';
   }
 
   if ( ! values['email']) {
