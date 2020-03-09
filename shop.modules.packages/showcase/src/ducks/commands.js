@@ -29,15 +29,12 @@ export const addProductToCart = (product) => dispatch => {
 export const getProducts = (params) => async dispatch => {
   try {
     dispatch(getProductsRequest());
+    dispatch(setNextPageAction(Number(params['page'] || 1)));
 
     const result = await request({
       url: '/products',
       params: params,
     });
-
-    if (params['page']) {
-      dispatch(setNextPageAction(Number(params['page'])));
-    }
 
     dispatch(getProductsRequestSuccess(result));
   }

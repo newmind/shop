@@ -10,7 +10,6 @@ class Component extends PureComponent {
   static propTypes = {
     page: types.number,
     pages: types.number,
-    onGetMore: types.func,
   };
 
   static defaultProps = {
@@ -20,6 +19,7 @@ class Component extends PureComponent {
 
   _handleSetStart() {
     const { page, onChange } = this.props;
+
     if (page > 1) {
       onChange(1);
     }
@@ -28,6 +28,7 @@ class Component extends PureComponent {
   _handleSetPrev() {
     const { page, onChange } = this.props;
     const prevPage = page - 1;
+
     if (prevPage >= 1) {
       onChange(prevPage);
     }
@@ -36,6 +37,7 @@ class Component extends PureComponent {
   _handleSetNext() {
     const { page, pages, onChange } = this.props;
     const nextPage = page + 1;
+
     if (nextPage <= pages) {
       onChange(nextPage);
     }
@@ -43,6 +45,7 @@ class Component extends PureComponent {
 
   _handleSetEnd() {
     const { page, pages, onChange } = this.props;
+
     if (page < pages) {
       onChange(pages);
     }
@@ -50,6 +53,7 @@ class Component extends PureComponent {
 
   _handleSetPage(pageNum) {
     const { page, onChange } = this.props;
+
     if (page !== pageNum) {
       onChange(pageNum);
     }
@@ -58,10 +62,12 @@ class Component extends PureComponent {
   _renderPageNums() {
     const { page, pages } = this.props;
     const pagesComponents = [];
+
     for (let pageNum = 1; pageNum < pages + 1; pageNum++) {
       const pageClassName = cn(styles['page'], {
         [styles['page--active']]: pageNum === page,
       });
+
       pagesComponents.push((
         <span key={pageNum} className={pageClassName} onClick={this._handleSetPage.bind(this, pageNum)}>
           <span className={styles['pae__number']}>{ pageNum }</span>
@@ -74,6 +80,7 @@ class Component extends PureComponent {
   render() {
     const { page, pages } = this.props;
     const hasPages = pages > 1;
+
     const startClassName = cn(styles['start'], 'fas fa-angle-double-left', {
       [styles['start--disabled']]: page === 1
     });
@@ -86,6 +93,7 @@ class Component extends PureComponent {
     const endClassName = cn(styles['end'], 'fas fa-angle-double-right', {
       [styles['end--disabled']]: page === pages,
     });
+
     return hasPages && (
       <div className={styles['paging']}>
         <span className={startClassName} onClick={this._handleSetStart.bind(this)} />

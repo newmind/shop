@@ -184,6 +184,12 @@
   right: 0;
   display: block;
   font-size: 14px;
-  color: $danger;
+  color: $gray;
   cursor: pointer;
+  transition: color 200ms;
+
+  &:hover {
+
+    color: $danger;
+  }
 }

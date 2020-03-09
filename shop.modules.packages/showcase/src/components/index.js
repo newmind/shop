@@ -15,8 +15,6 @@ import {
 
 
 const mapStateToProps = (state) => ({
-  count: state['showcase']['count'],
-  paging: state['showcase']['paging'],
   inProcess: state['showcase']['inProcess'],
 });
 

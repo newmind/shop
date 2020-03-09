@@ -10,9 +10,10 @@ import { Link } from 'react-router-dom';
 
 import Comments from './Comments';
 import Properties from './Properties';
-import Form from './Form';
+import CommentModify from './CommentModify';
 
 import styles from './default.module.scss';
+import cn from "classnames";
 
 
 class Component extends PureComponent {
@@ -61,10 +62,17 @@ class Component extends PureComponent {
     closeDialog('comment');
   }
 
+  _handleRemoveFromCart(id) {
+    const { removeProductFromCart } = this.props;
+
+    removeProductFromCart(id);
+  }
+
   render() {
     const { cart, initialValues, product: { uuid, gallery, attributes, brand, name, description, comments, amount, currency }} = this.props;
 
     const countInCart = cart.filter(item => item['uuid'] === uuid).length;
+    const removeFromCartClassName= cn(styles['remove'], 'far fa-trash-alt');
 
     return (
       <article className={styles['product']}>
@@ -89,10 +97,13 @@ class Component extends PureComponent {
               {name && <p className={styles['product__name']}>{ name }</p>}
               <p className={styles['product__amount']}>{ numeral(amount).format() } {currency['value']}</p>
               <div className={styles['controls']}>
-              <span className={styles['cart']} onClick={this._handleClickCart.bind(this)}>
-                <span className={styles['cart__caption']}>Добавить в корзину</span>
-                <span className="fas fa-shopping-cart" />
-              </span>
+                <span className={styles['cart']} onClick={this._handleClickCart.bind(this)}>
+                  <span className={styles['cart__caption']}>Добавить в корзину</span>
+                  <span className="fas fa-shopping-cart" />
+                </span>
+                { !! countInCart && (
+                  <span className={removeFromCartClassName} onClick={this._handleRemoveFromCart.bind(this, uuid)} />
+                )}
               </div>
               { !! countInCart && (
                 <span className={styles['has-in-case']}>
@@ -132,7 +143,7 @@ class Component extends PureComponent {
           </div>
         </div>
         <Dialog name="comment" title="Ваш отзыв о товаре">
-          <Form onSubmit={this._handleCreateComment.bind(this)} initialValues={initialValues} />
+          <CommentModify onSubmit={this._handleCreateComment.bind(this)} initialValues={initialValues} />
         </Dialog>
       </article>
     );

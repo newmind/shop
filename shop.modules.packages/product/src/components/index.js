@@ -1,17 +1,19 @@
 
-import { bindActionCreators } from 'redux';
-
 import PageHOC from '@ui.packages/hocs';
+import { openDialog, closeDialog } from '@ui.packages/dialog';
+
+import { bindActionCreators } from 'redux';
 
 import Component from './Component';
 
-import { openDialog, closeDialog } from '@ui.packages/dialog';
 
 import {
   pageInProcess,
 
-  getProductById,
   addProductToCart,
+  removeProductFromCart,
+
+  getProductById,
   createComment,
 } from '../ducks/commands';
 
@@ -36,9 +38,11 @@ const mapActionsToProps = (dispatch) => {
     openDialog: bindActionCreators(openDialog, dispatch),
     closeDialog: bindActionCreators(closeDialog, dispatch),
 
-    createComment: bindActionCreators(createComment, dispatch),
-    getProductById: bindActionCreators(getProductById, dispatch),
     addProductToCart: bindActionCreators(addProductToCart, dispatch),
+    removeProductFromCart: bindActionCreators(removeProductFromCart, dispatch),
+
+    getProductById: bindActionCreators(getProductById, dispatch),
+    createComment: bindActionCreators(createComment, dispatch),
   };
 };
 

@@ -5,6 +5,7 @@ import {
   pageInProcessAction,
 
   addProductToCartAction,
+  removeProductFromCartAction,
 
   getProductByIdRequest,
   getProductByIdRequestFail,
@@ -21,6 +22,7 @@ export const pageInProcess = (status) => (dispatch) => dispatch(pageInProcessAct
 
 
 export const addProductToCart = (product) => (dispatch) => dispatch(addProductToCartAction(product));
+export const removeProductFromCart = (id) => (dispatch) => dispatch(removeProductFromCartAction(id));
 
 
 export const getProductById = (id) => async (dispatch) => {

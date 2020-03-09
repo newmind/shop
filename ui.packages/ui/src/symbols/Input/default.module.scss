@@ -50,8 +50,9 @@
 
   &--disabled {
 
-    background: $pale-lilac;
-    border-color: $gray;
+    background: $pale-grey;
+    border-color: $pale-lilac;
+    color: $gray;
   }
 }
 

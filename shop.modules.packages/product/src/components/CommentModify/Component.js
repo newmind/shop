@@ -1,8 +1,8 @@
 
+import { Container, Row, Col, EvaluationField, InputField, TextareaField, Button } from '@ui.packages/ui';
+
 import types from 'prop-types';
 import React, { PureComponent } from 'react';
-
-import { Container, Row, Col, EvaluationField, InputField, TextareaField, Button } from '@ui.packages/ui';
 
 import styles from './default.module.scss';
 
@@ -17,6 +17,7 @@ class Component extends PureComponent {
 
   render() {
     const { handleSubmit, valid, pristine } = this.props;
+
     return (
       <form className={styles['form']} onSubmit={handleSubmit}>
         <Container>

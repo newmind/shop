@@ -221,13 +221,21 @@
     color: inherit;
   }
 
-  &--disabled {
+  &--disabled,
+  &--disabled:hover {
 
-    background: $pale-lilac;
-    border-color: $gray;
+    background: $pale-grey;
+    border-color: $pale-lilac;
     color: $gray;
-    text-shadow: -1px 1px 0 $white;
     cursor: default;
+  }
+
+  &--disabled .select__cross,
+  &--disabled:hover .select__cross,
+  &--disabled .select__marker,
+  &--disabled:hover .select__marker {
+
+    color: $gray;
   }
 }
 

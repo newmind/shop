@@ -76,6 +76,7 @@ class FieldComponent extends PureComponent {
           {React.cloneElement(children, {
             ...props,
             ...input,
+            disabled,
             mode: mode,
             className: hasError ? styles['border-right-bottom-none'] : '',
             onChange: this._handleChange.bind(this),

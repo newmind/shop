@@ -128,7 +128,6 @@
   &__info {
 
     display: block;
-    border-top: 1px solid $very-light-pink;
     padding: 20px;
   }
 
@@ -136,7 +135,6 @@
 
     display: block;
     padding: 20px;
-    border-top: 1px solid $very-light-pink;
     text-align: right;
   }
 }
@@ -211,11 +209,4 @@
     overflow: hidden;
     text-overflow: ellipsis;
   }
-}
-
-.remove {
-
-  font-size: 14px;
-  color: $danger;
-  cursor: pointer;
 }

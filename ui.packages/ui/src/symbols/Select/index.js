@@ -99,7 +99,6 @@ class Component extends PureComponent {
     placeholder: 'Выбери значение'
   };
 
-  inputRef = React.createRef();
   selectRef = React.createRef();
   optionsRef = React.createRef();
   messageRef = React.createRef();
@@ -242,6 +241,12 @@ class Component extends PureComponent {
 
   _handleOnFocus() {
     const { isFocus } = this.state;
+    const { disabled } = this.props;
+
+    if (disabled) {
+      return void 0;
+    }
+
     if ( ! isFocus) {
       this.setState({ isOpen: true }, this._handleSetFocus.bind(this));
     }
@@ -263,13 +268,19 @@ class Component extends PureComponent {
   }
 
   _handleResetValue() {
-    const { onChange } = this.props;
+    const { disabled, onChange } = this.props;
+
+    if (disabled) {
+      return void 0;
+    }
+
     this.setState({ isOpen: false, isDirectUp: false }, () => onChange && onChange(null));
   }
 
   _renderValue() {
     const { value, placeholder } = this.props;
     const selectedValue = (value && this._getValue(value)) || null;
+
     return (
       <span className={styles['select__values']}>
         {selectedValue
@@ -321,10 +332,10 @@ class Component extends PureComponent {
       [styles['wrapper--info']]: mode === INFO_MODE,
       [styles['wrapper--danger']]: mode === DANGER_MODE,
       [styles['wrapper--warning']]: mode === WARNING_MODE,
-      [styles['wrapper--disabled']]: disabled,
     });
     const classNameSelect = cn(styles['select'], {
       [styles['select--is-focus']]: isOpen,
+      [styles['select--disabled']]: disabled,
     });
 
     return (

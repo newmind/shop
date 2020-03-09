@@ -1,8 +1,8 @@
 
+import { SelectField, InputField, Row, Col } from '@ui.packages/ui';
+
 import types from 'prop-types';
 import React, { PureComponent } from 'react';
-
-import { SelectField, InputField, Row, Col } from '@ui.packages/ui';
 
 import styles from './default.module.scss';
 
@@ -10,7 +10,7 @@ import styles from './default.module.scss';
 const Option = (option) => (
   <span className={styles['option']}>
     <span className={styles['option__title']}>{option['value']}</span>
-    <span className={styles['option__count']}>{option['count']}</span>
+    <span className={styles['option__count']}>{option['count']} поз.</span>
   </span>
 );
 
@@ -40,6 +40,7 @@ class Component extends PureComponent {
 
   _handleSubmit() {
     const { submit } = this.props;
+
     setTimeout(() => submit('filter-showcase-ui'), 100);
   }
 

@@ -12,41 +12,35 @@ import styles from './default.module.scss';
 
 class Component extends PureComponent {
   static propTypes = {
-    items: types.array,
-    paging: types.shape({
-      page: types.number,
-    }),
     addProductToCart: types.func,
   };
 
-  static defaultProps = {
-    items: [],
-    paging: {
-      page: 1,
-    },
-    count: 0,
-  };
+  static defaultProps = {};
 
   _handleFilter(formData) {
     const { pushSearch } = this.props;
+
     formData['page'] = 1;
     pushSearch({ search: objectToQuery(formData) });
   }
 
   _handleCart(product) {
     const { addProductToCart } = this.props;
+
     addProductToCart(product);
   }
 
   _handleLoadingMore(page) {
-    const { getProducts, location: { search }, pushSearch} = this.props;
+    const { location: { search }, pushSearch} = this.props;
     const query = new URLSearchParams(search);
+
     if (page > 1) {
       query.set('page', String(page));
     }
     else {
       query.delete('page');
     }
+
     pushSearch({ search: query.toString() });
   }
 
