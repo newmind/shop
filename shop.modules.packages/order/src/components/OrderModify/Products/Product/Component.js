@@ -107,7 +107,7 @@ class Component extends PureComponent {
     return(
       <div className={styles['product']}>
         <div className={styles['gallery']}>
-          <span className={styles['product__uuid']}># { uuid }</span>
+          <span className={styles['product__uuid']}>{ uuid }</span>
           <div className={styles['gallery__images']}>
             <Gallery items={gallery} valueKey="id" path={`${process.env['REACT_APP_API_HOST']}/gallery`} />
           </div>

@@ -12,21 +12,6 @@
   flex-direction: column;
   flex: 0 0;
 
-  //&--good {
-  //
-  //  background: rgba($success-color, .03);
-  //}
-  //
-  //&--medium {
-  //
-  //  background: rgba($info-color, .06);
-  //}
-  //
-  //&--bad {
-  //
-  //  background: rgba($danger-color, .03);
-  //}
-
   & + & {
 
     margin: 40px 0 0;
@@ -51,8 +36,8 @@
   &__person {
 
     display: block;
-    font-size: 14px;
-    font-weight: bold;
+    font: 14px "Istok Web", sans-serif;
+    font-weight: 700;
     color: $coal-dark;
   }
 
@@ -65,7 +50,7 @@
 
     display: block;
     margin: 0 0 0 20px;
-    font-size: 12px;
+    font: 12px "Istok Web", sans-serif;
     color: $gray;
   }
 
@@ -73,7 +58,7 @@
 
     display: block;
     margin: 15px 0 0;
-    font-size: 12px;
+    font: 12px "Istok Web", sans-serif;
     line-height: 1.4;
   }
 }

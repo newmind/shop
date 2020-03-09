@@ -15,25 +15,20 @@
     padding: 40px 0 0;
   }
 
-  //&:last-child {
-  //
-  //  margin: 0 0 40px;
-  //}
-
   &__uuid {
 
     display: block;
-    font-size: 12px;
+    font: 12px "Istok Web", sans-serif;
     text-align: center;
-    color: rgba($gray, .6);
+    color: $gray;
     margin: 6px 0 15px;
   }
 
   &__brand {
 
     display: block;
-    font-size: 16px;
-    font-weight: bold;
+    font: 16px "Istok Web", sans-serif;
+    font-weight: 700;
     margin: 0 0 15px;
     color: $coal-dark;
     letter-spacing: .5px;
@@ -47,7 +42,7 @@
   &__name {
 
     display: inline-block;
-    font-size: 14px;
+    font: 14px "Istok Web", sans-serif;
     font-weight: normal;
     color: $blue-grey;
     margin: 0 0 0 14px;
@@ -94,7 +89,7 @@
 
   &__info {
 
-    font-size: 14px;
+    font: 14px "Istok Web", sans-serif;
     line-height: 1.6;
     color: $coal-dark;
 
@@ -151,26 +146,26 @@
   &__value {
 
     display: inline-block;
-    font-size: 16px;
-    font-weight: bold;
+    font: 16px "Istok Web", sans-serif;
+    font-weight: 700;
   }
 
   &__add &__value {
 
-    font-size: 14px;
+    font: 14px "Istok Web", sans-serif;
   }
 
   &__currency {
 
     display: inline-block;
-    font-size: 14px;
+    font: 14px "Istok Web", sans-serif;
     margin: 0 0 0 4px;
   }
 }
 
 .error {
 
-  font-size: 11px;
+  font: 11px "Istok Web", sans-serif;
   color: $warning;
   margin: 0 0 0 20px;
   font-style: italic;

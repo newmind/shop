@@ -89,7 +89,7 @@ class Component extends PureComponent {
   }
 
   render() {
-    const { className, label, size, mode, value, disabled, message } = this.props;
+    const { className, label, size, mode, value, disabled } = this.props;
     const classNameInputWrapper = cn(className, styles['wrapper'], {
       [styles['wrapper--primary']]: mode === PRIMARY_MODE,
       [styles['wrapper--success']]: mode === SUCCESS_MODE,
@@ -115,11 +115,6 @@ class Component extends PureComponent {
             <span className={cn(styles['evaluation__star'], { 'fas fa-star': value >= 4, 'far fa-star': value < 4 })} onClick={this._handleClick.bind(this, 4)} />
             <span className={cn(styles['evaluation__star'], { 'fas fa-star': value >= 5, 'far fa-star': value < 5 })} onClick={this._handleClick.bind(this, 5)} />
           </div>
-          { ! disabled && message && (
-            <span ref={this.messageRef} className={styles['tooltip']}>
-              <span className={styles['tooltip__message']}>{ message }</span>
-            </span>
-          )}
         </div>
       </div>
     );

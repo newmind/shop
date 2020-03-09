@@ -5,16 +5,16 @@
 .header {
   
   display: block;
-  font-size: 14px;
-  text-transform: uppercase;
+  font: 14px "Istok Web", sans-serif;
   font-weight: 700;
+  text-transform: uppercase;
   letter-spacing: .5px;
 }
 
 .paragraph {
 
   display: block;
-  font-size: 14px;
+  font: 14px "Istok Web", sans-serif;
   line-height: 1.4;
 }
 
@@ -54,7 +54,7 @@
   &__uuid {
 
     display: block;
-    font-size: 12px;
+    font: 12px "Istok Web", sans-serif;
     color: $gray;
     margin: 0 0 10px;
   }
@@ -62,7 +62,7 @@
   &__brand {
 
     display: block;
-    font-size: 25px;
+    font: 25px "Istok Web", sans-serif;
     font-weight: bold;
     color: $coal-dark;
     letter-spacing: 1px;
@@ -71,16 +71,16 @@
   &__name {
 
     display: block;
-    font-size: 13px;
-    color: $coal-dark;
-    margin: 10px 0 0;
+    font: 13px "Istok Web", sans-serif;
+    color: $blue-grey;
+    margin: 4px 0 0;
   }
 
   &__amount {
 
     display: block;
-    font-size: 20px;
-    margin: 60px 0 0;
+    font: 20px "Istok Web", sans-serif;
+    margin: 30px 0 0;
     color: $coal-dark;
   }
 
@@ -95,7 +95,7 @@
     &__header {
 
       display: block;
-      font-size: 14px;
+      font: 14px "Istok Web", sans-serif;
       font-weight: 700;
       letter-spacing: .5px;
       text-transform: uppercase;
@@ -178,6 +178,7 @@
 
   &__caption {
 
+    font: 14px "Istok Web", sans-serif;
     display: inline-block;
     margin: 0 10px 0 0;
   }
@@ -209,8 +210,8 @@
 .has-in-case {
 
   display: block;
-  margin: 10px 0 0;
-  font-size: 12px;
+  margin: 15px 0 0;
+  font: 12px "Istok Web", sans-serif;
   color: $blue-grey;
 }
 
@@ -234,7 +235,7 @@
 
     display: flex;
     flex: 1 0;
-    font-size: 14px;
+    font: 14px "Istok Web", sans-serif;
     text-transform: uppercase;
     font-weight: 700;
     letter-spacing: .5px;
@@ -243,7 +244,7 @@
   &__link {
 
     display: inline-block;
-    font-size: 14px;
+    font: 14px "Istok Web", sans-serif;
     color: $primary;
     cursor: pointer;
     border-radius: 4px;
@@ -260,7 +261,7 @@
   &__empty {
 
     display: inline-block;
-    font-size: 14px;
+    font: 14px "Istok Web", sans-serif;
     color: $coal-dark;
   }
 

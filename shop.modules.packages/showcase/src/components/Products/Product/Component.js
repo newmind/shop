@@ -63,7 +63,7 @@ class Component extends PureComponent {
           {isSale && <span className={classNameForSale} title="распродажа" />}
         </div>
         <div className={styles['product__description']}>
-          <span className={styles['product__uuid']}>#{ uuid }</span>
+          <span className={styles['product__uuid']}>{ uuid }</span>
           <span className={styles['product__brand']}>{ brand }</span>
           <span className={styles['product__name']}>{ name }</span>
         </div>

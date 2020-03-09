@@ -15,7 +15,7 @@
   &__delimiter {
 
     display: block;
-    font-size: 14px;
+    font: 14px "Istok Web", sans-serif;
     color: $gray;
     padding: 0 10px;
   }
@@ -24,13 +24,13 @@
 
     display: block;
     color: $primary;
-    font-size: 14px;
+    font: 14px "Istok Web", sans-serif;
   }
 
   &__title {
 
     display: block;
     color: $coal-dark;
-    font-size: 14px;
+    font: 14px "Istok Web", sans-serif;
   }
 }

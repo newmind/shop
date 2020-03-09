@@ -1,7 +1,7 @@
 
 import types from 'prop-types';
-import React, { PureComponent } from 'react';
 import { Field } from 'redux-form';
+import React, { PureComponent } from 'react';
 
 import Evaluation from '../../symbols/Evaluation';
 

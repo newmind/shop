@@ -19,11 +19,10 @@
   &__header {
 
     display: block;
-    font-size: 14px;
-    font-weight: 700;
+    font: 14px "Istok Web", sans-serif;
+    color: $coal-dark;
     text-transform: uppercase;
     letter-spacing: .5px;
-    color: $coal-dark;
   }
 
   &__content {
@@ -41,5 +40,5 @@
 .paragraph {
 
   display: block;
-  font-size: 14px;
+  font: 14px "Istok Web", sans-serif;
 }

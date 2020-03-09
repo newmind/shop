@@ -31,11 +31,27 @@
     font-family: 'Helvetica Neue',sans-serif;
   }
 
-  #app {
+  #root {
 
     display: flex;
-    flex: 1 0;
+    flex: 1 0 auto;
     flex-direction: column;
+    height: 100%;
+    overflow: auto;
+    font-family: 'Istok Web', sans-serif;
+    z-index: 10;
+  }
+
+  #dialog {
+
+    display: block;
+    z-index: 20;
+  }
+
+  #notification {
+
+    display: block;
+    z-index: 30;
   }
 
   .page {

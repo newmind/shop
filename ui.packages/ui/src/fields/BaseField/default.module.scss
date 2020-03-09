@@ -65,7 +65,7 @@
 .label {
 
   display: block;
-  font-size: 13px;
+  font: 13px "Istok Web", sans-serif;
   color: $blue-grey;
   margin: 0 0 6px 15px;
   transition: color 400ms;
@@ -86,7 +86,7 @@
 
   &__message {
 
-    font-size: 11px;
+    font: 11px "Istok Web", sans-serif;
     color: $danger;
     letter-spacing: .5px;
   }
