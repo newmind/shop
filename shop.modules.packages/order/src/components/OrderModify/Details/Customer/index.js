@@ -1,7 +1,7 @@
 
 import React, { PureComponent } from 'react';
 
-import { Container, Col, InputField, Row } from "@ui.packages/ui";
+import { Container, Col, InputField, MaskInputField, Row } from "@ui.packages/ui";
 
 
 class Component extends PureComponent {
@@ -18,7 +18,7 @@ class Component extends PureComponent {
         </Row>
         <Row>
           <Col>
-            <InputField label="Номер телефона" name="phone" placeholder="+7 (xxx) xxx-xx-xx" />
+            <MaskInputField label="Номер телефона" name="phone" placeholder="+7 (___) ___-__-__" mask="+7 (999) 999-99-99" />
           </Col>
           <Col>
             <InputField label="E-Mail" name="email" placeholder="example@mail.su" />

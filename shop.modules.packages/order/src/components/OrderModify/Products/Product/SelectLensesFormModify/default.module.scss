@@ -36,7 +36,7 @@
   &__content {
 
     display: block;
-    font-size: 12px;
+    font: 12px "Istok Web", sans-serif;
     color: $blue-grey;
     line-height: 1.4;
     padding: 0 0 0 10px;
@@ -60,7 +60,7 @@
   &__value {
 
     display: block;
-    font-size: 14px;
+    font: 14px "Istok Web", sans-serif;
     width: 115px;
     text-align: right;
     margin: 0 0 10px;

@@ -1,9 +1,11 @@
 
 import types from 'prop-types';
 import React, { PureComponent } from 'react';
+import ReactDOM from 'react-dom';
 
 import cn from 'classnames';
 import styles from './defaults.module.scss';
+
 
 const PRIMARY_MODE = 'primary';
 const INFO_MODE = 'info';
@@ -34,13 +36,16 @@ class Component extends PureComponent {
 
   _handleCloseDialog() {
     const { name, closeDialog, onClose } = this.props;
+
     closeDialog(name);
     onClose && onClose(name);
   }
 
   _handleOutClick(event) {
     const { current: wrapperElement } = this.wrapperRef;
+
     const target = event.target;
+
     if (wrapperElement === target) {
       this._handleCloseDialog();
     }
@@ -57,7 +62,7 @@ class Component extends PureComponent {
       [styles['dialog--warning']]: mode === WARNING_MODE,
     });
 
-    return isOpen && (name === actionDialogName) && (
+    return isOpen && (name === actionDialogName) && ReactDOM.createPortal((
       <div ref={this.wrapperRef} className={styles['wrapper']} onClick={this._handleOutClick.bind(this)}>
         <div className={classNameDialog}>
           <span className={classNameCloseDialog} onClick={this._handleCloseDialog.bind(this)} />
@@ -71,7 +76,7 @@ class Component extends PureComponent {
           </div>
         </div>
       </div>
-    );
+    ), document.querySelector('#dialog'));
   }
 }
 

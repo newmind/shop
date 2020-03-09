@@ -16,6 +16,11 @@
     transition: color 400ms;
     vertical-align: bottom;
 
+    &:hover {
+
+      color: $primary;
+    }
+
     &--active,
     &--active:hover {
 
@@ -29,7 +34,7 @@
     text-decoration: none;
     color: inherit;
     outline: none;
-    padding: 16px 14px 17px 0;
+    padding: 14px 14px 20px 0;
   }
 
   &__home-text {
@@ -80,7 +85,7 @@
 
   &__text {
 
-    font-size: 16px;
+    font: 16px "Istok Web", sans-serif;
     color: inherit;
   }
 }

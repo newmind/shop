@@ -50,13 +50,13 @@
   &__title {
 
     display: inline-block;
-    font-size: 14px;
-    font-weight: bold;
+    font: 14px "Istok Web", sans-serif;
+    font-weight: 700;
   }
 
   &__value {
 
     display: inline-block;
-    font-size: 14px;
+    font: 14px "Istok Web", sans-serif;
   }
 }

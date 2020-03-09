@@ -1,5 +1,6 @@
 
 import types from 'prop-types';
+import ReactDOM from 'react-dom';
 import React, { PureComponent } from 'react';
 
 import { Timeout } from '@ui.packages/timer';
@@ -78,15 +79,15 @@ class Component extends PureComponent {
 
   render() {
     const { notifications } = this.props;
-    return (
+    return ReactDOM.createPortal(
       <div className={styles['notifications']}>
         <div className={styles['notifications__content']}>
-          {notifications.map((notification, ind) => {
+          {notifications.map((notification) => {
             return <Notification key={notification['index']} {...notification} onClose={this._handleCloseByIndex.bind(this)} />
           })}
         </div>
       </div>
-    );
+    , document.querySelector('#notification'));
   }
 }
 

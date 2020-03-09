@@ -39,7 +39,7 @@
 
     display: block;
     padding: 20px;
-    font-size: 14px;
+    font: 14px "Istok Web", sans-serif;
     color: $coal-dark;
     text-align: center;
     background: $white;
@@ -48,8 +48,8 @@
   &__full-amount {
 
     text-align: right;
-    font-size: 14px;
-    font-weight: bold;
+    font: 14px "Istok Web", sans-serif;
+    font-weight: 700;
     color: $coal-dark;
   }
 
@@ -58,7 +58,7 @@
     display: inline-block;
     vertical-align: middle;
     padding: 10px 10px 8px;
-    font-size: 12px;
+    font: 12px "Istok Web", sans-serif;
     border: 1px solid $gray;
     text-decoration: none;
     outline: none;
@@ -79,7 +79,7 @@
     vertical-align: middle;
     padding: 10px 20px;
     border-radius: 4px;
-    font-size: 12px;
+    font: 12px "Istok Web", sans-serif;
     text-decoration: none;
     outline: none;
     color: $white;
@@ -187,22 +187,22 @@
 
     display: block;
     text-align: right;
-    font-size: 13px;
+    font: 13px "Istok Web", sans-serif;
     color: $coal-dark;
   }
 
   &__brand {
 
     display: block;
-    font-size: 14px;
-    font-weight: bold;
+    font: 14px "Istok Web", sans-serif;
+    font-weight: 700;
     color: $coal-dark;
   }
 
   &__name {
 
     display: block;
-    font-size: 12px;
+    font: 12px "Istok Web", sans-serif;
     color: $coal-dark;
     margin: 5px 0 0;
     white-space: nowrap;

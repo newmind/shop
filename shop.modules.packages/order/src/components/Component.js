@@ -1,6 +1,6 @@
 
-import { Button, Col, Container, Row, Breadcrumbs } from '@ui.packages/ui';
 import numeral from '@packages/numeral';
+import { Button, Col, Container, Row, Breadcrumbs } from '@ui.packages/ui';
 
 import types from 'prop-types';
 import React, {PureComponent} from 'react';
@@ -65,6 +65,7 @@ class Component extends PureComponent {
 
   render() {
     const { inProcess, products, hasProducts, isValid } = this.props;
+
     const calculatedAmount = calculateFullAmount(products['items']);
 
     return (

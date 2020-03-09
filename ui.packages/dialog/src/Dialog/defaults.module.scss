@@ -24,9 +24,10 @@
   flex: 0 0 auto;
   flex-direction: column;
   background: $white;
-  min-width: 500px;
+  min-width: 250px;
   border-radius: 15px;
   margin: auto;
+  box-sizing: border-box;
   box-shadow: 0 6px 10px 0 rgba($dark-grey, 0.3);
   overflow: hidden;
 
@@ -54,12 +55,12 @@
   &__close {
 
     position: absolute;
-    top: 20px;
-    right: 20px;
+    top: 28px;
+    right: 28px;
     display: block;
     width: 16px;
     height: 16px;
-    font-size: 20px;
+    font: 20px "Istok Web", sans-serif;
     color: $pale-lilac;
     cursor: pointer;
     transition: color 400ms;
@@ -72,10 +73,11 @@
   &__header {
 
     display: block;
-    font-size: 14px;
-    padding: 28px 40px 26px 30px;
-    letter-spacing: .5px;
+    font: 14px "Istok Web";
+    font-weight: 700;
+    padding: 28px 50px 0 40px;
     color: $coal-dark;
+    letter-spacing: .5px;
     text-transform: uppercase;
   }
 
@@ -83,5 +85,6 @@
 
     display: block;
     overflow: auto;
+    padding: 28px 40px 40px;
   }
 }

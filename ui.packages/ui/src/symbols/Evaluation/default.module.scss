@@ -1,6 +1,7 @@
 
 @import "~@ui.packages/theme";
 
+
 .evaluation {
 
   display: inline-block;
@@ -89,41 +90,14 @@
 .label {
 
   display: block;
-  font-size: 14px;
-  color: #222;
-  margin: 0 0 10px 1px;
+  font: 14px "Istok Web", sans-serif;
+  color: $blue-grey;
+  margin: 0 0 6px 15px;
   transition: color 400ms;
 }
 
-.tooltip {
+.container {
 
-  position: fixed;
-  padding: 10px 16px;
   display: block;
-  background: $danger;
-  border-radius: 4px;
-
-  &:before {
-
-    position: absolute;
-    right: 100%;
-    top: 50%;
-    display: inline-block;
-    margin: -7px 0 0;
-    width: 0;
-    height: 0;
-    border: 6px solid transparent;
-    border-left: none;
-    border-right-color: $danger;
-    content: '';
-  }
-
-  &__message {
-
-    display: inline-block;
-    font-size: 13px;
-    color: $whitesmoke;
-    letter-spacing: .5px;
-    font-weight: bold;
-  }
+  margin: 0 0 0 14px;
 }

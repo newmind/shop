@@ -15,7 +15,7 @@
     flex-direction: row;
 
     &:first-child {
-      font-size: 14px;
+      font: 14px "Istok Web", sans-serif;
       background: $pale-lilac;
     }
 
@@ -32,7 +32,7 @@
     height: 35px;
     align-items: center;
     justify-content: center;
-    font-size: 13px;
+    font: 13px "Istok Web", sans-serif;
 
     & + & {
       border-left: 1px solid $pale-lilac;
@@ -40,7 +40,7 @@
 
     &--today {
       text-decoration: underline;
-      font-weight: bold;
+      font-weight: 700;
     }
 
     &--weekend {

@@ -6,14 +6,6 @@
 
   background: transparent;
   vertical-align: top;
-
-  //&:first-child .content {
-  //  margin-left: 0;
-  //}
-  //
-  //&:last-child .content {
-  //  margin-right: 0;
-  //}
 }
 
 .content {
@@ -21,7 +13,7 @@
   display: block;
   margin: 20px 8px 30px;
   text-align: center;
-  font-size: 12px;
+  font: 12px "Istok Web", sans-serif;
 
   &--left {
     text-align: left;

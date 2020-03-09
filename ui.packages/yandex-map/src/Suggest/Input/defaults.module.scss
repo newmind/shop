@@ -62,12 +62,11 @@
 .label {
 
   display: block;
-  font-size: 14px;
-  color: #222;
-  margin: 0 0 8px 1px;
+  font: 13px "Istok Web", sans-serif;
+  color: $blue-grey;
+  margin: 0 0 6px 15px;
   transition: color 400ms;
 }
-
 
 .container {
 
@@ -75,59 +74,17 @@
   display: block;
 }
 
-//.tooltip {
-//
-//  position: fixed;
-//  padding: 10px 16px;
-//  display: block;
-//  background: $danger-color;
-//  border-radius: 4px;
-//
-//  &:before {
-//
-//    position: absolute;
-//    right: 100%;
-//    top: 50%;
-//    display: inline-block;
-//    margin: -7px 0 0;
-//    width: 0;
-//    height: 0;
-//    border: 6px solid transparent;
-//    border-left: none;
-//    border-right-color: $danger-color;
-//    content: '';
-//  }
-//
-//  &__message {
-//
-//    display: inline-block;
-//    font-size: 13px;
-//    color: $whitesmoke;
-//    letter-spacing: .5px;
-//    font-weight: bold;
-//  }
-//}
-
 .error {
 
   position: absolute;
   top: 100%;
-  right: 0;
+  right: 5px;
   display: block;
-  background: $warning;
-  padding: 0 6px 2px 20px;
-  letter-spacing: .2px;
-  border-radius: 0 0 3px 3px;
 
   &__message {
 
-    font-size: 10px;
-    color: $white;
-    font-weight: bold;
+    font: 11px "Istok Web", sans-serif;
+    color: $warning;
+    letter-spacing: .5px;
   }
-}
-
-.border-right-bottom-none {
-
-  border-radius: 3px 3px 0;
 }

@@ -1,4 +1,7 @@
 
+@import url('https://fonts.googleapis.com/css?family=Exo+2&display=swap');
+@import url('https://fonts.googleapis.com/css?family=Istok+Web&display=swap');
+
 @import "~@ui.packages/theme";
 
 @import "./_base/reset.css";
@@ -32,7 +35,19 @@
     flex-direction: column;
     height: 100%;
     overflow: auto;
-    font-family: 'Istok Web', sans-serif;
+    z-index: 10;
+  }
+
+  #dialog {
+
+    display: block;
+    z-index: 20;
+  }
+
+  #notification {
+
+    display: block;
+    z-index: 30;
   }
 
   .page {

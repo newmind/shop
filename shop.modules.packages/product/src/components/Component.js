@@ -92,7 +92,7 @@ class Component extends PureComponent {
               <Gallery items={gallery} valueKey="id" path={`${process.env['REACT_APP_API_HOST']}/gallery`} />
             </div>
             <div className={styles['product__commands']}>
-              <span className={styles['product__uuid']}>#{ uuid }</span>
+              <span className={styles['product__uuid']}>{ uuid }</span>
               <h3 className={styles['product__brand']}>{ brand }</h3>
               {name && <p className={styles['product__name']}>{ name }</p>}
               <p className={styles['product__amount']}>{ numeral(amount).format() } {currency['value']}</p>

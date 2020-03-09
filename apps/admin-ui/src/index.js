@@ -51,7 +51,7 @@ const store = createStore({},
         />
       </Router>
     </Provider>
-  ), document.querySelector('#app'));
+  ), document.querySelector('#root'));
 
   serviceWorker.unregister();
 })();

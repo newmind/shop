@@ -8,7 +8,7 @@
 
   & + & {
 
-    margin: 100px 0 0;
+    margin: 60px 0 0;
   }
 
   &:last-child {
@@ -19,17 +19,16 @@
   &__header {
 
     display: block;
-    font-size: 18px;
+    font: 14px "Istok Web", sans-serif;
+    color: $coal-dark;
+    text-transform: uppercase;
     letter-spacing: .5px;
-    border-bottom: 1px solid $pale-lilac;
-    padding: 0 0 4px 0;
-    color: rgba($coal-dark, .4);
   }
 
   &__content {
 
     display: block;
-    margin: 40px 0 0;
+    margin: 30px 0 0;
   }
 }
 
@@ -41,5 +40,5 @@
 .paragraph {
 
   display: block;
-  font-size: 14px;
+  font: 14px "Istok Web", sans-serif;
 }

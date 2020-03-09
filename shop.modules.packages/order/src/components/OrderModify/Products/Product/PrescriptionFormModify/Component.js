@@ -471,12 +471,13 @@ class Component extends PureComponent {
 
   render() {
     const { PDLeft, PDRight, sphRight, sphLeft, cylRight, cylLeft, axisRight, axisLeft, addRight, addLeft } = this.state;
+
     return (
       <Container className={styles['container']}>
         <Row>
           <Col className={styles['content']}>
             <div className={styles['eyes']}>
-              <h3 className={styles['eyes__header']}>Межзрачковое расстояние</h3>
+              <h3 className={styles['header']}>Межзрачковое расстояние</h3>
               <div className={styles['eyes__content']}>
                 <div className={styles['eyes__row']}>
                   <Select
@@ -501,7 +502,7 @@ class Component extends PureComponent {
               </div>
             </div>
             <div className={cn(styles['blank'])}>
-              <h3 className={styles['blank__top-header']}>Рецепт на очки</h3>
+              <h3 className={styles['header']}>Рецепт на очки</h3>
               <div className={styles['blank__line']}>
                 <div className={styles['blank__label']} />
                 <div className={cn(styles['blank__value'], styles['blank__header'])}>SPH (Сфера)</div>
@@ -525,7 +526,7 @@ class Component extends PureComponent {
               </div>
             </div>
             <div className={cn(styles['blank'])}>
-              <h3 className={styles['blank__top-header']}>Коментарий</h3>
+              <h3 className={styles['header']}>Коментарий</h3>
               <div className={styles['blank__line']}>
                 <TextareaField name="comment" />
               </div>
@@ -534,7 +535,7 @@ class Component extends PureComponent {
         </Row>
         <Row className={styles['controls']}>
           <Col>
-            <Button mode="success" onClick={this._handleSubmit.bind(this)}>Готово</Button>
+            <Button mode="success" onClick={this._handleSubmit.bind(this)}>Сохранить рецепт</Button>
           </Col>
         </Row>
       </Container>

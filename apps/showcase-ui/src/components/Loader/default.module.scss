@@ -49,8 +49,8 @@
   &__text {
 
     display: inline-block;
-    font-size: 30px;
-    font-weight: bold;
+    font: 30px 'Exo 2', sans-serif;
+    font-weight: 700;
     vertical-align: baseline;
     color: $coal-dark;
   }

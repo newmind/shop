@@ -103,8 +103,8 @@
 .label {
 
   display: block;
-  font-size: 12px;
-  font-weight: bold;
+  font: 13px "Istok Web", sans-serif;
+  font-weight: 700;
   color: $coal-dark;
   padding: 11px 10px 0 10px;
 }
@@ -114,7 +114,7 @@
   display: block;
   padding: 11px 10px 10px;
   color: $coal-dark;
-  font-size: 14px;
+  font: 14px "Istok Web", sans-serif;
   outline: none;
   width: 100%;
   box-sizing: border-box;
