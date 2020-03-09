@@ -526,7 +526,7 @@ class Component extends PureComponent {
               </div>
             </div>
             <div className={cn(styles['blank'])}>
-              <h3 className={styles['blank__top-header']}>Коментарий</h3>
+              <h3 className={styles['header']}>Коментарий</h3>
               <div className={styles['blank__line']}>
                 <TextareaField name="comment" />
               </div>
