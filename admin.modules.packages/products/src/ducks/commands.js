@@ -29,13 +29,14 @@ export const openDialog = () => (dispatch) => dispatch(openDialogAction());
 export const closeDialog = () => (dispatch) => dispatch(closeDialogAction());
 
 
-export const getProducts = () => async (dispatch) => {
+export const getProducts = (params) => async (dispatch) => {
   try {
     dispatch(getProductsRequestAction());
 
     const result = await request({
       url: '/products',
       method: 'get',
+      params,
     });
 
     dispatch(getProductsRequestSuccessAction(result));

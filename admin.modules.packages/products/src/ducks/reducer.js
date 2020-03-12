@@ -22,7 +22,12 @@ import {
 
 const initialState = {
   items: [],
-  meta: {},
+  filter: {
+
+  },
+  meta: {
+    total: 0,
+  },
 };
 
 
@@ -34,11 +39,12 @@ export default (state = initialState, { type, payload }) => {
       ...initialState,
     };
 
-    case GET_PRODUCTS_REQUEST: return { ...state };
+    case GET_PRODUCTS_REQUEST: return { ...state, items: [] };
     case GET_PRODUCTS_REQUEST_FAIL: return { ...state };
     case GET_PRODUCTS_REQUEST_SUCCESS: return {
       ...state,
       items: payload['data'],
+      filter: payload['filter'],
       meta: payload['meta'],
     };
 

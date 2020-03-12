@@ -1,12 +1,11 @@
 
 import PageHOC from '@ui.packages/hocs';
+import { queryToObject } from "@ui.packages/utils";
 
 import { bindActionCreators } from 'redux';
-import { replace } from 'react-router-redux';
+import { push } from 'react-router-redux';
 
 import Component from './Component';
-
-import { openDialog, closeDialog } from '@ui.packages/dialog';
 
 import {
   pageInProcess,
@@ -17,10 +16,9 @@ import {
 } from '../ducks/commands';
 
 
-const mapStateToProps = state => {
-  const Products = state['products'];
+const mapStateToProps = (state, props) => {
   return {
-    items: Products['items'],
+    search: queryToObject(props['location']['search']),
   };
 };
 
@@ -28,10 +26,7 @@ const mapActionsToProps = (dispatch) => {
   return {
     pageInProcess: bindActionCreators(pageInProcess, dispatch),
 
-    openDialog: bindActionCreators(openDialog, dispatch),
-    closeDialog: bindActionCreators(closeDialog, dispatch),
-
-    replaceURI: bindActionCreators(replace, dispatch),
+    push: bindActionCreators(push, dispatch),
 
     getProducts: bindActionCreators(getProducts, dispatch),
     createProducts: bindActionCreators(createProducts, dispatch),
@@ -42,9 +37,9 @@ const mapActionsToProps = (dispatch) => {
 export default PageHOC({
   mapStateToProps,
   mapActionsToProps,
-  onEnter: async ({ pageInProcess, getProducts }) => {
+  onEnter: async ({ pageInProcess, getProducts, location: { search }}) => {
     pageInProcess(false);
-    await getProducts();
+    await getProducts(queryToObject(search));
     pageInProcess(false);
   },
 })(Component);

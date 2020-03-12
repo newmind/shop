@@ -61,7 +61,6 @@ class Component extends PureComponent {
     scroller: 'body',
   };
 
-  inputRef = React.createRef();
   selectRef = React.createRef();
   optionsRef = React.createRef();
   messageRef = React.createRef();
@@ -174,11 +173,12 @@ class Component extends PureComponent {
   _renderValue(value) {
     const { displayFormat } = this.props;
     const selectedValue = value ? moment(value).format(displayFormat) : null;// (value && this._getValue(value)) || null;
+
     return (
       <span className={styles['select__values']} onClick={this._handleOnFocus.bind(this)}>
         {selectedValue
           ? <span className={styles['select__value']}>{selectedValue}</span>
-          : <span className={styles['select__placeholder']}>Выбери значение</span>}
+          : <span className={styles['select__placeholder']}>__.__.____</span>}
       </span>
     );
   }

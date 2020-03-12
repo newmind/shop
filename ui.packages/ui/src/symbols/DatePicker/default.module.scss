@@ -72,15 +72,6 @@
   }
 }
 
-.label {
-
-  display: block;
-  font: 13px "Istok Web", sans-serif;
-  color: $black;
-  margin: 0 0 8px 1px;
-  transition: color 400ms;
-}
-
 .select {
 
   display: flex;
@@ -89,7 +80,12 @@
   border-radius: 5px;
   cursor: pointer;
   background: $white;
-  transition: border-color 400ms;
+  transition: border-color 200ms;
+
+  &:hover {
+
+    border-color: $coal-dark;
+  }
 
   &:hover &__angle {
 
@@ -103,6 +99,10 @@
 
   & + & {
     margin: 0 0 0 10px;
+  }
+
+  &--is-focus {
+    border-color: $coal-dark;
   }
 
   &--is-focus &__angle {
@@ -173,7 +173,7 @@
     font-size: 14px;
     align-items: center;
     justify-content: center;
-    padding: 0 8px;
+    padding: 0 12px 0 8px;
     color: $pale-lilac;
     transition: color 200ms;
   }

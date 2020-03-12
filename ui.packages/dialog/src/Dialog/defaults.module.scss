@@ -47,9 +47,10 @@
   &--warning &__header { background: $warning; color: $white; }
   &--warning &__close:hover { color: $white; }
 
-  &--danger { background: lighten($danger, 40%); }
-  &--danger &__header { background: $danger; color: $white; }
-  &--danger &__close:hover { color: $white; }
+  &--danger { background: lighten($danger, 45%); }
+  &--danger &__header {  }
+  &--danger &__close { color: $blue-grey; }
+  &--danger &__close:hover { color: $coal-dark; }
 
 
   &__close {

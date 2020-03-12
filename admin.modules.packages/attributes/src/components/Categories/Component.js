@@ -6,7 +6,6 @@ import { Table, Column } from '@ui.packages/table';
 import types from 'prop-types';
 import React, { PureComponent } from 'react';
 
-import Actions from '../_Actions';
 import Form from '../_FormModify';
 
 import styles from './default.module.scss';
@@ -85,7 +84,7 @@ class Component extends PureComponent {
         <div className={styles['controls']}>
           <Button mode="success" onClick={this._handleCreate.bind(this)}>Добавить</Button>
         </div>
-        <Dialog title="Цвет продукта" name="category">
+        <Dialog title="Категория продукта" name="category">
           <Form onSubmit={this._submitModify.bind(this)} />
         </Dialog>
       </div>
