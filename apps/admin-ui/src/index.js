@@ -42,7 +42,7 @@ const store = createStore({},
   await importReducer('Module');
   await importReducer('Page');
 
-  ReactDOM.render((
+  ReactDOM.render(
     <Provider store={store}>
       <Router history={history}>
         <App
@@ -51,7 +51,7 @@ const store = createStore({},
         />
       </Router>
     </Provider>
-  ), document.querySelector('#root'));
+  , document.querySelector('#root'));
 
   serviceWorker.unregister();
 })();
