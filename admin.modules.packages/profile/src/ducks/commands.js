@@ -17,43 +17,39 @@ import {
 
 
 export const getProfile = () => async dispatch => {
-
-  dispatch(pageInProcess(true));
-
   try {
-
+    dispatch(pageInProcess(true));
     dispatch(getProfileRequestAction());
 
-    const profile = await request({
+    const { data } = await request({
       method: 'get',
       url: `/profile`,
     });
 
-    dispatch(getProfileRequestSuccessAction(profile));
-
-  } catch(error) {
-
+    dispatch(getProfileRequestSuccessAction(data));
+  }
+  catch(error) {
     dispatch(getProfileRequestFailAction(error));
   }
-
-  dispatch(pageInProcess(false));
+  finally {
+    dispatch(pageInProcess(false));
+  }
 };
 
 export const saveProfile = (formData) => async dispatch => {
   try {
-
     dispatch(saveProfileRequestAction());
 
-    const profile = await request({
+    const { data } = await request({
       method: 'put',
       url: '/profile',
       data: formData,
     });
 
-    dispatch(saveProfileRequestSuccessAction(profile));
-    dispatch(applicationGetProfileRequestSuccessAction(profile));
-
-  } catch(error) {
+    dispatch(saveProfileRequestSuccessAction(data));
+    dispatch(applicationGetProfileRequestSuccessAction(data));
+  }
+  catch(error) {
 
     dispatch(saveProfileRequestFailAction(error));
   }

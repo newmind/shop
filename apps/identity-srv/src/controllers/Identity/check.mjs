@@ -30,10 +30,8 @@ export default () => async (ctx) => {
       success: true,
       data: user,
     };
-
-  } catch (error) {
-
-    console.log(error);
+  }
+  catch (error) {
 
     if (error instanceof TokenExpiredError) {
 
@@ -48,7 +46,7 @@ export default () => async (ctx) => {
     ctx.body = {
       success: false,
       error: {
-        code: '',
+        code: 500,
         message: error['message'],
       }
     };

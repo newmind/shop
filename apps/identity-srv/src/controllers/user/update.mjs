@@ -1,7 +1,6 @@
-'use strict';
 
-import { models } from '@sys.packages/db';
-import {sendEvent} from "@sys.packages/rabbit";
+import { sequelize, models } from '@sys.packages/db';
+import { sendEvent } from "@sys.packages/rabbit";
 
 
 export default () => async (ctx) => {
@@ -12,22 +11,36 @@ export default () => async (ctx) => {
     const { id } = ctx['params'];
     const { body } = ctx['request'];
 
+    const transaction = await sequelize.transaction();
+
     await Passport.update(body, {
-      where: { userId: id }
-    });
-
-    const passport = await Passport.findOne({
       where: { userId: id },
+      transaction,
     });
 
-    sendEvent(process.env['RABBIT_IDENTITY_SRV_EXCHANGE_PASSPORT_UPDATED'], JSON.stringify(passport));
+    const result = await Passport.findOne({
+      where: { userId: id },
+      transaction,
+    });
+
+    await transaction.commit();
+
+    sendEvent(process.env['RABBIT_IDENTITY_SRV_EXCHANGE_PASSPORT_UPDATED'], JSON.stringify(result.toJSON()));
 
     ctx.body = {
       success: true,
-      data: passport,
+      data: result.toJSON(),
     };
 
   } catch(e) {
-    console.log(e);
+
+    ctx.status = 500;
+    ctx.body = {
+      success: false,
+      error: {
+        code: 500,
+        message: e['message'],
+      },
+    };
   }
 };

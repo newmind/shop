@@ -18,14 +18,14 @@ export default () => async (ctx) => {
       success: true,
       data: passport ? passport.toJSON() : null,
     };
-
-  } catch(error) {
+  }
+  catch(error) {
 
     ctx.status = 500;
     ctx.body = {
       success: false,
       error: {
-        code: '',
+        code: 500,
         message: error['message'],
       }
     };

@@ -1,6 +1,6 @@
 
-import { objectToQuery } from "@ui.packages/utils";
 import { Button } from '@ui.packages/ui';
+import { objectToQuery } from "@ui.packages/utils";
 
 import types from 'prop-types';
 import React, { PureComponent } from 'react';
@@ -22,12 +22,14 @@ class Component extends PureComponent {
 
   _setQuery(formData) {
     const { push } = this.props;
+
     push('?' + objectToQuery({ ...formData }))
   }
 
   _handleAddProduct() {
-    const { replaceURI } = this.props;
-    replaceURI('/products/create');
+    const { push } = this.props;
+
+    push('/products/create');
   }
 
   render() {

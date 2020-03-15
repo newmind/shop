@@ -1,5 +1,5 @@
 
-import { Button } from '@ui.packages/ui';
+import { Button, Actions } from '@ui.packages/ui';
 import { Dialog } from '@ui.packages/dialog';
 import { Table, Column } from '@ui.packages/table';
 

@@ -12,6 +12,7 @@
     "@ui.packages/moment": "1.0.0",
     "@ui.packages/theme": "1.0.0",
     "@ui.packages/utils": "1.0.0",
+    "prop-types": "15.7.2",
     "classnames": "2.2.6",
     "react": "16.13.0",
     "react-input-mask": "3.0.0-alpha.2",

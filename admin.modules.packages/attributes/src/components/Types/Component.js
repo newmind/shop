@@ -1,12 +1,11 @@
 
-import { Button } from '@ui.packages/ui';
+import { Button, Actions } from '@ui.packages/ui';
 import { Dialog } from '@ui.packages/dialog';
 import { Table, Column } from '@ui.packages/table';
 
 import types from 'prop-types';
 import React, { PureComponent } from 'react';
 
-import Actions from '../_Actions';
 import Form from '../_FormModify';
 
 import styles from './default.module.scss';

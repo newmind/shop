@@ -1,8 +1,8 @@
 
+import { Button } from '@ui.packages/ui';
+
 import types from 'prop-types';
 import React, { PureComponent } from 'react';
-
-import { Button } from '@ui.packages/ui';
 
 import ProfileForm from './ProfileForm';
 
@@ -36,8 +36,12 @@ class Component extends PureComponent {
 
   render() {
     const { profile, inProcess, isValid, isPristine } = this.props;
+
     return (
-      <div className="page">
+      <div className={styles['wrapper']}>
+        <div className={styles['header']}>
+          <h2>Пользователь</h2>
+        </div>
         <div className={styles['container']}>
           <div className={styles['form']}>
             <ProfileForm

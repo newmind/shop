@@ -1,5 +1,5 @@
 
-import { Row, Col, InputField, SelectField, DatePickerField, Button } from '@ui.packages/ui';
+import { Row, Col, InputField, SelectField, AmountField, DatePickerField, Button } from '@ui.packages/ui';
 
 import React, { PureComponent } from 'react';
 
@@ -24,7 +24,7 @@ class Component extends PureComponent {
           <Col><SelectField placeholder="Цвет" name="colorId" clearable simple options={colors} /></Col>
           <Col><SelectField placeholder="Форма" name="formId" clearable simple options={forms} /></Col>
           <Col><SelectField placeholder="Материал" name="materialId" clearable options={materials} /></Col>
-          <Col />
+          <Col><AmountField min={0} max={4000} /></Col>
         </Row>
         <Row>
           <Col>
