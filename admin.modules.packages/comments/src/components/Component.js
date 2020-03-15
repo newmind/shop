@@ -70,6 +70,9 @@ class Component extends PureComponent {
 
     return (
       <div className={styles['wrapper']}>
+        <div className={styles['header']}>
+          <h2>Комментарии</h2>
+        </div>
         <Row>
           <Col>
             <div className={styles['block']}>
