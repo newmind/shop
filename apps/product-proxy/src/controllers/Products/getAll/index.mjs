@@ -11,6 +11,7 @@ export default () => async (ctx) => {
     const { Op } = Sequelize;
     const { Product, Attribute, Units, Gallery, Currency, Category, Type, Color, Material, Form, Comment } = models;
     const {
+      createdFrom = null, createdTo = null,
       status = null, limit = null, skip = null, take = null,
       uuid = null, id = null, categoryId = null, brand = null, amountFrom = null,
       amountTo = null, colorId = null, formId = null, materialId = null, typeId = null,
@@ -63,6 +64,20 @@ export default () => async (ctx) => {
     } else if (amountFrom && amountTo) {
       where['amount'] = {
         [Op.between]: [amountFrom, amountTo]
+      };
+    }
+
+    if (createdFrom && ! createdTo) {
+      where['createdAt'] = {
+        [Op.gte]: createdFrom
+      };
+    } else if (createdTo && ! createdFrom) {
+      where['createdAt'] = {
+        [Op.lte]: createdTo
+      };
+    } else if (createdFrom && createdTo) {
+      where['createdAt'] = {
+        [Op.between]: [createdFrom, createdTo]
       };
     }
 

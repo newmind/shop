@@ -2,13 +2,13 @@
 import {
   PAGE_IN_PROCESS,
 
+  GET_COMMENT_REQUEST,
+  GET_COMMENT_REQUEST_FAIL,
+  GET_COMMENT_REQUEST_SUCCESS,
+
   GET_COMMENTS_REQUEST,
   GET_COMMENTS_REQUEST_FAIL,
   GET_COMMENTS_REQUEST_SUCCESS,
-
-  CREATE_COMMENT_REQUEST,
-  CREATE_COMMENT_REQUEST_FAIL,
-  CREATE_COMMENT_REQUEST_SUCCESS,
 
   UPDATE_COMMENT_REQUEST,
   UPDATE_COMMENT_REQUEST_FAIL,
@@ -26,9 +26,9 @@ export const getCommentsRequestAction = () => ({ type: GET_COMMENTS_REQUEST });
 export const getCommentsRequestFailAction = (error) => ({ type: GET_COMMENTS_REQUEST_FAIL, error });
 export const getCommentsRequestSuccessAction = (payload) => ({ type: GET_COMMENTS_REQUEST_SUCCESS, payload });
 
-export const createCommentRequestAction = () => ({ type: CREATE_COMMENT_REQUEST });
-export const createCommentRequestFailAction = (error) => ({ type: CREATE_COMMENT_REQUEST_FAIL, error });
-export const createCommentRequestSuccessAction = (payload) => ({ type: CREATE_COMMENT_REQUEST_SUCCESS, payload });
+export const getCommentRequestAction = () => ({ type: GET_COMMENT_REQUEST });
+export const getCommentRequestFailAction = (error) => ({ type: GET_COMMENT_REQUEST_FAIL, error });
+export const getCommentRequestSuccessAction = (payload) => ({ type: GET_COMMENT_REQUEST_SUCCESS, payload });
 
 export const updateCommentRequestAction = () => ({ type: UPDATE_COMMENT_REQUEST });
 export const updateCommentRequestFailAction = (error) => ({ type: UPDATE_COMMENT_REQUEST_FAIL, error });

@@ -6,7 +6,7 @@
 
   display: inline-block;
   padding: 18px 24px 14px;;
-  background: $very-light-pink;
+  background: $white;
   cursor: pointer;
   transition: background 200ms, color 200ms;
 
@@ -27,7 +27,9 @@
 
   &__caption {
 
-    font-size: 14px;
+    font: 14px "Istok Web";
+    font-weight: 700;
+    letter-spacing: .5px;
   }
 
   &--active,
@@ -55,40 +57,4 @@
   &--danger { background: lighten($danger, 40%); }
   &--danger &__header { background: $danger; color: $white; }
   &--danger &__close:hover { color: $white; }
-
-
-  &__close {
-
-    position: absolute;
-    top: 10px;
-    right: 10px;
-    display: block;
-    width: 16px;
-    height: 16px;
-    font-size: 20px;
-    color: $very-light-pink;
-    cursor: pointer;
-    transition: color 400ms;
-
-    &:hover {
-      color: $coal-dark;
-    }
-  }
-
-  &__header {
-
-    display: block;
-    background: $whitesmoke;
-    border-bottom: 1px solid $very-light-pink;
-    font: 14px "Istok Web", sans-serif;
-    font-weight: 700;
-    padding: 14px 20px 10px;
-    color: $coal-dark;
-  }
-
-  &__content {
-
-    display: block;
-    overflow: auto;
-  }
 }

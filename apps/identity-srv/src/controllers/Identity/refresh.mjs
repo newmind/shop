@@ -33,7 +33,7 @@ export default () => async (ctx) => {
       return ctx.body = {
         success: false,
         error: {
-          code: '',
+          code: 401,
           message: 'Пользователь не прошел верификацию'
         }
       };
@@ -63,8 +63,8 @@ export default () => async (ctx) => {
         refreshToken: newRefreshToken,
       }
     };
-
-  } catch(error) {
+  }
+  catch(error) {
 
     ctx.status = 500;
     ctx.body = {

@@ -10,6 +10,10 @@
 .form {
 
   display: block;
+  background: $white;
+  border: 1px solid $pale-lilac;
+  border-radius: 15px;
+  padding: 30px;
 }
 
 .controls {

@@ -1,4 +1,3 @@
-'use strict';
 
 import request from '@sys.packages/request';
 
@@ -9,10 +8,14 @@ const PRODUCT_API_SRV = process.env['PRODUCT_API_SRV'];
 export default () => async (ctx) => {
   try {
     let filter = {};
-    const { status } = ctx['request']['query'];
+    const { status = null, id = null } = ctx['request']['query'];
 
     if (status) {
       filter['status'] = status;
+    }
+
+    if (id) {
+      filter['id'] = id;
     }
 
     const { data, meta } = await request({

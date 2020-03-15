@@ -2,7 +2,7 @@
 import types from 'prop-types';
 import React, { PureComponent } from 'react';
 
-import { Row, Col, InputField, SelectField } from '@ui.packages/ui';
+import { Row, Col, InputField, SelectField, Button } from '@ui.packages/ui';
 
 import cn from 'classnames';
 import styles from './default.module.scss';
@@ -79,10 +79,8 @@ class Component extends PureComponent {
           </div>
         </Row>)}
         <Row>
-          <Col>
-            <span className={styles['add-attr']} onClick={this._handleAddAttr.bind(this)}>
-              <span className={cn('fas fa-plus', styles['add-attr__icon'])}/>
-            </span>
+          <Col className={styles['align-right']}>
+            <Button mode="success" onClick={this._handleAddAttr.bind(this)}>Добавить</Button>
           </Col>
         </Row>
       </div>

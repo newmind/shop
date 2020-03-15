@@ -1,5 +1,6 @@
 
 import request from '@ui.packages/request';
+import moment from '@ui.packages/moment';
 import { pushNotification } from '@ui.packages/notifications';
 
 import {
@@ -29,13 +30,18 @@ export const openDialog = () => (dispatch) => dispatch(openDialogAction());
 export const closeDialog = () => (dispatch) => dispatch(closeDialogAction());
 
 
-export const getProducts = () => async (dispatch) => {
+export const getProducts = (params = {}) => async (dispatch) => {
   try {
     dispatch(getProductsRequestAction());
 
     const result = await request({
       url: '/products',
       method: 'get',
+      params: {
+        ...params,
+        createdFrom: params['createdFrom'] ? moment(params['createdFrom']).format('YYYY-MM-DD 00:00:00+03:00') : null,
+        createdTo: params['createdTo'] ? moment(params['createdTo']).format('YYYY-MM-DD 23:59:59+03:00') : null,
+      },
     });
 
     dispatch(getProductsRequestSuccessAction(result));

@@ -1,18 +1,20 @@
 
+import { dialogReducer } from '@ui.packages/dialog';
+import { tabsReducer } from '@ui.packages/tabs';
+import { notificationReducer } from '@ui.packages/notifications';
+
 import { combineReducers } from 'redux';
 import { routerReducer } from 'react-router-redux';
 import { reducer as formReducer } from 'redux-form';
 
-import { dialogReducer } from '@ui.packages/dialog';
-import { notificationReducer } from '@ui.packages/notifications';
-
 
 export default (asyncReducers = {}) => {
   return combineReducers({
-    dialog: dialogReducer,
-    notifications: notificationReducer,
-    routing: routerReducer,
     form: formReducer,
+    tabs: tabsReducer,
+    dialog: dialogReducer,
+    routing: routerReducer,
+    notifications: notificationReducer,
 
     ...asyncReducers
   });

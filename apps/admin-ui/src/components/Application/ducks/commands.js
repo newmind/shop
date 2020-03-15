@@ -1,8 +1,9 @@
 
-import { push } from 'react-router-redux';
-
 import request from "@ui.packages/request";
+import { pushNotification } from "@ui.packages/notifications";
 import { instance, joinToRoom, connect, disconnect } from '@ui.packages/socket';
+
+import { push } from 'react-router-redux';
 
 import {
   signOutAction,
@@ -21,8 +22,6 @@ import {
   applicationSignOutRequestSuccessAction,
 } from './actions';
 
-import { pushNotification } from "@ui.packages/notifications";
-
 
 export const changeState = (state) => async (dispatch) => {
 
@@ -31,19 +30,18 @@ export const changeState = (state) => async (dispatch) => {
 
 export const getProfile = () => async (dispatch) => {
   try {
-
     dispatch(applicationGetProfileRequestAction());
 
-    const profile = await request({
+    const { data } = await request({
       url: '/profile',
       method: 'get',
       data: {},
     });
 
-    dispatch(applicationGetProfileRequestSuccessAction(profile));
-    joinToRoom(profile['id']);
-
-  } catch(error) {
+    dispatch(applicationGetProfileRequestSuccessAction(data));
+    joinToRoom(data['id']);
+  }
+  catch(error) {
 
     dispatch(applicationGetProfileRequestFailAction());
     dispatch(push('/sign-in'));
@@ -76,8 +74,8 @@ export const signIn = (formData) => async dispatch => {
     dispatch(applicationAuthRequestSuccessAction(result));
 
     dispatch(push('/'));
-
-  } catch(error) {
+  }
+  catch(error) {
 
     const notification = {
       mode: '',
@@ -118,8 +116,8 @@ export const signOut = () => async (dispatch) => {
     dispatch(applicationSignOutRequestSuccessAction());
 
     dispatch(push('/sign-in'));
-
-  } catch(error) {
+  }
+  catch(error) {
 
     dispatch(applicationSignOutRequestFailAction(error));
   }

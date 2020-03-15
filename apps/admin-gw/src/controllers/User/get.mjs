@@ -8,16 +8,36 @@ export default () => async (ctx) => {
 
     const { id } = ctx.user || {};
 
+    if ( ! id) {
+      ctx.status = 401;
+      return ctx.body = {
+        success: false,
+        error: {
+          code: 401,
+          message: 'Unauthorized'
+        },
+      };
+    }
+
     const { data } = await get(id);
 
     delete data['userId'];
 
-    ctx.body = data;
+    ctx.body = {
+      success: true,
+      data: data,
+    };
 
-  } catch(error) {
+  }
+  catch(error) {
 
-    const { status, data } = error['response'];
-
-    ctx.throw(status, data);
+    ctx.status = 500;
+    ctx.body = {
+      success: false,
+      error: {
+        code: 500,
+        message: error['message'],
+      },
+    };
   }
 }

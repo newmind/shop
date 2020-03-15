@@ -29,5 +29,6 @@ const validate = values => {
 export default reduxForm({
   form: 'profile',
   enableReinitialize: true,
+  destroyOnUnmount: false,
   validate,
 })(Component);

@@ -1,0 +1,107 @@
+
+@import "~@ui.packages/theme";
+
+
+.wrapper {
+
+  display: block;
+  border: 1px solid $pale-lilac;
+  border-radius: 8px;
+  padding: 30px;
+  background: $white;
+}
+
+.header {
+
+  display: block;
+  font: 16px "Istok Web";
+  font-weight: 700;
+  color: $coal-dark;
+  margin: 0 0 30px;
+}
+
+.amount {
+
+  display: block;
+  text-align: right;
+  color: $coal-dark;
+  font-size: 0;
+
+  &__value {
+
+    display: inline-block;
+    font-size: 13px;
+    //font-weight: bold;
+    margin: 0 4px 0 0;
+  }
+
+  &__currency {
+
+    display: inline-block;
+    font-size: 13px;
+    //font-weight: bold;
+  }
+}
+
+.image {
+
+  width: 140px;
+  height: 105px;
+}
+
+.attributes {
+
+  display: block;
+
+  &__item {
+
+    display: block;
+    font-size: 12px;
+    white-space: nowrap;
+
+    & + & {
+
+      margin: 10px 0 0;
+    }
+  }
+
+  &__name {
+
+    display: inline-block;
+    font-weight: bold;
+    margin: 0 8px 0 0;
+  }
+
+  &__value {
+
+    display: inline-block;
+  }
+
+  &__unit {
+
+    display: inline-block;
+    margin: 0 0 0 4px;
+    font-style: italic;
+  }
+}
+
+.description {
+
+  display: block;
+  font-size: 13px;
+  line-height: 1.4;
+
+  &__label {
+
+    font-weight: bold;
+  }
+
+  &__item {
+
+    display: block;
+
+    & + & {
+      margin: 8px 0 0;
+    }
+  }
+}

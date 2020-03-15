@@ -13,7 +13,7 @@
   display: block;
   padding: 20px 40px;
   text-align: right;
-  background: $pale-grey;
+  background: $white;
   border-bottom: 1px solid $pale-lilac;
 }
 
@@ -23,89 +23,27 @@
   padding: 40px;
 }
 
-
-.amount {
-
-  display: block;
-  text-align: right;
-  color: $coal-dark;
-  font-size: 0;
-
-  &__value {
-
-    display: inline-block;
-    font-size: 13px;
-    //font-weight: bold;
-    margin: 0 4px 0 0;
-  }
-
-  &__currency {
-
-    display: inline-block;
-    font-size: 13px;
-    //font-weight: bold;
-  }
-}
-
-.image {
-
-  width: 140px;
-  height: 105px;
-}
-
-.attributes {
+.header {
 
   display: block;
-
-  &__item {
-
-    display: block;
-    font-size: 12px;
-    white-space: nowrap;
-
-    & + & {
-
-      margin: 10px 0 0;
-    }
-  }
-
-  &__name {
-
-    display: inline-block;
-    font-weight: bold;
-    margin: 0 8px 0 0;
-  }
-
-  &__value {
-
-    display: inline-block;
-  }
-
-  &__unit {
-
-    display: inline-block;
-    margin: 0 0 0 4px;
-    font-style: italic;
-  }
+  font: 18px "Istok Web";
+  font-weight: 700;
+  letter-spacing: .5px;
+  margin: 0 0 40px;
 }
 
-.description {
+.filter {
 
   display: block;
-  font-size: 13px;
-  line-height: 1.4;
+  margin: 0 0 30px;
+}
 
-  &__label {
+.table {
 
-    font-weight: bold;
-  }
+  display: block;
+}
 
-  &__item {
+.paging {
 
-    display: block;
-
-    & + & {
-      margin: 8px 0 0;
-    }
-  }
+  display: block;
 }

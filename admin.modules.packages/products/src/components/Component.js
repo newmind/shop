@@ -1,61 +1,39 @@
 
-import { Confirm } from "@ui.packages/dialog";
-import { Table, Column } from "@ui.packages/table";
-import { Gallery, Button, Row, Col, Actions } from '@ui.packages/ui';
+import { Button } from '@ui.packages/ui';
+import { objectToQuery } from "@ui.packages/utils";
 
 import types from 'prop-types';
 import React, { PureComponent } from 'react';
 
 import Filter from './Filter';
+import Table from './Table';
 
 import styles from './default.module.scss';
 
 
 class Component extends PureComponent {
   static propTypes = {
-    items: types.array,
+    search: types.object
   };
 
   static defaultProps = {
-    items: [],
+    search: {},
   };
 
-  state = {
-    productId: null,
-    product: null,
-  };
+  _setQuery(formData) {
+    const { push } = this.props;
+
+    push('?' + objectToQuery({ ...formData }))
+  }
 
   _handleAddProduct() {
-    const { replaceURI } = this.props;
-    replaceURI('/products/create');
-  }
+    const { push } = this.props;
 
-  _handleCancelRemove() {
-    const { closeDialog } = this.props;
-    this.setState({ productId: null }, () => closeDialog('remove-confirm'));
-  }
-
-  _handleRemoveProduct(id) {
-    const { openDialog } = this.props;
-    this.setState({ productId: id }, () => openDialog('remove-confirm'));
-  }
-
-  async _handleConfirmRemove() {
-    const { productId } = this.state;
-    const { removeProductById, closeDialog } =  this.props;
-    await removeProductById([ productId ]);
-
-    this.setState({ productId: null }, () => closeDialog('remove-confirm'));
-  }
-
-  _handleEdit(id) {
-    const { replaceURI } = this.props;
-
-    replaceURI('/products/' + id);
+    push('/products/create');
   }
 
   render() {
-    const { items } = this.props;
+    const { search } = this.props;
 
     return (
       <section className={styles['wrapper']}>
@@ -66,88 +44,19 @@ class Component extends PureComponent {
           >Добавить товар</Button>
         </aside>
         <article className={styles['content']}>
-          <Filter onSubmit={(data) => console.log(data)}/>
-          <Table columns={items}>
-            <Column
-              title="Фото"
-              alias="gallery"
-              width="140"
-            >
-              {(items) => <Gallery className={styles['image']} valueKey={'id'} items={items} path={`${process.env['REACT_APP_API_HOST']}/gallery`} />}
-            </Column>
-            <Column
-              title="Основное"
-              align="left"
-            >
-              {({ id, uuid, name, brand, description, amount, currency }) => {
-                return (
-                  <div className={styles['description']}>
-                    {uuid && <div className={styles['description__item']}>[ID: { id }] <b className={styles['description__label']}>{ uuid }</b></div>}
-                    {brand && <div className={styles['description__item']}><b className={styles['description__label']}>Бренд:</b> { brand }</div>}
-                    {name && <div className={styles['description__item']}><b className={styles['description__label']}>Название:</b> { name }</div>}
-                    {name && <div className={styles['description__item']}><b className={styles['description__label']}>Цена:</b> { amount } { currency['value'] }</div>}
-                    {description && <div className={styles['description__item']}><b className={styles['description__label']}>Описание:</b> { description }</div>}
-                  </div>
-                )
-              }}
-            </Column>
-            <Column
-              title="Описание"
-              align="left"
-              width="200"
-            >
-              {({ type, category, color, form, material }) => {
-                return (
-                  <div className={styles['description']}>
-                    {type && <div className={styles['description__item']}><b className={styles['description__label']}>Тип:</b> { type['value'] }</div>}
-                    {category && <div className={styles['description__item']}><b className={styles['description__label']}>Категория:</b> { category['value'] }</div>}
-                    {color && <div className={styles['description__item']}><b className={styles['description__label']}>Цвет:</b> { color['value'] }</div>}
-                    {form && <div className={styles['description__item']}><b className={styles['description__label']}>Форма:</b> { form['value'] }</div>}
-                    {material && <div className={styles['description__item']}><b className={styles['description__label']}>Материал:</b> { material['value'] }</div>}
-                  </div>
-                );
-              }}
-            </Column>
-            <Column
-              title="Аттрибуты"
-              alias="attributes"
-              align="left"
-              width="200"
-            >
-              {(attrs) => {
-                return (
-                  <ul className={styles['attributes']}>
-                    { ! attrs.length && <li className={styles['attributes__item']}>Нет данных</li>}
-                    {attrs.map((attr, index) => (
-                      <li key={index} className={styles['attributes__item']}>
-                        <span className={styles['attributes__name']}>{ attr['name'] }:</span>
-                        <span className={styles['attributes__value']}>{ attr['value'] }</span>
-                        {attr['unit'] && <span className={styles['attributes__unit']}>{ attr['unit']['value'] }</span>}
-                      </li>
-                    ))}
-                  </ul>
-                );
-              }}
-            </Column>
-            <Column
-              align="right"
-              width="70"
-            >
-              {({ id }) => (
-                <Actions
-                  onEdit={this._handleEdit.bind(this, id)}
-                  onDelete={this._handleRemoveProduct.bind(this, id, 0)}
-                />
-              )}
-            </Column>
-          </Table>
+          <div className={styles['header']}>
+            <h2>Управление витриной</h2>
+          </div>
+          <div className={styles['filter']}>
+            <Filter initialValues={search} onSubmit={this._setQuery.bind(this)} />
+          </div>
+          <div className={styles['table']}>
+            <Table />
+          </div>
+          <div className={styles['paging']}>
+
+          </div>
         </article>
-        <Confirm
-          name="remove-confirm"
-          message="Вы уверены, что хотите удалить товар?"
-          onConfirm={this._handleConfirmRemove.bind(this)}
-          onCancel={this._handleCancelRemove.bind(this)}
-        />
       </section>
     );
   }
