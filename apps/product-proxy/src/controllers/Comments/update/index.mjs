@@ -4,24 +4,43 @@ import { sequelize, models } from '@sys.packages/db';
 
 
 export default () => async (ctx) => {
+  try {
+    const { Comment, Product } = models;
+    const { id } = ctx['params'];
+    const formData = ctx['request']['body'];
 
-  const { Comment } = models;
-  const { productId } = ctx.params;
-  const { ...formData } = ctx.request.body;
+    const transaction = await sequelize.transaction();
 
-  const transaction = await sequelize.transaction();
+    await Comment.update(formData, {
+      where: { id },
+      transaction,
+    });
 
-  const result = await Comment.create({
-    productId,
-    ...formData
-  }, { transaction });
+    const result = await Comment.findOne({
+      include: [{
+        model: Product,
+        as: 'product',
+        attributes: ['id', 'uuid', 'brand']
+      }],
+      where: { id },
+      transaction,
+    });
 
-  await transaction.commit();
+    await transaction.commit();
 
-  sendEvent(process.env['RABBIT_PRODUCT_PROXY_EXCHANGE_COMMENT_UPDATED'], JSON.stringify(result.toJSON()));
+    sendEvent(process.env['RABBIT_PRODUCT_PROXY_EXCHANGE_COMMENT_UPDATED'], JSON.stringify(result.toJSON()));
 
-  ctx.body = {
-    success: true,
-    data: result.toJSON(),
-  };
+    ctx.body = {
+      success: true,
+      data: result.toJSON(),
+    };
+  }
+  catch(error) {
+
+    ctx.status = 500;
+    ctx.body = {
+      success: false,
+      error: { code: 500, message: error['message'] },
+    };
+  }
 };

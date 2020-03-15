@@ -12,23 +12,29 @@ class Component extends PureComponent {
   };
 
   render() {
+    const { handleSubmit } = this.props;
+
     return (
-      <form className={styles['form']}>
+      <form className={styles['form']} onSubmit={handleSubmit}>
         <Row>
           <Col>
             <InputField
+              label="Комментатор"
               name="person"
             />
           </Col>
         </Row>
         <Row>
           <Col>
-            <TextareaField name="comment" />
+            <TextareaField
+              label="Комментарий"
+              name="comment"
+            />
           </Col>
         </Row>
         <Row>
-          <Col>
-            <Button type="submit">Сохранить</Button>
+          <Col className={styles['controls']}>
+            <Button type="submit" mode="success">Сохранить</Button>
           </Col>
         </Row>
       </form>

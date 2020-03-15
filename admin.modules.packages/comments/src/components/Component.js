@@ -9,14 +9,15 @@ import React, { PureComponent } from 'react';
 
 import FormModify from './FormModify';
 
-import cn from 'classnames';
 import styles from './default.module.scss';
 
 
 class Component extends PureComponent {
   static propTypes = {
     items: types.array,
+    getComment: types.func,
     getComments: types.func,
+    updateComment: types.func,
   };
 
   static defaultProps = {
@@ -27,6 +28,13 @@ class Component extends PureComponent {
     commentId: null,
     comment: null,
   };
+
+  async _handleUpdate(formData) {
+    const { updateComment, closeDialog } = this.props;
+
+    await updateComment(formData);
+    closeDialog('remove-confirm');
+  }
 
   _handleCancelRemove() {
     const { closeDialog } = this.props;
@@ -40,10 +48,11 @@ class Component extends PureComponent {
     this.setState({ commentId: id }, () => openDialog('remove-confirm'));
   }
 
-  _handleEditComment(id) {
-    const { openDialog } = this.props;
+  async _handleEditComment(id) {
+    const { getComment, openDialog } = this.props;
+    const comment = await getComment(id);
 
-    this.setState({ commentId: id }, () => openDialog('comment-modify'));
+    this.setState({ comment }, () => openDialog('comment-modify'));
   }
 
   async _handleConfirmRemove() {
@@ -56,6 +65,7 @@ class Component extends PureComponent {
   }
 
   render() {
+    const { comment } = this.state;
     const { items } = this.props;
 
     return (
@@ -93,9 +103,7 @@ class Component extends PureComponent {
                 >
                   {(product) => {
                     return product && (
-                      <div>
-                        <Link to={'/products/' + product['id']}>{ product['brand'] }</Link>
-                      </div>
+                      <Link className={styles['link']} to={'/products/' + product['id']}>{ product['brand'] }</Link>
                     )
                   }}
                 </Column>
@@ -120,8 +128,8 @@ class Component extends PureComponent {
           onConfirm={this._handleConfirmRemove.bind(this)}
           onCancel={this._handleCancelRemove.bind(this)}
         />
-        <Dialog title="Доавить комментарий" name="comment-modify">
-          <FormModify onSubmit={() => {}} />
+        <Dialog title="Редактировать комментарий" name="comment-modify">
+          <FormModify initialValues={comment} onSubmit={this._handleUpdate.bind(this)} />
         </Dialog>
       </div>
     );

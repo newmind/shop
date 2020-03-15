@@ -1,17 +1,17 @@
 
 import request from '@ui.packages/request';
-import { pushNotification } from '@ui.packages/notifications';
+// import { pushNotification } from '@ui.packages/notifications';
 
 import {
   pageInProcessAction,
 
+  getCommentRequestAction,
+  getCommentRequestFailAction,
+  getCommentRequestSuccessAction,
+
   getCommentsRequestAction,
   getCommentsRequestFailAction,
   getCommentsRequestSuccessAction,
-
-  createCommentRequestAction,
-  createCommentRequestFailAction,
-  createCommentRequestSuccessAction,
 
   updateCommentRequestAction,
   updateCommentRequestFailAction,
@@ -43,29 +43,43 @@ export const getComments = () => async (dispatch) => {
   }
 };
 
-// export const createProducts = (data) => async dispatch => {
-//   try {
-//
-//     dispatch(createProductsRequestAction());
-//
-//     const result = await request({
-//       method: 'post',
-//       url: '/products',
-//       data: data,
-//     });
-//
-//     dispatch(createProductsRequestSuccessAction(result['data']));
-//     dispatch(closeDialog());
-//
-//   } catch(error) {
-//     dispatch(pushNotification({
-//       type: 'Ошибка запроса',
-//       message: error['message'],
-//       mode: 'danger'
-//     }));
-//     dispatch(createProductsRequestFailAction());
-//   }
-// };
+export const getComment = (id) => async (dispatch) => {
+  try {
+    dispatch(getCommentRequestAction());
+
+    const result = await request({
+      url: '/comments',
+      method: 'get',
+      params: { id },
+    });
+
+    dispatch(getCommentRequestSuccessAction(result));
+
+    return result['data'][0];
+  }
+  catch(error) {
+
+    dispatch(getCommentRequestFailAction(error));
+  }
+};
+
+export const updateComment = (formData) => async (dispatch) => {
+  try {
+    dispatch(updateCommentRequestAction());
+
+    const result = await request({
+      url: '/comments/' + formData['id'],
+      method: 'put',
+      data: formData,
+    });
+
+    dispatch(updateCommentRequestSuccessAction(result['data']));
+  }
+  catch(error) {
+
+    dispatch(updateCommentRequestFailAction(error));
+  }
+};
 
 export const deleteComments = (id) => async (dispatch) => {
   try {

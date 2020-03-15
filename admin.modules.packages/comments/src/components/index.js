@@ -1,17 +1,18 @@
 
 import PageHOC from '@ui.packages/hocs';
+import { openDialog, closeDialog } from '@ui.packages/dialog';
 
 import { bindActionCreators } from 'redux';
 
 import Component from './Component';
 
-import { openDialog, closeDialog } from '@ui.packages/dialog';
-
 import {
   pageInProcess,
 
   getComments,
+  getComment,
   deleteComments,
+  updateComment,
 } from '../ducks/commands';
 
 
@@ -30,7 +31,9 @@ const mapActionsToProps = (dispatch) => bindActionCreators({
   closeDialog,
 
   getComments,
+  getComment,
   deleteComments,
+  updateComment,
 }, dispatch);
 
 
