@@ -114,18 +114,18 @@ services:
       - /shop/data/certbot/www:/var/www/certbot:rw
     entrypoint: /bin/sh -c 'trap exit TERM; while :; do certbot renew; sleep 12h & wait $${!}; done;'
 
-  prerender:
-    container_name: prerender_srv
-    build:
-      context: ./
-      dockerfile: Dockerfile.prerender-srv
-    restart: always
-    depends_on:
-      - showcase_ui
-      - showcase_gw
-      - product_proxy
-    ports:
-    - 8080:8080
+#  prerender:
+#    container_name: prerender_srv
+#    build:
+#      context: ./
+#      dockerfile: Dockerfile.prerender-srv
+#    restart: always
+#    depends_on:
+#      - showcase_ui
+#      - showcase_gw
+#      - product_proxy
+#    ports:
+#    - 8080:8080
 
   proxy:
     user: root
