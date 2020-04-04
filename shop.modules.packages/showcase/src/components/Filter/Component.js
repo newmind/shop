@@ -1,5 +1,5 @@
 
-import { SelectField, InputField, Row, Col } from '@ui.packages/ui';
+import { SelectField, InputField, CheckBoxField, Row, Col } from '@ui.packages/ui';
 
 import types from 'prop-types';
 import React, { PureComponent } from 'react';
@@ -137,16 +137,23 @@ class Component extends PureComponent {
                   <div className={styles['amount']}>
                     <span className={styles['amount__label']}>Сумма</span>
                     <span className={styles['amount__wrapper']}>
-                      <InputField className={styles['amount__input']} name="amountFrom" disabled={inProcess} />
+                      <InputField className={styles['amount__input']} name="amountFrom" disabled={inProcess} autocomplete="off" />
                       <span className={styles['amount__delimiter']}>-</span>
-                      <InputField className={styles['amount__input']} name="amountTo" disabled={inProcess} />
+                      <InputField className={styles['amount__input']} name="amountTo" disabled={inProcess} autocomplete="off" />
                     </span>
                   </div>
                 </Col>
               </Row>
             </div>
             <div className={styles['col']}>
-              <p>more</p>
+              <div className={styles['additional']}>
+                <div className={styles['additional__col']}>
+                  <CheckBoxField label="скидка" name="isHit" onChange={this._handleSubmit.bind(this)} />
+                </div>
+                <div className={styles['additional__col']}>
+                  <CheckBoxField label="новинки" name="isSale" onChange={this._handleSubmit.bind(this)} />
+                </div>
+              </div>
             </div>
           </div>
         </div>

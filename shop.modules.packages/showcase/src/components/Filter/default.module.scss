@@ -106,3 +106,18 @@
 
   justify-content: center;
 }
+
+.additional {
+
+  display: flex;
+  flex-direction: row;
+  flex: 1 0;
+  padding: 10px 0 0;
+
+  &__col {
+
+    display: flex;
+    flex-direction: column;
+    flex: 1 0;
+  }
+}

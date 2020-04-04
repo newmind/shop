@@ -23,7 +23,7 @@ export default () => async (ctx) => {
       customData: {
         name: fields['name'],
         surname: fields['surname'],
-        address: fields['address'],
+        address: fields['address'].replace(/[,]/g, ''),
       },
       successUrl: "https://mysite.com/successUrl",
       failUrl: "https://mysite.com/failUrl",
@@ -38,7 +38,6 @@ export default () => async (ctx) => {
     const result = await request({
       url: process.env['PIKASSA_API_URL'] + '/invoices',
       method: 'post',
-      json: true,
       headers: {
         'Content-Type': 'application/json; charset=utf-8',
         'X-Sign': sign,
@@ -79,8 +78,8 @@ export default () => async (ctx) => {
     ctx.body = {
       success: false,
       error: {
-        code: error.original.code,
-        message: error.original.detail,
+        code: 500,
+        message: error.message,
       }
     };
   }
