@@ -55,7 +55,7 @@ function transform(html) {
     });
   });
 
-  server.listen(5040, () => {
-    console.log('server start');
+  server.listen(process.env['PORT'], () => {
+    console.log(`Сервер запущен на порту ${process.env['PORT']}`);
   });
 })();
