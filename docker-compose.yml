@@ -124,6 +124,8 @@ services:
       - showcase_ui
       - showcase_gw
       - product_proxy
+    ports:
+    - 8080:8080
 
   proxy:
     user: root
