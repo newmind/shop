@@ -105,7 +105,7 @@ services:
 
 
   certbot:
-    user: vpyatakov
+    user: root
     container_name: certbot
     image: certbot/certbot
     restart: unless-stopped
@@ -128,7 +128,7 @@ services:
 #    - 8080:8080
 
   proxy:
-    user: vpyatakov
+    user: root
     container_name: proxy
     build: ./nginx
     restart: unless-stopped
