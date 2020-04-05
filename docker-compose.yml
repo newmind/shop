@@ -102,6 +102,19 @@ services:
       - ./apps/showcase-ui/nginx/conf.d:/etc/nginx/conf.d:ro
     environment:
       - NODE_ENV=production
+      -
+  #  prerender:
+  #    container_name: prerender_srv
+  #    build:
+  #      context: ./
+  #      dockerfile: Dockerfile.prerender-srv
+  #    restart: always
+  #    depends_on:
+  #      - showcase_ui
+  #      - showcase_gw
+  #      - product_proxy
+  #    ports:
+  #    - 8080:8080
 
   certbot:
     user: root
@@ -112,19 +125,6 @@ services:
       - ./data/certbot/conf:/etc/letsencrypt:rw
       - ./data/certbot/www:/var/www/certbot:rw
     entrypoint: /bin/sh -c 'trap exit TERM; while :; do certbot renew; sleep 12h & wait $${!}; done;'
-
-#  prerender:
-#    container_name: prerender_srv
-#    build:
-#      context: ./
-#      dockerfile: Dockerfile.prerender-srv
-#    restart: always
-#    depends_on:
-#      - showcase_ui
-#      - showcase_gw
-#      - product_proxy
-#    ports:
-#    - 8080:8080
 
   proxy:
     user: root
