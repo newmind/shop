@@ -102,7 +102,7 @@ services:
       - ./apps/showcase-ui/nginx/conf.d:/etc/nginx/conf.d:ro
     environment:
       - NODE_ENV=production
-      -
+
   #  prerender:
   #    container_name: prerender_srv
   #    build:
