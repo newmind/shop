@@ -83,7 +83,7 @@ services:
     links:
       - admin_gw
     volumes:
-      - /shop/apps/admin-ui/nginx/conf.d:/etc/nginx/conf.d:ro
+      - ./apps/admin-ui/nginx/conf.d:/etc/nginx/conf.d:ro
     environment:
       - NODE_ENV=production
 
@@ -99,10 +99,9 @@ services:
     links:
       - showcase_gw
     volumes:
-      - /shop/apps/showcase-ui/nginx/conf.d:/etc/nginx/conf.d:ro
+      - ./apps/showcase-ui/nginx/conf.d:/etc/nginx/conf.d:ro
     environment:
       - NODE_ENV=production
-
 
   certbot:
     user: root
@@ -110,8 +109,8 @@ services:
     image: certbot/certbot
     restart: unless-stopped
     volumes:
-      - /shop/data/certbot/conf:/etc/letsencrypt:rw
-      - /shop/data/certbot/www:/var/www/certbot:rw
+      - ./data/certbot/conf:/etc/letsencrypt:rw
+      - ./data/certbot/www:/var/www/certbot:rw
     entrypoint: /bin/sh -c 'trap exit TERM; while :; do certbot renew; sleep 12h & wait $${!}; done;'
 
 #  prerender:
@@ -142,9 +141,9 @@ services:
       - 80:80
       - 443:443
     volumes:
-      - /shop/nginx/init-letsencrypt.sh:/etc/nginx/init-letsencrypt.sh
-      - /shop/nginx/conf.d:/etc/nginx/conf.d
-      - /shop/nginx/nginx.conf:/etc/nginx/nginx.conf
-      - /shop/data/certbot/conf:/etc/letsencrypt
-      - /shop/data/certbot/www:/var/www/certbot
+      - ./nginx/init-letsencrypt.sh:/etc/nginx/init-letsencrypt.sh
+      - ./nginx/conf.d:/etc/nginx/conf.d
+      - ./nginx/nginx.conf:/etc/nginx/nginx.conf
+      - ./data/certbot/conf:/etc/letsencrypt
+      - ./data/certbot/www:/var/www/certbot
     command: '/bin/sh -c ''while :; do sleep 6h & wait $${!}; nginx -s reload; done & nginx -g "daemon off;"'''
