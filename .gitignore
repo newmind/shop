@@ -1,8 +1,8 @@
 
-.idea
+/.idea
 
-build/
+/build/
 
-lib/
-node_modules/
-data/
+/lib/
+/node_modules/
+/data/
