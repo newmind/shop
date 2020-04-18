@@ -23,8 +23,6 @@ services:
       context: ./
       dockerfile: Dockerfile.mail-srv
     restart: always
-    depends_on:
-    links:
 
   identity_srv:
     container_name: identity_srv
