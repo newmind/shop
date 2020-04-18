@@ -137,9 +137,9 @@ class Component extends PureComponent {
                   <div className={styles['amount']}>
                     <span className={styles['amount__label']}>Сумма</span>
                     <span className={styles['amount__wrapper']}>
-                      <InputField className={styles['amount__input']} name="amountFrom" disabled={inProcess} autocomplete="off" />
+                      <InputField className={styles['amount__input']} name="amountFrom" disabled={inProcess} autoComplete="off" />
                       <span className={styles['amount__delimiter']}>-</span>
-                      <InputField className={styles['amount__input']} name="amountTo" disabled={inProcess} autocomplete="off" />
+                      <InputField className={styles['amount__input']} name="amountTo" disabled={inProcess} autoComplete="off" />
                     </span>
                   </div>
                 </Col>

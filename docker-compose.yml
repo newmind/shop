@@ -16,6 +16,16 @@ services:
     ports:
       - 50002:15672
 
+
+  mail_srv:
+    container_name: mail_srv
+    build:
+      context: ./
+      dockerfile: Dockerfile.mail-srv
+    restart: always
+    depends_on:
+    links:
+
   identity_srv:
     container_name: identity_srv
     build:
@@ -24,8 +34,10 @@ services:
     restart: always
     depends_on:
       - db
+      - mail_srv
     links:
       - db
+      - mail_srv
 
 
   product_proxy:
@@ -37,9 +49,11 @@ services:
     depends_on:
       - db
       - rabbit
+      - mail_srv
     links:
       - db
       - rabbit
+      - mail_srv
 
 
   admin_gw:
@@ -113,6 +127,7 @@ services:
   #      - showcase_ui
   #      - showcase_gw
   #      - product_proxy
+  #      - mail_srv
   #    ports:
   #    - 8080:8080
 

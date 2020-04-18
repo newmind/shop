@@ -3,7 +3,7 @@
   "private": true,
   "devDependencies": {
     "lerna": "3.20.2",
-    "lerna-update-wizard": "0.17.7"
+    "lerna-update-wizard": "0.17.8"
   },
   "license": "MIT",
   "homepage": "https://магазиночков.рф",

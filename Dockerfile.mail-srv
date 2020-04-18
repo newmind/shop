@@ -1,0 +1,23 @@
+
+# BUILD APP
+FROM node:13-alpine
+
+RUN npm config set package-lock false
+#RUN npm i yarn -g --yes
+
+WORKDIR /app
+
+COPY ./apps/mail-srv/src               ./apps/mail-srv/src
+COPY ./apps/mail-srv/.env.production   ./apps/mail-srv
+COPY ./apps/mail-srv/package.json      ./apps/mail-srv
+COPY ./sys.packages                    ./sys.packages
+COPY ./packages                        ./packages
+COPY ./package.json                    .
+COPY ./lerna.json                      .
+COPY ./yarn.lock                       .
+
+RUN yarn
+
+WORKDIR /app/apps/mail-srv
+
+ENTRYPOINT ["yarn", "run", "start"]

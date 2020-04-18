@@ -94,6 +94,7 @@ export default () => async (ctx) => {
       attributes: ['id', 'uuid', 'brand', 'name', 'description', 'status', 'amount', 'saleAmount', 'count', 'params', 'isHit', 'isSale', 'createdAt'],
       ...options,
       ...offset,
+      distinct: true,
       where: { ...where },
       order: [['createdAt', 'desc']],
       include: [
