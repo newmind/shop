@@ -1,5 +1,7 @@
 
+import { openDialog } from '@ui.packages/dialog';
 import request from '@ui.packages/request';
+
 import { push } from 'react-router-redux';
 
 import {
@@ -13,6 +15,7 @@ import {
 
 export const pageInProcess = (status) => (dispatch) => {
   dispatch(pageInProcessAction(status));
+  dispatch(openDialog('success'));
 };
 
 export const createOperation = (order) => async (dispatch) => {

@@ -7,11 +7,12 @@ import {
 
 
 const initialState = {
+  data: null,
   error: null,
   inProcess: false,
 };
 
-export default (state = initialState, { type }) => {
+export default (state = initialState, { type, payload }) => {
   switch (type) {
 
     case CREATE_OPERATION_REQUEST: return {
@@ -24,6 +25,7 @@ export default (state = initialState, { type }) => {
     };
     case CREATE_OPERATION_REQUEST_SUCCESS: return {
       ...state,
+      data: payload,
       inProcess: false,
     };
 

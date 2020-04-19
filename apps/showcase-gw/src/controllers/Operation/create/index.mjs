@@ -8,7 +8,7 @@ export default () => async (ctx) => {
 
     const items = data['items'].map((item) => {
       return {
-        type: item['type'],
+        type: item['productType'],
         lens: item['lens'],
         productId: item['id'],
         recipe: item['recipe'],

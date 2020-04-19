@@ -1,10 +1,9 @@
-'use strict';
-
-import http from 'http';
 
 import databaseORM from '@sys.packages/db';
 import appServer, { initRouter } from '@sys.packages/server';
 import { connect as createConnection, channel as createChannel, createExchange } from "@sys.packages/rabbit";
+
+import http from 'http';
 
 import routes from './routes';
 

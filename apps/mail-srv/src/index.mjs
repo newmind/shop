@@ -1,10 +1,9 @@
-'use strict';
-
-import http from 'http';
 
 import appServer, { initRouter } from '@sys.packages/server';
 
-import routes from './routes/index';
+import http from 'http';
+
+import routes from './routes';
 
 
 (async () => {
