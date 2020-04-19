@@ -16,7 +16,7 @@ const saveFiles = (files, { productId }, { transaction }) => {
           const fileBuffer = files[key]['buffer'];
 
           const { data } = await request({
-            url: process.env['GALLERY_SRV'] + '/images',
+            url: process.env['GALLERY_API_SRV'] + '/images',
             method: 'post',
             headers: {
               'Content-type': 'application/octet-stream',

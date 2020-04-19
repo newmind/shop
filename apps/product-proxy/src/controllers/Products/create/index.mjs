@@ -17,7 +17,7 @@ const saveFiles = (files, { productId }, { transaction }) => {
           const uuid = UUID();
 
           const result = await request({
-            url: process.env['GALLERY_SRV'] + '/images',
+            url: process.env['GALLERY_API_SRV'] + '/images',
             method: 'post',
             headers: {
               'Content-type': 'application/octet-stream',
