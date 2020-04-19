@@ -1,24 +1,46 @@
 
-import { sequelize, models } from '@sys.packages/db';
-import { getFiles } from "@sys.packages/sys.utils";
+import request from '@sys.packages/request';
 import { sendEvent } from "@sys.packages/rabbit";
+import { sequelize, models } from '@sys.packages/db';
+import { getFiles, UUID } from "@sys.packages/sys.utils";
 
 
 const saveFiles = (files, { productId }, { transaction }) => {
-
   const { Gallery } = models;
 
-  return new Promise((resolve) => {
+  return new Promise((resolve, reject) => {
 
     Object.keys(files)
       .map(async (key, index) => {
+        try {
+          const fileBuffer = files[key]['buffer'];
+          const uuid = UUID();
 
-        const fileBuffer = files[key]['buffer'];
+          const result = await request({
+            url: process.env['GALLERY_SRV'] + '/images',
+            method: 'post',
+            headers: {
+              'Content-type': 'application/octet-stream',
+            },
+            data: fileBuffer,
+          });
 
-        await Gallery.create({ productId, file: fileBuffer, order: index }, { transaction });
+          console.log(result)
 
-        if (Object.keys(files).length === index + 1) {
-          resolve();
+          await Gallery.create({
+            productId,
+            externalId: uuid,
+            order: index,
+          }, {
+            transaction
+          });
+
+          if (Object.keys(files).length === index + 1) {
+            resolve();
+          }
+        }
+        catch (error) {
+          reject(error);
         }
       });
   });
@@ -27,13 +49,16 @@ const saveFiles = (files, { productId }, { transaction }) => {
 export default () => async (ctx) => {
   try {
     const { Product, Attribute, Units, Gallery, Currency, Category, Type, Color, Material, Form } = models;
-    const { files, fields } = await getFiles(ctx['req']);
+    const { files = [], fields = {}} = await getFiles(ctx['req']);
+    const { attributes = null } = fields;
 
     const transaction = await sequelize.transaction();
 
     const { id } = await Product.create(fields, { transaction });
 
-    const { attributes = null } = fields;
+    if (Object.keys(files).length) {
+      await saveFiles(files, { ctx, productId: id }, { transaction });
+    }
 
     if (attributes) {
 
@@ -44,10 +69,6 @@ export default () => async (ctx) => {
         });
 
       await Attribute.bulkCreate(attributes, { transaction });
-    }
-
-    if (Object.keys(files).length) {
-      await saveFiles(files, { productId: id }, { transaction });
     }
 
     await transaction.commit();

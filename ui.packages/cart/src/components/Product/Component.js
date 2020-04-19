@@ -36,7 +36,7 @@ class Component extends PureComponent {
     return (
       <div className={styles['item']}>
         <div className={styles['item__promo']}>
-          <Gallery items={gallery} isList={false} valueKey="id" path={`${process.env['REACT_APP_API_HOST']}/gallery`} />
+          <Gallery items={gallery} isList={false} valueKey="externalId" path={`${process.env['REACT_APP_API_HOST']}/gallery`} />
         </div>
         <div className={styles['item__description']}>
           <div className={styles['item__names']}>

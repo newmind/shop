@@ -1,28 +1,42 @@
 
+import request from "@sys.packages/request";
 import { sendEvent } from '@sys.packages/rabbit';
 import { getFiles } from "@sys.packages/sys.utils";
 import { sequelize, models } from '@sys.packages/db';
 
 
 const saveFiles = (files, { productId }, { transaction }) => {
-
   const { Gallery } = models;
 
-  return new Promise((resolve) => {
-
-    if ( ! Object.keys(files).length) {
-      resolve();
-    }
+  return new Promise((resolve, reject) => {
 
     Object.keys(files)
       .map(async (key, index) => {
+        try {
+          const fileBuffer = files[key]['buffer'];
 
-        const fileBuffer = files[key]['buffer'];
+          const { data } = await request({
+            url: process.env['GALLERY_SRV'] + '/images',
+            method: 'post',
+            headers: {
+              'Content-type': 'application/octet-stream',
+            },
+            data: fileBuffer,
+          });
 
-        await Gallery.create({ productId, file: fileBuffer }, { transaction });
+          await Gallery.create({
+            productId,
+            externalId: data['externalId'],
+          }, {
+            transaction
+          });
 
-        if (Object.keys(files).length === index + 1) {
-          resolve();
+          if (Object.keys(files).length === index + 1) {
+            resolve();
+          }
+        }
+        catch (error) {
+          reject(error);
         }
       });
   });
@@ -124,7 +138,7 @@ export default () => async (ctx) => {
           model: Gallery,
           required: false,
           as: 'gallery',
-          attributes: ['id'],
+          attributes: ['externalId'],
         },
       ],
       transaction

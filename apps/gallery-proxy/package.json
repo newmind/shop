@@ -1,5 +1,5 @@
 {
-  "name": "product-proxy",
+  "name": "gallery-proxy",
   "license": "MIT",
   "version": "1.0.0",
   "scripts": {
@@ -13,7 +13,6 @@
   "dependencies": {
     "@sys.packages/db": "1.0.0",
     "@sys.packages/rabbit": "1.0.0",
-    "@sys.packages/request": "1.0.0",
     "@sys.packages/server": "1.0.0",
     "@sys.packages/socket.io": "1.0.0",
     "@sys.packages/sys.utils": "1.0.0",

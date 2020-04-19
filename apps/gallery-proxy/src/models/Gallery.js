@@ -11,9 +11,9 @@ module.exports = (db, DataType) => {
     externalId: {
       type: DataType.STRING(36),
     },
-    productId: {
-      type: DataType.INTEGER,
-    },
+    file: {
+      type: DataType.BLOB,
+    }
   });
 
   Gallery.associate = ({}) => {};

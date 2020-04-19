@@ -37,11 +37,11 @@ module.exports = {
           autoIncrement: true,
           index: true,
         },
+        externalId: {
+          type: Sequelize.STRING(36),
+        },
         productId: {
           type: Sequelize.INTEGER,
-        },
-        file: {
-          type: Sequelize.BLOB,
         },
         createdAt: {
           type: Sequelize.DATE,

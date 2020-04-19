@@ -152,7 +152,7 @@ export default () => async (ctx) => {
           model: Gallery,
           required: false,
           as: 'gallery',
-          attributes: ['id'],
+          attributes: ['externalId'],
         },
         {
           model: Comment,

@@ -36,7 +36,8 @@ class Component extends PureComponent {
 
   _normalizeURI(src) {
     const { path } = this.props;
-    if (src.constructor === File) {
+
+    if (src && src.constructor === File) {
       return URL.createObjectURL(src);
     } else {
       return path + '/' + src;
@@ -45,6 +46,7 @@ class Component extends PureComponent {
 
   render() {
     const { input, onDelete } = this.props;
+
     return (
       <div className={styles['wrapper']}>
         <Row>
@@ -53,11 +55,13 @@ class Component extends PureComponent {
               <span className={styles['add-image']} onClick={this._handleAddImages.bind(this)}>
                 <span className={cn('fas fa-plus', styles['add-image__icon'])}/>
               </span>
-              {(input['value'] || []).map((id, key) => {
+              {(input['value'] || []).map((externalId, key) => {
                 return (
                   <div key={key} className={styles['image']}>
-                    {(id.constructor !== File) && <span className={cn(styles['remove-image'], 'fas fa-times')} onClick={onDelete.bind(this, id)} />}
-                    <Image src={this._normalizeURI(id)} />
+                    {(externalId && externalId.constructor !== File) && (
+                      <span className={cn(styles['remove-image'], 'fas fa-times')} onClick={onDelete.bind(this, externalId)} />
+                    )}
+                    <Image src={this._normalizeURI(externalId)} />
                   </div>
                 );
               })}

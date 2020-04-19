@@ -197,7 +197,7 @@ export const getProductById = (id) => async (dispatch) => {
 
     const resultData = {
       ...product,
-      gallery: product['gallery'].map(img => img['id']),
+      gallery: product['gallery'].map(img => img['externalId']),
       attributes: product['attributes'].map(item => {
         return {
           id: item['id'],
@@ -253,7 +253,7 @@ export const updateProductsById = (data) => async (dispatch) => {
 
     const resultData = {
       ...result['data'],
-      gallery: result['data']['gallery'].map((img) => img['id']),
+      gallery: result['data']['gallery'].map((img) => img['externalId']),
       attributes: result['data']['attributes'] ? result['data']['attributes'].map((item) => {
         return {
           id: item['id'],
@@ -316,7 +316,7 @@ export const createProduct = (data) => async dispatch => {
 
     const resultData = {
       ...result['data'],
-      gallery: result['data']['gallery'].map((img) => img['id']),
+      gallery: result['data']['gallery'].map((img) => img['externalId']),
       attributes: result['data']['attributes'] ? result['data']['attributes'].map((item) => {
         return {
           id: item['id'],

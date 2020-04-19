@@ -60,7 +60,7 @@ class Component extends PureComponent {
             alias="gallery"
             width="140"
           >
-            {(items) => <Gallery className={styles['image']} valueKey={'id'} items={items} path={`${process.env['REACT_APP_API_HOST']}/gallery`} />}
+            {(items) => <Gallery className={styles['image']} valueKey={'externalId'} items={items} path={`${process.env['REACT_APP_API_HOST']}/gallery`} />}
           </Column>
           <Column
             title="Основное"

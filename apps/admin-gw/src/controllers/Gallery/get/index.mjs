@@ -8,7 +8,7 @@ export default () => async (ctx) => {
 
     const { data } = await request({
       method: 'get',
-      url: process.env['PRODUCT_API_SRV'] + '/gallery/' + id,
+      url: process.env['GALLERY_API_SRV'] + '/images/' + id,
       responseType: 'stream',
     });
 

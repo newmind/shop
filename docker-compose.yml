@@ -37,6 +37,16 @@ services:
       - db
       - mail_srv
 
+  gallery_proxy:
+    container_name: gallery_proxy
+    build:
+      context: ./
+      dockerfile: Dockerfile.gallery-proxy
+    restart: always
+    depends_on:
+      - db
+    links:
+      - db
 
   product_proxy:
     container_name: product_proxy
@@ -48,10 +58,12 @@ services:
       - db
       - rabbit
       - mail_srv
+      - gallery_proxy
     links:
       - db
       - rabbit
       - mail_srv
+      - gallery_proxy
 
 
   admin_gw:
@@ -64,10 +76,12 @@ services:
       - rabbit
       - product_proxy
       - identity_srv
+      - gallery_proxy
     links:
       - rabbit
       - product_proxy
       - identity_srv
+      - gallery_proxy
 
 
   showcase_gw:
@@ -79,9 +93,11 @@ services:
     depends_on:
       - rabbit
       - product_proxy
+      - gallery_proxy
     links:
       - rabbit
       - product_proxy
+      - gallery_proxy
 
 
   admin_ui:
