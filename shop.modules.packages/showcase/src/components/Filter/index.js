@@ -31,6 +31,7 @@ const mapStateToProps = (state, props) => {
   const Showcase = state['showcase'];
   const { location: { search }} = props;
   const query = queryToObject(search);
+
   return {
     initialValues: query,
     types: Showcase['types'],
@@ -42,7 +43,6 @@ const mapStateToProps = (state, props) => {
     inProcess: Showcase['inProcess'],
     isValid: isValid('filter-showcase-ui')(state),
     isPristine: isPristine('filter-showcase-ui')(state),
-
   }
 };
 
@@ -59,5 +59,6 @@ export default withRouter(connect(
 )(reduxForm({
   form: 'showcase-filter',
   destroyOnUnmount: false,
+  enableReinitialize: true,
   validate,
 })(Component)));
