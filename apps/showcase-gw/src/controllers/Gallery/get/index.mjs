@@ -5,9 +5,10 @@ import request from 'axios';
 export default () => async (ctx) => {
   try {
     const { fileName } = ctx['params'];
+
     const { data } = await request({
       method: 'get',
-      url: process.env['PRODUCT_API_SRV'] + `/images/${fileName}`,
+      url: process.env['GALLERY_API_SRV'] + `/images/${fileName}`,
       responseType: 'stream',
     });
 
