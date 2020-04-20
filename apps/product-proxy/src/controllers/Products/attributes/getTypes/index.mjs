@@ -1,5 +1,5 @@
 
-import {models, sequelize, Sequelize } from '@sys.packages/db';
+import { models, sequelize, Sequelize } from '@sys.packages/db';
 
 
 export default () => async (ctx) => {
@@ -52,7 +52,7 @@ export default () => async (ctx) => {
     }
 
     const result = await Type.findAll({
-      raw: true,
+      distinct: true,
       group: ['Type.id'],
       attributes: ['id', 'value', [sequelize.fn('COUNT', sequelize.col('product.typeId')), 'count']],
       include: [

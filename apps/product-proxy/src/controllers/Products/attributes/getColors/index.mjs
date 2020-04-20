@@ -52,7 +52,7 @@ export default () => async (ctx) => {
     }
 
     const result = await Color.findAll({
-      raw: true,
+      distinct: true,
       group: ['Color.id'],
       attributes: ['id', 'value', [sequelize.fn('COUNT', sequelize.col('product.colorId')), 'count']],
       include: [

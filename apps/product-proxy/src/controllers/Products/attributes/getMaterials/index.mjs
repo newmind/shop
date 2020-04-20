@@ -52,7 +52,7 @@ export default () => async (ctx) => {
     }
 
     const result = await Material.findAll({
-      raw: true,
+      distinct: true,
       group: ['Material.id'],
       attributes: ['id', 'value', [sequelize.fn('COUNT', sequelize.col('product.materialId')), 'count']],
       include: [
