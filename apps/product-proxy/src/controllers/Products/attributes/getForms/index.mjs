@@ -52,7 +52,7 @@ export default () => async (ctx) => {
     }
 
     const result = await Form.findAll({
-      raw: true,
+      distinct: true,
       group: ['Form.id'],
       attributes: ['id', 'value', [sequelize.fn('COUNT', sequelize.col('product.formId')), 'count']],
       include: [
