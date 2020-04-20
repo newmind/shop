@@ -9,36 +9,40 @@ const saveFiles = (files, { productId }, { transaction }) => {
   const { Gallery } = models;
 
   return new Promise((resolve, reject) => {
+    const filesMap = Object.keys(files);
 
-    Object.keys(files)
-      .map(async (key, index) => {
-        try {
-          const fileBuffer = files[key]['buffer'];
+    if ( ! filesMap.length) {
+      resolve();
+    }
 
-          const { data } = await request({
-            url: process.env['GALLERY_API_SRV'] + '/images',
-            method: 'post',
-            headers: {
-              'Content-type': 'application/octet-stream',
-            },
-            data: fileBuffer,
-          });
+    filesMap.map(async (key, index) => {
+      try {
+        const fileBuffer = files[key]['buffer'];
 
-          await Gallery.create({
-            productId,
-            externalId: data['externalId'],
-          }, {
-            transaction
-          });
+        const { data } = await request({
+          url: process.env['GALLERY_API_SRV'] + '/images',
+          method: 'post',
+          headers: {
+            'Content-type': 'application/octet-stream',
+          },
+          data: fileBuffer,
+        });
 
-          if (Object.keys(files).length === index + 1) {
-            resolve();
-          }
+        await Gallery.create({
+          productId,
+          externalId: data['externalId'],
+        }, {
+          transaction
+        });
+
+        if (Object.keys(files).length === index + 1) {
+          resolve();
         }
-        catch (error) {
-          reject(error);
-        }
-      });
+      }
+      catch (error) {
+        reject(error);
+      }
+    });
   });
 };
 
