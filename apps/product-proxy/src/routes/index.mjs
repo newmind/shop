@@ -12,8 +12,6 @@ import { getAllOrders, createOrder, updateOrder } from '../controllers/Operation
 import { getProducts, createProduct, deleteProductById, updateProductById } from '../controllers/Products';
 import { getTypesCount, getFormsCount, getBrandsCount, getColorsCount, getMaterialsCount, getCategoriesCount } from '../controllers/Products';
 
-import { getImage, deleteImages } from '../controllers/Gallery';
-
 import { getAllComments, deleteComments, createComment, updateComment } from '../controllers/Comments';
 
 
@@ -69,9 +67,6 @@ export default (router) => {
   router.get('/v1/api/operations', getAllOrders());
   router.post('/v1/api/operations', createOrder());
   router.put('/v1/api/operations/:operationId', updateOrder());
-
-  router.get('/v1/api/gallery/:id', getImage());
-  router.delete('/v1/api/gallery', deleteImages());
 
   router.get('/v1/api/comments', getAllComments());
   router.post('/v1/api/comments', createComment());
