@@ -39,9 +39,6 @@ import routes from './routes';
       await createExchange(process.env['RABBIT_PRODUCT_PROXY_EXCHANGE_MATERIAL_CREATED']);
       await createExchange(process.env['RABBIT_PRODUCT_PROXY_EXCHANGE_MATERIAL_DELETED']);
 
-      await createExchange(process.env['RABBIT_PRODUCT_PROXY_EXCHANGE_OPERATION_UPDATED']);
-      await createExchange(process.env['RABBIT_PRODUCT_PROXY_EXCHANGE_OPERATION_CREATED']);
-
       await createExchange(process.env['RABBIT_PRODUCT_PROXY_EXCHANGE_PRODUCT_UPDATED']);
       await createExchange(process.env['RABBIT_PRODUCT_PROXY_EXCHANGE_PRODUCT_CREATED']);
       await createExchange(process.env['RABBIT_PRODUCT_PROXY_EXCHANGE_PRODUCT_DELETED']);
@@ -54,6 +51,7 @@ import routes from './routes';
       await createExchange(process.env['RABBIT_PRODUCT_PROXY_EXCHANGE_UNIT_CREATED']);
       await createExchange(process.env['RABBIT_PRODUCT_PROXY_EXCHANGE_UNIT_DELETED']);
 
+      await createExchange(process.env['RABBIT_PRODUCT_PROXY_EXCHANGE_GALLERY_CREATED']);
     });
   });
 

@@ -65,7 +65,7 @@ export default (router) => {
   router.delete('/units', deleteUnits());
 
   router.get('/products', getProducts());
-  router.get('/products/:id', getProduct());
+  router.get('/products/:uuid', getProduct());
   router.post('/products', createProduct());
   router.put('/products/:id', updateProduct());
   router.delete('/products', deleteProducts());

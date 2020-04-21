@@ -10,7 +10,7 @@ export default () => async (ctx) => {
     const transaction = await sequelize.transaction();
 
     await Gallery.destroy({
-      where: { id: data['id'] },
+      where: { externalId: data['externalId'] },
     }, {
       transaction,
     });
@@ -19,7 +19,7 @@ export default () => async (ctx) => {
 
     ctx.body = {
       success: true,
-      data: data['id'],
+      data: data['externalId'],
     };
   }
   catch(e) {

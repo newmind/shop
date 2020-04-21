@@ -35,6 +35,11 @@ const saveFiles = (files, { productId }, { transaction }) => {
           transaction
         });
 
+        sendEvent(process.env['RABBIT_PRODUCT_PROXY_EXCHANGE_GALLERY_CREATED'], JSON.stringify({
+          productId,
+          externalId: data['externalId'],
+        }));
+
         if (Object.keys(files).length === index + 1) {
           resolve();
         }
@@ -54,15 +59,15 @@ export default () => async (ctx) => {
 
     const transaction = await sequelize.transaction();
 
-    const { id } = await Product.create(fields, { transaction });
+    const { uuid } = await Product.create(fields, { transaction });
 
-    await saveFiles(files, { ctx, productId: id }, { transaction });
+    await saveFiles(files, { productId: uuid }, { transaction });
 
     if (attributes) {
 
       const attributes = [...JSON.parse(fields['attributes'])]
         .map(item => {
-          item['productId'] = id;
+          item['productId'] = uuid;
           return item;
         });
 
@@ -72,8 +77,8 @@ export default () => async (ctx) => {
     await transaction.commit();
 
     const result = await Product.findOne({
-      where: { id },
-      attributes: ['id', 'uuid', 'brand', 'name', 'description', 'status', 'amount', 'saleAmount', 'count', 'isHit', 'isSale', 'createdAt'],
+      where: { uuid },
+      attributes: ['uuid', 'brand', 'name', 'description', 'status', 'amount', 'saleAmount', 'count', 'isHit', 'isSale', 'createdAt'],
       include: [
         {
           model: Category,
@@ -129,7 +134,7 @@ export default () => async (ctx) => {
           model: Gallery,
           required: false,
           as: 'gallery',
-          attributes: ['id'],
+          attributes: ['externalId'],
         },
       ],
     });

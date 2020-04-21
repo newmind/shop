@@ -39,16 +39,16 @@ class Component extends PureComponent {
   _handleSubmitProduct(formData) {
     const { updateProductsById, createProduct } = this.props;
 
-    if (formData['id']) {
+    if (formData['uuid']) {
       updateProductsById(formData);
     } else {
       createProduct(formData);
     }
   }
 
-  _handleDeleteImages(id) {
+  _handleDeleteImages(uuid) {
     const { deleteImages } = this.props;
-    deleteImages([ id ]);
+    deleteImages([ uuid ]);
   }
 
   _handleSubmit() {

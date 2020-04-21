@@ -5,12 +5,12 @@ module.exports = (db, DataType) => {
   const Product = db.define('Product', {
     id: {
       type: DataType.INTEGER,
-      primaryKey: true,
       autoIncrement: true,
       index: true,
     },
     uuid: {
       type: DataType.STRING(9),
+      primaryKey: true,
       allowNull: false,
       index: true,
       unique: 'compositeIndex',
@@ -22,35 +22,6 @@ module.exports = (db, DataType) => {
     },
     name: {
       type: DataType.STRING(255),
-      allowNull: true,
-      index: true,
-    },
-    typeId: {
-      type: DataType.INTEGER,
-      allowNull: false,
-      index: true,
-    },
-    categoryId: {
-      type: DataType.INTEGER,
-      allowNull: true,
-      index: true,
-    },
-    currencyId: {
-      type: DataType.INTEGER,
-      allowNull: false,
-    },
-    colorId: {
-      type: DataType.INTEGER,
-      allowNull: true,
-      index: true,
-    },
-    materialId: {
-      type: DataType.INTEGER,
-      allowNull: true,
-      index: true,
-    },
-    formId: {
-      type: DataType.INTEGER,
       allowNull: true,
       index: true,
     },
@@ -74,22 +45,17 @@ module.exports = (db, DataType) => {
     },
     saleAmount: {
       type: DataType.DECIMAL(10, 2),
-      allowNull: true,
+      allowNull: false,
       defaultValue: 0,
       get() {
         const amount = this.getDataValue('saleAmount');
-        return amount ? Number(amount) : '';
+        return amount ? Number(amount) : 0;
       },
     },
     count: {
       type: DataType.INTEGER,
       allowNull: false,
       defaultValue: 0,
-    },
-    params: {
-      type: DataType.ENUM,
-      values: ['further'],
-      allowNull: true,
     },
     isHit: {
       type: DataType.BOOLEAN,
@@ -101,7 +67,13 @@ module.exports = (db, DataType) => {
     },
   });
 
-  Product.associate = function() { };
+  Product.associate = function({ Gallery }) {
+
+    Product.hasMany(Gallery, {
+      foreignKey: 'productId',
+      as: 'gallery'
+    });
+  };
 
   return Product;
 };

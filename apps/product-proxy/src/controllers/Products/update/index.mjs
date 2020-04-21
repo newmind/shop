@@ -35,6 +35,11 @@ const saveFiles = (files, { productId }, { transaction }) => {
           transaction
         });
 
+        sendEvent(process.env['RABBIT_PRODUCT_PROXY_EXCHANGE_GALLERY_CREATED'], JSON.stringify({
+          productId,
+          externalId: data['externalId'],
+        }));
+
         if (Object.keys(files).length === index + 1) {
           resolve();
         }
@@ -48,17 +53,17 @@ const saveFiles = (files, { productId }, { transaction }) => {
 
 export default () => async (ctx) => {
   try {
-    const { id } = ctx['params'];
+    const { uuid } = ctx['params'];
     const { files, fields } = await getFiles(ctx['req']);
     const { Product, Attribute, Units, Gallery, Currency, Category, Type, Color, Material, Form } = models;
 
     const transaction = await sequelize.transaction();
 
-    await Attribute.destroy({ where: { productId: id }}, { transaction });
+    await Attribute.destroy({ where: { productId: uuid }}, { transaction });
 
     const attributes = [...JSON.parse(fields['attributes'])].map(item => {
       delete item['id'];
-      item['productId'] = id;
+      item['productId'] = uuid;
       item['unitId'] < 0 && delete item['unitId'];
       return item;
     });
@@ -78,15 +83,15 @@ export default () => async (ctx) => {
     }
 
     await Product.update(normalize, {
-      where: { id },
+      where: { uuid },
       transaction,
     });
 
-    await saveFiles(files, { productId: id }, { transaction });
+    await saveFiles(files, { productId: uuid }, { transaction });
 
     const product = await Product.findOne({
-      where: { id },
-      attributes: ['id', 'uuid', 'brand', 'name', 'description', 'status', 'amount', 'saleAmount', 'count', 'params', 'isHit', 'isSale', 'createdAt'],
+      where: { uuid },
+      attributes: ['uuid', 'brand', 'name', 'description', 'status', 'amount', 'saleAmount', 'count', 'params', 'isHit', 'isSale', 'createdAt'],
       include: [
         {
           model: Category,

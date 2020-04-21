@@ -40,10 +40,10 @@ class Component extends PureComponent {
     this.setState({ productId: null }, () => closeDialog('remove-confirm'));
   }
 
-  _handleEdit(id) {
+  _handleEdit(uuid) {
     const { replaceURI } = this.props;
 
-    replaceURI('/products/' + id);
+    replaceURI('/products/' + uuid);
   }
 
   render() {
@@ -66,10 +66,10 @@ class Component extends PureComponent {
             title="Основное"
             align="left"
           >
-            {({ id, uuid, name, brand, description, amount, currency }) => {
+            {({ uuid, name, brand, description, amount, currency }) => {
               return (
                 <div className={styles['description']}>
-                  {uuid && <div className={styles['description__item']}>[ID: { id }] <b className={styles['description__label']}>{ uuid }</b></div>}
+                  {uuid && <div className={styles['description__item']}><b className={styles['description__label']}>{ uuid }</b></div>}
                   {brand && <div className={styles['description__item']}><b className={styles['description__label']}>Бренд:</b> { brand }</div>}
                   {name && <div className={styles['description__item']}><b className={styles['description__label']}>Название:</b> { name }</div>}
                   {name && <div className={styles['description__item']}><b className={styles['description__label']}>Цена:</b> { amount } { currency['value'] }</div>}
@@ -120,10 +120,10 @@ class Component extends PureComponent {
             align="right"
             width="70"
           >
-            {({ id }) => (
+            {({ uuid }) => (
               <Actions
-                onEdit={this._handleEdit.bind(this, id)}
-                onDelete={this._handleRemoveProduct.bind(this, id, 0)}
+                onEdit={this._handleEdit.bind(this, uuid)}
+                onDelete={this._handleRemoveProduct.bind(this, uuid, 0)}
               />
             )}
           </Column>

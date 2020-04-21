@@ -5,33 +5,33 @@ import { sequelize, models } from '@sys.packages/db';
 
 export default () => async (ctx) => {
   try {
-    const { id } = ctx['request']['body'];
+    const { uuid } = ctx['request']['body'];
     const { Product, Attribute, Gallery } = models;
 
     const transaction = await sequelize.transaction();
 
     await Attribute.destroy({
-      where: { productId: id },
+      where: { productId: uuid },
       transaction,
     });
 
     await Gallery.destroy({
-      where: { productId: id },
+      where: { productId: uuid },
       transaction,
     });
 
     await Product.destroy({
-      where: { id },
+      where: { uuid },
       transaction,
     });
 
     await transaction.commit();
 
-    sendEvent(process.env['RABBIT_PRODUCT_PROXY_EXCHANGE_PRODUCT_DELETED'], JSON.stringify(id));
+    sendEvent(process.env['RABBIT_PRODUCT_PROXY_EXCHANGE_PRODUCT_DELETED'], JSON.stringify(uuid));
 
     ctx.body = {
       success: true,
-      data: id,
+      data: uuid,
     };
   }
   catch(e) {
