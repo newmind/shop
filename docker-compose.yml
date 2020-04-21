@@ -48,6 +48,21 @@ services:
     links:
       - db
 
+  operation_proxy:
+    container_name: operation_proxy
+    build:
+      context: ./
+      dockerfile: Dockerfile.operation-proxy
+    restart: always
+    depends_on:
+      - db
+      - rabbit
+      - mail_srv
+    links:
+      - db
+      - rabbit
+      - mail_srv
+
   product_proxy:
     container_name: product_proxy
     build:
@@ -77,11 +92,13 @@ services:
       - product_proxy
       - identity_srv
       - gallery_proxy
+      - operation_proxy
     links:
       - rabbit
       - product_proxy
       - identity_srv
       - gallery_proxy
+      - operation_proxy
 
 
   showcase_gw:
@@ -94,10 +111,12 @@ services:
       - rabbit
       - product_proxy
       - gallery_proxy
+      - operation_proxy
     links:
       - rabbit
       - product_proxy
       - gallery_proxy
+      - operation_proxy
 
 
   admin_ui:
@@ -140,6 +159,7 @@ services:
   #    depends_on:
   #      - showcase_ui
   #      - showcase_gw
+  #      - operation_proxy
   #      - product_proxy
   #      - mail_srv
   #    ports:

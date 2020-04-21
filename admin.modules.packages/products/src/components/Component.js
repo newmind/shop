@@ -23,6 +23,8 @@ class Component extends PureComponent {
   _setQuery(formData) {
     const { push } = this.props;
 
+    console.log(formData)
+
     push('?' + objectToQuery({ ...formData }))
   }
 
