@@ -74,6 +74,8 @@ export default () => async (ctx) => {
       await Attribute.bulkCreate(attributes, { transaction });
     }
 
+    await transaction.commit();
+
     const result = await Product.findOne({
       where: { uuid },
       attributes: ['uuid', 'brand', 'name', 'description', 'status', 'amount', 'saleAmount', 'count', 'isHit', 'isSale', 'createdAt'],
@@ -138,8 +140,6 @@ export default () => async (ctx) => {
     });
 
     await sendEvent(process.env['RABBIT_PRODUCT_PROXY_EXCHANGE_PRODUCT_CREATED'], JSON.stringify(result.toJSON()));
-
-    await transaction.commit();
 
     ctx.body = {
       success: true,
