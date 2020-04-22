@@ -35,7 +35,7 @@ const saveFiles = (files, { productId }, { transaction }) => {
           transaction
         });
 
-        sendEvent(process.env['RABBIT_PRODUCT_PROXY_EXCHANGE_GALLERY_CREATED'], JSON.stringify({
+        await sendEvent(process.env['RABBIT_PRODUCT_PROXY_EXCHANGE_GALLERY_CREATED'], JSON.stringify({
           productId,
           externalId: data['externalId'],
         }));
@@ -73,8 +73,6 @@ export default () => async (ctx) => {
 
       await Attribute.bulkCreate(attributes, { transaction });
     }
-
-    await transaction.commit();
 
     const result = await Product.findOne({
       where: { uuid },
@@ -139,7 +137,9 @@ export default () => async (ctx) => {
       ],
     });
 
-    sendEvent(process.env['RABBIT_PRODUCT_PROXY_EXCHANGE_PRODUCT_CREATED'], JSON.stringify(result.toJSON()));
+    await sendEvent(process.env['RABBIT_PRODUCT_PROXY_EXCHANGE_PRODUCT_CREATED'], JSON.stringify(result.toJSON()));
+
+    await transaction.commit();
 
     ctx.body = {
       success: true,
@@ -153,7 +153,7 @@ export default () => async (ctx) => {
       success: false,
       error: {
         code: '500',
-        message: e.message,
+        message: e['message'],
       },
     };
   }

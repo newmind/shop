@@ -66,9 +66,9 @@ export default () => async (ctx) => {
       data: body,
     });
 
-    await transaction.commit();
+    await sendEvent(process.env['RABBIT_PRODUCT_PROXY_EXCHANGE_OPERATION_CREATED'], JSON.stringify(externalId));
 
-    sendEvent(process.env['RABBIT_PRODUCT_PROXY_EXCHANGE_OPERATION_CREATED'], JSON.stringify(externalId));
+    await transaction.commit();
 
     ctx.body = {
       success: true,

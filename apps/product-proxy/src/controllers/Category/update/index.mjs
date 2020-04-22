@@ -1,4 +1,3 @@
-'use strict';
 
 import { sendEvent } from '@sys.packages/rabbit';
 import { sequelize, models } from '@sys.packages/db';
@@ -17,9 +16,9 @@ export default () => async (ctx) => {
       transaction
     });
 
-    await transaction.commit();
+    await sendEvent(process.env['RABBIT_PRODUCT_PROXY_EXCHANGE_CATEGORY_UPDATED'], JSON.stringify(result.toJSON()));
 
-    sendEvent(process.env['RABBIT_PRODUCT_PROXY_EXCHANGE_CATEGORY_UPDATED'], JSON.stringify(result.toJSON()));
+    await transaction.commit();
 
     ctx.body = {
       success: true,

@@ -64,11 +64,14 @@ export default () => async (ctx) => {
     };
   }
   catch(e) {
-console.log(e);
+
     ctx.static = 500;
     ctx.body = {
       success: false,
-      error: { code: '500', message: e['message'] },
+      error: {
+        code: '500',
+        message: e['message'],
+      },
     };
   }
 

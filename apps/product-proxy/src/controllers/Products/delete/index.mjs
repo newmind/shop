@@ -25,9 +25,9 @@ export default () => async (ctx) => {
       transaction,
     });
 
-    await transaction.commit();
+    await sendEvent(process.env['RABBIT_PRODUCT_PROXY_EXCHANGE_PRODUCT_DELETED'], JSON.stringify(uuid));
 
-    sendEvent(process.env['RABBIT_PRODUCT_PROXY_EXCHANGE_PRODUCT_DELETED'], JSON.stringify(uuid));
+    await transaction.commit();
 
     ctx.body = {
       success: true,
@@ -41,7 +41,7 @@ export default () => async (ctx) => {
       success: false,
       error: {
         code: '500',
-        message: e.message,
+        message: e['message'],
       },
     };
   }

@@ -26,9 +26,9 @@ export default () => async (ctx) => {
       transaction,
     });
 
-    await transaction.commit();
+    await sendEvent(process.env['RABBIT_PRODUCT_PROXY_EXCHANGE_COMMENT_UPDATED'], JSON.stringify(result.toJSON()));
 
-    sendEvent(process.env['RABBIT_PRODUCT_PROXY_EXCHANGE_COMMENT_UPDATED'], JSON.stringify(result.toJSON()));
+    await transaction.commit();
 
     ctx.body = {
       success: true,

@@ -1,4 +1,5 @@
 
+import { sendEvent } from '@sys.packages/rabbit';
 import { sequelize, models } from '@sys.packages/db';
 
 
@@ -14,6 +15,8 @@ export default () => async (ctx) => {
     }, {
       transaction,
     });
+
+    await sendEvent(process.env['RABBIT_GALLERY_PROXY_EXCHANGE_GALLERY_DELETED'], JSON.stringify(data['externalId']))
 
     await transaction.commit();
 
