@@ -12,9 +12,9 @@ export default () => async (ctx) => {
 
     const result = await Category.create(formData, { transaction });
 
-    await transaction.commit();
+    await sendEvent(process.env['RABBIT_PRODUCT_PROXY_EXCHANGE_CATEGORY_CREATED'], JSON.stringify(result.toJSON()));
 
-    sendEvent(process.env['RABBIT_PRODUCT_PROXY_EXCHANGE_CATEGORY_CREATED'], JSON.stringify(result.toJSON()));
+    await transaction.commit();
 
     ctx.body = {
       success: true,

@@ -1,6 +1,6 @@
 
-import { models } from '@sys.packages/db';
 import { sendEvent } from "@sys.packages/rabbit";
+import {models, sequelize} from '@sys.packages/db';
 
 
 export default () => async (ctx) => {
@@ -9,6 +9,8 @@ export default () => async (ctx) => {
     const { id } = ctx['params'];
     const { ...formData } = ctx['request']['body'];
 
+    const transaction = await sequelize.transaction();
+
     const result = await Comment.create({
       productId: id,
       ...formData,
@@ -16,7 +18,9 @@ export default () => async (ctx) => {
       attributes: ['id', 'evaluation', 'person', 'comment', 'createdAt'],
     });
 
-    sendEvent(process.env['RABBIT_PRODUCT_PROXY_EXCHANGE_COMMENT_CREATED'], JSON.stringify(result.toJSON()));
+    await sendEvent(process.env['RABBIT_PRODUCT_PROXY_EXCHANGE_COMMENT_CREATED'], JSON.stringify(result.toJSON()));
+
+    await transaction.commit();
 
     ctx.body = {
       success: true,
@@ -28,7 +32,10 @@ export default () => async (ctx) => {
     ctx.status = 500;
     ctx.body = {
       success: false,
-      error: { code: '500', message: e['message'] },
+      error: {
+        code: '500',
+        message: e['message']
+      },
     };
   }
 };

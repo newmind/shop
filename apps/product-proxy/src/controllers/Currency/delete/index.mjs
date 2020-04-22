@@ -15,9 +15,9 @@ export default () => async (ctx) => {
       transaction,
     });
 
-    await transaction.commit();
+    await sendEvent(process.env['RABBIT_PRODUCT_PROXY_EXCHANGE_CURRENCY_DELETED'], JSON.stringify(id));
 
-    sendEvent(process.env['RABBIT_PRODUCT_PROXY_EXCHANGE_CURRENCY_DELETED'], JSON.stringify(id));
+    await transaction.commit();
 
     ctx.body = {
       success: true,
@@ -31,7 +31,7 @@ export default () => async (ctx) => {
       success: false,
       error: {
         code: '500',
-        message: e.message,
+        message: e['message'],
       }
     };
   }

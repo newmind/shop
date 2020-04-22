@@ -12,9 +12,9 @@ export default () => async (ctx) => {
 
     const result = await Form.create(data, { transaction });
 
-    await transaction.commit();
+    await sendEvent(process.env['RABBIT_PRODUCT_PROXY_EXCHANGE_FORM_CREATED'], JSON.stringify(result.toJSON()));
 
-    sendEvent(process.env['RABBIT_PRODUCT_PROXY_EXCHANGE_FORM_CREATED'], JSON.stringify(result.toJSON()));
+    await transaction.commit();
 
     ctx.body = {
       success: true,
@@ -28,7 +28,7 @@ export default () => async (ctx) => {
       success: false,
       error: {
         code: '500',
-        message: e.message,
+        message: e['message'],
       }
     };
   }

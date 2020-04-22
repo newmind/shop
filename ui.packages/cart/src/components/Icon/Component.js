@@ -1,8 +1,8 @@
 
+import { nounDeclension } from '@ui.packages/utils';
+
 import types from 'prop-types';
 import React, { PureComponent } from 'react';
-
-import { nounDeclension } from '@ui.packages/utils';
 
 import cn from "classnames";
 import styles from "./defaults.module.scss";
@@ -18,6 +18,7 @@ class Icon extends PureComponent {
 
   _handleSwitchStateCaretList() {
     const { isOpen, openCart, closeCart } = this.props;
+
     if (isOpen) {
       closeCart();
     } else {
@@ -27,11 +28,14 @@ class Icon extends PureComponent {
 
   render() {
     const { isOpen, items } = this.props;
+
     const classNameCartIcon = cn('fas fa-shopping-cart', styles['cart__icon']);
     const classNameCartWrapper = cn(styles['cart__wrapper'], {
       [styles['cart__wrapper--open']]: isOpen,
     });
+
     const hasItems = !! items.length;
+
     return (
       <div className={classNameCartWrapper} onClick={this._handleSwitchStateCaretList.bind(this)}>
         <span className={classNameCartIcon} />

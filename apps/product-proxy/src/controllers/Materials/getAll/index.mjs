@@ -22,7 +22,7 @@ export default () => async (ctx) => {
       success: false,
       error: {
         code: '500',
-        message: e.message,
+        message: e['message'],
       }
     };
   }

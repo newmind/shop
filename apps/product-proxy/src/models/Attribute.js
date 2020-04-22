@@ -10,7 +10,7 @@ module.exports = (db, DataType) => {
       index: true,
     },
     productId: {
-      type: DataType.INTEGER,
+      type: DataType.STRING(9),
     },
     unitId: {
       type: DataType.INTEGER,

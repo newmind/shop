@@ -4,6 +4,29 @@ module.exports = {
     const transaction = await queryInterface.sequelize.transaction();
     try {
 
+      await queryInterface.createTable('Galleries', {
+        id: {
+          type: Sequelize.INTEGER,
+          primaryKey: true,
+          autoIncrement: true,
+          index: true,
+        },
+        externalId: {
+          type: Sequelize.STRING(36),
+        },
+        productId: {
+          type: Sequelize.STRING(9),
+        },
+        createdAt: {
+          type: Sequelize.DATE,
+        },
+        updatedAt: {
+          type: Sequelize.DATE,
+        }
+      }, {
+        transaction
+      });
+
       await queryInterface.createTable('Products', {
         id: {
           type: Sequelize.INTEGER,

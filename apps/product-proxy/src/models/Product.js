@@ -5,12 +5,12 @@ module.exports = (db, DataType) => {
   const Product = db.define('Product', {
     id: {
       type: DataType.INTEGER,
-      primaryKey: true,
       autoIncrement: true,
       index: true,
     },
     uuid: {
       type: DataType.STRING(9),
+      primaryKey: true,
       allowNull: false,
       index: true,
       unique: 'compositeIndex',
@@ -135,16 +135,19 @@ module.exports = (db, DataType) => {
     });
 
     Product.hasMany(Attribute, {
+      sourceKey: 'uuid',
       foreignKey: 'productId',
       as: 'attributes',
     });
 
     Product.hasMany(Gallery, {
+      sourceKey: 'uuid',
       foreignKey: 'productId',
       as: 'gallery'
     });
 
     Product.hasMany(Comment, {
+      sourceKey: 'uuid',
       foreignKey: 'productId',
       as: 'comments'
     });

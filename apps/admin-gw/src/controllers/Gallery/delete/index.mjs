@@ -4,12 +4,12 @@ import request from '@sys.packages/request';
 
 export default () => async (ctx) => {
   try {
-    const { id } = ctx['request']['body'];
+    const { uuid } = ctx['request']['body'];
 
     const result = await request({
-      url: process.env['PRODUCT_API_SRV'] + '/gallery',
+      url: process.env['GALLERY_API_SRV'] + '/images',
       method: 'delete',
-      data: { id },
+      data: { externalId: uuid },
     });
 
     ctx.body = {
@@ -24,7 +24,7 @@ export default () => async (ctx) => {
       success: false,
       error: {
         code: '500',
-        message: e.message,
+        message: e['message'],
       },
     };
   }

@@ -8,28 +8,29 @@ export default () => async (ctx) => {
 
     const { id } = ctx['request']['body'];
 
-    await sequelize.transaction(async (transaction) => {
+    const transaction = await sequelize.transaction();
 
-      await models['Category'].destroy({
-        where: { id },
-        transaction,
-      });
+    await models['Category'].destroy({
+      where: { id },
+      transaction,
     });
 
-    sendEvent(process.env['RABBIT_PRODUCT_PROXY_EXCHANGE_CATEGORY_DELETED'], JSON.stringify(id));
+    await sendEvent(process.env['RABBIT_PRODUCT_PROXY_EXCHANGE_CATEGORY_DELETED'], JSON.stringify(id));
+
+    await transaction.commit();
 
     ctx.body = {
       success: true,
       data: id,
     };
-
-  } catch (error) {
+  }
+  catch (error) {
 
     ctx.body = {
       success: false,
       error: {
-        code: error.original.code,
-        message: error.original.detail,
+        code: '500',
+        message: error['message'],
       }
     };
   }
