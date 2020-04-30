@@ -13,16 +13,12 @@ export default () => async (ctx) => {
     const {
       createdFrom = null, createdTo = null,
       status = null, limit = null, skip = null, take = null,
-      uuid = null, id = null, categoryId = null, brand = null, amountFrom = null,
+      uuid = null, categoryId = null, brand = null, amountFrom = null,
       amountTo = null, colorId = null, formId = null, materialId = null, typeId = null,
     } = ctx['request']['query'];
 
     if (status) {
       where['status'] = status;
-    }
-
-    if (id) {
-      where['id'] = id;
     }
 
     if (uuid) {
@@ -91,7 +87,7 @@ export default () => async (ctx) => {
     }
 
     const products = await Product.findAndCountAll({
-      attributes: ['id', 'uuid', 'brand', 'name', 'description', 'status', 'amount', 'saleAmount', 'count', 'params', 'isHit', 'isSale', 'createdAt'],
+      attributes: ['uuid', 'brand', 'name', 'description', 'status', 'amount', 'saleAmount', 'count', 'params', 'isHit', 'isSale', 'createdAt'],
       ...options,
       ...offset,
       distinct: true,
@@ -152,7 +148,7 @@ export default () => async (ctx) => {
           model: Gallery,
           required: false,
           as: 'gallery',
-          attributes: ['id'],
+          attributes: ['externalId'],
         },
         {
           model: Comment,

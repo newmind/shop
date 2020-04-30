@@ -1,60 +1,84 @@
 
-import { sequelize, models } from '@sys.packages/db';
-import { getFiles } from "@sys.packages/sys.utils";
+import request from '@sys.packages/request';
 import { sendEvent } from "@sys.packages/rabbit";
+import { getFiles } from "@sys.packages/sys.utils";
+import { sequelize, models } from '@sys.packages/db';
 
 
 const saveFiles = (files, { productId }, { transaction }) => {
-
   const { Gallery } = models;
 
-  return new Promise((resolve) => {
+  return new Promise((resolve, reject) => {
+    const filesMap = Object.keys(files);
 
-    Object.keys(files)
-      .map(async (key, index) => {
+    if ( ! filesMap.length) {
+      resolve();
+    }
 
+    filesMap.map(async (key, index) => {
+      try {
         const fileBuffer = files[key]['buffer'];
 
-        await Gallery.create({ productId, file: fileBuffer, order: index }, { transaction });
+        const { data } = await request({
+          url: process.env['GALLERY_API_SRV'] + '/images',
+          method: 'post',
+          headers: {
+            'Content-type': 'application/octet-stream',
+          },
+          data: fileBuffer,
+        });
+
+        await Gallery.create({
+          productId,
+          externalId: data['externalId'],
+        }, {
+          transaction
+        });
+
+        await sendEvent(process.env['RABBIT_PRODUCT_PROXY_EXCHANGE_GALLERY_CREATED'], JSON.stringify({
+          productId,
+          externalId: data['externalId'],
+        }));
 
         if (Object.keys(files).length === index + 1) {
           resolve();
         }
-      });
+      }
+      catch (error) {
+        reject(error);
+      }
+    });
   });
 };
 
 export default () => async (ctx) => {
   try {
     const { Product, Attribute, Units, Gallery, Currency, Category, Type, Color, Material, Form } = models;
-    const { files, fields } = await getFiles(ctx['req']);
+    const { files = [], fields = {}} = await getFiles(ctx['req']);
+    const { attributes = null } = fields;
 
     const transaction = await sequelize.transaction();
 
-    const { id } = await Product.create(fields, { transaction });
+    const { uuid } = await Product.create(fields, { transaction });
 
-    const { attributes = null } = fields;
+    await saveFiles(files, { productId: uuid }, { transaction });
 
     if (attributes) {
 
       const attributes = [...JSON.parse(fields['attributes'])]
         .map(item => {
-          item['productId'] = id;
+          item['productId'] = uuid;
           return item;
         });
 
       await Attribute.bulkCreate(attributes, { transaction });
     }
 
-    if (Object.keys(files).length) {
-      await saveFiles(files, { productId: id }, { transaction });
-    }
-
     await transaction.commit();
 
     const result = await Product.findOne({
-      where: { id },
-      attributes: ['id', 'uuid', 'brand', 'name', 'description', 'status', 'amount', 'saleAmount', 'count', 'isHit', 'isSale', 'createdAt'],
+      where: { uuid },
+      attributes: ['uuid', 'brand', 'name', 'description', 'status', 'amount', 'saleAmount', 'count', 'isHit', 'isSale', 'createdAt'],
       include: [
         {
           model: Category,
@@ -110,12 +134,12 @@ export default () => async (ctx) => {
           model: Gallery,
           required: false,
           as: 'gallery',
-          attributes: ['id'],
+          attributes: ['externalId'],
         },
       ],
     });
 
-    sendEvent(process.env['RABBIT_PRODUCT_PROXY_EXCHANGE_PRODUCT_CREATED'], JSON.stringify(result.toJSON()));
+    await sendEvent(process.env['RABBIT_PRODUCT_PROXY_EXCHANGE_PRODUCT_CREATED'], JSON.stringify(result.toJSON()));
 
     ctx.body = {
       success: true,
@@ -129,7 +153,7 @@ export default () => async (ctx) => {
       success: false,
       error: {
         code: '500',
-        message: e.message,
+        message: e['message'],
       },
     };
   }

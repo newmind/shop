@@ -8,20 +8,20 @@ export default () => async (ctx) => {
     const { Gallery } = models;
     const { id } = ctx['params'];
 
-    ctx.res.writeHead(200, {
-      "Content-Type": "application/octet-stream",
-    });
-
     const image = await Gallery.findOne({
-      where: { id },
-      attributes: ['id', 'file']
+      where: { externalId: id },
+      attributes: ['file']
     });
 
     const stream = new Duplex();
 
-    stream.push(image['file']);
+    if (image) {
+      stream.push(image['file']);
+    }
+
     stream.push(null);
 
+    ctx.status = 200;
     ctx.body = stream;
   }
   catch(e) {

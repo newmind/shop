@@ -37,11 +37,11 @@ module.exports = {
           autoIncrement: true,
           index: true,
         },
-        productId: {
-          type: Sequelize.INTEGER,
+        externalId: {
+          type: Sequelize.STRING(36),
         },
-        file: {
-          type: Sequelize.BLOB,
+        productId: {
+          type: Sequelize.STRING(9),
         },
         createdAt: {
           type: Sequelize.DATE,
@@ -186,7 +186,7 @@ module.exports = {
           index: true,
         },
         productId: {
-          type: Sequelize.INTEGER,
+          type: Sequelize.STRING(9),
           defaultValue: 0,
         },
         evaluation: {
@@ -242,7 +242,7 @@ module.exports = {
           index: true,
         },
         productId: {
-          type: Sequelize.INTEGER,
+          type: Sequelize.STRING(9),
           allowNull: false
         },
         unitId: {
@@ -337,6 +337,10 @@ module.exports = {
           type: Sequelize.INTEGER,
           allowNull: false,
         },
+        params: {
+          type: Sequelize.ENUM('further'),
+          allowNull: true,
+        },
         isHit: {
           type: Sequelize.BOOLEAN,
           defaultValue: false,
@@ -344,95 +348,6 @@ module.exports = {
         isSale: {
           type: Sequelize.BOOLEAN,
           defaultValue: false,
-        },
-        createdAt: {
-          type: Sequelize.DATE,
-        },
-        updatedAt: {
-          type: Sequelize.DATE,
-        }
-      }, {
-        transaction
-      });
-
-      await queryInterface.createTable('Operations', {
-        id: {
-          type: Sequelize.INTEGER,
-          primaryKey: true,
-          autoIncrement: true,
-          index: true,
-        },
-        externalId: {
-          type: Sequelize.STRING(64),
-          allowNull: false,
-        },
-        address: {
-          type: Sequelize.STRING(512),
-          allowNull: false,
-        },
-        email: {
-          type: Sequelize.STRING(126),
-          allowNull: false,
-        },
-        phone: {
-          type: Sequelize.STRING(126),
-          allowNull: false,
-        },
-        name: {
-          type: Sequelize.STRING(126),
-          allowNull: false,
-        },
-        surname: {
-          type: Sequelize.STRING(126),
-          allowNull: false,
-        },
-        amount: {
-          type: Sequelize.DECIMAL(10, 2),
-          allowNull: false,
-        },
-        pay: {
-          type: Sequelize.STRING(32),
-          allowNull: false,
-        },
-        delivery: {
-          type: Sequelize.STRING(32),
-          allowNull: false,
-        },
-        status: {
-          type: Sequelize.INTEGER,
-          allowNull: false,
-        },
-        createdAt: {
-          type: Sequelize.DATE,
-        },
-        updatedAt: {
-          type: Sequelize.DATE,
-        }
-      }, {
-        transaction
-      });
-
-      await queryInterface.createTable('OperationStocks', {
-        id: {
-          type: Sequelize.INTEGER,
-          primaryKey: true,
-          autoIncrement: true,
-          index: true,
-        },
-        operationId: {
-          type: Sequelize.INTEGER,
-        },
-        productId: {
-          type: Sequelize.INTEGER,
-        },
-        type: {
-          type: Sequelize.STRING,
-        },
-        recipe: {
-          type: Sequelize.JSON,
-        },
-        lens: {
-          type: Sequelize.JSON,
         },
         createdAt: {
           type: Sequelize.DATE,

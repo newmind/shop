@@ -7,12 +7,8 @@ import { getAllMaterials, createMaterial, updateMaterial, deleteMaterials } from
 import { getAllCategories, createCategory, updateCategory, deleteCategories } from '../controllers/Category';
 import { getAllCurrencies, createCurrency, updateCurrency, deleteCurrencies } from '../controllers/Currency';
 
-import { getAllOrders, createOrder, updateOrder } from '../controllers/Operations';
-
 import { getProducts, createProduct, deleteProductById, updateProductById } from '../controllers/Products';
 import { getTypesCount, getFormsCount, getBrandsCount, getColorsCount, getMaterialsCount, getCategoriesCount } from '../controllers/Products';
-
-import { getImage, deleteImages } from '../controllers/Gallery';
 
 import { getAllComments, deleteComments, createComment, updateComment } from '../controllers/Comments';
 
@@ -63,15 +59,8 @@ export default (router) => {
 
   router.get('/v1/api/products', getProducts());
   router.post('/v1/api/products', createProduct());
-  router.put('/v1/api/products/:id', updateProductById());
+  router.put('/v1/api/products/:uuid', updateProductById());
   router.delete('/v1/api/products', deleteProductById());
-
-  router.get('/v1/api/operations', getAllOrders());
-  router.post('/v1/api/operations', createOrder());
-  router.put('/v1/api/operations/:operationId', updateOrder());
-
-  router.get('/v1/api/gallery/:id', getImage());
-  router.delete('/v1/api/gallery', deleteImages());
 
   router.get('/v1/api/comments', getAllComments());
   router.post('/v1/api/comments', createComment());

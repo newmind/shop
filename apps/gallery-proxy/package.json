@@ -1,0 +1,27 @@
+{
+  "name": "gallery-proxy",
+  "license": "MIT",
+  "version": "1.0.0",
+  "scripts": {
+    "migration": "cross-env NODE_ENV=production sequelize-cli db:migrate",
+    "migration:dev": "cross-env NODE_ENV=development sequelize-cli db:migrate",
+    "seed": "cross-env NODE_ENV=production sequelize-cli db:seed:all",
+    "seed:dev": "cross-env NODE_ENV=development sequelize-cli db:seed:all",
+    "start": "yarn run migration && node -r dotenv/config --experimental-modules --es-module-specifier-resolution=node ./src/index.mjs dotenv_config_path=./.env.production",
+    "start:dev": "nodemon --exec node -r dotenv/config --experimental-modules --es-module-specifier-resolution=node ./src/index.mjs dotenv_config_path=./.env.development"
+  },
+  "dependencies": {
+    "@sys.packages/db": "1.0.0",
+    "@sys.packages/rabbit": "1.0.0",
+    "@sys.packages/server": "1.0.0",
+    "@sys.packages/socket.io": "1.0.0",
+    "@sys.packages/sys.utils": "1.0.0",
+    "busboy": "0.3.1",
+    "dotenv": "8.2.0"
+  },
+  "devDependencies": {
+    "cross-env": "7.0.2",
+    "nodemon": "2.0.2",
+    "sequelize-cli": "5.5.1"
+  }
+}

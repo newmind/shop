@@ -179,9 +179,9 @@ export const getForms = () => async (dispatch) => {
 };
 
 
-export const getProductById = (id) => async (dispatch) => {
+export const getProductById = (uuid) => async (dispatch) => {
   try {
-    if ( ! id) {
+    if ( ! uuid) {
       return;
     }
 
@@ -190,14 +190,14 @@ export const getProductById = (id) => async (dispatch) => {
 
     const result = await request({
       method: 'get',
-      url: `/products/${id}`
+      url: `/products/${uuid}`
     });
 
     const product = result['data'];
 
     const resultData = {
       ...product,
-      gallery: product['gallery'].map(img => img['id']),
+      gallery: product['gallery'].map(img => img['externalId']),
       attributes: product['attributes'].map(item => {
         return {
           id: item['id'],
@@ -247,13 +247,13 @@ export const updateProductsById = (data) => async (dispatch) => {
 
     const result = await request({
       method: 'put',
-      url: `/products/${data['id']}`,
+      url: `/products/${data['uuid']}`,
       data: formData,
     });
 
     const resultData = {
       ...result['data'],
-      gallery: result['data']['gallery'].map((img) => img['id']),
+      gallery: result['data']['gallery'].map((img) => img['externalId']),
       attributes: result['data']['attributes'] ? result['data']['attributes'].map((item) => {
         return {
           id: item['id'],
@@ -316,7 +316,7 @@ export const createProduct = (data) => async dispatch => {
 
     const resultData = {
       ...result['data'],
-      gallery: result['data']['gallery'].map((img) => img['id']),
+      gallery: result['data']['gallery'].map((img) => img['externalId']),
       attributes: result['data']['attributes'] ? result['data']['attributes'].map((item) => {
         return {
           id: item['id'],
@@ -341,14 +341,14 @@ export const createProduct = (data) => async dispatch => {
   }
 };
 
-export const deleteImages = (id) => async (dispatch) => {
+export const deleteImages = (uuid) => async (dispatch) => {
   try {
     dispatch(deleteImagesRequestAction());
 
     const result = await request({
       url: `/gallery`,
       method: 'delete',
-      data: { id },
+      data: { uuid },
     });
 
     dispatch(deleteImagesRequestSuccessAction(result['data']));

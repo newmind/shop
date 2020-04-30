@@ -27,6 +27,7 @@ class Component extends PureComponent {
   render() {
     const { items, meta, onAddToCart } = this.props;
     const products = reduceToArray(items, SIZE);
+
     return (
       <div className={styles['block']}>
         <h2 className={styles['block__header']}>Найдено {meta['total']} {nounDeclension(meta['total'], ['предложение', 'предложения', 'предложений'])}</h2>
