@@ -6,26 +6,26 @@ export default () => async (ctx) => {
   try {
     const where = {};
 
-    const { Operation, OperationStock, Product, Gallery, Currency } = models;
+    const { Order, OrderProducts, Product, Gallery, Currency } = models;
     const { externalId } = ctx['request']['query'];
 
     if (externalId) {
       where['externalId'] = externalId;
     }
 
-    const operations = await Operation.findAll({
+    const operations = await Order.findAll({
       where: { ...where },
       attributes: ['externalId', 'address', 'email', 'phone', 'name', 'surname', 'amount', 'pay', 'delivery', 'status', 'createdAt', 'updatedAt'],
       include: [
         {
-          model: OperationStock,
+          model: OrderProducts,
           required: true,
-          as: 'stock',
+          as: 'products',
           attributes: ['id', 'type', 'recipe', 'lens'],
           include: [
             {
               model: Product,
-              attributes: ['uuid', 'name', 'brand', 'params'],
+              attributes: ['uuid', 'name', 'brand', 'params', 'amount', 'saleAmount'],
               required: true,
               as: 'product',
               include: [
@@ -33,13 +33,13 @@ export default () => async (ctx) => {
                   model: Currency,
                   required: false,
                   as: 'currency',
-                  attributes: ['id', 'value']
+                  attributes: ['uuid', 'value']
                 },
                 {
                   model: Gallery,
                   required: false,
                   as: 'gallery',
-                  attributes: ['id'],
+                  attributes: ['externalId'],
                 },
               ]
             }
@@ -47,6 +47,8 @@ export default () => async (ctx) => {
         }
       ]
     });
+
+    console.log(operations)
 
     ctx.body = {
       success: true,

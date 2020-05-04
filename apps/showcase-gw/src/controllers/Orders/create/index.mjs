@@ -10,13 +10,13 @@ export default () => async (ctx) => {
       return {
         type: item['productType'],
         lens: item['lens'],
-        productId: item['id'],
+        productId: item['uuid'],
         recipe: item['recipe'],
       };
     });
 
     const result = await request({
-      url: process.env['PRODUCT_API_SRV'] + '/operations',
+      url: process.env['OPERATION_API_SRV'] + '/operations',
       method: 'post',
       data: {
         status: 1,

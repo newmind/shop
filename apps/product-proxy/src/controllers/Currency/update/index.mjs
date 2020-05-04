@@ -6,13 +6,13 @@ import { sequelize, models } from '@sys.packages/db';
 export default () => async (ctx) => {
   try {
     const { Currency } = models;
-    const { id } = ctx['params'];
+    const { uuid } = ctx['params'];
     const formData = ctx['request']['body'];
 
     const transaction = await sequelize.transaction();
 
     const result = await Currency.update(formData, {
-      where: { id },
+      where: { uuid },
       transaction
     });
 

@@ -11,7 +11,7 @@ import {
   getById as getOperationById,
   create as createOperation,
   updateById as updateOperationById,
-} from '../controllers/Operatons';
+} from '../controllers/Orders';
 
 import { getAllTypes, createType, updateType, deleteType } from '../controllers/Types';
 import { getAllForms, createForm, updateForm, deleteForms } from '../controllers/Forms';

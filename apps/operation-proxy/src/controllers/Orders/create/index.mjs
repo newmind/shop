@@ -12,10 +12,10 @@ export default () => async (ctx) => {
     const externalId = UUID();
     const fields = ctx['request']['body'];
 
-    const { Operation, OperationStock } = models;
+    const { Order, OrderProducts } = models;
     const transaction = await sequelize.transaction();
 
-    const { id } = await Operation.create({
+    const { id } = await Order.create({
       externalId,
       status: fields['status'],
       pay: fields['pay'],
@@ -30,9 +30,13 @@ export default () => async (ctx) => {
       transaction
     });
 
-    const items = fields['items'].map((item) => ({ operationId: id, ...item }));
+    const items = fields['items'].map((item) => ({
+      orderId: id,
+      productId: item['uuid'],
+      ...item,
+    }));
 
-    await OperationStock.bulkCreate(items, { transaction });
+    await OrderProducts.bulkCreate(items, { transaction });
 
     const body = {
       externalId,
@@ -66,7 +70,7 @@ export default () => async (ctx) => {
       data: body,
     });
 
-    await sendEvent(process.env['RABBIT_PRODUCT_PROXY_EXCHANGE_OPERATION_CREATED'], JSON.stringify(externalId));
+    await sendEvent(process.env['RABBIT_OPERATION_PROXY_EXCHANGE_ORDER_CREATED'], JSON.stringify(externalId));
 
     await transaction.commit();
 
@@ -82,7 +86,7 @@ export default () => async (ctx) => {
       success: false,
       error: {
         code: 500,
-        message: error.message,
+        message: error['message'],
       }
     };
   }

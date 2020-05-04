@@ -1,7 +1,7 @@
 
 import { getImageByFileName } from '../controllers/Gallery';
 
-import { create as createOperation, get as getOperationById } from '../controllers/Operation';
+import { create as createOperation, get as getOperationById } from '../controllers/Orders';
 
 import { getProducts, getProductById } from '../controllers/Products';
 

@@ -127,7 +127,7 @@ export default () => async (ctx) => {
           model: Currency,
           required: false,
           as: 'currency',
-          attributes: ['id', 'value']
+          attributes: ['uuid', 'value']
         },
         {
           model: Attribute,

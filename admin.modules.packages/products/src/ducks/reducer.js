@@ -74,7 +74,7 @@ export default (state = initialState, { type, payload }) => {
     case SOCKET_PRODUCT_DELETED:
     case REMOVE_PRODUCT_REQUEST_SUCCESS: return {
       ...state,
-      items: [...state['items']].filter((item) => (payload.indexOf(item['id']) === -1)),
+      items: [...state['items']].filter((item) => (payload.indexOf(item['uuid']) === -1)),
     };
 
 

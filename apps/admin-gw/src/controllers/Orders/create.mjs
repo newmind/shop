@@ -1,15 +1,13 @@
 
 import request from "@sys.packages/request";
 
-const PRODUCT_API_SRV = process.env['PRODUCT_API_SRV'];
-
 
 export default () => async (ctx) => {
   try {
     const formData = ctx['request']['body'];
 
     const result = await request({
-      url: `${PRODUCT_API_SRV}/operations`,
+      url: process.env['OPERATION_API_SRV'] + '/operations',
       method: 'post',
       data: formData,
     });

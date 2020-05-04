@@ -1,4 +1,3 @@
-'use strict';
 
 module.exports = (db, DataType) => {
 
@@ -15,6 +14,11 @@ module.exports = (db, DataType) => {
       index: true,
       unique: 'compositeIndex',
     },
+    promo: {
+      type: DataType.BLOB,
+      allowNull: true,
+      defaultValue: null,
+    },
     brand: {
       type: DataType.STRING(255),
       allowNull: false,
@@ -23,15 +27,6 @@ module.exports = (db, DataType) => {
     name: {
       type: DataType.STRING(255),
       allowNull: true,
-      index: true,
-    },
-    description: {
-      type: DataType.STRING(1024),
-      allowNull: true,
-    },
-    status: {
-      type: DataType.INTEGER,
-      defaultValue: 1,
       index: true,
     },
     amount: {
@@ -43,37 +38,18 @@ module.exports = (db, DataType) => {
         return Number(amount)
       },
     },
-    saleAmount: {
-      type: DataType.DECIMAL(10, 2),
+    currency: {
+      type: DataType.STRING(16),
       allowNull: false,
-      defaultValue: 0,
-      get() {
-        const amount = this.getDataValue('saleAmount');
-        return amount ? Number(amount) : 0;
-      },
     },
-    count: {
-      type: DataType.INTEGER,
-      allowNull: false,
-      defaultValue: 0,
-    },
-    isHit: {
-      type: DataType.BOOLEAN,
-      defaultValue: false,
-    },
-    isSale: {
-      type: DataType.BOOLEAN,
-      defaultValue: false,
+    params: {
+      type: DataType.ENUM,
+      values: ['further'],
+      allowNull: true,
     },
   });
 
-  Product.associate = function({ Gallery }) {
-
-    Product.hasMany(Gallery, {
-      foreignKey: 'productId',
-      as: 'gallery'
-    });
-  };
+  Product.associate = function() {};
 
   return Product;
 };

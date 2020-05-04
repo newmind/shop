@@ -259,15 +259,7 @@ export default (state = initialState, { type, payload, error }) => {
     case CREATE_CURRENCY_REQUEST_FAIL: return { ...state, error };
     case CREATE_CURRENCY_REQUEST_SUCCESS: return {
       ...state,
-      currencies: [...state['currencies'], payload].sort((left, right) => {
-        if (left['id'] > right['id']) {
-          return 1;
-        }
-        else if (left['id'] < right['id']) {
-          return -1;
-        }
-        return 0;
-      }),
+      currencies: [...state['currencies'], payload],
     };
 
     case UPDATE_CURRENCY_REQUEST: return { ...state };
@@ -275,7 +267,7 @@ export default (state = initialState, { type, payload, error }) => {
     case UPDATE_CURRENCY_REQUEST_SUCCESS: return {
       ...state,
       currencies: [...state['currencies']].map((item) => {
-        if (item['id'] === payload['id']) {
+        if (item['uuid'] === payload['uuid']) {
           return payload;
         }
         return item;
@@ -286,7 +278,7 @@ export default (state = initialState, { type, payload, error }) => {
     case DELETE_CURRENCIES_REQUEST_FAIL: return { ...state, error };
     case DELETE_CURRENCIES_REQUEST_SUCCESS: return {
       ...state,
-      currencies: [...state['currencies']].filter((item) => (payload.indexOf(item['id']) === -1)),
+      currencies: [...state['currencies']].filter((item) => (payload.indexOf(item['uuid']) === -1)),
     };
 
 

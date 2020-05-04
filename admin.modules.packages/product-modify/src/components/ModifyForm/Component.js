@@ -162,7 +162,7 @@ class Component extends PureComponent {
                 name="currency"
                 label="Валюта"
                 options={currencies}
-                optionKey="id"
+                optionKey="uuid"
                 optionValue="value"
               />
             </Col>

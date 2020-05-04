@@ -1,4 +1,3 @@
-'use strict';
 
 module.exports = (db, DataType) => {
 
@@ -36,7 +35,7 @@ module.exports = (db, DataType) => {
       index: true,
     },
     currencyId: {
-      type: DataType.INTEGER,
+      type: DataType.UUID,
       allowNull: false,
     },
     colorId: {
@@ -110,6 +109,7 @@ module.exports = (db, DataType) => {
     });
 
     Product.belongsTo(Category, {
+      sourceKey: 'uuid',
       foreignKey: 'categoryId',
       as: 'category',
     });

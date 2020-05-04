@@ -12,7 +12,6 @@ import {
 
   getProducts,
   createProducts,
-  removeProductById,
 } from '../ducks/commands';
 
 
@@ -30,7 +29,6 @@ const mapActionsToProps = (dispatch) => {
 
     getProducts: bindActionCreators(getProducts, dispatch),
     createProducts: bindActionCreators(createProducts, dispatch),
-    removeProductById: bindActionCreators(removeProductById, dispatch),
   };
 };
 

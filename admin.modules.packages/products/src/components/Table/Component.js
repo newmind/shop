@@ -35,6 +35,7 @@ class Component extends PureComponent {
   async _handleConfirmRemove() {
     const { productId } = this.state;
     const { removeProductById, closeDialog } =  this.props;
+
     await removeProductById([ productId ]);
 
     this.setState({ productId: null }, () => closeDialog('remove-confirm'));

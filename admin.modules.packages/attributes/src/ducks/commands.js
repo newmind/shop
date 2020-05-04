@@ -89,7 +89,7 @@ export const updateType = (data) => async (dispatch) => {
   try {
     dispatch(updateTypeRequestAction());
 
-    const type = await request({
+    await request({
       url: '/types',
       method: 'put',
       data,
@@ -472,14 +472,14 @@ export const updateCurrency = (data) => async (dispatch) => {
   }
 };
 
-export const deleteCurrencies = (id) => async (dispatch) => {
+export const deleteCurrencies = (uuid) => async (dispatch) => {
   try {
     dispatch(deleteCurrenciesRequestAction());
 
     const { data } = await request({
       url: '/currencies',
       method: 'delete',
-      data: { id }
+      data: { uuid }
     });
 
     dispatch(deleteCurrenciesRequestSuccessAction(data));

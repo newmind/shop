@@ -7,7 +7,7 @@ import {replace} from "react-router-redux";
 
 import Component from './Component';
 
-import { pageInProcess } from "../../ducks/commands";
+import { pageInProcess, removeProductById } from "../../ducks/commands";
 
 
 const mapStateToProps = (state) => ({
@@ -23,6 +23,7 @@ const mapActionsToProps = (dispatch) => {
     closeDialog: bindActionCreators(closeDialog, dispatch),
 
     replaceURI: bindActionCreators(replace, dispatch),
+    removeProductById: bindActionCreators(removeProductById, dispatch),
   };
 };
 

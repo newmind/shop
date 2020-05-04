@@ -1,5 +1,5 @@
 
-import { getAllOrders, createOrder, updateOrder } from '../controllers/Operations';
+import { getAllOrders, createOrder, updateOrder } from '../controllers/Orders';
 
 
 export default (router) => {

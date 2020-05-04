@@ -1,8 +1,7 @@
-'use strict';
 
-module.exports = (db, DataType) => {
+module.exports = (sequelize, DataType) => {
 
-  const Operation = db.define('Operation', {
+  const Order = sequelize.define('Invoice', {
     id: {
       type: DataType.INTEGER,
       primaryKey: true,
@@ -10,6 +9,10 @@ module.exports = (db, DataType) => {
       index: true,
     },
     externalId: {
+      type: DataType.STRING(64),
+      allowNull: false,
+    },
+    invoiceId: {
       type: DataType.STRING(64),
       allowNull: false,
     },
@@ -56,13 +59,13 @@ module.exports = (db, DataType) => {
     },
   });
 
-  Operation.associate = function({ OperationStock }) {
+  Order.associate = function({ OrderProducts }) {
 
-    Operation.hasMany(OperationStock, {
-      foreignKey: 'operationId',
-      as: 'stock',
+    Order.hasMany(OrderProducts, {
+      foreignKey: 'orderId',
+      as: 'products',
     });
   };
 
-  return Operation;
+  return Order;
 };

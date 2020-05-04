@@ -1,15 +1,14 @@
-'use strict';
 
 module.exports = (db, DataType) => {
 
-  const OperationStock = db.define('OperationStock', {
+  const OrderProducts = db.define('OrderProducts', {
     id: {
       type: DataType.INTEGER,
       primaryKey: true,
       autoIncrement: true,
       index: true,
     },
-    operationId: {
+    orderId: {
       type: DataType.INTEGER,
     },
     productId: {
@@ -26,13 +25,14 @@ module.exports = (db, DataType) => {
     }
   });
 
-  OperationStock.associate = ({ Product }) => {
+  OrderProducts.associate = ({ Product }) => {
 
-    OperationStock.belongsTo(Product, {
+    OrderProducts.belongsTo(Product, {
+      sourceKey: 'uuid',
       foreignKey: 'productId',
       as: 'product',
     });
   };
 
-  return OperationStock;
+  return OrderProducts;
 };

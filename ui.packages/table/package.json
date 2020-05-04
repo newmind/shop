@@ -19,7 +19,7 @@
   },
   "devDependencies": {
     "@babel/cli": "7.8.4",
-    "@babel/core": "7.9.0",
+    "@babel/core": "7.9.6",
     "core-js": "3.6.4",
     "cross-env": "7.0.2",
     "resolve": "2.0.0-next.1"

@@ -6,7 +6,7 @@ import Component from './Component';
 
 const mapStateToProps = (state) => {
   return {
-    products: state['details-order']['stock'],
+    products: state['details-order']['products'],
   };
 };
 

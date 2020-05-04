@@ -6,22 +6,22 @@ import { sequelize, models } from '@sys.packages/db';
 export default () => async (ctx) => {
   try {
     const { Currency } = models;
-    const { id } = ctx['request']['body'];
+    const { uuid } = ctx['request']['body'];
 
     const transaction = await sequelize.transaction();
 
     await Currency.destroy({
-      where: { id },
+      where: { uuid },
       transaction,
     });
 
-    await sendEvent(process.env['RABBIT_PRODUCT_PROXY_EXCHANGE_CURRENCY_DELETED'], JSON.stringify(id));
+    await sendEvent(process.env['RABBIT_PRODUCT_PROXY_EXCHANGE_CURRENCY_DELETED'], JSON.stringify(uuid));
 
     await transaction.commit();
 
     ctx.body = {
       success: true,
-      data: id,
+      data: uuid,
     };
   }
   catch(e) {

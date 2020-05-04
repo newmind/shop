@@ -1,6 +1,6 @@
 
-import { Button, Actions } from '@ui.packages/ui';
 import { Dialog } from '@ui.packages/dialog';
+import { Button, Actions } from '@ui.packages/ui';
 import { Table, Column } from '@ui.packages/table';
 
 import types from 'prop-types';
@@ -27,6 +27,7 @@ class Component extends PureComponent {
 
   _handleCreate() {
     const { openDialog } = this.props;
+
     openDialog('currency');
   }
 
@@ -34,15 +35,16 @@ class Component extends PureComponent {
 
   }
 
-  _handleDelete(id) {
+  _handleDelete(uuid) {
     const { deleteCurrencies } = this.props;
-    deleteCurrencies([ id ]);
+
+    deleteCurrencies([ uuid ]);
   }
 
   _submitModify(data) {
     const { createCurrency, updateCurrency } = this.props;
 
-    if ('id' in data) {
+    if ('uuid' in data) {
       updateCurrency(data);
     }
     else {
@@ -58,11 +60,6 @@ class Component extends PureComponent {
         <div className={styles['table']}>
           <Table columns={items}>
             <Column
-              title="ID"
-              alias="id"
-              width="40"
-            />
-            <Column
               title="Значение"
               alias="value"
               width="200"
@@ -77,7 +74,7 @@ class Component extends PureComponent {
               align="right"
               width="40"
             >
-              {({ id }) => <Actions onDelete={this._handleDelete.bind(this, id)} />}
+              {({ uuid }) => <Actions onDelete={this._handleDelete.bind(this, uuid)} />}
             </Column>
           </Table>
         </div>
