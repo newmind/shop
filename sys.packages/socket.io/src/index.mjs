@@ -1,9 +1,11 @@
-'use strict';
+
+import logger from '@sys.packages/logger';
 
 import SocketIO from 'socket.io';
 
 
 let io = null;
+
 
 export default async (server, options = {}) => {
   try {
@@ -19,20 +21,20 @@ export default async (server, options = {}) => {
     io.on('connection', client => {
 
       client.on('join', (room) => {
-        console.log('joined to room', room);
         client.join(room);
+        logger['info']('Socket: joined to room: ' + room);
       });
 
-      client.on('disconnect', () => { console.log('Socket disconnect') });
-      console.log('SocketIO connected');
+      client.on('disconnect', () => { logger['info']('Socket: disconnect') });
+      logger['info']('Socket: connected');
     });
 
-    console.log('SocketIO created');
+    logger['info']('Socket: created');
 
     return io;
-
-  } catch(error) {
-    console.log('SocketIO error:', error)
+  }
+  catch(error) {
+    logger['error']('Socket: ' + error)
   }
 }
 

@@ -1,4 +1,5 @@
-'use strict';
+
+import logger from '@sys.packages/logger';
 
 import Koa from 'koa';
 import Router from 'koa-router';
@@ -11,7 +12,7 @@ const router = new Router();
 
 app.use(async (ctx, next) => {
 
-  console.log(`REQUEST ---> [${ctx.request.method}] "${ctx.request.url}" (${ctx.request.body ? JSON.stringify(ctx.request.body) : 'null'})`);
+  logger['info'](`REQUEST ---> [${ctx.request.method}] "${ctx.request.url}" (${ctx.request.body ? JSON.stringify(ctx.request.body) : 'null'})`);
 
   await next();
 
@@ -26,7 +27,7 @@ app.use(async (ctx, next) => {
     }
   }
 
-  console.log(`RESPONSE <--- [${ctx.request.method}] "${ctx.request.url}" [${ctx.response.status}] (${response})`);
+  logger['info'](`RESPONSE <--- [${ctx.request.method}] "${ctx.request.url}" [${ctx.response.status}] (${response})`);
 });
 
 app.use(koaBodyParser({
@@ -39,7 +40,8 @@ app.use(koaBodyParser({
 app.use(async (ctx, next) => {
   try {
     await next();
-  } catch(error) {
+  }
+  catch(error) {
     ctx.status = error['status'];
     ctx.body = error['data'];
   }

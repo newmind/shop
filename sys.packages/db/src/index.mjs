@@ -3,11 +3,12 @@ import logger from '@sys.packages/logger';
 
 import fs from 'fs';
 import path from 'path';
-import Sequelize from 'sequelize';
+import Sq from 'sequelize';
 
 
 export let models = {};
 export let sequelize = null;
+export const Sequelize = Sq;
 
 const __dirname = process.cwd();
 
@@ -16,7 +17,7 @@ export default async (host) => {
 
   logger['info']('DB: Создание соединения к базе данных');
 
-  sequelize = new Sequelize(host, {
+  sequelize = new Sq(host, {
     dialect: 'postgres',
     logging: false,
     pool: {

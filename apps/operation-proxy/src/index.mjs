@@ -1,4 +1,5 @@
 
+import logger from '@sys.packages/logger';
 import connectToDatabase from '@sys.packages/db';
 import appServer, { initRouter } from '@sys.packages/server';
 import { connectToRabbit, queueToExchange, createExchange } from "@sys.packages/rabbit";
@@ -41,10 +42,9 @@ import routes from './routes';
 
     initRouter(routes);
 
-    httpServer.listen(process.env['PORT'], () => console.log('Server started on port', process.env['PORT']));
+    httpServer.listen(process.env['PORT'], () => logger['info']('Server started on port: ' + process.env['PORT']));
   }
   catch(error) {
-    console.log(error);
-    process.exit(-1);
+    logger['error'](error);
   }
 })();
