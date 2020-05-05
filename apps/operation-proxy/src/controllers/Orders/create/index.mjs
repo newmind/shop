@@ -12,32 +12,6 @@ export default () => async (ctx) => {
     const externalId = UUID();
     const fields = ctx['request']['body'];
 
-    const { Order, OrderProducts } = models;
-    const transaction = await sequelize.transaction();
-
-    const { id } = await Order.create({
-      externalId,
-      status: fields['status'],
-      pay: fields['pay'],
-      name: fields['name'],
-      phone: fields['phone'],
-      email: fields['email'],
-      surname: fields['surname'],
-      address: fields['address'],
-      delivery: fields['delivery'],
-      amount: fields['amount'],
-    }, {
-      transaction
-    });
-
-    const items = fields['items'].map((item) => ({
-      orderId: id,
-      productId: item['uuid'],
-      ...item,
-    }));
-
-    await OrderProducts.bulkCreate(items, { transaction });
-
     const body = {
       externalId,
       amount: fields['amount'],
@@ -59,7 +33,7 @@ export default () => async (ctx) => {
     const hash = createHash('md5').update(bodyWithSalt).digest();
     const sign = hash.toString('base64');
 
-    const result = await request({
+    const invoice = await request({
       url: process.env['PIKASSA_API_URL'] + '/invoices',
       method: 'post',
       headers: {
@@ -70,13 +44,41 @@ export default () => async (ctx) => {
       data: body,
     });
 
+    const { Order, OrderProducts } = models;
+    const transaction = await sequelize.transaction();
+
+    const { id } = await Order.create({
+      externalId,
+      invoiceId: invoice['data']['uuid'],
+      paymentLink: invoice['data']['paymentLink'],
+      status: fields['status'],
+      pay: fields['pay'],
+      name: fields['name'],
+      phone: fields['phone'],
+      email: fields['email'],
+      surname: fields['surname'],
+      address: fields['address'],
+      delivery: fields['delivery'],
+      amount: fields['amount'],
+    }, {
+      transaction
+    });
+
+    const items = fields['items'].map((item) => ({
+      orderId: id,
+      productId: item['uuid'],
+      ...item,
+    }));
+
+    await OrderProducts.bulkCreate(items, { transaction });
+
     await sendEvent(process.env['RABBIT_OPERATION_PROXY_EXCHANGE_ORDER_CREATED'], JSON.stringify(externalId));
 
     await transaction.commit();
 
     ctx.body = {
       success: true,
-      data: result['data'],
+      data: invoice['data'],
     };
   }
   catch (error) {

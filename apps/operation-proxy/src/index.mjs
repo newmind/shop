@@ -6,9 +6,9 @@ import { connectToRabbit, queueToExchange, createExchange } from "@sys.packages/
 
 import http from 'http';
 
-import { createImage, deleteImage } from './controllers/Gallery';
-import { createCurrency, updateCurrency, deleteCurrencies } from './controllers/Currency';
-import { createProduct, updateProductById, deleteProductById } from './controllers/Products';
+import { createImage, deleteImage } from './actions/Gallery';
+import { createCurrency, updateCurrency, deleteCurrencies } from './actions/Currency';
+import { createProduct, updateProductById, deleteProductById } from './actions/Products';
 
 import routes from './routes';
 

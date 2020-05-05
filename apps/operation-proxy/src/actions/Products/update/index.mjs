@@ -6,16 +6,12 @@ export default async (fields) => {
   const { uuid } = fields;
   const { Product } = models;
 
+  console.log(fields)
+
   const productFields = {
     brand: fields['brand'],
     name: fields['name'],
-    description: fields['description'],
-    status: fields['status'],
-    amount: fields['amount'],
-    saleAmount: fields['saleAmount'] || 0,
-    count: fields['count'],
-    isHit: fields['isHit'],
-    isSale: fields['isSale'],
+    currencyId: fields['currency']['uuid'],
   };
   const transaction = await sequelize.transaction();
 

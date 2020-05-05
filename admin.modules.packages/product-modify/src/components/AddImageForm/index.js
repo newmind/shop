@@ -24,11 +24,12 @@ class Component extends PureComponent {
     inputElement.classList.add(styles['input']);
     inputElement.type = 'file';
     inputElement.multiple = true;
-    inputElement.accept = '.jpg, .bmp, .png';
+    inputElement.accept = '.jpg, .jpeg, .bmp, .png';
 
     inputElement.onchange = () => {
       let files = [...input['value'] || [], ...inputElement['files']];
       this.setState({ files }, () => input.onChange(files));
+      inputElement.remove();
     };
 
     inputElement.click();

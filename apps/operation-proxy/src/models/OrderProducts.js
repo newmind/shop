@@ -22,10 +22,28 @@ module.exports = (db, DataType) => {
     },
     lens: {
       type: DataType.JSON,
-    }
+    },
+    amount: {
+      type: DataType.DECIMAL(10, 2),
+      allowNull: false,
+      defaultValue: 0,
+      get() {
+        const amount = this.getDataValue('amount');
+        return Number(amount)
+      },
+    },
+    currencyId: {
+      type: DataType.UUID,
+      allowNull: false,
+    },
   });
 
-  OrderProducts.associate = ({ Product }) => {
+  OrderProducts.associate = ({ Product, Currency }) => {
+
+    OrderProducts.belongsTo(Currency, {
+      foreignKey: 'currencyId',
+      as: 'currency',
+    });
 
     OrderProducts.belongsTo(Product, {
       sourceKey: 'uuid',

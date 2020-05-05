@@ -12,12 +12,7 @@ module.exports = (db, DataType) => {
       primaryKey: true,
       allowNull: false,
       index: true,
-      unique: 'compositeIndex',
-    },
-    promo: {
-      type: DataType.BLOB,
-      allowNull: true,
-      defaultValue: null,
+      unique: true,
     },
     brand: {
       type: DataType.STRING(255),
@@ -29,27 +24,25 @@ module.exports = (db, DataType) => {
       allowNull: true,
       index: true,
     },
-    amount: {
-      type: DataType.DECIMAL(10, 2),
+    currencyId: {
+      type: DataType.UUID,
       allowNull: false,
-      defaultValue: 0,
-      get() {
-        const amount = this.getDataValue('amount');
-        return Number(amount)
-      },
-    },
-    currency: {
-      type: DataType.STRING(16),
-      allowNull: false,
-    },
-    params: {
-      type: DataType.ENUM,
-      values: ['further'],
-      allowNull: true,
     },
   });
 
-  Product.associate = function() {};
+  Product.associate = function({ Gallery, Currency }) {
+
+    Product.belongsTo(Currency, {
+      foreignKey: 'currencyId',
+      as: 'currency',
+    });
+
+    Product.hasMany(Gallery, {
+      sourceKey: 'uuid',
+      foreignKey: 'productId',
+      as: 'gallery'
+    });
+  };
 
   return Product;
 };

@@ -21,11 +21,17 @@ export default () => async (ctx) => {
           model: OrderProducts,
           required: true,
           as: 'products',
-          attributes: ['id', 'type', 'recipe', 'lens'],
+          attributes: ['id', 'type', 'recipe', 'lens', 'amount'],
           include: [
             {
+              model: Currency,
+              required: false,
+              as: 'currency',
+              attributes: ['uuid', 'value']
+            },
+            {
               model: Product,
-              attributes: ['uuid', 'name', 'brand', 'params', 'amount', 'saleAmount'],
+              attributes: ['uuid', 'name', 'brand'],
               required: true,
               as: 'product',
               include: [
@@ -47,8 +53,6 @@ export default () => async (ctx) => {
         }
       ]
     });
-
-    console.log(operations)
 
     ctx.body = {
       success: true,

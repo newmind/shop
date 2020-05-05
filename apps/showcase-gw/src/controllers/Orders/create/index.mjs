@@ -12,6 +12,8 @@ export default () => async (ctx) => {
         lens: item['lens'],
         productId: item['uuid'],
         recipe: item['recipe'],
+        amount: item['amount'] - item['saleAmount'],
+        currencyId: item['currency']['uuid'],
       };
     });
 

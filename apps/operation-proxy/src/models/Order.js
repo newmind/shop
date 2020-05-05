@@ -16,6 +16,10 @@ module.exports = (db, DataType) => {
       type: DataType.STRING(64),
       allowNull: false,
     },
+    paymentLink: {
+      type: DataType.STRING,
+      allowNull: false,
+    },
     address: {
       type: DataType.STRING(512),
       allowNull: false,
