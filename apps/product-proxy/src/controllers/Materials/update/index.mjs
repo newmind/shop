@@ -11,7 +11,12 @@ export default () => async (ctx) => {
 
     const transaction = await sequelize.transaction();
 
-    const result = await Material.update(data, {
+    await Material.update(data, {
+      where: { id },
+      transaction
+    });
+
+    const result = await Material.findOne({
       where: { id },
       transaction
     });

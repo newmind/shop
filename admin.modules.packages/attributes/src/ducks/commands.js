@@ -89,13 +89,14 @@ export const updateType = (data) => async (dispatch) => {
   try {
     dispatch(updateTypeRequestAction());
 
-    await request({
-      url: '/types',
+    const result = await request({
+      url: '/types/' + data['id'],
       method: 'put',
       data,
     });
 
-    dispatch(updateTypeRequestSuccessAction());
+    dispatch(updateTypeRequestSuccessAction(result['data']));
+    dispatch(closeDialog('type'));
   }
   catch(error) {
     dispatch(updateTypeRequestFailAction(error));
@@ -164,12 +165,13 @@ export const updateCategory = (data) => async (dispatch) => {
     dispatch(updateCategoryRequestAction());
 
     const result = await request({
-      url: '/categories',
+      url: '/categories/' + data['id'],
       method: 'put',
       data,
     });
 
     dispatch(updateCategoryRequestSuccessAction(result['data']));
+    dispatch(closeDialog('category'));
   }
   catch(error) {
     dispatch(updateCategoryRequestFailAction(error));
@@ -238,12 +240,13 @@ export const updateColor = (data) => async (dispatch) => {
     dispatch(updateColorRequestAction());
 
     const result = await request({
-      url: '/colors',
+      url: '/colors/' + data['id'],
       method: 'put',
       data,
     });
 
     dispatch(updateColorRequestSuccessAction(result['data']));
+    dispatch(closeDialog('color'));
   }
   catch(error) {
     dispatch(updateColorRequestFailAction(error));
@@ -312,12 +315,13 @@ export const updateMaterial = (data) => async (dispatch) => {
     dispatch(updateMaterialRequestAction());
 
     const result = await request({
-      url: '/materials',
+      url: '/materials/' + data['id'],
       method: 'put',
       data,
     });
 
     dispatch(updateMaterialRequestSuccessAction(result['data']));
+    dispatch(closeDialog('material'));
   }
   catch(error) {
     dispatch(updateMaterialRequestFailAction(error));
@@ -386,12 +390,13 @@ export const updateForm = (data) => async (dispatch) => {
     dispatch(updateFormRequestAction());
 
     const result = await request({
-      url: '/forms',
+      url: '/forms/' + data['id'],
       method: 'put',
       data,
     });
 
     dispatch(updateFormRequestSuccessAction(result['data']));
+    dispatch(closeDialog('form'));
   }
   catch(error) {
     dispatch(updateFormRequestFailAction(error));
@@ -460,12 +465,13 @@ export const updateCurrency = (data) => async (dispatch) => {
     dispatch(updateCurrencyRequestAction());
 
     const result = await request({
-      url: '/currencies',
+      url: '/currencies/' + data['uuid'],
       method: 'put',
       data,
     });
 
     dispatch(updateCurrencyRequestSuccessAction(result['data']));
+    dispatch(closeDialog('form'));
   }
   catch(error) {
     dispatch(updateCurrencyRequestFailAction(error));
@@ -522,7 +528,7 @@ export const createUnit = (data) => async (dispatch) => {
     });
 
     dispatch(createUnitRequestSuccessAction(result['data']));
-    dispatch(closeDialog('form'));
+    dispatch(closeDialog('unit'));
   }
   catch(error) {
     dispatch(createUnitRequestFailAction(error));
@@ -540,6 +546,7 @@ export const updateUnit = (data) => async (dispatch) => {
     });
 
     dispatch(updateUnitRequestSuccessAction(result['data']));
+    dispatch(closeDialog('unit'));
   }
   catch(error) {
     dispatch(updateUnitRequestFailAction(error));

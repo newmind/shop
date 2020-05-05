@@ -5,10 +5,10 @@ import {
 } from './actions';
 
 
-export const openDialog = (dialogName) => dispatch => {
-  dispatch(openDialogAction(dialogName));
+export const openDialog = (dialogName, data) => (dispatch) => {
+  dispatch(openDialogAction(dialogName, data));
 };
 
-export const closeDialog = (dialogName) => dispatch => {
+export const closeDialog = (dialogName) => (dispatch) => {
   dispatch(closeDialogAction(dialogName));
 };

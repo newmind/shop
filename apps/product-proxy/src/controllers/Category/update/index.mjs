@@ -5,13 +5,17 @@ import { sequelize, models } from '@sys.packages/db';
 
 export default () => async (ctx) => {
   try {
-
     const { id } = ctx['params'];
     const formDate = ctx['request']['body'];
 
     const transaction = await sequelize.transaction();
 
-    const result = await models['Category'].update(formDate, {
+    await models['Category'].update(formDate, {
+      where: { id },
+      transaction
+    });
+
+    const result = await models['Category'].findOne({
       where: { id },
       transaction
     });

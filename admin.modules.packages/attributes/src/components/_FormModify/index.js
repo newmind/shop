@@ -1,4 +1,5 @@
 
+import { connect } from 'react-redux';
 import { reduxForm } from 'redux-form';
 
 import Component from './Component';
@@ -14,7 +15,11 @@ const validate = (values) => {
   return errors;
 };
 
-export default reduxForm({
+const mapStateToProps = (state, props) => ({
+  initialValues: props['data'],
+});
+
+export default connect(mapStateToProps)(reduxForm({
   form: 'attr-modify',
   validate,
-})(Component);
+})(Component));

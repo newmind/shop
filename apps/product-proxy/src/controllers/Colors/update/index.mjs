@@ -11,7 +11,12 @@ export default () => async (ctx) => {
 
     const transaction = await sequelize.transaction();
 
-    const result = await Color.update(data, {
+    await Color.update(data, {
+      where: { id },
+      transaction
+    });
+
+    const result = await Color.findOne({
       where: { id },
       transaction
     });

@@ -30,8 +30,9 @@ class Component extends PureComponent {
     openDialog('color');
   }
 
-  _handleEdit(id) {
-
+  _handleEdit(value) {
+    const { openDialog } = this.props;
+    openDialog('color', value);
   }
 
   _handleDelete(id) {
@@ -78,7 +79,7 @@ class Component extends PureComponent {
               align="right"
               width="40"
             >
-              {({ id }) => <Actions onDelete={this._handleDelete.bind(this, id)} />}
+              {(value) => <Actions onEdit={this._handleEdit.bind(this, value)} onDelete={this._handleDelete.bind(this, value['id'])} />}
             </Column>
           </Table>
         </div>

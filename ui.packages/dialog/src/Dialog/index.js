@@ -9,6 +9,7 @@ import { closeDialog } from '../ducks/commands';
 
 const mapStateToProps = state => {
   return {
+    data: state['dialog']['data'],
     isOpen: state['dialog']['isOpen'],
     actionDialogName: state['dialog']['name'],
   }
