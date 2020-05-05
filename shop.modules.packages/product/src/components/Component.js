@@ -57,15 +57,15 @@ class Component extends PureComponent {
 
   async _handleCreateComment(formData) {
     const { closeDialog } = this.props;
-    const { product: { id }, createComment } = this.props;
-    await createComment(id, formData);
+    const { product: { uuid }, createComment } = this.props;
+    await createComment(uuid, formData);
     closeDialog('comment');
   }
 
-  _handleRemoveFromCart(id) {
+  _handleRemoveFromCart(uuid) {
     const { removeProductFromCart } = this.props;
 
-    removeProductFromCart(id);
+    removeProductFromCart(uuid);
   }
 
   render() {

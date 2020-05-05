@@ -61,6 +61,11 @@ module.exports = (db, DataType) => {
       type: DataType.INTEGER,
       allowNull: false,
     },
+    statusInvoice: {
+      type: DataType.INTEGER,
+      allowNull: false,
+      defaultValue: 0,
+    },
   });
 
   Order.associate = function({ OrderProducts }) {

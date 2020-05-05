@@ -106,7 +106,7 @@ class Component extends PureComponent {
                 >
                   {(product) => {
                     return product && (
-                      <Link className={styles['link']} to={'/products/' + product['id']}>{ product['brand'] }</Link>
+                      <Link className={styles['link']} to={'/products/' + product['uuid']}>{ product['brand'] }</Link>
                     )
                   }}
                 </Column>

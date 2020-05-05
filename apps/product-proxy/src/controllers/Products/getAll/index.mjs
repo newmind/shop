@@ -91,7 +91,7 @@ export default () => async (ctx) => {
       ...options,
       ...offset,
       distinct: true,
-      where: { ...where },
+      where: { ...where, count: { [Op.gt]: 0 } },
       order: [['createdAt', 'desc']],
       include: [
         {
