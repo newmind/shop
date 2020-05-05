@@ -14,6 +14,7 @@ export default () => async (ctx) => {
     ctx.body = {
       success: true,
       data: result['data'],
+      meta: result['meta'],
     };
   }
   catch(e) {

@@ -30,7 +30,8 @@ export default (state = initialState, { type, payload }) => {
     };
     case GET_OPERATIONS_REQUEST_SUCCESS: return {
       ...state,
-      ...payload,
+      items: payload['data'],
+      meta: payload['meta'],
       inProcess: false,
     };
 

@@ -13,8 +13,10 @@ export default () => async (ctx) => {
       where['externalId'] = externalId;
     }
 
-    const operations = await Order.findAll({
+    const operations = await Order.findAndCountAll({
       where: { ...where },
+      distinct: true,
+      order: [['createdAt', 'desc']],
       attributes: ['externalId', 'address', 'email', 'phone', 'name', 'surname', 'amount', 'pay', 'delivery', 'status', 'createdAt', 'updatedAt'],
       include: [
         {
@@ -56,7 +58,10 @@ export default () => async (ctx) => {
 
     ctx.body = {
       success: true,
-      data: operations,
+      data: operations['rows'],
+      meta: {
+        total: operations['count'],
+      },
     };
   }
   catch(error) {

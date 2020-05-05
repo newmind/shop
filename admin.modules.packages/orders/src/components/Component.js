@@ -5,6 +5,7 @@ import { Table, Column } from '@ui.packages/table';
 import types from 'prop-types';
 import React, { PureComponent } from 'react';
 
+import styles from './default.module.scss';
 
 
 class Component extends PureComponent {
@@ -18,8 +19,12 @@ class Component extends PureComponent {
 
   render() {
     const { items } = this.props;
+
     return (
-      <div className="page">
+      <div className={styles['wrapper']}>
+        <div className={styles['header']}>
+          <h2>Заказы</h2>
+        </div>
         <Row>
           <Col>
             <Table columns={items}>
