@@ -6,30 +6,34 @@ import React from 'react';
 import styles from './default.module.scss';
 
 
-export default ({ handleSubmit }) => {
+export default ({ handleSubmit, valid, pristine }) => {
   return (
     <form className={styles['form']} onSubmit={handleSubmit}>
-      <Row>
-        <Col>
-          <InputField
-            name="value"
-            lable="Значение"
-          />
-        </Col>
-      </Row>
-      <Row>
-        <Col>
-          <TextareaField
-            name="description"
-            label="Описание"
-          />
-        </Col>
-      </Row>
-      <Row>
-        <Col>
-          <Button type="submit">Выполнить</Button>
-        </Col>
-      </Row>
+      <div className={styles['content']}>
+        <Row>
+          <Col>
+            <InputField
+              name="value"
+              lable="Значение"
+            />
+          </Col>
+        </Row>
+        <Row>
+          <Col>
+            <TextareaField
+              name="description"
+              label="Описание"
+            />
+          </Col>
+        </Row>
+      </div>
+      <div className={styles['controls']}>
+        <Button
+          type="submit"
+          mode="success"
+          disabled={ ! valid || pristine}
+        >Выполнить</Button>
+      </div>
     </form>
   )
 };

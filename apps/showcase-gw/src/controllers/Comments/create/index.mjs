@@ -22,8 +22,10 @@ export default () => async (ctx) => {
     ctx.body = {
       success: true,
       data: {
+        id: data['id'],
         person: data['person'],
         comment: data['comment'],
+        productId: data['productId'],
         createdAt: data['createdAt'],
         evaluation: data['evaluation'],
       },

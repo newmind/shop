@@ -27,6 +27,7 @@
   min-width: 250px;
   border-radius: 15px;
   margin: auto;
+  padding: 48px 70px;
   box-sizing: border-box;
   box-shadow: 0 6px 10px 0 rgba($dark-grey, 0.3);
   overflow: hidden;
@@ -56,8 +57,8 @@
   &__close {
 
     position: absolute;
-    top: 28px;
-    right: 28px;
+    top: 20px;
+    right: 20px;
     display: block;
     width: 16px;
     height: 16px;
@@ -76,16 +77,15 @@
     display: block;
     font: 14px "Istok Web";
     font-weight: 700;
-    padding: 28px 50px 0 40px;
     color: $coal-dark;
-    letter-spacing: .5px;
-    text-transform: uppercase;
+    letter-spacing: 1px;
+    text-align: center;
   }
 
   &__content {
 
     display: block;
     overflow: auto;
-    padding: 28px 40px 40px;
+    margin: 30px 0 0;
   }
 }

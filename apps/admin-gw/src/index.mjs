@@ -2,7 +2,7 @@
 import jwtToken from '@sys.packages/jwt';
 import logger from '@sys.packages/logger';
 import appServer, { initRouter } from '@sys.packages/server';
-import createSocket, { emitToRoom } from '@sys.packages/socket.io';
+import createSocket from '@sys.packages/socket.io';
 import { connectToRabbit, queueToExchange } from "@sys.packages/rabbit";
 
 import http from 'http';
@@ -12,6 +12,9 @@ import cookie from 'koa-cookie';
 
 import routes from './routes';
 
+import { updatePassport } from './actions/passport';
+import { createComment, updateComment, deleteComment } from './actions/comments';
+
 
 (async () => {
   try {
@@ -20,10 +23,11 @@ import routes from './routes';
 
     // QUEUES
 
-    await queueToExchange(process.env['RABBIT_IDENTITY_SRV_QUEUE_PASSPORT_UPDATED'], process.env['RABBIT_IDENTITY_SRV_EXCHANGE_PASSPORT_UPDATED'], (message) => {
-      const passport = JSON.parse(message);
-      emitToRoom(passport['id'], process.env['SOCKET_PASSPORT_UPDATED'], passport);
-    });
+    await queueToExchange(process.env['RABBIT_IDENTITY_SRV_QUEUE_PASSPORT_UPDATED'], process.env['RABBIT_IDENTITY_SRV_EXCHANGE_PASSPORT_UPDATED'], updatePassport);
+
+    await queueToExchange(process.env['RABBIT_ADMIN_GW_QUEUE_COMMENT_CREATED'], process.env['RABBIT_PRODUCT_PROXY_EXCHANGE_COMMENT_CREATED'], createComment);
+    await queueToExchange(process.env['RABBIT_ADMIN_GW_QUEUE_COMMENT_UPDATED'], process.env['RABBIT_PRODUCT_PROXY_EXCHANGE_COMMENT_UPDATED'], updateComment);
+    await queueToExchange(process.env['RABBIT_ADMIN_GW_QUEUE_COMMENT_DELETED'], process.env['RABBIT_PRODUCT_PROXY_EXCHANGE_COMMENT_DELETED'], deleteComment);
 
     await queueToExchange(process.env['RABBIT_ADMIN_GW_QUEUE_CATEGORY_CREATED'], process.env['RABBIT_PRODUCT_PROXY_EXCHANGE_CATEGORY_CREATED'], (message) => io.emit('action', { type: process.env['SOCKET_CATEGORY_CREATED'], payload: JSON.parse(message) }));
     await queueToExchange(process.env['RABBIT_ADMIN_GW_QUEUE_CATEGORY_UPDATED'], process.env['RABBIT_PRODUCT_PROXY_EXCHANGE_CATEGORY_UPDATED'], (message) => io.emit('action', { type: process.env['SOCKET_CATEGORY_UPDATED'], payload: JSON.parse(message) }));
@@ -32,10 +36,6 @@ import routes from './routes';
     await queueToExchange(process.env['RABBIT_ADMIN_GW_QUEUE_COLOR_CREATED'], process.env['RABBIT_PRODUCT_PROXY_EXCHANGE_COLOR_CREATED'], (message) => io.emit('action', { type: process.env['SOCKET_COLOR_CREATED'], payload: JSON.parse(message) }));
     await queueToExchange(process.env['RABBIT_ADMIN_GW_QUEUE_COLOR_UPDATED'], process.env['RABBIT_PRODUCT_PROXY_EXCHANGE_COLOR_UPDATED'], (message) => io.emit('action', { type: process.env['SOCKET_COLOR_UPDATED'], payload: JSON.parse(message) }));
     await queueToExchange(process.env['RABBIT_ADMIN_GW_QUEUE_COLOR_DELETED'], process.env['RABBIT_PRODUCT_PROXY_EXCHANGE_COLOR_DELETED'], (message) => io.emit('action', { type: process.env['SOCKET_COLOR_DELETED'], payload: JSON.parse(message) }));
-
-    await queueToExchange(process.env['RABBIT_ADMIN_GW_QUEUE_COMMENT_CREATED'], process.env['RABBIT_PRODUCT_PROXY_EXCHANGE_COMMENT_CREATED'], (message) => io.emit('action', { type: process.env['SOCKET_COMMENT_CREATED'], payload: JSON.parse(message) }));
-    await queueToExchange(process.env['RABBIT_ADMIN_GW_QUEUE_COMMENT_UPDATED'], process.env['RABBIT_PRODUCT_PROXY_EXCHANGE_COMMENT_UPDATED'], (message) => io.emit('action', { type: process.env['SOCKET_COMMENT_UPDATED'], payload: JSON.parse(message) }));
-    await queueToExchange(process.env['RABBIT_ADMIN_GW_QUEUE_COMMENT_DELETED'], process.env['RABBIT_PRODUCT_PROXY_EXCHANGE_COMMENT_DELETED'], (message) => io.emit('action', { type: process.env['SOCKET_COMMENT_DELETED'], payload: JSON.parse(message) }));
 
     await queueToExchange(process.env['RABBIT_ADMIN_GW_QUEUE_CURRENCY_CREATED'], process.env['RABBIT_PRODUCT_PROXY_EXCHANGE_CURRENCY_CREATED'], (message) => io.emit('action', { type: process.env['SOCKET_CURRENCY_CREATED'], payload: JSON.parse(message) }));
     await queueToExchange(process.env['RABBIT_ADMIN_GW_QUEUE_CURRENCY_UPDATED'], process.env['RABBIT_PRODUCT_PROXY_EXCHANGE_CURRENCY_UPDATED'], (message) => io.emit('action', { type: process.env['SOCKET_CURRENCY_UPDATED'], payload: JSON.parse(message) }));

@@ -41,7 +41,7 @@ export default async (server, options = {}) => {
 export const emitToRoom = (room, type, payload) => {
 
   io.sockets.in(room).emit('action', {
-    type: type,
+    type,
     payload,
   })
 };
@@ -49,7 +49,7 @@ export const emitToRoom = (room, type, payload) => {
 export const emit = (type, payload) => {
 
   io.sockets.emit('action', {
-    type: `@@socket/${type}`,
+    type,
     payload,
   });
 };
