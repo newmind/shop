@@ -25,7 +25,7 @@ export default () => async (ctx) => {
         address: fields['address'].replace(/[,]/g, ''),
       },
       successUrl: `https://магазиночков.рф/order/${externalId}`,
-      failUrl: "https://магазиночков.рф",
+      failUrl: "https://магазиночков.рф/order",
       deliveryMethod: "EMAIL",
     };
 

@@ -1,36 +1,38 @@
 
+import logger from '@sys.packages/logger';
 import { sequelize, models } from '@sys.packages/db';
 
 
-export default async (fields) => {
-  const { uuid } = fields;
-  const { Product } = models;
+export default async (event) => {
+  try {
+    const { uuid, ...fields } = JSON.parse(event);
+    const { Product } = models;
 
-  console.log(fields)
+    const productFields = {
+      brand: fields['brand'],
+      name: fields['name'],
+      currencyId: fields['currency']['uuid'],
+    };
+    const transaction = await sequelize.transaction();
 
-  const productFields = {
-    brand: fields['brand'],
-    name: fields['name'],
-    currencyId: fields['currency']['uuid'],
-  };
-  const transaction = await sequelize.transaction();
+    const product = await Product.findOne({ where: { uuid }, transaction });
 
-  const product = await Product.findOne({ where: { uuid }, transaction });
+    if (product) {
+      await Product.update(productFields, {
+        where: { uuid },
+        transaction,
+      });
+    }
+    else {
+      await Product.create({ uuid, ...productFields }, {
+        transaction
+      });
+    }
 
-  if (product) {
-    await Product.update(productFields, {
-      where: { uuid },
-      transaction,
-    });
+    await transaction.commit();
   }
-  else {
-    await Product.create({
-      uuid: fields['uuid'],
-      ...productFields,
-    }, {
-      transaction
-    });
-  }
+  catch(error) {
 
-  await transaction.commit();
+    logger['error'](error);
+  }
 };

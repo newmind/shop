@@ -1,9 +1,11 @@
 
+import logger from '@sys.packages/logger';
 import { sequelize, models } from '@sys.packages/db';
 
 
-export default async (uuid) => {
+export default async (event) => {
   try {
+    const uuid = JSON.parse(event);
     const { Currency } = models;
 
     const transaction = await sequelize.transaction();
@@ -15,8 +17,8 @@ export default async (uuid) => {
 
     await transaction.commit();
   }
-  catch(e) {
+  catch(error) {
 
-    console.log(e);
+    logger['error'](error);
   }
 };
