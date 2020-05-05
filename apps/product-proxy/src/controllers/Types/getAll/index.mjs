@@ -8,6 +8,7 @@ export default () => async (ctx) => {
 
     const result = await Type.findAll({
       attributes: ['id', 'value', 'description'],
+      order: [['createdAt', 'desc']],
     });
 
     ctx.body = {
