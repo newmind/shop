@@ -2,7 +2,38 @@
 module.exports = {
   async up(queryInterface, Sequelize) {
     const transaction = await queryInterface.sequelize.transaction();
+
     try {
+
+      await queryInterface.createTable('Currencies', {
+        id: {
+          type: Sequelize.INTEGER,
+          autoIncrement: true,
+          index: true,
+        },
+        uuid: {
+          type: Sequelize.UUID,
+          primaryKey: true,
+          unique: true,
+          allowNull: false,
+        },
+        value: {
+          type: Sequelize.STRING(8),
+          allowNull: false,
+        },
+        description: {
+          type: Sequelize.STRING(2024),
+          defaultValue: ''
+        },
+        createdAt: {
+          type: Sequelize.DATE,
+        },
+        updatedAt: {
+          type: Sequelize.DATE,
+        }
+      }, {
+        transaction
+      });
 
       await queryInterface.createTable('Galleries', {
         id: {
@@ -30,14 +61,15 @@ module.exports = {
       await queryInterface.createTable('Products', {
         id: {
           type: Sequelize.INTEGER,
-          primaryKey: true,
           autoIncrement: true,
           index: true,
         },
         uuid: {
           type: Sequelize.STRING(9),
+          primaryKey: true,
           allowNull: false,
           index: true,
+          unique: true,
         },
         brand: {
           type: Sequelize.STRING(255),
@@ -49,34 +81,9 @@ module.exports = {
           allowNull: true,
           index: true,
         },
-        description: {
-          type: Sequelize.STRING(1024),
-          allowNull: true,
-        },
-        status: {
-          type: Sequelize.INTEGER,
-          defaultValue: 1,
-          index: true,
-        },
-        amount: {
-          type: Sequelize.DECIMAL(10, 2),
+        currencyId: {
+          type: Sequelize.UUID,
           allowNull: false,
-        },
-        saleAmount: {
-          type: Sequelize.DECIMAL(10, 2),
-          allowNull: true,
-        },
-        count: {
-          type: Sequelize.INTEGER,
-          allowNull: false,
-        },
-        isHit: {
-          type: Sequelize.BOOLEAN,
-          defaultValue: false,
-        },
-        isSale: {
-          type: Sequelize.BOOLEAN,
-          defaultValue: false,
         },
         createdAt: {
           type: Sequelize.DATE,
@@ -88,7 +95,7 @@ module.exports = {
         transaction
       });
 
-      await queryInterface.createTable('Operations', {
+      await queryInterface.createTable('Orders', {
         id: {
           type: Sequelize.INTEGER,
           primaryKey: true,
@@ -97,6 +104,14 @@ module.exports = {
         },
         externalId: {
           type: Sequelize.STRING(64),
+          allowNull: false,
+        },
+        invoiceId: {
+          type: Sequelize.STRING(64),
+          allowNull: false,
+        },
+        paymentLink: {
+          type: Sequelize.STRING,
           allowNull: false,
         },
         address: {
@@ -122,6 +137,7 @@ module.exports = {
         amount: {
           type: Sequelize.DECIMAL(10, 2),
           allowNull: false,
+          defaultValue: 0.00,
         },
         pay: {
           type: Sequelize.STRING(32),
@@ -135,6 +151,11 @@ module.exports = {
           type: Sequelize.INTEGER,
           allowNull: false,
         },
+        statusInvoice: {
+          type: Sequelize.INTEGER,
+          allowNull: false,
+          defaultValue: 0,
+        },
         createdAt: {
           type: Sequelize.DATE,
         },
@@ -145,18 +166,18 @@ module.exports = {
         transaction
       });
 
-      await queryInterface.createTable('OperationStocks', {
+      await queryInterface.createTable('OrderProducts', {
         id: {
           type: Sequelize.INTEGER,
           primaryKey: true,
           autoIncrement: true,
           index: true,
         },
-        operationId: {
+        orderId: {
           type: Sequelize.INTEGER,
         },
         productId: {
-          type: Sequelize.INTEGER,
+          type: Sequelize.STRING(9),
         },
         type: {
           type: Sequelize.STRING,
@@ -167,6 +188,15 @@ module.exports = {
         lens: {
           type: Sequelize.JSON,
         },
+        amount: {
+          type: Sequelize.DECIMAL(10, 2),
+          allowNull: false,
+          defaultValue: 0,
+        },
+        currencyId: {
+          type: Sequelize.UUID,
+          allowNull: false,
+        },
         createdAt: {
           type: Sequelize.DATE,
         },
@@ -178,8 +208,8 @@ module.exports = {
       });
 
       await transaction.commit();
-
-    } catch (err) {
+    }
+    catch (err) {
 
       await transaction.rollback();
 
@@ -188,10 +218,14 @@ module.exports = {
   },
   async down(queryInterface) {
     const transaction = await queryInterface.sequelize.transaction();
+
     try {
       await transaction.commit();
-    } catch (err) {
+    }
+    catch (err) {
+
       await transaction.rollback();
+
       throw err;
     }
   },
