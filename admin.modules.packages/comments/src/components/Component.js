@@ -1,7 +1,7 @@
 
-import { Confirm, Dialog } from "@ui.packages/dialog";
 import { Table, Column } from "@ui.packages/table";
-import { Actions, Row, Col } from '@ui.packages/ui';
+import { Actions, Row, Col } from '@ui.packages/kit';
+import { Confirm, Dialog } from "@ui.packages/dialog";
 
 import types from 'prop-types';
 import { Link } from 'react-router-dom';

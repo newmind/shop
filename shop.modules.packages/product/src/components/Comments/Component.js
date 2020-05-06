@@ -1,9 +1,9 @@
 
+import moment from '@ui.packages/moment';
+import { Evaluation } from '@ui.packages/kit';
+
 import types from 'prop-types';
 import React, { PureComponent } from 'react';
-
-import moment from '@ui.packages/moment';
-import { Evaluation } from '@ui.packages/ui';
 
 import cn from 'classnames';
 import styles from './default.module.scss';

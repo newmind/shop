@@ -1,5 +1,5 @@
 
-import { Container, Row, Col, EvaluationField, InputField, TextareaField, Button } from '@ui.packages/ui';
+import { Container, Row, Col, EvaluationField, InputField, TextareaField, Button } from '@ui.packages/kit';
 
 import types from 'prop-types';
 import React, { PureComponent } from 'react';

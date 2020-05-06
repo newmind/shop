@@ -1,11 +1,11 @@
 
+import {Button, Container, Col, Row, Select, TextareaField} from "@ui.packages/kit";
+
 import types from 'prop-types';
 import React, { PureComponent } from 'react';
 
-import {Button, Container, Col, Row, Select, TextareaField} from "@ui.packages/ui";
-
-import styles from "./default.module.scss";
 import cn from "classnames";
+import styles from "./default.module.scss";
 
 
 const eyeAndNose = [

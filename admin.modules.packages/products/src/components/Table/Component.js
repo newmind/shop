@@ -1,7 +1,7 @@
 
 import { Confirm } from "@ui.packages/dialog";
 import { Column, Table } from "@ui.packages/table";
-import { Actions, Gallery } from "@ui.packages/ui";
+import { Actions, Gallery } from "@ui.packages/kit";
 
 import types from 'prop-types';
 import React, { PureComponent } from 'react';

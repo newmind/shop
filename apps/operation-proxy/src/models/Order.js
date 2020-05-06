@@ -49,6 +49,10 @@ module.exports = (db, DataType) => {
         return Number(amount);
       },
     },
+    currencyId: {
+      type: DataType.UUID,
+      allowNull: false,
+    },
     pay: {
       type: DataType.STRING(32),
       allowNull: false,
@@ -68,7 +72,12 @@ module.exports = (db, DataType) => {
     },
   });
 
-  Order.associate = function({ OrderProducts }) {
+  Order.associate = function({ OrderProducts, Currency }) {
+
+    Order.belongsTo(Currency, {
+      foreignKey: 'currencyId',
+      as: 'currency',
+    });
 
     Order.hasMany(OrderProducts, {
       foreignKey: 'orderId',

@@ -1,5 +1,5 @@
 
-import { SelectField, InputField, CheckBoxField, Row, Col } from '@ui.packages/ui';
+import { SelectField, InputField, CheckBoxField, Row, Col } from '@ui.packages/kit';
 
 import types from 'prop-types';
 import React, { PureComponent } from 'react';

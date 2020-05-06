@@ -1,12 +1,12 @@
 
 import numeral from "@ui.packages/numeral";
 import { Dialog } from "@ui.packages/dialog";
-import { Radio, RadioBoxField, Gallery } from "@ui.packages/ui";
+import { Radio, RadioBoxField, Gallery } from "@ui.packages/kit";
 
 import types from 'prop-types';
-import React, { Fragment, PureComponent } from 'react';
 import { Field } from 'redux-form';
 import { Link } from 'react-router-dom';
+import React, { Fragment, PureComponent } from 'react';
 
 import PrescriptionFormModify from './PrescriptionFormModify';
 import SelectLensesFormModify from './SelectLensesFormModify';

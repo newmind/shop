@@ -1,5 +1,5 @@
 
-import { Gallery } from "@ui.packages/ui";
+import { Gallery } from "@ui.packages/kit";
 
 import { Link } from 'react-router-dom';
 import React, { Fragment, PureComponent } from 'react';

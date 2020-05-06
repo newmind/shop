@@ -1,5 +1,5 @@
 
-import { Input } from '@ui.packages/ui';
+import { Input } from '@ui.packages/kit';
 
 import React, { PureComponent } from 'react';
 

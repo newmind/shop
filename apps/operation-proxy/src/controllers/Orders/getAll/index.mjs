@@ -20,6 +20,12 @@ export default () => async (ctx) => {
       attributes: ['externalId', 'address', 'email', 'phone', 'name', 'surname', 'amount', 'pay', 'delivery', 'status', 'createdAt', 'updatedAt'],
       include: [
         {
+          model: Currency,
+          required: false,
+          as: 'currency',
+          attributes: ['uuid', 'value']
+        },
+        {
           model: OrderProducts,
           required: true,
           as: 'products',

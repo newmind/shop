@@ -1,6 +1,6 @@
 
 import { Dialog } from '@ui.packages/dialog';
-import { Button, Actions } from '@ui.packages/ui';
+import { Button, Actions } from '@ui.packages/kit';
 import { Table, Column } from '@ui.packages/table';
 
 import types from 'prop-types';

@@ -1,7 +1,7 @@
 
-import { Button, Actions } from '@ui.packages/ui';
 import { Dialog } from '@ui.packages/dialog';
 import { Table, Column } from '@ui.packages/table';
+import { Button, Actions } from '@ui.packages/kit';
 
 import types from 'prop-types';
 import React, { PureComponent } from 'react';

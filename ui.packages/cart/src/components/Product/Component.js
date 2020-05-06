@@ -1,10 +1,10 @@
 
+import { Gallery } from "@ui.packages/kit";
+import numeral from "@ui.packages/numeral";
+
 import types from "prop-types";
 import React, { PureComponent } from 'react';
 import { Link } from 'react-router-dom';
-
-import { Gallery } from "@ui.packages/ui";
-import numeral from "@ui.packages/numeral";
 
 import cn from "classnames";
 import styles from "./defaults.module.scss";

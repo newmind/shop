@@ -1,7 +1,7 @@
 
 import numeral from '@packages/numeral';
 import { Dialog } from '@ui.packages/dialog';
-import { Button, Col, Container, Row, Breadcrumbs } from '@ui.packages/ui';
+import { Button, Col, Container, Row, Breadcrumbs } from '@ui.packages/kit';
 
 import types from 'prop-types';
 import { Link } from "react-router-dom";

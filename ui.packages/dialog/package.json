@@ -9,11 +9,11 @@
   },
   "dependencies": {
     "@ui.packages/theme": "1.0.0",
-    "@ui.packages/ui": "1.0.0",
+    "@ui.packages/kit": "1.0.0",
     "classnames": "2.2.6",
     "prop-types": "15.7.2",
     "react": "16.13.1",
-    "react-dom": "16.13.0",
+    "react-dom": "16.13.1",
     "redux": "4.0.5"
   },
   "devDependencies": {
@@ -24,7 +24,7 @@
   },
   "babel": {
     "presets": [
-      "react-app"
+      ["react-app", { "absoluteRuntime": false }]
     ]
   }
 }

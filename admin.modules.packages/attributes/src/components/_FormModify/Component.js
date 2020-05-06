@@ -1,5 +1,5 @@
 
-import { Row, Col, Button, InputField, TextareaField } from '@ui.packages/ui';
+import { Row, Col, Button, InputField, TextareaField } from '@ui.packages/kit';
 
 import React from 'react';
 

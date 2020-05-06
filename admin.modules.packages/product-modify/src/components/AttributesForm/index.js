@@ -1,8 +1,8 @@
 
+import { Row, Col, InputField, SelectField, Button } from '@ui.packages/kit';
+
 import types from 'prop-types';
 import React, { PureComponent } from 'react';
-
-import { Row, Col, InputField, SelectField, Button } from '@ui.packages/ui';
 
 import cn from 'classnames';
 import styles from './default.module.scss';

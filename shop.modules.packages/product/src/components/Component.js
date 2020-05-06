@@ -1,8 +1,8 @@
 
-import { nounDeclension } from "@ui.packages/utils";
 import numeral from '@ui.packages/numeral';
-import { Gallery, Breadcrumbs } from '@ui.packages/ui';
 import { Dialog } from '@ui.packages/dialog';
+import { nounDeclension } from "@ui.packages/utils";
+import { Gallery, Breadcrumbs } from '@ui.packages/kit';
 
 import types from 'prop-types';
 import React, { PureComponent } from 'react';

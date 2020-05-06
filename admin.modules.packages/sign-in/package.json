@@ -18,7 +18,7 @@
     "@ui.packages/request": "1.0.0",
     "@ui.packages/socket": "1.0.0",
     "@ui.packages/theme": "1.0.0",
-    "@ui.packages/ui": "1.0.0",
+    "@ui.packages/kit": "1.0.0",
     "@ui.packages/utils": "1.0.0",
     "prop-types": "15.7.2",
     "react": "16.13.1",
@@ -35,7 +35,7 @@
   },
   "babel": {
     "presets": [
-      "react-app"
+      ["react-app", { "absoluteRuntime": false }]
     ]
   }
 }
