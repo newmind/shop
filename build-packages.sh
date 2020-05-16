@@ -12,7 +12,7 @@ cd ../hocs && npx yarn build
 cd ../notifications && npx yarn build
 cd ../table && npx yarn build
 cd ../tabs && npx yarn build
-cd ../ui && npx yarn build
+cd ../kit && npx yarn build
 cd ../yandex-map && npx yarn build
 
 echo ''

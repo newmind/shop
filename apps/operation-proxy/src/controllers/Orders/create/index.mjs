@@ -44,11 +44,12 @@ export default () => async (ctx) => {
       data: body,
     });
 
-    const { Order, OrderProducts } = models;
+    const { Order, OrderProducts, Currency, Product, Gallery } = models;
     const transaction = await sequelize.transaction();
 
     const { id } = await Order.create({
       externalId,
+      currencyId: fields['items'][0]['currencyId'],
       invoiceId: invoice['data']['uuid'],
       paymentLink: invoice['data']['paymentLink'],
       status: fields['status'],
@@ -72,9 +73,57 @@ export default () => async (ctx) => {
 
     await OrderProducts.bulkCreate(items, { transaction });
 
-    await sendEvent(process.env['RABBIT_OPERATION_PROXY_EXCHANGE_ORDER_CREATED'], JSON.stringify(externalId));
-
     await transaction.commit();
+
+    const operations = await Order.findAll({
+      where: { externalId },
+      order: [['createdAt', 'desc']],
+      attributes: ['externalId', 'address', 'email', 'phone', 'name', 'surname', 'amount', 'pay', 'delivery', 'status', 'createdAt', 'updatedAt'],
+      include: [
+        {
+          model: Currency,
+          required: false,
+          as: 'currency',
+          attributes: ['uuid', 'value']
+        },
+        {
+          model: OrderProducts,
+          required: true,
+          as: 'products',
+          attributes: ['id', 'type', 'recipe', 'lens', 'amount'],
+          include: [
+            {
+              model: Currency,
+              required: false,
+              as: 'currency',
+              attributes: ['uuid', 'value']
+            },
+            {
+              model: Product,
+              attributes: ['uuid', 'name', 'brand'],
+              required: true,
+              as: 'product',
+              include: [
+                {
+                  model: Currency,
+                  required: false,
+                  as: 'currency',
+                  attributes: ['uuid', 'value']
+                },
+                {
+                  model: Gallery,
+                  required: false,
+                  as: 'gallery',
+                  attributes: ['externalId'],
+                },
+              ]
+            }
+          ]
+        }
+      ]
+    });
+
+    await sendEvent(process.env['RABBIT_OPERATION_PROXY_EXCHANGE_ORDER_CREATED'], JSON.stringify(operations[0]));
 
     ctx.body = {
       success: true,
