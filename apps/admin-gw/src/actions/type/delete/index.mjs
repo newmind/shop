@@ -7,7 +7,7 @@ export default () => async (event) => {
   try {
     const fields = JSON.parse(event);
 
-    emit(process.env['SOCKET_COMMENT_DELETED'], fields);
+    emit(process.env['SOCKET_TYPE_DELETED'], fields);
   }
   catch(error) {
     logger['error'](error);

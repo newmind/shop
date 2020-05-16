@@ -59,11 +59,6 @@ class Component extends PureComponent {
         <div className={styles['table']}>
           <Table columns={items}>
             <Column
-              title="ID"
-              alias="id"
-              width="40"
-            />
-            <Column
               title="Значение"
               alias="value"
               width="200"

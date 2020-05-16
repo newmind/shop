@@ -1,13 +1,13 @@
 
 import logger from '@sys.packages/logger';
-import { emit } from "@sys.packages/socket.io";
+import { emit } from '@sys.packages/socket.io';
 
 
 export default () => async (event) => {
   try {
     const fields = JSON.parse(event);
 
-    emit(process.env['SOCKET_COMMENT_DELETED'], fields);
+    emit(process.env['SOCKET_TYPE_CREATED'], fields);
   }
   catch(error) {
     logger['error'](error);
