@@ -44,7 +44,7 @@ export default () => async (ctx) => {
       data: body,
     });
 
-    const { Order, OrderProducts, Currency, Product, Gallery } = models;
+    const { Order, OrderProducts, Currency, Product, Gallery, Status } = models;
     const transaction = await sequelize.transaction();
 
     const { id } = await Order.create({
@@ -52,7 +52,7 @@ export default () => async (ctx) => {
       currencyId: fields['items'][0]['currencyId'],
       invoiceId: invoice['data']['uuid'],
       paymentLink: invoice['data']['paymentLink'],
-      status: fields['status'],
+      statusCode: 1,
       pay: fields['pay'],
       name: fields['name'],
       phone: fields['phone'],
@@ -78,13 +78,19 @@ export default () => async (ctx) => {
     const operations = await Order.findAll({
       where: { externalId },
       order: [['createdAt', 'desc']],
-      attributes: ['externalId', 'address', 'email', 'phone', 'name', 'surname', 'amount', 'pay', 'delivery', 'status', 'createdAt', 'updatedAt'],
+      attributes: ['externalId', 'address', 'email', 'phone', 'name', 'surname', 'amount', 'pay', 'delivery', 'createdAt', 'updatedAt'],
       include: [
         {
           model: Currency,
           required: false,
           as: 'currency',
           attributes: ['uuid', 'value']
+        },
+        {
+          model: Status,
+          required: false,
+          as: 'status',
+          attributes: ['code', 'name']
         },
         {
           model: OrderProducts,

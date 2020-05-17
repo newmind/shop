@@ -61,7 +61,7 @@ module.exports = (db, DataType) => {
       type: DataType.STRING(32),
       allowNull: false,
     },
-    status: {
+    statusCode: {
       type: DataType.INTEGER,
       allowNull: false,
     },
@@ -72,7 +72,13 @@ module.exports = (db, DataType) => {
     },
   });
 
-  Order.associate = function({ OrderProducts, Currency }) {
+  Order.associate = function({ OrderProducts, Currency, Status }) {
+
+    Order.belongsTo(Status, {
+      sourceKey: 'code',
+      foreignKey: 'statusCode',
+      as: 'status',
+    });
 
     Order.belongsTo(Currency, {
       foreignKey: 'currencyId',

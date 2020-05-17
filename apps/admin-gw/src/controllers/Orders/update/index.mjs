@@ -4,12 +4,23 @@ import request from "@sys.packages/request";
 
 export default () => async (ctx) => {
   try {
-    const formData = ctx['request']['body'];
+    const { externalId } = ctx['params'];
+    const fields = ctx['request']['body'];
 
     const result = await request({
-      url: process.env['OPERATION_API_SRV'] + '/operations',
+      url: process.env['OPERATION_API_SRV'] + '/operations/' + externalId,
       method: 'put',
-      data: formData,
+      data: {
+        statusCode: fields['statusCode'],
+        pay: fields['pay'],
+        name: fields['name'],
+        phone: fields['phone'],
+        email: fields['email'],
+        surname: fields['surname'],
+        address: fields['address'],
+        delivery: fields['delivery'],
+        amount: fields['amount'],
+      },
     });
 
     ctx.body = {
@@ -17,14 +28,14 @@ export default () => async (ctx) => {
       data: result['data'],
     };
   }
-  catch(e) {
+  catch(error) {
 
     ctx.status = 500;
     ctx.body = {
       success: false,
       error: {
         code: '500',
-        message: e['message'],
+        message: error['message'],
       },
     };
   }

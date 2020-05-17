@@ -3,26 +3,28 @@ import PageHOC from '@ui.packages/hocs';
 
 import { bindActionCreators } from 'redux';
 
-import { pageInProcess } from '../ducks/commands';
-
 import Component from './Component';
 
-import { getOperations } from '../ducks/commands';
+import { pageInProcess, getOperations, getStatuses } from '../ducks/commands';
 
 
 const mapStateToProps = (state) => ({
-  items: state['orders']['items']
+  items: state['orders']['items'],
+  statuses: state['orders']['statuses'],
 });
 
-const mapActionsToProps = (dispatch) => ({
-  pageInProcess: bindActionCreators(pageInProcess, dispatch),
-  getOperations: bindActionCreators(getOperations, dispatch),
-});
+const mapActionsToProps = (dispatch) => bindActionCreators({
+  pageInProcess,
+  getOperations,
+  getStatuses,
+}, dispatch);
+
 
 export default PageHOC({
   mapStateToProps,
   mapActionsToProps,
-  onEnter: async ({ pageInProcess, getOperations }) => {
+  onEnter: async ({ pageInProcess, getOperations, getStatuses }) => {
+    await getStatuses();
     await getOperations();
     pageInProcess(false);
   }

@@ -1,6 +1,6 @@
 
 import numeral from '@packages/numeral';
-import { Dialog } from '@ui.packages/dialog';
+// import { Dialog } from '@ui.packages/dialog';
 import { Button, Col, Container, Row, Breadcrumbs } from '@ui.packages/kit';
 
 import types from 'prop-types';
@@ -8,7 +8,7 @@ import { Link } from "react-router-dom";
 import React, { PureComponent } from 'react';
 
 import OrderModify from './OrderModify';
-import OrderSuccess from './OrderSuccess';
+// import OrderSuccess from './OrderSuccess';
 
 import styles from './default.module.scss';
 
@@ -109,9 +109,9 @@ class Component extends PureComponent {
               </div>
             )}
         </div>
-        <Dialog name="success">
-          <OrderSuccess />
-        </Dialog>
+        {/*<Dialog name="success">*/}
+        {/*  <OrderSuccess />*/}
+        {/*</Dialog>*/}
       </section>
     );
   }

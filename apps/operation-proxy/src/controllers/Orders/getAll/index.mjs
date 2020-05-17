@@ -6,7 +6,7 @@ export default () => async (ctx) => {
   try {
     const where = {};
 
-    const { Order, OrderProducts, Product, Gallery, Currency } = models;
+    const { Order, OrderProducts, Product, Gallery, Currency, Status } = models;
     const { externalId } = ctx['request']['query'];
 
     if (externalId) {
@@ -17,13 +17,19 @@ export default () => async (ctx) => {
       where: { ...where },
       distinct: true,
       order: [['createdAt', 'desc']],
-      attributes: ['externalId', 'address', 'email', 'phone', 'name', 'surname', 'amount', 'pay', 'delivery', 'status', 'createdAt', 'updatedAt'],
+      attributes: ['externalId', 'address', 'email', 'phone', 'name', 'surname', 'amount', 'pay', 'delivery', 'createdAt', 'updatedAt'],
       include: [
         {
           model: Currency,
           required: false,
           as: 'currency',
-          attributes: ['uuid', 'value']
+          attributes: ['uuid', 'value'],
+        },
+        {
+          model: Status,
+          required: true,
+          as: 'status',
+          attributes: ['code', 'name'],
         },
         {
           model: OrderProducts,
@@ -35,7 +41,7 @@ export default () => async (ctx) => {
               model: Currency,
               required: false,
               as: 'currency',
-              attributes: ['uuid', 'value']
+              attributes: ['uuid', 'value'],
             },
             {
               model: Product,
@@ -47,7 +53,7 @@ export default () => async (ctx) => {
                   model: Currency,
                   required: false,
                   as: 'currency',
-                  attributes: ['uuid', 'value']
+                  attributes: ['uuid', 'value'],
                 },
                 {
                   model: Gallery,

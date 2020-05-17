@@ -159,6 +159,7 @@
     font: 14px "Istok Web", sans-serif;
     padding: 9px 14px 8px;
     width: 100%;
+    text-align: left;
     box-sizing: border-box;
     transition: color 200ms;
   }
@@ -245,6 +246,7 @@
 
   position: fixed;
   display: block;
+  text-align: left;
   min-width: 200px;
   padding: 6px 0 0;
   z-index: 9000;

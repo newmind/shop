@@ -144,13 +144,15 @@ class Component extends PureComponent {
                     <p className={styles['details__info']}>Преобретается оправа с линзами по рецепту.</p>
                     <p className={styles['details__info']}>
                       1. <span className={styles['link']} onClick={this._handlePrescriptionModifyOpenDialog.bind(this)}>{hasRecipe ? 'Изменить' : 'Заполинть'}</span> рецепт.
-                      {hasRecipe && <i className="fas fa-check-circle" />}
+                      {hasRecipe && <i className={cn(styles['success'], 'fas fa-check-circle')} />}
+                      { ! hasRecipe && <i className={cn(styles['danger'], 'fas fa-exclamation-circle')} />}
                       {hasItemsErrors && errors['items'][index]['recipe'] && <span className={styles['error']}>[{errors['items'][index]['recipe']}]</span>}
                     </p>
                     {hasRecipe && <Recipe {...recipe} />}
                     <p className={styles['details__info']}>
                       2. <span className={styles['link']} onClick={this._handleSelectLensesOpenDialog.bind(this)}>{hasLens ? 'Заменить' : 'Выбрать'}</span> линзы.
-                      {hasLens && <i className="fas fa-check-circle" />}
+                      {hasLens && <i className={cn(styles['success'], 'fas fa-check-circle')} />}
+                      { ! hasLens && <i className={cn(styles['danger'], 'fas fa-exclamation-circle')} />}
                       {hasItemsErrors && errors['items'][index]['lens'] && <span className={styles['error']}>[{errors['items'][index]['lens']}]</span>}
                     </p>
                     {hasLens && <Lens {...lens} />}

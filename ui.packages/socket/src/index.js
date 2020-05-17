@@ -41,11 +41,18 @@ export const joinToRoom = (roomName) => {
   room = roomName;
 };
 
-export const reconnect = () => {
-
-  socket.disconnect();
-};
-
 export const instance = () => {
   return socket;
+};
+
+export const on = (eventName, cb) => {
+  if (socket) {
+    socket.on('action', (event) => {
+      if (event['type'] === eventName) {
+        cb(event['payload']);
+      }
+    });
+  } else {
+    setTimeout(() => on(eventName, cb), 1000);
+  }
 };

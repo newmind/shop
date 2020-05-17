@@ -69,8 +69,11 @@ export default (state = initialState, { type, payload }) => {
         items: newItems,
       };
     }
-    case UPDATE_PRODUCT_IN_CART: {
-      const products = state['items'].map(product => {
+
+    case SOCKET_PRODUCT_UPDATED:
+    case UPDATE_PRODUCT_IN_CART: return {
+      ...state,
+      items: state['items'].map((product) => {
         if (product['uuid'] === payload['uuid']) {
           return {
             ...product,
@@ -78,12 +81,8 @@ export default (state = initialState, { type, payload }) => {
           };
         }
         return product;
-      });
-      return {
-        ...state,
-        items: products,
-      };
-    }
+      }),
+    };
 
     case RESTORE_CART: return {
       ...state,
@@ -94,18 +93,7 @@ export default (state = initialState, { type, payload }) => {
       items: [],
     };
 
-    case SOCKET_PRODUCT_UPDATED: return {
-      ...state,
-      items: state['items'].map((item) => {
-        if (item['id'] === payload['id']) {
-          return {
-            ...item,
-            ...payload,
-          };
-        }
-        return item;
-      }),
-    };
+
 
     default: return state;
   }
