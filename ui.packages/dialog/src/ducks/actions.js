@@ -5,9 +5,12 @@ import {
 } from './types';
 
 
-export const openDialogAction = (dialogName) => ({
+export const openDialogAction = (dialogName, data = null) => ({
   type: OPEN_DIALOG,
-  payload: dialogName,
+  payload: {
+    name: dialogName,
+    data: data,
+  },
 });
 
 

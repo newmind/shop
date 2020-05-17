@@ -11,7 +11,12 @@ export default () => async (ctx) => {
 
     const transaction = await sequelize.transaction();
 
-    const result = await Type.update(data, {
+    await Type.update(data, {
+      where: { id },
+      transaction
+    });
+
+    const result = await Type.findOne({
       where: { id },
       transaction
     });

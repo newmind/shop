@@ -1,7 +1,7 @@
 
-import React, { PureComponent } from 'react';
+import { InputField, Row, Col } from '@ui.packages/kit'
 
-import { InputField, Row, Col } from '@ui.packages/ui'
+import React, { PureComponent } from 'react';
 
 
 class Component extends PureComponent {

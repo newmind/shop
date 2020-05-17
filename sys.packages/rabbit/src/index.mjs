@@ -1,5 +1,6 @@
 
 import logger from '@sys.packages/logger';
+import { UUID } from '@sys.packages/sys.utils';
 
 import amqp from 'amqplib/callback_api';
 
@@ -76,6 +77,35 @@ export const channel = (connection, cb) => {
     });
 };
 
+export const connectToRabbit = (host) => {
+  return new Promise((resolve, reject) => {
+    connect(host, (error, connection) => {
+      if (error) {
+        return reject(error);
+      }
+      channel(connection, (error, chanel) => {
+        if (error) {
+          return reject(error);
+        }
+        resolve(chanel);
+      });
+    });
+  });
+};
+
+
+export const createExchange = (exchange) => {
+  return new Promise((resolve, reject) => {
+    channelConnect.assertExchange(exchange, 'fanout', { durable: true }, function(error, _ok) {
+      if (error) {
+        return reject(error);
+      }
+      logger.info('RabbitMQ exchanged: ' + exchange);
+      resolve(_ok);
+    });
+  });
+};
+
 export const createConsumer = (queue, cb) => {
   return new Promise((resolve, reject) => {
     channelConnect.assertQueue(queue, { durable: true, autoDelete: true }, function(error, _ok) {
@@ -122,16 +152,13 @@ export const bindQueueToExchange = (exchange, queue) => {
   });
 };
 
-export const createExchange = (exchange) => {
-  return new Promise((resolve, reject) => {
-    channelConnect.assertExchange(exchange, 'fanout', { durable: true }, function(error, _ok) {
-      if (error) {
-        return reject(error);
-      }
-      logger.info('RabbitMQ exchanged: ' + exchange);
-      resolve(_ok);
-    });
-  });
+export const queueToExchange = async (queue, exchange, cb) => {
+
+  queue = queue + '___' + UUID();
+
+  await createExchange(exchange);
+  await createConsumer(queue, cb);
+  await bindQueueToExchange(exchange, queue);
 };
 
 export const sendEvent = (exchange, content) => {
@@ -140,7 +167,7 @@ export const sendEvent = (exchange, content) => {
       content = Buffer.from(content);
       channelConnect.publish(exchange, '', content, { percistent: true });
 
-      logger.info('RabbitMQ: publish to exchange ', exchange);
+      logger.info('RabbitMQ: publish to exchange ' + exchange);
 
       resolve();
     }

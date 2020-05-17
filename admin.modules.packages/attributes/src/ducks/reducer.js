@@ -36,6 +36,14 @@ import {
   CREATE_UNIT_REQUEST, CREATE_UNIT_REQUEST_FAIL, CREATE_UNIT_REQUEST_SUCCESS,
   UPDATE_UNIT_REQUEST, UPDATE_UNIT_REQUEST_FAIL, UPDATE_UNIT_REQUEST_SUCCESS,
   DELETE_UNITS_REQUEST, DELETE_UNITS_REQUEST_FAIL, DELETE_UNITS_REQUEST_SUCCESS,
+
+  SOCKET_TYPE_CREATED, SOCKET_TYPE_DELETED, SOCKET_TYPE_UPDATED,
+  SOCKET_CATEGORY_CREATED, SOCKET_CATEGORY_DELETED, SOCKET_CATEGORY_UPDATED,
+  SOCKET_COLOR_CREATED, SOCKET_COLOR_DELETED, SOCKET_COLOR_UPDATED,
+  SOCKET_MATERIAL_CREATED, SOCKET_MATERIAL_DELETED, SOCKET_MATERIAL_UPDATED,
+  SOCKET_FORM_CREATED, SOCKET_FORM_DELETED, SOCKET_FORM_UPDATED,
+  SOCKET_CURRENCY_CREATED, SOCKET_CURRENCY_DELETED, SOCKET_CURRENCY_UPDATED,
+  SOCKET_UNIT_CREATED, SOCKET_UNIT_DELETED, SOCKET_UNIT_UPDATED,
 } from './types';
 
 
@@ -62,21 +70,20 @@ export default (state = initialState, { type, payload, error }) => {
 
     case CREATE_TYPE_REQUEST: return { ...state };
     case CREATE_TYPE_REQUEST_FAIL: return { ...state, error };
-    case CREATE_TYPE_REQUEST_SUCCESS: return {
-      ...state,
-      types: [...state['types'], payload].sort((left, right) => {
-        if (left['id'] > right['id']) {
-          return 1;
-        }
-        else if (left['id'] < right['id']) {
-          return -1;
-        }
-        return 0;
-      }),
-    };
+    case SOCKET_TYPE_CREATED:
+    case CREATE_TYPE_REQUEST_SUCCESS: {
+      if (state['types'].some((item) => item['id'] === payload['id'])) {
+        return { ...state, };
+      }
+      return {
+        ...state,
+        types: [ payload, ...state['types'] ],
+      };
+    }
 
     case UPDATE_TYPE_REQUEST: return { ...state };
     case UPDATE_TYPE_REQUEST_FAIL: return { ...state, error };
+    case SOCKET_TYPE_UPDATED:
     case UPDATE_TYPE_REQUEST_SUCCESS: return {
       ...state,
       types: [...state['types']].map((item) => {
@@ -89,9 +96,10 @@ export default (state = initialState, { type, payload, error }) => {
 
     case DELETE_TYPES_REQUEST: return { ...state };
     case DELETE_TYPES_REQUEST_FAIL: return { ...state, error };
+    case SOCKET_TYPE_DELETED:
     case DELETE_TYPES_REQUEST_SUCCESS: return {
       ...state,
-      types: [...state['types']].filter((item) => payload.indexOf(item['id']) === -1),
+      types: [...state['types']].filter((item) => !~ payload.indexOf(item['id'])),
     };
 
 
@@ -101,24 +109,23 @@ export default (state = initialState, { type, payload, error }) => {
 
     case CREATE_CATEGORY_REQUEST: return { ...state };
     case CREATE_CATEGORY_REQUEST_FAIL: return { ...state, error };
-    case CREATE_CATEGORY_REQUEST_SUCCESS: return {
-      ...state,
-      categories: [...state['categories'], payload].sort((left, right) => {
-        if (left['id'] > right['id']) {
-          return 1;
-        }
-        else if (left['id'] < right['id']) {
-          return -1;
-        }
-        return 0;
-      }),
-    };
+    case SOCKET_CATEGORY_CREATED:
+    case CREATE_CATEGORY_REQUEST_SUCCESS: {
+      if (state['categories'].some((item) => item['id'] === payload['id'])) {
+        return { ...state, };
+      }
+      return {
+        ...state,
+        categories: [ payload, ...state['categories'] ],
+      };
+    }
 
     case UPDATE_CATEGORY_REQUEST: return { ...state };
     case UPDATE_CATEGORY_REQUEST_FAIL: return { ...state, error };
+    case SOCKET_CATEGORY_UPDATED:
     case UPDATE_CATEGORY_REQUEST_SUCCESS: return {
       ...state,
-      categories: [...state['categories']].map((item) => {
+      categories: [ ...state['categories'] ].map((item) => {
         if (item['id'] === payload['id']) {
           return payload;
         }
@@ -128,6 +135,7 @@ export default (state = initialState, { type, payload, error }) => {
 
     case DELETE_CATEGORIES_REQUEST: return { ...state };
     case DELETE_CATEGORIES_REQUEST_FAIL: return { ...state, error };
+    case SOCKET_CATEGORY_DELETED:
     case DELETE_CATEGORIES_REQUEST_SUCCESS: return {
       ...state,
       categories: [...state['categories']].filter((item) => (payload.indexOf(item['id']) === -1)),
@@ -140,21 +148,20 @@ export default (state = initialState, { type, payload, error }) => {
 
     case CREATE_COLOR_REQUEST: return { ...state };
     case CREATE_COLOR_REQUEST_FAIL: return { ...state, error };
-    case CREATE_COLOR_REQUEST_SUCCESS: return {
-      ...state,
-      colors: [...state['colors'], payload].sort((left, right) => {
-        if (left['id'] > right['id']) {
-          return 1;
-        }
-        else if (left['id'] < right['id']) {
-          return -1;
-        }
-        return 0;
-      }),
-    };
+    case SOCKET_COLOR_CREATED:
+    case CREATE_COLOR_REQUEST_SUCCESS: {
+      if (state['colors'].some((item) => item['id'] === payload['id'])) {
+        return { ...state, };
+      }
+      return {
+        ...state,
+        colors: [ payload, ...state['colors'] ],
+      };
+    }
 
     case UPDATE_COLOR_REQUEST: return { ...state };
     case UPDATE_COLOR_REQUEST_FAIL: return { ...state, error };
+    case SOCKET_COLOR_UPDATED:
     case UPDATE_COLOR_REQUEST_SUCCESS: return {
       ...state,
       colors: [...state['colors']].map((item) => {
@@ -167,6 +174,7 @@ export default (state = initialState, { type, payload, error }) => {
 
     case DELETE_COLORS_REQUEST: return { ...state };
     case DELETE_COLORS_REQUEST_FAIL: return { ...state, error };
+    case SOCKET_COLOR_DELETED:
     case DELETE_COLORS_REQUEST_SUCCESS: return {
       ...state,
       colors: [...state['colors']].filter((item) => (payload.indexOf(item['id']) === -1)),
@@ -179,21 +187,20 @@ export default (state = initialState, { type, payload, error }) => {
 
     case CREATE_MATERIAL_REQUEST: return { ...state };
     case CREATE_MATERIAL_REQUEST_FAIL: return { ...state, error };
-    case CREATE_MATERIAL_REQUEST_SUCCESS: return {
-      ...state,
-      materials: [...state['materials'], payload].sort((left, right) => {
-        if (left['id'] > right['id']) {
-          return 1;
-        }
-        else if (left['id'] < right['id']) {
-          return -1;
-        }
-        return 0;
-      }),
-    };
+    case SOCKET_MATERIAL_CREATED:
+    case CREATE_MATERIAL_REQUEST_SUCCESS: {
+      if (state['materials'].some((item) => item['id'] === payload['id'])) {
+        return { ...state, };
+      }
+      return {
+        ...state,
+        materials: [ payload, ...state['materials'] ],
+      };
+    }
 
     case UPDATE_MATERIAL_REQUEST: return { ...state };
     case UPDATE_MATERIAL_REQUEST_FAIL: return { ...state, error };
+    case SOCKET_MATERIAL_UPDATED:
     case UPDATE_MATERIAL_REQUEST_SUCCESS: return {
       ...state,
       materials: [...state['materials']].map((item) => {
@@ -206,6 +213,7 @@ export default (state = initialState, { type, payload, error }) => {
 
     case DELETE_MATERIALS_REQUEST: return { ...state };
     case DELETE_MATERIALS_REQUEST_FAIL: return { ...state, error };
+    case SOCKET_MATERIAL_DELETED:
     case DELETE_MATERIALS_REQUEST_SUCCESS: return {
       ...state,
       materials: [...state['materials']].filter((item) => (payload.indexOf(item['id']) === -1)),
@@ -218,21 +226,20 @@ export default (state = initialState, { type, payload, error }) => {
 
     case CREATE_FORM_REQUEST: return { ...state };
     case CREATE_FORM_REQUEST_FAIL: return { ...state, error };
-    case CREATE_FORM_REQUEST_SUCCESS: return {
-      ...state,
-      forms: [...state['forms'], payload].sort((left, right) => {
-        if (left['id'] > right['id']) {
-          return 1;
-        }
-        else if (left['id'] < right['id']) {
-          return -1;
-        }
-        return 0;
-      }),
-    };
+    case SOCKET_FORM_CREATED:
+    case CREATE_FORM_REQUEST_SUCCESS: {
+      if (state['forms'].some((item) => item['id'] === payload['id'])) {
+        return { ...state, };
+      }
+      return {
+        ...state,
+        forms: [ payload, ...state['forms'] ],
+      };
+    }
 
     case UPDATE_FORM_REQUEST: return { ...state };
     case UPDATE_FORM_REQUEST_FAIL: return { ...state, error };
+    case SOCKET_FORM_UPDATED:
     case UPDATE_FORM_REQUEST_SUCCESS: return {
       ...state,
       forms: [...state['forms']].map((item) => {
@@ -245,6 +252,7 @@ export default (state = initialState, { type, payload, error }) => {
 
     case DELETE_FORMS_REQUEST: return { ...state };
     case DELETE_FORMS_REQUEST_FAIL: return { ...state, error };
+    case SOCKET_FORM_DELETED:
     case DELETE_FORMS_REQUEST_SUCCESS: return {
       ...state,
       forms: [...state['forms']].filter((item) => (payload.indexOf(item['id']) === -1)),
@@ -257,25 +265,24 @@ export default (state = initialState, { type, payload, error }) => {
 
     case CREATE_CURRENCY_REQUEST: return { ...state };
     case CREATE_CURRENCY_REQUEST_FAIL: return { ...state, error };
-    case CREATE_CURRENCY_REQUEST_SUCCESS: return {
-      ...state,
-      currencies: [...state['currencies'], payload].sort((left, right) => {
-        if (left['id'] > right['id']) {
-          return 1;
-        }
-        else if (left['id'] < right['id']) {
-          return -1;
-        }
-        return 0;
-      }),
-    };
+    case SOCKET_CURRENCY_CREATED:
+    case CREATE_CURRENCY_REQUEST_SUCCESS: {
+      if (state['currencies'].some((item) => item['id'] === payload['id'])) {
+        return { ...state, };
+      }
+      return {
+        ...state,
+        currencies: [ payload, ...state['currencies'] ],
+      };
+    }
 
     case UPDATE_CURRENCY_REQUEST: return { ...state };
     case UPDATE_CURRENCY_REQUEST_FAIL: return { ...state, error };
+    case SOCKET_CURRENCY_UPDATED:
     case UPDATE_CURRENCY_REQUEST_SUCCESS: return {
       ...state,
       currencies: [...state['currencies']].map((item) => {
-        if (item['id'] === payload['id']) {
+        if (item['uuid'] === payload['uuid']) {
           return payload;
         }
         return item;
@@ -284,9 +291,10 @@ export default (state = initialState, { type, payload, error }) => {
 
     case DELETE_CURRENCIES_REQUEST: return { ...state };
     case DELETE_CURRENCIES_REQUEST_FAIL: return { ...state, error };
+    case SOCKET_CURRENCY_DELETED:
     case DELETE_CURRENCIES_REQUEST_SUCCESS: return {
       ...state,
-      currencies: [...state['currencies']].filter((item) => (payload.indexOf(item['id']) === -1)),
+      currencies: [...state['currencies']].filter((item) => (payload.indexOf(item['uuid']) === -1)),
     };
 
 
@@ -296,21 +304,20 @@ export default (state = initialState, { type, payload, error }) => {
 
     case CREATE_UNIT_REQUEST: return { ...state };
     case CREATE_UNIT_REQUEST_FAIL: return { ...state, error };
-    case CREATE_UNIT_REQUEST_SUCCESS: return {
-      ...state,
-      units: [...state['units'], payload].sort((left, right) => {
-        if (left['id'] > right['id']) {
-          return 1;
-        }
-        else if (left['id'] < right['id']) {
-          return -1;
-        }
-        return 0;
-      }),
-    };
+    case SOCKET_UNIT_CREATED:
+    case CREATE_UNIT_REQUEST_SUCCESS: {
+      if (state['units'].some((item) => item['id'] === payload['id'])) {
+        return { ...state, };
+      }
+      return {
+        ...state,
+        units: [ payload, ...state['units'] ],
+      };
+    }
 
     case UPDATE_UNIT_REQUEST: return { ...state };
     case UPDATE_UNIT_REQUEST_FAIL: return { ...state, error };
+    case SOCKET_UNIT_UPDATED:
     case UPDATE_UNIT_REQUEST_SUCCESS: return {
       ...state,
       units: [...state['units']].map((item) => {
@@ -323,6 +330,7 @@ export default (state = initialState, { type, payload, error }) => {
 
     case DELETE_UNITS_REQUEST: return { ...state };
     case DELETE_UNITS_REQUEST_FAIL: return { ...state, error };
+    case SOCKET_UNIT_DELETED:
     case DELETE_UNITS_REQUEST_SUCCESS: return {
       ...state,
       units: [...state['units']].filter((item) => (payload.indexOf(item['id']) === -1)),

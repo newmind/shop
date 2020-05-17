@@ -75,14 +75,14 @@ export const createProducts = (data) => async dispatch => {
   }
 };
 
-export const removeProductById = (id) => async dispatch => {
+export const removeProductById = (uuid) => async dispatch => {
   try {
     dispatch(removeProductsRequestAction());
 
     const result = await request({
       method: 'delete',
       url: `/products`,
-      data: { id },
+      data: { uuid },
     });
 
     dispatch(removeProductsRequestSuccessAction(result['data']));

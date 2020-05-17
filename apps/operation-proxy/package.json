@@ -12,6 +12,7 @@
   },
   "dependencies": {
     "@sys.packages/db": "1.0.0",
+    "@sys.packages/logger": "1.0.0",
     "@sys.packages/rabbit": "1.0.0",
     "@sys.packages/request": "1.0.0",
     "@sys.packages/server": "1.0.0",

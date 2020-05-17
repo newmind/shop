@@ -2,6 +2,7 @@
   "name": "@sys.packages/logger",
   "version": "1.0.0",
   "main": "./src/index.mjs",
+  "type": "module",
   "author": {
     "name": "Viktor Pyatakov",
     "email": "viktor.pyatakov@pimpay.ru"

@@ -1,5 +1,5 @@
 
-import { Row, Col, Hr, InputField, TextareaField, SelectField } from '@ui.packages/ui';
+import { Row, Col, Hr, InputField, TextareaField, SelectField } from '@ui.packages/kit';
 
 import types from 'prop-types';
 import React, { PureComponent } from 'react';
@@ -162,7 +162,7 @@ class Component extends PureComponent {
                 name="currency"
                 label="Валюта"
                 options={currencies}
-                optionKey="id"
+                optionKey="uuid"
                 optionValue="value"
               />
             </Col>

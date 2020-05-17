@@ -1,13 +1,16 @@
-'use strict';
 
 module.exports = (db, DataType) => {
 
   const Currency = db.define('Currency', {
     id: {
       type: DataType.INTEGER,
-      primaryKey: true,
       autoIncrement: true,
       index: true,
+    },
+    uuid: {
+      type: DataType.UUID,
+      primaryKey: true,
+      allowNull: false,
     },
     value: {
       type: DataType.STRING(8),

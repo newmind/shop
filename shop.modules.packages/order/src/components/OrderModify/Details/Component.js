@@ -1,7 +1,7 @@
 
-import React, { PureComponent } from 'react';
+import { Container, Row, Col } from '@ui.packages/kit';
 
-import { Container, Row, Col } from '@ui.packages/ui';
+import React, { PureComponent } from 'react';
 
 import Customer from './Customer';
 import Delivery from './Delivery';

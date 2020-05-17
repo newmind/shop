@@ -52,7 +52,7 @@ class Component extends PureComponent {
   }
 
   render() {
-    const { isOpen, name, title, mode, actionDialogName, children } = this.props;
+    const { isOpen, data, name, title, mode, actionDialogName, children } = this.props;
     const classNameCloseDialog = cn('fas fa-times', styles['dialog__close']);
     const classNameDialog = cn(styles['dialog'], {
       [styles['dialog--primary']]: mode === PRIMARY_MODE,
@@ -72,7 +72,7 @@ class Component extends PureComponent {
             </div>
           )}
           <div className={styles['dialog__content']}>
-            { children }
+            { React.cloneElement(children, { data }) }
           </div>
         </div>
       </div>

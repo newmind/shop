@@ -8,12 +8,12 @@ import styles from './default.module.scss';
 
 class Component extends PureComponent {
   static propTypes = {
-    status: types.number,
+    status: types.object,
     delivery: types.string,
   };
 
   static defaultProps = {
-    status: 0,
+    status: null,
     delivery: null,
   };
 

@@ -1,8 +1,8 @@
 
+import { Container, Row, Col, Button } from '@ui.packages/kit';
+
 import types from 'prop-types';
 import React, { PureComponent } from 'react';
-
-import { Container, Row, Col, Button } from '@ui.packages/ui';
 
 import styles from './default.module.scss';
 

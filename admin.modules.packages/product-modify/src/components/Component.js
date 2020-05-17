@@ -2,7 +2,7 @@
 import types from 'prop-types';
 import React, { PureComponent } from 'react';
 
-import { Row, Col, Button, Container } from '@ui.packages/ui';
+import { Row, Col, Button, Container } from '@ui.packages/kit';
 
 import ModifyForm from './ModifyForm';
 

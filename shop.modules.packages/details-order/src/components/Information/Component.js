@@ -63,7 +63,7 @@ class Component extends PureComponent {
           </p>
           <p className={styles['line']}>
             <span className={styles['line__label']}>Дата оформления заказа:</span>
-            <span className={styles['line__value']}>{ moment(createdAt).format('DD.MM.YYYY') }</span>
+            <span className={styles['line__value']}>{ moment(createdAt).format('LLLL') }</span>
           </p>
           <p className={styles['line']}>
             <span className={styles['line__label']}>Сумма заказа:</span>

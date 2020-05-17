@@ -8,6 +8,7 @@ export default () => async (ctx) => {
 
     const result = await Material.findAll({
       attributes: ['id', 'value', 'description'],
+      order: [['createdAt', 'desc']],
     });
 
     ctx.body = {

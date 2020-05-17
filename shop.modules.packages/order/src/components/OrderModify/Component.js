@@ -1,12 +1,12 @@
 
+import { Row, Col } from "@ui.packages/kit";
+
 import React, { PureComponent } from 'react';
 import { FieldArray } from "redux-form";
 
 import Products from "./Products";
 import Details from "./Details";
 import Empty from "./Empty";
-
-import { Row, Col } from "@ui.packages/ui";
 
 import styles from "./default.module.scss";
 

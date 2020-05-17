@@ -1,4 +1,6 @@
 
+import { on } from '@ui.packages/socket';
+
 import {
   openCartAction,
   closeCartAction,
@@ -8,6 +10,24 @@ import {
   restoreCartAction,
   resetCartAction,
 } from './actions';
+
+import { SOCKET_PRODUCT_UPDATED } from './types';
+
+
+on(SOCKET_PRODUCT_UPDATED, (data) => {
+  const { localStorage } = window;
+  const cart = JSON.parse(localStorage.getItem('cart'));
+  const updated = cart.map((product) => {
+    if (product['uuid'] === data['uuid']) {
+      return {
+        ...product,
+        ...data,
+      };
+    }
+    return product;
+  });
+  localStorage.setItem('cart', JSON.stringify(updated));
+});
 
 
 export const openCart = () => dispatch => {

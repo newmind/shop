@@ -1,5 +1,5 @@
 
-import { Button } from '@ui.packages/ui';
+import { Button } from '@ui.packages/kit';
 import { objectToQuery } from "@ui.packages/utils";
 
 import types from 'prop-types';

@@ -1,6 +1,6 @@
 
 import numeral from '@packages/numeral';
-import {Button, Container, Col, Row, Select} from "@ui.packages/ui";
+import {Button, Container, Col, Row, Select} from "@ui.packages/kit";
 
 import types from 'prop-types';
 import React, { PureComponent } from 'react';

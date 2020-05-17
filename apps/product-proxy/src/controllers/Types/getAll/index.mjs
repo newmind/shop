@@ -8,6 +8,7 @@ export default () => async (ctx) => {
 
     const result = await Type.findAll({
       attributes: ['id', 'value', 'description'],
+      order: [['createdAt', 'desc']],
     });
 
     ctx.body = {
@@ -15,14 +16,14 @@ export default () => async (ctx) => {
       data: [ ...result ],
     };
   }
-  catch(e) {
+  catch(error) {
 
     ctx.status = 500;
     ctx.body = {
       success: false,
       error: {
         code: '500',
-        message: e.message,
+        message: error['message'],
       }
     };
   }

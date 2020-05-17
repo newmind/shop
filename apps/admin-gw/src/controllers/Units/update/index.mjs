@@ -12,7 +12,7 @@ export default () => async (ctx) => {
 
     const result = await request({
       method: 'put',
-      url: PRODUCT_API_SRV + '/units' + id,
+      url: PRODUCT_API_SRV + '/units/' + id,
       data: formData,
     });
 

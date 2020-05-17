@@ -8,6 +8,7 @@ import {
 const initialState = {
   isOpen: false,
   name: null,
+  data: null,
 };
 
 
@@ -18,12 +19,14 @@ export default (state = initialState, { type, payload }) => {
     case OPEN_DIALOG: return {
       ...state,
       isOpen: true,
-      name: payload,
+      name: payload['name'],
+      data: payload['data'],
     };
     case CLOSE_DIALOG: return {
       ...state,
       isOpen: false,
       name: null,
+      data: null,
     };
 
     default: return { ...state };

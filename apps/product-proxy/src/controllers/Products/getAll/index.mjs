@@ -91,8 +91,11 @@ export default () => async (ctx) => {
       ...options,
       ...offset,
       distinct: true,
-      where: { ...where },
-      order: [['createdAt', 'desc']],
+      where: { ...where, count: { [Op.gt]: 0 } },
+      order: [
+        ['createdAt', 'desc'],
+        ['comments', 'createdAt', 'desc']
+      ],
       include: [
         {
           model: Category,
@@ -128,7 +131,7 @@ export default () => async (ctx) => {
           model: Currency,
           required: false,
           as: 'currency',
-          attributes: ['id', 'value']
+          attributes: ['uuid', 'value']
         },
         {
           model: Attribute,
@@ -154,7 +157,7 @@ export default () => async (ctx) => {
           model: Comment,
           required: false,
           as: 'comments',
-          attributes: ['evaluation', 'person', 'comment', 'createdAt'],
+          attributes: ['id', 'evaluation', 'person', 'comment', 'createdAt'],
         },
       ],
     });

@@ -1,5 +1,5 @@
 
-import { Row, Col, InputField, SelectField, AmountField, DatePickerField, Button } from '@ui.packages/ui';
+import { Row, Col, InputField, SelectField, DatePickerField, Button } from '@ui.packages/kit';
 
 import types from 'prop-types';
 import React, { PureComponent } from 'react';

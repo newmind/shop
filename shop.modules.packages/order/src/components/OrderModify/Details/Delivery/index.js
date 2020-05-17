@@ -1,6 +1,6 @@
 
 import { Suggest } from '@ui.packages/yandex-map';
-import { InputField, RadioBoxField, Radio, Container, Row, Col } from "@ui.packages/ui";
+import { RadioBoxField, Radio, Container, Row, Col } from "@ui.packages/kit";
 
 import React, { PureComponent } from 'react';
 

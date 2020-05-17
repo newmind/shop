@@ -1,4 +1,3 @@
-'use strict';
 
 module.exports = (db, DataType) => {
 
@@ -13,7 +12,7 @@ module.exports = (db, DataType) => {
       primaryKey: true,
       allowNull: false,
       index: true,
-      unique: 'compositeIndex',
+      unique: true,
     },
     brand: {
       type: DataType.STRING(255),
@@ -25,51 +24,21 @@ module.exports = (db, DataType) => {
       allowNull: true,
       index: true,
     },
-    description: {
-      type: DataType.STRING(1024),
-      allowNull: true,
-    },
-    status: {
-      type: DataType.INTEGER,
-      defaultValue: 1,
-      index: true,
-    },
-    amount: {
-      type: DataType.DECIMAL(10, 2),
+    currencyId: {
+      type: DataType.UUID,
       allowNull: false,
-      defaultValue: 0,
-      get() {
-        const amount = this.getDataValue('amount');
-        return Number(amount)
-      },
-    },
-    saleAmount: {
-      type: DataType.DECIMAL(10, 2),
-      allowNull: false,
-      defaultValue: 0,
-      get() {
-        const amount = this.getDataValue('saleAmount');
-        return amount ? Number(amount) : 0;
-      },
-    },
-    count: {
-      type: DataType.INTEGER,
-      allowNull: false,
-      defaultValue: 0,
-    },
-    isHit: {
-      type: DataType.BOOLEAN,
-      defaultValue: false,
-    },
-    isSale: {
-      type: DataType.BOOLEAN,
-      defaultValue: false,
     },
   });
 
-  Product.associate = function({ Gallery }) {
+  Product.associate = function({ Gallery, Currency }) {
+
+    Product.belongsTo(Currency, {
+      foreignKey: 'currencyId',
+      as: 'currency',
+    });
 
     Product.hasMany(Gallery, {
+      sourceKey: 'uuid',
       foreignKey: 'productId',
       as: 'gallery'
     });

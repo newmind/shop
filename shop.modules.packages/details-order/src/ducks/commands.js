@@ -23,7 +23,7 @@ export const getOperationById = (id) => async (dispatch) => {
       method: 'get',
     });
 
-    dispatch(getOperationByIdRequestSuccessAction(result));
+    dispatch(getOperationByIdRequestSuccessAction(result['data']));
   }
   catch(error) {
     dispatch(getOperationByIdRequestFailAction(error));

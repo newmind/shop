@@ -1,4 +1,5 @@
 
+import logger from '@sys.packages/logger';
 import { NetworkError } from '@packages/errors';
 
 import axios from 'axios';
@@ -25,7 +26,7 @@ const requestLogger = (config) => {
     requestData = JSON.stringify(config['data']);
   }
 
-  console.log(`[${method.toLocaleUpperCase()}] ---> "${url}" (${requestData})`);
+  logger['info'](`[${method.toLocaleUpperCase()}] ---> "${url}" (${requestData})`);
 
   return config;
 };
@@ -40,13 +41,13 @@ const responseLogger = (response) => {
     responseData = JSON.stringify(data);
   }
 
-  console.log(`[${method.toLocaleUpperCase()}] <--- "${url}" [${status}] (${responseData})`);
+  logger['info'](`[${method.toLocaleUpperCase()}] <--- "${url}" [${status}] (${responseData})`);
 
   return response;
 };
 
 const errorLogger = (error) => {
-  const {config: { url, method }, response } = error;
+  const { config: { url, method }, response } = error;
 
   let status = 0;
   let data = null;
@@ -58,7 +59,7 @@ const errorLogger = (error) => {
     }
   }
 
-  console.log(`[${method.toLocaleUpperCase()}] <--- "${url}" [${status}] (${data})`);
+  logger['error'](`[${method.toLocaleUpperCase()}] <--- "${url}" [${status}] (${data})`);
 
   if ('errno' in error) {
     if (error['errno'] === 'ECONNREFUSED') {
@@ -71,7 +72,6 @@ const errorLogger = (error) => {
 
 
 const request = async (options) => {
-
   options = {
     ...defaultOptions,
     ...options,

@@ -10,13 +10,14 @@ module.exports = (db, DataType) => {
     },
     externalId: {
       type: DataType.STRING(36),
+      unique: true,
     },
     productId: {
       type: DataType.STRING(9),
     },
   });
 
-  Gallery.associate = ({}) => {};
+  Gallery.associate = () => {};
 
   return Gallery;
 };

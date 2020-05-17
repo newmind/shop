@@ -7,7 +7,7 @@ export default () => async (ctx) => {
 
     const categories = await models['Category'].findAll({
       attributes: ['id', 'value', 'description'],
-      order: [['id', 'ASC']],
+      order: [['createdAt', 'desc']],
     });
 
     ctx.body = {

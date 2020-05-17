@@ -79,8 +79,8 @@
   padding: 30px;
   border-radius: 4px;
   margin: 30px 0 0;
-  background: rgba($information, .1);
-  border: 1px solid $very-light-pink;
+  background: $very-light-pink;
+  border: 1px solid $pale-lilac;
 
   &__content {
 
@@ -122,6 +122,7 @@
 
   color: $primary;
   cursor: pointer;
+  font-weight: bold;
   text-decoration: underline;
 }
 
@@ -187,4 +188,18 @@
 
     color: $danger;
   }
+}
+
+.success {
+
+  display: inline-block;
+  color: $success;
+  margin: 0 0 0 10px;
+}
+
+.danger {
+
+  display: inline-block;
+  color: $danger;
+  margin: 0 0 0 10px;
 }

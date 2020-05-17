@@ -1,8 +1,8 @@
 
+import { Button } from "@ui.packages/kit";
+
 import types from 'prop-types';
 import React, { PureComponent } from 'react';
-
-import { Button } from "@ui.packages/ui";
 
 import Dialog from '../Dialog';
 

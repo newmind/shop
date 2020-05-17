@@ -1,9 +1,9 @@
 
-import { RadioBoxField, Radio } from "@ui.packages/ui";
+import { RadioBoxField, Radio } from "@ui.packages/kit";
 
-import React, { PureComponent } from 'react';
 import { connect } from 'react-redux';
 import { getFormValues } from 'redux-form';
+import React, { PureComponent } from 'react';
 
 import cn from 'classnames';
 import styles from './default.module.scss';

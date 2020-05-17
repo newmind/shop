@@ -1,63 +1,50 @@
 
-import databaseORM from '@sys.packages/db';
+import logger from '@sys.packages/logger';
+import connectToDatabase from '@sys.packages/db';
 import appServer, { initRouter } from '@sys.packages/server';
-import { connect as createConnection, channel as createChannel, createExchange, bindQueueToExchange, createConsumer } from "@sys.packages/rabbit";
+import { connectToRabbit, queueToExchange, createExchange } from "@sys.packages/rabbit";
 
 import http from 'http';
 
-import { createProduct, updateProductById, deleteProductById } from './controllers/Products';
-import { createImage, deleteImage } from './controllers/Gallery';
+import { createImage, deleteImage } from './actions/Gallery';
+import { createCurrency, updateCurrency, deleteCurrencies } from './actions/Currency';
+import { createProduct, updateProductById, deleteProductById } from './actions/Products';
 
 import routes from './routes';
 
 
 (async () => {
+  try {
+    await connectToDatabase(process.env['DB_CONNECTION_HOST']);
+    await connectToRabbit(process.env['RABBIT_CONNECTION_HOST']);
 
-  databaseORM(`postgres://${process.env['DATA_BASE_USERNAME']}:${process.env['DATA_BASE_PASSWORD']}@${process.env['DATA_BASE_HOST']}:${process.env['DATA_BASE_PORT']}/${process.env['DATA_BASE_NAME']}`);
+    // EXCHANGES
 
-  createConnection(process.env['RABBIT_CONNECTION_HOST'], (error, connection) => {
-    createChannel(connection, async () => {
+    await createExchange(process.env['RABBIT_OPERATION_PROXY_EXCHANGE_ORDER_CREATED']);
+    await createExchange(process.env['RABBIT_OPERATION_PROXY_EXCHANGE_ORDER_UPDATED']);
 
-      // EXCHANGES
+    // CONSUMER
 
-      await createExchange(process.env['RABBIT_OPERATION_PROXY_EXCHANGE_UPDATED']);
-      await createExchange(process.env['RABBIT_OPERATION_PROXY_EXCHANGE_CREATED']);
+    await queueToExchange(process.env['RABBIT_OPERATION_PROXY_QUEUE_GALLERY_DELETE'], process.env['RABBIT_GALLERY_PROXY_EXCHANGE_GALLERY_DELETED'], deleteImage);
 
-      await createExchange(process.env['RABBIT_PRODUCT_PROXY_EXCHANGE_PRODUCT_CREATED']);
-      await createExchange(process.env['RABBIT_PRODUCT_PROXY_EXCHANGE_PRODUCT_UPDATED']);
-      await createExchange(process.env['RABBIT_PRODUCT_PROXY_EXCHANGE_PRODUCT_DELETED']);
+    await queueToExchange(process.env['RABBIT_OPERATION_PROXY_QUEUE_GALLERY_CREATED'], process.env['RABBIT_PRODUCT_PROXY_EXCHANGE_GALLERY_CREATED'], createImage);
 
-      await createExchange(process.env['RABBIT_PRODUCT_PROXY_EXCHANGE_GALLERY_CREATED']);
+    await queueToExchange(process.env['RABBIT_OPERATION_PROXY_QUEUE_PRODUCT_CREATED'], process.env['RABBIT_PRODUCT_PROXY_EXCHANGE_PRODUCT_CREATED'], createProduct);
+    await queueToExchange(process.env['RABBIT_OPERATION_PROXY_QUEUE_PRODUCT_UPDATED'], process.env['RABBIT_PRODUCT_PROXY_EXCHANGE_PRODUCT_UPDATED'], updateProductById);
+    await queueToExchange(process.env['RABBIT_OPERATION_PROXY_QUEUE_PRODUCT_DELETED'], process.env['RABBIT_PRODUCT_PROXY_EXCHANGE_PRODUCT_DELETED'], deleteProductById);
 
-      await createExchange(process.env['RABBIT_GALLERY_PROXY_EXCHANGE_GALLERY_DELETED']);
-
-
-      // CONSUMER
-
-      await createConsumer(process.env['RABBIT_OPERATION_PROXY_QUEUE_PRODUCT_CREATED'], (event) => { createProduct(JSON.parse(event)); })
-      await createConsumer(process.env['RABBIT_OPERATION_PROXY_QUEUE_PRODUCT_UPDATED'], (event) => { updateProductById(JSON.parse(event)); })
-      await createConsumer(process.env['RABBIT_OPERATION_PROXY_QUEUE_PRODUCT_DELETED'], (event) => { deleteProductById(JSON.parse(event)); })
-
-      await createConsumer(process.env['RABBIT_OPERATION_PROXY_QUEUE_GALLERY_CREATED'], (event) => { createImage(JSON.parse(event)); })
-
-      await createConsumer(process.env['RABBIT_OPERATION_PROXY_QUEUE_GALLERY_DELETE'], (event) => { deleteImage(JSON.parse(event)); })
+    await queueToExchange(process.env['RABBIT_OPERATION_PROXY_QUEUE_CURRENCY_CREATED'], process.env['RABBIT_PRODUCT_PROXY_EXCHANGE_CURRENCY_CREATED'], createCurrency);
+    await queueToExchange(process.env['RABBIT_OPERATION_PROXY_QUEUE_CURRENCY_UPDATED'], process.env['RABBIT_PRODUCT_PROXY_EXCHANGE_CURRENCY_UPDATED'], updateCurrency);
+    await queueToExchange(process.env['RABBIT_OPERATION_PROXY_QUEUE_CURRENCY_DELETED'], process.env['RABBIT_PRODUCT_PROXY_EXCHANGE_CURRENCY_DELETED'], deleteCurrencies);
 
 
-      // BIND QUEUE TO EXCHANGE
+    const httpServer = http.createServer(appServer.callback());
 
-      await bindQueueToExchange(process.env['RABBIT_PRODUCT_PROXY_EXCHANGE_PRODUCT_CREATED'], process.env['RABBIT_OPERATION_PROXY_QUEUE_PRODUCT_CREATED']);
-      await bindQueueToExchange(process.env['RABBIT_PRODUCT_PROXY_EXCHANGE_PRODUCT_UPDATED'], process.env['RABBIT_OPERATION_PROXY_QUEUE_PRODUCT_UPDATED']);
-      await bindQueueToExchange(process.env['RABBIT_PRODUCT_PROXY_EXCHANGE_PRODUCT_DELETED'], process.env['RABBIT_OPERATION_PROXY_QUEUE_PRODUCT_DELETED']);
+    initRouter(routes);
 
-      await bindQueueToExchange(process.env['RABBIT_PRODUCT_PROXY_EXCHANGE_GALLERY_CREATED'], process.env['RABBIT_OPERATION_PROXY_QUEUE_GALLERY_CREATED']);
-
-      await bindQueueToExchange(process.env['RABBIT_GALLERY_PROXY_EXCHANGE_GALLERY_DELETED'], process.env['RABBIT_OPERATION_PROXY_QUEUE_GALLERY_DELETE']);
-    });
-  });
-
-  const httpServer = http.createServer(appServer.callback());
-
-  initRouter(routes);
-
-  httpServer.listen(process.env['PORT'], () => console.log('Server started on port', process.env['PORT']));
+    httpServer.listen(process.env['PORT'], () => logger['info']('Server started on port: ' + process.env['PORT']));
+  }
+  catch(error) {
+    logger['error'](error);
+  }
 })();

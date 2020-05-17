@@ -2,7 +2,7 @@
 import types from 'prop-types';
 import React, { PureComponent } from 'react';
 
-import { Row, Col, InputField, DatePickerField } from '@ui.packages/ui';
+import { Row, Col, InputField, DatePickerField } from '@ui.packages/kit';
 
 
 class Component extends PureComponent {

@@ -11,7 +11,7 @@ import {
   getById as getOperationById,
   create as createOperation,
   updateById as updateOperationById,
-} from '../controllers/Operatons';
+} from '../controllers/Orders';
 
 import { getAllTypes, createType, updateType, deleteType } from '../controllers/Types';
 import { getAllForms, createForm, updateForm, deleteForms } from '../controllers/Forms';
@@ -26,8 +26,12 @@ import { getProducts, getProduct,  createProduct, updateProduct, deleteProducts 
 import { getImage, deleteImages } from '../controllers/Gallery';
 import { getComments, createComment, updateComment, deleteComments } from '../controllers/Comments';
 
+import { getAllStatuses } from '../controllers/Statuses';
+
 
 export default (router) => {
+
+  router.get('/statuses', getAllStatuses());
 
   router.get('/types', getAllTypes());
   router.post('/types', createType());
@@ -73,7 +77,7 @@ export default (router) => {
   router.get('/operations', getOperations());
   router.get('/operations/:operationId', getOperationById());
   router.post('/operations', createOperation());
-  router.put('/operations/:operationId', updateOperationById());
+  router.put('/operations/:externalId', updateOperationById());
 
 
   router.get('/comments', getComments());

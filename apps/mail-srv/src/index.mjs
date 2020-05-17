@@ -1,16 +1,37 @@
 
+import logger from '@sys.packages/logger';
 import appServer, { initRouter } from '@sys.packages/server';
+import { connectToRabbit, queueToExchange } from '@sys.packages/rabbit';
 
+import path from 'path';
 import http from 'http';
+import nunjucks from 'nunjucks';
 
 import routes from './routes';
+import { orderCreated } from './actions/order';
 
 
 (async () => {
+  try {
+    await connectToRabbit(process.env['RABBIT_CONNECTION_HOST']);
 
-  const httpServer = http.createServer(appServer.callback());
+    await queueToExchange(process.env['RABBIT_OPERATION_PROXY_QUEUE_ORDER_CREATED'], process.env['RABBIT_OPERATION_PROXY_EXCHANGE_ORDER_CREATED'], orderCreated());
 
-  initRouter(routes);
+    nunjucks.configure(path.resolve(process.cwd(), 'src/templates'), {
+      autoescape: true,
+      watch: true,
+    });
 
-  httpServer.listen(process.env['PORT'], () => console.log('Server started on port', process.env['PORT']));
+    const httpServer = http.createServer(appServer.callback());
+
+    initRouter(routes);
+
+    httpServer.listen(process.env['PORT'], () => {
+      logger['info']('Server started on port: ' + process.env['PORT'])
+    });
+  }
+  catch(error) {
+
+    logger['error'](error);
+  }
 })();

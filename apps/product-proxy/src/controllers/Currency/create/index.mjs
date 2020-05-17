@@ -1,16 +1,21 @@
 
 import { sendEvent } from "@sys.packages/rabbit";
 import { sequelize, models } from '@sys.packages/db';
+import { UUID } from '@sys.packages/sys.utils';
 
 
 export default () => async (ctx) => {
   try {
     const { Currency } = models;
     const formData = ctx['request']['body'];
+    const uuid = UUID();
 
     const transaction = await sequelize.transaction();
 
-    const result = await Currency.create(formData, {
+    const result = await Currency.create({
+      uuid,
+      ...formData
+    }, {
       transaction,
     });
 

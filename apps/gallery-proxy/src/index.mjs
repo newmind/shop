@@ -1,7 +1,8 @@
 
-import databaseORM from '@sys.packages/db';
+import logger from '@sys.packages/logger';
+import connectToDatabase from '@sys.packages/db';
 import appServer, { initRouter } from '@sys.packages/server';
-import { channel as createChannel, connect as createConnection, createExchange } from "@sys.packages/rabbit";
+import { connectToRabbit, createExchange } from "@sys.packages/rabbit";
 
 import http from 'http';
 
@@ -9,19 +10,21 @@ import routes from './routes';
 
 
 (async () => {
+  try {
+    await connectToDatabase(process.env['DB_CONNECTION_HOST']);
+    await connectToRabbit(process.env['RABBIT_CONNECTION_HOST']);
 
-  databaseORM(`postgres://${process.env['DATA_BASE_USERNAME']}:${process.env['DATA_BASE_PASSWORD']}@${process.env['DATA_BASE_HOST']}:${process.env['DATA_BASE_PORT']}/${process.env['DATA_BASE_NAME']}`);
+    await createExchange(process.env['RABBIT_GALLERY_PROXY_EXCHANGE_GALLERY_DELETED']);
 
-  createConnection(process.env['RABBIT_CONNECTION_HOST'], (error, connection) => {
-    createChannel(connection, async () => {
 
-      await createExchange(process.env['RABBIT_GALLERY_PROXY_EXCHANGE_GALLERY_DELETED']);
-    });
-  });
+    const httpServer = http.createServer(appServer.callback());
 
-  const httpServer = http.createServer(appServer.callback());
+    initRouter(routes);
 
-  initRouter(routes);
+    httpServer.listen(process.env['PORT'], () => logger['info']('Server started on port', process.env['PORT']));
+  }
+  catch(error) {
 
-  httpServer.listen(process.env['PORT'], () => console.log('Server started on port', process.env['PORT']));
+    logger['error'](error);
+  }
 })();

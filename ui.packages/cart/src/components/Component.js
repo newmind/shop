@@ -1,9 +1,9 @@
 
+import { Button } from '@ui.packages/kit';
+import numeral from '@ui.packages/numeral';
+
 import types from 'prop-types';
 import React, { PureComponent } from 'react';
-
-import numeral from '@ui.packages/numeral';
-import { Button } from '@ui.packages/ui';
 
 import Icon from './Icon';
 import Product from './Product';

@@ -1,7 +1,6 @@
 
 import { Tabs, Tab, TabContainer } from '@ui.packages/tabs';
 
-// import types from 'prop-types';
 import React, { PureComponent } from 'react';
 
 import Types from './Types';

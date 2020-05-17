@@ -1,4 +1,3 @@
-'use strict';
 
 import { models } from '@sys.packages/db';
 
@@ -9,7 +8,7 @@ export default () => async (ctx) => {
 
     const result = await Units.findAll({
       attributes: ['id', 'value', 'description'],
-      order: [['id', 'ASC']],
+      order: [['createdAt', 'desc']],
     });
 
     ctx.body = {

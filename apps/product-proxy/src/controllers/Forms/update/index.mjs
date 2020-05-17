@@ -11,7 +11,12 @@ export default () => async (ctx) => {
 
     const transaction = await sequelize.transaction();
 
-    const result = await Form.update(data, {
+    await Form.update(data, {
+      where: { id },
+      transaction
+    });
+
+    const result = await Form.findOne({
       where: { id },
       transaction
     });
