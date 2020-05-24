@@ -1,9 +1,9 @@
 
 export default [
-  // {
-  //   title: 'Витрина',
-  //   path: '/products',
-  // },
+  {
+    title: 'Витрина',
+    path: '/products',
+  },
   {
     title: 'Сервис и поддержка',
     path: '/produce',

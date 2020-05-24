@@ -12,7 +12,9 @@ class Component extends PureComponent {
   render() {
     return (
       <section className={styles['wrapper']}>
-        <p>Привет! Я главная страница</p>
+        <div className={styles['content']}>
+          <p>Привет! Я главная страница</p>
+        </div>
       </section>
     );
   }

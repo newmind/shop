@@ -7,11 +7,7 @@ import { push } from 'react-router-redux';
 import Component from './Component';
 
 
-import {
-  pageInProcess,
-  addProductToCart,
-  getProducts,
-} from '../ducks/commands';
+import { pageInProcess } from '../ducks/commands';
 
 
 const mapStateToProps = (state) => ({
@@ -22,16 +18,13 @@ const mapActionsToProps = (dispatch) => ({
   pageInProcess: bindActionCreators(pageInProcess, dispatch),
 
   pushSearch: bindActionCreators(push, dispatch),
-
-  getProducts: bindActionCreators(getProducts, dispatch),
-  addProductToCart: bindActionCreators(addProductToCart, dispatch),
 });
 
 
 export default PageHOC({
   mapStateToProps,
   mapActionsToProps,
-  onEnter: async ({ pageInProcess, getProducts, location: { search }}) => {
+  onEnter: async ({ pageInProcess, location: { search }}) => {
 
     document.title = `${process.env['REACT_APP_WEBSITE_NAME']} - Витрина`;
 
@@ -41,8 +34,6 @@ export default PageHOC({
     for (let [key, value] of params) {
       searchParams[key] = value;
     }
-
-    await getProducts(searchParams);
 
     pageInProcess(false);
   },

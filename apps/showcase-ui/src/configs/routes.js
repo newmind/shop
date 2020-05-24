@@ -1,11 +1,18 @@
 
 export default [
   {
-    // path: '/products',
     path: '/',
     wrapper: 'Navigate',
     module: import(
-      /* webpackChunkName: "products" */
+      /* webpackChunkName: "main-page" */
+      '@modules.packages/main-page'
+    ),
+  },
+  {
+    path: '/products',
+    wrapper: 'Navigate',
+    module: import(
+      /* webpackChunkName: "showcase" */
       '@modules.packages/showcase'
     ),
   },

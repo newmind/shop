@@ -1,6 +1,6 @@
 {
   "private": true,
-  "name": "@modules.packages/main",
+  "name": "@modules.packages/main-page",
   "version": "1.0.0",
   "main": "./lib/index.js",
   "scripts": {
