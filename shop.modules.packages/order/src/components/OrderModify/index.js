@@ -28,11 +28,11 @@ const validate = (values) => {
       const itemErrors = {};
       if (item['params'] === 'further') {
         if (item['productType'] === 'on-prescription') {
-          if ( ! Object.keys(item['recipe']).length) {
+          if ( ! item['recipe'] || ! Object.keys(item['recipe']).length) {
             itemErrors['recipe'] = 'Необходимо заполнить';
             itemsErrors[index] = itemErrors;
           }
-          if ( ! Object.keys(item['lens']).length) {
+          if ( ! item['lens'] || ! Object.keys(item['lens']).length) {
             itemErrors['lens'] = 'Необходимо сделать выбор';
             itemsErrors[index] = itemErrors;
           }

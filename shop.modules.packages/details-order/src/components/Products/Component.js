@@ -20,7 +20,7 @@ class Component extends PureComponent {
     const { products } = this.props;
 
     return (
-      <div className={styles['products']}>
+      <div className={styles['wrapper']}>
         <h2 className={styles['header']}>Ваш заказ</h2>
         <div className={styles['content']}>
           {products.map((product, index) => <Product key={index + '.' + product['product']['uuid']} {...product} />)}

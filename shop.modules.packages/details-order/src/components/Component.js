@@ -6,6 +6,7 @@ import React, { PureComponent } from 'react';
 
 import Information from './Information';
 import Status from './Status';
+import Delivery from './Delivery';
 import Products from './Products';
 
 import styles from './default.module.scss';
@@ -37,6 +38,9 @@ class Component extends PureComponent {
           </div>
           <div className={styles['status']}>
             <Status />
+          </div>
+          <div className={styles['delivery']}>
+            <Delivery />
           </div>
           <div className={styles['products']}>
             <Products />

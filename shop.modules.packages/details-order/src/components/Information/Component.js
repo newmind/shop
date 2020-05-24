@@ -16,6 +16,7 @@ class Component extends PureComponent {
     address: types.string,
     delivery: types.string,
     amount: types.number,
+    currency: types.object,
     createdAt: types.string,
   };
 
@@ -26,15 +27,15 @@ class Component extends PureComponent {
     address: '',
     delivery: '',
     amount: 0.00,
+    currency: {},
     createdAt: ''
   };
 
   render() {
-    console.log(this.props)
-    const { externalId, name, surname, address, delivery, amount, createdAt } = this.props;
+    const { externalId, name, surname, address, delivery, amount, createdAt, currency } = this.props;
 
     return (
-      <div className={styles['information']}>
+      <div className={styles['wrapper']}>
         <h2 className={styles['header']}>Информация</h2>
         <div className={styles['content']}>
           <p className={styles['line']}>
@@ -67,7 +68,7 @@ class Component extends PureComponent {
           </p>
           <p className={styles['line']}>
             <span className={styles['line__label']}>Сумма заказа:</span>
-            <span className={styles['line__value']}>{ numeral(amount).format() } руб.</span>
+            <span className={styles['line__value']}>{ numeral(amount).format() } { currency['value'] }</span>
           </p>
         </div>
       </div>

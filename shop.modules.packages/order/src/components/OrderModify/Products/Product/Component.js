@@ -39,9 +39,9 @@ class Component extends PureComponent {
     gallery: [],
     amount: 0,
     currency: {},
-    productType: '',
-    recipe: {},
-    lens: {},
+    productType: 'on-prescription',
+    recipe: null,
+    lens: null,
     params: '',
   };
 
@@ -98,8 +98,8 @@ class Component extends PureComponent {
   render() {
     const { uuid, field, index, name, brand, gallery, amount, currency, productType, recipe, lens, errors, params } = this.props;
 
-    const hasRecipe = !! Object.keys(recipe).length;
-    const hasLens = !! Object.keys(lens).length;
+    const hasRecipe = recipe && !! Object.keys(recipe).length;
+    const hasLens = lens && !! Object.keys(lens).length;
     const hasItemsErrors = !! errors['items'] && errors['items'][index];
 
     const removeFromCartClassName= cn(styles['remove'], 'far fa-trash-alt');
@@ -163,10 +163,10 @@ class Component extends PureComponent {
           )}
         </div>
         <Field name={`${field}.recipe`} component={() => <Dialog title="Рецепт на изготовление очков" name={`${field}.prescription-modify`}>
-          <PrescriptionFormModify value={recipe} onSubmit={this._handlePrescriptionSubmit.bind(this)} />
+          <PrescriptionFormModify value={recipe || {}} onSubmit={this._handlePrescriptionSubmit.bind(this)} />
         </Dialog>} />
         <Field name={`${field}.lens`} component={() => <Dialog title="Выбор линз" name={`${field}.select-lenses`}>
-          <SelectLensesFormModify value={lens} onSubmit={this._handleLensesSubmit.bind(this)} />
+          <SelectLensesFormModify value={lens || {}} onSubmit={this._handleLensesSubmit.bind(this)} />
         </Dialog>} />
       </div>
     );

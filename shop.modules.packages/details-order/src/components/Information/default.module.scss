@@ -2,7 +2,8 @@
 @import "~@ui.packages/theme";
 
 
-.information {
+
+.wrapper {
 
   display: block;
 }
@@ -10,29 +11,40 @@
 .header {
 
   display: block;
-  text-transform: uppercase;
   font: 14px "Istok Web", sans-serif;
-  border-bottom: 1px solid $coal-dark;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: $coal-dark;
+  padding: 0 0 4px 20px;
 }
 
 .content {
 
   display: block;
-  margin: 40px 0 0;
+  margin: 10px 0 0;
+  border: 1px solid $pale-lilac;
+  border-radius: 15px;
+  padding: 40px 40px 80px;
 }
+
 
 .line {
 
   display: block;
   font: 14px "Istok Web", sans-serif;
-  color: $coal-dark;
-  margin: 20px 0 0;
+
+  & + & {
+
+    margin: 20px 0 0;
+  }
 
   &__label {
 
     display: inline-block;
     vertical-align: middle;
     font-weight: bold;
+    color: $coal-dark;
   }
 
   &__value {
@@ -40,5 +52,6 @@
     display: inline-block;
     vertical-align: middle;
     margin: 0 0 0 10px;
+    color: $black;
   }
 }

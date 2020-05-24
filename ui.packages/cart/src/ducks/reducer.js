@@ -37,10 +37,11 @@ export default (state = initialState, { type, payload }) => {
       const { localStorage } = window;
       const item = {
         ...payload,
-        goal: '',
-        productType: 'on-prescription',
-        recipe: {},
-        lens: {},
+        goal: null,
+        type: 'on-prescription',
+        productType: (payload['params'] === 'further') ? 'on-prescription' : null,
+        recipe: null,
+        lens: null,
         file: null,
       };
       const newItems = [

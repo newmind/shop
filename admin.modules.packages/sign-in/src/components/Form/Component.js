@@ -8,7 +8,7 @@ class Component extends PureComponent {
   render() {
     const { handleSubmit } = this.props;
     return (
-      <form onSubmit={handleSubmit} autoComplete="on">
+      <form onSubmit={handleSubmit}>
         <Row>
           <Col>
             <InputField name="login" label="Логин" />

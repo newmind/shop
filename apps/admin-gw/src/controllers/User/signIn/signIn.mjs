@@ -7,7 +7,6 @@ const INVOICE_API_SRV = process.env['INVOICE_API_SRV'];
 
 export default () => async (ctx) => {
   try {
-
     const formData = ctx['request']['body'];
 
     const { data } = await axios({
@@ -17,6 +16,7 @@ export default () => async (ctx) => {
     });
 
     if ( ! data) {
+
       ctx.status = 404;
       return ctx.body = {
         success: false,
@@ -36,12 +36,12 @@ export default () => async (ctx) => {
   }
   catch(error) {
 
-    ctx.status = error['status'];
+    ctx.status = 500;
     ctx.body = {
       success: false,
       error: {
         code: '500',
-        message: error['data'],
+        message: error['message'],
       },
     };
   }

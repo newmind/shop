@@ -12,8 +12,8 @@
   },
   "dependencies": {
     "@sys.packages/db": "1.0.0",
-    "@sys.packages/rabbit": "1.0.0",
     "@sys.packages/logger": "1.0.0",
+    "@sys.packages/rabbit": "1.0.0",
     "@sys.packages/server": "1.0.0",
     "@sys.packages/socket.io": "1.0.0",
     "@sys.packages/sys.utils": "1.0.0",
@@ -22,7 +22,7 @@
   },
   "devDependencies": {
     "cross-env": "7.0.2",
-    "nodemon": "2.0.2",
+    "nodemon": "2.0.4",
     "sequelize-cli": "5.5.1"
   }
 }

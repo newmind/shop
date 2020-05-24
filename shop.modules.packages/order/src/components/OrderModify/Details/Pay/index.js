@@ -25,7 +25,7 @@ class Block extends PureComponent {
 
 class Component extends PureComponent {
   render() {
-    const { formValues } = this.props;
+    // const { formValues } = this.props;
     return (
       <RadioBoxField name="pay" defaultValue="post">
         <Radio name="cash">
@@ -34,26 +34,26 @@ class Component extends PureComponent {
             <span className={styles['block__caption']}>Онлайн оплата</span>
           </Block>
         </Radio>
-        {(formValues['delivery'] === 'courier')
-          ? (
-            <Radio name="courier-card" label="Оплата картой при получении товара">
-              <Block>
-                <i className={cn(styles['block__icon'], 'far fa-credit-card')} />
-                <span className={styles['block__caption']}>Оплата картой при<br />получении товара</span>
-              </Block>
-            </Radio>
-          )
-          : null}
-        {(formValues['delivery'] === 'courier')
-          ? (
-            <Radio name="courier-cash" label="Оплата наличными при получении товара">
-              <Block>
-                <i className={cn(styles['block__icon'], 'far fa-money-bill-alt')} />
-                <span className={styles['block__caption']}>Оплата наличными при<br/>получении товара</span>
-              </Block>
-            </Radio>
-          )
-          : null}
+        {/*{(formValues['delivery'] === 'courier')*/}
+        {/*  ? (*/}
+        {/*    <Radio name="courier-card" label="Оплата картой при получении товара">*/}
+        {/*      <Block>*/}
+        {/*        <i className={cn(styles['block__icon'], 'far fa-credit-card')} />*/}
+        {/*        <span className={styles['block__caption']}>Оплата картой при<br />получении товара</span>*/}
+        {/*      </Block>*/}
+        {/*    </Radio>*/}
+        {/*  )*/}
+        {/*  : null}*/}
+        {/*{(formValues['delivery'] === 'courier')*/}
+        {/*  ? (*/}
+        {/*    <Radio name="courier-cash" label="Оплата наличными при получении товара">*/}
+        {/*      <Block>*/}
+        {/*        <i className={cn(styles['block__icon'], 'far fa-money-bill-alt')} />*/}
+        {/*        <span className={styles['block__caption']}>Оплата наличными при<br/>получении товара</span>*/}
+        {/*      </Block>*/}
+        {/*    </Radio>*/}
+        {/*  )*/}
+        {/*  : null}*/}
       </RadioBoxField>
     );
   }

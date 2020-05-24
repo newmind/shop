@@ -20,6 +20,13 @@ module.exports = {
             updatedAt: new Date(),
           },
           {
+            code: 11,
+            name: 'Оплачен',
+            description: '',
+            createdAt: new Date(),
+            updatedAt: new Date(),
+          },
+          {
             code: 20,
             name: 'Сформирован',
             description: '',
@@ -28,7 +35,14 @@ module.exports = {
           },
           {
             code: 30,
-            name: 'Отправлен',
+            name: 'Отправлен по почте',
+            description: '',
+            createdAt: new Date(),
+            updatedAt: new Date(),
+          },
+          {
+            code: 31,
+            name: 'Передан в курьерскую службу',
             description: '',
             createdAt: new Date(),
             updatedAt: new Date(),

@@ -14,22 +14,22 @@
     "@ui.packages/cart": "1.0.0",
     "@ui.packages/dialog": "1.0.0",
     "@ui.packages/hocs": "1.0.0",
+    "@ui.packages/kit": "1.0.0",
     "@ui.packages/moment": "1.0.0",
     "@ui.packages/notifications": "1.0.0",
     "@ui.packages/request": "1.0.0",
     "@ui.packages/socket": "1.0.0",
     "@ui.packages/theme": "1.0.0",
-    "@ui.packages/kit": "1.0.0",
     "@ui.packages/utils": "1.0.0",
     "@ui.packages/yandex-map": "1.0.0",
     "classnames": "2.2.6",
     "prop-types": "15.7.2",
     "react": "16.13.1",
     "react-redux": "7.2.0",
-    "react-router-dom": "5.1.2",
+    "react-router-dom": "5.2.0",
     "react-router-redux": "4.0.8",
     "redux": "4.0.5",
-    "redux-form": "8.3.3"
+    "redux-form": "8.3.5"
   },
   "devDependencies": {
     "@babel/cli": "7.8.4",
@@ -39,7 +39,12 @@
   },
   "babel": {
     "presets": [
-      ["react-app", { "absoluteRuntime": false }]
+      [
+        "react-app",
+        {
+          "absoluteRuntime": false
+        }
+      ]
     ]
   }
 }

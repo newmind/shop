@@ -1,6 +1,6 @@
 
-import { openDialog } from '@ui.packages/dialog';
 import request from '@ui.packages/request';
+import { openDialog } from '@ui.packages/dialog';
 
 import { push } from 'react-router-redux';
 
