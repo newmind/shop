@@ -81,7 +81,7 @@ class Component extends PureComponent {
           <Button mode="success" onClick={this._handleCreate.bind(this)}>Добавить</Button>
         </div>
         <Dialog title="Категория продукта" name="category">
-          <Form onSubmit={this._submitModify.bind(this)} />
+          <Form hasImage={true} onSubmit={this._submitModify.bind(this)} />
         </Dialog>
       </div>
     );

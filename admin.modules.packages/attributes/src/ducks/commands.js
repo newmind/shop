@@ -146,10 +146,16 @@ export const createCategory = (data) => async (dispatch) => {
   try {
     dispatch(createCategoryRequestAction());
 
+    const formData = new FormData();
+
+    formData.append('value', data['value']);
+    data['description'] && formData.append('description', data['description']);
+    formData.append('file', data['file']);
+
     const result = await request({
       url: '/categories',
       method: 'post',
-      data,
+      data: formData,
     });
 
     dispatch(createCategoryRequestSuccessAction(result['data']));

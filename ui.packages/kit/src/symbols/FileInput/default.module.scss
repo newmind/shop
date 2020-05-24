@@ -5,125 +5,55 @@
 .wrapper {
 
   display: flex;
-  flex: 1 0 auto;
+  flex: 1 0;
   flex-direction: row;
   border: 1px solid $pale-lilac;
-  border-radius: 4px;
+  border-radius: 5px;
+  background: $white;
+  align-items: center;
   overflow: hidden;
+  cursor: pointer;
   transition: border 400ms;
 
-  &:hover {
+  &:hover,
+  &--focus {
 
     border-color: $coal-dark;
   }
 
-  & + & {
-
-    margin: 20px 0 0;
-  }
-
-  &--with-label {
-    .input {
-      padding: 8px 10px 10px;
-    }
-  }
-
-  &--info {
+  &--info,
+  &--info:hover {
 
     border-color: $information;
-
-    .label,
-    .input,
-    .info__icon {
-      color: darken($information, 10%);
-    }
   }
 
-  &--primary {
+  &--primary,
+  &--primary:hover {
 
     border-color: $primary;
-
-    .label,
-    .input,
-    .info__icon {
-      color: darken($primary, 10%);
-    }
   }
 
-  &--success {
+  &--success,
+  &--success:hover {
 
     border-color: $success;
-
-    .label,
-    .input,
-    .info__icon {
-      color: darken($success, 10%);
-    }
   }
 
-  &--warning {
+  &--warning,
+  &--warning:hover {
 
     border-color: $warning;
-
-    .label,
-    .input,
-    .info__icon {
-      color: darken($warning, 10%);
-    }
   }
 
-  &--danger {
+  &--danger,
+  &--danger:hover {
 
     border-color: $danger;
-
-    .label,
-    .input,
-    .info__icon {
-      color: darken($danger, 10%);
-    }
   }
 
   &--disabled {
 
-    background: $pale-lilac;
-    border-color: $gray;
-
-    .label {
-      color: $gray;
-      text-shadow: -1px 1px 0 $white;
-    }
-
-    .input {
-      color: $gray;
-      text-shadow: -1px 1px 0 $white;
-    }
-  }
-}
-
-.label {
-
-  display: block;
-  font: 13px "Istok Web", sans-serif;
-  font-weight: 700;
-  color: $coal-dark;
-  padding: 11px 10px 0 10px;
-}
-
-.input {
-
-  display: block;
-  padding: 11px 10px 10px;
-  color: $coal-dark;
-  font: 14px "Istok Web", sans-serif;
-  outline: none;
-  width: 100%;
-  box-sizing: border-box;
-  border: none;
-  letter-spacing: .5px;
-  background: transparent;
-
-  &:disabled {
-
+    background: $pale-grey;
     border-color: $pale-lilac;
     color: $gray;
   }
@@ -132,19 +62,56 @@
 .container {
 
   display: flex;
-  flex: 1 0 auto;
+  flex: 1 0;
   flex-direction: column;
+  padding: 9px 14px 8px;
+  overflow: hidden;
+
+  &:disabled {
+
+    border-color: $pale-lilac;
+    color: $gray;
+  }
 }
 
-.controls {
+.file-name {
+
+  display: inline-block;
+  color: $black;
+  font: 14px "Istok Web", sans-serif;
+  outline: none;
+  width: 100%;
+  box-sizing: border-box;
+  letter-spacing: .5px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.placeholder {
+
+  display: inline-block;
+  color: $blue-grey;
+  font: 14px "Istok Web", sans-serif;
+  outline: none;
+  width: 100%;
+  box-sizing: border-box;
+  letter-spacing: .5px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.button {
 
   display: block;
-  padding: 10px;
-}
 
-.info__icon {
+  &__caption {
 
-  font-size: 16px;
-  color: $pale-lilac;
-  cursor: pointer;
+    display: inline-block;
+    font: 14px "Istok Web", sans-serif;
+    background: $success;
+    padding: 4px 10px;
+    border-radius: 4px;
+    margin: 0 6px 0 0;
+    color: $white;
+  }
 }

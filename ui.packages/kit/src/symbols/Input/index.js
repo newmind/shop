@@ -32,7 +32,6 @@ class Component extends PureComponent {
     type: 'text',
     format: 'string',
     mode: 'default',
-    label: null,
     message: null,
     value: '',
     disabled: false,
@@ -73,7 +72,6 @@ class Component extends PureComponent {
       [styles['container--danger']]: mode === DANGER_MODE,
       [styles['container--warning']]: mode === WARNING_MODE,
       [styles['container--disabled']]: disabled,
-      [styles['container--with-label']]: !! label,
     });
 
     return (

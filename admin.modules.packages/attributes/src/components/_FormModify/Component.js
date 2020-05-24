@@ -1,12 +1,12 @@
 
-import { Row, Col, Button, InputField, TextareaField } from '@ui.packages/kit';
+import { Row, Col, Button, InputField, TextareaField, FileField } from '@ui.packages/kit';
 
 import React from 'react';
 
 import styles from './default.module.scss';
 
 
-export default ({ handleSubmit, valid, pristine }) => {
+export default ({ handleSubmit, valid, pristine, hasImage }) => {
   return (
     <form className={styles['form']} onSubmit={handleSubmit}>
       <div className={styles['content']}>
@@ -14,7 +14,7 @@ export default ({ handleSubmit, valid, pristine }) => {
           <Col>
             <InputField
               name="value"
-              lable="Значение"
+              label="Значение"
             />
           </Col>
         </Row>
@@ -26,6 +26,16 @@ export default ({ handleSubmit, valid, pristine }) => {
             />
           </Col>
         </Row>
+        {hasImage && (
+          <Row>
+            <Col>
+              <FileField
+                label="Изображение"
+                name="file"
+              />
+            </Col>
+          </Row>
+        )}
       </div>
       <div className={styles['controls']}>
         <Button

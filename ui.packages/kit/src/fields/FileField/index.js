@@ -1,36 +1,9 @@
 
 import types from 'prop-types';
-import { Field } from 'redux-form';
 import React, { PureComponent } from 'react';
 
-
-// let contentElement = document.getElementById("content");
-
-// Button callback
-// async function onButtonClicked(){
-//   let files = await selectFile("image/*", true);
-//   contentElement.innerHTML = files.map(file => '<img src="${URL.createObjectURL(file)}" style="width: 100px; height: 100px;">').join('');
-// }
-
-// ---- function definition ----
-// function selectFile (contentType, multiple){
-//   return new Promise(resolve => {
-//     let input = document.createElement('input');
-//     input.type = 'file';
-//     input.multiple = multiple;
-//     input.accept = contentType;
-//
-//     input.onchange = _ => {
-//       let files = Array.from(input.files);
-//       if (multiple)
-//         resolve(files);
-//       else
-//         resolve(files[0]);
-//     };
-//
-//     input.click();
-//   });
-// }
+import BaseField from "../BaseField";
+import FileInput from '../../symbols/FileInput';
 
 
 class Component extends PureComponent {
@@ -43,9 +16,11 @@ class Component extends PureComponent {
   };
 
   render() {
-    const { name, label, type } = this.props;
+    const { error, ...props } = this.props;
     return (
-      <Field name={name} type={type} label={label} accept=".jpg" component={() => null} />
+      <BaseField { ...props } message={error}>
+        <FileInput />
+      </BaseField>
     );
   }
 }
