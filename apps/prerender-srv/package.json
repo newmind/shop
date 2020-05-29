@@ -7,7 +7,8 @@
     "start:dev": "nodemon --exec node -r dotenv/config --experimental-modules --es-module-specifier-resolution=node ./src/index.mjs dotenv_config_path=./.env.development"
   },
   "dependencies": {
-    "prerender": "5.6.0"
+    "prerender": "5.6.0",
+    "dotenv": "8.2.0"
   },
   "devDependencies": {
     "nodemon": "2.0.4"
