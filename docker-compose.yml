@@ -151,7 +151,7 @@ services:
       - NODE_ENV=production
 
 
-  prerender:
+  prerender_srv:
     container_name: prerender_srv
     build:
       context: ./
