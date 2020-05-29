@@ -14,12 +14,12 @@ RUN wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | apt-key
 RUN groupadd -r chrome && useradd -r -g chrome -G audio,video chrome \
     && mkdir -p /home/chrome && chown -R chrome:chrome /home/chrome
 
-WORKDIR /home/chrome
-COPY . /home/chrome
-RUN  chown -R chrome:chrome /home/chrome/
+#WORKDIR /home/chrome
+#COPY . /home/chrome
+#RUN  chown -R chrome:chrome /home/chrome/
 
 # Run Chrome non-privileged
-USER chrome
+#USER chrome
 
 
 RUN npm config set package-lock false
