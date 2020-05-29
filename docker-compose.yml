@@ -150,6 +150,7 @@ services:
     environment:
       - NODE_ENV=production
 
+
   prerender:
     container_name: prerender_srv
     build:
@@ -160,11 +161,12 @@ services:
       - showcase_ui
       - showcase_gw
       - operation_proxy
-      - gallery_srv
+      - gallery_proxy
       - product_proxy
       - mail_srv
     ports:
       - 8080:8080
+
 
   certbot:
     user: root
