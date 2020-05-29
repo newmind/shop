@@ -25,6 +25,8 @@ USER chrome
 RUN npm config set package-lock false
 
 WORKDIR /app
+RUN  chown -R chrome:chrome /app
+
 
 COPY ./apps/prerender-srv/src               ./apps/prerender-srv/src
 COPY ./apps/prerender-srv/.env.production   ./apps/prerender-srv
