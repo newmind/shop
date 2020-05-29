@@ -1,6 +1,6 @@
 
 # BUILD APP
-FROM node:13-alpine
+FROM node:13-stretch
 
 
 RUN wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | apt-key add - \
