@@ -3,15 +3,14 @@
 FROM node:13-alpine
 
 
-ENV CHROMIUM_VERSION 68.0.3440.106-r0
-ENV PRERENDER_VERSION 5.6.0
-ENV PRERENDER_MEMORY_VERSION 1.0.2
-ENV DISPLAY :99.0
+ENV CHROME_VERSION "google-chrome-stable"
+RUN sed -i -- 's&deb http://deb.debian.org/debian jessie-updates main&#deb http://deb.debian.org/debian jessie-updates main&g' /etc/apt/sources.list \
+  && apt-get update && apt-get install wget -y
 
-RUN addgroup -S prerender && adduser -S -g prerender prerender  && \
-    apk add --no-cache ca-certificates && \
-    apk add chromium=${CHROMIUM_VERSION} --no-cache --repository http://nl.alpinelinux.org/alpine/edge/community && \
-    rm -rf /var/cache/apk/*
+ENV CHROME_VERSION "google-chrome-stable"
+RUN wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | apt-key add - \
+  && echo "deb http://dl.google.com/linux/chrome/deb/ stable main" >> /etc/apt/sources.list \
+  && apt-get update && apt-get -qqy install ${CHROME_VERSION:-google-chrome-stable}
 
 
 RUN npm config set package-lock false
