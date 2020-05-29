@@ -8,21 +8,27 @@ export default () => async (ctx) => {
     const { id } = ctx['params'];
     const formDate = ctx['request']['body'];
 
+    const { Category } = models;
+
     const transaction = await sequelize.transaction();
 
-    await models['Category'].update(formDate, {
-      where: { id },
+    await Category.update({
+      value: formDate['value'],
+      description: formDate['description'],
+      imageId: formDate['imageId'],
+    }, {
+      where: { id, updatedAt: formDate['updatedAt'] },
       transaction
     });
 
-    const result = await models['Category'].findOne({
+    await transaction.commit();
+
+    const result = await Category.findOne({
       where: { id },
-      transaction
+      attributes: ['id', 'value', 'description', 'imageId', 'createdAt', 'updatedAt'],
     });
 
     await sendEvent(process.env['RABBIT_PRODUCT_PROXY_EXCHANGE_CATEGORY_UPDATED'], JSON.stringify(result.toJSON()));
-
-    await transaction.commit();
 
     ctx.body = {
       success: true,

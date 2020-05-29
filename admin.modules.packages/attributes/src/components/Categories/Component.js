@@ -70,6 +70,14 @@ class Component extends PureComponent {
               align="left"
             />
             <Column
+              title="Описание"
+              alias="imageId"
+            >{(value) => {
+              console.log(111, value);
+              return value ? <img src={`${process.env['REACT_APP_API_HOST']}/gallery/${value}`} width="40" alt="" /> : null;
+            }}
+            </Column>
+            <Column
               align="right"
               width="40"
             >

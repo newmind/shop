@@ -15,7 +15,11 @@ module.exports = (db, DataType) => {
     description: {
       type: DataType.STRING(1024),
       defaultValue: ''
-    }
+    },
+    imageId: {
+      type: DataType.UUID,
+      allowNull: true,
+    },
   });
 
   Category.associate = ({ Product }) => {

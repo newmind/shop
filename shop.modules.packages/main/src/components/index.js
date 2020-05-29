@@ -6,8 +6,10 @@ import { push } from 'react-router-redux';
 
 import Component from './Component';
 
-
-import { pageInProcess } from '../ducks/commands';
+import {
+  pageInProcess,
+  getCategories
+} from '../ducks/commands';
 
 
 const mapStateToProps = (state) => ({
@@ -18,22 +20,18 @@ const mapActionsToProps = (dispatch) => ({
   pageInProcess: bindActionCreators(pageInProcess, dispatch),
 
   pushSearch: bindActionCreators(push, dispatch),
+  getCategories: bindActionCreators(getCategories, dispatch),
 });
 
 
 export default PageHOC({
   mapStateToProps,
   mapActionsToProps,
-  onEnter: async ({ pageInProcess, location: { search }}) => {
+  onEnter: async ({ pageInProcess, getCategories }) => {
 
     document.title = `${process.env['REACT_APP_WEBSITE_NAME']} - Витрина`;
 
-    const searchParams = {};
-    const params = new URLSearchParams(search);
-
-    for (let [key, value] of params) {
-      searchParams[key] = value;
-    }
+    await getCategories();
 
     pageInProcess(false);
   },

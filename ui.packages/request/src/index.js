@@ -1,10 +1,9 @@
-'use strict';
-
-import axios from 'axios';
-
-import { push } from 'react-router-redux';
 
 import { NetworkError } from '@packages/errors';
+
+import axios from 'axios';
+import { push } from 'react-router-redux';
+
 
 const defaultOptions = {
   method: 'get',
