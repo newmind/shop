@@ -8,13 +8,6 @@ services:
       context: ./
       dockerfile: Dockerfile.prerender-srv
     restart: always
-    depends_on:
-#      - showcase_ui
-#      - showcase_gw
-#      - operation_proxy
-#      - gallery_proxy
-#      - product_proxy
-#      - mail_srv
     ports:
       - 8080:8080
 
