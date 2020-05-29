@@ -150,20 +150,21 @@ services:
     environment:
       - NODE_ENV=production
 
-  #  prerender:
-  #    container_name: prerender_srv
-  #    build:
-  #      context: ./
-  #      dockerfile: Dockerfile.prerender-srv
-  #    restart: always
-  #    depends_on:
-  #      - showcase_ui
-  #      - showcase_gw
-  #      - operation_proxy
-  #      - product_proxy
-  #      - mail_srv
-  #    ports:
-  #    - 8080:8080
+    prerender:
+      container_name: prerender_srv
+      build:
+        context: ./
+        dockerfile: Dockerfile.prerender-srv
+      restart: always
+      depends_on:
+        - showcase_ui
+        - showcase_gw
+        - operation_proxy
+        - gallery_srv
+        - product_proxy
+        - mail_srv
+      ports:
+      - 8080:8080
 
   certbot:
     user: root
