@@ -14,7 +14,8 @@ RUN wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | apt-key
 RUN groupadd -r chrome && useradd -r -g chrome -G audio,video chrome \
     && mkdir -p /home/chrome && chown -R chrome:chrome /home/chrome
 
-#WORKDIR /home/chrome
+
+WORKDIR /home/chrome
 COPY . /home/chrome
 RUN  chown -R chrome:chrome /home/chrome/
 
@@ -33,9 +34,10 @@ COPY ./yarn.lock                            .
 RUN yarn
 
 WORKDIR /app/apps/prerender-srv
+RUN  chown -R chrome:chrome /app/
 
 
 # Run Chrome non-privileged
-#USER chrome
+USER chrome
 
 ENTRYPOINT ["yarn", "run", "start"]
