@@ -179,12 +179,12 @@ services:
     build: ./nginx
     restart: unless-stopped
     depends_on:
-      - admin_ui
-      - showcase_ui
+#      - admin_ui
+#      - showcase_ui
       - prerender_srv
     links:
-      - admin_ui
-      - showcase_ui
+#      - admin_ui
+#      - showcase_ui
       - prerender_srv
     ports:
       - 80:80
