@@ -11,153 +11,153 @@ services:
     ports:
       - 8080:8080
 
-#  db:
-#    container_name: postgre_sql
-#    build: ./postgresql
-#    restart: always
-#    ports:
-#      - 50004:5432
-#
-#  rabbit:
-#    container_name: rabbit_mq
-#    build: ./rabbit
-#    restart: always
-#    ports:
-#      - 50002:15672
-#
-#
-#  mail_srv:
-#    container_name: mail_srv
-#    build:
-#      context: ./
-#      dockerfile: Dockerfile.mail-srv
-#    restart: always
-#
-#  identity_srv:
-#    container_name: identity_srv
-#    build:
-#      context: ./
-#      dockerfile: Dockerfile.identity-srv
-#    restart: always
-#    depends_on:
-#      - db
-#      - mail_srv
-#    links:
-#      - db
-#      - mail_srv
-#
-#  gallery_proxy:
-#    container_name: gallery_proxy
-#    build:
-#      context: ./
-#      dockerfile: Dockerfile.gallery-proxy
-#    restart: always
-#    depends_on:
-#      - db
-#    links:
-#      - db
-#
-#  operation_proxy:
-#    container_name: operation_proxy
-#    build:
-#      context: ./
-#      dockerfile: Dockerfile.operation-proxy
-#    restart: always
-#    depends_on:
-#      - db
-#      - rabbit
-#      - mail_srv
-#    links:
-#      - db
-#      - rabbit
-#      - mail_srv
-#
-#  product_proxy:
-#    container_name: product_proxy
-#    build:
-#      context: ./
-#      dockerfile: Dockerfile.product-proxy
-#    restart: always
-#    depends_on:
-#      - db
-#      - rabbit
-#      - mail_srv
-#      - gallery_proxy
-#    links:
-#      - db
-#      - rabbit
-#      - mail_srv
-#      - gallery_proxy
-#
-#
-#  admin_gw:
-#    container_name: admin_gw
-#    build:
-#      context: ./
-#      dockerfile: Dockerfile.admin-gw
-#    restart: always
-#    depends_on:
-#      - rabbit
-#      - product_proxy
-#      - identity_srv
-#      - gallery_proxy
-#      - operation_proxy
-#    links:
-#      - rabbit
-#      - product_proxy
-#      - identity_srv
-#      - gallery_proxy
-#      - operation_proxy
-#
-#
-#  showcase_gw:
-#    container_name: showcase_gw
-#    build:
-#      context: ./
-#      dockerfile: Dockerfile.showcase-gw
-#    restart: always
-#    depends_on:
-#      - rabbit
-#      - product_proxy
-#      - gallery_proxy
-#      - operation_proxy
-#    links:
-#      - rabbit
-#      - product_proxy
-#      - gallery_proxy
-#      - operation_proxy
-#
-#
-#  admin_ui:
-#    container_name: admin_ui
-#    build:
-#      context: ./
-#      dockerfile: Dockerfile.admin-ui
-#    restart: always
-#    depends_on:
-#      - admin_gw
-#    links:
-#      - admin_gw
-#    volumes:
-#      - ./apps/admin-ui/nginx/conf.d:/etc/nginx/conf.d:ro
-#    environment:
-#      - NODE_ENV=production
-#
-#
-#  showcase_ui:
-#    container_name: showcase_ui
-#    build:
-#      context: ./
-#      dockerfile: Dockerfile.showcase-ui
-#    restart: always
-#    depends_on:
-#      - showcase_gw
-#    links:
-#      - showcase_gw
-#    volumes:
-#      - ./apps/showcase-ui/nginx/conf.d:/etc/nginx/conf.d:ro
-#    environment:
-#      - NODE_ENV=production
+  db:
+    container_name: postgre_sql
+    build: ./postgresql
+    restart: always
+    ports:
+      - 50004:5432
+
+  rabbit:
+    container_name: rabbit_mq
+    build: ./rabbit
+    restart: always
+    ports:
+      - 50002:15672
+
+
+  mail_srv:
+    container_name: mail_srv
+    build:
+      context: ./
+      dockerfile: Dockerfile.mail-srv
+    restart: always
+
+  identity_srv:
+    container_name: identity_srv
+    build:
+      context: ./
+      dockerfile: Dockerfile.identity-srv
+    restart: always
+    depends_on:
+      - db
+      - mail_srv
+    links:
+      - db
+      - mail_srv
+
+  gallery_proxy:
+    container_name: gallery_proxy
+    build:
+      context: ./
+      dockerfile: Dockerfile.gallery-proxy
+    restart: always
+    depends_on:
+      - db
+    links:
+      - db
+
+  operation_proxy:
+    container_name: operation_proxy
+    build:
+      context: ./
+      dockerfile: Dockerfile.operation-proxy
+    restart: always
+    depends_on:
+      - db
+      - rabbit
+      - mail_srv
+    links:
+      - db
+      - rabbit
+      - mail_srv
+
+  product_proxy:
+    container_name: product_proxy
+    build:
+      context: ./
+      dockerfile: Dockerfile.product-proxy
+    restart: always
+    depends_on:
+      - db
+      - rabbit
+      - mail_srv
+      - gallery_proxy
+    links:
+      - db
+      - rabbit
+      - mail_srv
+      - gallery_proxy
+
+
+  admin_gw:
+    container_name: admin_gw
+    build:
+      context: ./
+      dockerfile: Dockerfile.admin-gw
+    restart: always
+    depends_on:
+      - rabbit
+      - product_proxy
+      - identity_srv
+      - gallery_proxy
+      - operation_proxy
+    links:
+      - rabbit
+      - product_proxy
+      - identity_srv
+      - gallery_proxy
+      - operation_proxy
+
+
+  showcase_gw:
+    container_name: showcase_gw
+    build:
+      context: ./
+      dockerfile: Dockerfile.showcase-gw
+    restart: always
+    depends_on:
+      - rabbit
+      - product_proxy
+      - gallery_proxy
+      - operation_proxy
+    links:
+      - rabbit
+      - product_proxy
+      - gallery_proxy
+      - operation_proxy
+
+
+  admin_ui:
+    container_name: admin_ui
+    build:
+      context: ./
+      dockerfile: Dockerfile.admin-ui
+    restart: always
+    depends_on:
+      - admin_gw
+    links:
+      - admin_gw
+    volumes:
+      - ./apps/admin-ui/nginx/conf.d:/etc/nginx/conf.d:ro
+    environment:
+      - NODE_ENV=production
+
+
+  showcase_ui:
+    container_name: showcase_ui
+    build:
+      context: ./
+      dockerfile: Dockerfile.showcase-ui
+    restart: always
+    depends_on:
+      - showcase_gw
+    links:
+      - showcase_gw
+    volumes:
+      - ./apps/showcase-ui/nginx/conf.d:/etc/nginx/conf.d:ro
+    environment:
+      - NODE_ENV=production
 
 
 
@@ -179,12 +179,12 @@ services:
     build: ./nginx
     restart: unless-stopped
     depends_on:
-#      - admin_ui
-#      - showcase_ui
+      - admin_ui
+      - showcase_ui
       - prerender_srv
     links:
-#      - admin_ui
-#      - showcase_ui
+      - admin_ui
+      - showcase_ui
       - prerender_srv
     ports:
       - 80:80
