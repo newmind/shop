@@ -2,15 +2,6 @@
 version: "3.7"
 services:
 
-  prerender_srv:
-    container_name: prerender_srv
-    build:
-      context: ./
-      dockerfile: Dockerfile.prerender-srv
-    restart: always
-    ports:
-      - 8080:8080
-
   db:
     container_name: postgre_sql
     build: ./postgresql
@@ -160,7 +151,18 @@ services:
       - NODE_ENV=production
 
 
-
+  prerender_srv:
+    container_name: prerender_srv
+    build:
+      context: ./
+      dockerfile: Dockerfile.prerender-srv
+    restart: always
+    depends_on:
+      - showcase_ui
+    links:
+      - showcase_ui
+    ports:
+      - 8080:8080
 
 
   certbot:
