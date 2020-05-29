@@ -3,7 +3,7 @@ import preRender from 'prerender';
 import cache from 'prerender-memory-cache';
 
 const server = preRender({
-  chromeLocation: "/usr/lib/chromium/chrome",
+  chromeLocation: "/home/chrome",
   chromeFlags: [
     "--headless",
     "--disable-gpu",
