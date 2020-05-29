@@ -2,8 +2,11 @@
 # BUILD APP
 FROM node:13-alpine
 
+# INSTALL Chrome
+RUN wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
+RUN dpkg -i google-chrome-stable_current_amd64.deb; apt-get -fy install
+
 RUN npm config set package-lock false
-#RUN npm i yarn -g --yes
 
 WORKDIR /app
 
