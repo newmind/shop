@@ -18,9 +18,9 @@
     <meta http-equiv="Pragma" content="no-cache" />
     <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
 
-    <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
-    <link rel="icon" href="%PUBLIC_URL%/favicon.ico" type="image/x-icon">
-    <link rel="shortcut icon" href="%PUBLIC_URL%/favicon.ico" type="image/x-icon">
+    <link rel="manifest preload" href="%PUBLIC_URL%/manifest.json" />
+    <link rel="icon preload" href="%PUBLIC_URL%/favicon.ico" type="image/x-icon">
+    <link rel="shortcut icon preload" href="%PUBLIC_URL%/favicon.ico" type="image/x-icon">
 
     <title>%REACT_APP_WEBSITE_NAME%</title>
 
@@ -34,7 +34,7 @@
     <section id="notification"></section>
 
     <!-- Yandex.Metrika counter -->
-    <script type="text/javascript" >
+    <script rel="preload" type="text/javascript" >
       (function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
         m[i].l=1*new Date();k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})
       (window, document, "script", "https://mc.yandex.ru/metrika/tag.js", "ym");
@@ -46,10 +46,12 @@
         webvisor:true
       });
     </script>
-    <noscript><div><img src="https://mc.yandex.ru/watch/56847952" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+    <noscript>
+      <div><img src="https://mc.yandex.ru/watch/56847952" style="position:absolute; left:-9999px;" alt="" /></div>
+    </noscript>
     <!-- /Yandex.Metrika counter -->
 
-    <script src="https://api-maps.yandex.ru/2.1/?apikey=0341a2a3-e60f-4de5-8c0b-7556a13ce6dc&lang=ru_RU" type="text/javascript"></script>
+    <script rel="preload" src="https://api-maps.yandex.ru/2.1/?apikey=0341a2a3-e60f-4de5-8c0b-7556a13ce6dc&lang=ru_RU" type="text/javascript"></script>
 
   </body>
 </html>
