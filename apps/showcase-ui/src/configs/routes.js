@@ -3,7 +3,11 @@ export default [
   {
     path: '/',
     wrapper: 'Navigate',
-    module: import(/* webpackChunkName: "main-page" *//* webpackPreload: true */ '@modules.packages/main-page'),
+    module: import(
+      /* webpackChunkName: "main-page" */
+      /* webpackPreload: true */
+      '@modules.packages/main-page'
+    ),
   },
   {
     path: '/products',
