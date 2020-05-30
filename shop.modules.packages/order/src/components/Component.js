@@ -76,7 +76,7 @@ class Component extends PureComponent {
           <div className={styles['breadcrumbs__content']}>
             <Breadcrumbs
               items={[
-                { title: 'Витрина', href: '/' },
+                { title: 'Витрина', href: '/products' },
                 { title: `Оформление заказа` },
               ]}
             />
