@@ -66,7 +66,9 @@ class ModuleComponent extends PureComponent {
   render() {
     const { Module } = this.state;
     const { navigate, wrapper, location, dispatch } = this.props;
+
     const Wrapper = wrapperFactory(wrapper);
+
     return (
       <Wrapper navigate={navigate} location={location}>
         <Page>

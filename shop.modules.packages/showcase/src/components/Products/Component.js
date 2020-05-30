@@ -2,12 +2,12 @@
 import { nounDeclension, reduceToArray } from "@ui.packages/utils";
 
 import types from 'prop-types';
-import React, { PureComponent } from 'react';
-
-import Product from './Product';
+import React, { PureComponent, lazy, Suspense } from 'react';
 
 import styles from "./default.module.scss";
 
+
+const Product = lazy(() => import(/* webpackChunkName: "showcase.product" */'./Product'));
 
 const SIZE = 3;
 
@@ -26,29 +26,33 @@ class Component extends PureComponent {
 
   render() {
     const { items, meta, onAddToCart } = this.props;
+
     const products = reduceToArray(items, SIZE);
 
     return (
-      <div className={styles['block']}>
-        <h2 className={styles['block__header']}>Найдено {meta['total']} {nounDeclension(meta['total'], ['предложение', 'предложения', 'предложений'])}</h2>
-        <div className={styles['block__content']}>
-          {products.map((lineWithProducts, index) => {
-            return (
-              <div key={index} className={styles['block__line']}>
-                {lineWithProducts.map((product, index) => {
-                  return (
-                    <Product
-                      key={index}
-                      {...product}
-                      onCart={onAddToCart.bind(this, product)}
-                    />
-                  );
-                })}
-              </div>
-            );
-          })}
+      <Suspense fallback={null}>
+        <div className={styles['block']}>
+          <h2 className={styles['block__header']}>Найдено {meta['total']} {nounDeclension(meta['total'], ['предложение', 'предложения', 'предложений'])}</h2>
+          <div className={styles['block__content']}>
+            {products.map((lineWithProducts, index) => {
+              return (
+                <div key={index} className={styles['block__line']}>
+                  {lineWithProducts.map((product, index) => {
+                    return (
+                      <Product
+                        key={index}
+                        {...product}
+                        onCart={onAddToCart.bind(this, product)}
+                      />
+                    );
+                  })}
+                </div>
+              );
+            })}
+          </div>
         </div>
-      </div>
+      </Suspense>
+
     );
   }
 }

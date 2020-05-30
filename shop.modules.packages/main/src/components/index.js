@@ -13,7 +13,7 @@ import {
 
 
 const mapStateToProps = (state) => ({
-  inProcess: state['showcase']['inProcess'],
+  inProcess: state['main']['inProcess'],
 });
 
 const mapActionsToProps = (dispatch) => ({

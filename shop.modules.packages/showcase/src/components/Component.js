@@ -1,13 +1,15 @@
 
-import types from 'prop-types';
-import React, { PureComponent } from 'react';
 import { objectToQuery } from '@ui.packages/utils';
 
-import Filter from './Filter';
-import Products from './Products';
-import Paging from './Paging';
+import types from 'prop-types';
+import React, { PureComponent, lazy, Suspense } from 'react';
 
 import styles from './default.module.scss';
+
+
+const Filter = lazy(() => import(/* webpackChunkName: "showcase.filter" */'./Filter'));
+const Products = lazy(() => import(/* webpackChunkName: "showcase.products" */'./Products'));
+const Paging = lazy(() => import(/* webpackChunkName: "showcase.paging" */'./Paging'));
 
 
 class Component extends PureComponent {
@@ -46,25 +48,27 @@ class Component extends PureComponent {
 
   render() {
     return (
-      <section className={styles['wrapper']}>
-        <aside className={styles['filters']}>
-          <div className={styles['filters__content']}>
-            <Filter
-              onSubmit={this._handleFilter.bind(this)}
+      <Suspense fallback={null}>
+        <section className={styles['wrapper']}>
+          <aside className={styles['filters']}>
+            <div className={styles['filters__content']}>
+              <Filter
+                onSubmit={this._handleFilter.bind(this)}
+              />
+            </div>
+          </aside>
+          <section className={styles['products']}>
+            <Products
+              onAddToCart={this._handleCart.bind(this)}
+            />
+          </section>
+          <div className={styles['controls']}>
+            <Paging
+              onChange={this._handleLoadingMore.bind(this)}
             />
           </div>
-        </aside>
-        <section className={styles['products']}>
-          <Products
-            onAddToCart={this._handleCart.bind(this)}
-          />
         </section>
-        <div className={styles['controls']}>
-          <Paging
-            onChange={this._handleLoadingMore.bind(this)}
-          />
-        </div>
-      </section>
+      </Suspense>
     );
   }
 }
