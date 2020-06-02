@@ -1,6 +1,6 @@
 
-import { bindActionCreators } from "redux";
 import { connect } from 'react-redux';
+import { bindActionCreators } from "redux";
 import { withRouter } from 'react-router-dom';
 
 import Component from './Component';
@@ -8,11 +8,11 @@ import Component from './Component';
 import { pageInProcess } from "../ducks/commands";
 
 
-const mapStoreToAction = store => ({
+const mapStoreToAction = (store) => ({
   inProcess: store['module']['inProcess'],
 });
 
-const mapActionsToProps = dispatch => ({
+const mapActionsToProps = (dispatch) => ({
   pageInProcess: bindActionCreators(pageInProcess, dispatch),
 });
 

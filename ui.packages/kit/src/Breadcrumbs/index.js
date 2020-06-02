@@ -1,7 +1,7 @@
 
 import types from 'prop-types';
-import React, { Fragment, PureComponent } from 'react';
 import { NavLink } from "react-router-dom";
+import React, { Fragment, PureComponent } from 'react';
 
 import styles from './default.module.scss';
 
@@ -17,7 +17,9 @@ class Component extends PureComponent {
 
   render() {
     const { items } = this.props;
+
     const count = items.length - 1;
+
     return (
       <div className={styles['breadcrumbs']}>
         {items.map((item, index) => {
@@ -25,8 +27,9 @@ class Component extends PureComponent {
             <Fragment key={index}>
               <span key={`item.${index}`} className={styles['breadcrumbs__item']}>
                 {item['href']
-                  ? <NavLink className={styles['breadcrumbs__link']} to={'/'}>{ item['title'] }</NavLink>
-                  : <span className={styles['breadcrumbs__title']}>{ item['title'] }</span>}
+                  ? <NavLink className={styles['breadcrumbs__link']} to={item['href']}>{ item['title'] }</NavLink>
+                  : <span className={styles['breadcrumbs__title']}>{ item['title'] }</span>
+                }
               </span>
               {(index < count) && (
                 <span key={`delimiter.${index}`} className={styles['breadcrumbs__item']}>

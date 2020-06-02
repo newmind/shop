@@ -1,6 +1,6 @@
 
 import PropTypes from 'prop-types';
-import React, { PureComponent, Suspense, lazy } from 'react';
+import React, { PureComponent, lazy } from 'react';
 
 import { injectAsyncReducer, checkReducer } from '../../../bin/createStore';
 
@@ -43,20 +43,26 @@ class ModuleComponent extends PureComponent {
   async _createReducer() {
     const { module } = this.props;
     const Module = await module;
+
     injectAsyncReducer(Module['name'], Module['reducer']);
+
     return void 0;
   }
 
   async _attachModule() {
     const { module } = this.props;
     const Module = lazy(() => module);
+
     this.setState({ Module });
   }
 
   async _startProcess() {
     const { module, pageInProcess } = this.props;
+
     pageInProcess();
+
     const hasReducer = checkReducer(module);
+
     if ( ! hasReducer) {
       await this._createReducer();
     }
@@ -72,9 +78,7 @@ class ModuleComponent extends PureComponent {
     return (
       <Wrapper navigate={navigate} location={location}>
         <Page>
-          <Suspense fallback={null}>
-            {Module && <Module dispatch={dispatch} />}
-          </Suspense>
+          { Module && <Module dispatch={dispatch} /> }
         </Page>
       </Wrapper>
     );

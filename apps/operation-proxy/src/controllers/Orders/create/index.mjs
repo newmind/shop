@@ -44,6 +44,8 @@ export default () => async (ctx) => {
       data: body,
     });
 
+    console.log(fields);
+
     const { Order, OrderProducts, Currency, Product, Gallery, Status, Prescription } = models;
     const transaction = await sequelize.transaction();
 
