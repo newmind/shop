@@ -1,16 +1,14 @@
 
 # BUILD APP
-FROM node:13-stretch
+FROM node:13-alpine
 
 
-RUN apt-get update -y \
-  && apt install --assume-yes chromium-browser \
-  && apt-get clean \
-  && rm -rf /tmp/* /var/lib/apt/lists/*
+WORKDIR /app
+
+RUN apk add --no-cache  chromium --repository=http://dl-cdn.alpinelinux.org/alpine/v3.10/main
 
 RUN npm config set package-lock false
 
-WORKDIR /app
 
 COPY ./apps/prerender-srv/src               ./apps/prerender-srv/src
 COPY ./apps/prerender-srv/.env.production   ./apps/prerender-srv
