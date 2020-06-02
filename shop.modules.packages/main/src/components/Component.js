@@ -1,7 +1,10 @@
 
-import React, { PureComponent } from 'react';
+import React, { PureComponent, lazy, Suspense } from 'react';
 
 import styles from './default.module.scss';
+
+
+const Categories = lazy(() => import('./Categories'));
 
 
 class Component extends PureComponent {
@@ -11,11 +14,15 @@ class Component extends PureComponent {
 
   render() {
     return (
-      <section className={styles['wrapper']}>
-        <div className={styles['content']}>
-          <p>Привет! Я главная страница</p>
-        </div>
-      </section>
+      <Suspense fallback={null}>
+        <section className={styles['wrapper']}>
+          <div className={styles['content']}>
+            <article className={styles['categories']}>
+              <Categories />
+            </article>
+          </div>
+        </section>
+      </Suspense>
     );
   }
 }

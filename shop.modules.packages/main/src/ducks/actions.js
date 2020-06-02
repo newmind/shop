@@ -16,10 +16,11 @@ export const pageInProcessAction = (status) => ({
 export const getCategoriesRequest = () => ({
   type: GET_CATEGORIES_REQUEST,
 });
-export const getCategoriesRequestFail = () => ({
+export const getCategoriesRequestFail = (error) => ({
   type: GET_CATEGORIES_REQUEST_FAIL,
+  error,
 });
-export const getCategoriesRequestSuccess = (data) => ({
+export const getCategoriesRequestSuccess = (payload) => ({
   type: GET_CATEGORIES_REQUEST_SUCCESS,
-  payload: data,
+  payload,
 });

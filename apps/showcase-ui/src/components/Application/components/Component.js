@@ -8,6 +8,7 @@ import React, { lazy, Suspense, PureComponent } from 'react';
 import styles from './default.module.scss';
 
 
+const Error = lazy(() => import(/* webpackChunkName: "application.loader" */'../../Error'));
 const Loader = lazy(() => import(/* webpackChunkName: "application.loader" */'../../Loader'));
 const Module = lazy(() => import(/* webpackChunkName: "application.module" */'../../Module/components'));
 
@@ -115,7 +116,7 @@ class Component extends PureComponent {
           {isInit
             ? ( ! hasError
               ? <Routes {...props} />
-              : <p>Error: {error['message']}</p>)
+              : <Error error={error} />)
             : <Loader />}
           <Notifications/>
         </div>
