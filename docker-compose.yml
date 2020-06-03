@@ -183,11 +183,11 @@ services:
     depends_on:
       - admin_ui
       - showcase_ui
-      - prerender
+#      - prerender
     links:
       - admin_ui
       - showcase_ui
-      - prerender
+#      - prerender
     ports:
       - 80:80
       - 443:443
