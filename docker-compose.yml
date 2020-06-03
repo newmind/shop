@@ -151,8 +151,8 @@ services:
       - NODE_ENV=production
 
 
-  prerender_srv:
-    container_name: prerender_srv
+  prerender:
+    container_name: prerender
     build:
       context: ./
       dockerfile: Dockerfile.prerender-srv
@@ -183,11 +183,11 @@ services:
     depends_on:
       - admin_ui
       - showcase_ui
-      - prerender_srv
+      - prerender
     links:
       - admin_ui
       - showcase_ui
-      - prerender_srv
+      - prerender
     ports:
       - 80:80
       - 443:443
