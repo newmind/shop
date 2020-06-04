@@ -66,7 +66,7 @@ import { createType, updateType, deleteTypes } from './actions/type';
 
     appServer.use(koaCORS({
       credentials: true,
-      origin: process.env['HTTP_ORIGINS'],
+      origin: process.env['HTTP_ORIGINS'].split(','),
       allowMethods: ['GET', 'POST', 'PATCH', 'PUT', 'DELETE', 'OPTIONS'],
     }));
 
