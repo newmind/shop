@@ -1,4 +1,5 @@
 
+import koaCORS from '@sys.packages/cors';
 import jwtToken from '@sys.packages/jwt';
 import logger from '@sys.packages/logger';
 import appServer, { initRouter } from '@sys.packages/server';
@@ -7,7 +8,6 @@ import { connectToRabbit, queueToExchange } from "@sys.packages/rabbit";
 
 import http from 'http';
 
-import koaCORS from "koa-cors2";
 import cookie from 'koa-cookie';
 
 import routes from './routes';

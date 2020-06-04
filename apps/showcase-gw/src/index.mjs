@@ -1,11 +1,11 @@
 
+import koaCORS from '@sys.packages/cors';
 import logger from '@sys.packages/logger';
 import createSocket from '@sys.packages/socket.io';
 import appServer, { initRouter } from '@sys.packages/server';
 import { connectToRabbit, queueToExchange } from '@sys.packages/rabbit';
 
 import http from 'http';
-import koaCORS from "koa-cors2";
 
 import routes from './routes';
 
