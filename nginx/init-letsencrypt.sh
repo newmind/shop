@@ -1,9 +1,6 @@
 #!/bin/bash
 
-domains=(
-  "xn--80aagcvgokokb0i.xn--p1ai www.xn--80aagcvgokokb0i.xn--p1ai"
-  "admin.xn--80aagcvgokokb0i.xn--p1ai www.admin.xn--80aagcvgokokb0i.xn--p1ai"
-  "xn--d1ahbfcxr6c.com www.xn--d1ahbfcxr6c.com")
+domains=("xn--80aagcvgokokb0i.xn--p1ai" "admin.xn--80aagcvgokokb0i.xn--p1ai" "xn--d1ahbfcxr6c.com")
 email="pyatakov.viktor@gmail.com" # Adding a valid address is strongly recommended
 staging=0 # Set to 1 if you're testing your setup to avoid hitting request limits
 
