@@ -7,11 +7,15 @@ import { getProducts, getProductById } from '../controllers/Products';
 
 import { createComment } from '../controllers/Comments';
 
+import { getAllCategories } from '../controllers/Category';
+
 
 export default (router) => {
 
   router.get('/products', getProducts());
   router.get('/products/:uuid', getProductById());
+
+  router.get('/categories', getAllCategories());
 
   router.post('/products/:id/comments', createComment());
 

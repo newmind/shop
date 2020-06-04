@@ -12,6 +12,12 @@
   overflow: hidden;
   transition: border 400ms;
 
+  &:hover,
+  &--focus {
+
+    border-color: $coal-dark;
+  }
+
   &--info {
     border-color: $information;
   }

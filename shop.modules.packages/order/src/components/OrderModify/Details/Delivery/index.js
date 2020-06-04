@@ -1,6 +1,6 @@
 
 import { Suggest } from '@ui.packages/yandex-map';
-import { RadioBoxField, Radio, Container, Row, Col } from "@ui.packages/kit";
+import { RadioBoxField, InputField, Radio, Container, Row, Col } from "@ui.packages/kit";
 
 import React, { PureComponent } from 'react';
 
@@ -34,6 +34,14 @@ class Component extends PureComponent {
         </Row>
         <Row>
           <Col>
+            <InputField
+              name="details"
+              label="Дополнительно"
+            />
+          </Col>
+        </Row>
+        <Row>
+          <Col>
             <RadioBoxField name="delivery" defaultValue="post">
               <Radio name="post">
                 <Block>
@@ -51,7 +59,6 @@ class Component extends PureComponent {
           </Col>
         </Row>
       </Container>
-
     );
   }
 }

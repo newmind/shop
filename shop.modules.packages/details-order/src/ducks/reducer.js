@@ -6,7 +6,7 @@ import {
 } from './types';
 
 const initialState = {
-  status: 0,
+  status: null,
   delivery: null,
   stock: [],
 };

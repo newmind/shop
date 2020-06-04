@@ -1,16 +1,15 @@
 
 import numeral from '@packages/numeral';
-// import { Dialog } from '@ui.packages/dialog';
 import { Button, Col, Container, Row, Breadcrumbs } from '@ui.packages/kit';
 
 import types from 'prop-types';
 import { Link } from "react-router-dom";
-import React, { PureComponent } from 'react';
-
-import OrderModify from './OrderModify';
-// import OrderSuccess from './OrderSuccess';
+import React, {lazy, PureComponent} from 'react';
 
 import styles from './default.module.scss';
+
+
+const OrderModify = lazy(() => import(/* webpackChunkName: "order.order" */'./OrderModify'));
 
 
 const calculateFullAmount = (products) => {
@@ -77,7 +76,7 @@ class Component extends PureComponent {
           <div className={styles['breadcrumbs__content']}>
             <Breadcrumbs
               items={[
-                { title: 'Витрина', href: '/' },
+                { title: 'Витрина', href: '/products' },
                 { title: `Оформление заказа` },
               ]}
             />

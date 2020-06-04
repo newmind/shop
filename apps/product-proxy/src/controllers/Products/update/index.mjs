@@ -91,7 +91,7 @@ export default () => async (ctx) => {
 
     const product = await Product.findOne({
       where: { uuid },
-      attributes: ['uuid', 'brand', 'name', 'description', 'status', 'amount', 'saleAmount', 'count', 'params', 'isHit', 'isSale', 'createdAt'],
+      attributes: ['uuid', 'brand', 'name', 'description', 'status', 'amount', 'saleAmount', 'count', 'params', 'createdAt'],
       include: [
         {
           model: Category,

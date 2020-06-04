@@ -49,6 +49,9 @@ RUN ["yarn", "run", "build"]
 WORKDIR /app/shop.modules.packages/about
 RUN ["yarn", "run", "build"]
 
+WORKDIR /app/shop.modules.packages/main
+RUN ["yarn", "run", "build"]
+
 WORKDIR /app/shop.modules.packages/not-found
 RUN ["yarn", "run", "build"]
 

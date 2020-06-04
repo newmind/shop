@@ -1,8 +1,9 @@
 
 import types from 'prop-types';
-import React, { PureComponent } from 'react';
+import React, { lazy, PureComponent, Suspense } from 'react';
 
-import Product from './Product';
+
+const Product = lazy(() => import(/* webpackChunkName: "order.product" */'./Product'));
 
 
 class Component extends PureComponent {
@@ -16,12 +17,18 @@ class Component extends PureComponent {
 
   render() {
     const { fields } = this.props;
-    return fields.map((field, index) => {
-      const product = fields.get(index);
-      return (
-        <Product key={index} index={index} field={field} {...product} />
-      );
-    });
+
+    return (
+      <Suspense fallback={null}>
+        {fields.map((field, index) => {
+          const product = fields.get(index);
+
+          return (
+            <Product key={index} index={index} field={field} {...product} />
+          );
+        })}
+      </Suspense>
+    );
   }
 }
 

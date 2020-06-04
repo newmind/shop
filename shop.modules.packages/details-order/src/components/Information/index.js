@@ -1,5 +1,4 @@
 
-// import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 
 import Component from './Component';
@@ -11,12 +10,10 @@ const mapStateToProps = (state) => {
     externalId: order['externalId'],
     address: order['address'],
     amount: order['amount'],
-    delivery: order['delivery'],
-    email: order['email'],
     name: order['name'],
     pay: order['pay'],
-    phone: order['phone'],
     surname: order['surname'],
+    currency: order['currency'],
     createdAt: order['createdAt'],
   };
 };

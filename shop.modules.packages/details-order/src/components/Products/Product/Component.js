@@ -1,62 +1,66 @@
 
+import numeral from '@packages/numeral';
 import { Gallery } from "@ui.packages/kit";
 
 import { Link } from 'react-router-dom';
-import React, { Fragment, PureComponent } from 'react';
-
-import Recipe from './Recipe';
-import Lens from './Lens';
+import React, { lazy, PureComponent, Suspense } from 'react';
 
 import styles from "./default.module.scss";
 
 
+const Recipe = lazy(() => import(/* webpackChunkName: "details-order.recipe" */'./Recipe'));
+const Lens = lazy(() => import(/* webpackChunkName: "details-order.lens" */'./Lens'));
+
+
 class Component extends PureComponent {
   render() {
-    const { type, recipe, lens, product: { uuid, gallery, brand, name, params }} = this.props;
+    const { type, recipe, lens, amount, currency, product: { uuid, gallery, brand, name }} = this.props;
 
     return (
-      <div className={styles['product']}>
-        <div className={styles['gallery']}>
-          <span className={styles['uuid']}>{ uuid }</span>
-          <div className={styles['gallery__images']}>
-            <Gallery items={gallery} valueKey="externalId" path={`${process.env['REACT_APP_API_HOST']}/gallery`} />
+      <Suspense fallback={null}>
+        <div className={styles['product']}>
+          <div className={styles['gallery']}>
+            <span className={styles['uuid']}>{ uuid }</span>
+            <div className={styles['gallery__images']}>
+              <Gallery items={gallery} valueKey="externalId" path={`${process.env['REACT_APP_API_HOST']}/gallery`} />
+            </div>
+          </div>
+          <div className={styles['content']}>
+            <p className={styles['brand']}>
+              <Link className={styles['brand__link']} to={process.env['PUBLIC_URL'] + `/products/${uuid}`}>{ brand }</Link>
+              {name && <span className={styles['name']}>({ name })</span>}
+            </p>
+            {(type === 'only-rim') && (
+              <p className={styles['type']}>
+                <span className={styles['label']}>Тип изготовления:</span>
+                <span className={styles['value']}>Только оправа</span>
+              </p>
+            )}
+            {(type === 'on-prescription') && (
+              <p className={styles['type']}>
+                <span className={styles['label']}>Тип изготовления:</span>
+                <span className={styles['value']}>Очки по рецепту</span>
+              </p>
+            )}
+            {(type === 'image-lenses') && (
+              <p className={styles['type']}>
+                <span className={styles['label']}>Тип изготовления:</span>
+                <span className={styles['value']}>С имиджевыми линзами</span>
+              </p>
+            )}
+            {(type === 'on-prescription') && (
+              <div className={styles['prescription']}>
+                <Recipe {...recipe} />
+                <Lens {...lens} />
+              </div>
+            )}
+            <p className={styles['type']}>
+              <span className={styles['label']}>Цена:</span>
+              <span className={styles['value']}>{ numeral(amount).format() } { currency['value'] }</span>
+            </p>
           </div>
         </div>
-        <div className={styles['content']}>
-          <p className={styles['brand']}>
-            <Link className={styles['brand__link']} to={process.env['PUBLIC_URL'] + `/products/${uuid}`}>{ brand }</Link>
-            {name && <span className={styles['name']}>({ name })</span>}
-          </p>
-          {(params === 'further') && (
-            <Fragment>
-              {(type === 'only-rim') && (
-                <p className={styles['type']}>
-                  <span className={styles['label']}>Тип изготовления:</span>
-                  <span className={styles['value']}>Только оправа</span>
-                </p>
-              )}
-              {(type === 'on-prescription') && (
-                <p className={styles['type']}>
-                  <span className={styles['label']}>Тип изготовления:</span>
-                  <span className={styles['value']}>Очки по рецепту</span>
-                </p>
-              )}
-              {(type === 'image-lenses') && (
-                <p className={styles['type']}>
-                  <span className={styles['label']}>Тип изготовления:</span>
-                  <span className={styles['value']}>С имиджевыми линзами</span>
-                </p>
-              )}
-              {(type === 'on-prescription') && (
-                <div className={styles['prescription']}>
-                  <Recipe {...recipe} />
-                  <Lens {...lens} />
-                </div>
-              )}
-            </Fragment>
-          )}
-        </div>
-      </div>
+      </Suspense>
     );
   }
 }

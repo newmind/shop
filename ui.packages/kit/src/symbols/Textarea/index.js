@@ -38,6 +38,7 @@ class Component extends PureComponent {
 
   render() {
     const { className, disabled, mode, label, message, ...props } = this.props;
+
     const classNameTextareaWrapper = cn(className, styles['wrapper'], {
       [styles['wrapper--primary']]: mode === PRIMARY_MODE,
       [styles['wrapper--success']]: mode === SUCCESS_MODE,

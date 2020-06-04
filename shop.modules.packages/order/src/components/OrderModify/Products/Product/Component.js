@@ -6,16 +6,17 @@ import { Radio, RadioBoxField, Gallery } from "@ui.packages/kit";
 import types from 'prop-types';
 import { Field } from 'redux-form';
 import { Link } from 'react-router-dom';
-import React, { Fragment, PureComponent } from 'react';
-
-import PrescriptionFormModify from './PrescriptionFormModify';
-import SelectLensesFormModify from './SelectLensesFormModify';
-
-import Recipe from './Recipe';
-import Lens from './Lens';
+import React, { Fragment, PureComponent, Suspense, lazy } from 'react';
 
 import cn from 'classnames';
 import styles from "./default.module.scss";
+
+
+const Lens = lazy(() => import(/* webpackChunkName: "order.lens" */'./Lens'));
+const Recipe = lazy(() => import(/* webpackChunkName: "order.recipe" */'./Recipe'));
+
+const PrescriptionFormModify = lazy(() => import(/* webpackChunkName: "order.prescription" */'./PrescriptionFormModify'));
+const SelectLensesFormModify = lazy(() => import(/* webpackChunkName: "order.select-lenses" */'./SelectLensesFormModify'));
 
 
 class Component extends PureComponent {
@@ -39,9 +40,9 @@ class Component extends PureComponent {
     gallery: [],
     amount: 0,
     currency: {},
-    productType: '',
-    recipe: {},
-    lens: {},
+    productType: 'on-prescription',
+    recipe: null,
+    lens: null,
     params: '',
   };
 
@@ -98,77 +99,79 @@ class Component extends PureComponent {
   render() {
     const { uuid, field, index, name, brand, gallery, amount, currency, productType, recipe, lens, errors, params } = this.props;
 
-    const hasRecipe = !! Object.keys(recipe).length;
-    const hasLens = !! Object.keys(lens).length;
+    const hasRecipe = recipe && !! Object.keys(recipe).length;
+    const hasLens = lens && !! Object.keys(lens).length;
     const hasItemsErrors = !! errors['items'] && errors['items'][index];
 
     const removeFromCartClassName= cn(styles['remove'], 'far fa-trash-alt');
 
     return(
-      <div className={styles['product']}>
-        <div className={styles['gallery']}>
-          <span className={styles['product__uuid']}>{ uuid }</span>
-          <div className={styles['gallery__images']}>
-            <Gallery items={gallery} valueKey="externalId" path={`${process.env['REACT_APP_API_HOST']}/gallery`} />
-          </div>
-          <div className={styles['amount']}>
-            <div className={styles['amount__main']}>
-              <span className={styles['amount__value']}>{numeral(amount).format()}</span>
-              <span className={styles['amount__currency']}>{currency['value']}</span>
+      <Suspense fallback={null}>
+        <div className={styles['product']}>
+          <div className={styles['gallery']}>
+            <span className={styles['product__uuid']}>{ uuid }</span>
+            <div className={styles['gallery__images']}>
+              <Gallery items={gallery} valueKey="externalId" path={`${process.env['REACT_APP_API_HOST']}/gallery`} />
             </div>
-            {hasLens && productType === 'on-prescription' && (
-              <div className={styles['amount__add']}>
-                <span className={styles['amount__value']}>+ {numeral(this._getLensAmount()).format()}</span>
+            <div className={styles['amount']}>
+              <div className={styles['amount__main']}>
+                <span className={styles['amount__value']}>{numeral(amount).format()}</span>
                 <span className={styles['amount__currency']}>{currency['value']}</span>
-              </div>)}
-          </div>
-        </div>
-        <div className={styles['content']}>
-          <span className={removeFromCartClassName} onClick={this._handleRemoveFromCart.bind(this)} />
-          <h3 className={styles['product__brand']}>
-            <Link className={styles['product__brand-link']} to={process.env['PUBLIC_URL'] + `/products/${uuid}`}>{brand}</Link>
-            {name && <span className={styles['product__name']}>({name})</span>}
-          </h3>
-          {(params === 'further') && (
-            <div className={styles['details']}>
-              <RadioBoxField name={`${field}.productType`}>
-                <Radio className={styles['type']} name="on-prescription" label="Очки по рецепту" />
-                <Radio className={styles['type']} name="image-lenses" label="С имиджевыми линзами" />
-                <Radio className={styles['type']} name="only-rim" label="Только оправа" />
-              </RadioBoxField>
-              <div className={styles['details__content']}>
-                {productType === 'only-rim' && <p className={styles['details__info']}>Преобретается только оправа.</p>}
-                {productType === 'image-lenses' && <p className={styles['details__info']}>Преобретается оправа с линзами без диоптрий, но с основными защитами.</p>}
-                {productType === 'on-prescription' && (
-                  <Fragment>
-                    <p className={styles['details__info']}>Преобретается оправа с линзами по рецепту.</p>
-                    <p className={styles['details__info']}>
-                      1. <span className={styles['link']} onClick={this._handlePrescriptionModifyOpenDialog.bind(this)}>{hasRecipe ? 'Изменить' : 'Заполинть'}</span> рецепт.
-                      {hasRecipe && <i className={cn(styles['success'], 'fas fa-check-circle')} />}
-                      { ! hasRecipe && <i className={cn(styles['danger'], 'fas fa-exclamation-circle')} />}
-                      {hasItemsErrors && errors['items'][index]['recipe'] && <span className={styles['error']}>[{errors['items'][index]['recipe']}]</span>}
-                    </p>
-                    {hasRecipe && <Recipe {...recipe} />}
-                    <p className={styles['details__info']}>
-                      2. <span className={styles['link']} onClick={this._handleSelectLensesOpenDialog.bind(this)}>{hasLens ? 'Заменить' : 'Выбрать'}</span> линзы.
-                      {hasLens && <i className={cn(styles['success'], 'fas fa-check-circle')} />}
-                      { ! hasLens && <i className={cn(styles['danger'], 'fas fa-exclamation-circle')} />}
-                      {hasItemsErrors && errors['items'][index]['lens'] && <span className={styles['error']}>[{errors['items'][index]['lens']}]</span>}
-                    </p>
-                    {hasLens && <Lens {...lens} />}
-                  </Fragment>
-                )}
               </div>
+              {hasLens && productType === 'on-prescription' && (
+                <div className={styles['amount__add']}>
+                  <span className={styles['amount__value']}>+ {numeral(this._getLensAmount()).format()}</span>
+                  <span className={styles['amount__currency']}>{currency['value']}</span>
+                </div>)}
             </div>
-          )}
+          </div>
+          <div className={styles['content']}>
+            <span className={removeFromCartClassName} onClick={this._handleRemoveFromCart.bind(this)} />
+            <h3 className={styles['product__brand']}>
+              <Link className={styles['product__brand-link']} to={process.env['PUBLIC_URL'] + `/products/${uuid}`}>{brand}</Link>
+              {name && <span className={styles['product__name']}>({name})</span>}
+            </h3>
+            {(params === 'further') && (
+              <div className={styles['details']}>
+                <RadioBoxField name={`${field}.productType`}>
+                  <Radio className={styles['type']} name="on-prescription" label="Очки по рецепту" />
+                  <Radio className={styles['type']} name="image-lenses" label="С имиджевыми линзами" />
+                  <Radio className={styles['type']} name="only-rim" label="Только оправа" />
+                </RadioBoxField>
+                <div className={styles['details__content']}>
+                  {productType === 'only-rim' && <p className={styles['details__info']}>Преобретается только оправа.</p>}
+                  {productType === 'image-lenses' && <p className={styles['details__info']}>Преобретается оправа с линзами без диоптрий, но с основными защитами.</p>}
+                  {productType === 'on-prescription' && (
+                    <Fragment>
+                      <p className={styles['details__info']}>Преобретается оправа с линзами по рецепту.</p>
+                      <p className={styles['details__info']}>
+                        1. <span className={styles['link']} onClick={this._handlePrescriptionModifyOpenDialog.bind(this)}>{hasRecipe ? 'Изменить' : 'Заполинть'}</span> рецепт.
+                        {hasRecipe && <i className={cn(styles['success'], 'fas fa-check-circle')} />}
+                        { ! hasRecipe && <i className={cn(styles['danger'], 'fas fa-exclamation-circle')} />}
+                        {hasItemsErrors && errors['items'][index]['recipe'] && <span className={styles['error']}>[{errors['items'][index]['recipe']}]</span>}
+                      </p>
+                      {hasRecipe && <Recipe {...recipe} />}
+                      <p className={styles['details__info']}>
+                        2. <span className={styles['link']} onClick={this._handleSelectLensesOpenDialog.bind(this)}>{hasLens ? 'Заменить' : 'Выбрать'}</span> линзы.
+                        {hasLens && <i className={cn(styles['success'], 'fas fa-check-circle')} />}
+                        { ! hasLens && <i className={cn(styles['danger'], 'fas fa-exclamation-circle')} />}
+                        {hasItemsErrors && errors['items'][index]['lens'] && <span className={styles['error']}>[{errors['items'][index]['lens']}]</span>}
+                      </p>
+                      {hasLens && <Lens {...lens} />}
+                    </Fragment>
+                  )}
+                </div>
+              </div>
+            )}
+          </div>
+          <Field name={`${field}.recipe`} component={() => <Dialog title="Рецепт на изготовление очков" name={`${field}.prescription-modify`}>
+            <PrescriptionFormModify value={recipe || {}} onSubmit={this._handlePrescriptionSubmit.bind(this)} />
+          </Dialog>} />
+          <Field name={`${field}.lens`} component={() => <Dialog title="Выбор линз" name={`${field}.select-lenses`}>
+            <SelectLensesFormModify value={lens || {}} onSubmit={this._handleLensesSubmit.bind(this)} />
+          </Dialog>} />
         </div>
-        <Field name={`${field}.recipe`} component={() => <Dialog title="Рецепт на изготовление очков" name={`${field}.prescription-modify`}>
-          <PrescriptionFormModify value={recipe} onSubmit={this._handlePrescriptionSubmit.bind(this)} />
-        </Dialog>} />
-        <Field name={`${field}.lens`} component={() => <Dialog title="Выбор линз" name={`${field}.select-lenses`}>
-          <SelectLensesFormModify value={lens} onSubmit={this._handleLensesSubmit.bind(this)} />
-        </Dialog>} />
-      </div>
+      </Suspense>
     );
   }
 }

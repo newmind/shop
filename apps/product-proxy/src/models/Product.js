@@ -90,14 +90,6 @@ module.exports = (db, DataType) => {
       values: ['further'],
       allowNull: true,
     },
-    isHit: {
-      type: DataType.BOOLEAN,
-      defaultValue: false,
-    },
-    isSale: {
-      type: DataType.BOOLEAN,
-      defaultValue: false,
-    },
   });
 
   Product.associate = function({ Attribute, Gallery, Category, Type, Material, Form, Color, Currency, Comment }) {

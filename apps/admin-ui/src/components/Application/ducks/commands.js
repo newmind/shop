@@ -91,7 +91,7 @@ export const signIn = (formData) => async dispatch => {
     else if (error['status'] === 500) {
       notification['mode'] = 'danger';
       notification['title'] = 'Ошибка доступа';
-      notification['content'] = `${error['data']['message']} (${error['data']['code']})`;
+      notification['content'] = `${error['data']['error']['message']} (${error['data']['error']['code']})`;
     }
 
     dispatch(pushNotification(notification));

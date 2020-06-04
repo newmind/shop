@@ -18,7 +18,7 @@ import routes from './configs/routes';
 import navigate from './configs/navigate';
 
 import App from "./components/Application/components";
-import './styles/index.module.scss';
+import /* webpackPreload: true */ './styles/index.module.scss';
 
 import * as serviceWorker from './serviceWorker';
 

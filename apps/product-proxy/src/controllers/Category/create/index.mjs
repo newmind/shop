@@ -10,7 +10,9 @@ export default () => async (ctx) => {
 
     const transaction = await sequelize.transaction();
 
-    const result = await Category.create(formData, { transaction });
+    const result = await Category.create(formData, {
+      transaction
+    });
 
     await sendEvent(process.env['RABBIT_PRODUCT_PROXY_EXCHANGE_CATEGORY_CREATED'], JSON.stringify(result.toJSON()));
 
@@ -24,6 +26,12 @@ export default () => async (ctx) => {
   catch(error) {
 
     ctx.status = 500;
-    ctx.body = { success: false, error: { code: '500', message: error['message'] }};
+    ctx.body = {
+      success: false,
+      error: {
+        code: '500',
+        message: error['message']
+      }
+    };
   }
 };

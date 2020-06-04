@@ -1,11 +1,20 @@
 
 export default [
   {
-    // path: '/products',
     path: '/',
     wrapper: 'Navigate',
     module: import(
-      /* webpackChunkName: "products" */
+      /* webpackChunkName: "main-page" */
+      /* webpackPreload: true */
+      '@modules.packages/main-page'
+    ),
+  },
+  {
+    path: '/products',
+    wrapper: 'Navigate',
+    module: import(
+      /* webpackChunkName: "showcase" */
+      /* webpackPreload: true */
       '@modules.packages/showcase'
     ),
   },
@@ -14,6 +23,7 @@ export default [
     wrapper: 'Navigate',
     module: import(
       /* webpackChunkName: "product" */
+      /* webpackPreload: true */
       '@modules.packages/product'
     ),
   },
@@ -30,6 +40,7 @@ export default [
     wrapper: 'Navigate',
     module: import(
       /* webpackChunkName: "produce" */
+      /* webpackPreload: true */
       '@modules.packages/produce'
     ),
   },
@@ -39,6 +50,7 @@ export default [
     wrapper: 'Navigate',
     module: import(
       /* webpackChunkName: "order" */
+      /* webpackPreload: true */
       '@modules.packages/order'
     ),
   },
@@ -48,6 +60,7 @@ export default [
     wrapper: 'Navigate',
     module: import(
       /* webpackChunkName: "details-order" */
+      /* webpackPreload: true */
       '@modules.packages/details-order'
     ),
   }

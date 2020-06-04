@@ -4,34 +4,25 @@
 
     <base href="%PUBLIC_URL%" />
 
+    <meta name="fragment" content="!" />
+
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
-    <meta name="theme-color" content="#000000" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+    <meta name="theme-color" content="#ffffff" />
+
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 
     <meta name="author" content="Пятаков Виктор">
     <meta name="keywords" content="очки,очки для зрения,оправы,изготовление очков,изготовление очков на заказ,изготовление очков по речепту" />
     <meta name="description" content="Интернет магазин. Продажа и изготовление очков для зрения. Солнцезащитные очки. Изготовление очков по рецепту." />
 
-    <meta name="yandex-verification" content="2e8f64a984f5c0fa" />
+    <meta name="yandex-verification" content="d9f686bdff8bc4aa" />
+    <meta name="Prerender-Dont-Wait-For-Web-Sockets" content="true" />
+    <meta name="prerender-status-code" content="301" />
 
-    <meta http-equiv="Expires" content="0" />
-    <meta http-equiv="Pragma" content="no-cache" />
-    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
-
-    <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
-    <link rel="icon" href="%PUBLIC_URL%/favicon.ico" type="image/x-icon">
-    <link rel="shortcut icon" href="%PUBLIC_URL%/favicon.ico" type="image/x-icon">
-
-    <title>%REACT_APP_WEBSITE_NAME%</title>
-
-  </head>
-  <body>
-
-    <noscript>You need to enable JavaScript to run this app.</noscript>
-
-    <main id="root"></main>
-    <section id="dialog"></section>
-    <section id="notification"></section>
+    <link rel="manifest preload" href="%PUBLIC_URL%/manifest.json" />
+    <link rel="icon preload" href="%PUBLIC_URL%/favicon.ico" type="image/x-icon">
+    <link rel="shortcut icon preload" href="%PUBLIC_URL%/favicon.ico" type="image/x-icon">
 
     <!-- Yandex.Metrika counter -->
     <script type="text/javascript" >
@@ -46,10 +37,23 @@
         webvisor:true
       });
     </script>
-    <noscript><div><img src="https://mc.yandex.ru/watch/56847952" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+    <noscript>
+      <div><img src="https://mc.yandex.ru/watch/56847952" style="position:absolute; left:-9999px;" alt="" /></div>
+    </noscript>
     <!-- /Yandex.Metrika counter -->
 
-    <script src="https://api-maps.yandex.ru/2.1/?apikey=0341a2a3-e60f-4de5-8c0b-7556a13ce6dc&lang=ru_RU" type="text/javascript"></script>
+    <script async rel="preload" src="https://api-maps.yandex.ru/2.1/?apikey=0341a2a3-e60f-4de5-8c0b-7556a13ce6dc&lang=ru_RU" type="text/javascript"></script>
 
+    <title>%REACT_APP_WEBSITE_NAME%</title>
+
+  </head>
+  <body>
+
+    <noscript>You need to enable JavaScript to run this app.</noscript>
+
+    <main id="root" role="main"></main>
+
+    <div id="dialog"></div>
+    <div id="notification"></div>
   </body>
 </html>

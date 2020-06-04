@@ -25,8 +25,7 @@ export const addProductToCart = (product) => dispatch => {
   }));
 };
 
-
-export const getProducts = (params) => async dispatch => {
+export const getProducts = (params) => async (dispatch) => {
   try {
     dispatch(getProductsRequest());
     dispatch(setNextPageAction(Number(params['page'] || 1)));

@@ -44,7 +44,9 @@ export default () => async (ctx) => {
       data: body,
     });
 
-    const { Order, OrderProducts, Currency, Product, Gallery, Status } = models;
+    console.log(fields);
+
+    const { Order, OrderProducts, Currency, Product, Gallery, Status, Prescription } = models;
     const transaction = await sequelize.transaction();
 
     const { id } = await Order.create({
@@ -62,16 +64,33 @@ export default () => async (ctx) => {
       delivery: fields['delivery'],
       amount: fields['amount'],
     }, {
-      transaction
+      transaction,
     });
 
-    const items = fields['items'].map((item) => ({
-      orderId: id,
-      productId: item['uuid'],
-      ...item,
-    }));
+    const products = fields['items'];
+    for (let index in products) {
+      if (products.hasOwnProperty(index)) {
+        const product = products[index];
+        const { id: orderProductId } = await OrderProducts.create({
+          orderId: id,
+          productId: product['productId'],
+          currencyId: product['currencyId'],
+          type: product['type'],
+          amount: product['amount'],
+        }, {
+          transaction
+        });
 
-    await OrderProducts.bulkCreate(items, { transaction });
+        if (product['recipe']) {
+          await Prescription.create({
+            orderId: orderProductId,
+            ...product['recipe'],
+          }, {
+            transaction,
+          });
+        }
+      }
+    }
 
     await transaction.commit();
 
@@ -96,11 +115,17 @@ export default () => async (ctx) => {
           model: OrderProducts,
           required: true,
           as: 'products',
-          attributes: ['id', 'type', 'recipe', 'lens', 'amount'],
+          attributes: ['id', 'type', 'amount'],
           include: [
             {
-              model: Currency,
+              model: Prescription,
               required: false,
+              as: 'recipe',
+              attributes: ['PDLeft', 'PDRight', 'sphRight', 'sphLeft', 'cylRight', 'cylLeft', 'axisRight', 'axisLeft', 'addRight', 'addLeft']
+            },
+            {
+              model: Currency,
+              required: true,
               as: 'currency',
               attributes: ['uuid', 'value']
             },
@@ -131,6 +156,9 @@ export default () => async (ctx) => {
 
     await sendEvent(process.env['RABBIT_OPERATION_PROXY_EXCHANGE_ORDER_CREATED'], JSON.stringify(operations[0]));
 
+    console.log(operations[0].toJSON()['products']);
+
+    ctx.status = 500;
     ctx.body = {
       success: true,
       data: invoice['data'],

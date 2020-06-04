@@ -146,16 +146,23 @@ export const createCategory = (data) => async (dispatch) => {
   try {
     dispatch(createCategoryRequestAction());
 
+    const formData = new FormData();
+
+    formData.append('value', data['value']);
+    formData.append('description', data['description'] || '');
+    formData.append('file', data['file']);
+
     const result = await request({
       url: '/categories',
       method: 'post',
-      data,
+      data: formData,
     });
 
     dispatch(createCategoryRequestSuccessAction(result['data']));
     dispatch(closeDialog('category'));
   }
   catch(error) {
+
     dispatch(createCategoryRequestFailAction(error));
   }
 };
@@ -164,16 +171,25 @@ export const updateCategory = (data) => async (dispatch) => {
   try {
     dispatch(updateCategoryRequestAction());
 
+    const formData = new FormData();
+
+    formData.append('value', data['value']);
+    formData.append('description', data['description'] || '');
+    data['imageId'] && formData.append('imageId', data['imageId']);
+    formData.append('updatedAt', data['updatedAt']);
+    formData.append('file', data['file']);
+
     const result = await request({
       url: '/categories/' + data['id'],
       method: 'put',
-      data,
+      data: formData,
     });
 
     dispatch(updateCategoryRequestSuccessAction(result['data']));
     dispatch(closeDialog('category'));
   }
   catch(error) {
+
     dispatch(updateCategoryRequestFailAction(error));
   }
 };
@@ -191,6 +207,7 @@ export const deleteCategories = (id) => async (dispatch) => {
     dispatch(deleteCategoriesRequestSuccessAction(result['data']));
   }
   catch(error) {
+
     dispatch(deleteCategoriesRequestFailAction(error));
   }
 };

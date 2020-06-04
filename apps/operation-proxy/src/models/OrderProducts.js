@@ -10,18 +10,15 @@ module.exports = (db, DataType) => {
     },
     orderId: {
       type: DataType.INTEGER,
+      allowNull: false,
     },
     productId: {
       type: DataType.STRING(9),
+      allowNull: false,
     },
     type: {
       type: DataType.STRING,
-    },
-    recipe: {
-      type: DataType.JSON,
-    },
-    lens: {
-      type: DataType.JSON,
+      allowNull: false,
     },
     amount: {
       type: DataType.DECIMAL(10, 2),
@@ -38,7 +35,12 @@ module.exports = (db, DataType) => {
     },
   });
 
-  OrderProducts.associate = ({ Product, Currency }) => {
+  OrderProducts.associate = ({ Product, Currency, Prescription }) => {
+
+    OrderProducts.hasOne(Prescription, {
+      foreignKey: 'orderId',
+      as: 'recipe',
+    });
 
     OrderProducts.belongsTo(Currency, {
       foreignKey: 'currencyId',
