@@ -1,0 +1,10 @@
+{
+  "name": "@sys.packages/cors",
+  "version": "1.0.0",
+  "main": "./src/index.mjs",
+  "author": {
+    "name": "Viktor Pyatakov",
+    "email": "viktor.pyatakov@pimpay.ru"
+  },
+  "dependencies": {}
+}
