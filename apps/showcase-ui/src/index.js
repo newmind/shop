@@ -32,7 +32,7 @@ const store = createStore({},
   thunk,
   routerMiddleware(history),
   createSocketIoMiddleware(socket),
-  requestMiddleware(window.location.origin)
+  requestMiddleware(process.env['REACT_APP_API_HOST'])
 );
 
 
