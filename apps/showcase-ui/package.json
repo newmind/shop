@@ -9,8 +9,8 @@
   "dependencies": {
     "@modules.packages/about": "1.0.0",
     "@modules.packages/details-order": "1.0.0",
-    "@modules.packages/not-found2": "1.0.0",
     "@modules.packages/main-page": "1.0.0",
+    "@modules.packages/not-found2": "1.0.0",
     "@modules.packages/order": "1.0.0",
     "@modules.packages/produce": "1.0.0",
     "@modules.packages/product": "1.0.0",
@@ -40,6 +40,7 @@
     "react-router-dom": "5.2.0",
     "react-router-redux": "4.0.8",
     "react-scripts": "3.4.1",
+    "react-yandex-metrika": "^2.6.0",
     "redux": "4.0.5",
     "redux-devtools-extension": "2.13.8",
     "redux-form": "8.3.5",
