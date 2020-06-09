@@ -22,6 +22,7 @@ export default (options) => async (ctx, next) => {
   if ( ! origin) {
     return await next();
   }
+
   if(options['allowedOrigins'].indexOf(origin) > -1) {
     ctx.set('Access-Control-Allow-Origin', origin);
   }
@@ -50,8 +51,9 @@ export default (options) => async (ctx, next) => {
     }
 
     ctx.status = 204;
-
-  } else {
+    ctx.body = null;
+  }
+  else {
 
     if (options['credentials'] === true) {
       ctx.set('Access-Control-Allow-Credentials', 'true');

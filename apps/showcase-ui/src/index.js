@@ -1,4 +1,7 @@
 
+import createSocketIO from '@ui.packages/socket';
+import { middleware as requestMiddleware } from "@ui.packages/request";
+
 import React from 'react';
 import ReactDOM from 'react-dom';
 
@@ -7,9 +10,7 @@ import { Provider } from 'react-redux';
 import { Router } from 'react-router';
 import { routerMiddleware } from 'react-router-redux';
 import createSocketIoMiddleware from 'redux-socket.io';
-
-import createSocketIO from '@ui.packages/socket';
-import { middleware as requestMiddleware } from "@ui.packages/request";
+import { YMInitializer } from 'react-yandex-metrika';
 
 import createStore, { importReducer }  from './bin/createStore';
 import createHistory from './bin/createRouter';
@@ -18,7 +19,8 @@ import routes from './configs/routes';
 import navigate from './configs/navigate';
 
 import App from "./components/Application/components";
-import /* webpackPreload: true */ './styles/index.module.scss';
+
+import './styles/index.module.scss';
 
 import * as serviceWorker from './serviceWorker';
 
@@ -49,7 +51,17 @@ const store = createStore({},
           routes={routes}
           navigate={navigate}
         />
-      </Router>
+        <YMInitializer
+          accounts={[ Number(process.env['REACT_APP_YANDEX_METRIKA']) ]}
+          options={{
+            clickmap:true,
+            webvisor: true,
+            trackLinks:true,
+            accurateTrackBounce:true,
+          }}
+          version="2"
+        />
+        </Router>
     </Provider>
   ), document.getElementById('root'));
 
