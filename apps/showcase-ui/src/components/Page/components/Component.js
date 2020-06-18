@@ -7,6 +7,8 @@ import styles from './default.module.scss';
 
 
 class Component extends PureComponent {
+  static displayName = 'Page';
+
   static propTypes = {
     children: PropTypes.node,
     inProcess: PropTypes.bool,
@@ -18,9 +20,11 @@ class Component extends PureComponent {
 
   render() {
     const { children, inProcess } = this.props;
+
     const pageContentClassName = cn(styles['page__content'], {
       [styles['page--blur']]: inProcess,
     });
+
     return (
       <div className={styles['page']}>
         <div className={pageContentClassName}>

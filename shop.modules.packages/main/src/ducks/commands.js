@@ -4,6 +4,10 @@ import request from "@ui.packages/request";
 import {
   pageInProcessAction,
 
+  getTypesRequest,
+  getTypesRequestFail,
+  getTypesRequestSuccess,
+
   getCategoriesRequest,
   getCategoriesRequestFail,
   getCategoriesRequestSuccess,
@@ -12,6 +16,22 @@ import {
 
 export const pageInProcess = (status) => (dispatch) => dispatch(pageInProcessAction(status));
 
+
+export const getTypes = () => async (dispatch) => {
+  try {
+    dispatch(getTypesRequest());
+
+    const result = await request({
+      url: '/types',
+    });
+
+    dispatch(getTypesRequestSuccess(result['data']));
+  }
+  catch(error) {
+
+    dispatch(getTypesRequestFail(error));
+  }
+};
 
 export const getCategories = () => async (dispatch) => {
   try {

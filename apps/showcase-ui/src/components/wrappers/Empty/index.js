@@ -8,6 +8,8 @@ import styles from './default.module.scss';
 
 
 class Component extends PureComponent {
+  static displayName = 'Wrapper Empty';
+
   render() {
     const { children } = this.props;
     return (

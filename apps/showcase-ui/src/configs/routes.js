@@ -10,6 +10,15 @@ export default [
     ),
   },
   {
+    path: '/sign-up',
+    wrapper: 'Navigate',
+    module: import(
+      /* webpackChunkName: "sign-up" */
+      /* webpackPreload: true */
+      '@modules.packages/sign-up'
+    ),
+  },
+  {
     path: '/products',
     wrapper: 'Navigate',
     module: import(

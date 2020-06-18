@@ -1,0 +1,27 @@
+
+@import "~@ui.packages/theme";
+
+
+.wrapper {
+
+  display: block;
+}
+
+.content {
+
+  display: block;
+  width: 1024px;
+  margin: 0 auto;
+  padding: 60px 0 200px;
+}
+
+
+.sign-up {
+
+  display: block;
+  border: 1px solid $blue-grey;
+  border-radius: 5px;
+  padding: 40px;
+  width: 250px;
+  margin: 0 auto;
+}

@@ -112,11 +112,13 @@ services:
       - product_proxy
       - gallery_proxy
       - operation_proxy
+      - identity_srv
     links:
       - rabbit
       - product_proxy
       - gallery_proxy
       - operation_proxy
+      - identity_srv
 
 
   admin_ui:

@@ -1,5 +1,5 @@
 
-import { NetworkError } from '@packages/errors';
+import {BadRequestError, NetworkError, NotAuthError, NotFoundError, ValidationError} from '@packages/errors';
 
 import axios from 'axios';
 import { push } from 'react-router-redux';
@@ -46,22 +46,34 @@ const request = async (options) => {
     const { data } = await instance(options);
 
     return data;
-
-  } catch(error) {
-
+  }
+  catch(error) {
     if (error['response']) {
-
-      const {status, data} = error['response'];
+      const { status, data } = error['response'];
 
       if (status === 401) {
         dispatch(push('/sign-in'));
       }
 
-      throw new NetworkError(status, data);
+      if (status === 400) {
+        return Promise.reject(new BadRequestError(data));
+      }
+      else if (status === 401) {
+        return Promise.reject(new NotAuthError(data));
+      }
+      else if (status === 404) {
+        return Promise.reject(new NotFoundError(data));
+      }
+      else if (status === 417) {
+        return Promise.reject(new ValidationError(data));
+      }
+      else {
+        return Promise.reject(new NetworkError(data));
+      }
+    }
+    else {
 
-    } else {
-
-      throw new NetworkError(500, { code: '1.0.0', message: 'Сервис временно не доступен' });
+      throw new NetworkError({ code: '1.0.0', message: 'Сервис временно не доступен' });
     }
   }
 };

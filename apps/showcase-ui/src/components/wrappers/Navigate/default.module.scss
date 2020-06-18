@@ -13,10 +13,18 @@
 
   position: relative;
   display: flex;
-  flex: 1 0 auto;
+  flex: 1 0;
   flex-direction: column;
   margin: 0 auto;
   width: 1024px;
+}
+
+.tablet {
+
+  .center {
+    width: 800px;
+    background: red;
+  }
 }
 
 .header {

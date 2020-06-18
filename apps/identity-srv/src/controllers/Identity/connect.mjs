@@ -1,4 +1,3 @@
-'use strict';
 
 import jwt from 'jsonwebtoken';
 
@@ -44,6 +43,7 @@ export default () => async (ctx) => {
     });
 
     ctx.body = {
+      success: true,
       data: {
         token: identityToken,
         refreshToken: refreshToken,

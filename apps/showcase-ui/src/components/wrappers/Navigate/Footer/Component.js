@@ -1,7 +1,6 @@
 
-import React, { PureComponent } from 'react';
-
 import { Link } from 'react-router-dom';
+import React, { PureComponent } from 'react';
 
 import styles from './default.module.scss';
 

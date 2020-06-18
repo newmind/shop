@@ -8,7 +8,8 @@ import Component from './Component';
 
 import {
   pageInProcess,
-  getCategories
+  getTypes,
+  getCategories,
 } from '../ducks/commands';
 
 
@@ -20,6 +21,7 @@ const mapActionsToProps = (dispatch) => ({
   pageInProcess: bindActionCreators(pageInProcess, dispatch),
 
   pushSearch: bindActionCreators(push, dispatch),
+  getTypes: bindActionCreators(getTypes, dispatch),
   getCategories: bindActionCreators(getCategories, dispatch),
 });
 
@@ -27,10 +29,11 @@ const mapActionsToProps = (dispatch) => ({
 export default PageHOC({
   mapStateToProps,
   mapActionsToProps,
-  onEnter: async ({ pageInProcess, getCategories }) => {
+  onEnter: async ({ pageInProcess, getTypes, getCategories }) => {
 
     document.title = `${process.env['REACT_APP_WEBSITE_NAME']} - Витрина`;
 
+    await getTypes();
     await getCategories();
 
     pageInProcess(false);

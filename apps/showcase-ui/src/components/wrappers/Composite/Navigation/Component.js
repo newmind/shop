@@ -7,8 +7,11 @@ import styles from './default.module.scss';
 
 
 class Component extends PureComponent {
+  static displayName = 'Navigation';
+
   render() {
     const { items, location }  = this.props;
+
     return (
       <nav className={styles['navigate']}>
         {items.map((item, index) => {
