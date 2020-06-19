@@ -46,7 +46,7 @@ WORKDIR /app/ui.packages/confirm-order
 RUN ["yarn", "run", "build"]
 
 # BUILD MODULES
-WORKDIR /app/shop.modules.packages/sign-up
+WORKDIR /app/shop.modules.packages/signUp
 RUN ["yarn", "run", "build"]
 
 WORKDIR /app/shop.modules.packages/about
