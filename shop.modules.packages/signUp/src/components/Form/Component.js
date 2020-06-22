@@ -1,14 +1,23 @@
 
 import { Container, Row, Col, InputField, DatePickerField, Button } from '@ui.packages/kit';
 
+import types from 'prop-types';
 import React, { PureComponent } from 'react';
 
 import styles from './default.module.scss';
 
 
 class Component extends PureComponent {
+  static propTypes = {
+    isValid: types.bool,
+    isPristine: types.bool,
+    handleSubmit: types.func,
+  };
+
+  static defaultProps = {};
+
   render() {
-    const { handleSubmit } = this.props;
+    const { handleSubmit, isValid, isPristine } = this.props;
 
     return (
       <form className={styles['sign-up']} onSubmit={handleSubmit}>
@@ -45,7 +54,11 @@ class Component extends PureComponent {
           </Row>
           <Row>
             <Col>
-              <Button type="submit" mode="success">Регистрация</Button>
+              <Button
+                type="submit"
+                mode="success"
+                disabled={ ! isValid || isPristine}
+              >Регистрация</Button>
             </Col>
           </Row>
         </Container>
