@@ -4,7 +4,7 @@ import { Button, Col, Container, Row, Breadcrumbs } from '@ui.packages/kit';
 
 import types from 'prop-types';
 import { Link } from "react-router-dom";
-import React, {lazy, PureComponent} from 'react';
+import React, { lazy, Suspense, PureComponent } from 'react';
 
 import styles from './default.module.scss';
 
@@ -71,47 +71,49 @@ class Component extends PureComponent {
     const calculatedAmount = calculateFullAmount(products['items']);
 
     return (
-      <section className={styles['wrapper']}>
-        <div className={styles['breadcrumbs']}>
-          <div className={styles['breadcrumbs__content']}>
-            <Breadcrumbs
-              items={[
-                { title: 'Витрина', href: '/products' },
-                { title: `Оформление заказа` },
-              ]}
-            />
+      <Suspense fallback={null}>
+        <section className={styles['wrapper']}>
+          <div className={styles['breadcrumbs']}>
+            <div className={styles['breadcrumbs__content']}>
+              <Breadcrumbs
+                items={[
+                  { title: 'Витрина', href: '/products' },
+                  { title: `Оформление заказа` },
+                ]}
+              />
+            </div>
           </div>
-        </div>
-        <div className={styles['content']}>
-          {hasProducts
-            ? (
-              <Container>
-                <Row>
-                  <Col>
-                    <OrderModify onSubmit={this._handleSendOrderData.bind(this)}/>
-                  </Col>
-                </Row>
-                <Row>
-                  <Col className={styles['controls']}>
-                    <p className={styles['message']}>Нажимая на кнопку ”Оформить заказ”, Вы подтверждаете согласие на обработку "Персональных данных".</p>
-                    <Button mode="success" size="l" disabled={ ! isValid || inProcess} onClick={this._handleSubmitOrder.bind(this)}>
-                      Оформить заказ на сумму {numeral(calculatedAmount).format()} руб.
-                    </Button>
-                  </Col>
-                </Row>
-              </Container>
-            )
-            : (
-              <div className={styles['empty']}>
-                <p className={styles['empty__message']}>Нет выбранных товаров</p>
-                <p className={styles['empty__description']}>Перейти в раздел <Link className={styles['link']} to="/">Витрина</Link></p>
-              </div>
-            )}
-        </div>
-        {/*<Dialog name="success">*/}
-        {/*  <OrderSuccess />*/}
-        {/*</Dialog>*/}
-      </section>
+          <div className={styles['content']}>
+            {hasProducts
+              ? (
+                <Container>
+                  <Row>
+                    <Col>
+                      <OrderModify onSubmit={this._handleSendOrderData.bind(this)}/>
+                    </Col>
+                  </Row>
+                  <Row>
+                    <Col className={styles['controls']}>
+                      <p className={styles['message']}>Нажимая на кнопку ”Оформить заказ”, Вы подтверждаете согласие на обработку "Персональных данных".</p>
+                      <Button mode="success" size="l" disabled={ ! isValid || inProcess} onClick={this._handleSubmitOrder.bind(this)}>
+                        Оформить заказ на сумму {numeral(calculatedAmount).format()} руб.
+                      </Button>
+                    </Col>
+                  </Row>
+                </Container>
+              )
+              : (
+                <div className={styles['empty']}>
+                  <p className={styles['empty__message']}>Нет выбранных товаров</p>
+                  <p className={styles['empty__description']}>Перейти в раздел <Link className={styles['link']} to="/">Витрина</Link></p>
+                </div>
+              )}
+          </div>
+          {/*<Dialog name="success">*/}
+          {/*  <OrderSuccess />*/}
+          {/*</Dialog>*/}
+        </section>
+      </Suspense>
     );
   }
 }
