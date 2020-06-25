@@ -26,6 +26,9 @@ class Component extends PureComponent {
       <Suspense fallback={null}>
         <section className={styles['wrapper']}>
           <div className={styles['content']}>
+            <header className={styles['header']}>
+              <h2 className={styles['title']}>Регистрация</h2>
+            </header>
             <SignUpForm onSubmit={this._handleSubmit.bind(this)} />
           </div>
         </section>

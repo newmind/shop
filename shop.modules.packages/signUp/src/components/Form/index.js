@@ -18,12 +18,24 @@ const validate = (values) => {
     errors['password'] = 'Обязательно к заполнению';
   }
 
+  if ( ! values['name']) {
+    errors['name'] = 'Обязательно к заполнению';
+  }
+
   if ( ! values['surname']) {
     errors['surname'] = 'Обязательно к заполнению';
   }
 
-  if ( ! values['name']) {
-    errors['name'] = 'Обязательно к заполнению';
+  if ( ! values['phone']) {
+    errors['phone'] = 'Обязательно к заполнению';
+  }
+
+  if ( ! values['birthday']) {
+    errors['birthday'] = 'Обязательно к заполнению';
+  }
+
+  if ( ! values['sex']) {
+    errors['sex'] = 'Обязательно к заполнению';
   }
 
   return errors;
