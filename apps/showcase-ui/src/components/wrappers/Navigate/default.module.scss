@@ -14,9 +14,34 @@
   position: relative;
   display: flex;
   flex: 1 0;
-  flex-direction: column;
+  flex-direction: row;
   margin: 0 auto;
   width: 1024px;
+  align-items: center;
+}
+
+.menu {
+
+  display: flex;
+  flex-direction: column;
+  flex: 1 0;
+}
+
+.controls {
+
+  display: block;
+}
+
+.link {
+
+  display: inline-block;
+  font: 300 16px "Istok Web", sans-serif;
+  color: $coal-dark;
+  background: transparent;
+  cursor: pointer;
+  transition: color 400ms;
+  align-items: center;
+  vertical-align: bottom;
 }
 
 .tablet {

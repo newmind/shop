@@ -77,6 +77,7 @@ class Component extends PureComponent {
     signIn: types.func,
     signOut: types.func,
     onNavLink: types.func,
+    signDialog: types.func,
   };
 
   static getDerivedStateFromError(error) {
@@ -87,13 +88,14 @@ class Component extends PureComponent {
   };
 
   getChildContext() {
-    const { profile, isAuth, signIn, signOut, navigate } = this.props;
+    const { profile, isAuth, signIn, signOut, navigate, signDialog } = this.props;
     return {
       navigate,
       profile,
       isAuth,
       signIn,
       signOut,
+      signDialog
     };
   }
 
@@ -104,6 +106,7 @@ class Component extends PureComponent {
 
   async componentDidMount() {
     const { changeState, getProfile } = this.props;
+
     await getProfile();
     changeState(true);
   }

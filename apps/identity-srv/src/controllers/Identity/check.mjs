@@ -1,4 +1,3 @@
-'use strict';
 
 import jwt from 'jsonwebtoken';
 
@@ -21,7 +20,7 @@ export default () => async (ctx) => {
   try {
 
     const { token } = ctx['request']['body'];
-
+console.log(123, token)
     // декодируем авторизационный токен
     const user = await decode(token);
 

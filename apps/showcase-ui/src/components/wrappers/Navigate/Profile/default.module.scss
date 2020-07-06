@@ -1,0 +1,71 @@
+
+@import "~@ui.packages/theme";
+
+
+.profile {
+
+  display: inline-block;
+}
+
+.options {
+
+  display: inline-block;
+  font-size: 20px;
+  color: $pale-lilac;
+  vertical-align: middle;
+  transition: color 200ms;
+  cursor: pointer;
+
+  &:hover {
+
+    color: $information;
+  }
+}
+
+.name {
+
+  display: inline-block;
+  font: 500 16px "Istok Web";
+  color: $coal-dark;
+  vertical-align: middle;
+  padding: 0 20px 0 10px;
+}
+
+.exit {
+
+  display: inline-block;
+  font-size: 20px;
+  color: $pale-lilac;
+  vertical-align: middle;
+  transition: color 200ms;
+  cursor: pointer;
+
+  &:hover {
+
+    color: $danger;
+  }
+}
+
+.sign-in {
+
+  display: inline-block;
+  cursor: pointer;
+
+  &__caption {
+
+    display: inline-block;
+    font: 500 16px "Istok Web";
+    color: $coal-dark;
+    vertical-align: middle;
+  }
+
+  &__icon {
+
+    display: inline-block;
+    font-size: 20px;
+    color: $pale-lilac;
+    vertical-align: middle;
+    transition: color 200ms;
+    margin: 0 0 0 15px;
+  }
+}

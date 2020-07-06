@@ -30,6 +30,8 @@ export default () => async (ctx) => {
       birthday: formData['birthday'],
       email: formData['login'],
       phone: formData['phone'],
+      patronymic: formData['patronymic'],
+      sex: formData['sex'],
     }, { transaction });
 
     await transaction.commit();

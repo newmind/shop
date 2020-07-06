@@ -1,11 +1,13 @@
 
 import koaCORS from '@sys.packages/cors';
+import { checkCookie, getCookie } from "@sys.packages/jwt";
 import logger from '@sys.packages/logger';
 import createSocket from '@sys.packages/socket.io';
 import appServer, { initRouter } from '@sys.packages/server';
 import { connectToRabbit, queueToExchange } from '@sys.packages/rabbit';
 
 import http from 'http';
+import cookie from 'koa-cookie';
 
 import routes from './routes';
 
@@ -38,11 +40,35 @@ import { updateType } from './actions/types';
       allowMethods: ['GET', 'POST', 'PATCH', 'PUT', 'DELETE', 'OPTIONS'],
     }));
 
+    appServer.use(cookie.default());
+
     const httpServer = http.createServer(appServer.callback());
     const io = await createSocket(httpServer, { path: '/showcase.socket.io' });
 
     appServer.use(async (ctx, next) => {
       ctx.io = io.sockets;
+      await next();
+    });
+
+    appServer.use(async (ctx, next) => {
+      const cookie = await getCookie(ctx, process.env['COOKIE_NAME'], { silent: true });
+
+      if (cookie) {
+        const { data } = await checkCookie(cookie, {
+          serviceUrl: process.env['IDENTITY_API_SRV'],
+        });
+
+        if ( ! data) {
+          ctx.user = null;
+        }
+        else {
+          ctx.user = data['data'];
+        }
+      }
+      else {
+        ctx.user = null;
+      }
+
       await next();
     });
 

@@ -6,7 +6,7 @@ import { bindActionCreators } from 'redux';
 
 import Component from './Component';
 
-import { getProfile, changeState, signIn, signOut } from '../ducks/commands';
+import { getProfile, changeState, signIn, signOut, signDialog } from '../ducks/commands';
 
 
 const mapStateToProps = (store) => {
@@ -24,6 +24,7 @@ const mapActionsToProps = dispatch => ({
   signOut: bindActionCreators(signOut, dispatch),
   getProfile: bindActionCreators(getProfile, dispatch),
   changeState: bindActionCreators(changeState, dispatch),
+  signDialog: bindActionCreators(signDialog, dispatch),
 });
 
 export default withSizes(({ width }) => ({

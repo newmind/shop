@@ -1,8 +1,8 @@
 
-import jwt from 'jsonwebtoken';
-
-import { genHash256, token } from '@sys.packages/sys.utils';
 import { models } from '@sys.packages/db';
+import { genHash256, token } from '@sys.packages/sys.utils';
+
+import jwt from 'jsonwebtoken';
 
 
 export default () => async (ctx) => {
@@ -30,7 +30,6 @@ export default () => async (ctx) => {
     const refreshToken = token(process.env['JWT_SECRET']).digest('hex');
 
     // await User.update({ refreshToken }, { where: { id: user['id'] }});
-
 
     // организуем авторизационный объект
     const payload = {

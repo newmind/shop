@@ -1,7 +1,7 @@
 
-import { push } from 'react-router-redux';
-
 import request from "@ui.packages/request";
+import { openDialog } from '@ui.packages/dialog';
+import { pushNotification } from "@ui.packages/notifications";
 import { instance, joinToRoom, connect, disconnect } from '@ui.packages/socket';
 
 import {
@@ -21,17 +21,11 @@ import {
   applicationSignOutRequestSuccessAction,
 } from './actions';
 
-import { pushNotification } from "@ui.packages/notifications";
 
-
-export const changeState = (state) => async (dispatch) => {
-
-  dispatch(changeStateAction(state));
-};
+export const changeState = (state) => async (dispatch) => dispatch(changeStateAction(state));
 
 export const getProfile = () => async (dispatch) => {
   try {
-
     dispatch(applicationGetProfileRequestAction());
 
     const profile = await request({
@@ -42,25 +36,21 @@ export const getProfile = () => async (dispatch) => {
 
     dispatch(applicationGetProfileRequestSuccessAction(profile));
     joinToRoom(profile['id']);
-
-  } catch(error) {
+  }
+  catch(error) {
 
     dispatch(applicationGetProfileRequestFailAction());
-    dispatch(push('/sign-in'));
   }
 };
 
 export const signIn = (formData) => async dispatch => {
   try {
-
     dispatch(applicationAuthRequestAction());
 
     const result = await request({
       url: '/sign-in',
       method: 'post',
-      data: {
-        ...formData,
-      }
+      data: formData,
     });
 
     dispatch(getProfile());
@@ -74,10 +64,8 @@ export const signIn = (formData) => async dispatch => {
     joinToRoom(result['id']);
 
     dispatch(applicationAuthRequestSuccessAction(result));
-
-    dispatch(push('/'));
-
-  } catch(error) {
+  }
+  catch(error) {
 
     const notification = {
       mode: '',
@@ -101,10 +89,8 @@ export const signIn = (formData) => async dispatch => {
   }
 };
 
-
 export const signOut = () => async (dispatch) => {
   try {
-
     dispatch(applicationSignOutRequestAction());
 
     await request({
@@ -116,11 +102,11 @@ export const signOut = () => async (dispatch) => {
 
     dispatch(signOutAction());
     dispatch(applicationSignOutRequestSuccessAction());
-
-    dispatch(push('/sign-in'));
-
-  } catch(error) {
+  }
+  catch(error) {
 
     dispatch(applicationSignOutRequestFailAction(error));
   }
 };
+
+export const signDialog = () => async (dispatch) => dispatch(openDialog('sign-in'));
