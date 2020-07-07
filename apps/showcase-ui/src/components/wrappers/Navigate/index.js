@@ -6,9 +6,9 @@ import React, { PureComponent } from 'react';
 
 import Header from './Header';
 import Footer from './Footer';
+import Profile from './Profile';
 import Navigation from './Navigation';
 import SignInForm from './SignInForm';
-import Profile from './Profile';
 
 import styles from './default.module.scss';
 
@@ -60,7 +60,7 @@ class Component extends PureComponent {
             <Footer />
           </div>
         </footer>
-        <Dialog name="sign-in" title="Авторизация">
+        <Dialog name="sign-in" title="Войти в личный кабинет">
           <SignInForm onSubmit={signIn.bind(this)} />
         </Dialog>
       </section>

@@ -3,6 +3,8 @@ import { InputField, Button, Row, Col } from '@ui.packages/kit';
 
 import React from 'react';
 
+import styles from './default.module.scss';
+
 
 export default ({ handleSubmit }) => {
   return (
@@ -19,7 +21,9 @@ export default ({ handleSubmit }) => {
       </Row>
       <Row>
         <Col>
-          <Button type="submit">Авторизация</Button>
+          <div className={styles['controls']}>
+            <Button type="submit" mode="success">Войти</Button>
+          </div>
         </Col>
       </Row>
     </form>
