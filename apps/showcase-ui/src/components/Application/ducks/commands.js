@@ -109,4 +109,6 @@ export const signOut = () => async (dispatch) => {
   }
 };
 
-export const signDialog = () => async (dispatch) => dispatch(openDialog('sign-in'));
+export const signDialog = () => async (dispatch) => {
+  dispatch(openDialog('sign-in'));
+};

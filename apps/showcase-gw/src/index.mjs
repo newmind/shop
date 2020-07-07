@@ -1,8 +1,8 @@
 
 import koaCORS from '@sys.packages/cors';
-import { checkCookie, getCookie } from "@sys.packages/jwt";
 import logger from '@sys.packages/logger';
 import createSocket from '@sys.packages/socket.io';
+import { checkCookie, getCookie } from "@sys.packages/jwt";
 import appServer, { initRouter } from '@sys.packages/server';
 import { connectToRabbit, queueToExchange } from '@sys.packages/rabbit';
 
@@ -11,9 +11,9 @@ import cookie from 'koa-cookie';
 
 import routes from './routes';
 
-import { createComment, updateComment, deleteComment } from './actions/comments';
 import { updateForm } from './actions/forms';
 import { updateType } from './actions/types';
+import { createComment, updateComment, deleteComment } from './actions/comments';
 
 
 (async () => {

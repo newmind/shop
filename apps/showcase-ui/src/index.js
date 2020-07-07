@@ -10,7 +10,6 @@ import { Provider } from 'react-redux';
 import { Router } from 'react-router';
 import { routerMiddleware } from 'react-router-redux';
 import createSocketIoMiddleware from 'redux-socket.io';
-import { YMInitializer } from 'react-yandex-metrika';
 
 import createStore, { importReducer }  from './bin/createStore';
 import createHistory from './bin/createRouter';
@@ -34,7 +33,10 @@ const store = createStore({},
   thunk,
   routerMiddleware(history),
   createSocketIoMiddleware(socket),
-  requestMiddleware(process.env['REACT_APP_API_HOST'])
+  requestMiddleware({
+    host: process.env['REACT_APP_API_HOST'],
+    silent: true,
+  })
 );
 
 
@@ -51,17 +53,7 @@ const store = createStore({},
           routes={routes}
           navigate={navigate}
         />
-        <YMInitializer
-          accounts={[ Number(process.env['REACT_APP_YANDEX_METRIKA']) ]}
-          options={{
-            clickmap:true,
-            webvisor: true,
-            trackLinks:true,
-            accurateTrackBounce:true,
-          }}
-          version="2"
-        />
-        </Router>
+      </Router>
     </Provider>
   ), document.getElementById('root'));
 

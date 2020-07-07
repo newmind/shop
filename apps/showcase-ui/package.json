@@ -40,7 +40,6 @@
     "react-router": "5.2.0",
     "react-router-dom": "5.2.0",
     "react-router-redux": "4.0.8",
-    "react-scripts": "3.4.1",
     "react-sizes": "2.0.0",
     "react-yandex-metrika": "2.6.0",
     "redux": "4.0.5",
@@ -51,6 +50,7 @@
   },
   "devDependencies": {
     "@fortawesome/fontawesome-free": "5.13.1",
+    "react-scripts": "3.4.1",
     "node-sass": "4.14.1"
   },
   "browserslist": [

@@ -4,6 +4,7 @@ import { Notifications } from '@ui.packages/notifications';
 import types from 'prop-types';
 import { Route, Switch } from "react-router";
 import React, { PureComponent } from 'react';
+import { YMInitializer } from 'react-yandex-metrika';
 
 import Error from '../../Error';
 import Loader from '../../Loader';
@@ -129,6 +130,16 @@ class Component extends PureComponent {
             : <Error error={error} />)
           : <Loader />}
         <Notifications/>
+        <YMInitializer
+          accounts={[ Number(process.env['REACT_APP_YANDEX_METRIKA']) ]}
+          options={{
+            clickmap:true,
+            webvisor: true,
+            trackLinks:true,
+            accurateTrackBounce:true,
+          }}
+          version="2"
+        />
       </div>
     );
   }
