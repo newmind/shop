@@ -1,0 +1,72 @@
+
+@import "~@ui.packages/theme";
+
+
+.container {
+
+  display: block;
+}
+
+.header {
+
+  display: block;
+  font: 700 18px "Exo 2";
+  letter-spacing: .5px;
+}
+
+.content {
+
+  display: block;
+  margin: 40px 0 0;
+  padding: 0 20px;
+}
+
+.block {
+
+  display: flex;
+  flex: 1 0;
+  flex-direction: row;
+
+  & + & {
+
+    margin-top: 30px;
+  }
+
+  &__label {
+
+    display: block;
+    width: 200px;
+  }
+}
+
+.label {
+
+  display: inline-block;
+
+  &__icon {
+
+    display: inline-block;
+    vertical-align: middle;
+    font-size: 14px;
+    width: 24px;
+    color: $primary;
+  }
+
+  &__caption {
+
+    display: inline-block;
+    vertical-align: middle;
+    font: bold 12px "Istok Web";
+    text-transform: uppercase;
+    letter-spacing: .5px;
+    color: $blue-grey;
+    padding: 2px 0 0;
+  }
+}
+
+.paragraph {
+
+  display: block;
+  font: 500 14px "Istok Web";
+  color: $coal-dark;
+}

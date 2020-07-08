@@ -2,7 +2,6 @@
 import React, { PureComponent } from 'react';
 
 import Header from "./Header";
-import Footer from "./Footer";
 
 import styles from './default.module.scss';
 
@@ -26,11 +25,6 @@ class Component extends PureComponent {
             { children }
           </article>
         </section>
-        <footer className={styles['footer']}>
-          <div className={styles['center']}>
-            <Footer />
-          </div>
-        </footer>
       </section>
     );
   }

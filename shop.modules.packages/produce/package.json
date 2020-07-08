@@ -9,23 +9,16 @@
   },
   "dependencies": {
     "@fortawesome/fontawesome-free": "5.13.1",
-    "@packages/errors": "1.0.0",
-    "@packages/numeral": "1.0.0",
-    "@ui.packages/dialog": "1.0.0",
     "@ui.packages/hocs": "1.0.0",
     "@ui.packages/kit": "1.0.0",
-    "@ui.packages/moment": "1.0.0",
-    "@ui.packages/notifications": "1.0.0",
-    "@ui.packages/request": "1.0.0",
-    "@ui.packages/socket": "1.0.0",
     "@ui.packages/theme": "1.0.0",
-    "@ui.packages/utils": "1.0.0",
     "prop-types": "15.7.2",
     "react": "16.13.1",
     "react-redux": "7.2.0",
     "react-router-dom": "5.2.0",
     "redux": "4.0.5",
-    "redux-form": "8.3.6"
+    "redux-form": "8.3.6",
+    "classnames": "2.2.6"
   },
   "devDependencies": {
     "@babel/cli": "7.10.1",
