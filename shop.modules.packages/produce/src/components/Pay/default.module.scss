@@ -19,3 +19,56 @@
   display: block;
   margin: 40px 0 0;
 }
+
+.block {
+
+  display: flex;
+  flex: 1 0;
+  flex-direction: row;
+
+  &__col {
+
+    display: flex;
+    flex-direction: column;
+    flex: 1 0;
+    align-items: center;
+  }
+}
+
+.pay {
+
+  display: flex;
+  flex: 1 0;
+  flex-direction: column;
+  width: 300px;
+  text-align: center;
+  white-space: pre-wrap;
+
+  &__icon {
+
+    display: inline-block;
+    font-size: 50px;
+    color: $warning;
+    white-space: pre-line;
+  }
+
+  &__label {
+
+    display: inline-block;
+    font: bold 12px "Istok Web";
+    letter-spacing: .5px;
+    color: $blue-grey;
+    text-transform: uppercase;
+    white-space: pre-wrap;
+    margin-top: 15px;
+  }
+
+  &__description {
+
+    display: block;
+    color: $coal-dark;
+    font: 14px "Istok Web";
+    line-height: 20px;
+    margin-top: 20px;
+  }
+}
