@@ -1,36 +1,27 @@
-'use strict';
+
+import { NotAuthError } from '@packages/errors';
 
 import request from "axios";
 import jwt from 'jsonwebtoken';
 
-import { CustomError } from '@packages/errors';
 
-
-class NotAuthorize extends CustomError {
-  constructor(status, data) {
-    super(data);
-
-    this.name = NotAuthorize.name;
-    this.status = status;
-
-    Error.captureStackTrace(this, NotAuthorize);
-  }
-}
-
-
-const getCookie = async (ctx, name) => {
+export const getCookie = async (ctx, name, { silent = false }) => {
 
   const cookies = ctx['cookie'] || {};
   const cookie = cookies[name] || null;
 
   if ( ! cookie) {
-    throw new NotAuthorize(401, { code: '', message: 'User not authorize' });
+    if ( ! silent) {
+      throw new NotAuthError({ code: '', message: 'User not authorize' });
+    }
+    return null;
   }
-
-  return JSON.parse(decodeURIComponent(cookie));
+  else {
+    return JSON.parse(decodeURIComponent(cookie));
+  }
 };
 
-const checkCookie = async (cookie, { serviceUrl }) => {
+export const checkCookie = async (cookie, { serviceUrl }) => {
   try {
 
     const { data } = await request({
@@ -85,8 +76,7 @@ export default (options) => async (ctx, next) => {
   const { name, serviceUrl } = options;
 
   try {
-
-    const cookie = await getCookie(ctx, name);
+    const cookie = await getCookie(ctx, name, { silent: false, });
     const { status, data } = await checkCookie(cookie, { serviceUrl });
 
     let userData = data;
@@ -107,7 +97,7 @@ export default (options) => async (ctx, next) => {
 
   } catch(error) {
 
-    if (error instanceof NotAuthorize) {
+    if (error instanceof NotAuthError) {
       ctx.status = 401;
       return ctx.body = {
         success: true,

@@ -21,6 +21,10 @@ module.exports = (db, DataType) => {
       type: DataType.STRING(125),
       index: true,
     },
+    patronymic: {
+      type: DataType.STRING(125),
+      allowNull: true,
+    },
     surname: {
       type: DataType.STRING(125),
       index: true,
@@ -41,11 +45,18 @@ module.exports = (db, DataType) => {
       type: DataType.STRING,
       index: true,
     },
+    sex: {
+      type: DataType.STRING(32),
+      index: true,
+      allowNull: true,
+    },
+    imageId: {
+      type: DataType.UUID,
+      allowNull: true,
+    }
   });
 
   Passport.associate = ({}) => {};
-
-  // Passport.sync({ force: true });
 
   return Passport;
 };

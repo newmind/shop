@@ -6,6 +6,7 @@
 
   display: block;
   box-sizing: border-box;
+  padding: 60px 0 200px;
 }
 
 .content {
@@ -13,7 +14,13 @@
   display: block;
   width: 1024px;
   margin: 0 auto;
-  padding: 60px 0 200px;
+  padding: 0 0 60px;
+
+  & + & {
+
+    border-top: 1px solid $pale-lilac;
+    padding: 40px 0 60px;
+  }
 }
 
 .breadcrumbs {

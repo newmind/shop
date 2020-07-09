@@ -6,6 +6,8 @@ import styles from './default.module.scss';
 
 
 class Component extends PureComponent {
+  static displayName = 'Loader';
+
   render() {
     return (
       <div className={styles['wrapper']}>

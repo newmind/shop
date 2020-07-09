@@ -1,6 +1,12 @@
 
 import logger from '@sys.packages/logger';
-import { NetworkError } from '@packages/errors';
+import {
+  BadRequestError,
+  NotAuthError,
+  NotFoundError,
+  ValidationError,
+  NetworkError,
+} from '@packages/errors';
 
 import axios from 'axios';
 
@@ -52,7 +58,7 @@ const errorLogger = (error) => {
   let status = 0;
   let data = null;
 
-  if(response){
+  if (response) {
     status = response['status'];
     if ('data' in response) {
       data = JSON.stringify(response.data);
@@ -63,11 +69,27 @@ const errorLogger = (error) => {
 
   if ('errno' in error) {
     if (error['errno'] === 'ECONNREFUSED') {
-      return Promise.reject(new NetworkError(500, 'Сервис временно недоступен'));
+      return Promise.reject(new NetworkError('Сервис временно недоступен'));
     }
   }
 
-  return Promise.reject(new NetworkError(error['status'], error['message']));
+  if (response) {
+    if (response['status'] === 400) {
+      return Promise.reject(new BadRequestError(response['data']));
+    }
+    else if (response['status'] === 401) {
+      return Promise.reject(new NotAuthError(response['data']));
+    }
+    else if (response['status'] === 404) {
+      return Promise.reject(new NotFoundError(response['data']));
+    }
+    else if (response['status'] === 417) {
+      return Promise.reject(new ValidationError(response['data']));
+    }
+    else {
+      return Promise.reject(new NetworkError(response['data']));
+    }
+  }
 };
 
 

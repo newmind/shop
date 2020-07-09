@@ -1,15 +1,17 @@
 
 import { connect } from 'react-redux';
-import { withRouter } from 'react-router-dom';
 
 import Component from './Component';
 
 
-const mapStateToProps = () => ({});
+const mapStateToProps = (state) => ({
+  items: state['main']['categories'],
+});
 
 const mapActionsToProps = () => ({});
 
-export default withRouter(connect(
+
+export default connect(
   mapStateToProps,
   mapActionsToProps,
-)(Component));
+)(Component);

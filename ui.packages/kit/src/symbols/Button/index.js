@@ -1,5 +1,6 @@
 
 import types from 'prop-types';
+import { Link } from 'react-router-dom';
 import React, { PureComponent } from 'react';
 
 import cn from 'classnames';
@@ -16,7 +17,8 @@ const SUCCESS_MODE = 'success';
 class Component extends PureComponent {
   static propTypes = {
     className: types.string,
-    type: types.oneOf(['button', 'submit']),
+    href: types.string,
+    type: types.oneOf(['button', 'submit', 'link']),
     mode: types.oneOf(['info', 'primary', 'danger', 'warning', 'success', 'default']),
     size: types.oneOf(['s', 'm', 'l']),
     caption: types.string,
@@ -26,6 +28,7 @@ class Component extends PureComponent {
   };
 
   static defaultProps = {
+    href: '#',
     type: 'button',
     mode: 'default',
     caption: null,
@@ -35,11 +38,13 @@ class Component extends PureComponent {
 
   _handleClick() {
     const { onClick } = this.props;
+
     onClick && onClick();
   }
 
   render() {
-    const { type, className, caption, children, disabled, mode, size } = this.props;
+    const { type, href, className, caption, children, disabled, mode, size } = this.props;
+
     const classNameButton = cn(className, styles['button'], {
       [styles['button--primary']]: mode === PRIMARY_MODE,
       [styles['button--success']]: mode === SUCCESS_MODE,
@@ -51,6 +56,13 @@ class Component extends PureComponent {
       [styles['button--small']]: size === 's',
       [styles['button--large']]: size === 'l',
     });
+
+    if (type === 'link') {
+      return (
+        <Link className={classNameButton} to={href}>{ caption || children }</Link>
+      );
+    }
+
     return (
       <button type={type} className={classNameButton} onClick={this._handleClick.bind(this)} disabled={disabled}>
         {caption || children}

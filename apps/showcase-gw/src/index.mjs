@@ -1,17 +1,19 @@
 
+import koaCORS from '@sys.packages/cors';
 import logger from '@sys.packages/logger';
 import createSocket from '@sys.packages/socket.io';
+import { checkCookie, getCookie } from "@sys.packages/jwt";
 import appServer, { initRouter } from '@sys.packages/server';
 import { connectToRabbit, queueToExchange } from '@sys.packages/rabbit';
 
 import http from 'http';
-import koaCORS from "koa-cors2";
+import cookie from 'koa-cookie';
 
 import routes from './routes';
 
-import { createComment, updateComment, deleteComment } from './actions/comments';
 import { updateForm } from './actions/forms';
 import { updateType } from './actions/types';
+import { createComment, updateComment, deleteComment } from './actions/comments';
 
 
 (async () => {
@@ -34,15 +36,39 @@ import { updateType } from './actions/types';
 
     appServer.use(koaCORS({
       credentials: true,
-      origin: process.env['HTTP_ORIGINS'],
+      allowedOrigins: process.env['HTTP_ORIGINS'].split(','),
       allowMethods: ['GET', 'POST', 'PATCH', 'PUT', 'DELETE', 'OPTIONS'],
     }));
+
+    appServer.use(cookie.default());
 
     const httpServer = http.createServer(appServer.callback());
     const io = await createSocket(httpServer, { path: '/showcase.socket.io' });
 
     appServer.use(async (ctx, next) => {
       ctx.io = io.sockets;
+      await next();
+    });
+
+    appServer.use(async (ctx, next) => {
+      const cookie = await getCookie(ctx, process.env['COOKIE_NAME'], { silent: true });
+
+      if (cookie) {
+        const { data } = await checkCookie(cookie, {
+          serviceUrl: process.env['IDENTITY_API_SRV'],
+        });
+
+        if ( ! data) {
+          ctx.user = null;
+        }
+        else {
+          ctx.user = data['data'];
+        }
+      }
+      else {
+        ctx.user = null;
+      }
+
       await next();
     });
 

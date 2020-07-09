@@ -112,11 +112,13 @@ services:
       - product_proxy
       - gallery_proxy
       - operation_proxy
+      - identity_srv
     links:
       - rabbit
       - product_proxy
       - gallery_proxy
       - operation_proxy
+      - identity_srv
 
 
   admin_ui:
@@ -151,20 +153,6 @@ services:
       - NODE_ENV=production
 
 
-#  prerender:
-#    container_name: prerender
-#    build:
-#      context: ./
-#      dockerfile: Dockerfile.prerender-srv
-#    restart: always
-#    depends_on:
-#      - showcase_ui
-#    links:
-#      - showcase_ui
-#    ports:
-#      - 8080:8080
-
-
   certbot:
     user: root
     container_name: certbot
@@ -183,11 +171,9 @@ services:
     depends_on:
       - admin_ui
       - showcase_ui
-#      - prerender
     links:
       - admin_ui
       - showcase_ui
-#      - prerender
     ports:
       - 80:80
       - 443:443

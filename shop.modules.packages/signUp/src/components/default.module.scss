@@ -1,0 +1,42 @@
+
+@import "~@ui.packages/theme";
+
+
+.wrapper {
+
+  display: block;
+}
+
+.content {
+
+  display: block;
+  width: 1024px;
+  margin: 0 auto;
+  padding: 60px 0 200px;
+}
+
+.header {
+
+  display: block;
+  margin: 0 0 40px 0;
+
+  .title {
+
+    display: block;
+    margin: 0 0 30px;
+    font: 700 18px "Exo 2";
+    letter-spacing: .5px;
+    text-align: center;
+  }
+}
+
+
+.sign-up {
+
+  display: block;
+  border: 1px solid $blue-grey;
+  border-radius: 5px;
+  padding: 40px;
+  width: 250px;
+  margin: 0 auto;
+}

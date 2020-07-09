@@ -12,6 +12,7 @@ module.exports = (db, DataType) => {
     login: {
       type: DataType.STRING(125),
       index: true,
+      unique: true,
     },
     password: {
       type: DataType.STRING(255),

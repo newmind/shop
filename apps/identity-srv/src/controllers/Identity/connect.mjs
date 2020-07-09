@@ -1,9 +1,8 @@
-'use strict';
+
+import { models } from '@sys.packages/db';
+import { genHash256, token } from '@sys.packages/sys.utils';
 
 import jwt from 'jsonwebtoken';
-
-import { genHash256, token } from '@sys.packages/sys.utils';
-import { models } from '@sys.packages/db';
 
 
 export default () => async (ctx) => {
@@ -32,7 +31,6 @@ export default () => async (ctx) => {
 
     // await User.update({ refreshToken }, { where: { id: user['id'] }});
 
-
     // организуем авторизационный объект
     const payload = {
       id: user['id'],
@@ -44,6 +42,7 @@ export default () => async (ctx) => {
     });
 
     ctx.body = {
+      success: true,
       data: {
         token: identityToken,
         refreshToken: refreshToken,

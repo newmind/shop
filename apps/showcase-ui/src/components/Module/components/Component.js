@@ -1,13 +1,13 @@
 
 import PropTypes from 'prop-types';
-import React, { PureComponent, lazy } from 'react';
-
-import { injectAsyncReducer, checkReducer } from '../../../bin/createStore';
+import React, { PureComponent } from 'react';
 
 import Page from '../../Page/components'
 import Empty from '../../wrappers/Empty';
 import Navigate from '../../wrappers/Navigate';
 import Composite from '../../wrappers/Composite';
+
+import { injectAsyncReducer, checkReducer } from '../../../bin/createStore';
 
 
 const wrapperFactory = (module) => (props) => {
@@ -15,7 +15,7 @@ const wrapperFactory = (module) => (props) => {
     case 'Navigate': return <Navigate {...props} />;
     case 'Composite': return <Composite {...props} />;
     case 'Empty': return <Empty {...props} />;
-    default: return null;
+    default: return <Empty {...props} />;
   }
 };
 
@@ -51,9 +51,10 @@ class ModuleComponent extends PureComponent {
 
   async _attachModule() {
     const { module } = this.props;
-    const Module = lazy(() => module);
 
-    this.setState({ Module });
+    const Module = await module;
+
+    this.setState({ Module: Module['default'] });
   }
 
   async _startProcess() {

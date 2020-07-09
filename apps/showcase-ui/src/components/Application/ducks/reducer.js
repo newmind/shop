@@ -17,6 +17,7 @@ import {
   SOCKET_PASSPORT_UPDATED,
 } from './types';
 
+
 const initialState = {
   isInit: false,
   isAuth: false,
@@ -45,8 +46,8 @@ export default (state = initialState, { type, payload }) => {
     };
     case APPLICATION_GET_PROFILE_REQUEST_SUCCESS: return {
       ...state,
-      profile: payload,
-      isAuth: true,
+      profile: payload['data'],
+      isAuth: !! payload['data'],
     };
 
     case APPLICATION_SIG_OUT_REQUEST: return {

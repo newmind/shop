@@ -1,5 +1,5 @@
 
-import { NetworkError } from '@packages/errors';
+import {BadRequestError, NetworkError, NotAuthError, NotFoundError, ValidationError} from '@packages/errors';
 
 import axios from 'axios';
 import { push } from 'react-router-redux';
@@ -9,16 +9,19 @@ const defaultOptions = {
   method: 'get',
   url: '/',
   responseType: 'json',
+  silent: false,
 };
 
 let dispatch = null;
 let hostApi = null;
 
 
-export const middleware = (host) => (store) => (next) => (action) => {
+export const middleware = (options) => (store) => (next) => (action) => {
 
   dispatch = store['dispatch'];
-  hostApi = host;
+  hostApi = options['host'];
+
+  defaultOptions['silent'] = options['silent'] || false;
 
   return next(action);
 };
@@ -46,22 +49,36 @@ const request = async (options) => {
     const { data } = await instance(options);
 
     return data;
-
-  } catch(error) {
-
+  }
+  catch(error) {
     if (error['response']) {
+      const { status, data } = error['response'];
 
-      const {status, data} = error['response'];
-
-      if (status === 401) {
-        dispatch(push('/sign-in'));
+      if ( ! options['silent']) {
+        if (status === 401) {
+          dispatch(push('/sign-in'));
+        }
       }
 
-      throw new NetworkError(status, data);
+      if (status === 400) {
+        return Promise.reject(new BadRequestError(data));
+      }
+      else if (status === 401) {
+        return Promise.reject(new NotAuthError(data));
+      }
+      else if (status === 404) {
+        return Promise.reject(new NotFoundError(data));
+      }
+      else if (status === 417) {
+        return Promise.reject(new ValidationError(data));
+      }
+      else {
+        return Promise.reject(new NetworkError(data));
+      }
+    }
+    else {
 
-    } else {
-
-      throw new NetworkError(500, { code: '1.0.0', message: 'Сервис временно не доступен' });
+      throw new NetworkError({ code: '1.0.0', message: 'Сервис временно не доступен' });
     }
   }
 };

@@ -6,6 +6,7 @@ import Spinner from '../Spinner';
 
 import cn from 'classnames';
 import styles from './default.module.scss';
+import {sleep} from "@ui.packages/utils";
 
 
 const PRIMARY_MODE = 'primary';
@@ -55,15 +56,17 @@ class Component extends PureComponent {
 
   componentDidMount() {
     const { current: imageElement } = this.imageRef;
+
     imageElement.addEventListener('load', this._handleLoad);
     imageElement.addEventListener('error', this._handleError);
   }
 
   componentDidUpdate(prevProps) {
+    const { src: prevSrc } = prevProps;
+    const { src: nextSrc } = this.props;
     const { current: imageElement } = this.imageRef;
-    const { src } = prevProps;
 
-    if (src !== this.props['src']) {
+    if (prevSrc !== nextSrc) {
 
       imageElement.style['width'] = 'auto';
       imageElement.style['height'] = 'auto';
@@ -74,12 +77,16 @@ class Component extends PureComponent {
 
   componentWillUnmount() {
     const { current: imageElement } = this.imageRef;
+
     imageElement.addEventListener('load', this._handleLoad);
     imageElement.addEventListener('error', this._handleError);
+
     clearTimeout(this.timeOutInstance);
   }
 
   async _handleLoad() {
+    await sleep(100);
+
     const { current: wrapperElement } = this.wrapperRef;
     const { current: imageElement } = this.imageRef;
 
@@ -106,7 +113,7 @@ class Component extends PureComponent {
     imageElement.style['margin-top'] = `-${imageSize['height'] / 2}px`;
     imageElement.style['margin-left'] = `-${imageSize['width'] / 2}px`;
 
-    this.timeOutInstance = setTimeout(() => this.setState({ isLoading: false, isError: false }), 10);
+    this.setState({ isLoading: false, isError: false });
   }
 
   _handleError() {
@@ -116,6 +123,7 @@ class Component extends PureComponent {
   render() {
     const { isLoading, isError } = this.state;
     const { className, src, mode } = this.props;
+
     const classNameImageWrapper = cn(className, styles['wrapper'], {
       [styles['wrapper--in-process']]: isLoading,
       [styles['wrapper--error']]: isError,

@@ -1,0 +1,80 @@
+
+@import "~@ui.packages/theme";
+
+
+.container {
+
+  display: block;
+}
+
+.header {
+
+  display: block;
+  font: 700 18px "Exo 2";
+  letter-spacing: .5px;
+}
+
+.content {
+
+  display: block;
+  margin: 40px 0 0;
+}
+
+.bold {
+
+  font-weight: bold;
+}
+
+.paragraph {
+
+  display: block;
+  font: 500 14px "Istok Web";
+  color: $coal-dark;
+  line-height: 1.5;
+
+  & + & {
+
+    margin: 4px 0 0;
+  }
+}
+
+.list {
+
+  display: block;
+  padding: 0 0 0 40px;
+
+  li {
+
+    display: block;
+    font: 500 14px "Istok Web";
+
+    &:before {
+
+      display: inline-block;
+      content: '';
+      background: $success;
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      vertical-align: middle;
+      margin: 0 10px 0 0;
+    }
+
+    & + & {
+      margin-top: 4px;
+    }
+  }
+}
+
+.attention {
+
+  display: block;
+
+  h3 {
+
+    display: block;
+    font: bold 16px "Istok Web";
+    color: $danger;
+    margin: 0 0 10px;
+  }
+}

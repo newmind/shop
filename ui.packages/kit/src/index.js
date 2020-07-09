@@ -1,6 +1,7 @@
 
 export { default as Input } from './symbols/Input';
 export { default as Image } from './symbols/Image';
+export { default as Avatar } from './symbols/Avatar';
 export { default as Amount } from './symbols/Amount';
 export { default as Button } from './symbols/Button';
 export { default as Select } from './symbols/Select';
@@ -20,6 +21,7 @@ export { default as Breadcrumbs } from './Breadcrumbs';
 export { default as BaseField } from './fields/BaseField';
 export { default as FileField } from './fields/FileField';
 export { default as InputField } from './fields/InputField';
+export { default as AvatarField } from './fields/AvatarField';
 export { default as AmountField } from './fields/AmountField';
 export { default as SelectField } from './fields/SelectField';
 export { default as TextareaField } from './fields/TextareaField';

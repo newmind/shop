@@ -11,13 +11,14 @@ import createSocketIoMiddleware from 'redux-socket.io';
 import createSocketIO from '@ui.packages/socket';
 import { middleware as requestMiddleware } from '@ui.packages/request';
 
-import createStore, { importReducer }  from './bin/createStore';
 import createHistory from './bin/createRouter';
+import createStore, { importReducer }  from './bin/createStore';
 
 import routes from './configs/routes';
 import navigate from './configs/navigate';
 
 import App from "./components/Application/components";
+
 import './styles/index.module.scss';
 
 import * as serviceWorker from './serviceWorker';
@@ -32,7 +33,10 @@ const store = createStore({},
   thunk,
   routerMiddleware(history),
   createSocketIoMiddleware(socket),
-  requestMiddleware(process.env['REACT_APP_API_HOST'])
+  requestMiddleware({
+    host: process.env['REACT_APP_API_HOST'],
+    silent: false,
+  })
 );
 
 

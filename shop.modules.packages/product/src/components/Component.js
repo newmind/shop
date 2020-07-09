@@ -8,13 +8,14 @@ import types from 'prop-types';
 import { Link } from 'react-router-dom';
 import React, { PureComponent, lazy, Suspense } from 'react';
 
-import styles from './default.module.scss';
+import CommentModify from './CommentModify';
+
 import cn from "classnames";
+import styles from './default.module.scss';
 
 
 const Comments = lazy(() => import(/* webpackChunkName: "product.comments" */'./Comments'));
 const Properties = lazy(() => import(/* webpackChunkName: "showcase.properties" */'./Properties'));
-const CommentModify = lazy(() => import(/* webpackChunkName: "showcase.comment" */'./CommentModify'));
 
 
 class Component extends PureComponent {

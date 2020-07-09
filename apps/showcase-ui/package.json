@@ -9,12 +9,13 @@
   "dependencies": {
     "@modules.packages/about": "1.0.0",
     "@modules.packages/details-order": "1.0.0",
-    "@modules.packages/not-found2": "1.0.0",
     "@modules.packages/main-page": "1.0.0",
+    "@modules.packages/not-found2": "1.0.0",
     "@modules.packages/order": "1.0.0",
     "@modules.packages/produce": "1.0.0",
     "@modules.packages/product": "1.0.0",
     "@modules.packages/showcase": "1.0.0",
+    "@modules.packages/sign-up": "1.0.0",
     "@ui.packages/cart": "1.0.0",
     "@ui.packages/dialog": "1.0.0",
     "@ui.packages/hocs": "1.0.0",
@@ -39,15 +40,17 @@
     "react-router": "5.2.0",
     "react-router-dom": "5.2.0",
     "react-router-redux": "4.0.8",
-    "react-scripts": "3.4.1",
+    "react-sizes": "2.0.0",
+    "react-yandex-metrika": "2.6.0",
     "redux": "4.0.5",
     "redux-devtools-extension": "2.13.8",
-    "redux-form": "8.3.5",
+    "redux-form": "8.3.6",
     "redux-socket.io": "1.4.0",
     "redux-thunk": "2.3.0"
   },
   "devDependencies": {
-    "@fortawesome/fontawesome-free": "5.12.0-2",
+    "@fortawesome/fontawesome-free": "5.13.1",
+    "react-scripts": "3.4.1",
     "node-sass": "4.14.1"
   },
   "browserslist": [
