@@ -71,10 +71,16 @@ export const createType = (data) => async (dispatch) => {
   try {
     dispatch(createTypeRequestAction());
 
+    const formData = new FormData();
+
+    formData.append('value', data['value']);
+    formData.append('description', data['description'] || '');
+    formData.append('file', data['file']);
+
     const result = await request({
       url: '/types',
       method: 'post',
-      data,
+      data: formData,
     });
 
     dispatch(createTypeRequestSuccessAction(result['data']));
@@ -89,10 +95,18 @@ export const updateType = (data) => async (dispatch) => {
   try {
     dispatch(updateTypeRequestAction());
 
+    const formData = new FormData();
+
+    formData.append('value', data['value']);
+    formData.append('description', data['description'] || '');
+    data['imageId'] && formData.append('imageId', data['imageId']);
+    formData.append('updatedAt', data['updatedAt']);
+    formData.append('file', data['file']);
+
     const result = await request({
       url: '/types/' + data['id'],
       method: 'put',
-      data,
+      data: formData,
     });
 
     dispatch(updateTypeRequestSuccessAction(result['data']));

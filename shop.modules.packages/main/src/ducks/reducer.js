@@ -30,6 +30,16 @@ export default (state = initialState, { type, error, payload }) => {
       types: payload,
     };
 
+    case process.env['REACT_APP_SOCKET_TYPE_UPDATED']: return {
+      ...state,
+      types: state['types'].map((type) => {
+        if (type['id'] === payload['id']) {
+          return payload;
+        }
+        return type;
+      }),
+    };
+
     case GET_CATEGORIES_REQUEST: return {
       ...state,
     };
@@ -40,6 +50,16 @@ export default (state = initialState, { type, error, payload }) => {
     case GET_CATEGORIES_REQUEST_SUCCESS: return {
       ...state,
       categories: payload,
+    };
+
+    case process.env['REACT_APP_SOCKET_CATEGORY_UPDATED']: return {
+      ...state,
+      categories: state['categories'].map((category) => {
+        if (category['id'] === payload['id']) {
+          return payload;
+        }
+        return category;
+      }),
     };
 
     default: return state;

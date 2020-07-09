@@ -70,6 +70,13 @@ class Component extends PureComponent {
               align="left"
             />
             <Column
+              title="Описание"
+              alias="imageId"
+            >{(value) => {
+              return value ? <img src={`${process.env['REACT_APP_API_HOST']}/gallery/${value}`} width="40" alt="" /> : null;
+            }}
+            </Column>
+            <Column
               align="right"
               width="40"
             >
@@ -81,7 +88,7 @@ class Component extends PureComponent {
           <Button mode="success" onClick={this._handleCreate.bind(this)}>Добавить</Button>
         </div>
         <Dialog title="Тип продукта" name="type">
-          <Form onSubmit={this._submitModify.bind(this)} />
+          <Form hasImage={true} onSubmit={this._submitModify.bind(this)} />
         </Dialog>
       </div>
     );

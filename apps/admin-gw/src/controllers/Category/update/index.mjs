@@ -8,8 +8,6 @@ export default () => async (ctx) => {
     const { id } = ctx['params'];
     const { files = {}, fields = {}} = await getFiles(ctx['req']);
 
-    console.log(files)
-
     if ('file' in files) {
       const fileBuffer = files['file']['buffer'];
 
