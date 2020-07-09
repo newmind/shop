@@ -42,6 +42,7 @@ app.use(async (ctx, next) => {
     await next();
   }
   catch(error) {
+    console.log(error)
     ctx.status = error['status'];
     ctx.body = error['data'];
   }

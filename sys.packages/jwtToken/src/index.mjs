@@ -76,8 +76,7 @@ export default (options) => async (ctx, next) => {
   const { name, serviceUrl } = options;
 
   try {
-
-    const cookie = await getCookie(ctx, name);
+    const cookie = await getCookie(ctx, name, { silent: false, });
     const { status, data } = await checkCookie(cookie, { serviceUrl });
 
     let userData = data;
@@ -98,7 +97,7 @@ export default (options) => async (ctx, next) => {
 
   } catch(error) {
 
-    if (error instanceof NotAuthorize) {
+    if (error instanceof NotAuthError) {
       ctx.status = 401;
       return ctx.body = {
         success: true,
