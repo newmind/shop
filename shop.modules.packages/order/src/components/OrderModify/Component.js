@@ -4,6 +4,7 @@ import { Row, Col } from "@ui.packages/kit";
 import React, { lazy, PureComponent, Suspense } from 'react';
 import { FieldArray } from "redux-form";
 
+import cn from 'classnames';
 import styles from "./default.module.scss";
 
 
@@ -23,7 +24,7 @@ class Component extends PureComponent {
           <Row className={styles['row']}>
             <Col>
               <h2 className={styles['block__header']}>Выбранные товары</h2>
-              <div className={styles['block__content']}>
+              <div className={cn(styles['block__content'], styles['block__content--no-border'])}>
                 {hasProducts
                   ? <FieldArray name="items" component={Products} />
                   : <Empty />

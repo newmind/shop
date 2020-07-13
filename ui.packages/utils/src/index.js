@@ -1,17 +1,15 @@
-'use strict';
-
-// import fs from "fs";
-// import BusBoy from 'busboy';
-//
-//
-// const extensions = {
-//   'image/jpeg': 'jpg',
-//   'image/bmp': 'bmp',
-//   'image/png': 'png'
-// };
 
 export const UUID = () => {
-  return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g,(c,r)=>('x'===c?(r=Math.random()*16|0):(r&0x3|0x8)).toString(16));
+  return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g,(c, r) => {
+    return ('x' === c
+      ? (
+        r = Math.random() * 16 | 0
+      )
+      :(
+        r & 0x3 | 0x8
+      )
+    ).toString(16)
+  });
 };
 
 export const uniqName = () => {
@@ -36,12 +34,25 @@ export const nounDeclension = (number = 0, titles = []) => {
       : 5]];
 };
 
-export const reduceToArray = (items, SIZE = 4) => {
-  return items.reduce((p, c) => {
+export const reduceToArray = (items, SIZE = 4, options = { fillNull: false }) => {
+  return items.reduce((p, c, index, source) => {
     if( p[p.length - 1].length === SIZE) {
       p.push([]);
     }
     p[p.length - 1].push(c);
+
+    if (options['fillNull']) {
+      if (index === (source.length - 1)) {
+        if (p[p.length - 1].length < SIZE) {
+          let i = p[p.length - 1].length;
+          while (i < SIZE) {
+            i++;
+            p[p.length - 1].push(null);
+          }
+        }
+      }
+    }
+
     return p;
   }, [[]]);
 };

@@ -5,33 +5,46 @@
 .footer {
 
   display: block;
+  width: 100%;
 }
 
-.links {
+.link {
+
+  display: inline-block;
+  font: 14px "Istok Web", sans-serif;
+  color: $white;
+  text-decoration: underline;
+  transition: color 200ms;
+
+  &:hover {
+
+    color: $primary;
+  }
+}
+
+.row {
+
+  display: flex;
+  flex-direction: row;
+  flex: 1 0;
+}
+
+.col {
+
+  display: flex;
+  flex-direction: column;
+  flex: 1 0;
+
+  & + & {
+
+    text-align: right;
+  }
+}
+
+.paragraph {
 
   display: block;
-  font-size: 0;
-  text-align: right;
-
-  &__item {
-    
-    display: inline-block;
-
-    & + & {
-      margin: 0 0 0 20px;
-    }
-  }
-  
-  &__link {
-
-    display: block;
-    font: 13px "Istok Web", sans-serif;
-    color: $whitesmoke;
-    text-decoration: none;
-
-    &:hover {
-
-      text-decoration: underline;
-    }
-  }
+  font: 500 14px "Istok Web";
+  color: $white;
+  line-height: 1.5;
 }

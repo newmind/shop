@@ -1,0 +1,198 @@
+
+@import "~@ui.packages/theme";
+
+
+.product {
+
+  display: flex;
+  flex: 1 0;
+  min-height: 200px;
+
+  &__uuid {
+
+    display: block;
+    font: 12px "Istok Web", sans-serif;
+    text-align: center;
+    color: $gray;
+    margin: 6px 0 15px;
+  }
+
+  &__brand {
+
+    display: block;
+    font: 16px "Istok Web", sans-serif;
+    font-weight: 700;
+    margin: 0 0 15px;
+    color: $coal-dark;
+    letter-spacing: .5px;
+
+    &-link {
+
+      color: inherit;
+    }
+  }
+
+  &__name {
+
+    display: inline-block;
+    font: 14px "Istok Web", sans-serif;
+    font-weight: normal;
+    color: $blue-grey;
+    margin: 0 0 0 14px;
+    vertical-align: middle;
+    padding: 0 0 2px;
+  }
+}
+
+.gallery {
+
+  display: block;
+  width: 250px;
+  text-align: center;
+
+  &__images {
+
+    display: flex;
+    height: 200px;
+  }
+}
+
+.content {
+
+  position: relative;
+  display: flex;
+  flex: 1 0;
+  flex-direction: column;
+  margin: 0 0 0 20px;
+}
+
+.details {
+
+  display: block;
+  padding: 30px;
+  border-radius: 4px;
+  margin: 30px 0 0;
+  background: $very-light-pink;
+  border: 1px solid $pale-lilac;
+
+  &__content {
+
+    margin: 30px 0 0;
+  }
+
+  &__info {
+
+    font: 14px "Istok Web", sans-serif;
+    line-height: 1.6;
+    color: $coal-dark;
+
+    &:first-child + & {
+      margin: 20px 0 0;
+    }
+
+    & + & {
+
+      margin: 10px 0 0;
+    }
+  }
+}
+
+.info {
+
+  display: block;
+}
+
+.type {
+
+  display: inline-block;
+
+  & + & {
+    margin: 0 0 0 20px;
+  }
+}
+
+.link {
+
+  color: $primary;
+  cursor: pointer;
+  font-weight: bold;
+  text-decoration: underline;
+}
+
+.amount {
+
+  display: block;
+  text-align: center;
+  margin: 20px 0;
+
+  &__main {
+
+    display: block;
+  }
+
+  &__add {
+
+    display: block;
+    margin: 10px 0 0;
+    color: $success;
+  }
+
+  &__value {
+
+    display: inline-block;
+    font: 16px "Istok Web", sans-serif;
+    font-weight: 700;
+  }
+
+  &__add &__value {
+
+    font: 14px "Istok Web", sans-serif;
+  }
+
+  &__currency {
+
+    display: inline-block;
+    font: 14px "Istok Web", sans-serif;
+    margin: 0 0 0 4px;
+  }
+}
+
+.error {
+
+  font: 11px "Istok Web", sans-serif;
+  color: $warning;
+  margin: 0 0 0 20px;
+  font-style: italic;
+  letter-spacing: .5px;
+}
+
+.remove {
+
+  position: absolute;
+  top: 0;
+  right: 0;
+  display: block;
+  font-size: 14px;
+  color: $gray;
+  cursor: pointer;
+  transition: color 200ms;
+
+  &:hover {
+
+    color: $danger;
+  }
+}
+
+.success {
+
+  display: inline-block;
+  color: $success;
+  margin: 0 0 0 10px;
+}
+
+.danger {
+
+  display: inline-block;
+  color: $danger;
+  margin: 0 0 0 10px;
+}

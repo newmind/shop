@@ -91,6 +91,7 @@
   cursor: pointer;
   background: $white;
   transition: border-color 200ms;
+  overflow: hidden;
 
   &:hover,
   &--is-focus {
@@ -129,6 +130,7 @@
     flex: 1 0;
     flex-direction: row;
     outline: none;
+    overflow: hidden;
   }
 
   &__content {
@@ -137,6 +139,7 @@
     flex: 1 0;
     flex-direction: column;
     justify-content: center;
+    overflow: hidden;
   }
 
   &__controls {

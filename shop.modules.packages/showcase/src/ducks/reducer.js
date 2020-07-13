@@ -36,6 +36,32 @@ export default (state = initialState, { type, payload }) => {
       }
     };
 
+    case process.env['REACT_APP_SOCKET_TYPE_UPDATED']: return {
+      ...state,
+      types: state['types'].map((type) => {
+        if (type['id'] === payload['id']) {
+          return {
+            ...type,
+            value: payload['value'],
+          };
+        }
+        return type;
+      }),
+    };
+
+    case process.env['REACT_APP_SOCKET_CATEGORY_UPDATED']: return {
+      ...state,
+      categories: state['categories'].map((category) => {
+        if (category['id'] === payload['id']) {
+          return {
+            ...category,
+            value: payload['value'],
+          };
+        }
+        return category;
+      }),
+    };
+
     case GET_PRODUCTS_REQUEST: return {
       ...state,
       inProcess: true,
