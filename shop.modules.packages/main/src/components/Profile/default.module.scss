@@ -1,0 +1,46 @@
+
+@import "~@ui.packages/theme";
+
+
+.wrapper {
+
+  display: flex;
+  flex-direction: column;
+  flex: 1 0;
+}
+
+.header {
+
+  display: block;
+  margin: 0 0 30px;
+  font: 700 18px "Exo 2";
+  letter-spacing: .5px;
+  text-align: center;
+}
+
+.content {
+
+  display: flex;
+  flex-direction: row;
+  flex: 0 0;
+  align-items: center;
+}
+
+.sign-up {
+
+  display: block;
+}
+
+.description {
+
+  display: flex;
+  flex-direction: column;
+  flex: 1 0;
+  margin: 0 0 0 60px;
+}
+
+.text {
+
+  display: block;
+  font: 300 16px "Istok Web";
+}
