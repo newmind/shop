@@ -21,7 +21,7 @@ class Component extends PureComponent {
   render() {
     const { items } = this.props;
 
-    const types = reduceToArray(items, 3);
+    const types = reduceToArray(items, 4, { fillNull: true });
 
     return (
       <div className={styles['wrapper']}>

@@ -1,3 +1,52 @@
 
 @import "~@ui.packages/theme";
 
+
+.with-another {
+
+  display: block;
+  margin: 0 0 50px;
+
+  &__line {
+
+    display: flex;
+    flex-direction: row;
+    flex: 1 0;
+
+    & + & {
+
+      margin: 20px 0 0;
+    }
+
+  }
+
+  &__col {
+
+    display: flex;
+    flex-direction: column;
+    flex: 1 0;
+    border: 1px solid $pale-lilac;
+    border-radius: 15px;
+    padding: 20px;
+    box-sizing: border-box;
+
+    &--no-border {
+
+      border-color: transparent;
+    }
+
+    & + & {
+
+      margin: 0 0 0 20px;
+    }
+  }
+}
+
+.with-further {
+
+  display: block;
+  margin: 10px 0 0;
+  border: 1px solid $pale-lilac;
+  border-radius: 15px;
+  padding: 40px 40px 80px;
+}

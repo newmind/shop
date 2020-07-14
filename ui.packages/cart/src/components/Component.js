@@ -4,6 +4,7 @@ import numeral from '@ui.packages/numeral';
 
 import types from 'prop-types';
 import React, { PureComponent } from 'react';
+import { Link } from 'react-router-dom';
 
 import Icon from './Icon';
 import Product from './Product';
@@ -124,7 +125,10 @@ class Component extends PureComponent {
                   </div>
                 )
                 : (
-                  <span className={styles['cart__empty']}>В карзине нет выбранных товаров</span>
+                  <span className={styles['cart__empty']}>
+                    В карзине нет выбранных товаров<br/>
+                    перейдите в раздел <Link className={styles['link']} to={process.env['PUBLIC_URL'] + '/products'}>Витрина</Link> для выбора товаров
+                  </span>
                 )
               }
             </div>

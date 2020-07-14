@@ -34,6 +34,18 @@
     }
   }
 
+  &__col {
+
+    display: flex;
+    flex-direction: column;
+    flex: 1 0;
+
+    & + & {
+
+      margin: 0 0 0 35px;
+    }
+  }
+
   &__controls {
 
     display: block;

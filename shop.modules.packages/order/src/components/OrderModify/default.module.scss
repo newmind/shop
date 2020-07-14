@@ -36,6 +36,12 @@
     border: 1px solid $pale-lilac;
     border-radius: 15px;
     padding: 40px 40px 80px;
+
+    &--no-border {
+
+      border: none;
+      padding: 0;
+    }
   }
 }
 

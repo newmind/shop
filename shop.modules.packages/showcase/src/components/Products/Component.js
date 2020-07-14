@@ -27,7 +27,7 @@ class Component extends PureComponent {
   render() {
     const { items, meta, onAddToCart } = this.props;
 
-    const products = reduceToArray(items, SIZE);
+    const products = reduceToArray(items, SIZE, { fillNull: true });
 
     return (
       <Suspense fallback={null}>
@@ -39,11 +39,14 @@ class Component extends PureComponent {
                 <div key={index} className={styles['block__line']}>
                   {lineWithProducts.map((product, index) => {
                     return (
-                      <Product
-                        key={index}
-                        {...product}
-                        onCart={onAddToCart.bind(this, product)}
-                      />
+                      <div key={index} className={styles['block__col']}>
+                        {product && (
+                          <Product
+                            {...product}
+                            onCart={onAddToCart.bind(this, product)}
+                          />
+                        )}
+                      </div>
                     );
                   })}
                 </div>

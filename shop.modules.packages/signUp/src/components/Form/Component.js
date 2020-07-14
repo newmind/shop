@@ -4,6 +4,7 @@ import {
   Row,
   Col,
   InputField,
+  MaskInputField,
   DatePickerField,
   Button,
   AvatarField,
@@ -75,7 +76,7 @@ console.log(valid, pristine)
               </Row>
               <Row>
                 <Col>
-                  <InputField label="Телефон" name="phone" />
+                  <MaskInputField mask="+7 (999) 999-99-99" label="Телефон" name="phone" />
                 </Col>
                 <Col>
                   <DatePickerField label="Дата рождения" name="birthday" />
