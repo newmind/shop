@@ -1,9 +1,9 @@
 
 import React from 'react';
+import { Link } from "react-router-dom";
 
 import cn from 'classnames';
 import styles from './default.module.scss';
-import {Link} from "react-router-dom";
 
 
 export default ({ isAuth, profile, onSignIn, onSignOut }) => {
@@ -25,9 +25,10 @@ export default ({ isAuth, profile, onSignIn, onSignOut }) => {
 
   return (
     <div className={styles['profile']}>
-      <span className={cn(styles['options'], 'fas fa-cog')} />
-      <span className={styles['name']}>{ profile['name'] } { profile['surname'] }</span>
-      <span className={cn(styles['exit'], 'fas fa-sign-out-alt')} onClick={onSignOut} />
+      <Link className={styles['name']} to={process.env['PUBLIC_URL'] + '/profile'}>{ profile['name'] } { profile['surname'] }</Link>
+      <div className={styles['exit']}>
+        <span className={cn(styles['exit__icon'], 'fas fa-sign-out-alt')} onClick={onSignOut} />
+      </div>
     </div>
   );
 };

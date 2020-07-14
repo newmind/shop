@@ -34,13 +34,19 @@
 
   &__name {
 
-    display: inline-block;
+    display: block;
     font: 14px "Istok Web", sans-serif;
     font-weight: normal;
     color: $blue-grey;
-    margin: 0 0 0 14px;
-    vertical-align: middle;
-    padding: 0 0 2px;
+    padding: 10px 0 0;
+  }
+
+  &__description {
+
+    display: block;
+    font: 500 14px "Istok Web";
+    color: $coal-dark;
+    margin: 20px 0 0;
   }
 }
 

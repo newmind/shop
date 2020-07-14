@@ -18,6 +18,7 @@ class Component extends PureComponent {
     gallery: types.array,
     amount: types.number,
     currency: types.object,
+    description: types.string,
   };
 
   static defaultProps = {
@@ -27,15 +28,17 @@ class Component extends PureComponent {
     gallery: [],
     amount: 0,
     currency: {},
+    description: '',
   };
 
   _handleRemoveFromCart() {
     const { uuid, removeProduct } = this.props;
+
     removeProduct(uuid);
   }
 
   render() {
-    const { uuid, name, brand, gallery, amount, currency } = this.props;
+    const { uuid, name, brand, gallery, amount, currency, description } = this.props;
 
     const removeFromCartClassName= cn(styles['remove'], 'far fa-trash-alt');
 
@@ -57,7 +60,8 @@ class Component extends PureComponent {
           <span className={removeFromCartClassName} onClick={this._handleRemoveFromCart.bind(this)} />
           <h3 className={styles['product__brand']}>
             <Link className={styles['product__brand-link']} to={process.env['PUBLIC_URL'] + `/products/${uuid}`}>{brand}</Link>
-            {name && <span className={styles['product__name']}>({name})</span>}
+            {name && <span className={styles['product__name']}>{ name }</span>}
+            {description && <span className={styles['product__description']}>{ description }</span>}
           </h3>
         </div>
       </div>
