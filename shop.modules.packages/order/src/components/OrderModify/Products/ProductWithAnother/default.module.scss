@@ -19,12 +19,16 @@
 
   &__brand {
 
-    display: block;
-    font: 16px "Istok Web", sans-serif;
-    font-weight: 700;
-    margin: 0 0 15px;
+    display: flex;
+    flex-direction: column;
+    flex: 1 0;
+    font: 700 16px "Istok Web", sans-serif;
+    margin: 0 25px 0 0;
     color: $coal-dark;
     letter-spacing: .5px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
 
     &-link {
 
@@ -34,11 +38,16 @@
 
   &__name {
 
-    display: block;
+    display: flex;
+    flex-direction: column;
+    flex: 1 0;
     font: 14px "Istok Web", sans-serif;
     font-weight: normal;
     color: $blue-grey;
     padding: 10px 0 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
   }
 
   &__description {
@@ -47,6 +56,25 @@
     font: 500 14px "Istok Web";
     color: $coal-dark;
     margin: 20px 0 0;
+  }
+}
+
+.brand {
+
+  display: flex;
+  flex-direction: column;
+  flex: 0 0;
+
+  &__value {
+
+    display: block;
+    font: 700 16px "Istok Web", sans-serif;
+    color: $coal-dark;
+    cursor: pointer;
+    text-decoration: underline;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
   }
 }
 

@@ -14,7 +14,7 @@ class Component extends PureComponent {
   render() {
     return (
       <div className={styles['wrapper']}>
-        <h2 className={styles['header']}>Регистрируйте личный кабинет</h2>
+        <h2 className={styles['header']}>Можно зарегистрировать личный кабинет</h2>
         <div className={styles['content']}>
           <div className={styles['sign-up']}>
             <Button type="link" mode="success" href={process.env['PUBLIC_URL'] + '/sign-up'}>Регистрация</Button>

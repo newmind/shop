@@ -59,7 +59,9 @@ class Component extends PureComponent {
         <div className={styles['content']}>
           <span className={removeFromCartClassName} onClick={this._handleRemoveFromCart.bind(this)} />
           <h3 className={styles['product__brand']}>
-            <Link className={styles['product__brand-link']} to={process.env['PUBLIC_URL'] + `/products/${uuid}`}>{brand}</Link>
+            <Link className={styles['brand']} to={process.env['PUBLIC_URL'] + `/products/${uuid}`}>
+              <span className={styles['brand__value']}>{brand}</span>
+            </Link>
             {name && <span className={styles['product__name']}>{ name }</span>}
             {description && <span className={styles['product__description']}>{ description }</span>}
           </h3>

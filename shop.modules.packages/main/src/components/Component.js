@@ -1,4 +1,6 @@
 
+import { Row, Col } from '@ui.packages/kit';
+
 import React, { PureComponent, lazy, Suspense } from 'react';
 
 import styles from './default.module.scss';
@@ -7,6 +9,7 @@ import styles from './default.module.scss';
 const Types = lazy(() => import('./Types'));
 const Categories = lazy(() => import('./Categories'));
 const SignUp = lazy(() => import('./SignUp'));
+const Profile = lazy(() => import('./Profile'));
 
 
 class Component extends PureComponent {
@@ -26,7 +29,14 @@ class Component extends PureComponent {
               <Categories />
             </article>
             <article className={styles['sign-up']}>
-              <SignUp />
+              <Row>
+                <Col>
+                  <SignUp />
+                </Col>
+                <Col>
+                  <Profile />
+                </Col>
+              </Row>
             </article>
           </div>
         </section>
