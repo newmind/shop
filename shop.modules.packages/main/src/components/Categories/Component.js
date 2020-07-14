@@ -28,17 +28,21 @@ class Component extends PureComponent {
         <h2 className={styles['header']}>Выберите интересующую вас категорию</h2>
         {categories.map((line, index) => (
           <div key={index} className={styles['line']}>
-            {line.map((category) => (
-              <Link key={category['id']} className={styles['category']} to={process.env['PUBLIC_URL'] + '/products?categoryId=' + category['id']}>
-                <div className={styles['promo']}>
-                  <Image src={process.env['REACT_APP_API_HOST'] + '/gallery/' + category['imageId']} />
-                </div>
-                <div className={styles['information']}>
-                  <div className={styles['caption']}>
-                    <span className={styles['caption__text']}>{ category['value'] }</span>
-                  </div>
-                </div>
-              </Link>
+            {line.map((category, index) => (
+              <div key={index} className={styles['line__col']}>
+                { !! category && (
+                  <Link className={styles['category']} to={process.env['PUBLIC_URL'] + '/products?categoryId=' + category['id']}>
+                    <div className={styles['promo']}>
+                      <Image src={process.env['REACT_APP_API_HOST'] + '/gallery/' + category['imageId']} />
+                    </div>
+                    <div className={styles['information']}>
+                      <div className={styles['caption']}>
+                        <span className={styles['caption__text']}>{ category['value'] }</span>
+                      </div>
+                    </div>
+                  </Link>
+                )}
+              </div>
             ))}
           </div>
         ))}
