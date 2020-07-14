@@ -28,8 +28,8 @@ class Component extends PureComponent {
         <h2 className={styles['header']}>Какой тип товара Вас интересует?</h2>
         {types.map((line, index) => (
           <div key={index} className={styles['line']}>
-            {line.map((type) => (
-              <Link key={type['id']} className={styles['type']} to={ process.env['PUBLIC_URL'] + '/products?typeId=' + type['id'] }>
+            {line.map((type, index) => (
+              <Link key={index} className={styles['type']} to={ process.env['PUBLIC_URL'] + '/products?typeId=' + type['id'] }>
                 <div className={styles['promo']}>
                   <Image src={ process.env['REACT_APP_API_HOST'] + '/gallery/' + type['imageId'] } />
                 </div>
