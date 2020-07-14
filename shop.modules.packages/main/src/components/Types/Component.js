@@ -29,16 +29,20 @@ class Component extends PureComponent {
         {types.map((line, index) => (
           <div key={index} className={styles['line']}>
             {line.map((type, index) => (
-              <Link key={index} className={styles['type']} to={ process.env['PUBLIC_URL'] + '/products?typeId=' + type['id'] }>
-                <div className={styles['promo']}>
-                  <Image src={ process.env['REACT_APP_API_HOST'] + '/gallery/' + type['imageId'] } />
-                </div>
-                <div className={styles['information']}>
-                  <div className={styles['caption']}>
-                    <span className={styles['caption__text']}>{ type['value'] }</span>
-                  </div>
-                </div>
-              </Link>
+              <div key={index} className={styles['line__col']}>
+                { !! type && (
+                  <Link className={styles['type']} to={ process.env['PUBLIC_URL'] + '/products?typeId=' + type['id'] }>
+                    <div className={styles['promo']}>
+                      <Image src={ process.env['REACT_APP_API_HOST'] + '/gallery/' + type['imageId'] } />
+                    </div>
+                    <div className={styles['information']}>
+                      <div className={styles['caption']}>
+                        <span className={styles['caption__text']}>{ type['value'] }</span>
+                      </div>
+                    </div>
+                  </Link>
+                )}
+              </div>
             ))}
           </div>
         ))}

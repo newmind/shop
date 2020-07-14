@@ -28,6 +28,13 @@
 
     margin: 4px 0 0;
   }
+
+  &__col {
+
+    display: flex;
+    flex-direction: column;
+    flex: 1 0;
+  }
 }
 
 .type {
