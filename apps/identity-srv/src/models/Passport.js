@@ -1,4 +1,3 @@
-'use strict';
 
 module.exports = (db, DataType) => {
 
@@ -56,7 +55,13 @@ module.exports = (db, DataType) => {
     }
   });
 
-  Passport.associate = ({}) => {};
+  Passport.associate = ({ User }) => {
+
+    User.hasOne(Passport, {
+      foreignKey: 'userId',
+      as: 'user',
+    });
+  };
 
   return Passport;
 };

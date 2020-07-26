@@ -9,7 +9,7 @@ export default [
     path: '/produce',
   },
   {
-    title: 'О компании',
+    title: 'О нас',
     path: '/about',
   },
   {

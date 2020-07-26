@@ -8,6 +8,7 @@
   },
   "dependencies": {
     "@fortawesome/fontawesome-free": "5.13.1",
+    "@modules.packages/users": "1.0.0",
     "@modules.packages/attributes": "1.0.0",
     "@modules.packages/comments": "1.0.0",
     "@modules.packages/not-found": "1.0.0",

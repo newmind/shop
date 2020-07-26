@@ -1,0 +1,22 @@
+
+@import "~@ui.packages/theme";
+
+
+.block {
+
+  display: block;
+  background: $white;
+  border: 1px solid $pale-lilac;
+  border-radius: 15px;
+  padding: 30px;
+}
+
+.name {
+
+  display: block;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  color: $coal-dark;
+  font: 500 14px 'Istok Web';
+}

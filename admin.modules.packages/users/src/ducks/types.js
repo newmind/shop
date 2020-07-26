@@ -1,0 +1,6 @@
+
+export const PAGE_IN_PROCESS = '@page/PAGE_IN_PROCESS';
+
+export const GET_USERS_REQUEST = '@users/GET_USERS_REQUEST';
+export const GET_USERS_REQUEST_FAIL = '@users/GET_USERS_REQUEST_FAIL';
+export const GET_USERS_REQUEST_SUCCESS = '@users/GET_USERS_REQUEST_SUCCESS';

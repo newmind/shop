@@ -48,14 +48,14 @@ export default [
       '@modules.packages/attributes'
     ),
   },
-  // {
-  //   path: '/units',
-  //   wrapper: 'Composite',
-  //   module: import(
-  //     /* webpackChunkName: "units" */
-  //     '@modules.packages/units'
-  //   ),
-  // },
+  {
+    path: '/users',
+    wrapper: 'Composite',
+    module: import(
+      /* webpackChunkName: "users" */
+      '@modules.packages/users'
+    ),
+  },
   // {
   //   path: '/currency',
   //   wrapper: 'Composite',

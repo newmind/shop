@@ -14,6 +14,8 @@
   margin: 20px 8px 30px;
   text-align: center;
   font: 14px "Istok Web", sans-serif;
+  overflow: hidden;
+  text-overflow: ellipsis;
 
   &--left {
     text-align: left;

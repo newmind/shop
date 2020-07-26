@@ -1,0 +1,30 @@
+
+@import "~@ui.packages/theme";
+
+
+.wrapper {
+
+  display: block;
+  padding: 40px 40px 180px;
+}
+
+.header {
+
+  display: block;
+  font: 18px "Istok Web";
+  font-weight: 700;
+  letter-spacing: .5px;
+  margin: 0 0 40px;
+}
+
+.content {
+
+  display: block;
+}
+
+.controls {
+
+  display: block;
+  padding: 50px 0 30px;
+  text-align: center;
+}

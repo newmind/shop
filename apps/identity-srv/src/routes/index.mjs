@@ -1,4 +1,3 @@
-'use strict';
 
 import Identity from './identity';
 import Passport from './passport';

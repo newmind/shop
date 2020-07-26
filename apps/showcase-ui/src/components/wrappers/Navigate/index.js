@@ -21,12 +21,13 @@ class Component extends PureComponent {
     profile: types.object,
     navigate: types.array,
     signIn: types.func,
+    signOut: types.func,
     signDialog: types.func,
   };
 
   render() {
     const { children }  = this.props;
-    const { navigate, signDialog, signIn } = this.context;
+    const { navigate, signDialog, signIn, signOut } = this.context;
 
     return (
       <section className={styles['wrapper']}>
@@ -45,7 +46,7 @@ class Component extends PureComponent {
                 <div className={styles['controls']}>
                   <Profile
                     onSignIn={signDialog.bind(this)}
-                    onSignOut={() => console.log(345678)}
+                    onSignOut={signOut.bind(this)}
                   />
                 </div>
               </div>
