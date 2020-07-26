@@ -2,6 +2,7 @@
 import {
   signIn,
   signOut,
+  getAll as getAllUsers,
   get as getUser,
   update as updateUser,
 } from '../controllers/User';
@@ -94,4 +95,5 @@ export default (router) => {
   router.post('/sign-out', signOut());
   router.get('/profile', getUser());
   router.put('/profile', updateUser());
+  router.get('/users', getAllUsers());
 };

@@ -10,7 +10,7 @@ import { createComment } from '../controllers/Comments';
 import { getAllTypes } from '../controllers/Type';
 import { getAllCategories } from '../controllers/Category';
 
-import { getProfile, signUp, signIn } from '../controllers/Profile';
+import { getProfile, signUp, signIn, signOut } from '../controllers/Profile';
 
 
 export default (router) => {
@@ -18,6 +18,7 @@ export default (router) => {
   router.get('/profile', getProfile());
   router.post('/sign-up', signUp());
   router.post('/sign-in', signIn());
+  router.post('/sign-out', signOut());
 
   router.get('/products', getProducts());
   router.get('/products/:uuid', getProductById());

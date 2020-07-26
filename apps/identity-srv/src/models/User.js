@@ -19,7 +19,13 @@ module.exports = (db, DataType) => {
     },
   });
 
-  User.associate = ({}) => {};
+  User.associate = ({ Passport }) => {
+
+    Passport.belongsTo(User, {
+      foreignKey: 'userId',
+      as: 'user',
+    });
+  };
 
   // User.sync({ force: true });
 

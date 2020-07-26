@@ -17,6 +17,10 @@ export default [
     path: '/orders',
   },
   {
+    title: "Клиенты",
+    path: '/users',
+  },
+  {
     title: "Профайл",
     path: '/profile',
   },
