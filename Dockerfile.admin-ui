@@ -44,6 +44,9 @@ RUN ["yarn", "run", "build"]
 WORKDIR /app/admin.modules.packages/comments
 RUN ["yarn", "run", "build"]
 
+WORKDIR /app/admin.modules.packages/users
+RUN ["yarn", "run", "build"]
+
 WORKDIR /app/admin.modules.packages/attributes
 RUN ["yarn", "run", "build"]
 
