@@ -19,28 +19,34 @@ class Component extends PureComponent {
 
   render() {
     return (
-      <Suspense fallback={null}>
-        <section className={styles['wrapper']}>
-          <div className={styles['content']}>
-            <article className={styles['types']}>
+      <section className={styles['wrapper']}>
+        <div className={styles['content']}>
+          <article className={styles['types']}>
+            <Suspense fallback={null}>
               <Types />
-            </article>
-            <article className={styles['categories']}>
+            </Suspense>
+          </article>
+          <article className={styles['categories']}>
+            <Suspense fallback={null}>
               <Categories />
-            </article>
-            <article className={styles['sign-up']}>
-              <Row>
-                <Col>
+            </Suspense>
+          </article>
+          <article className={styles['sign-up']}>
+            <Row>
+              <Col>
+                <Suspense fallback={null}>
                   <SignUp />
-                </Col>
-                <Col>
+                </Suspense>
+              </Col>
+              <Col>
+                <Suspense fallback={null}>
                   <Profile />
-                </Col>
-              </Row>
-            </article>
-          </div>
-        </section>
-      </Suspense>
+                </Suspense>
+              </Col>
+            </Row>
+          </article>
+        </div>
+      </section>
     );
   }
 }

@@ -11,6 +11,7 @@ import {
   pageInProcess,
   addProductToCart,
   getProducts,
+  fastViewProduct,
 } from '../ducks/commands';
 
 
@@ -24,6 +25,7 @@ const mapActionsToProps = (dispatch) => ({
   pushSearch: bindActionCreators(push, dispatch),
 
   getProducts: bindActionCreators(getProducts, dispatch),
+  fastViewProduct: bindActionCreators(fastViewProduct, dispatch),
   addProductToCart: bindActionCreators(addProductToCart, dispatch),
 });
 

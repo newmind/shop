@@ -8,14 +8,13 @@ import types from 'prop-types';
 import { Link } from 'react-router-dom';
 import React, { PureComponent, lazy, Suspense } from 'react';
 
-import CommentModify from './CommentModify';
-
 import cn from "classnames";
 import styles from './default.module.scss';
 
 
 const Comments = lazy(() => import(/* webpackChunkName: "product.comments" */'./Comments'));
 const Properties = lazy(() => import(/* webpackChunkName: "showcase.properties" */'./Properties'));
+const CommentModify = lazy(() => import(/* webpackChunkName: "showcase.properties" */'./CommentModify'));
 
 
 class Component extends PureComponent {
@@ -78,7 +77,6 @@ class Component extends PureComponent {
     const removeFromCartClassName= cn(styles['remove'], 'far fa-trash-alt');
 
     return (
-      <Suspense fallback={null}>
         <article className={styles['product']}>
           <div className={styles['breadcrumbs']}>
             <div className={styles['breadcrumbs__content']}>
@@ -128,7 +126,9 @@ class Component extends PureComponent {
                   <div className={styles['product__feature']}>
                     <h4 className={styles['header']}>Характеристика товара:</h4>
                     <div className={styles['product__list']}>
-                      <Properties list={attributes} />
+                      <Suspense fallback={null}>
+                        <Properties list={attributes} />
+                      </Suspense>
                     </div>
                   </div>
                 )
@@ -140,17 +140,22 @@ class Component extends PureComponent {
                 </div>
                 <div className={styles['comments__content']}>
                   { !! comments.length
-                    ? <Comments comments={comments} />
+                    ? (
+                      <Suspense fallback={null}>
+                        <Comments comments={comments} />
+                      </Suspense>
+                    )
                     : <p className={styles['comments__empty']}>Отзывов о товаре еще нет</p>}
                 </div>
               </div>
             </div>
           </div>
           <Dialog name="comment" title="Ваш отзыв о товаре">
-            <CommentModify onSubmit={this._handleCreateComment.bind(this)} initialValues={initialValues} />
+            <Suspense fallback={null}>
+              <CommentModify onSubmit={this._handleCreateComment.bind(this)} initialValues={initialValues} />
+            </Suspense>
           </Dialog>
         </article>
-      </Suspense>
     );
   }
 }

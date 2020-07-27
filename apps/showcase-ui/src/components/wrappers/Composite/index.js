@@ -1,12 +1,13 @@
 
 import types from "prop-types";
 import { matchPath } from 'react-router-dom';
-import React, { PureComponent } from 'react';
-
-import Wrapper from '../Navigate';
-import Navigation from './Navigation';
+import React, { PureComponent, lazy, Suspense } from 'react';
 
 import styles from './default.module.scss';
+
+
+const Wrapper = lazy(() => import('../Navigate'));
+const Navigation = lazy(() => import('./Navigation'));
 
 
 const compositeNavigate = (navigate, location) => navigate.find(item => {
@@ -45,7 +46,9 @@ class Component extends PureComponent {
       <Wrapper className={styles['wrapper']} navigate={navigate}>
         <section className={styles['page']}>
           <aside className={styles['aside']}>
-            <Navigation items={newNavigate['navigate']} />
+            <Suspense fallback={null}>
+              <Navigation items={newNavigate['navigate']} />
+            </Suspense>
           </aside>
           <article className={styles['content']}>
             { children }
