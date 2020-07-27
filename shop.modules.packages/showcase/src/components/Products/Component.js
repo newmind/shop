@@ -24,38 +24,50 @@ class Component extends PureComponent {
     meta: {},
   };
 
+  _handleFastView(product) {
+    const { fastViewProduct } = this.props;
+
+    fastViewProduct(product);
+  }
+
+  _handleAddToCart(product) {
+    const { addProductToCart } = this.props;
+
+    addProductToCart(product);
+  }
+
   render() {
-    const { items, meta, onAddToCart } = this.props;
+    const { items, meta } = this.props;
 
     const products = reduceToArray(items, SIZE, { fillNull: true });
 
     return (
-      <Suspense fallback={null}>
-        <div className={styles['block']}>
-          <h2 className={styles['block__header']}>Найдено {meta['total']} {nounDeclension(meta['total'], ['предложение', 'предложения', 'предложений'])}</h2>
-          <div className={styles['block__content']}>
-            {products.map((lineWithProducts, index) => {
-              return (
-                <div key={index} className={styles['block__line']}>
-                  {lineWithProducts.map((product, index) => {
-                    return (
-                      <div key={index} className={styles['block__col']}>
-                        {product && (
+      <div className={styles['block']}>
+        <h2 className={styles['block__header']}>Найдено {meta['total']} {nounDeclension(meta['total'], ['предложение', 'предложения', 'предложений'])}</h2>
+        <div className={styles['block__content']}>
+          {products.map((lineWithProducts, index) => {
+            return (
+              <div key={index} className={styles['block__line']}>
+                {lineWithProducts.map((product, index) => {
+                  return (
+                    <div key={index} className={styles['block__col']}>
+                      {product && (
+                        <Suspense fallback={null}>
                           <Product
                             {...product}
-                            onCart={onAddToCart.bind(this, product)}
+                            onCart={this._handleAddToCart.bind(this, product)}
+                            onView={this._handleFastView.bind(this, product)}
                           />
-                        )}
-                      </div>
-                    );
-                  })}
-                </div>
-              );
-            })}
-          </div>
+                        </Suspense>
+                      )}
+                    </div>
+                  );
+                })}
+              </div>
+            );
+          })}
         </div>
-      </Suspense>
-
+      </div>
     );
   }
 }

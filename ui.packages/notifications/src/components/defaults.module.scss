@@ -1,13 +1,14 @@
 
 @import "~@ui.packages/theme";
 
+
 .notifications {
 
   position: fixed;
   bottom: 40px;
   right: 40px;
   display: flex;
-  flex: 0 0 auto;
+  flex: 0 0;
   flex-direction: column;
   width: 400px;
   z-index: 900000;
@@ -24,17 +25,34 @@
 
   position: relative;
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   flex: 0 0 auto;
-  padding: 30px;
+  padding: 30px 30px 25px 25px;
   border-radius: 8px;
   transform-origin: center center;
   animation-name: showing;
   animation-duration: 150ms;
   animation-timing-function: ease-in-out;
   color: $coal-dark;
-  background: $whitesmoke;
+  background: $white;
+  border: 1px solid transparent;
   box-shadow: 0 4px 10px 0 rgba($coal-dark, .3);
+
+  &__icon {
+
+    display: flex;
+    flex: 0 0;
+    flex-direction: column;
+    margin: 0 20px 0 0;
+    justify-content: center;
+  }
+
+  &__block {
+
+    display: flex;
+    flex: 1 0;
+    flex-direction: column;
+  }
 
   &__title {
 
@@ -80,22 +98,53 @@
   }
 
   &--success {
-
-    background: $success;
-    border: 1px solid darken($success, 5%);
+    border: 1px solid $success;
+  }
+  &--success &__close {
+    color: $success;
   }
 
   &--danger {
-
-    background: $danger;
-    border: 1px solid darken($danger, 10%);
+    border: 1px solid $danger;
+  }
+  &--danger &__close {
+    color: $danger;
   }
 
   &--info {
+    border: 1px solid $information;
+  }
+  &--info &__close {
+    color: $information;
+  }
 
-    background: $information;
-    color: $coal-dark;
-    border: 1px solid darken($information, 10%);
+  &--primary {
+    border: 1px solid $primary;
+  }
+  &--primary &__close {
+    color: $primary;
+  }
+}
+
+.icon {
+
+  display: block;
+  font-size: 22px;
+
+  &--primary {
+    color: $primary;
+  }
+
+  &--success {
+    color: $success;
+  }
+
+  &--info {
+    color: $information;
+  }
+
+  &--danger {
+    color: $danger;
   }
 }
 

@@ -54,12 +54,14 @@ class Component extends PureComponent {
 
   _handleOpenCommentDialog() {
     const { openDialog } = this.props;
+
     openDialog('comment');
   }
 
   async _handleCreateComment(formData) {
     const { closeDialog } = this.props;
     const { product: { uuid }, createComment } = this.props;
+
     await createComment(uuid, formData);
     closeDialog('comment');
   }
