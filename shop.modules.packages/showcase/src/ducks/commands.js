@@ -13,18 +13,19 @@ import {
   getProductsRequestFail,
   getProductsRequestSuccess,
 } from './actions';
+import {removeProductFromCartAction} from "@modules.packages/product/src/ducks/actions";
 
 
 export const pageInProcess = (status) => (dispatch) => dispatch(pageInProcessAction(status));
 
+export const removeProductFromCart = (id) => (dispatch) => dispatch(removeProductFromCartAction(id));
 
 export const addProductToCart = (product) => (dispatch) => {
   product['recipe'] = {};
   dispatch(addProductToCartAction(product));
   dispatch(pushNotification({
-    title: 'Товар добавлен в корзину',
-    content: product['brand'],
-    autoClose: false
+    title: `Товар ${product['uuid']} "${product['brand']}" добавлен в карзину`,
+    mode: 'success',
   }));
 };
 

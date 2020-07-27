@@ -44,10 +44,10 @@ class Component extends PureComponent {
   }
 
   _handleClickFastView(event) {
-    const { fastViewProduct } = this.props;
+    const { onView } = this.props;
 
     event.preventDefault();
-    fastViewProduct(this.props);
+    onView && onView();
   }
 
   render() {

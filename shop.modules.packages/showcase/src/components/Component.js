@@ -28,12 +28,6 @@ class Component extends PureComponent {
     pushSearch({ search: objectToQuery(formData) });
   }
 
-  _handleCart(product) {
-    const { addProductToCart } = this.props;
-
-    addProductToCart(product);
-  }
-
   _handleLoadingMore(page) {
     const { location: { search }, pushSearch} = this.props;
     const query = new URLSearchParams(search);
@@ -60,7 +54,7 @@ class Component extends PureComponent {
         </aside>
         <section className={styles['products']}>
           <Suspense fallback={null}>
-            <Products onAddToCart={this._handleCart.bind(this)} />
+            <Products />
           </Suspense>
         </section>
         <div className={styles['controls']}>
@@ -69,7 +63,7 @@ class Component extends PureComponent {
           </Suspense>
         </div>
         <Suspense fallback={null}>
-          <Dialog name="fast-view-product">
+          <Dialog name="fast-view-product" title="Быстрый просмотр">
             <FastView />
           </Dialog>
         </Suspense>
