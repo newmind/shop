@@ -13,22 +13,28 @@ const Delivery = lazy(() => import('./Delivery'));
 class Component extends PureComponent {
   render() {
     return (
-      <Suspense fallback={null}>
-        <section className={styles['wrapper']}>
-          <div className={styles['content']}>
+      <section className={styles['wrapper']}>
+        <div className={styles['content']}>
+          <Suspense fallback={null}>
             <Contacts />
-          </div>
-          <div className={styles['content']}>
+          </Suspense>
+        </div>
+        <div className={styles['content']}>
+          <Suspense fallback={null}>
             <Pay />
-          </div>
-          <div className={styles['content']}>
+          </Suspense>
+        </div>
+        <div className={styles['content']}>
+          <Suspense fallback={null}>
             <Delivery />
-          </div>
-          <div className={styles['content']}>
+          </Suspense>
+        </div>
+        <div className={styles['content']}>
+          <Suspense fallback={null}>
             <Making />
-          </div>
-        </section>
-      </Suspense>
+          </Suspense>
+        </div>
+      </section>
     );
   }
 }

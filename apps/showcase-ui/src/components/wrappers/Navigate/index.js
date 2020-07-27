@@ -2,15 +2,16 @@
 import { Dialog } from '@ui.packages/dialog';
 
 import types from 'prop-types';
-import React, { PureComponent } from 'react';
-
-import Header from './Header';
-import Footer from './Footer';
-import Profile from './Profile';
-import Navigation from './Navigation';
-import SignInForm from './SignInForm';
+import React, { PureComponent, lazy, Suspense } from 'react';
 
 import styles from './default.module.scss';
+
+
+const Header = lazy(() => import('./Header'));
+const Footer = lazy(() => import('./Footer'));
+const Profile = lazy(() => import('./Profile'));
+const Navigation = lazy(() => import('./Navigation'));
+const SignInForm = lazy(() => import('./SignInForm'));
 
 
 class Component extends PureComponent {
@@ -35,19 +36,25 @@ class Component extends PureComponent {
           <aside className={styles['aside']}>
             <header className={styles['header']}>
               <div className={styles['center']}>
-                <Header />
+                <Suspense fallback={null}>
+                  <Header />
+                </Suspense>
               </div>
             </header>
             <div className={styles['navigate']}>
               <div className={styles['center']}>
                 <div className={styles['menu']}>
-                  <Navigation items={navigate} />
+                  <Suspense fallback={null}>
+                    <Navigation items={navigate} />
+                  </Suspense>
                 </div>
                 <div className={styles['controls']}>
-                  <Profile
-                    onSignIn={signDialog.bind(this)}
-                    onSignOut={signOut.bind(this)}
-                  />
+                  <Suspense fallback={null}>
+                    <Profile
+                      onSignIn={signDialog.bind(this)}
+                      onSignOut={signOut.bind(this)}
+                    />
+                  </Suspense>
                 </div>
               </div>
             </div>
@@ -58,12 +65,16 @@ class Component extends PureComponent {
         </section>
         <footer role="contentinfo" className={styles['footer']}>
           <div className={styles['center']}>
-            <Footer />
+            <Suspense fallback={null}>
+              <Footer />
+            </Suspense>
           </div>
         </footer>
-        <Dialog name="sign-in" title="Войти в личный кабинет">
-          <SignInForm onSubmit={signIn.bind(this)} />
-        </Dialog>
+        <Suspense fallback={null}>
+          <Dialog name="sign-in" title="Войти в личный кабинет">
+            <SignInForm onSubmit={signIn.bind(this)} />
+          </Dialog>
+        </Suspense>
       </section>
     );
   }

@@ -1,9 +1,10 @@
 
-import React, { PureComponent } from 'react';
-
-import Header from "./Header";
+import React, { PureComponent, lazy, Suspense } from 'react';
 
 import styles from './default.module.scss';
+
+
+const Header = lazy(() => import('./Header'));
 
 
 class Component extends PureComponent {
@@ -17,7 +18,9 @@ class Component extends PureComponent {
           <aside className={styles['aside']}>
             <header className={styles['header']}>
               <div className={styles['center']}>
-                <Header />
+                <Suspense fallback={null}>
+                  <Header />
+                </Suspense>
               </div>
             </header>
           </aside>

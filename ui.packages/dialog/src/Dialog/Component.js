@@ -53,6 +53,7 @@ class Component extends PureComponent {
 
   render() {
     const { isOpen, data, name, title, mode, actionDialogName, children } = this.props;
+
     const classNameCloseDialog = cn('fas fa-times', styles['dialog__close']);
     const classNameDialog = cn(styles['dialog'], {
       [styles['dialog--primary']]: mode === PRIMARY_MODE,

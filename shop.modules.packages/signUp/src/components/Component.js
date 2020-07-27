@@ -23,16 +23,16 @@ class Component extends PureComponent {
 
   render() {
     return (
-      <Suspense fallback={null}>
-        <section className={styles['wrapper']}>
-          <div className={styles['content']}>
-            <header className={styles['header']}>
-              <h2 className={styles['title']}>Регистрация</h2>
-            </header>
+      <section className={styles['wrapper']}>
+        <div className={styles['content']}>
+          <header className={styles['header']}>
+            <h2 className={styles['title']}>Регистрация</h2>
+          </header>
+          <Suspense fallback={null}>
             <SignUpForm onSubmit={this._handleSubmit.bind(this)} />
-          </div>
-        </section>
-      </Suspense>
+          </Suspense>
+        </div>
+      </section>
     );
   }
 }

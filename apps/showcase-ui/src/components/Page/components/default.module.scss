@@ -9,6 +9,7 @@
   flex: 1 0;
   flex-direction: column;
   overflow: hidden;
+  background-color: $white;
 
   &--blur {
     filter: blur(3px);

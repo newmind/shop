@@ -36,9 +36,18 @@ class Component extends PureComponent {
     name: 'None',
   };
 
-  _handleClickCart() {
+  _handleClickCart(event) {
     const { onCart } = this.props;
+
+    event.preventDefault();
     onCart && onCart();
+  }
+
+  _handleClickFastView(event) {
+    const { fastViewProduct } = this.props;
+
+    event.preventDefault();
+    fastViewProduct(this.props);
   }
 
   render() {
@@ -46,6 +55,7 @@ class Component extends PureComponent {
 
     const classNameForSale = cn('fas fa-percent', styles['product__sale']);
     const classNameForHit = cn('fas fa-star', styles['product__hit']);
+    const classNameForFastView = cn('far fa-eye', styles['product__view']);
     const classNameForCart = cn('fas fa-shopping-cart', styles['product__cart']);
 
     const countInCart = cart.filter((item) => (item['uuid'] === uuid)).length;
@@ -55,7 +65,7 @@ class Component extends PureComponent {
     });
 
     return (
-      <div className={productClassName}>
+      <Link className={productClassName} to={`/products/${uuid}`}>
         <div className={styles['product__meta']}>
           {isHit && <span className={classNameForHit} title="хит продаж" />}
           {isSale && <span className={classNameForSale} title="распродажа" />}
@@ -63,19 +73,19 @@ class Component extends PureComponent {
         <div className={styles['product__description']}>
           <span className={styles['product__uuid']}>{ uuid }</span>
           <span className={styles['product__brand']}>{ brand }</span>
-          <span className={styles['product__name']}>{ name }</span>
         </div>
         <div className={styles['product__promo']}>
           <Gallery items={gallery} isList={false} valueKey="externalId" path={`${process.env['REACT_APP_API_HOST']}/gallery`} />
         </div>
-        <div className={styles['product__amount']}>{ numeral(amount).format() } {currency['value']}</div>
+        <span className={styles['product__name']}>{ name }</span>
         <div className={styles['product__controls']}>
-          <Link className={styles['product__button']} to={`/products/${uuid}`}>Подробнее</Link>
-          <span className={classNameForCart} onClick={this._handleClickCart.bind(this, uuid)}>
+          <span className={classNameForFastView} onClick={this._handleClickFastView.bind(this)} />
+          <div className={styles['product__amount']}>{ numeral(amount).format() } {currency['value']}</div>
+          <span className={classNameForCart} onClick={this._handleClickCart.bind(this)}>
             { !! countInCart && <span className={styles['product__count']}>{countInCart}</span>}
           </span>
         </div>
-      </div>
+      </Link>
     );
   }
 }
