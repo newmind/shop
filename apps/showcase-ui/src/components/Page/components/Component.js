@@ -30,16 +30,16 @@ class Component extends PureComponent {
         <div className={pageContentClassName}>
           { children }
         </div>
-        {inProcess && (
-          <div className={styles['loading']}>
-            <div className={styles['container']}>
-              <span className={styles['logotype']}>
-                <i className={cn('fas fa-glasses', styles['logotype__icon'])} />
-                <span className={styles['logotype__text']}>Магазин очков</span>
-              </span>
-            </div>
-          </div>
-        )}
+        {/*{inProcess && (*/}
+        {/*  <div className={styles['loading']}>*/}
+        {/*    <div className={styles['container']}>*/}
+        {/*      <span className={styles['logotype']}>*/}
+        {/*        <i className={cn(styles['logotype__icon'], 'fas fa-glasses')} />*/}
+        {/*        <span className={styles['logotype__text']}>Магазин очков</span>*/}
+        {/*      </span>*/}
+        {/*    </div>*/}
+        {/*  </div>*/}
+        {/*)}*/}
       </div>
     );
   }
