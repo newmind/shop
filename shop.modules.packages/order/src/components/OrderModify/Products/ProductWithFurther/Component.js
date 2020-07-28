@@ -1,6 +1,6 @@
 
 import numeral from "@ui.packages/numeral";
-import { Dialog } from "@ui.packages/dialog";
+import { Dialog, Confirm } from "@ui.packages/dialog";
 import { Radio, RadioBoxField, Gallery } from "@ui.packages/kit";
 
 import types from 'prop-types';
@@ -46,6 +46,14 @@ class Component extends PureComponent {
     params: '',
   };
 
+  constructor(...props) {
+    super(...props);
+
+    this.state = {
+      uuid: null,
+    };
+  }
+
   _getLensAmount() {
     let amount = 0;
     const { lens } = this.props;
@@ -87,13 +95,28 @@ class Component extends PureComponent {
 
   _handleLensesSubmit(data) {
     const { field, change, closeDialog } = this.props;
+
     change('order', `${field}.lens`, data);
     closeDialog(`${field}.select-lenses`);
   }
 
+  _handleCloseConfirmDialog() {
+    const { uuid, closeDialog } = this.props;
+
+    closeDialog('remove-confirm-' + uuid);
+  }
+
   _handleRemoveFromCart() {
+    const { uuid, openDialog } = this.props;
+
+    openDialog('remove-confirm-' + uuid);
+  }
+
+  _handleConfirmRemoveFromCart() {
     const { uuid, removeProduct } = this.props;
+
     removeProduct(uuid);
+    this._handleCloseConfirmDialog();
   }
 
   render() {
@@ -106,7 +129,6 @@ class Component extends PureComponent {
     const removeFromCartClassName= cn(styles['remove'], 'far fa-trash-alt');
 
     return(
-      <Suspense fallback={null}>
         <div className={styles['product']}>
           <div className={styles['gallery']}>
             <span className={styles['product__uuid']}>{ uuid }</span>
@@ -150,28 +172,39 @@ class Component extends PureComponent {
                         { ! hasRecipe && <i className={cn(styles['danger'], 'fas fa-exclamation-circle')} />}
                         {hasItemsErrors && errors['items'][index]['recipe'] && <span className={styles['error']}>[{errors['items'][index]['recipe']}]</span>}
                       </p>
-                      {hasRecipe && <Recipe {...recipe} />}
+                      <Suspense fallback={null}>
+                        {hasRecipe && <Recipe {...recipe} />}
+                      </Suspense>
                       <p className={styles['details__info']}>
                         2. <span className={styles['link']} onClick={this._handleSelectLensesOpenDialog.bind(this)}>{hasLens ? 'Заменить' : 'Выбрать'}</span> линзы.
                         {hasLens && <i className={cn(styles['success'], 'fas fa-check-circle')} />}
                         { ! hasLens && <i className={cn(styles['danger'], 'fas fa-exclamation-circle')} />}
                         {hasItemsErrors && errors['items'][index]['lens'] && <span className={styles['error']}>[{errors['items'][index]['lens']}]</span>}
                       </p>
-                      {hasLens && <Lens {...lens} />}
+                      <Suspense fallback={null}>
+                        {hasLens && <Lens {...lens} />}
+                      </Suspense>
                     </Fragment>
                   )}
                 </div>
               </div>
             )}
           </div>
-          <Field name={`${field}.recipe`} component={() => <Dialog title="Рецепт на изготовление очков" name={`${field}.prescription-modify`}>
-            <PrescriptionFormModify value={recipe || {}} onSubmit={this._handlePrescriptionSubmit.bind(this)} />
-          </Dialog>} />
-          <Field name={`${field}.lens`} component={() => <Dialog title="Выбор линз" name={`${field}.select-lenses`}>
-            <SelectLensesFormModify value={lens || {}} onSubmit={this._handleLensesSubmit.bind(this)} />
-          </Dialog>} />
+          <Suspense fallback={null}>
+            <Field name={`${field}.recipe`} component={() => <Dialog title="Рецепт на изготовление очков" name={`${field}.prescription-modify`}>
+              <PrescriptionFormModify value={recipe || {}} onSubmit={this._handlePrescriptionSubmit.bind(this)} />
+            </Dialog>} />
+            <Field name={`${field}.lens`} component={() => <Dialog title="Выбор линз" name={`${field}.select-lenses`}>
+              <SelectLensesFormModify value={lens || {}} onSubmit={this._handleLensesSubmit.bind(this)} />
+            </Dialog>} />
+          </Suspense>
+          <Confirm
+            name={'remove-confirm-' + uuid}
+            message="Вы уверены что хотите удалить продукт из карзины?"
+            onCancel={this._handleCloseConfirmDialog.bind(this)}
+            onConfirm={this._handleConfirmRemoveFromCart.bind(this)}
+          />
         </div>
-      </Suspense>
     );
   }
 }

@@ -106,7 +106,7 @@ class Component extends PureComponent {
             : (
               <div className={styles['empty']}>
                 <p className={styles['empty__message']}>Нет выбранных товаров</p>
-                <p className={styles['empty__description']}>Перейти в раздел <Link className={styles['link']} to="/">Витрина</Link></p>
+                <p className={styles['empty__description']}>Перейти в раздел <Link className={styles['link']} to="/products">Витрина</Link></p>
               </div>
             )}
         </div>

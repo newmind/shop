@@ -28,31 +28,41 @@
   border-radius: 15px;
   margin: auto;
   padding: 48px 70px;
+  border: 1px solid transparent;
   box-sizing: border-box;
   box-shadow: 0 6px 10px 0 rgba($dark-grey, 0.3);
   overflow: hidden;
 
 
-  &--info { background: lighten($information, 30%); }
-  &--info &__header { background: $information;  }
+  &--info {
+    border: 1px solid $information;
+    box-shadow: 0 6px 10px 0 rgba($information, 0.3);
+  }
+  &--info &__close { color: $information;  }
 
-  &--primary { background: lighten($primary, 40%); }
-  &--primary &__header { background: $primary; color: $white; }
-  &--primary &__close:hover { color: $white; }
+  &--primary {
+    border: 1px solid $primary;
+    box-shadow: 0 6px 10px 0 rgba($primary, 0.3);
+  }
+  &--primary &__close { color: $primary; }
 
-  &--success { background: lighten($success, 40%); }
-  &--success &__header { background: $success; color: $white; }
-  &--success &__close:hover { color: $white; }
+  &--success {
+    border: 1px solid $success;
+    box-shadow: 0 6px 10px 0 rgba($success, 0.3);
+  }
+  &--success &__close { color: $success; }
 
-  &--warning { background: lighten($warning, 40%); }
-  &--warning &__header { background: $warning; color: $white; }
-  &--warning &__close:hover { color: $white; }
+  &--warning {
+    border: 1px solid $warning;
+    box-shadow: 0 6px 10px 0 rgba($warning, 0.3);
+  }
+  &--warning &__close { color: $warning; }
 
-  &--danger { background: lighten($danger, 45%); }
-  &--danger &__header {  }
-  &--danger &__close { color: $blue-grey; }
-  &--danger &__close:hover { color: $coal-dark; }
-
+  &--danger {
+    border: 1px solid $danger;
+    box-shadow: 0 6px 10px 0 rgba($danger, 0.3);
+  }
+  &--danger &__close { color: $danger; }
 
   &__close {
 

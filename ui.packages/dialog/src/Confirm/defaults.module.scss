@@ -5,7 +5,7 @@
 .confirm {
 
   display: block;
-  padding: 20px;
+  padding: 20px;;
 
   &__message {
 
@@ -13,12 +13,13 @@
     font: 14px "Istok Web", sans-serif;
     color: $coal-dark;
     text-shadow: 2px 1px 0 $whitesmoke;
+    text-align: center
   }
 
   &__controls {
 
     display: block;
-    text-align: right;
     margin: 30px 0 0;
+    text-align: center
   }
 }
