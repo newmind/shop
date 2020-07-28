@@ -1,6 +1,6 @@
 
-import { closeDialog, openDialog } from '@ui.packages/dialog';
 import { removeProduct } from '@ui.packages/cart';
+import { closeDialog, openDialog } from '@ui.packages/dialog';
 
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';

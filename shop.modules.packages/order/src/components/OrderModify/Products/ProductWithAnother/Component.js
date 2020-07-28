@@ -8,6 +8,7 @@ import React, { PureComponent } from 'react';
 
 import cn from 'classnames';
 import styles from "./default.module.scss";
+import {Confirm} from "@ui.packages/dialog";
 
 
 class Component extends PureComponent {
@@ -31,10 +32,23 @@ class Component extends PureComponent {
     description: '',
   };
 
+  _handleCloseConfirmDialog() {
+    const { uuid, closeDialog } = this.props;
+
+    closeDialog('remove-confirm-' + uuid);
+  }
+
   _handleRemoveFromCart() {
+    const { uuid, openDialog } = this.props;
+
+    openDialog('remove-confirm-' + uuid);
+  }
+
+  _handleConfirmRemoveFromCart() {
     const { uuid, removeProduct } = this.props;
 
     removeProduct(uuid);
+    this._handleCloseConfirmDialog();
   }
 
   render() {
@@ -66,6 +80,12 @@ class Component extends PureComponent {
             {description && <span className={styles['product__description']}>{ description }</span>}
           </h3>
         </div>
+        <Confirm
+          name={'remove-confirm-' + uuid}
+          message="Вы уверены что хотите удалить продукт из карзины?"
+          onCancel={this._handleCloseConfirmDialog.bind(this)}
+          onConfirm={this._handleConfirmRemoveFromCart.bind(this)}
+        />
       </div>
     );
   }

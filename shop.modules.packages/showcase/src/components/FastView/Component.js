@@ -71,11 +71,13 @@ class Component extends PureComponent {
               </div>)}
           </div>
         </div>
-        <div className={styles['property']}>
-          <Suspense fallback={null}>
-            <Properties list={attributes} />
-          </Suspense>
-        </div>
+        { !! attributes.length && (
+          <div className={styles['property']}>
+            <Suspense fallback={null}>
+              <Properties list={attributes} />
+            </Suspense>
+          </div>
+        )}
       </div>
 
     );
