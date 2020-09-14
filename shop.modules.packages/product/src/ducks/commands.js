@@ -1,5 +1,6 @@
 
 import request from "@ui.packages/request";
+import {pushNotification} from "@ui.packages/notifications";
 
 import {
   pageInProcessAction,
@@ -15,7 +16,6 @@ import {
   createCommentRequestFailAction,
   createCommentRequestSuccessAction,
 } from './actions';
-import {pushNotification} from "@ui.packages/notifications";
 
 
 export const pageInProcess = (status) => (dispatch) => dispatch(pageInProcessAction(status));
@@ -29,14 +29,14 @@ export const getProductById = (id) => async (dispatch) => {
   try {
     dispatch(getProductByIdRequest());
 
-    const result = await request({
+    const { data } = await request({
       method: 'get',
       url: `/products/${id}`
     });
 
-    dispatch(getProductByIdRequestSuccess(result['data']));
+    dispatch(getProductByIdRequestSuccess(data));
 
-    return void 0;
+    return data;
   }
   catch(error) {
 

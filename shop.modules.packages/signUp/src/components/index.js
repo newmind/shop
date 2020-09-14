@@ -15,12 +15,14 @@ const mapActionsToProps = (dispatch) => bindActionCreators({
   signUp,
 }, dispatch);
 
+
 export default PageHOC({
   mapStateToProps,
   mapActionsToProps,
   onEnter: ({ pageInProcess }) => {
 
     document.title = `${process.env['REACT_APP_WEBSITE_NAME']} - Регистрация личного кабинета`;
+    document.querySelector('meta[name="description"]').setAttribute('content', 'Регистрация нового пользователя');
 
     pageInProcess(false);
   },

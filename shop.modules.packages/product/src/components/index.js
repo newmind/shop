@@ -50,9 +50,13 @@ export default PageHOC({
   mapStateToProps,
   mapActionsToProps,
   onEnter: async ({ pageInProcess, getProductById, match: { params } }) => {
-    document.title = `${process.env['REACT_APP_WEBSITE_NAME']} - Продукт`;
     const { id } = params;
-    await getProductById(id);
+
+    const data = await getProductById(id);
+
+    document.title = `${process.env['REACT_APP_WEBSITE_NAME']} - ${data['brand']} (${data['uuid']})`;
+    document.querySelector('meta[name="description"]').setAttribute("content", data['description']);
+
     pageInProcess(false);
   },
 })(Component);

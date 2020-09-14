@@ -1,6 +1,6 @@
 
 import request from "@ui.packages/request";
-import { openDialog } from '@ui.packages/dialog';
+import { openDialog, closeDialog } from '@ui.packages/dialog';
 import { pushNotification } from "@ui.packages/notifications";
 import { instance, joinToRoom, connect, disconnect } from '@ui.packages/socket';
 
@@ -64,6 +64,7 @@ export const signIn = (formData) => async dispatch => {
     joinToRoom(result['id']);
 
     dispatch(applicationAuthRequestSuccessAction(result));
+    dispatch(closeDialog('sign-in'));
   }
   catch(error) {
 

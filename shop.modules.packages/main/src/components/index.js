@@ -32,6 +32,7 @@ export default PageHOC({
   onEnter: async ({ pageInProcess, getTypes, getCategories }) => {
 
     document.title = `${process.env['REACT_APP_WEBSITE_NAME']} - Витрина`;
+    document.querySelector('meta[name="description"]').setAttribute('content', 'Интернет магазин. Продажа и изготовление очков для зрения. Солнцезащитные очки. Изготовление очков по рецепту');
 
     await getTypes();
     await getCategories();
