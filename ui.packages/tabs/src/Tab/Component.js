@@ -1,51 +1,44 @@
 
 import types from 'prop-types';
-import React, { PureComponent } from "react";
+import React, { useContext } from "react";
+
+import Context from '../contexts/TabContext';
 
 import cn from 'classnames';
 import styles from "./defaults.module.scss";
 
 
-class Comment extends PureComponent {
-  static propTypes = {
-    caption: types.string,
-    name: types.string,
-    tabs: types.object.isRequired,
-    setActiveTab: types.func,
-  };
+function Tab({ name, setActiveTab, tabs, caption }) {
+  const { tabsName, onChange } = useContext(Context);
 
-  static contextTypes = {
-    tabsName: types.string,
-    onChange: types.func,
-  };
-
-  static defaultProps = {
-    caption: 'No caption',
-    name: '',
-    tabs: {},
-  };
-
-  _handleSetActiveTab() {
-    const { tabsName, onChange } = this.context;
-    const { name } = this.props;
-    const { setActiveTab } = this.props;
+  function handleSetActiveTab() {
     onChange(name);
     setActiveTab(tabsName, name)
   }
 
-  render() {
-    const { tabsName } = this.context;
-    const { name, tabs, caption } = this.props;
-    const activeTab = tabs[tabsName] && tabs[tabsName]['activeTab'];
-    const classNameTab = cn(styles['tab'], {
-      [styles['tab--active']]: activeTab === name,
-    });
-    return (
-      <span className={classNameTab} onClick={this._handleSetActiveTab.bind(this)}>
-        <span className={styles['tab__caption']}>{ caption }</span>
-      </span>
-    );
-  }
+  const activeTab = tabs[tabsName] && tabs[tabsName]['activeTab'];
+  const classNameTab = cn(styles['tab'], {
+    [styles['tab--active']]: activeTab === name,
+  });
+
+  return (
+    <span className={classNameTab} onClick={handleSetActiveTab}>
+      <span className={styles['tab__caption']}>{ caption }</span>
+    </span>
+  );
 }
+
+Tab.propTypes = {
+  caption: types.string,
+  name: types.string,
+  tabs: types.object.isRequired,
+  setActiveTab: types.func,
+};
+
+Tab.defaultProps = {
+  caption: 'No caption',
+  name: '',
+  tabs: {},
+};
 
 export default Comment;

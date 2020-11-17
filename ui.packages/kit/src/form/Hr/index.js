@@ -1,17 +1,23 @@
 
-import React, { PureComponent } from 'react';
+import React from 'react';
+import types from 'prop-types';
 
 import cn from 'classnames';
 import styles from './default.module.scss';
 
 
-class Component extends PureComponent {
-  render() {
-    const { className } = this.props;
-    return (
-      <span className={cn(styles['hr'], className)} />
-    );
-  }
+function Hr({ s }) {
+  return (
+    <span className={cn(styles['hr'], className)} />
+  );
 }
 
-export default Component;
+Hr.propTypes = {
+  className: types.string,
+};
+
+Hr.defaultProps = {
+  className: null,
+};
+
+export default Hr;

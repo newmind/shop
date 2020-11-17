@@ -1,66 +1,48 @@
 
 import types from 'prop-types';
-import React, { PureComponent } from 'react';
+import React, { useEffect, useRef } from 'react';
+
+import TabContext from "../contexts/TabContext";
 
 import styles from './defaults.module.scss';
 
 
-class Component extends PureComponent {
-  static propTypes = {
-    name: types.string,
-    defaultTab: types.string,
-    createTabs: types.func,
-    onChange: types.func,
-  };
+const usePrevious = (value) => {
+  const ref = useRef();
+  useEffect(() => {
+    ref.current = value;
+  });
+  return ref.current;
+}
 
-  static childContextTypes = {
-    tabsName: types.string,
-    onChange: types.func,
-  };
 
-  static defaultProps = {
-    name: 'default',
-    defaultTab: '',
-  };
+function Tabs({ name, defaultTab, children, createTabs, removeTabs, setActiveTab, onChange }) {
 
-  getChildContext() {
-    const { name } = this.props;
-    return {
-      tabsName: name,
-      onChange: this._handleChangeTab.bind(this)
-    };
-  }
-
-  componentDidMount() {
-    const { name, defaultTab, createTabs } = this.props;
-    createTabs(name, defaultTab);
-  }
-
-  componentDidUpdate(prevProps) {
-    const { name, defaultTab, setActiveTab } = prevProps;
-    if (this.props['defaultTab'] !== defaultTab) {
-      setActiveTab(name, this.props['defaultTab']);
-    }
-  }
-
-  componentWillUnmount() {
-    const { name, removeTabs } = this.props;
-    removeTabs(name);
-  }
-
-  _handleChangeTab(name) {
-    const { onChange } = this.props;
+  function handleChangeTab(name) {
     onChange && onChange(name);
   }
 
-  render() {
-    const { children } = this.props;
-    return (
+  useEffect(() => {
+    createTabs(name, defaultTab);
+    return () => {
+      removeTabs(name);
+    };
+  });
+
+  useEffect(() => {
+    setActiveTab(name);
+  }, [defaultTab]);
+
+  return (
+    <TabContext.Provider value={{
+      tabsName: name,
+      onChange: handleChangeTab
+    }}>
       <div className={styles['wrapper']}>
         { children }
       </div>
-    );
-  }
+    </TabContext.Provider>
+  );
 }
 
-export default Component;
+export default Tabs;

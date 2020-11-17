@@ -1,28 +1,27 @@
 
 import types from 'prop-types';
-import React, { PureComponent } from 'react';
+import React from 'react';
 
 import styles from './defaults.module.scss';
 
 
-class Component extends PureComponent {
-  static propTypes = {
-    items: types.array,
-  };
+function ConfirmOrder({ items }) {
+  const hasProductsInCart = !! items.length;
 
-  static defaultProps = {
-    items: [],
-  };
-
-  render() {
-    const { items } = this.props;
-    const hasProductsInCart = !! items.length;
-    return hasProductsInCart && (
-      <div className={styles['cart']}>
-        <span>Перейти к оформлению</span>
-      </div>
-    );
-  }
+  return hasProductsInCart && (
+    <div className={styles['cart']}>
+      <span>Перейти к оформлению</span>
+    </div>
+  );
 }
 
-export default Component;
+ConfirmOrder.propTypes = {
+  items: types.array,
+};
+
+ConfirmOrder.defaultProps = {
+  items: [],
+};
+
+
+export default ConfirmOrder;

@@ -32,6 +32,7 @@
   display: block;
   flex-direction: column;
   flex: 1 0;
+  overflow: hidden;
 
   & + & {
     margin: 0 0 0 20px;
@@ -42,24 +43,6 @@
 
   position: relative;
   display: block;
-}
-
-
-.option {
-
-  display: block;
-
-  &__title {
-
-    font: 14px "Istok Web", sans-serif;
-  }
-
-  &__count {
-
-    font: 12px "Istok Web", sans-serif;
-    margin: 0 0 0 12px;
-    color: $blue-grey;
-  }
 }
 
 .amounts {

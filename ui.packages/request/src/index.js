@@ -1,5 +1,5 @@
 
-import {BadRequestError, NetworkError, NotAuthError, NotFoundError, ValidationError} from '@packages/errors';
+import { BadRequestError, NetworkError, NotAuthError, NotFoundError, ValidationError } from '@packages/errors';
 
 import axios from 'axios';
 import { push } from 'react-router-redux';

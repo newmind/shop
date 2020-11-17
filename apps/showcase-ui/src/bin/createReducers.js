@@ -9,7 +9,7 @@ import { routerReducer } from 'react-router-redux';
 import { reducer as formReducer } from 'redux-form';
 
 
-export default (asyncReducers = {}) => {
+const reducers = (asyncReducers = {}) => {
   return combineReducers({
     tabs: tabsReducer,
     dialog: dialogReducer,
@@ -19,4 +19,6 @@ export default (asyncReducers = {}) => {
     form: formReducer,
     ...asyncReducers
   });
-}
+};
+
+export default reducers;

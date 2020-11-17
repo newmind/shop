@@ -4,7 +4,7 @@
   "private": true,
   "main": "./src/index.mjs",
   "dependencies": {
-    "lodash": "4.17.15",
-    "validator": "13.0.0"
+    "lodash": "4.17.20",
+    "validator": "13.1.17"
   }
 }

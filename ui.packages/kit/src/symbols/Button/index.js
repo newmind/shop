@@ -1,7 +1,7 @@
 
 import types from 'prop-types';
 import { Link } from 'react-router-dom';
-import React, { PureComponent } from 'react';
+import React from 'react';
 
 import cn from 'classnames';
 import styles from './default.module.scss';
@@ -14,61 +14,55 @@ const DANGER_MODE = 'danger';
 const SUCCESS_MODE = 'success';
 
 
-class Component extends PureComponent {
-  static propTypes = {
-    className: types.string,
-    href: types.string,
-    type: types.oneOf(['button', 'submit', 'link']),
-    mode: types.oneOf(['info', 'primary', 'danger', 'warning', 'success', 'default']),
-    size: types.oneOf(['s', 'm', 'l']),
-    caption: types.string,
-    children: types.any,
-    disabled: types.bool,
-    onClick: types.func,
-  };
-
-  static defaultProps = {
-    href: '#',
-    type: 'button',
-    mode: 'default',
-    caption: null,
-    disabled: false,
-    children: 'Button'
-  };
-
-  _handleClick() {
-    const { onClick } = this.props;
-
+function Button({ type, href, className, caption, children, disabled, mode, size, onClick }) {
+  function handleClick() {
     onClick && onClick();
   }
 
-  render() {
-    const { type, href, className, caption, children, disabled, mode, size } = this.props;
+  const classNameButton = cn(className, styles['button'], {
+    [styles['button--primary']]: mode === PRIMARY_MODE,
+    [styles['button--success']]: mode === SUCCESS_MODE,
+    [styles['button--info']]: mode === INFO_MODE,
+    [styles['button--danger']]: mode === DANGER_MODE,
+    [styles['button--warning']]: mode === WARNING_MODE,
+    [styles['button--disabled']]: disabled,
+  }, {
+    [styles['button--small']]: size === 's',
+    [styles['button--large']]: size === 'l',
+  });
 
-    const classNameButton = cn(className, styles['button'], {
-      [styles['button--primary']]: mode === PRIMARY_MODE,
-      [styles['button--success']]: mode === SUCCESS_MODE,
-      [styles['button--info']]: mode === INFO_MODE,
-      [styles['button--danger']]: mode === DANGER_MODE,
-      [styles['button--warning']]: mode === WARNING_MODE,
-      [styles['button--disabled']]: disabled,
-    }, {
-      [styles['button--small']]: size === 's',
-      [styles['button--large']]: size === 'l',
-    });
-
-    if (type === 'link') {
-      return (
-        <Link className={classNameButton} to={href}>{ caption || children }</Link>
-      );
-    }
-
+  if (type === 'link') {
     return (
-      <button type={type} className={classNameButton} onClick={this._handleClick.bind(this)} disabled={disabled}>
-        {caption || children}
-      </button>
+      <Link className={classNameButton} to={href}>{ caption || children }</Link>
     );
   }
+
+  return (
+    <button type={type} className={classNameButton} onClick={handleClick} disabled={disabled}>
+      {caption || children}
+    </button>
+  );
 }
 
-export default Component;
+Button.propTypes = {
+  className: types.string,
+  href: types.string,
+  type: types.oneOf(['button', 'submit', 'link']),
+  mode: types.oneOf(['info', 'primary', 'danger', 'warning', 'success', 'default']),
+  size: types.oneOf(['s', 'm', 'l']),
+  caption: types.string,
+  children: types.any,
+  disabled: types.bool,
+  onClick: types.func,
+};
+
+Button.defaultProps = {
+  href: '#',
+  type: 'button',
+  mode: 'default',
+  caption: null,
+  disabled: false,
+  children: 'Button'
+};
+
+export default Button;

@@ -1,20 +1,14 @@
 
 import PropTypes from 'prop-types';
-import React, { PureComponent } from 'react';
+import React from 'react';
 
 import cn from 'classnames';
 import styles from './default.module.scss';
 
 
-class Component extends PureComponent {
-  static propTypes = {
-    children: PropTypes.any,
-    params: PropTypes.object,
-  };
+function Header({ children }) {
 
-  _renderItem() {
-    const { children } = this.props;
-
+  function renderItem() {
     return React.Children.map(children, (Item) => {
       const params = Item['props'];
       const { title, width, align } = params;
@@ -39,16 +33,19 @@ class Component extends PureComponent {
     });
   }
 
-  render() {
-    return (
-      <thead className={styles['header']}>
-        <tr className={styles['row']}>
-          { this._renderItem() }
-        </tr>
-      </thead>
-    );
-  }
+  return (
+    <thead className={styles['header']}>
+      <tr className={styles['row']}>
+        { renderItem() }
+      </tr>
+    </thead>
+  );
 }
 
+Header.propTypes = {
+  children: PropTypes.any,
+  params: PropTypes.object,
+};
 
-export default Component;
+
+export default Header;

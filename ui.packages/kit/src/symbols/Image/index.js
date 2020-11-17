@@ -1,156 +1,154 @@
 
 import types from 'prop-types';
-import React, { PureComponent } from 'react';
-
-import Spinner from '../Spinner';
+import React, { useEffect, useState, useRef } from 'react';
 
 import cn from 'classnames';
 import styles from './default.module.scss';
-import {sleep} from "@ui.packages/utils";
 
 
-const PRIMARY_MODE = 'primary';
-const INFO_MODE = 'info';
-const WARNING_MODE = 'warning';
-const DANGER_MODE = 'danger';
-const SUCCESS_MODE = 'success';
+const COVER_SIZE = 'cover';
+
+const BOTH_DIRECTION = 'both';
+const PORTRAIT_DIRECTION = 'portrait';
+const LANDSCAPE_DIRECTION = 'landscape';
 
 
-class Component extends PureComponent {
-  static propTypes = {
-    className: types.string,
-    src: types.string,
-    mode: types.oneOf(['info', 'primary', 'danger', 'warning', 'success', 'default']),
-  };
+function getRation(el) {
+  const RECT = el.getBoundingClientRect();
+  return RECT['height'] / RECT['width'];
+}
 
-  static defaultProps = {
-    className: '',
-    src: '',
-    mode: 'default',
-  };
+function getDirection(img, container) {
+  const imageRatio = getRation(img);
+  const containerRatio = getRation(container);
 
-  static getSize(element) {
-    const rect = element.getBoundingClientRect();
-    return {
-      width: rect['width'],
-      height: rect['height'],
-    };
+  if (imageRatio < containerRatio) {
+    return LANDSCAPE_DIRECTION;
   }
-
-  timeOutInstance = null;
-
-  wrapperRef = React.createRef();
-  imageRef = React.createRef();
-
-  constructor(props) {
-    super(props);
-
-    this.state = {
-      isLoading: true,
-      isError: false,
-    };
-
-    this._handleLoad = this._handleLoad.bind(this);
-    this._handleError = this._handleError.bind(this);
+  else if (imageRatio > containerRatio) {
+    return PORTRAIT_DIRECTION;
   }
+  return BOTH_DIRECTION;
+}
 
-  componentDidMount() {
-    const { current: imageElement } = this.imageRef;
+function setProportionalImageSize(img, container) {
+  const direction = getDirection(img, container);
+  const containerRECT = container.getBoundingClientRect();
 
-    imageElement.addEventListener('load', this._handleLoad);
-    imageElement.addEventListener('error', this._handleError);
+  if (direction === LANDSCAPE_DIRECTION) {
+    img.width = containerRECT['width'];
   }
-
-  componentDidUpdate(prevProps) {
-    const { src: prevSrc } = prevProps;
-    const { src: nextSrc } = this.props;
-    const { current: imageElement } = this.imageRef;
-
-    if (prevSrc !== nextSrc) {
-
-      imageElement.style['width'] = 'auto';
-      imageElement.style['height'] = 'auto';
-
-      this.setState({ isError: false, isLoading: true });
-    }
+  else if (direction === PORTRAIT_DIRECTION) {
+    img.height = containerRECT['height'];
   }
-
-  componentWillUnmount() {
-    const { current: imageElement } = this.imageRef;
-
-    imageElement.addEventListener('load', this._handleLoad);
-    imageElement.addEventListener('error', this._handleError);
-
-    clearTimeout(this.timeOutInstance);
-  }
-
-  async _handleLoad() {
-    await sleep(100);
-
-    const { current: wrapperElement } = this.wrapperRef;
-    const { current: imageElement } = this.imageRef;
-
-    if ( ! wrapperElement || ! imageElement) {
-      return void 0;
-    }
-
-    const wrapperSize = Component.getSize(wrapperElement);
-    imageElement.style['width'] = wrapperSize['width'] + 'px';
-
-    let imageSize = Component.getSize(imageElement);
-
-    if (imageSize['width'] < wrapperSize['width']) {
-      imageElement.style['width'] = wrapperSize['width'] + 'px';
-      imageElement.style['height'] = 'auto';
-    }
-    if (imageSize['height'] < wrapperSize['height']) {
-      imageElement.style['width'] = 'auto';
-      imageElement.style['height'] = wrapperSize['height'] + 'px';
-    }
-
-    imageSize = Component.getSize(imageElement);
-
-    imageElement.style['margin-top'] = `-${imageSize['height'] / 2}px`;
-    imageElement.style['margin-left'] = `-${imageSize['width'] / 2}px`;
-
-    this.setState({ isLoading: false, isError: false });
-  }
-
-  _handleError() {
-    this.setState({ isLoading: false, isError: true });
-  }
-
-  render() {
-    const { isLoading, isError } = this.state;
-    const { className, src, mode } = this.props;
-
-    const classNameImageWrapper = cn(className, styles['wrapper'], {
-      [styles['wrapper--in-process']]: isLoading,
-      [styles['wrapper--error']]: isError,
-      [styles['wrapper--primary']]: mode === PRIMARY_MODE,
-      [styles['wrapper--success']]: mode === SUCCESS_MODE,
-      [styles['wrapper--info']]: mode === INFO_MODE,
-      [styles['wrapper--danger']]: mode === DANGER_MODE,
-      [styles['wrapper--warning']]: mode === WARNING_MODE,
-    });
-    const errorIcon = cn(styles['error__icon'], 'far fa-image');
-
-    return (
-      <div ref={this.wrapperRef} className={classNameImageWrapper}>
-        <img ref={this.imageRef} className={styles['image']} alt={"No Image"} src={src} />
-        {isLoading && (
-          <div className={styles['loading']}>
-            <Spinner />
-          </div>
-        )}
-        {isError && (
-          <div className={styles['error']}>
-            <i className={errorIcon} />
-          </div>
-        )}
-      </div>
-    );
+  else {
+    img.width = containerRECT['width'];
+    img.height = containerRECT['height'];
   }
 }
 
-export default Component;
+function setCoverImageSize(img, container) {
+  const direction = getDirection(img, container);
+  const containerRECT = container.getBoundingClientRect();
+
+  if (direction === LANDSCAPE_DIRECTION) {
+    img.height = containerRECT['height'];
+  }
+  else if (direction === PORTRAIT_DIRECTION) {
+    img.width = containerRECT['width'];
+  }
+  else {
+    img.width = containerRECT['width'];
+    img.height = containerRECT['height'];
+  }
+}
+
+
+export default function Image({ className, src, size, isResize }) {
+  const imageRef = useRef(null);
+  const wrapperRef = useRef(null);
+
+  const [isLoadingState, setLoadingState] = useState(true);
+  const [isError, setError] = useState(false);
+
+  function calculateProportions() {
+    const { current: imageElement } = imageRef;
+    const { current: wrapperElement } = wrapperRef;
+
+    switch (size) {
+      case COVER_SIZE: setCoverImageSize(imageElement, wrapperElement); break;
+      default: setProportionalImageSize(imageElement, wrapperElement);
+    }
+  }
+
+  function handleError() {
+    setError(true);
+    setLoadingState(false);
+  }
+
+  function handleLoaded() {
+    calculateProportions();
+    setLoadingState(false);
+  }
+
+  function handleResize() {
+    calculateProportions();
+  }
+
+  useEffect(() => {
+    const { current: imageElement } = imageRef;
+
+    if (isResize) {
+      window.addEventListener('resize', handleResize);
+    }
+
+    imageElement.addEventListener('load', handleLoaded);
+    imageElement.addEventListener('error', handleError);
+
+    return () => {
+      if (isResize) {
+        window.removeEventListener('resize', handleResize);
+      }
+
+      imageElement.removeEventListener('load', handleLoaded);
+      imageElement.removeEventListener('error', handleError);
+    };
+  }, [src, size]);
+
+  const wrapperClassName = cn(styles['wrapper'], className);
+  const imageClassName = cn(styles['image'], {
+    [styles['image--visible']]: ! isLoadingState,
+  });
+
+  return (
+    <div className={wrapperClassName}>
+      <div ref={wrapperRef} className={imageClassName}>
+        <img ref={imageRef} src={src} alt="" />
+      </div>
+      {isLoadingState && (
+        <div className={styles['loading']}>
+          <span className={cn(styles['icon'], 'fas fa-circle-notch')} />
+        </div>
+      )}
+      {isError && (
+        <div className={styles['error']}>
+          <span className={cn(styles['icon'], 'fas fa-exclamation-circle')} />
+        </div>
+      )}
+    </div>
+  );
+}
+
+Image.propTypes = {
+  className: types.string,
+  src: types.string,
+  size: types.oneOf([COVER_SIZE, null]),
+  isResize: types.bool,
+};
+
+Image.defaultProps = {
+  className: '',
+  src: null,
+  size: 'cover',
+  isResize: false,
+};

@@ -1,30 +1,27 @@
 
+import React from 'react';
 import types from 'prop-types';
-import React, { PureComponent } from 'react';
 
 import cn from 'classnames';
 import styles from './default.module.scss';
 
 
-class Component extends PureComponent {
-  static propTypes = {
-    className: types.string,
-  };
-
-  static defaultProps = {
-    className: '',
-  };
-
-  render() {
-    const { children, className } = this.props;
-    return (
-      <span className={cn(className, styles['row'])}>
-        {React.Children.map(children, child => {
-          return React.cloneElement(child, {});
-        })}
-      </span>
-    );
-  }
+function Row({ children, className }) {
+  return (
+    <span className={cn(className, styles['row'])}>
+      {React.Children.map(children, (child) => {
+        return React.cloneElement(child, {});
+      })}
+    </span>
+  );
 }
 
-export default Component;
+Row.propTypes = {
+  className: types.string,
+};
+
+Row.defaultProps = {
+  className: '',
+};
+
+export default Row;

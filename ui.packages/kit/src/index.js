@@ -1,4 +1,5 @@
 
+export { default as Range } from './symbols/Range';
 export { default as Input } from './symbols/Input';
 export { default as Image } from './symbols/Image';
 export { default as Avatar } from './symbols/Avatar';

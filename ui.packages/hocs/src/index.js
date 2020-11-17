@@ -1,39 +1,24 @@
 
 import PropTypes from 'prop-types';
-import React, { Component } from 'react';
-import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
+import React, { useEffect } from 'react';
+import { withRouter, useLocation } from 'react-router-dom';
 
 
-class Wrapper extends Component {
-  static propTypes = {
-    onEnter: PropTypes.func,
-    onChange: PropTypes.func,
-    onDestroy: PropTypes.func,
-  };
+function Wrapper({ onEnter, children, onDestroy }) {
+  const location = useLocation();
 
-  async componentDidMount() {
-    const { onEnter, children } = this.props;
-    onEnter && await onEnter(children.props);
-  }
-  async componentWillUnmount() {
-    const { onDestroy, children } = this.props;
-    onDestroy && await onDestroy(children.props);
-  }
-  async componentDidUpdate(prevProps) {
-    const { onChange, children } = prevProps;
-    const { location } = children.props;
-    if (this.props.children.props.location.key !== location.key) {
-      onChange && await onChange(children.props);
-    }
-  }
-  render() {
-    return this.props.children;
-  }
+  useEffect(() => {
+    onEnter && onEnter(children.props);
+    return async () => {
+      onDestroy && onDestroy(children.props);
+    };
+  }, [location]);
+
+  return children;
 }
 
 export default (options) => (Component) => {
-
   const defaultOptions = {
     module: null,
     mapStateToProps: null,
@@ -45,7 +30,6 @@ export default (options) => (Component) => {
     return (
       <Wrapper
         onEnter={defaultOptions['onEnter']}
-        onChange={defaultOptions['onChange']}
         onDestroy={defaultOptions['onDestroy']}
       >
         <Component {...props} />
@@ -55,8 +39,13 @@ export default (options) => (Component) => {
 
   return withRouter(
     connect(
-      defaultOptions.mapStateToProps,
-      defaultOptions.mapActionsToProps,
+      defaultOptions['mapStateToProps'],
+      defaultOptions['mapActionsToProps'],
     )(HOComponent)
   );
+};
+
+Wrapper.propTypes = {
+  onEnter: PropTypes.func,
+  onDestroy: PropTypes.func,
 };

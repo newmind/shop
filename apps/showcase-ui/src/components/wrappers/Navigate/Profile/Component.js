@@ -1,12 +1,17 @@
 
 import React from 'react';
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 
 import cn from 'classnames';
 import styles from './default.module.scss';
 
 
 export default ({ isAuth, profile, onSignIn, onSignOut }) => {
+  const location = useLocation();
+
+  if (/sign-up/.test(location['pathname'])) {
+    return null;
+  }
 
   if ( ! isAuth) {
     return (

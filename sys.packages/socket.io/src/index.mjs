@@ -1,7 +1,7 @@
 
 import logger from '@sys.packages/logger';
 
-import SocketIO from 'socket.io';
+import { Server } from 'socket.io';
 
 
 let io = null;
@@ -9,7 +9,7 @@ let io = null;
 
 export default async (server, options = {}) => {
   try {
-    io = new SocketIO(server, {
+    io = new Server(server, {
       path: options['path'] || '/admin.socket.io',
       transports: ['websocket'],
     });

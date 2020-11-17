@@ -1,17 +1,16 @@
 
-import types from 'prop-types';
 import React from 'react';
+import types from 'prop-types';
 
 import cn from 'classnames';
 import styles from './default.module.scss';
 
 
-const Actions = (props) => {
-  const { onEdit, onDelete } = props;
+const Actions = ({ onEdit, onDelete }) => {
   return (
     <div className={styles['block']}>
-      {onEdit && <span className={cn(styles['action'], styles['action--edit'], 'fas fa-edit')} onClick={props.onEdit} />}
-      {onDelete && <span className={cn(styles['action'], styles['action--delete'], 'far fa-trash-alt')} onClick={props.onDelete} />}
+      {onEdit && <span className={cn(styles['action'], styles['action--edit'], 'fas fa-edit')} onClick={onEdit} />}
+      {onDelete && <span className={cn(styles['action'], styles['action--delete'], 'far fa-trash-alt')} onClick={onDelete} />}
     </div>
   );
 };

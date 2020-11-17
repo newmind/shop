@@ -8,6 +8,6 @@
     "email": "viktor.pyatakov@pimpay.ru"
   },
   "dependencies": {
-    "winston": "3.2.1"
+    "winston": "3.3.3"
   }
 }

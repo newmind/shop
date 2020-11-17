@@ -8,21 +8,23 @@
     "start:dev": "cross-env NODE_ENV=development babel ./src --out-dir ./lib --copy-files --watch"
   },
   "dependencies": {
+    "@packages/moment": "1.0.0",
+    "@packages/numeral": "1.0.0",
     "@ui.packages/hocs": "1.0.0",
-    "@ui.packages/moment": "1.0.0",
     "@ui.packages/theme": "1.0.0",
     "@ui.packages/utils": "1.0.0",
     "classnames": "2.2.6",
     "prop-types": "15.7.2",
-    "react": "16.13.1",
-    "react-input-mask": "3.0.0-alpha.2",
+    "react": "17.0.1",
+    "react-dom": "17.0.1",
+    "react-input-mask": "2.0.4",
     "react-router-dom": "5.2.0"
   },
   "devDependencies": {
-    "@babel/cli": "7.10.1",
-    "@babel/core": "7.10.1",
+    "@babel/cli": "7.12.1",
+    "@babel/core": "7.12.3",
     "cross-env": "7.0.2",
-    "resolve": "1.17.0"
+    "resolve": "1.18.1"
   },
   "babel": {
     "presets": [

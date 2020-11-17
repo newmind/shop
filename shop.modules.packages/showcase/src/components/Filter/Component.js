@@ -1,165 +1,163 @@
 
-import { SelectField, InputField, CheckBoxField, Row, Col } from '@ui.packages/kit';
+import { SelectField, CheckBoxField, Row, Col, Range } from '@ui.packages/kit';
 
+import React, { useState } from 'react';
 import types from 'prop-types';
-import React, { PureComponent } from 'react';
+
+import Option from './Option';
 
 import styles from './default.module.scss';
 
 
-const Option = (option) => (
-  <span className={styles['option']}>
-    <span className={styles['option__title']}>{option['value']}</span>
-    <span className={styles['option__count']}>{option['count']} поз.</span>
-  </span>
-);
+function Filter({ handleSubmit, submit, types, categories, brands, colors, forms, materials, inProcess }) {
+  const [values, setValues] = useState([0, 20000]);
 
+  console.log(1, values)
 
-class Component extends PureComponent {
-  static propTypes = {
-    types: types.array,
-    categories: types.array,
-    brands: types.array,
-    colors: types.array,
-    forms: types.array,
-    materials: types.array,
-    isValid: types.bool,
-    inProcess: types.bool,
-  };
-
-  static defaultProps = {
-    types: [],
-    categories: [],
-    brands: [],
-    colors: [],
-    forms: [],
-    materials: [],
-    isValid: false,
-    inProcess: false,
-  };
-
-  _handleSubmit() {
-    const { submit } = this.props;
-
-    setTimeout(() => submit('filter-showcase-ui'), 100);
+  function onSubmit() {
+    setTimeout(() => submit('filter-showcase-ui'), 50);
   }
 
-  render() {
-    const { handleSubmit, types, categories, brands, colors, forms, materials, inProcess } = this.props;
-
-    return (
-      <form onSubmit={handleSubmit} className={styles['wrapper']}>
-        <div className={styles['fields']}>
-          <div className={styles['line']}>
-            <div className={styles['col']}>
-              <SelectField
-                placeholder="Тип"
-                name="typeId"
-                options={types}
-                optionKey="id"
-                optionValue="value"
-                simple={true}
-                optionTemplate={Option}
-                disabled={inProcess}
-                onChange={this._handleSubmit.bind(this)}
-              />
-            </div>
-            <div className={styles['col']}>
-              <SelectField
-                placeholder="Категория"
-                name="categoryId"
-                options={categories}
-                optionKey="id"
-                optionValue="value"
-                simple={true}
-                optionTemplate={Option}
-                disabled={inProcess}
-                onChange={this._handleSubmit.bind(this)}
-              />
-            </div>
-            <div className={styles['col']}>
-              <SelectField
-                placeholder="Цвет"
-                name="colorId"
-                optionKey="id"
-                optionValue="value"
-                options={colors}
-                simple={true}
-                optionTemplate={Option}
-                disabled={inProcess}
-                onChange={this._handleSubmit.bind(this)}
-              />
-            </div>
-            <div className={styles['col']}>
-              <SelectField
-                placeholder="Материал"
-                name="materialId"
-                optionKey="id"
-                optionValue="value"
-                options={materials}
-                simple={true}
-                optionTemplate={Option}
-                disabled={inProcess}
-                onChange={this._handleSubmit.bind(this)}
-              />
-            </div>
+  return (
+    <form onSubmit={handleSubmit} className={styles['wrapper']}>
+      <div className={styles['fields']}>
+        <div className={styles['line']}>
+          <div className={styles['col']}>
+            <SelectField
+              placeholder="Тип"
+              name="typeId"
+              options={types}
+              optionKey="id"
+              optionValue="value"
+              simple={true}
+              OptionTemplate={Option}
+              disabled={inProcess}
+              onChange={onSubmit}
+            />
           </div>
-          <div className={styles['line']}>
-            <div className={styles['col']}>
-              <SelectField
-                placeholder="Бренд"
-                name="brand"
-                optionKey="value"
-                optionValue="value"
-                options={brands}
-                simple={true}
-                optionTemplate={Option}
-                disabled={inProcess}
-                onChange={this._handleSubmit.bind(this)}
-              />
-            </div>
-            <div className={styles['col']}>
-              <SelectField
-                placeholder="Форма"
-                name="formId"
-                optionKey="id"
-                optionValue="value"
-                options={forms}
-                simple={true}
-                optionTemplate={Option}
-                disabled={inProcess}
-                onChange={this._handleSubmit.bind(this)}
-              />
-            </div>
-            <div className={styles['col']}>
-              <Row>
-                <Col>
-                  <div className={styles['amount']}>
-                    <span className={styles['amount__label']}>Сумма</span>
-                    <span className={styles['amount__wrapper']}>
-                      <InputField className={styles['amount__input']} name="amountFrom" disabled={inProcess} autoComplete="off" />
-                      <span className={styles['amount__delimiter']}>-</span>
-                      <InputField className={styles['amount__input']} name="amountTo" disabled={inProcess} autoComplete="off" />
-                    </span>
-                  </div>
-                </Col>
-              </Row>
-            </div>
-            <div className={styles['col']}>
-              <div className={styles['additional']}>
-                <div className={styles['additional__col']}>
-                  <CheckBoxField label="скидка" name="isHit" onChange={this._handleSubmit.bind(this)} />
-                </div>
-                <div className={styles['additional__col']}>
-                  <CheckBoxField label="новинки" name="isSale" onChange={this._handleSubmit.bind(this)} />
-                </div>
+          <div className={styles['col']}>
+            <SelectField
+              placeholder="Категория"
+              name="categoryId"
+              options={categories}
+              optionKey="id"
+              optionValue="value"
+              simple={true}
+              OptionTemplate={Option}
+              disabled={inProcess}
+              onChange={onSubmit}
+            />
+          </div>
+          <div className={styles['col']}>
+            <SelectField
+              placeholder="Цвет"
+              name="colorId"
+              optionKey="id"
+              optionValue="value"
+              options={colors}
+              simple={true}
+              OptionTemplate={Option}
+              disabled={inProcess}
+              onChange={onSubmit}
+            />
+          </div>
+          <div className={styles['col']}>
+            <SelectField
+              placeholder="Материал"
+              name="materialId"
+              optionKey="id"
+              optionValue="value"
+              options={materials}
+              simple={true}
+              OptionTemplate={Option}
+              disabled={inProcess}
+              onChange={onSubmit}
+            />
+          </div>
+        </div>
+        <div className={styles['line']}>
+          <div className={styles['col']}>
+            <SelectField
+              placeholder="Бренд"
+              name="brand"
+              optionKey="value"
+              optionValue="value"
+              options={brands}
+              simple={true}
+              OptionTemplate={Option}
+              disabled={inProcess}
+              onChange={onSubmit}
+            />
+          </div>
+          <div className={styles['col']}>
+            <SelectField
+              placeholder="Форма"
+              name="formId"
+              optionKey="id"
+              optionValue="value"
+              options={forms}
+              simple={true}
+              OptionTemplate={Option}
+              disabled={inProcess}
+              onChange={onSubmit}
+            />
+          </div>
+          <div className={styles['col']}>
+            <Row>
+              <Col>
+                <Range
+                  min={0}
+                  max={20000}
+                  step={500}
+                  value={values}
+                  onChange={(v) => setValues(v)} />
+                {/*<div className={styles['amount']}>*/}
+                {/*  <span className={styles['amount__label']}>Сумма</span>*/}
+                {/*  <span className={styles['amount__wrapper']}>*/}
+                {/*    <InputField className={styles['amount__input']} name="amountFrom" disabled={inProcess} autoComplete="off" />*/}
+                {/*    <span className={styles['amount__delimiter']}>-</span>*/}
+                {/*    <InputField className={styles['amount__input']} name="amountTo" disabled={inProcess} autoComplete="off" />*/}
+                {/*  </span>*/}
+                {/*</div>*/}
+              </Col>
+            </Row>
+          </div>
+          <div className={styles['col']}>
+            <div className={styles['additional']}>
+              <div className={styles['additional__col']}>
+                <CheckBoxField label="скидка" name="isHit" onChange={onSubmit} />
+              </div>
+              <div className={styles['additional__col']}>
+                <CheckBoxField label="новинки" name="isSale" onChange={onSubmit} />
               </div>
             </div>
           </div>
         </div>
-      </form>
-    );
-  }
+      </div>
+    </form>
+  );
 }
 
-export default Component;
+Filter.propTypes = {
+  types: types.array,
+  categories: types.array,
+  brands: types.array,
+  colors: types.array,
+  forms: types.array,
+  materials: types.array,
+  isValid: types.bool,
+  inProcess: types.bool,
+};
+
+Filter.defaultProps = {
+  types: [],
+  categories: [],
+  brands: [],
+  colors: [],
+  forms: [],
+  materials: [],
+  isValid: false,
+  inProcess: false,
+};
+
+export default Filter;

@@ -1,12 +1,12 @@
 
 import types from 'prop-types';
 import { Field } from 'redux-form';
-import React, { PureComponent } from 'react';
+import React from 'react';
 
 import Evaluation from '../../symbols/Evaluation';
 
 
-const EvaluationField = ({ input, type, mode, size, label, meta: { touched, error } }) => {
+const InputField = ({ input, type, mode, size, label, meta: { touched, error } }) => {
   return (
     <Evaluation
       type={type}
@@ -20,29 +20,26 @@ const EvaluationField = ({ input, type, mode, size, label, meta: { touched, erro
   );
 };
 
-class Component extends PureComponent {
-  static propTypes = {
-    label: types.string,
-    name: types.string,
-    mode: types.string,
-    size: types.string,
-    disabled: types.bool,
-  };
-
-  static defaultProps = {
-    label: '',
-    name: '',
-    size: 'm',
-    mode: 'default',
-    disabled: false,
-  };
-
-  render() {
-    const { name, label, mode, size, disabled } = this.props;
-    return (
-      <Field name={name} mode={mode} size={size} label={label} disabled={disabled} component={EvaluationField} />
-    );
-  }
+function EvaluationField({ name, label, mode, size, disabled }) {
+  return (
+    <Field name={name} mode={mode} size={size} label={label} disabled={disabled} component={InputField} />
+  );
 }
 
-export default Component;
+EvaluationField.propTypes = {
+  label: types.string,
+  name: types.string,
+  mode: types.string,
+  size: types.string,
+  disabled: types.bool,
+};
+
+EvaluationField.defaultProps = {
+  label: '',
+  name: '',
+  size: 'm',
+  mode: 'default',
+  disabled: false,
+};
+
+export default EvaluationField;

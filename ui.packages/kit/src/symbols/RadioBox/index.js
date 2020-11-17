@@ -1,51 +1,41 @@
 
 import types from 'prop-types';
-import React, { PureComponent } from 'react';
+import React from 'react';
+
+import Context from './context';
 
 import styles from './default.module.scss';
 
 
-class Component extends PureComponent {
-  static propTypes = {
-    disabled: types.bool,
-    value: types.any,
-    onChange: types.func,
-  };
+function RadioBox({ children, value, onChange }) {
 
-  static defaultProps = {
-    mode: 'default',
-    disabled: false,
-    value: false,
-    label: null,
-  };
-
-  static childContextTypes = {
-    value: types.any,
-    onChange: types.func,
-  };
-
-  getChildContext() {
-    return {
-      onChange: this._handleClick.bind(this),
-    };
+  function handleClick(value) {
+    onChange && onChange(value);
   }
 
-  _handleClick(value) {
-    const { onChange } = this.props;
-    onChange(value);
-  }
-
-  render() {
-    const { children, value } = this.props;
-    return (
+  return (
+    <Context.Provider value={{ value, onChange: handleClick }}>
       <div className={styles['container']}>
         {React.Children.map(children, (child, key) => {
           return child && React.cloneElement(child, { key, value });
         })}
       </div>
-    );
-  }
+    </Context.Provider>
+  );
 }
 
-export default Component;
+RadioBox.propTypes = {
+  disabled: types.bool,
+  value: types.any,
+  onChange: types.func,
+};
+
+RadioBox.defaultProps = {
+  mode: 'default',
+  disabled: false,
+  value: false,
+  label: null,
+};
+
+export default RadioBox;
 export { default as Radio } from './RadioComponent';

@@ -7,8 +7,6 @@
     "start": "react-scripts start"
   },
   "dependencies": {
-    "@fortawesome/fontawesome-free": "5.13.1",
-    "@modules.packages/users": "1.0.0",
     "@modules.packages/attributes": "1.0.0",
     "@modules.packages/comments": "1.0.0",
     "@modules.packages/not-found": "1.0.0",
@@ -17,6 +15,7 @@
     "@modules.packages/products": "1.0.0",
     "@modules.packages/profile": "1.0.0",
     "@modules.packages/sign-in": "1.0.0",
+    "@modules.packages/users": "1.0.0",
     "@packages/errors": "1.0.0",
     "@packages/numeral": "1.0.0",
     "@ui.packages/dialog": "1.0.0",
@@ -31,24 +30,24 @@
     "classnames": "2.2.6",
     "cross-env": "7.0.2",
     "history": "4.10.1",
-    "i18n-calypso": "4.1.0",
+    "i18n-calypso": "5.0.0",
     "prop-types": "15.7.2",
-    "react": "16.13.1",
-    "react-dom": "16.13.1",
-    "react-redux": "7.2.0",
+    "react": "17.0.1",
+    "react-dom": "17.0.1",
+    "react-redux": "7.2.2",
     "react-router": "5.2.0",
     "react-router-dom": "5.2.0",
     "react-router-redux": "4.0.8",
-    "react-scripts": "3.4.1",
+    "react-scripts": "4.0.0",
     "redux": "4.0.5",
     "redux-form": "8.3.6",
     "redux-socket.io": "1.4.0",
     "redux-thunk": "2.3.0",
-    "validator": "13.0.0"
+    "validator": "13.1.17"
   },
   "devDependencies": {
-    "node-sass": "4.14.1",
-    "redux-devtools-extension": "2.13.8"
+    "redux-devtools-extension": "2.13.8",
+    "sass": "1.29.0"
   },
   "browserslist": [
     ">0.2%",

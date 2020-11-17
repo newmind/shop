@@ -1,18 +1,15 @@
-'use strict';
 
 import numeral from 'numeral';
 
 
-if (numeral.locale() !== 'my') {
-  numeral.register('locale', 'my', {
-    delimiters: {
-      thousands: ' ',
-      decimal: ','
-    },
-  });
-}
+numeral.register('locale', 'user-local', {
+  delimiters: {
+    thousands: ' ',
+    decimal: ','
+  },
+});
 
-numeral.locale('my');
-numeral.defaultFormat('0,0.[00]');
+numeral.locale('user-local');
+numeral.defaultFormat('0 0.[00]');
 
 export default numeral;

@@ -1,129 +1,122 @@
 
 import types from 'prop-types';
-import React, { PureComponent } from 'react';
+import React, { useRef, useEffect } from 'react';
 
 import styles from './default.module.scss';
 
 
-class Component extends PureComponent {
-  static propTypes = {
-    min: types.number,
-    max: types.number,
-    value: types.object,
-    disabled: types.bool,
-    onFocus: types.func,
-    onChange: types.func,
-    onBlur: types.func,
-  };
+function Amount({ value, onFocus, onBlur, onChange }) {
+  const scrollerRef = useRef(null);
+  const minProgressRef = useRef(null);
+  const maxProgressRef = useRef(null);
 
-  static defaultProps = {
-    min: 0,
-    max: 1000,
-    value: {
-      min: 0,
-      max: 1000,
-    },
-    disabled: false,
-  };
+  let isStartMinMove = false;
+  let isStartMaxMove = false;
 
-  scrollerRef = React.createRef();
-  minProgressRef = React.createRef();
-  maxProgressRef = React.createRef();
+  let minValue = 0;
+  let maxValue = 0;
 
-  isStartMinMove = false;
-  isStartMaxMove = false;
+  useEffect(() => {
 
-  minValue = 0;
-  maxValue = 0;
+    function handleStop() {
+      isStartMinMove = false;
+      isStartMaxMove = false;
+      onChange && onChange({ min: minValue, max: maxValue });
+      onBlur && onBlur();
+    }
 
-  componentDidMount() {
+    function handleMinMove(event) {
+      if (isStartMinMove) {
+        const { clientX } = event;
+        const { current: scroller } = scrollerRef;
+        const { current: minProgress } = minProgressRef;
+        const { current: maxProgress } = maxProgressRef;
 
-    document.body.addEventListener('mousemove', this._handleMinMove.bind(this), false);
-    document.body.addEventListener('mouseup', this._handleStop.bind(this), false);
-  }
+        const scrollerRect = scroller.getBoundingClientRect();
+        const minProgressRect = minProgress.getBoundingClientRect();
+        const maxProgressRect = maxProgress.getBoundingClientRect();
 
-  componentWillUnmount() {
+        const minX = clientX - scrollerRect['left'];
 
-    document.body.removeEventListener('mousemove', this._handleMinMove.bind(this), false);
-    document.body.removeEventListener('mouseup', this._handleStop.bind(this), false);
-  }
+        if (minX >= 0 && minX <= (maxProgressRect['left'] - scrollerRect['left'] - minProgressRect['width'])) {
+          minProgress.style['left'] = minX + 'px';
+          this.minValue = minX;
+        }
+      }
 
-  _handleMinStart(event) {
-    const { onFocus } = this.props;
-    this.isStartMinMove = true;
+      if (isStartMaxMove) {
+        const { clientX } = event;    const {  } = this.props;
+
+        const { current: scroller } = scrollerRef;
+        const { current: minProgress } = minProgressRef;
+        const { current: maxProgress } = maxProgressRef;
+
+        const scrollerRect = scroller.getBoundingClientRect();
+        const minProgressRect = minProgress.getBoundingClientRect();
+        const maxProgressRect = maxProgress.getBoundingClientRect();
+
+        const maxX = clientX - scrollerRect['left'];
+
+        if (maxX >= (minProgressRect['left'] - scrollerRect['left'] + minProgressRect['width'] - 1) && maxX <= scrollerRect['width'] - maxProgressRect['width']) {
+          maxProgress.style['left'] = maxX + 'px';
+          this.maxValue = maxX;
+        }
+      }
+    }
+
+    document.body.addEventListener('mousemove', handleMinMove, false);
+    document.body.addEventListener('mouseup', handleStop, false);
+
+    return () => {
+      document.body.removeEventListener('mousemove', handleMinMove, false);
+      document.body.removeEventListener('mouseup', handleStop, false);
+    };
+  });
+
+  function handleMinStart(event) {
+    isStartMinMove = true;
     onFocus && onFocus();
     event.preventDefault();
   }
 
-  _handleMaxStart(event) {
-    const { onFocus } = this.props;
-    this.isStartMaxMove = true;
+  function handleMaxStart(event) {
+    isStartMaxMove = true;
     onFocus && onFocus();
     event.preventDefault();
   }
 
-  _handleStop = () => {
-    const { onBlur, onChange } = this.props;
-    this.isStartMinMove = false;
-    this.isStartMaxMove = false;
-    onChange && onChange({ min: this.minValue, max: this.maxValue });
-    onBlur && onBlur();
-  };
-
-  _handleMinMove = (event) => {
-    if (this.isStartMinMove) {
-      const { clientX } = event;
-      const { current: scroller } = this.scrollerRef;
-      const { current: minProgress } = this.minProgressRef;
-      const { current: maxProgress } = this.maxProgressRef;
-
-      const scrollerRect = scroller.getBoundingClientRect();
-      const minProgressRect = minProgress.getBoundingClientRect();
-      const maxProgressRect = maxProgress.getBoundingClientRect();
-
-      const minX = clientX - scrollerRect['left'];
-
-      if (minX >= 0 && minX <= (maxProgressRect['left'] - scrollerRect['left'] - minProgressRect['width'])) {
-        minProgress.style['left'] = minX + 'px';
-        this.minValue = minX;
-      }
-    }
-
-    if (this.isStartMaxMove) {
-      const { clientX } = event;
-      const { current: scroller } = this.scrollerRef;
-      const { current: minProgress } = this.minProgressRef;
-      const { current: maxProgress } = this.maxProgressRef;
-
-      const scrollerRect = scroller.getBoundingClientRect();
-      const minProgressRect = minProgress.getBoundingClientRect();
-      const maxProgressRect = maxProgress.getBoundingClientRect();
-
-      const maxX = clientX - scrollerRect['left'];
-
-      if (maxX >= (minProgressRect['left'] - scrollerRect['left'] + minProgressRect['width'] - 1) && maxX <= scrollerRect['width'] - maxProgressRect['width']) {
-        maxProgress.style['left'] = maxX + 'px';
-        this.maxValue = maxX;
-      }
-    }
-  };
-
-  render() {
-    const { value } = this.props;
-
-    return (
-      <div className={styles['wrapper']}>
-        <div className={styles['values']}>
-          <span className={styles['min']}>{ value['min'] }</span>
-          <span className={styles['max']}>{ value['max'] }</span>
-        </div>
-        <div ref={this.scrollerRef} className={styles['scroller']}>
-          <span ref={this.minProgressRef} className={styles['min-progress']} onMouseDown={this._handleMinStart.bind(this)} onMouseUp={this._handleStop.bind(this)} />
-          <span ref={this.maxProgressRef} className={styles['max-progress']} onMouseDown={this._handleMaxStart.bind(this)} onMouseUp={this._handleStop.bind(this)} />
-        </div>
+  return (
+    <div className={styles['wrapper']}>
+      <div className={styles['values']}>
+        <span className={styles['min']}>{ value['min'] }</span>
+        <span className={styles['max']}>{ value['max'] }</span>
       </div>
-    );
-  }
+      <div ref={scrollerRef} className={styles['scroller']}>
+        <span ref={minProgressRef} className={styles['min-progress']} onMouseDown={handleMinStart} onMouseUp={handleStop} />
+        <span ref={maxProgressRef} className={styles['max-progress']} onMouseDown={handleMaxStart} onMouseUp={handleStop} />
+      </div>
+    </div>
+  );
 }
 
-export default Component;
+Amount.propTypes = {
+  min: types.number,
+  max: types.number,
+  value: types.object,
+  disabled: types.bool,
+  onFocus: types.func,
+  onChange: types.func,
+  onBlur: types.func,
+};
+
+Amount.defaultProps = {
+  min: 0,
+  max: 1000,
+  value: {
+    min: 0,
+    max: 1000,
+  },
+  disabled: false,
+};
+
+export default Amount;

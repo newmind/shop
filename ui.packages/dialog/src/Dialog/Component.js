@@ -1,7 +1,7 @@
 
 import types from 'prop-types';
-import React, { PureComponent } from 'react';
 import ReactDOM from 'react-dom';
+import React, { useRef } from 'react';
 
 import cn from 'classnames';
 import styles from './defaults.module.scss';
@@ -14,71 +14,65 @@ const DANGER_MODE = 'danger';
 const SUCCESS_MODE = 'success';
 
 
-class Component extends PureComponent {
-  static propTypes = {
-    isOpen: types.bool,
-    title: types.string,
-    name: types.string,
-    mode: types.oneOf(['info', 'primary', 'danger', 'warning', 'success', 'default']),
-    actionDialogName: types.string,
-    closeDialog: types.func,
-    onClose: types.func,
-  };
+function Dialog({ isOpen, data, name, title, mode, actionDialogName, children, closeDialog, onClose }) {
+  const wrapperRef = useRef(null);
 
-  static defaultProps = {
-    isOpen: false,
-    title: null,
-    name: null,
-    mode: 'default',
-  };
-
-  wrapperRef = React.createRef();
-
-  _handleCloseDialog() {
-    const { name, closeDialog, onClose } = this.props;
-
+  function handleCloseDialog() {
     closeDialog(name);
     onClose && onClose(name);
   }
 
-  _handleOutClick(event) {
-    const { current: wrapperElement } = this.wrapperRef;
+  function handleOutClick(event) {
+    const { current: wrapperElement } = wrapperRef;
 
     const target = event.target;
 
     if (wrapperElement === target) {
-      this._handleCloseDialog();
+      handleCloseDialog();
     }
   }
 
-  render() {
-    const { isOpen, data, name, title, mode, actionDialogName, children } = this.props;
+  const classNameCloseDialog = cn('fas fa-times', styles['dialog__close']);
+  const classNameDialog = cn(styles['dialog'], {
+    [styles['dialog--primary']]: mode === PRIMARY_MODE,
+    [styles['dialog--success']]: mode === SUCCESS_MODE,
+    [styles['dialog--info']]: mode === INFO_MODE,
+    [styles['dialog--danger']]: mode === DANGER_MODE,
+    [styles['dialog--warning']]: mode === WARNING_MODE,
+  });
 
-    const classNameCloseDialog = cn('fas fa-times', styles['dialog__close']);
-    const classNameDialog = cn(styles['dialog'], {
-      [styles['dialog--primary']]: mode === PRIMARY_MODE,
-      [styles['dialog--success']]: mode === SUCCESS_MODE,
-      [styles['dialog--info']]: mode === INFO_MODE,
-      [styles['dialog--danger']]: mode === DANGER_MODE,
-      [styles['dialog--warning']]: mode === WARNING_MODE,
-    });
-
-    return isOpen && (name === actionDialogName) && ReactDOM.createPortal((
-      <div ref={this.wrapperRef} className={styles['wrapper']} onClick={this._handleOutClick.bind(this)}>
-        <div className={classNameDialog}>
-          <span className={classNameCloseDialog} onClick={this._handleCloseDialog.bind(this)} />
-          {title && (
-            <div className={styles['dialog__header']}>
-              <h3>{ title }</h3>
-            </div>
-          )}
-          <div className={styles['dialog__content']}>
-            { React.cloneElement(children, { data }) }
+  return isOpen && (name === actionDialogName) && ReactDOM.createPortal((
+    <div ref={this.wrapperRef} className={styles['wrapper']} onClick={handleOutClick}>
+      <div className={classNameDialog}>
+        <span className={classNameCloseDialog} onClick={handleCloseDialog} />
+        {title && (
+          <div className={styles['dialog__header']}>
+            <h3>{ title }</h3>
           </div>
+        )}
+        <div className={styles['dialog__content']}>
+          { React.cloneElement(children, { data }) }
         </div>
       </div>
-    ), document.querySelector('#dialog'));
-  }
+    </div>
+  ), document.querySelector('#dialog'));
 }
 
-export default Component;
+Dialog.propTypes = {
+  isOpen: types.bool,
+  title: types.string,
+  name: types.string,
+  mode: types.oneOf(['info', 'primary', 'danger', 'warning', 'success', 'default']),
+  actionDialogName: types.string,
+  closeDialog: types.func,
+  onClose: types.func,
+};
+
+Dialog.defaultProps = {
+  isOpen: false,
+  title: null,
+  name: null,
+  mode: 'default',
+};
+
+export default Dialog;

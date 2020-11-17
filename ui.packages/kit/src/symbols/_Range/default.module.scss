@@ -1,0 +1,28 @@
+
+@import "~@ui.packages/theme";
+
+
+.wrapper {
+
+  display: block;
+  padding: 5px 0 0;
+}
+
+.scroller {
+
+  position: relative;
+  display: block;
+  border: 1px solid $pale-lilac;
+  height: 12px;
+  border-radius: 5px;
+  transition: border 200ms;
+
+  &:hover {
+    border-color: $blue-grey;
+  }
+}
+
+.count {
+
+  display: block;
+}

@@ -1,5 +1,5 @@
 
-export default [
+const nav = [
   {
     title: 'Витрина',
     path: '/products',
@@ -17,3 +17,5 @@ export default [
     path: '/proposal',
   },
 ];
+
+export default nav;

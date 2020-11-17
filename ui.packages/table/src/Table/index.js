@@ -1,6 +1,6 @@
 
-import PropTypes from 'prop-types';
-import React, { PureComponent } from 'react';
+import React from 'react';
+import types from 'prop-types';
 
 import Row from '../Row';
 import Header from '../Header';
@@ -9,37 +9,29 @@ import Column from '../Column';
 import styles from './default.module.scss';
 
 
-class Component extends PureComponent {
-  static propTypes = {
-    _data: PropTypes.string,
-    columns: PropTypes.array,
-    children: PropTypes.any,
-  };
-
-  static defaultProps = {
-    columns: [],
-    children: Column,
-  };
-
-
-
-  render() {
-    const { columns, children } = this.props;
-
-    return (
-      <div className={styles['wrapper']}>
-        <table className={styles['table']}>
-          <Header>{ children }</Header>
-          {columns.map((item, index) => (
-            <Row key={index} data={item}>
-              { children }
-            </Row>
-          ))}
-        </table>
-      </div>
-    );
-  }
+function Table({ columns, children }) {
+  return (
+    <div className={styles['wrapper']}>
+      <table className={styles['table']}>
+        <Header>{ children }</Header>
+        {columns.map((item, index) => (
+          <Row key={index} data={item}>
+            { children }
+          </Row>
+        ))}
+      </table>
+    </div>
+  );
 }
 
+Table.propTypes = {
+  columns: types.array,
+  children: types.any,
+};
 
-export default Component;
+Table.defaultProps = {
+  columns: [],
+  children: Column,
+};
+
+export default Table;
