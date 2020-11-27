@@ -21,6 +21,7 @@ export { default as Breadcrumbs } from './Breadcrumbs';
 
 export { default as BaseField } from './fields/BaseField';
 export { default as FileField } from './fields/FileField';
+export { default as RangeField } from './fields/RangeField';
 export { default as InputField } from './fields/InputField';
 export { default as AvatarField } from './fields/AvatarField';
 export { default as AmountField } from './fields/AmountField';

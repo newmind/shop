@@ -1,8 +1,7 @@
 
-import PageHOC from '@ui.packages/hocs';
-
-import { bindActionCreators } from 'redux';
+import { connect } from 'react-redux';
 import { push } from 'react-router-redux';
+import { bindActionCreators } from 'redux';
 
 import Component from './Component';
 
@@ -26,17 +25,7 @@ const mapActionsToProps = (dispatch) => ({
 });
 
 
-export default PageHOC({
+export default connect(
   mapStateToProps,
   mapActionsToProps,
-  onEnter: async ({ pageInProcess, getTypes, getCategories }) => {
-
-    document.title = `${process.env['REACT_APP_WEBSITE_NAME']} - Витрина`;
-    document.querySelector('meta[name="description"]').setAttribute('content', 'Интернет магазин. Продажа и изготовление очков для зрения. Солнцезащитные очки. Изготовление очков по рецепту');
-
-    await getTypes();
-    await getCategories();
-
-    pageInProcess(false);
-  },
-})(Component);
+)(Component);

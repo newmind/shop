@@ -1,7 +1,7 @@
 
+import React from 'react';
 import types from 'prop-types';
 import { Field } from 'redux-form';
-import React, { useRef } from 'react';
 
 import cn from "classnames";
 import styles from "./default.module.scss";

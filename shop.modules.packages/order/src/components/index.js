@@ -1,8 +1,7 @@
 
+import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { submit, isValid, getFormValues } from 'redux-form';
-
-import PageHOC from '@ui.packages/hocs';
 
 import Component from './Component';
 
@@ -26,11 +25,7 @@ const mapActionsToProps = (dispatch) => ({
 });
 
 
-export default PageHOC({
+export default connect(
   mapStateToProps,
   mapActionsToProps,
-  onEnter: async ({ pageInProcess }) => {
-    document.title = `${process.env['REACT_APP_WEBSITE_NAME']} - Оформление заказа`;
-    pageInProcess(false);
-  },
-})(Component);
+)(Component);

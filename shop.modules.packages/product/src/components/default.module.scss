@@ -3,7 +3,7 @@
 
 
 .header {
-  
+
   display: block;
   font: 14px "Istok Web", sans-serif;
   font-weight: 700;
@@ -122,13 +122,14 @@
 
   &__commands {
 
-    display: flex;
-    flex: 0 1;
+    display: block;
+    flex: 1 0;
     flex-direction: column;
     border-radius: 15px;
     border: 1px solid $pale-lilac;
     margin: 0 0 0 20px;
     padding: 30px;
+    width: 400px;
   }
 
   &__feature {

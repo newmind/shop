@@ -1,9 +1,9 @@
 
 import numeral from '@packages/numeral';
-import {Button, Container, Col, Row, Select} from "@ui.packages/kit";
+import { Button, Container, Col, Row, Select } from "@ui.packages/kit";
 
 import types from 'prop-types';
-import React, { PureComponent } from 'react';
+import React, { useState } from 'react';
 
 import styles from "./default.module.scss";
 
@@ -38,96 +38,91 @@ const designs = [
 ];
 
 
-class Component extends PureComponent {
-  static propTypes = {
-    lenses: types.array,
-    onSubmit: types.func,
-  };
+const defaultState = {
+  index: coefficient[0],
+  coating: coatings[0],
+  type: null,
+  design: designs[0],
+};
 
-  constructor(props) {
-    super(props);
 
-    const { value } = props;
+function SelectLensesFormModify({ index, coating, type, design, value, onSubmit }) {
+  const [state, setState] = useState({
+    ...defaultState,
+    ...value
+  });
 
-    this.state = {
-      index: coefficient[0],
-      coating: coatings[0],
-      type: null,
-      design: designs[0],
-      ...value,
-    };
+  function handleChange(key, value) {
+    setState({ ...defaultState, [key]: value });
   }
 
-  _handleChange(key, value) {
-    this.setState({[key]: value});
+  function handleSubmit() {
+    onSubmit(state);
   }
 
-  _handleSubmit() {
-    const { onSubmit } = this.props;
-    onSubmit(this.state);
-  }
+  return (
+    <Container className={styles['container']}>
+      <Row>
+        <Col>
+          <div className={styles['coast']}>
+            <div className={styles['coast__container']}>
+              <Select label="Индекс (коэффициент утончения)" onChange={(value) => handleChange('index', value)} clearable={false} options={coefficient} value={index} />
+            </div>
+            <div className={styles['coast__value']}>
+              <span>+ {index ? numeral(index['coast']).format() : 0.00} руб.</span>
+            </div>
+          </div>
+        </Col>
+      </Row>
+      <Row>
+        <Col>
+          <div className={styles['coast']}>
+            <div className={styles['coast__container']}>
+              <Select label="Покрытие" onChange={(value) => handleChange('coating', value)} clearable={false} options={coatings} value={coating} />
+            </div>
+            <div className={styles['coast__value']}>
+              <span>+ {coating ? numeral(coating['coast']).format() : 0.00} руб.</span>
+            </div>
+          </div>
+        </Col>
+      </Row>
+      <Row>
+        <Col>
+          <div className={styles['coast']}>
+            <div className={styles['coast__container']}>
+              <Select label="Дизайн" onChange={(value) => handleChange('design', value)} clearable={false} options={designs} value={design} />
+            </div>
+            <div className={styles['coast__value']}>
+              <span>+ {design ? numeral(design['coast']).format() : 0.00} руб.</span>
+            </div>
+          </div>
+        </Col>
+      </Row>
+      <Row>
+        <Col>
+          <div className={styles['coast']}>
+            <div className={styles['coast__container']}>
+              <Select label="Тип" onChange={(value) => handleChange('type', value)} options={lensesTypes} value={type} />
+            </div>
+            <div className={styles['coast__value']}>
+              <span>+ {type ? numeral(type['coast']).format() : 0.00} руб.</span>
+            </div>
+          </div>
+        </Col>
+      </Row>
 
-  render() {
-    const { index, coating, type, design } = this.state;
-    return (
-      <Container className={styles['container']}>
-        <Row>
-          <Col>
-            <div className={styles['coast']}>
-              <div className={styles['coast__container']}>
-                <Select label="Индекс (коэффициент утончения)" onChange={this._handleChange.bind(this, 'index')} clearable={false} options={coefficient} value={index} />
-              </div>
-              <div className={styles['coast__value']}>
-                <span>+ {index ? numeral(index['coast']).format() : 0.00} руб.</span>
-              </div>
-            </div>
-          </Col>
-        </Row>
-        <Row>
-          <Col>
-            <div className={styles['coast']}>
-              <div className={styles['coast__container']}>
-                <Select label="Покрытие" onChange={this._handleChange.bind(this, 'coating')} clearable={false} options={coatings} value={coating} />
-              </div>
-              <div className={styles['coast__value']}>
-                <span>+ {coating ? numeral(coating['coast']).format() : 0.00} руб.</span>
-              </div>
-            </div>
-          </Col>
-        </Row>
-        <Row>
-          <Col>
-            <div className={styles['coast']}>
-              <div className={styles['coast__container']}>
-                <Select label="Дизайн" onChange={this._handleChange.bind(this, 'design')} clearable={false} options={designs} value={design} />
-              </div>
-              <div className={styles['coast__value']}>
-                <span>+ {design ? numeral(design['coast']).format() : 0.00} руб.</span>
-              </div>
-            </div>
-          </Col>
-        </Row>
-        <Row>
-          <Col>
-            <div className={styles['coast']}>
-              <div className={styles['coast__container']}>
-                <Select label="Тип" onChange={this._handleChange.bind(this, 'type')} options={lensesTypes} value={type} />
-              </div>
-              <div className={styles['coast__value']}>
-                <span>+ {type ? numeral(type['coast']).format() : 0.00} руб.</span>
-              </div>
-            </div>
-          </Col>
-        </Row>
-
-        <Row>
-          <Col className={styles['controls']}>
-            <Button mode="success" onClick={this._handleSubmit.bind(this)}>Готово</Button>
-          </Col>
-        </Row>
-      </Container>
-    );
-  }
+      <Row>
+        <Col className={styles['controls']}>
+          <Button mode="success" onClick={() => handleSubmit()}>Готово</Button>
+        </Col>
+      </Row>
+    </Container>
+  );
 }
 
-export default Component;
+SelectLensesFormModify.propTypes = {
+  lenses: types.array,
+  onSubmit: types.func,
+};
+
+export default SelectLensesFormModify;

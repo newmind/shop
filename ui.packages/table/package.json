@@ -18,11 +18,11 @@
     "react": "17.0.1"
   },
   "devDependencies": {
-    "@babel/cli": "7.12.1",
-    "@babel/core": "7.12.3",
-    "core-js": "3.7.0",
+    "@babel/cli": "7.12.8",
+    "@babel/core": "7.12.9",
+    "core-js": "3.8.0",
     "cross-env": "7.0.2",
-    "resolve": "1.18.1"
+    "resolve": "1.19.0"
   },
   "babel": {
     "presets": [

@@ -68,8 +68,8 @@ export default function Image({ className, src, size, isResize }) {
   const imageRef = useRef(null);
   const wrapperRef = useRef(null);
 
-  const [isLoadingState, setLoadingState] = useState(true);
   const [isError, setError] = useState(false);
+  const [isLoadingState, setLoadingState] = useState(true);
 
   function calculateProportions() {
     const { current: imageElement } = imageRef;
@@ -102,16 +102,19 @@ export default function Image({ className, src, size, isResize }) {
       window.addEventListener('resize', handleResize);
     }
 
-    imageElement.addEventListener('load', handleLoaded);
-    imageElement.addEventListener('error', handleError);
+    if (imageElement) {
+      imageElement.addEventListener('load', handleLoaded);
+      imageElement.addEventListener('error', handleError);
+    }
 
     return () => {
       if (isResize) {
         window.removeEventListener('resize', handleResize);
       }
-
-      imageElement.removeEventListener('load', handleLoaded);
-      imageElement.removeEventListener('error', handleError);
+      if (imageElement) {
+        imageElement.removeEventListener('load', handleLoaded);
+        imageElement.removeEventListener('error', handleError);
+      }
     };
   }, [src, size]);
 
@@ -123,7 +126,7 @@ export default function Image({ className, src, size, isResize }) {
   return (
     <div className={wrapperClassName}>
       <div ref={wrapperRef} className={imageClassName}>
-        <img ref={imageRef} src={src} alt="" />
+        {src && <img ref={imageRef} src={src} alt="" />}
       </div>
       {isLoadingState && (
         <div className={styles['loading']}>

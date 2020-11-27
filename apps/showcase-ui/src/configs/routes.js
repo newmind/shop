@@ -1,29 +1,20 @@
 
-export default [
+const routes = [
   {
     path: '/',
     wrapper: 'Navigate',
     module: import(
+      /* webpackPreload: true */
       /* webpackChunkName: "main-page" */
-      /* webpackPreload: true */
       '@modules.packages/main-page'
-    ),
-  },
-  {
-    path: '/sign-up',
-    wrapper: 'Navigate',
-    module: import(
-      /* webpackChunkName: "sign-up" */
-      /* webpackPreload: true */
-      '@modules.packages/sign-up'
     ),
   },
   {
     path: '/products',
     wrapper: 'Navigate',
     module: import(
-      /* webpackChunkName: "showcase" */
       /* webpackPreload: true */
+      /* webpackChunkName: "showcase" */
       '@modules.packages/showcase'
     ),
   },
@@ -31,46 +22,47 @@ export default [
     path: '/products/:id',
     wrapper: 'Navigate',
     module: import(
-      /* webpackChunkName: "product" */
       /* webpackPreload: true */
+      /* webpackChunkName: "product" */
       '@modules.packages/product'
     ),
   },
-  // {
-  //   path: '/about',
-  //   wrapper: 'Navigate',
-  //   module: import(
-  //     /* webpackChunkName: "about" */
-  //     '@modules.packages/about'
-  //   ),
-  // },
   {
     path: '/produce',
     wrapper: 'Navigate',
     module: import(
-      /* webpackChunkName: "produce" */
       /* webpackPreload: true */
+      /* webpackChunkName: "produce" */
       '@modules.packages/produce'
     ),
   },
   {
     path: '/order',
-    removable: true,
     wrapper: 'Navigate',
     module: import(
-      /* webpackChunkName: "order" */
       /* webpackPreload: true */
+      /* webpackChunkName: "order" */
       '@modules.packages/order'
     ),
   },
+  // {
+  //   path: '/order/:id',
+  //   wrapper: 'Navigate',
+  //   module: import(
+  //     /* webpackPreload: true */
+  //     /* webpackChunkName: "order-details" */
+  //     '@modules.packages/order-details'
+  //   ),
+  // },
   {
-    path: '/order/:id',
-    removable: true,
-    wrapper: 'Navigate',
+    path: '*',
+    wrapper: 'Empty',
     module: import(
-      /* webpackChunkName: "details-order" */
       /* webpackPreload: true */
-      '@modules.packages/details-order'
+      /* webpackChunkName: "not-found" */
+      '@modules.packages/not-found'
     ),
   }
 ];
+
+export default routes;

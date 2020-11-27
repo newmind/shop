@@ -33,7 +33,7 @@ export const fastViewProduct = (product) => (dispatch) => {
   dispatch(openDialog('fast-view-product', product));
 };
 
-export const getProducts = (params) => async (dispatch) => {
+export const getProducts = (params = {}) => async (dispatch) => {
   try {
     dispatch(getProductsRequest());
     dispatch(setNextPageAction(Number(params['page'] || 1)));

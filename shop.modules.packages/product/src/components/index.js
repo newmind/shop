@@ -1,7 +1,7 @@
 
-import PageHOC from '@ui.packages/hocs';
 import { openDialog, closeDialog } from '@ui.packages/dialog';
 
+import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 
 import Component from './Component';
@@ -46,17 +46,17 @@ const mapActionsToProps = (dispatch) => {
   };
 };
 
-export default PageHOC({
+export default connect(
   mapStateToProps,
   mapActionsToProps,
-  onEnter: async ({ pageInProcess, getProductById, match: { params } }) => {
-    const { id } = params;
-
-    const data = await getProductById(id);
-
-    document.title = `${process.env['REACT_APP_WEBSITE_NAME']} - ${data['brand']} (${data['uuid']})`;
-    document.querySelector('meta[name="description"]').setAttribute("content", data['description']);
-
-    pageInProcess(false);
-  },
-})(Component);
+  // onEnter: async ({ pageInProcess, getProductById, match: { params } }) => {
+  //   const { id } = params;
+  //
+  //   const data = await getProductById(id);
+  //
+  //   document.title = `${process.env['REACT_APP_WEBSITE_NAME']} - ${data['brand']} (${data['uuid']})`;
+  //   document.querySelector('meta[name="description"]').setAttribute("content", data['description']);
+  //
+  //   pageInProcess(false);
+  // },
+)(Component);

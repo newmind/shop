@@ -2,7 +2,6 @@
 import { BadRequestError, NetworkError, NotAuthError, NotFoundError, ValidationError } from '@packages/errors';
 
 import axios from 'axios';
-import { push } from 'react-router-redux';
 
 
 const defaultOptions = {
@@ -53,12 +52,6 @@ const request = async (options) => {
   catch(error) {
     if (error['response']) {
       const { status, data } = error['response'];
-
-      if ( ! options['silent']) {
-        if (status === 401) {
-          dispatch(push('/sign-in'));
-        }
-      }
 
       if (status === 400) {
         return Promise.reject(new BadRequestError(data));

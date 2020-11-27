@@ -1,40 +1,37 @@
 
 import { Container, Row, Col, Button } from '@ui.packages/kit';
 
+import React from 'react';
 import types from 'prop-types';
-import React, { PureComponent } from 'react';
 
 import styles from './default.module.scss';
 
 
-class Component extends PureComponent {
-  static propTypes = {
-    onNext: types.func,
-    onSubmit: types.func,
-  };
-
-  _handleNext() {
-    const { onNext } = this.props;
+function PrescriptionUploadForm({ onNext }) {
+  function handleNext() {
     onNext('select-lenses');
   }
 
-  render() {
-    return (
-      <Container className={styles['container']}>
-        <Row>
-          <Col className={styles['content']}>
+  return (
+    <Container className={styles['container']}>
+      <Row>
+        <Col className={styles['content']}>
 
-          </Col>
-        </Row>
-        <Row>
-          <Col className={styles['controls']}>
-            <Button mode="primary" onClick={this._handleNext.bind(this)}>Далее</Button>
-            <Button mode="success">Готово</Button>
-          </Col>
-        </Row>
-      </Container>
-    );
-  }
+        </Col>
+      </Row>
+      <Row>
+        <Col className={styles['controls']}>
+          <Button mode="primary" onClick={() => handleNext()}>Далее</Button>
+          <Button mode="success">Готово</Button>
+        </Col>
+      </Row>
+    </Container>
+  );
 }
 
-export default Component;
+PrescriptionUploadForm.propTypes = {
+  onNext: types.func,
+  onSubmit: types.func,
+};
+
+export default PrescriptionUploadForm;

@@ -5,7 +5,7 @@ import cn from 'classnames';
 import styles from './default.module.scss';
 
 
-export default () => {
+function Pay() {
   return (
     <section className={styles['container']}>
       <header className={styles['header']}>
@@ -32,3 +32,5 @@ export default () => {
     </section>
   );
 }
+
+export default Pay;

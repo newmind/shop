@@ -1,18 +1,26 @@
 
-import { connect } from 'react-redux';
+import types from 'prop-types';
+import React from 'react';
 
-import Component from './Component';
+import Comment from './Comment';
+
+import styles from './default.module.scss';
 
 
-const mapStateToProps = () => {
-  return {};
+function Comments({ comments }) {
+  return (
+    <div className={styles['comments']}>
+      {comments.map((comment, index) => <Comment key={index} {...comment} />)}
+    </div>
+  );
+}
+
+Comments.propTypes = {
+  comments: types.array,
 };
 
-const mapActionsToProps = () => {
-  return {};
+Comments.defaultProps = {
+  comments: [],
 };
 
-export default connect(
-  mapStateToProps,
-  mapActionsToProps,
-)(Component);
+export default Comments;

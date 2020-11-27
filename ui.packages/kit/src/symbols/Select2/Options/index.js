@@ -1,7 +1,7 @@
 
 import types from 'prop-types';
 import ReactDOM from 'react-dom';
-import React, { forwardRef, useContext, useEffect } from 'react';
+import React, { forwardRef, useContext } from 'react';
 
 import Option from './Option';
 
@@ -35,12 +35,6 @@ function useChangeElement() {
 const Options = forwardRef(({ onClick }, ref) => {
   const portalElement = useChangeElement();
   const { optionValue, options } = useContext(Context);
-
-  useEffect(() => {
-    return () => {
-      portalElement.remove();
-    };
-  });
 
   function handleOptionClick(option) {
     onClick(option);

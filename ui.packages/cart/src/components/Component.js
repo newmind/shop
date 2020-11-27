@@ -3,8 +3,8 @@ import { Button } from '@ui.packages/kit';
 import numeral from '@ui.packages/numeral';
 
 import types from 'prop-types';
-import { Link } from 'react-router-dom';
 import React, { useEffect, useRef } from 'react';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 
 import Icon from './Icon';
 import Product from './Product';
@@ -18,7 +18,9 @@ function calculateFullAmount(items) {
 }
 
 
-function Cart({ items, isOpen, match, closeCart, resetCart, removeProduct, push }) {
+function Cart({ items, isOpen, closeCart, resetCart, removeProduct }) {
+  const location = useLocation();
+  const navigate = useNavigate();
   const cartRef = useRef(null);
 
   useEffect(() => {
@@ -30,9 +32,7 @@ function Cart({ items, isOpen, match, closeCart, resetCart, removeProduct, push 
         isOpen && closeCart();
       }
     }
-
     document.addEventListener('click', onClick, true);
-
     return () => {
       document.removeEventListener('click', onClick, true);
     };
@@ -49,10 +49,10 @@ function Cart({ items, isOpen, match, closeCart, resetCart, removeProduct, push 
 
   function handleGoToCart() {
     closeCart();
-    push('/order');
+    navigate(process.env['PUBLIC_URL'] + '/order');
   }
 
-  if (/order/.test(match['url'])) {
+  if (/order/.test(location['pathname'])) {
     return null;
   }
 
@@ -69,9 +69,9 @@ function Cart({ items, isOpen, match, closeCart, resetCart, removeProduct, push 
               ? (
                 <div>
                   <div className={styles['list__content']}>
-                    {items.map((item) => (
+                    {items.map((item, index) => (
                       <Product
-                        key={item['uuid']}
+                        key={item['uuid'] + '_' + index}
                         {...item}
                         onRemove={handleRemoveProductFromCart}
                       />

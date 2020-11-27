@@ -1,0 +1,60 @@
+
+@import "~@ui.packages/theme";
+
+
+.comment {
+
+  display: flex;
+  flex-direction: column;
+  flex: 0 0;
+
+  & + & {
+
+    margin: 40px 0 0;
+  }
+}
+
+.header {
+
+  display: flex;
+  flex: 1 0;
+  flex-direction: row;
+  align-items: baseline;
+}
+
+.wrapper {
+
+  display: flex;
+  flex: 1 0;
+  flex-direction: row;
+  align-items: center;
+}
+
+.person {
+
+  display: block;
+  font: 14px "Istok Web", sans-serif;
+  font-weight: 700;
+  color: $coal-dark;
+}
+
+.evaluation {
+
+  display: block;
+}
+
+.date {
+
+  display: block;
+  margin: 0 0 0 20px;
+  font: 12px "Istok Web", sans-serif;
+  color: $gray;
+}
+
+.content {
+
+  display: block;
+  margin: 15px 0 0;
+  font: 12px "Istok Web", sans-serif;
+  line-height: 1.4;
+}

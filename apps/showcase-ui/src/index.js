@@ -1,63 +1,44 @@
 
-import createSocketIO from '@ui.packages/socket';
-import { middleware as requestMiddleware } from "@ui.packages/request";
+import { cartReducer } from '@ui.packages/cart';
+import Application from '@ui.packages/application';
+import { dialogReducer } from '@ui.packages/dialog';
+import { middleware as requestMiddleware } from '@ui.packages/request'
 
-import React from 'react';
-import ReactDOM from 'react-dom';
-
-import thunk from 'redux-thunk';
-import { Provider } from 'react-redux';
-import { Router } from 'react-router';
-import { routerMiddleware } from 'react-router-redux';
-import createSocketIoMiddleware from 'redux-socket.io';
-
-import createStore, { importReducer }  from './bin/createStore';
-import createHistory from './bin/createRouter';
+import { reducer as formReducer } from 'redux-form';
 
 import routes from './configs/routes';
 import navigate from './configs/navigate';
 
-import App from "./components/Application/components";
+import Empty from './wrappers/Empty';
+import Navigate from './wrappers/Navigate';
+import Composite from './wrappers/Composite';
 
 import './styles/index.module.scss';
 
-import * as serviceWorker from './serviceWorker';
 
+try {
+  const app = new Application({
+    portal: document.getElementById('root'),
+    reducers: {
+      cart: cartReducer,
+      form: formReducer,
+      dialog: dialogReducer,
+    },
+    routes,
+    navigate,
+    middleware: [
+      requestMiddleware({
+        host: process.env['REACT_APP_API_HOST'],
+        silent: true,
+      }),
+    ],
+    wrappers: { Empty, Navigate, Composite },
+  });
 
-const socket = createSocketIO(process.env['REACT_APP_SOCKET_HOST'], {
-  path: '/showcase.socket.io',
-});
+  app.start();
+}
+catch (error) {
 
-const history = createHistory();
-const store = createStore({},
-  thunk,
-  routerMiddleware(history),
-  createSocketIoMiddleware(socket),
-  requestMiddleware({
-    host: process.env['REACT_APP_API_HOST'],
-    silent: true,
-  })
-);
-
-
-(async () => {
-
-  await importReducer('Application');
-  await importReducer('Module');
-  await importReducer('Page');
-
-  ReactDOM.render((
-    <Provider store={store}>
-      <Router history={history}>
-        <App
-          routes={routes}
-          navigate={navigate}
-        />
-      </Router>
-    </Provider>
-  ), document.getElementById('root'));
-
-  serviceWorker.unregister();
-})();
-
+  console.error(error);
+}
 

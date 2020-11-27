@@ -21,6 +21,9 @@ COPY ./yarn.lock                         .
 RUN yarn
 
 # BUILD COMPONENTS
+WORKDIR /app/ui.packages/application
+RUN ["yarn", "run", "build"]
+
 WORKDIR /app/ui.packages/dialog
 RUN ["yarn", "run", "build"]
 
@@ -46,22 +49,19 @@ WORKDIR /app/ui.packages/confirm-order
 RUN ["yarn", "run", "build"]
 
 # BUILD MODULES
-WORKDIR /app/shop.modules.packages/signUp
-RUN ["yarn", "run", "build"]
-
 WORKDIR /app/shop.modules.packages/about
 RUN ["yarn", "run", "build"]
 
 WORKDIR /app/shop.modules.packages/main
 RUN ["yarn", "run", "build"]
 
-WORKDIR /app/shop.modules.packages/not-found
+WORKDIR /app/shop.modules.packages/notFound
 RUN ["yarn", "run", "build"]
 
 WORKDIR /app/shop.modules.packages/order
 RUN ["yarn", "run", "build"]
 
-WORKDIR /app/shop.modules.packages/details-order
+WORKDIR /app/shop.modules.packages/orderDetails
 RUN ["yarn", "run", "build"]
 
 WORKDIR /app/shop.modules.packages/produce

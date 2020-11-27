@@ -25,9 +25,9 @@
   flex-direction: column;
   background: $white;
   min-width: 250px;
-  border-radius: 15px;
+  border-radius: 20px;
   margin: auto;
-  padding: 48px 70px;
+  padding: 48px;
   border: 1px solid transparent;
   box-sizing: border-box;
   box-shadow: 0 6px 10px 0 rgba($dark-grey, 0.3);
@@ -85,17 +85,17 @@
   &__header {
 
     display: block;
-    font: 16px "Istok Web";
-    font-weight: 500;
+    font: 500 16px "Istok Web";
+    text-transform: uppercase;
     color: $coal-dark;
     letter-spacing: .5px;
     text-align: center;
+    margin: 0 0 48px;
   }
 
   &__content {
 
     display: block;
     overflow: auto;
-    margin: 30px 0 0;
   }
 }

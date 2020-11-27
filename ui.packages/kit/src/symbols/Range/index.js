@@ -2,9 +2,17 @@
 import types from 'prop-types';
 import React, { useRef, useState, useEffect } from 'react';
 
-
+import cn from 'classnames';
 import styles from './default.module.scss';
 
+
+function getTrackBackground({ values, colors, min, max }) {
+  const progress = values.slice(0).sort((a, b) => a - b).map(value => ((value - min) / (max - min)) * 100);
+  const middle = progress.reduce((acc, point, index) => {
+    return `${acc}, ${colors[index]} ${point}%, ${colors[index + 1]} ${point}%`;
+  }, '');
+  return `linear-gradient(to right, ${colors[0]} 0%${middle}, ${colors[colors.length - 1]} 100%)`;
+}
 
 function translate(element, x, index) {
   element.style.transform = `translate(${x}px)`;
@@ -36,18 +44,18 @@ function getThumbDistance(thumbEl, clientX) {
   return Math.abs(clientX - (x + width / 2));
 }
 
-// function getClosestThumbIndex(thumbs, clientX) {
-//   let thumbIndex = 0
-//   let minThumbDistance = getThumbDistance(thumbs[0], clientX);
-//   for (let i = 1; i < thumbs.length; i++) {
-//     const thumbDistance = getThumbDistance(thumbs[i], clientX);
-//     if (thumbDistance < minThumbDistance) {
-//       minThumbDistance = thumbDistance;
-//       thumbIndex = i;
-//     }
-//   }
-//   return thumbIndex;
-// }
+function getClosestThumbIndex(thumbs, clientX) {
+  let thumbIndex = 0
+  let minThumbDistance = getThumbDistance(thumbs[0], clientX);
+  for (let i = 1; i < thumbs.length; i++) {
+    const thumbDistance = getThumbDistance(thumbs[i], clientX);
+    if (thumbDistance < minThumbDistance) {
+      minThumbDistance = thumbDistance;
+      thumbIndex = i;
+    }
+  }
+  return thumbIndex;
+}
 
 function getStepDecimals(step) {
   const decimals = step.toString().split('.')[1];
@@ -79,9 +87,13 @@ function relativeValue(value, min, max) {
 }
 
 
-function Range({ step, value, min, max, onFocus, onChange, onBlur }) {
+function Range({ step, value, min, max, prefix, onChange }) {
+  console.log(value)
+  const wrapperRef = useRef(null);
   const trackRef = useRef(null);
   const thumbRefs = value.map(() => useRef(null));
+
+  const [ isHover, setHover ] = useState(false);
   const [ activeThumbIndex, setActiveThumbIndex ] = useState(-1);
 
   function getTargetIndex(event) {
@@ -101,31 +113,35 @@ function Range({ step, value, min, max, onFocus, onChange, onBlur }) {
     });
   }
 
-  function handleThumbMove(clientX) {
-    if (activeThumbIndex === -1) return void 0;
+  function handleThumbMove(clientX, index = null) {
+    if (activeThumbIndex === -1 && index === null) return void 0;
 
     const trackCoords = getCoords(trackRef['current']);
     let newValue = ((clientX - trackCoords['left']) / trackCoords['width']) * (max - min) + min;
+    const realIndex = index === null ? activeThumbIndex : index;
 
-    if (Math.abs(value[activeThumbIndex] - newValue) >= step / 2) {
+    if (Math.abs(value[realIndex] - newValue) >= step / 2) {
+
       if (newValue >= max) {
         newValue = max;
       }
       else if (newValue <= min) {
         newValue = min;
       }
-      else if (value[activeThumbIndex + 1] && newValue > value[activeThumbIndex + 1]) {
-        newValue = value[activeThumbIndex + 1];
-      }
-      else if (value[activeThumbIndex - 1] && newValue < value[activeThumbIndex - 1]) {
-        newValue = value[activeThumbIndex - 1];
-      }
     }
 
+    if (value[realIndex + 1] && newValue > value[realIndex + 1]) {
+      newValue = value[realIndex + 1];
+    }
+    else if (value[realIndex - 1] && newValue < value[realIndex - 1]) {
+      newValue = value[realIndex - 1];
+    }
     const newValues = value.slice(0);
-    newValues[activeThumbIndex] = normalizeValue(newValue, activeThumbIndex, min, max, step);
+    newValues[realIndex] = normalizeValue(newValue, realIndex, min, max, step);
 
-    onChange && onChange(newValues);
+    if (newValues[realIndex] !== value[realIndex]) {
+      onChange && onChange(newValues);
+    }
   }
 
   function handleMouseDown(event) {
@@ -134,14 +150,21 @@ function Range({ step, value, min, max, onFocus, onChange, onBlur }) {
     event.preventDefault();
     event.stopPropagation();
 
+    setHover(true);
     setActiveThumbIndex(getTargetIndex(event));
+  }
 
-    // const draggedThumbIndex = getClosestThumbIndex(thumbRefs.map((thumbRef) => thumbRef['current']), event['clientX']);
-    //
-    // thumbRefs[draggedThumbIndex]['current'].focus();
-    //
-    // setActiveThumbIndex(draggedThumbIndex);
-    // handleThumbMove(event['clientX']);
+  function handleTrackMouseDown(event) {
+    if (event['button'] !== 0) return void 0;
+
+    event.preventDefault();
+    event.stopPropagation();
+
+    const draggedThumbIndex = getClosestThumbIndex(thumbRefs.map((thumbRef) => thumbRef['current']), event['clientX']);
+
+    thumbRefs[draggedThumbIndex]['current'].focus();
+    setActiveThumbIndex(draggedThumbIndex);
+    handleThumbMove(event['clientX'], draggedThumbIndex);
   }
 
   function handleMouseMove(event) {
@@ -154,32 +177,55 @@ function Range({ step, value, min, max, onFocus, onChange, onBlur }) {
   function handleMouseUp(event) {
     event.preventDefault();
 
+    setHover(false);
     setActiveThumbIndex(-1);
   }
 
+  function handleMouseIn(event) {
+    event.preventDefault();
+    event.stopPropagation();
+
+    setHover(true);
+  }
+
+  function handleMouseOut(event) {
+    event.preventDefault();
+    event.stopPropagation();
+
+    if (activeThumbIndex === -1) {
+      setHover(false);
+    }
+  }
 
   useEffect(function mountEvents() {
     const trackElement = trackRef['current'];
 
     translateThumbs(getThumbs(trackElement), getOffsets(trackElement));
 
+    wrapperRef['current'].addEventListener('mouseover', handleMouseIn);
+    wrapperRef['current'].addEventListener('mouseout', handleMouseOut);
+    wrapperRef['current'].addEventListener('mousedown', handleTrackMouseDown);
+
     thumbRefs.map((thumbRef) => thumbRef['current'].addEventListener('mousedown', handleMouseDown));
     document.addEventListener('mousemove', handleMouseMove);
     document.addEventListener('mouseup', handleMouseUp);
 
     return function unmountEvents() {
+      wrapperRef['current'] && wrapperRef['current'].removeEventListener('mouseover', handleMouseIn);
+      wrapperRef['current'] && wrapperRef['current'].removeEventListener('mouseout', handleMouseOut);
+      wrapperRef['current'] && wrapperRef['current'].removeEventListener('mousedown', handleTrackMouseDown);
 
-      thumbRefs.map((thumbRef) => thumbRef['current'].removeEventListener('mousedown', handleMouseDown));
+      thumbRefs.map((thumbRef) => thumbRef['current'] && thumbRef['current'].removeEventListener('mousedown', handleMouseDown));
       document.removeEventListener('mousemove', handleMouseMove);
       document.removeEventListener('mouseup', handleMouseDown);
     }
   });
 
   return (
-    <div className={styles['wrapper']}>
-      <div className={styles['container']}>
-        <div ref={trackRef} className={styles['track']}>
-          {value.map((val, index) => (
+    <div ref={wrapperRef} className={styles['wrapper']}>
+      <div className={cn(styles['container'], { [styles['container--hover']]: isHover })}>
+        <div ref={trackRef} className={styles['track']} style={{ background: getTrackBackground({ values: value, colors: ['transparent', '#edf5ff', 'transparent'], min, max })}}>
+          {value && (value.length > 0) && value.map((val, index) => (
             <div ref={thumbRefs[index]} key={index} className={styles['thumb']} aria-valuenow={value[index]}>
               <div className={styles['block']} />
               <div className={styles['arrow']} />
@@ -187,11 +233,18 @@ function Range({ step, value, min, max, onFocus, onChange, onBlur }) {
           ))}
         </div>
       </div>
+      <div className={styles['tracker']} />
+      <div className={styles['values']}>
+        {value.map((value, index) => (
+          <span key={index} className={styles['value']}>{ value + (prefix ? ' ' + prefix : '') }</span>
+        ))}
+      </div>
     </div>
   );
 }
 
 Range.propTypes = {
+  prefix: types.string,
   step: types.number,
   min: types.number,
   max: types.number,
@@ -202,6 +255,7 @@ Range.propTypes = {
 };
 
 Range.defaultProps = {
+  prefix: 'P',
   value: [],
   min: 0,
   max: 10,

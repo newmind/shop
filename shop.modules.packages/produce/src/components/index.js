@@ -1,7 +1,6 @@
 
+import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-
-import PageHOC from '@ui.packages/hocs';
 
 import Component from './Component';
 
@@ -14,11 +13,8 @@ const mapActionsToProps = (dispatch) => ({
   pageInProcess: bindActionCreators(pageInProcess, dispatch),
 });
 
-export default PageHOC({
+
+export default connect(
   mapStateToProps,
   mapActionsToProps,
-  onEnter: ({ pageInProcess }) => {
-    document.title = `${process.env['REACT_APP_WEBSITE_NAME']} - О продукции`;
-    pageInProcess(false);
-  },
-})(Component);
+)(Component);

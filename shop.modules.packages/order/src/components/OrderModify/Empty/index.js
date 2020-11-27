@@ -1,13 +1,11 @@
 
-import React, { PureComponent } from 'react';
+import React from 'react';
 
 
-class Component extends PureComponent {
-  render() {
-    return (
-      <div>Нет выбранных товаров</div>
-    )
-  }
+function Empty() {
+  return (
+    <div>Нет выбранных товаров</div>
+  );
 }
 
-export default Component;
+export default Empty;

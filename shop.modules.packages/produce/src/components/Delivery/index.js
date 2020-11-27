@@ -5,7 +5,7 @@ import styles from './default.module.scss';
 import cn from "classnames";
 
 
-export default () => {
+function Delivery() {
   return (
     <section className={styles['container']}>
       <header className={styles['header']}>
@@ -39,3 +39,5 @@ export default () => {
     </section>
   );
 }
+
+export default Delivery;

@@ -1,9 +1,10 @@
 
-import { objectToQuery } from '@ui.packages/utils';
 import { Dialog } from '@ui.packages/dialog';
+import { objectToQuery, queryToObject } from '@ui.packages/utils';
 
 import types from 'prop-types';
-import React, { PureComponent, lazy, Suspense } from 'react';
+import React, { lazy, Suspense, useEffect } from 'react';
+import { useLocation, useNavigate } from 'react-router-dom';
 
 import styles from './default.module.scss';
 
@@ -14,23 +15,31 @@ const Paging = lazy(() => import(/* webpackChunkName: "showcase.paging" */'./Pag
 const FastView = lazy(() => import(/* webpackChunkName: "showcase.paging" */'./FastView'));
 
 
-class Component extends PureComponent {
-  static propTypes = {
-    addProductToCart: types.func,
-  };
+function Showcase({ getProducts }) {
+  const location = useLocation();
+  const navigate = useNavigate();
 
-  static defaultProps = {};
+  useEffect(function init() {
 
-  _handleFilter(formData) {
-    const { pushSearch } = this.props;
+    document.title = `${process.env['REACT_APP_WEBSITE_NAME']} - Витрина`;
+    document.querySelector('meta[name="description"]').setAttribute('content', 'Выбор очков, оправ и аксесуаров');
 
+    const query = queryToObject(location['search']);
+
+    getProducts(query);
+  }, []);
+
+  function handleFilter({ amount, ...formData }) {
     formData['page'] = 1;
-    pushSearch({ search: objectToQuery(formData) });
+    formData['minAmount'] = amount[0];
+    formData['maxAmount'] = amount[1];
+
+    navigate('?' + objectToQuery(formData));
+    getProducts(formData);
   }
 
-  _handleLoadingMore(page) {
-    const { location: { search }, pushSearch} = this.props;
-    const query = new URLSearchParams(search);
+  function handleLoadingMore(page) {
+    const query = new URLSearchParams(location['search']);
 
     if (page > 1) {
       query.set('page', String(page));
@@ -39,37 +48,41 @@ class Component extends PureComponent {
       query.delete('page');
     }
 
-    pushSearch({ search: query.toString() });
+    getProducts({ search: query.toString() });
   }
 
-  render() {
-    return (
-      <section className={styles['wrapper']}>
-        <aside className={styles['filters']}>
-          <div className={styles['filters__content']}>
-            <Suspense fallback={null}>
-              <Filter onSubmit={this._handleFilter.bind(this)} />
-            </Suspense>
-          </div>
-        </aside>
-        <section className={styles['products']}>
+  return (
+    <section className={styles['wrapper']}>
+      <aside className={styles['filters']}>
+        <div className={styles['filters__content']}>
           <Suspense fallback={null}>
-            <Products />
-          </Suspense>
-        </section>
-        <div className={styles['controls']}>
-          <Suspense fallback={null}>
-            <Paging onChange={this._handleLoadingMore.bind(this)} />
+            <Filter onSubmit={handleFilter} />
           </Suspense>
         </div>
+      </aside>
+      <section className={styles['products']}>
         <Suspense fallback={null}>
-          <Dialog name="fast-view-product" title="Быстрый просмотр">
-            <FastView />
-          </Dialog>
+          <Products />
         </Suspense>
       </section>
-    );
-  }
+      <div className={styles['controls']}>
+        <Suspense fallback={null}>
+          <Paging onChange={handleLoadingMore} />
+        </Suspense>
+      </div>
+      <Suspense fallback={null}>
+        <Dialog name="fast-view-product" title="Быстрый просмотр">
+          <FastView />
+        </Dialog>
+      </Suspense>
+    </section>
+  );
 }
 
-export default Component;
+Showcase.propTypes = {
+  addProductToCart: types.func,
+};
+
+Showcase.defaultProps = {};
+
+export default Showcase;

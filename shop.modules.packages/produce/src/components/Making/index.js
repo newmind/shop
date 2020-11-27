@@ -4,7 +4,7 @@ import React from 'react';
 import styles from './default.module.scss';
 
 
-export default () => {
+function Making() {
   return (
     <section className={styles['container']}>
       <header className={styles['header']}>
@@ -37,3 +37,5 @@ export default () => {
     </section>
   );
 }
+
+export default Making;

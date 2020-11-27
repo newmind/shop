@@ -1,5 +1,5 @@
 
-const nav = [
+const navigate = [
   {
     title: 'Витрина',
     path: '/products',
@@ -18,4 +18,4 @@ const nav = [
   },
 ];
 
-export default nav;
+export default navigate;

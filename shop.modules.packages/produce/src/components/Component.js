@@ -1,5 +1,5 @@
 
-import React, { PureComponent, lazy, Suspense } from 'react';
+import React, { lazy, Suspense } from 'react';
 
 import styles from "./default.module.scss";
 
@@ -10,33 +10,31 @@ const Contacts = lazy(() => import('./Contacts'));
 const Delivery = lazy(() => import('./Delivery'));
 
 
-class Component extends PureComponent {
-  render() {
-    return (
-      <section className={styles['wrapper']}>
-        <div className={styles['content']}>
-          <Suspense fallback={null}>
-            <Contacts />
-          </Suspense>
-        </div>
-        <div className={styles['content']}>
-          <Suspense fallback={null}>
-            <Pay />
-          </Suspense>
-        </div>
-        <div className={styles['content']}>
-          <Suspense fallback={null}>
-            <Delivery />
-          </Suspense>
-        </div>
-        <div className={styles['content']}>
-          <Suspense fallback={null}>
-            <Making />
-          </Suspense>
-        </div>
-      </section>
-    );
-  }
+function Produce() {
+  return (
+    <section className={styles['wrapper']}>
+      <div className={styles['content']}>
+        <Suspense fallback={null}>
+          <Contacts />
+        </Suspense>
+      </div>
+      <div className={styles['content']}>
+        <Suspense fallback={null}>
+          <Pay />
+        </Suspense>
+      </div>
+      <div className={styles['content']}>
+        <Suspense fallback={null}>
+          <Delivery />
+        </Suspense>
+      </div>
+      <div className={styles['content']}>
+        <Suspense fallback={null}>
+          <Making />
+        </Suspense>
+      </div>
+    </section>
+  );
 }
 
-export default Component;
+export default Produce;

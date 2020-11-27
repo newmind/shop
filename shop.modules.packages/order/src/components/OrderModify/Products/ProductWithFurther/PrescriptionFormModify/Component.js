@@ -1,8 +1,8 @@
 
-import {Button, Container, Col, Row, Select, TextareaField} from "@ui.packages/kit";
+import { Button, Container, Col, Row, Select, TextareaField } from "@ui.packages/kit";
 
+import React, { useState } from 'react';
 import types from 'prop-types';
-import React, { PureComponent } from 'react';
 
 import cn from "classnames";
 import styles from "./default.module.scss";
@@ -427,120 +427,114 @@ const spherical = [
 ];
 
 
-class Component extends PureComponent {
-  static propTypes = {
-    hasNext: types.bool,
-    value: types.object,
-    onNext: types.func,
-    onSubmit: types.func,
-  };
+const defaultState  = {
+  PDLeft: 'average',
+  PDRight: 'average',
+  sphRight: 'plano',
+  sphLeft: 'plano',
+  cylRight: 'plano',
+  cylLeft: 'plano',
+  axisRight: '0',
+  axisLeft: '0',
+  addRight: '0.00',
+  addLeft: '0.00',
+};
 
-  static defaultProps = {
-    hasNext: false,
-    value: {},
-  };
 
-  constructor(props) {
-    super(props);
+function PrescriptionFormModify({ value, PDLeft, PDRight, sphRight, sphLeft, cylRight, cylLeft, axisRight, axisLeft, addRight, addLeft, onSubmit }) {
+  const [state, setState] = useState({
+    ...defaultState,
+    ...value,
+  });
 
-    const { value } = props;
-
-    this.state = {
-      PDLeft: 'average',
-      PDRight: 'average',
-      sphRight: 'plano',
-      sphLeft: 'plano',
-      cylRight: 'plano',
-      cylLeft: 'plano',
-      axisRight: '0',
-      axisLeft: '0',
-      addRight: '0.00',
-      addLeft: '0.00',
-      ...value,
-    };
+  function handleChange(key, value) {
+    setState({ ...defaultState, [key]: value });
   }
 
-  _handleChange(key, value) {
-    this.setState({[key]: value});
+  function handleSubmit() {
+    onSubmit(state);
   }
 
-  _handleSubmit() {
-    const { onSubmit } = this.props;
-    onSubmit(this.state);
-  }
-
-  render() {
-    const { PDLeft, PDRight, sphRight, sphLeft, cylRight, cylLeft, axisRight, axisLeft, addRight, addLeft } = this.state;
-
-    return (
-      <Container className={styles['container']}>
-        <Row>
-          <Col className={styles['content']}>
-            <div className={styles['eyes']}>
-              <h3 className={styles['header']}>Межзрачковое расстояние</h3>
-              <div className={styles['eyes__content']}>
-                <div className={styles['eyes__row']}>
-                  <Select
-                    label="Левый глаз"
-                    clearable={false}
-                    simple={true}
-                    value={PDLeft}
-                    options={eyeAndNose}
-                    onChange={this._handleChange.bind(this, 'PDLeft')}
-                  />
-                </div>
-                <div className={styles['eyes__row']}>
-                  <Select
-                    label="Правый глаз"
-                    clearable={false}
-                    simple={true}
-                    value={PDRight}
-                    options={eyeAndNose}
-                    onChange={this._handleChange.bind(this, 'PDRight')}
-                  />
-                </div>
+  return (
+    <Container className={styles['container']}>
+      <Row>
+        <Col className={styles['content']}>
+          <div className={styles['eyes']}>
+            <h3 className={styles['header']}>Межзрачковое расстояние</h3>
+            <div className={styles['eyes__content']}>
+              <div className={styles['eyes__row']}>
+                <Select
+                  label="Левый глаз"
+                  clearable={false}
+                  simple={true}
+                  value={PDLeft}
+                  options={eyeAndNose}
+                  onChange={() => handleChange('PDLeft', value)}
+                />
+              </div>
+              <div className={styles['eyes__row']}>
+                <Select
+                  label="Правый глаз"
+                  clearable={false}
+                  simple={true}
+                  value={PDRight}
+                  options={eyeAndNose}
+                  onChange={(value) => handleChange('PDRight', value)}
+                />
               </div>
             </div>
-            <div className={cn(styles['blank'])}>
-              <h3 className={styles['header']}>Рецепт на очки</h3>
-              <div className={styles['blank__line']}>
-                <div className={styles['blank__label']} />
-                <div className={cn(styles['blank__value'], styles['blank__header'])}>SPH (Сфера)</div>
-                <div className={cn(styles['blank__value'], styles['blank__header'])}>CYL (Цилиндр)</div>
-                <div className={cn(styles['blank__value'], styles['blank__header'])}>AXIS (Ось)</div>
-                <div className={cn(styles['blank__value'], styles['blank__header'])}>ADD (Дополнение)</div>
-              </div>
-              <div className={styles['blank__line']}>
-                <div className={styles['blank__label']}>OD (Павый)</div>
-                <div className={styles['blank__value']}><Select value={sphRight} options={spherical} simple={true} clearable={false} onChange={this._handleChange.bind(this, 'sphRight')} /></div>
-                <div className={styles['blank__value']}><Select value={cylRight} options={cylinder} simple={true} clearable={false} onChange={this._handleChange.bind(this, 'cylRight')} /></div>
-                <div className={styles['blank__value']}><Select value={axisRight} options={axis} simple={true} clearable={false} onChange={this._handleChange.bind(this, 'axisRight')} /></div>
-                <div className={styles['blank__value']}><Select value={addRight} options={addition} simple={true} clearable={false} onChange={this._handleChange.bind(this, 'addRight')} /></div>
-              </div>
-              <div className={styles['blank__line']}>
-                <div className={styles['blank__label']}>OS (Левый)</div>
-                <div className={styles['blank__value']}><Select value={sphLeft} options={spherical} simple={true} clearable={false} onChange={this._handleChange.bind(this, 'sphLeft')} /></div>
-                <div className={styles['blank__value']}><Select value={cylLeft} options={cylinder} simple={true} clearable={false} onChange={this._handleChange.bind(this, 'cylLeft')} /></div>
-                <div className={styles['blank__value']}><Select value={axisLeft} options={axis} simple={true} clearable={false} onChange={this._handleChange.bind(this, 'axisLeft')} /></div>
-                <div className={styles['blank__value']}><Select value={addLeft} options={addition} simple={true} clearable={false} onChange={this._handleChange.bind(this, 'addLeft')} /></div>
-              </div>
+          </div>
+          <div className={cn(styles['blank'])}>
+            <h3 className={styles['header']}>Рецепт на очки</h3>
+            <div className={styles['blank__line']}>
+              <div className={styles['blank__label']} />
+              <div className={cn(styles['blank__value'], styles['blank__header'])}>SPH (Сфера)</div>
+              <div className={cn(styles['blank__value'], styles['blank__header'])}>CYL (Цилиндр)</div>
+              <div className={cn(styles['blank__value'], styles['blank__header'])}>AXIS (Ось)</div>
+              <div className={cn(styles['blank__value'], styles['blank__header'])}>ADD (Дополнение)</div>
             </div>
-            <div className={cn(styles['blank'])}>
-              <h3 className={styles['header']}>Коментарий</h3>
-              <div className={styles['blank__line']}>
-                <TextareaField name="comment" />
-              </div>
+            <div className={styles['blank__line']}>
+              <div className={styles['blank__label']}>OD (Павый)</div>
+              <div className={styles['blank__value']}><Select value={sphRight} options={spherical} simple={true} clearable={false} onChange={(value) => handleChange('sphRight', value)} /></div>
+              <div className={styles['blank__value']}><Select value={cylRight} options={cylinder} simple={true} clearable={false} onChange={(value) => handleChange('cylRight', value)} /></div>
+              <div className={styles['blank__value']}><Select value={axisRight} options={axis} simple={true} clearable={false} onChange={(value) => handleChange('axisRight', value)} /></div>
+              <div className={styles['blank__value']}><Select value={addRight} options={addition} simple={true} clearable={false} onChange={(value) => handleChange('addRight', value)} /></div>
             </div>
-          </Col>
-        </Row>
-        <Row className={styles['controls']}>
-          <Col>
-            <Button mode="success" onClick={this._handleSubmit.bind(this)}>Сохранить рецепт</Button>
-          </Col>
-        </Row>
-      </Container>
-    );
-  }
+            <div className={styles['blank__line']}>
+              <div className={styles['blank__label']}>OS (Левый)</div>
+              <div className={styles['blank__value']}><Select value={sphLeft} options={spherical} simple={true} clearable={false} onChange={(value) => handleChange('sphLeft', value)} /></div>
+              <div className={styles['blank__value']}><Select value={cylLeft} options={cylinder} simple={true} clearable={false} onChange={(value) => handleChange('cylLeft', value)} /></div>
+              <div className={styles['blank__value']}><Select value={axisLeft} options={axis} simple={true} clearable={false} onChange={(value) => handleChange('axisLeft', value)} /></div>
+              <div className={styles['blank__value']}><Select value={addLeft} options={addition} simple={true} clearable={false} onChange={(value) => handleChange('addLeft', value)} /></div>
+            </div>
+          </div>
+          <div className={cn(styles['blank'])}>
+            <h3 className={styles['header']}>Коментарий</h3>
+            <div className={styles['blank__line']}>
+              <TextareaField name="comment" />
+            </div>
+          </div>
+        </Col>
+      </Row>
+      <Row className={styles['controls']}>
+        <Col>
+          <Button mode="success" onClick={() => handleSubmit()}>Сохранить рецепт</Button>
+        </Col>
+      </Row>
+    </Container>
+  );
 }
 
-export default Component;
+PrescriptionFormModify.propTypes = {
+  hasNext: types.bool,
+  value: types.object,
+  onNext: types.func,
+  onSubmit: types.func,
+}
+
+PrescriptionFormModify.defaultProps = {
+  hasNext: false,
+  value: {},
+}
+
+export default PrescriptionFormModify;
