@@ -1,6 +1,6 @@
 
-import { sequelize, models } from '@sys.packages/db';
 import { UUID } from '@sys.packages/sys.utils';
+import { sequelize, models } from '@sys.packages/db';
 
 
 const getBufferFromRequest = (req) => {
@@ -20,40 +20,27 @@ const getBufferFromRequest = (req) => {
 };
 
 export default () => async (ctx) => {
-  try {
-    const { Gallery } = models;
-    const externalId = UUID();
+  const { Gallery } = models;
+  const externalId = UUID();
 
-    const buffer = await getBufferFromRequest(ctx['req']);
+  const buffer = await getBufferFromRequest(ctx['req']);
 
-    const transaction = await sequelize.transaction();
+  const transaction = await sequelize.transaction();
 
-    await Gallery.create({
-      file: buffer,
+  await Gallery.create({
+    file: buffer,
+    externalId,
+  }, {
+    transaction,
+  });
+
+  await transaction.commit();
+
+  ctx.status = 200;
+  ctx.body = {
+    success: true,
+    data: {
       externalId,
-    }, {
-      transaction,
-    });
-
-    await transaction.commit();
-
-    ctx.status = 200;
-    ctx.body = {
-      success: true,
-      data: {
-        externalId,
-      },
-    };
-  }
-  catch(e) {
-
-    ctx.status = 500;
-    ctx.body = {
-      success: false,
-      error: {
-        code: '500',
-        message: e['message'],
-      },
-    };
-  }
+    },
+  };
 };

@@ -11,6 +11,7 @@
     "start:dev": "nodemon --exec node -r dotenv/config --experimental-modules --es-module-specifier-resolution=node ./src/index.mjs dotenv_config_path=./.env.development"
   },
   "dependencies": {
+    "@packages/errors": "1.0.0",
     "@sys.packages/db": "1.0.0",
     "@sys.packages/logger": "1.0.0",
     "@sys.packages/rabbit": "1.0.0",

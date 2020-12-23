@@ -94,7 +94,6 @@ module.exports = (db, DataType) => {
 
   Product.associate = function({ Attribute, Gallery, Category, Type, Material, Form, Color, Currency, Comment }) {
 
-
     Product.belongsTo(Currency, {
       foreignKey: 'currencyId',
       as: 'currency',

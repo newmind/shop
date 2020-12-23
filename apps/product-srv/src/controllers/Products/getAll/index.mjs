@@ -160,7 +160,7 @@ export default () => async (ctx) => {
       },
     ],
   });
-
+a;
   ctx.body = {
     success: true,
     data: products['rows'],

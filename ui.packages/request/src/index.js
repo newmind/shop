@@ -1,5 +1,11 @@
 
-import { BadRequestError, NetworkError, NotAuthError, NotFoundError, ValidationError } from '@packages/errors';
+import {
+  BadRequestError,
+  NetworkError,
+  UnauthorizedError,
+  NotfoundError,
+  ValidationError
+} from '@packages/errors';
 
 import axios from 'axios';
 
@@ -57,10 +63,10 @@ const request = async (options) => {
         return Promise.reject(new BadRequestError(data));
       }
       else if (status === 401) {
-        return Promise.reject(new NotAuthError(data));
+        return Promise.reject(new UnauthorizedError(data));
       }
       else if (status === 404) {
-        return Promise.reject(new NotFoundError(data));
+        return Promise.reject(new NotfoundError(data));
       }
       else if (status === 417) {
         return Promise.reject(new ValidationError(data));

@@ -1,5 +1,5 @@
 
-import { NotAuthError } from '@packages/errors';
+import { UnauthorizedError } from '@packages/errors';
 
 import request from "axios";
 import jwt from 'jsonwebtoken';
@@ -12,7 +12,7 @@ export const getCookie = async (ctx, name, { silent = false }) => {
 
   if ( ! cookie) {
     if ( ! silent) {
-      throw new NotAuthError({ code: '', message: 'User not authorize' });
+      throw new UnauthorizedError({ code: '2.2.2', message: 'User not authorize' });
     }
     return null;
   }

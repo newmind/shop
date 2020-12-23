@@ -1,10 +1,6 @@
 
 class BaseError extends Error {
-  name = '';
-  status = 0;
-  data = null;
-
-  constructor(status = '500', data = 'Что-то пошло не так') {
+  constructor(status = 500, data = 'Что-то пошло не так') {
     super();
 
     this.name = 'NetworkError';
@@ -13,6 +9,30 @@ class BaseError extends Error {
 
     if ('captureStackTrace' in Error) {
       Error.captureStackTrace(this, BaseError);
+    }
+  }
+}
+
+export class UserNotFoundError extends BaseError {
+  constructor(data = 'Пользователь не найден') {
+    super(500, data);
+
+    this.name = 'UserNotFoundError';
+
+    if ('captureStackTrace' in Error) {
+      Error.captureStackTrace(this, UserNotFoundError);
+    }
+  }
+}
+
+export class NetworkError extends BaseError {
+  constructor(data = 'Что-то пошло не так') {
+    super(500, data);
+
+    this.name = 'NetworkError';
+
+    if ('captureStackTrace' in Error) {
+      Error.captureStackTrace(this, NetworkError);
     }
   }
 }
@@ -29,15 +49,29 @@ export class UnavailableError extends BaseError {
   }
 }
 
-export class NetworkError extends BaseError {
-  constructor(data = 'Что-то пошло не так') {
-    super(500, data);
 
-    this.name = 'NetworkError';
+export class BadRequestError extends BaseError {
+  constructor(data = 'Ошибка авторизации') {
+    super(400, data);
+
+    this.name = 'BadRequestError';
 
     if ('captureStackTrace' in Error) {
-      Error.captureStackTrace(this, NetworkError);
+      Error.captureStackTrace(this, BadRequestError);
     }
+  }
+}
+
+export class UnauthorizedError extends BaseError {
+  constructor(data = 'Пользователь неавторизован') {
+    super(401, data);
+
+    this.name = 'UnauthorizedError';
+
+    if ('captureStackTrace' in Error) {
+      Error.captureStackTrace(this, UnauthorizedError);
+    }
+
   }
 }
 
@@ -65,22 +99,22 @@ export class NotfoundError extends BaseError {
   }
 }
 
-export class UnauthorizedError extends BaseError {
-  constructor(data = 'Пользователь неавторизован') {
-    super(401, data);
 
-    this.name = 'UnauthorizedError';
+export class MethodNotAllowedError extends BaseError {
+  constructor(data = 'Метод не поддерживается') {
+    super(405, data);
+
+    this.name = 'MethodNotAllowedError';
 
     if ('captureStackTrace' in Error) {
-      Error.captureStackTrace(this, UnauthorizedError);
+      Error.captureStackTrace(this, MethodNotAllowedError);
     }
-
   }
 }
 
 export class ValidationError extends BaseError {
-  constructor(data = 'Ошибка авторизации') {
-    super(400, data);
+  constructor(data = 'Ошибка валидации') {
+    super(417, data);
 
     this.name = 'ValidationError';
 
@@ -102,26 +136,29 @@ export class LockedError extends BaseError {
   }
 }
 
-export class MethodNotAllowedError extends BaseError {
-  constructor(data = 'Метод не поддерживается') {
-    super(405, data);
 
-    this.name = 'MethodNotAllowedError';
-
-    if ('captureStackTrace' in Error) {
-      Error.captureStackTrace(this, MethodNotAllowedError);
-    }
+function checkStatus(status) {
+  if (status === 404) {
+    throw new NotfoundError({ code: '1.2.1', message: 'Страница не найдена' });
   }
 }
 
-export class UserNotFoundError extends BaseError {
-  constructor(data = 'Пользователь не найден') {
-    super(500, data);
 
-    this.name = 'UserNotFoundError';
+export const middlewareErrors = () => async (ctx, next) => {
+  try {
+    await next();
+    checkStatus(ctx['status']);
+  }
+  catch(error) {
 
-    if ('captureStackTrace' in Error) {
-      Error.captureStackTrace(this, UserNotFoundError);
+    if (error instanceof ReferenceError) {
+      ctx.status = 500;
+      ctx.body = { code: '1.0.0', message: error['message'] };
+    }
+    else {
+
+      ctx.status = Number(error['status'] || 500);
+      ctx.body = error['data'];
     }
   }
-}
+};

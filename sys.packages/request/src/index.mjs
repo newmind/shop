@@ -1,11 +1,13 @@
 
 import logger from '@sys.packages/logger';
 import {
-  BadRequestError,
-  NotAuthError,
-  NotFoundError,
-  ValidationError,
   NetworkError,
+  NotfoundError,
+  BadRequestError,
+  ValidationError,
+  UnavailableError,
+  UnauthorizedError,
+  MethodNotAllowedError,
 } from '@packages/errors';
 
 import axios from 'axios';
@@ -18,11 +20,10 @@ const defaultOptions = {
   withCredentials: false,
 };
 
+
 const requestLogger = (config) => {
-
-  const { url, method, params = null, data = null } = config;
-
   let requestData = null;
+  const { url, method, params = null, data = null } = config;
 
   if (params) {
     requestData = JSON.stringify(params);
@@ -38,10 +39,8 @@ const requestLogger = (config) => {
 };
 
 const responseLogger = (response) => {
-
-  const { config: { url, method, responseType }, status, data = null } = response;
-
   let responseData = null;
+  const { config: { url, method, responseType }, status, data = null } = response;
 
   if (responseType === 'json' && data) {
     responseData = JSON.stringify(data);
@@ -53,10 +52,9 @@ const responseLogger = (response) => {
 };
 
 const errorLogger = (error) => {
-  const { config: { url, method }, response } = error;
-
   let status = 0;
   let data = null;
+  const { config: { url, method }, response } = error;
 
   if (response) {
     status = response['status'];
@@ -78,13 +76,19 @@ const errorLogger = (error) => {
       return Promise.reject(new BadRequestError(response['data']));
     }
     else if (response['status'] === 401) {
-      return Promise.reject(new NotAuthError(response['data']));
+      return Promise.reject(new UnauthorizedError(response['data']));
     }
     else if (response['status'] === 404) {
-      return Promise.reject(new NotFoundError(response['data']));
+      return Promise.reject(new NotfoundError(response['data']));
+    }
+    else if (response['status'] === 405) {
+      return Promise.reject(new MethodNotAllowedError(response['data']));
     }
     else if (response['status'] === 417) {
       return Promise.reject(new ValidationError(response['data']));
+    }
+    else if (response['status'] === 503) {
+      return Promise.reject(new UnavailableError(response['data']));
     }
     else {
       return Promise.reject(new NetworkError(response['data']));
@@ -94,12 +98,8 @@ const errorLogger = (error) => {
 
 
 const request = async (options) => {
-  options = {
-    ...defaultOptions,
-    ...options,
-  };
-
   const instance = axios.create({
+    ...defaultOptions,
     ...options,
     timeout: 24000,
   });

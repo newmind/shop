@@ -1,21 +1,22 @@
 
+import { middlewareErrors } from '@packages/errors';
+
 import logger from '@sys.packages/logger';
 import connectToDatabase from '@sys.packages/db';
 import appServer, { initRouter } from '@sys.packages/server';
-import { connectToRabbit, createExchange } from "@sys.packages/rabbit";
 
 import http from 'http';
 
 import routes from './routes';
+import rabbit from './rabbit';
 
 
 (async () => {
   try {
     await connectToDatabase(process.env['DB_CONNECTION_HOST']);
-    await connectToRabbit(process.env['RABBIT_CONNECTION_HOST']);
+    await rabbit();
 
-    await createExchange(process.env['RABBIT_GALLERY_PROXY_EXCHANGE_GALLERY_DELETED']);
-
+    appServer.use(middlewareErrors());
 
     const httpServer = http.createServer(appServer.callback());
 

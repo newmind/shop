@@ -1,21 +1,22 @@
 
+import { middlewareErrors } from '@packages/errors';
+
 import logger from '@sys.packages/logger';
 import connectToDatabase from '@sys.packages/db';
 import appServer, { initRouter } from '@sys.packages/server';
-import { createExchange, connectToRabbit } from "@sys.packages/rabbit";
 
 import http from 'http';
 
 import routes from './routes';
+import rabbit from './rabbit';
 
 
 (async () => {
   try {
     await connectToDatabase(process.env['DB_CONNECTION_HOST']);
-    await connectToRabbit(process.env['RABBIT_CONNECTION_HOST']);
+    await rabbit();
 
-    await createExchange(process.env['RABBIT_IDENTITY_SRV_EXCHANGE_PASSPORT_UPDATED']);
-
+    appServer.use(middlewareErrors());
 
     const httpServer = http.createServer(appServer.callback());
 
@@ -24,6 +25,7 @@ import routes from './routes';
     httpServer.listen(process.env['PORT'], () => logger['info']('Server started on port: ' + process.env['PORT']));
   }
   catch(error) {
+
     logger['error'](error);
   }
 })();
