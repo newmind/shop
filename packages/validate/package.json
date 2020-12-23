@@ -5,6 +5,6 @@
   "main": "./src/index.mjs",
   "dependencies": {
     "lodash": "4.17.20",
-    "validator": "13.1.17"
+    "validator": "13.5.2"
   }
 }

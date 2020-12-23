@@ -1,0 +1,45 @@
+
+@import "~@ui.packages/theme";
+
+
+.wrapper {
+
+  display: flex;
+  flex: 1 0 auto;
+  flex-direction: column;
+}
+
+.center {
+
+  position: relative;
+  display: flex;
+  flex: 1 0 auto;
+  flex-direction: column;
+  margin: 0 auto;
+  width: 1024px;
+}
+
+.header {
+
+  display: block;
+  background: $coal-dark;
+}
+
+.page {
+
+  position: relative;
+  display: flex;
+  flex: 1 0 auto;
+  flex-direction: column;
+  z-index: 10;
+}
+
+.content {
+
+  display: flex;
+  flex: 1 1 auto;
+  flex-direction: column;
+  background: $white;
+  width: 100%;
+  z-index: 10;
+}

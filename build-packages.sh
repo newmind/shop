@@ -5,41 +5,66 @@ echo 'Сборка пакетов "UI"'
 echo '-------------------'
 
 cd ./ui.packages || return
-cd ./cart && npx yarn build
+
+echo '[--- Application ---]'
+cd  ./application && npx yarn build
+echo '[--- Cart ---]'
+cd ../cart && npx yarn build
+echo '[--- Confirm Order ---]'
 cd ../confirm-order && npx yarn build
+echo '[--- Dialog ---]'
 cd ../dialog && npx yarn build
-cd ../hocs && npx yarn build
+echo '[--- Notifications ---]'
 cd ../notifications && npx yarn build
+echo '[--- Table ---]'
 cd ../table && npx yarn build
+echo '[--- Tabs ---]'
 cd ../tabs && npx yarn build
+echo '[--- Kit ---]'
 cd ../kit && npx yarn build
+echo '[--- Yandex Map ---]'
 cd ../yandex-map && npx yarn build
 
 echo ''
-echo 'Сборка модулей для приложения "Shop"'
+echo 'Сборка модулей для приложения "Client"'
 echo '------------------------------------'
 
-cd ../../shop.modules.packages || return
-cd ./details-order && npx yarn build
+cd ../../modules || return
+
+echo '[--- Order Details ---]'
+cd  ./orderDetails && npx yarn build
+echo '[--- Not Found ---]'
 cd ../not-found && npx yarn build
+echo '[--- Showcase ---]'
 cd ../showcase && npx yarn build
+echo '[--- Produce ---]'
 cd ../produce && npx yarn build
+echo '[--- Product ---]'
 cd ../product && npx yarn build
+echo '[--- Order ---]'
 cd ../order && npx yarn build
+echo '[--- About ---]'
 cd ../about && npx yarn build
 
 echo ''
-echo 'Сборка модулей для приложения "Shop.Admin"'
+echo 'Сборка модулей для приложения "Admin"'
 echo '-----------------------------------------'
 
-cd ../../admin.modules.packages || return
-cd ./comments && npx yarn build
+echo '[--- Comments ---]'
+cd ../comments && npx yarn build
+echo '[--- Attributes ---]'
 cd ../attributes && npx yarn build
+echo '[--- Not Found ---]'
 cd ../not-found && npx yarn build
+echo '[--- Orders ---]'
 cd ../orders && npx yarn build
+echo '[--- Product Modify ---]'
 cd ../product-modify && npx yarn build
+echo '[--- Products ---]'
 cd ../products && npx yarn build
+echo '[--- Profile ---]'
 cd ../profile && npx yarn build
+echo '[--- Sign In ---]'
 cd ../sign-in && npx yarn build
 
 exit 0

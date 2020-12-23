@@ -2,11 +2,10 @@
   "lerna": "3.18.3",
   "version": "independent",
   "packages": [
-    "admin.modules.packages/*",
-    "shop.modules.packages/*",
     "sys.packages/*",
     "ui.packages/*",
     "packages/*",
+    "modules/*",
     "apps/*"
   ],
   "npmClient": "yarn",

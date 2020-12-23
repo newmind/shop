@@ -1,0 +1,49 @@
+
+@import "../../../../node_modules/@ui.packages/theme";
+
+
+.wrapper {
+
+  display: block;
+  padding: 0 0 120px;
+}
+
+.controls {
+
+  display: block;
+  padding: 20px 40px;
+  text-align: right;
+  background: $white;
+  border-bottom: 1px solid $pale-lilac;
+}
+
+.content {
+
+  display: block;
+  padding: 40px;
+}
+
+.header {
+
+  display: block;
+  font: 18px "Istok Web";
+  font-weight: 700;
+  letter-spacing: .5px;
+  margin: 0 0 40px;
+}
+
+.filter {
+
+  display: block;
+  margin: 0 0 30px;
+}
+
+.table {
+
+  display: block;
+}
+
+.paging {
+
+  display: block;
+}

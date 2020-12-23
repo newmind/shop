@@ -16,7 +16,6 @@ services:
     ports:
       - 50002:15672
 
-
   mail_srv:
     container_name: mail_srv
     build:
@@ -38,10 +37,10 @@ services:
       - mail_srv
 
   gallery_proxy:
-    container_name: gallery_proxy
+    container_name: gallery_srv
     build:
       context: ./
-      dockerfile: Dockerfile.gallery-proxy
+      dockerfile: Dockerfile.gallery-srv
     restart: always
     depends_on:
       - db
@@ -49,10 +48,10 @@ services:
       - db
 
   operation_proxy:
-    container_name: operation_proxy
+    container_name: operation_srv
     build:
       context: ./
-      dockerfile: Dockerfile.operation-proxy
+      dockerfile: Dockerfile.operation-srv
     restart: always
     depends_on:
       - db
@@ -64,21 +63,21 @@ services:
       - mail_srv
 
   product_proxy:
-    container_name: product_proxy
+    container_name: product_srv
     build:
       context: ./
-      dockerfile: Dockerfile.product-proxy
+      dockerfile: Dockerfile.product-srv
     restart: always
     depends_on:
       - db
       - rabbit
       - mail_srv
-      - gallery_proxy
+      - gallery_srv
     links:
       - db
       - rabbit
       - mail_srv
-      - gallery_proxy
+      - gallery_srv
 
 
   admin_gw:
@@ -89,36 +88,36 @@ services:
     restart: always
     depends_on:
       - rabbit
-      - product_proxy
+      - product_srv
+      - gallery_srv
       - identity_srv
-      - gallery_proxy
-      - operation_proxy
+      - operation_srv
     links:
       - rabbit
-      - product_proxy
+      - product_srv
+      - gallery_srv
       - identity_srv
-      - gallery_proxy
-      - operation_proxy
+      - operation_srv
 
 
   showcase_gw:
-    container_name: showcase_gw
+    container_name: client_gw
     build:
       context: ./
-      dockerfile: Dockerfile.showcase-gw
+      dockerfile: Dockerfile.client-gw
     restart: always
     depends_on:
       - rabbit
-      - product_proxy
-      - gallery_proxy
-      - operation_proxy
+      - product_srv
+      - gallery_srv
       - identity_srv
+      - operation_srv
     links:
       - rabbit
-      - product_proxy
-      - gallery_proxy
-      - operation_proxy
+      - product_srv
+      - gallery_srv
       - identity_srv
+      - operation_srv
 
 
   admin_ui:
@@ -138,17 +137,17 @@ services:
 
 
   showcase_ui:
-    container_name: showcase_ui
+    container_name: client_ui
     build:
       context: ./
-      dockerfile: Dockerfile.showcase-ui
+      dockerfile: Dockerfile.client-ui
     restart: always
     depends_on:
-      - showcase_gw
+      - client_gw
     links:
-      - showcase_gw
+      - client_gw
     volumes:
-      - ./apps/showcase-ui/nginx/conf.d:/etc/nginx/conf.d:ro
+      - ./apps/client-ui/nginx/conf.d:/etc/nginx/conf.d:ro
     environment:
       - NODE_ENV=production
 
@@ -170,10 +169,10 @@ services:
     restart: unless-stopped
     depends_on:
       - admin_ui
-      - showcase_ui
+      - client_ui
     links:
       - admin_ui
-      - showcase_ui
+      - client_ui
     ports:
       - 80:80
       - 443:443

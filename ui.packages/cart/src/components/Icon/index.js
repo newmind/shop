@@ -1,26 +1,45 @@
 
-import { connect } from 'react-redux';
-import { bindActionCreators } from 'redux';
+import { nounDeclension } from '@ui.packages/utils';
 
-import { closeCart, openCart } from "../../ducks/commands";
+import React from 'react';
+import { useSelector, useDispatch } from 'react-redux';
 
-import Component from './Component';
+import { openCart, closeCart, selectItems, selectIsOpen } from '../../ducks/cartSlice';
+
+import cn from "classnames";
+import styles from "./defaults.module.scss";
 
 
-const mapStateToProps = (state) => {
-  const Cart = state['cart'];
-  return {
-    items: Cart['items'],
-    isOpen: Cart['isOpen'],
+function Icon() {
+  const dispatch = useDispatch();
+  const isOpen = useSelector(selectIsOpen);
+  const items = useSelector(selectItems);
+
+  function handleSwitchStateCaretList() {
+    if (isOpen) {
+      dispatch(closeCart());
+    } else {
+      dispatch(openCart());
+    }
   }
-};
 
-const mapActionsToProps = (dispatch) => ({
-  openCart: bindActionCreators(openCart, dispatch),
-  closeCart: bindActionCreators(closeCart, dispatch),
-});
+  const classNameCartIcon = cn('fas fa-shopping-cart', styles['cart__icon']);
+  const classNameCartWrapper = cn(styles['cart__wrapper'], {
+    [styles['cart__wrapper--open']]: isOpen,
+  });
 
-export default connect(
-  mapStateToProps,
-  mapActionsToProps
-)(Component);
+  const hasItems = !! items.length;
+
+  return (
+    <div className={classNameCartWrapper} onClick={handleSwitchStateCaretList}>
+      <span className={classNameCartIcon} />
+      <span className={styles['cart__info']}>
+        <span className={styles['cart__count']}>
+          {hasItems ? `${items['length']} ${nounDeclension(items['length'], ['товар', 'товара', 'товаров'])}` : 'пусто'}
+        </span>
+      </span>
+    </div>
+  );
+}
+
+export default Icon;

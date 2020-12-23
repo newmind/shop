@@ -10,7 +10,6 @@
   "dependencies": {
     "@packages/moment": "1.0.0",
     "@packages/numeral": "1.0.0",
-    "@ui.packages/hocs": "1.0.0",
     "@ui.packages/theme": "1.0.0",
     "@ui.packages/utils": "1.0.0",
     "classnames": "2.2.6",
@@ -21,9 +20,9 @@
     "react-router-dom": "6.0.0-beta.0"
   },
   "devDependencies": {
-    "@babel/cli": "7.12.8",
-    "@babel/core": "7.12.9",
-    "cross-env": "7.0.2",
+    "@babel/cli": "7.12.10",
+    "@babel/core": "7.12.10",
+    "cross-env": "7.0.3",
     "resolve": "1.19.0"
   },
   "babel": {

@@ -1,5 +1,5 @@
 
-export default [
+const navigate = [
   {
     title: 'Витрина',
     path: '/',
@@ -25,3 +25,5 @@ export default [
     path: '/profile',
   },
 ];
+
+export default navigate;

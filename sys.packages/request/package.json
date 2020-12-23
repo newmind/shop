@@ -5,6 +5,6 @@
   "dependencies": {
     "@packages/errors": "1.0.0",
     "@sys.packages/logger": "1.0.0",
-    "axios": "0.21.0"
+    "axios": "0.21.1"
   }
 }

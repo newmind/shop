@@ -1,0 +1,84 @@
+
+# BUILD APP
+FROM node:13-alpine as ui
+
+RUN npm config set package-lock false
+#RUN npm i yarn -g --yes
+
+WORKDIR /app
+
+COPY ./apps/client-ui/src                ./apps/client-ui/src
+COPY ./apps/client-ui/public             ./apps/client-ui/public
+COPY ./apps/client-ui/package.json       ./apps/client-ui
+COPY ./apps/client-ui/.env.production    ./apps/client-ui
+COPY ./ui.packages                       ./ui.packages
+COPY ./packages                          ./packages
+COPY ./modules                           ./modules
+COPY ./package.json                      .
+COPY ./lerna.json                        .
+COPY ./yarn.lock                         .
+
+RUN yarn
+
+# BUILD COMPONENTS
+WORKDIR /app/ui.packages/application
+RUN ["yarn", "run", "build"]
+
+WORKDIR /app/ui.packages/dialog
+RUN ["yarn", "run", "build"]
+
+WORKDIR /app/ui.packages/cart
+RUN ["yarn", "run", "build"]
+
+WORKDIR /app/ui.packages/notifications
+RUN ["yarn", "run", "build"]
+
+WORKDIR /app/ui.packages/tabs
+RUN ["yarn", "run", "build"]
+
+WORKDIR /app/ui.packages/kit
+RUN ["yarn", "run", "build"]
+
+WORKDIR /app/ui.packages/yandex-map
+RUN ["yarn", "run", "build"]
+
+WORKDIR /app/ui.packages/confirm-order
+RUN ["yarn", "run", "build"]
+
+# BUILD MODULES
+WORKDIR /app/modules/about
+RUN ["yarn", "run", "build"]
+
+WORKDIR /app/modules/main
+RUN ["yarn", "run", "build"]
+
+WORKDIR /app/modules/notFound
+RUN ["yarn", "run", "build"]
+
+WORKDIR /app/modules/order
+RUN ["yarn", "run", "build"]
+
+WORKDIR /app/modules/orderDetails
+RUN ["yarn", "run", "build"]
+
+WORKDIR /app/modules/produce
+RUN ["yarn", "run", "build"]
+
+WORKDIR /app/modules/product
+RUN ["yarn", "run", "build"]
+
+WORKDIR /app/modules/showcase
+RUN ["yarn", "run", "build"]
+
+# BUILD APPLICATION
+WORKDIR /app/apps/showcase-ui
+RUN ["yarn", "run", "build"]
+
+# START NGINX
+FROM nginx
+
+COPY --from=ui /app/apps/client-ui/build /app
+
+WORKDIR /etc/nginx
+
+CMD ["nginx", "-g", "daemon off;"]

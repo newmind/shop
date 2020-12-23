@@ -1,83 +1,85 @@
 
-export default [
+const routes = [
   {
     path: '/',
-    wrapper: 'Composite',
+    wrapper: 'Navigate',
     module: import(
       /* webpackChunkName: "products" */
-      '@modules.packages/products'
-    ),
-  },
-  {
-    path: '/products/create',
-    wrapper: 'Composite',
-    module: import(
-      /* webpackChunkName: "product-modify" */
-      '@modules.packages/product-modify'
-    ),
-  },
-  {
-    path: '/products/:id',
-    wrapper: 'Composite',
-    module: import(
-      /* webpackChunkName: "product-modify" */
-      '@modules.packages/product-modify'
-    ),
-  },
-  {
-    path: '/orders',
-    wrapper: 'Navigate',
-    module: import(
-      /* webpackChunkName: "orders" */
-      '@modules.packages/orders'
-    ),
-  },
-  {
-    path: '/comments',
-    wrapper: 'Navigate',
-    module: import(
-      /* webpackChunkName: "comments" */
-      '@modules.packages/comments'
-    ),
-  },
-  {
-    path: '/attributes',
-    wrapper: 'Navigate',
-    module: import(
-      /* webpackChunkName: "categories" */
-      '@modules.packages/attributes'
-    ),
-  },
-  {
-    path: '/users',
-    wrapper: 'Composite',
-    module: import(
-      /* webpackChunkName: "users" */
-      '@modules.packages/users'
+      '@modules/products'
     ),
   },
   // {
-  //   path: '/currency',
-  //   wrapper: 'Composite',
+  //   path: '/products/create',
+  //   wrapper: 'Navigate',
   //   module: import(
-  //     /* webpackChunkName: "currency" */
-  //     '@modules.packages/currencies'
+  //     /* webpackChunkName: "product-modify" */
+  //     '@modules/product-modify'
   //   ),
   // },
+  // {
+  //   path: '/products/:id',
+  //   wrapper: 'Navigate',
+  //   module: import(
+  //     /* webpackChunkName: "product-modify" */
+  //     '@modules/product-modify'
+  //   ),
+  // },
+  // {
+  //   path: '/orders',
+  //   wrapper: 'Navigate',
+  //   module: import(
+  //     /* webpackChunkName: "orders" */
+  //     '@modules/orders'
+  //   ),
+  // },
+  // {
+  //   path: '/comments',
+  //   wrapper: 'Navigate',
+  //   module: import(
+  //     /* webpackChunkName: "comments" */
+  //     '@modules/comments'
+  //   ),
+  // },
+  // {
+  //   path: '/attributes',
+  //   wrapper: 'Navigate',
+  //   module: import(
+  //     /* webpackChunkName: "categories" */
+  //     '@modules/attributes'
+  //   ),
+  // },
+  // {
+  //   path: '/users',
+  //   wrapper: 'Navigate',
+  //   module: import(
+  //     /* webpackChunkName: "users" */
+  //     '@modules/users'
+  //   ),
+  // },
+  // // {
+  // //   path: '/currency',
+  // //   wrapper: 'Navigate',
+  // //   module: import(
+  // //     /* webpackChunkName: "currency" */
+  // //     '@modules/currencies'
+  // //   ),
+  // // },
   {
     path: '/sign-in',
     wrapper: 'Empty',
     module: import(
       /* webpackChunkName: "sign-in" */
-      '@modules.packages/sign-in'
+      '@modules/sign-in'
     ),
   },
-  {
-    path: '/profile',
-    wrapper: 'Navigate',
-    module: import(
-      /* webpackChunkName: "profile" */
-      '@modules.packages/profile'
-    ),
-  },
+  // {
+  //   path: '/profile',
+  //   wrapper: 'Navigate',
+  //   module: import(
+  //     /* webpackChunkName: "profile" */
+  //     '@modules/profile'
+  //   ),
+  // },
 ];
+
+export default routes;

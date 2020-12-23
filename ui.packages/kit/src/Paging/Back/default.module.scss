@@ -1,0 +1,44 @@
+
+@import "~@ui.packages/theme";
+
+
+.wrapper {
+
+  display: inline-block;
+  border: 1px solid $blue-grey;
+  border-radius: 5px;
+  color: $blue-grey;
+  padding: 4px 0;
+  width: 30px;
+  height: 16px;
+  transition: color 200ms, border 200ms, background-color 200ms;
+  overflow: hidden;
+  cursor: pointer;
+
+  &:hover {
+
+    border-color: $coal-dark;
+    color: $coal-dark;
+  }
+
+  & + * {
+
+    margin: 0 0 0 5px;
+  }
+}
+
+.icon {
+
+  display: block;
+  color: inherit;
+  text-align: center;
+}
+
+.disabled,
+.disabled:hover {
+
+  color: $pale-lilac;
+  border-color: $pale-lilac;
+  background: $pale-grey;
+  cursor: default;
+}

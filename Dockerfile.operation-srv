@@ -1,0 +1,25 @@
+
+# BUILD APP
+FROM node:13-alpine
+
+RUN npm config set package-lock false
+#RUN npm i yarn -g --yes
+
+WORKDIR /app
+
+COPY apps/operation-srv/db                ./apps/operation-proxy/db
+COPY apps/operation-srv/src               ./apps/operation-proxy/src
+COPY apps/operation-srv/.env.production   ./apps/operation-proxy
+COPY apps/operation-srv/package.json      ./apps/operation-proxy
+COPY apps/operation-srv/.sequelizerc      ./apps/operation-proxy
+COPY ./sys.packages                           ./sys.packages
+COPY ./packages                               ./packages
+COPY ./package.json                           .
+COPY ./lerna.json                             .
+COPY ./yarn.lock                              .
+
+RUN yarn
+
+WORKDIR /app/apps/operation-proxy
+
+ENTRYPOINT ["yarn", "run", "start"]

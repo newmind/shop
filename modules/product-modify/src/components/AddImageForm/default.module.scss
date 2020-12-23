@@ -1,0 +1,92 @@
+
+@import "../../../../../node_modules/@ui.packages/theme";
+
+.wrapper {
+
+  display: block;
+}
+
+.input {
+
+  display: none;
+}
+
+.image {
+
+  position: relative;
+  display: inline-flex;
+  width: 200px;
+  height: 150px;
+  border: 1px solid $pale-lilac;
+  border-radius: 5px;
+  overflow: hidden;
+
+  & + & {
+
+    margin: 0 0 0 20px;
+  }
+}
+
+.remove-image {
+
+  position: absolute;
+  display: block;
+  top: 10px;
+  right: 10px;
+  font-size: 20px;
+  color: $pale-lilac;
+  cursor: pointer;
+  z-index: 20;
+  transition: color 200ms;
+
+  &:hover {
+    color: $coal-dark;
+  }
+}
+
+.add-image {
+
+  display: inline-flex;
+  width: 200px;
+  height: 150px;
+  margin: 0 20px 0 0;
+  background: $pale-grey;
+  border: 1px solid $pale-lilac;
+  border-radius: 5px;
+  cursor: pointer;
+  vertical-align: top;
+  transition: border 200ms;
+
+  &:hover {
+
+    border-color: $coal-dark;
+  }
+
+  &__icon {
+
+    display: inline-block;
+    margin: auto auto;
+    font-size: 40px;
+    color: $pale-lilac;
+    vertical-align: top;
+    transition: color 200ms;
+  }
+
+  &:hover &__icon {
+
+    color: $coal-dark;
+  }
+}
+
+.content {
+
+  display: block;
+  min-height: 100px;
+  font-size: 0;
+}
+
+.controls {
+
+  display: block;
+  text-align: center;
+}

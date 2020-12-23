@@ -1,0 +1,41 @@
+
+@import "~@ui.packages/theme";
+
+
+.option {
+
+  display: flex;
+  flex-direction: row;
+  flex: 1 0;
+  padding: 10px 4px 7px 14px;
+}
+
+.title {
+
+  display: flex;
+  flex-direction: column;
+  flex: 1 0;
+  overflow: hidden;
+}
+
+.text {
+
+  display: block;
+  font: 14px "Istok Web", sans-serif;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+
+  &--none {
+    color: $blue-grey;
+  }
+}
+
+.count {
+
+  display: block;
+  font: 12px "Istok Web", sans-serif;
+  font-style: italic;
+  margin: 0 0 0 12px;
+  color: $blue-grey;
+}

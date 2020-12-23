@@ -19,9 +19,9 @@
     "redux-form": "8.3.7"
   },
   "devDependencies": {
-    "@babel/cli": "7.12.8",
-    "@babel/core": "7.12.9",
-    "cross-env": "7.0.2",
+    "@babel/cli": "7.12.10",
+    "@babel/core": "7.12.10",
+    "cross-env": "7.0.3",
     "resolve": "1.19.0"
   },
   "babel": {

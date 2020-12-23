@@ -16,11 +16,10 @@
     "url": "git+https://github.com/pyatakovvg/shop.git"
   },
   "workspaces": [
-    "admin.modules.packages/*",
-    "shop.modules.packages/*",
     "sys.packages/*",
     "ui.packages/*",
     "packages/*",
+    "modules/*",
     "apps/*"
   ],
   "scripts": {

@@ -1,0 +1,58 @@
+
+@import "../../../../../node_modules/@ui.packages/theme";
+
+.wrapper {
+
+  display: block;
+}
+
+.attrs {
+
+  display: block;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.attr {
+
+  display: flex;
+  flex-direction: row;
+  flex: 1 0;
+  box-sizing: border-box;
+  font-size: 0;
+
+  & + & {
+
+    margin: 20px 0 0;
+  }
+
+  &__title,
+  &__value,
+  &__units {
+
+    display: flex;
+    flex-direction: column;
+    flex: 1 0;
+    margin: 0 10px 0 0;
+  }
+
+  &__controls {
+
+    display: flex;
+    align-items: center;
+    justify-items: center;
+    padding: 22px 0 0 5px;
+  }
+
+  &__remove {
+
+    font-size: 14px;
+    color: $danger;
+    cursor: pointer;
+  }
+}
+
+.align-right {
+
+  text-align: right;
+}

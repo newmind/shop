@@ -1,0 +1,32 @@
+
+@import "../../../../node_modules/@ui.packages/theme";
+
+
+.wrapper {
+
+  display: block;
+  padding: 40px 40px 180px;
+}
+
+.header {
+
+  display: block;
+  font: 18px "Istok Web";
+  font-weight: 700;
+  letter-spacing: .5px;
+  margin: 0 0 40px;
+}
+
+.block {
+
+  display: block;
+  background: $white;
+  border: 1px solid $pale-lilac;
+  border-radius: 15px;
+  padding: 30px;
+}
+
+.link {
+
+  color: $primary;
+}

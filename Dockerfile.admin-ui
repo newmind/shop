@@ -11,7 +11,7 @@ COPY ./apps/admin-ui/src             ./apps/admin-ui/src
 COPY ./apps/admin-ui/public          ./apps/admin-ui/public
 COPY ./apps/admin-ui/package.json    ./apps/admin-ui
 COPY ./apps/admin-ui/.env.production ./apps/admin-ui
-COPY ./admin.modules.packages        ./admin.modules.packages
+COPY ./modules        ./modules
 COPY ./ui.packages                   ./ui.packages
 COPY ./packages                      ./packages
 COPY ./package.json                  .
@@ -21,14 +21,14 @@ COPY ./yarn.lock                     .
 RUN yarn
 
 # BUILD COMPONENTS
+WORKDIR /app/ui.packages/application
+RUN ["yarn", "run", "build"]
+
 WORKDIR /app/ui.packages/table
 RUN ["yarn", "run", "build"]
 
 # BUILD COMPONENTS
 WORKDIR /app/ui.packages/dialog
-RUN ["yarn", "run", "build"]
-
-WORKDIR /app/ui.packages/hocs
 RUN ["yarn", "run", "build"]
 
 WORKDIR /app/ui.packages/notifications
@@ -41,31 +41,31 @@ WORKDIR /app/ui.packages/kit
 RUN ["yarn", "run", "build"]
 
 # BUILD MODULES
-WORKDIR /app/admin.modules.packages/comments
+WORKDIR /app/modules/comments
 RUN ["yarn", "run", "build"]
 
-WORKDIR /app/admin.modules.packages/users
+WORKDIR /app/modules/users
 RUN ["yarn", "run", "build"]
 
-WORKDIR /app/admin.modules.packages/attributes
+WORKDIR /app/modules/attributes
 RUN ["yarn", "run", "build"]
 
-WORKDIR /app/admin.modules.packages/not-found
+WORKDIR /app/modules/not-found
 RUN ["yarn", "run", "build"]
 
-WORKDIR /app/admin.modules.packages/orders
+WORKDIR /app/modules/orders
 RUN ["yarn", "run", "build"]
 
-WORKDIR /app/admin.modules.packages/product-modify
+WORKDIR /app/modules/product-modify
 RUN ["yarn", "run", "build"]
 
-WORKDIR /app/admin.modules.packages/products
+WORKDIR /app/modules/products
 RUN ["yarn", "run", "build"]
 
-WORKDIR /app/admin.modules.packages/profile
+WORKDIR /app/modules/profile
 RUN ["yarn", "run", "build"]
 
-WORKDIR /app/admin.modules.packages/sign-in
+WORKDIR /app/modules/sign-in
 RUN ["yarn", "run", "build"]
 
 

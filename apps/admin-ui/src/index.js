@@ -1,63 +1,36 @@
 
-import React from 'react';
-import ReactDOM from 'react-dom';
+import Application from '@ui.packages/application';
+import { notificationReducer } from '@ui.packages/notifications';
+import { dialogReducer } from '@ui.packages/dialog';
 
-import thunk from 'redux-thunk';
-import { Provider } from 'react-redux';
-import { Router } from 'react-router';
-import { routerMiddleware } from 'react-router-redux';
-import createSocketIoMiddleware from 'redux-socket.io';
-
-import createSocketIO from '@ui.packages/socket';
-import { middleware as requestMiddleware } from '@ui.packages/request';
-
-import createHistory from './bin/createRouter';
-import createStore, { importReducer }  from './bin/createStore';
+import { reducer as formReducer } from 'redux-form';
 
 import routes from './configs/routes';
 import navigate from './configs/navigate';
 
-import App from "./components/Application/components";
+import Empty from './wrappers/Empty';
+import Navigate from './wrappers/Navigate';
+import Composite from './wrappers/Composite';
 
 import './styles/index.module.scss';
 
-import * as serviceWorker from './serviceWorker';
 
+try {
+  const app = new Application({
+    routes,
+    navigate,
+    portal: document.getElementById('root'),
+    reducers: {
+      form: formReducer,
+      dialog: dialogReducer,
+      notifications: notificationReducer,
+    },
+    wrappers: { Empty, Navigate, Composite },
+  });
 
-const socket = createSocketIO(process.env['REACT_APP_SOCKET_HOST'], {
-  path: process.env['REACT_APP_SOCKET_PATH'],
-});
+  app.start();
+}
+catch (error) {
 
-const history = createHistory();
-const store = createStore({},
-  thunk,
-  routerMiddleware(history),
-  createSocketIoMiddleware(socket),
-  requestMiddleware({
-    host: process.env['REACT_APP_API_HOST'],
-    silent: false,
-  })
-);
-
-
-(async () => {
-
-  await importReducer('Application');
-  await importReducer('Module');
-  await importReducer('Page');
-
-  ReactDOM.render(
-    <Provider store={store}>
-      <Router history={history}>
-        <App
-          routes={routes}
-          navigate={navigate}
-        />
-      </Router>
-    </Provider>
-  , document.querySelector('#root'));
-
-  serviceWorker.unregister();
-})();
-
-
+  console.error(error);
+}

@@ -4,6 +4,6 @@
   "private": true,
   "main": "./src/index.js",
   "dependencies": {
-    "socket.io-client": "3.0.1"
+    "socket.io-client": "3.0.4"
   }
 }

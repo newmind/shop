@@ -1,10 +1,10 @@
-'use strict';
 
 import SocketIO from 'socket.io-client';
 
 
 let socket = null;
 let room = null;
+
 
 export default (host, options) => {
   socket = SocketIO(host, {

@@ -1,5 +1,5 @@
 {
-  "name": "admin-gw",
+  "name": "admin-gateway",
   "license": "MIT",
   "version": "1.0.0",
   "scripts": {
@@ -17,7 +17,7 @@
     "@sys.packages/server": "1.0.0",
     "@sys.packages/socket.io": "1.0.0",
     "@sys.packages/sys.utils": "1.0.0",
-    "axios": "0.21.0",
+    "axios": "0.21.1",
     "busboy": "0.3.1",
     "dotenv": "8.2.0",
     "koa-cookie": "1.0.0"

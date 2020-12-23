@@ -1,6 +1,6 @@
 
-import React, { lazy, Suspense, useContext } from 'react';
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { Routes, Route } from 'react-router-dom';
+import React, { useContext, useEffect } from 'react';
 
 import Error from '../Error';
 
@@ -13,28 +13,32 @@ function checkNotFound(routes) {
 
 function Router() {
   const { routes, wrappers } = useContext(ApplicationContext);
+
   const hasNotFound = checkNotFound(routes);
 
-  return (
-    <BrowserRouter>
-      <Routes>
-        {routes.map((route, index) => {
-          const Module = wrappers[route['wrapper']] || null;
-          const Children = lazy(() => route['module']);
+  useEffect(() => {
+    console.log('router mount')
+    return () => {
+      console.log('router destroy')
+    }
+  }, []);
 
-          return (
-            <Route key={index} path={route['path']} element={(
-              <Module>
-                <Suspense fallback={null}>
-                  <Children />
-                </Suspense>
-              </Module>
-            )} />
-          );
-        })}
-        { ! hasNotFound && <Route path="*" element={<Error />} />}
-      </Routes>
-    </BrowserRouter>
+  return (
+    <Routes>
+      {routes.map((route, index) => {
+        const Wrapper = wrappers[route['wrapper']] || null;
+        const Module = route['Module'];
+
+        return (
+          <Route key={index} path={route['path']} element={(
+            <Wrapper>
+              <Module />
+            </Wrapper>
+          )} />
+        );
+      })}
+      { ! hasNotFound && <Route path="*" element={<Error />} />}
+    </Routes>
   );
 }
 

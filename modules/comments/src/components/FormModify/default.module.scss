@@ -1,0 +1,17 @@
+
+@import "../../../../../node_modules/@ui.packages/theme";
+
+
+.form {
+
+  display: flex;
+  flex: 1 0;
+  flex-direction: column;
+  width: 280px;
+}
+
+.controls {
+
+  text-align: center;
+  margin: 10px 0 0;
+}
