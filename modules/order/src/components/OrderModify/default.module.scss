@@ -8,65 +8,44 @@
   padding: 40px 20px;
 }
 
-.block {
-
-  display: block;
-
-
-  & + & {
-
-    margin: 60px 0 0;
-  }
-
-  &__header {
-
-    display: block;
-    font: 14px "Istok Web", sans-serif;
-    font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-    color: $coal-dark;
-    padding: 0 0 4px 20px;
-  }
-
-  &__content {
-
-    display: block;
-    margin: 10px 0 0;
-    border: 1px solid $pale-lilac;
-    border-radius: 15px;
-    padding: 40px 40px 80px;
-
-    &--no-border {
-
-      border: none;
-      padding: 0;
-    }
-  }
-}
-
-.list {
-
-  display: block;
-
-  &__item {
-
-    display: block;
-    font: 14px "Istok Web", sans-serif;
-
-    & + & {
-
-      margin: 10px 0 0;
-    }
-  }
-}
-
-.row {
+.section {
 
   display: block;
 
   & + & {
-
-    margin: 120px 0 0;
+    margin: 80px 0 0;
   }
+}
+
+.header {
+
+  display: block;
+  font-family: inherit;
+  font-weight: 700;
+  font-size: 14px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: $coal-dark;
+  padding: 0 0 0 38px;
+}
+
+.content {
+
+  display: block;
+  margin: 25px 0 0;
+  border: 1px solid $pale-lilac;
+  border-radius: 15px;
+  padding: 60px 80px 110px 80px;
+
+  &--no-border {
+
+    border: none;
+    padding: 0;
+  }
+}
+
+.controls {
+
+  display: block;
+  margin: 80px 0 0;
 }

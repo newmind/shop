@@ -13,8 +13,9 @@
 
   display: block;
   margin: 80px 0 20px;
-  font: 100px "Arial", sans-serif;
+  font-family: inherit;
   font-weight: 700;
+  font-size: 100px;
   text-align: center;
   color: $blue-grey;
 }
@@ -23,7 +24,9 @@
 
   display: block;
   margin: 0 0 20px;
-  font: 20px "Arial", sans-serif;
+  font-family: inherit;
+  font-weight: 300;
+  font-size: 20px;
   text-align: center;
   color: $blue-grey;
 }
@@ -31,7 +34,9 @@
 .description {
 
   display: block;
-  font: 14px "Arial", sans-serif;
+  font-family: inherit;
+  font-weight: 300;
+  font-size: 14px;
   text-align: center;
   color: $dark-grey;
 

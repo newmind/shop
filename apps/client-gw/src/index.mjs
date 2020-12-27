@@ -17,7 +17,7 @@ import rabbit from './rabbit';
 
 (async () => {
   try {
-    appServer.use(middlewareErrors);
+    appServer.use(middlewareErrors());
 
     appServer.use(koaCORS({
       credentials: true,

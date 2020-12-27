@@ -1,5 +1,6 @@
 
-import numeral from "@ui.packages/numeral";
+import numeral from "@packages/numeral";
+
 import { Gallery } from "@ui.packages/kit";
 import { Confirm } from "@ui.packages/dialog";
 

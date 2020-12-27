@@ -1,5 +1,6 @@
 
-import numeral from "@ui.packages/numeral";
+import numeral from "@packages/numeral";
+
 import { Dialog, Confirm } from "@ui.packages/dialog";
 import { Radio, RadioBoxField, Gallery } from "@ui.packages/kit";
 

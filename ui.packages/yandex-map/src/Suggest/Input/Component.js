@@ -7,12 +7,12 @@ import cn from "classnames";
 import styles from './defaults.module.scss';
 
 
-function Suggest({ change, input: { name, onFocus, onBlur, ...input }, meta: { form, touched }, label, disabled }) {
+export default function Suggest({ change, input: { name, onFocus, onBlur, ...input }, meta: { form, touched }, label, disabled }) {
   const [error, setError] = useState(null);
   const [hint, setHint] = useState(null);
   const [isChange, setChange] = useState(null);
 
-  const suggestView = null;
+  let suggestView = null;
 
   useEffect(() => {
     if ( ! ymaps) {
@@ -33,7 +33,7 @@ function Suggest({ change, input: { name, onFocus, onBlur, ...input }, meta: { f
       }
       suggestView.destroy();
     };
-  });
+  }, []);
 
   function handleChange(value) {
     change(form, name, value);
@@ -102,5 +102,3 @@ function Suggest({ change, input: { name, onFocus, onBlur, ...input }, meta: { f
     </div>
   );
 }
-
-export default Component;

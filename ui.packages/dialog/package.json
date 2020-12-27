@@ -9,6 +9,7 @@
   },
   "dependencies": {
     "@ui.packages/kit": "1.0.0",
+    "@ui.packages/types": "1.0.0",
     "@ui.packages/theme": "1.0.0",
     "classnames": "2.2.6",
     "prop-types": "15.7.2",

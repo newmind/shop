@@ -2,7 +2,6 @@
 import { Dialog } from '@ui.packages/dialog';
 
 import React from 'react';
-import types from 'prop-types';
 
 import FastView from "./FastView";
 
@@ -28,15 +27,13 @@ export default function Showcase() {
         <Paging />
       </div>
 
-      <Dialog name="fast-view-product" title="Быстрый просмотр">
+      <Dialog name="fast-view-product">
         <FastView />
       </Dialog>
     </section>
   );
 }
 
-Showcase.propTypes = {
-  addProductToCart: types.func,
-};
+Showcase.propTypes = {};
 
 Showcase.defaultProps = {};

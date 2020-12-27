@@ -34,12 +34,14 @@ export const getProductById = (id) => async (dispatch) => {
       url: `/products/${id}`
     });
 
+    console.log(data)
+
     dispatch(getProductByIdRequestSuccess(data));
 
     return data;
   }
   catch(error) {
-
+console.log(error)
     dispatch(getProductByIdRequestFail(error));
   }
 };

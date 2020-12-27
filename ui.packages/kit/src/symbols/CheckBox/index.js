@@ -1,39 +1,40 @@
 
-import types from 'prop-types';
+import { Mode } from '@ui.packages/types';
+
 import React from 'react';
+import types from 'prop-types';
 
 import cn from 'classnames';
 import styles from './default.module.scss';
 
 
-const PRIMARY_MODE = 'primary';
-const INFO_MODE = 'info';
-const WARNING_MODE = 'warning';
-const DANGER_MODE = 'danger';
-const SUCCESS_MODE = 'success';
-
-
-function Checkbox({ className, disabled, mode, value, label, onChange }) {
+export default function Checkbox({ className, disabled, mode, value, label, onChange }) {
   function handleClick() {
     onChange && onChange( ! value);
   }
 
-  const classNameButton = cn(className, styles['checkbox'], {
-    [styles['checkbox--primary']]: mode === PRIMARY_MODE,
-    [styles['checkbox--success']]: mode === SUCCESS_MODE,
-    [styles['checkbox--info']]: mode === INFO_MODE,
-    [styles['checkbox--danger']]: mode === DANGER_MODE,
-    [styles['checkbox--warning']]: mode === WARNING_MODE,
-    [styles['checkbox--disabled']]: disabled,
+  const classNameCheckbox = cn(className, styles['checkbox'], {
     [styles['checkbox--checked']]: value,
+  }, {
+    [styles['disabled']]: disabled,
+  }, {
+    [styles['mode--info']]: mode === Mode.INFO,
+    [styles['mode--danger']]: mode === Mode.DANGER,
+    [styles['mode--primary']]: mode === Mode.PRIMARY,
+    [styles['mode--success']]: mode === Mode.SUCCESS,
+    [styles['mode--warning']]: mode === Mode.WARNING,
   });
 
   return (
     <div className={styles['wrapper']} onClick={handleClick}>
-      <span className={classNameButton}>
-        {value && <span className={cn(styles['checkbox__marker'], 'fas fa-check')} />}
+      <span className={classNameCheckbox}>
+        {value && (
+          <span className={cn(styles['checkbox__marker'], 'fas fa-check')} />
+        )}
       </span>
-      {label && <label className={styles['label']}>{ label }</label>}
+      {label && (
+        <span className={styles['label']}>{ label }</span>
+      )}
     </div>
   );
 }
@@ -41,17 +42,15 @@ function Checkbox({ className, disabled, mode, value, label, onChange }) {
 Checkbox.propTypes = {
   className: types.string,
   label: types.string,
-  mode: types.oneOf(['info', 'primary', 'danger', 'warning', 'success', 'default']),
+  mode: types.oneOf([Mode.INFO, Mode.PRIMARY, Mode.DANGER, Mode.WARNING, Mode.SUCCESS, Mode.DEFAULT]),
   disabled: types.bool,
   value: types.bool,
   onChange: types.func,
 };
 
 Checkbox.defaultProps = {
-  mode: 'default',
+  mode: Mode.DEFAULT,
   disabled: false,
   value: false,
   label: null,
 };
-
-export default Checkbox;

@@ -18,7 +18,9 @@
 
   &__title {
 
-    font: 700 16px "Istok Web";
+    font-family: inherit;
+    font-weight: 700;
+    font-size: 16px;
   }
 }
 
@@ -34,7 +36,9 @@
   &__line {
 
     display: block;
-    font: 14px "Istok Web";
+    font-family: inherit;
+    font-weight: 300;
+    font-size: 14px;
 
     & + & {
 
@@ -51,14 +55,18 @@
   &__value {
 
     display: inline-block;
-    font: 700 14px "Istok Web";
+    font-family: inherit;
+    font-weight: 700;
+    font-size: 14px;
     color: $black;
   }
 
   &__currency {
 
     display: inline-block;
-    font: 14px "Istok Web";
+    font-family: inherit;
+    font-weight: 300;
+    font-size: 14px;
     color: $black;
     margin: 0 0 0 8px;
   }

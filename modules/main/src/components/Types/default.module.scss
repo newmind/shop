@@ -13,7 +13,9 @@
 
   display: block;
   margin: 0 0 60px;
-  font: 700 22px "Exo 2";
+  font-family: inherit;
+  font-weight: 700;
+  font-size: 22px;
   letter-spacing: .5px;
   text-align: center;
 }
@@ -92,7 +94,9 @@
   &__text {
 
     display: block;
-    font: 500 16px "Istok Web";
+    font-family: inherit;
+    font-weight: 500;
+    font-size: 16px;
     color: $white;
     padding: 15px 20px 10px;
     text-align: center;

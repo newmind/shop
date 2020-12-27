@@ -11,8 +11,9 @@
 .header {
 
   display: block;
-  font: 14px "Istok Web", sans-serif;
+  font-family: inherit;
   font-weight: 700;
+  font-size: 14px;
   text-transform: uppercase;
   letter-spacing: 1px;
   color: $coal-dark;
@@ -32,7 +33,9 @@
 .line {
 
   display: block;
-  font: 14px "Istok Web", sans-serif;
+  font-family: inherit;
+  font-weight: 300;
+  font-size: 14px;
 
   & + & {
 

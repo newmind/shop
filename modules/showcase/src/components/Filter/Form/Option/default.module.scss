@@ -7,7 +7,8 @@
   display: flex;
   flex-direction: row;
   flex: 1 0;
-  padding: 10px 4px 7px 14px;
+  padding: 12px 4px 12px 14px;
+  align-items: flex-end;
 }
 
 .title {
@@ -21,7 +22,9 @@
 .text {
 
   display: block;
-  font: 14px "Istok Web", sans-serif;
+  font-family: inherit;
+  font-weight: 300;
+  font-size: 14px;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -34,7 +37,9 @@
 .count {
 
   display: block;
-  font: 12px "Istok Web", sans-serif;
+  font-family: inherit;
+  font-weight: 300;
+  font-size: 12px;
   font-style: italic;
   margin: 0 0 0 12px;
   color: $blue-grey;

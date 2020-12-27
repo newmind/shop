@@ -78,7 +78,9 @@
 
   display: inline-block;
   color: $black;
-  font: 14px "Istok Web", sans-serif;
+  font-family: inherit;
+  font-weight: 300;
+  font-size: 14px;
   outline: none;
   width: 100%;
   box-sizing: border-box;
@@ -91,7 +93,9 @@
 
   display: inline-block;
   color: $blue-grey;
-  font: 14px "Istok Web", sans-serif;
+  font-family: inherit;
+  font-weight: 300;
+  font-size: 14px;
   outline: none;
   width: 100%;
   box-sizing: border-box;
@@ -107,7 +111,9 @@
   &__caption {
 
     display: inline-block;
-    font: 14px "Istok Web", sans-serif;
+    font-family: inherit;
+    font-weight: 300;
+    font-size: 14px;
     background: $success;
     padding: 4px 10px;
     border-radius: 4px;

@@ -30,7 +30,7 @@ function getSortedProducts(fields) {
   });
 }
 
-function Products({ fields }) {
+export default function Products({ fields }) {
   const products = getSortedProducts(fields);
 
   return (
@@ -70,5 +70,3 @@ Products.propTypes = {
 Products.defaultProps = {
   fields: {},
 };
-
-export default Products;

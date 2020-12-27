@@ -5,35 +5,44 @@
 .wrapper {
 
   display: inline-flex;
-  flex: 0;
+  flex: 1 0;
   flex-direction: row;
   align-items: center;
   cursor: pointer;
 }
 
+.wrapper:hover .checkbox {
+
+  border-color: $coal-dark;
+}
+
 .label {
 
   display: inline-block;
-  font: 13px "Istok Web", sans-serif;
+  font-family: inherit;
+  font-weight: 300;
+  font-size: 14px;
   color: $coal-dark;
-  margin: 0 0 0 10px;
+  margin: 0 0 0 12px;
 }
 
 .checkbox {
 
   display: inline-flex;
   flex: 0 0 auto;
-  width: 16px;
-  height: 16px;
+  width: 20px;
+  height: 20px;
   border: 1px solid $gray;
-  border-radius: 2px;
+  border-radius: 5px;
   background: $white;
   color: $coal-dark;
   font-size: 0;
   outline: none;
   justify-content: center;
   align-items: center;
-  transition: background 400ms;
+  padding: 0 0 0 2px;
+  box-sizing: border-box;
+  transition: background 200ms, border 200ms;
 
   & + & {
     margin: 0 0 0 10px;
@@ -49,16 +58,18 @@
 
     display: inline-flex;
   }
+}
 
-  &--disabled {
+.disabled {
 
-    background: $pale-lilac;
-    border-color: $gray;
-    color: $gray;
-    text-shadow: -1px 1px 0 $white;
-    cursor: default;
-  }
+  background: $pale-lilac;
+  border-color: $gray;
+  color: $gray;
+  text-shadow: -1px 1px 0 $white;
+  cursor: default;
+}
 
+.mode {
   &--info {
 
     border-color: $information;

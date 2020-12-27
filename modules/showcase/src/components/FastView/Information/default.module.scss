@@ -1,0 +1,93 @@
+
+@import "~@ui.packages/theme";
+
+
+.wrapper {
+
+  display: block;
+  border-radius: 15px;
+  border: 1px solid $pale-lilac;
+  padding: 30px;
+  height: 100%;
+  box-sizing: border-box;
+}
+
+.uuid {
+
+  display: block;
+  margin: 0 0 16px;
+}
+
+.brand {
+
+  display: block;
+}
+
+.name {
+
+  display: block;
+  margin: 8px 0 0;
+}
+
+.amount {
+
+  display: block;
+  margin: 25px 0 0;
+}
+
+.controls {
+
+  display: block;
+  margin: 16px 0 0;
+}
+
+.buttons {
+
+  display: block;
+}
+
+.remove {
+
+  display: inline-block;
+  font-size: 16px;
+  padding: 10px;
+  margin: 0 0 0 10px;
+  color: $gray;
+  vertical-align: middle;
+  cursor: pointer;
+  transition: color 200ms;
+
+  &:hover {
+
+    color: $danger;
+  }
+}
+
+.cart {
+
+  display: block;
+  padding: 10px 0 10px 2px;
+  font-family: inherit;
+  font-weight: 300;
+  font-size: 12px;
+  height: 12px;
+  color: $blue-grey;
+}
+
+.description {
+
+  display: block;
+  border-top: 1px solid $pale-lilac;
+  padding: 25px 0 0;
+}
+
+.header {
+
+  display: block;
+}
+
+.content {
+
+  display: block;
+  margin: 12px 0 0;
+}

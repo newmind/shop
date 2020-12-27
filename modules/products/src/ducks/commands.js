@@ -1,5 +1,6 @@
 
-import moment from '@ui.packages/moment';
+import moment from '@packages/moment';
+
 import request from '@ui.packages/request';
 import { pushNotification } from '@ui.packages/notifications';
 

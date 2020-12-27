@@ -1,311 +1,210 @@
 
+import React, { useRef, useState, useEffect, useLayoutEffect } from 'react';
 import types from 'prop-types';
-import React, { useRef, useEffect, useLayoutEffect, useState } from 'react';
 
-import Option from './Option';
+import Control from './Control';
+import Options from './Options';
 
-import cn from 'classnames';
+import Context from './Context';
+
 import styles from './default.module.scss';
 
 
-const INFO_MODE = 'info';
-const DANGER_MODE = 'danger';
-const WARNING_MODE = 'warning';
-const SUCCESS_MODE = 'success';
-const PRIMARY_MODE = 'primary';
+function useIsOptionObject(options) {
+  if (options[0]) {
+    if (options[0] instanceof Object) {
+      return true;
+    }
+  }
+  return false;
+}
 
+function useFindSelectedValue(value, options, optionKey) {
+  if (value instanceof Object) {
+    return options.find(option => option[optionKey] === value[optionKey]);
+  }
+
+  const isOptionObject = useIsOptionObject(options);
+
+  if (isOptionObject) {
+    return options.find(option => {
+      return option[optionKey] === value
+    });
+  }
+  return options.find(option => option === value);
+}
+
+function useGetValue(value, options, optionKey, optionValue) {
+  const selectedValue = useFindSelectedValue(value, options, optionKey);
+  if (selectedValue instanceof Object) {
+    return selectedValue[optionValue];
+  }
+  return value;
+}
 
 function Select({
-                  className,
-                  clearable,
-                  mode,
-                  value,
-                  placeholder,
-                  optionKey,
-                  simple,
-                  options,
-                  disabled,
-                  optionValue,
-                  valueTransform,
-                  calculateTooltipPosition,
-                  optionTransform,
-                  optionTemplate,
-                  onBlur,
-                  onFocus,
-                  onChange,
+  simple,
+  disabled,
+  options,
+  value,
+  placeholder,
+  optionKey,
+  optionValue,
+  inProcess,
+  OptionTemplate,
+  transformValue,
+  onChange,
+  onBlur,
+  onTransformSelectedValue,
 }) {
-  const selectRef = useRef(null);
+  const wrapperRef = useRef(null);
   const optionsRef = useRef(null);
-
   const [isOpen, setOpen] = useState(false);
-  const [isFocus, setFocus] = useState(false);
-  const [isValue, setValue] = useState(value);
+  const [selectedValue, setSelectedValue] = useState(null);
 
-  useEffect(() => {
-    function eventReset(event) {
-      const { current: selectElement } = selectRef;
-      const target = event.target;
-      if (selectElement && ! selectElement.contains(target)) {
-        isOpen && handleOnBlur();
-      }
-    }
+  useEffect(function changeValue() {
+    setSelectedValue(useGetValue(value, options, optionKey, optionValue));
+  }, [value, options]);
 
-    function eventHandleScrolling() {
+  useEffect(function clickEvents() {
+    function handleClick(event) {
+      event.preventDefault();
+      event.stopPropagation();
+
       if (isOpen) {
-        handleOnBlur();
+        const { current: wrapperElement } = wrapperRef;
+        const portalElement = document.querySelector('#selectOptionsPortal');
+        const { current: optionsElement } = optionsRef;
+
+        if (optionsElement && ! optionsElement.contains(event['target'])) {
+          handleClose();
+        }
+
+        if (portalElement && ! portalElement.contains(event['target']) && ! portalElement.contains(wrapperElement)) {
+          handleClose();
+        }
       }
     }
 
-    function eventHandleResize() {
-      if (isOpen) {
-        handleOnBlur();
-        calculateTooltipPosition();
-      }
-    }
-
-    window.addEventListener('click', eventReset);
-    window.addEventListener('resize', eventHandleResize);
-    document.querySelector('#root').addEventListener('scroll', eventHandleScrolling);
-
-    return () => {
-      window.removeEventListener('click', eventReset);
-      window.removeEventListener('resize', eventHandleResize);
-      document.querySelector('#root').removeEventListener('scroll', eventHandleScrolling);
+    document.addEventListener('click', handleClick);
+    document.querySelector('#root').addEventListener('scroll', handleClose);
+    return function() {
+      document.removeEventListener('click', handleClick);
+      document.querySelector('#root').removeEventListener('scroll', handleClose);
     };
   });
 
-  useLayoutEffect(() => {
-    // isOpen && calculateDirection();
-  }, [isOpen]);
+  useLayoutEffect(function openSelect() {
+    if (isOpen) {
+      calculatePositionOptions();
+    }
+  }, [value, options, isOpen]);
 
-  // function calculateDirection() {
-  //   const { current: selectElement } = selectRef;
-  //   const { current: optionsElement } = optionsRef;
-  //
-  //   const selectRECT = selectElement.getBoundingClientRect();
-  //   const optionsRECT = optionsElement.getBoundingClientRect();
-  //   const viewportRECT = document.body.getBoundingClientRect();
-  //
-  //   if ( ! isDirectUp && optionsRECT['bottom'] + 20 >= viewportRECT['bottom']) {
-  //     if (optionsRECT['bottom'] + 50 >= viewportRECT['bottom']) {
-  //       setDirectUp(true);
-  //       optionsElement.style['top'] = 'auto';
-  //       optionsElement.style['bottom'] = viewportRECT['bottom'] - selectRECT['top'] + 4 + 'px';
-  //     }
-  //   }
-  //
-  //   if ( ! isDirectUp && optionsRECT['bottom'] + 20 <= viewportRECT['bottom']) {
-  //     optionsElement.style['top'] = selectRECT['bottom'] + 'px';
-  //   }
-  // }
-
-  function handleSetFocus() {
-    const { current: selectElement } = selectRef;
+  function calculatePositionOptions() {
+    const { current: wrapperElement } = wrapperRef;
     const { current: optionsElement } = optionsRef;
 
-    const selectRect = selectElement.getBoundingClientRect();
+    const wrapperRect = wrapperElement.getBoundingClientRect();
 
-    optionsElement.style['width'] = selectRect['width'] + 'px';
-    setFocus(true);
-    onFocus && onFocus();
+    optionsElement.style.left = wrapperRect['left'] + 'px';
+    optionsElement.style.top = wrapperRect['bottom'] + 'px';
+    optionsElement.style.width = wrapperRect['width'] + 'px';
   }
 
-  function applyValue(value) {
-    if (value instanceof Object) {
-      if (simple) {
-        return value[optionKey];
-      } else {
-        return value;
-      }
-    } else {
-      return value;
-    }
-  }
-
-  function getValue(value) {
-    const option = options.find((option) => {
-      if (simple) {
-        return (option[optionKey] === value);
-      }
-      return (option[optionKey] === value[optionKey]) && (option[optionValue] === value[optionValue]);
-    });
-
-    if (option) {
-      if (valueTransform) {
-        return valueTransform(option);
-      }
-      else if (value instanceof Object) {
-        return option[optionValue];
-      } else {
-        if (simple) {
-          return option[optionValue];
-        }
-        return option;
-      }
-    } else {
-      return null;
-    }
-  }
-
-  function handleOnFocus() {
-    if (disabled) {
-      return void 0;
-    }
-
-    if ( ! isFocus) {
-      setOpen(true);
-      handleSetFocus();
-    }
-  }
-
-  function handleOnBlur() {
+  function handleClose() {
     setOpen(false);
-    setDirectUp(false);
-    onBlur && onBlur();
+    onBlur();
   }
 
-  function handleOnChange(option) {
-    setOpen(false);
-    setDirectUp(false);
-    onChange && onChange(applyValue(option));
+  function handleControlClick() {
+    setOpen( ! isOpen);
   }
 
-  function handleInputOnChange(event) {
-    setValue(isValue);
+  function handleResetClick() {
+    onChange(null);
+    handleClose();
   }
 
-  function handleResetValue() {
-    if (disabled) {
-      return void 0;
+  function handleSelectValue(option) {
+    if (option instanceof Object) {
+      onChange(simple ? option[optionKey] : option);
     }
-    setOpen(false);
-    setDirectUp(false);
-    onChange && onChange(null);
+    else {
+      onChange(option);
+    }
+    handleClose();
   }
-
-  function renderValue() {
-    const selectedValue = (isValue && getValue(isValue)) || null;
-
-    return (
-      <span className={styles['select__values']}>
-        {selectedValue
-          ? (<span className={styles['select__value']}>
-              <span className={styles['select__text']}>{ selectedValue }</span>
-            </span>)
-          : (<span className={styles['select__placeholder']}>
-              <span className={styles['select__text']}>{ placeholder }</span>
-            </span>)
-        }
-      </span>
-    );
-  }
-
-  function renderCancel() {
-    const classNameMarker = cn(styles['select__marker'], 'fas fa-times');
-
-    return clearable && (
-      <span className={styles['select__cross']} onClick={handleResetValue}>
-        <span className={classNameMarker}/>
-      </span>
-    );
-  }
-
-  function renderMarker() {
-    const classNameMarker = cn(styles['select__marker'], {
-      'fas fa-angle-down': ! isOpen,
-      'fas fa-angle-up': isOpen,
-    });
-
-    return (
-      <span className={styles['select__angle']}>
-        <span className={classNameMarker} />
-      </span>
-    );
-  }
-
-  const classNameSelectWrapper = cn(className, styles['wrapper'], {
-    [styles['wrapper--primary']]: mode === PRIMARY_MODE,
-    [styles['wrapper--success']]: mode === SUCCESS_MODE,
-    [styles['wrapper--info']]: mode === INFO_MODE,
-    [styles['wrapper--danger']]: mode === DANGER_MODE,
-    [styles['wrapper--warning']]: mode === WARNING_MODE,
-  });
-  const classNameSelect = cn(styles['select'], {
-    [styles['select--is-focus']]: isOpen,
-    [styles['select--disabled']]: disabled,
-  });
 
   return (
-    <div className={classNameSelectWrapper}>
-      <div ref={selectRef} className={classNameSelect}>
-        <div className={styles['select__container']} tabIndex={0} onClick={handleOnFocus}>
-          <span className={styles['select__content']}>
-            { renderValue() }
-          </span>
-          <span className={styles['select__controls']}>
-            { !! value && renderCancel() }
-            { renderMarker() }
-          </span>
-        </div>
+    <Context.Provider value={{
+      simple,
+      value,
+      isOpen,
+      isDisabled: disabled || inProcess,
+      selectedValue,
+      optionValue,
+      optionKey,
+      OptionTemplate,
+      options,
+      inProcess,
+      transformValue,
+      selectedObject: useFindSelectedValue(value, options, optionKey),
+      onTransformSelectedValue,
+    }}>
+      <div ref={wrapperRef} className={styles['wrapper']}>
+        <Control
+          value={value}
+          placeholder={placeholder}
+          isDisabled={disabled || inProcess}
+          onClick={handleControlClick}
+          onReset={handleResetClick}
+        />
         {isOpen && (
-          <div ref={optionsRef} className={styles['options']}>
-            <div className={styles['options__content']}>
-              {options.map((option, key) => (
-                <Option
-                  key={key}
-                  value={value}
-                  option={option}
-                  optionKey={optionKey}
-                  optionValue={optionValue}
-                  optionTransform={optionTransform}
-                  optionTemplate={optionTemplate}
-                  onCheck={handleOnChange}
-                />
-              ))}
-            </div>
-          </div>
-
+          <Options
+            ref={optionsRef}
+            options={options}
+            optionKey={optionKey}
+            optionValue={optionValue}
+            value={value}
+            onClick={handleSelectValue}
+          />
         )}
       </div>
-    </div>
+    </Context.Provider>
   );
 }
 
 Select.propTypes = {
-  className: types.string,
-  defaultKey: types.any,
-  label: types.string,
   simple: types.bool,
-  clearable: types.bool,
-  message: types.string,
-  mode: types.oneOf(['info', 'primary', 'danger', 'warning', 'success', 'default']),
-  disabled: types.bool,
-  value: types.any,
-  options: types.array,
   optionKey: types.string,
   optionValue: types.string,
   placeholder: types.string,
-  valueTransform: types.func,
-  optionTransform: types.func,
-  optionTemplate: types.func,
-  onChange: types.func,
+  options: types.array,
+  value: types.oneOfType([types.string, types.object, types.number]),
+  disabled: types.bool,
+  inProcess: types.bool,
+  transformValue: types.func,
   onFocus: types.func,
+  onChange: types.func,
   onBlur: types.func,
+  OptionTemplate: types.elementType,
+  onTransformSelectedValue: types.func,
+  onTransformOptionValue: types.func,
 };
 
 Select.defaultProps = {
-  className: '',
-  label: '',
-  simple: false,
-  clearable: true,
-  message: '',
-  mode: 'default',
-  disabled: false,
-  options: [],
+  simple: true,
   optionKey: 'id',
   optionValue: 'value',
-  value: '',
-  placeholder: 'Выбери значение'
+  placeholder: 'Выбери значение',
+  disabled: true,
+  value: null,
+  options: [],
+  inProcess: false,
+  transformValue: null,
+  OptionTemplate: null,
+  onTransformSelectedValue: null,
+  onTransformOptionValue: null,
 };
 
 export default Select;

@@ -1,51 +1,79 @@
 
-import { Row, Col } from "@ui.packages/kit";
+import numeral from "@packages/numeral";
 
+import { Button, Header, Text } from "@ui.packages/kit";
+import { selectItems } from '@ui.packages/cart';
+
+import React from 'react';
 import types from "prop-types";
-import { FieldArray } from "redux-form";
-import React, { lazy, Suspense } from 'react';
+// import { FieldArray } from "redux-form";
+import { useSelector } from 'react-redux';
 
-import cn from 'classnames';
+// import Products from './Products';
+import Details from './Details';
+
+// import cn from 'classnames';
 import styles from "./default.module.scss";
 
 
-const Products = lazy(() => import(/* webpackChunkName: "order.products" */'./Products'));
-const Details = lazy(() => import(/* webpackChunkName: "order.details" */'./Details'));
-const Empty = lazy(() => import(/* webpackChunkName: "order.empty" */'./Empty'));
+const calculateFullAmount = (products) => {
+  let fullAmount = 0;
+  for (let index in products) {
+    if (products.hasOwnProperty(index)) {
+      const product = products[index];
+      fullAmount += product['amount'];
+      if ('lens' in product) {
+        const lens = product['lens'];
+        for (let key in lens) {
+          if (lens.hasOwnProperty(key)) {
+            const position = lens[key];
+            if (position) {
+              fullAmount += position['coast'];
+            }
+          }
+        }
+      }
+    }
+  }
+  return fullAmount;
+};
 
+export default function OrderModify({ handleSubmit }) {
+  const items = useSelector(selectItems);
 
-export default function OrderModify({ items, handleSubmit }) {
-  const hasProducts = !! Object.keys(items).length;
+  console.log(items)
 
   return (
-    <form onSubmit={handleSubmit}>
-      <Row className={styles['row']}>
-        <Col>
-          <h2 className={styles['block__header']}>Выбранные товары</h2>
-          <div className={cn(styles['block__content'], styles['block__content--no-border'])}>
-            <Suspense fallback={null}>
-              {hasProducts
-                ? <FieldArray name="items" component={Products} />
-                : <Empty />}
-            </Suspense>
+    <div className={styles['wrapper']}>
+      <form onSubmit={handleSubmit}>
+        <div className={styles['section']}>
+          <Header level={3}>Выбранные товары</Header>
+          <div className={styles['content']}>
+            {/*<FieldArray name="items" component={Products} />*/}
           </div>
-        </Col>
-      </Row>
-      <Row className={styles['row']}>
-        <Col>
-          <h2 className={styles['block__header']}>Оформление заказа</h2>
-          <div className={styles['block__content']}>
-            <Suspense fallback={null}>
-              <Details />
-            </Suspense>
+        </div>
+        <div className={styles['section']}>
+          <Header level={3}>Оформление заказа</Header>
+          <div className={styles['content']}>
+            <Details />
           </div>
-        </Col>
-      </Row>
-    </form>
+        </div>
+        <div className={styles['controls']}>
+          <Text>Нажимая на кнопку ”Оформить заказ”, Вы подтверждаете согласие на обработку "Персональных данных".</Text>
+          <Button type="submit" mode="success" size="l">
+            Оформить заказ на сумму { numeral(calculateFullAmount(items)).format() } руб.
+          </Button>
+        </div>
+      </form>
+    </div>
   );
 }
 
 OrderModify.propTypes = {
   externalId: types.string,
   paymentLink: types.string,
+};
+
+OrderModify.defaultProps = {
+
 };

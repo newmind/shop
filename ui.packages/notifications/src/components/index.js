@@ -1,23 +1,36 @@
 
-import { bindActionCreators } from 'redux';
-import { connect } from 'react-redux';
+import React from 'react';
+import ReactDOM from 'react-dom';
+import { useSelector, useDispatch } from 'react-redux';
 
-import Component from './Component';
+import Notification from './Notification';
+import { selectNotifications, closeNotification } from '../ducks/slice';
 
-import { closeNotification } from '../ducks/commands';
+import styles from './defaults.module.scss';
 
 
-const mapStateToProps = state => ({
-  notifications: state['notifications']['notifications'],
-});
+function Notifications() {
+  const dispatch = useDispatch();
+  const notifications = useSelector(selectNotifications);
 
-const mapActionsToProps = (dispatch) => {
-  return {
-    closeNotification: bindActionCreators(closeNotification, dispatch),
-  };
-};
 
-export default connect(
-  mapStateToProps,
-  mapActionsToProps,
-)(Component);
+  function handleCloseByIndex(uuid) {
+    dispatch(closeNotification(uuid));
+  }
+
+  return ReactDOM.createPortal(
+    <div className={styles['notifications']}>
+      <div className={styles['notifications__content']}>
+        {notifications.map((notification) => (
+          <Notification key={notification['uuid']} {...notification} onClose={() => handleCloseByIndex(notification['uuid'])} />
+        ))}
+      </div>
+    </div>
+  , document.querySelector('#notification'));
+}
+
+Notifications.propTypes = {};
+
+Notifications.defaultProps = {};
+
+export default Notifications;

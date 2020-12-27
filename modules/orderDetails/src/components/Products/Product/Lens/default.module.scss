@@ -25,15 +25,18 @@
   &__label {
 
     display: inline-block;
-    font: 12px "Istok Web", sans-serif;
+    font-family: inherit;
+    font-weight: 700;
+    font-size: 12px;
     margin: 0 4px 0 0;
-    font-weight: bold;
   }
 
   &__value {
 
     display: inline-block;
-    font: 12px "Istok Web", sans-serif;
+    font-family: inherit;
+    font-weight: 300;
+    font-size: 12px;
     text-align: center;
   }
 }

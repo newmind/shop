@@ -8,7 +8,9 @@
   border: 1px solid $blue-grey;
   border-radius: 5px;
   color: $blue-grey;
-  font: 300 14px "Exo 2", sans-serif;
+  font-family: inherit;
+  font-weight: 300;
+  font-size: 14px;
   transition: color 200ms, border 200ms, background-color 200ms;
   overflow: hidden;
   cursor: pointer;

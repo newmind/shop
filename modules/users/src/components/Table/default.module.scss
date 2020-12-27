@@ -18,5 +18,7 @@
   text-overflow: ellipsis;
   white-space: nowrap;
   color: $coal-dark;
-  font: 500 14px 'Istok Web';
+  font-family: inherit;
+  font-weight: 500;
+  font-size: 14px;
 }

@@ -1,68 +1,52 @@
 
-import types from 'prop-types';
-import { Link } from 'react-router-dom';
+import { Mode, Size } from '@ui.packages/types';
+
 import React from 'react';
+import types from 'prop-types';
 
-import cn from 'classnames';
-import styles from './default.module.scss';
-
-
-const PRIMARY_MODE = 'primary';
-const INFO_MODE = 'info';
-const WARNING_MODE = 'warning';
-const DANGER_MODE = 'danger';
-const SUCCESS_MODE = 'success';
+import Default from './Default';
+import Context from "./Context";
+import Outline from './Outline';
+import Cart from './Cart';
 
 
-function Button({ type, href, className, caption, children, disabled, mode, size, onClick }) {
-  function handleClick() {
-    onClick && onClick();
+const TYPE_BUTTON = 'button';
+const TYPE_SUBMIT = 'submit';
+
+const FORM_DEFAULT = 'default';
+const FORM_CONTEXT = 'context';
+const FORM_OUTLINE = 'outline';
+const FORM_CART = 'cart';
+
+
+export default function ButtonFactory({ form, children, ...props }) {
+  switch(form) {
+    case FORM_DEFAULT: return <Default {...props}>{ children }</Default>;
+    case FORM_CONTEXT: return <Context {...props}>{ children }</Context>;
+    case FORM_OUTLINE: return <Outline {...props}>{ children }</Outline>;
+    case FORM_CART: return <Cart {...props}>{ children }</Cart>;
+    default: return <Default {...props}>{ children }</Default>;
   }
-
-  const classNameButton = cn(className, styles['button'], {
-    [styles['button--primary']]: mode === PRIMARY_MODE,
-    [styles['button--success']]: mode === SUCCESS_MODE,
-    [styles['button--info']]: mode === INFO_MODE,
-    [styles['button--danger']]: mode === DANGER_MODE,
-    [styles['button--warning']]: mode === WARNING_MODE,
-    [styles['button--disabled']]: disabled,
-  }, {
-    [styles['button--small']]: size === 's',
-    [styles['button--large']]: size === 'l',
-  });
-
-  if (type === 'link') {
-    return (
-      <Link className={classNameButton} to={href}>{ caption || children }</Link>
-    );
-  }
-
-  return (
-    <button type={type} className={classNameButton} onClick={handleClick} disabled={disabled}>
-      {caption || children}
-    </button>
-  );
 }
 
-Button.propTypes = {
+ButtonFactory.propTypes = {
   className: types.string,
-  href: types.string,
-  type: types.oneOf(['button', 'submit', 'link']),
-  mode: types.oneOf(['info', 'primary', 'danger', 'warning', 'success', 'default']),
-  size: types.oneOf(['s', 'm', 'l']),
-  caption: types.string,
+  type: types.oneOf([TYPE_BUTTON, TYPE_SUBMIT]),
+  form: types.oneOf([FORM_DEFAULT, FORM_CONTEXT, FORM_OUTLINE, FORM_CART]),
+  mode: types.oneOf([Mode.DEFAULT, Mode.INFO, Mode.PRIMARY, Mode.DANGER, Mode.WARNING, Mode.SUCCESS]),
+  size: types.oneOf([Size.SMALL, Size.MEDIUM, Size.LARGE]),
   children: types.any,
   disabled: types.bool,
   onClick: types.func,
 };
 
-Button.defaultProps = {
-  href: '#',
-  type: 'button',
-  mode: 'default',
-  caption: null,
+ButtonFactory.defaultProps = {
+  className: null,
+  form: FORM_DEFAULT,
+  type: TYPE_BUTTON,
+  mode: Mode.DEFAULT,
+  size: Size.MEDIUM,
   disabled: false,
-  children: 'Button'
+  children: 'Button',
+  onClick: null,
 };
-
-export default Button;

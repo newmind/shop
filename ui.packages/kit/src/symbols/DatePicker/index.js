@@ -1,5 +1,5 @@
 
-import moment from '@ui.packages/moment';
+import moment from '@packages/moment';
 
 import types from 'prop-types';
 import React, { useRef, forwardRef, useState, useEffect, useLayoutEffect } from 'react';

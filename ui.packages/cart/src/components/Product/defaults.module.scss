@@ -50,15 +50,18 @@
 
     display: block;
     text-align: right;
-    font: 13px "Istok Web", sans-serif;
+    font-family: inherit;
+    font-weight: 300;
+    font-size: 13px;
     color: $coal-dark;
   }
 
   &__brand {
 
     display: block;
-    font: 14px "Istok Web", sans-serif;
+    font-family: inherit;
     font-weight: 700;
+    font-size: 14px;
     color: $coal-dark;
 
     &-link {
@@ -70,7 +73,9 @@
   &__name {
 
     display: block;
-    font: 12px "Istok Web", sans-serif;
+    font-family: inherit;
+    font-weight: 300;
+    font-size: 12px;
     line-height: 1.4;
     color: $coal-dark;
     margin: 5px 0 0;

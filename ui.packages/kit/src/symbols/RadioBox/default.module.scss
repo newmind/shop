@@ -15,7 +15,9 @@
 .label {
 
   display: inline-block;
-  font: 14px "Istok Web", sans-serif;
+  font-family: inherit;
+  font-weight: 300;
+  font-size: 14px;
   color: $coal-dark;
   margin: 0 0 0 10px;
   vertical-align: middle;

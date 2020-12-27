@@ -8,8 +8,8 @@
   display: flex;
   flex-direction: row;
   flex: 0 0 auto;
-  padding: 30px 30px 25px 25px;
-  border-radius: 8px;
+  padding: 18px 30px 18px 20px;
+  border-radius: 5px;
   transform-origin: center center;
   animation-name: showing;
   animation-duration: 150ms;
@@ -38,8 +38,9 @@
   &__title {
 
     display: block;
-    font: 14px 'Helvetica Neue',sans-serif;
+    font-family: inherit;
     font-weight: 700;
+    font-size: 13px;
     letter-spacing: 1px;
     color: inherit;
   }
@@ -52,20 +53,21 @@
   &__content {
 
     display: block;
-    font: 13px 'Istok Web',sans-serif;
+    font-family: inherit;
+    font-weight: 300;
+    font-size: 13px;
     color: inherit;
   }
 
   &__close {
 
     position: absolute;
-    top: 11px;
-    right: 11px;
+    top: 10px;
+    right: 10px;
     display: block;
-    font-size: 16px;
+    font-size: 14px;
     color: inherit;
     cursor: pointer;
-    opacity: .6;
     transition: opacity 200ms;
 
     &:hover {
@@ -77,33 +79,52 @@
 
     margin: 10px 0 0;
   }
+}
 
+.mode {
   &--success {
-    border: 1px solid $success;
+    border-color: $success;
+    background: $success;
   }
-  &--success &__close {
-    color: $success;
+  &--success .notification__title,
+  &--success .notification__close {
+    color: $white;
   }
 
   &--danger {
-    border: 1px solid $danger;
+    border-color: $danger;
+    background: $danger;
   }
-  &--danger &__close {
-    color: $danger;
+  &--danger .notification__title,
+  &--danger .notification__close {
+    color: $white;
   }
 
   &--info {
-    border: 1px solid $information;
+    border-color: $information;
+    background: $information;
   }
-  &--info &__close {
-    color: $information;
+  &--info .notification__title,
+  &--info .notification__close {
+    color: $white;
   }
 
   &--primary {
-    border: 1px solid $primary;
+    border-color: $primary;
+    background: $primary;
   }
-  &--primary &__close {
-    color: $primary;
+  &--primary .notification__title,
+  &--primary .notification__close {
+    color: $white;
+  }
+
+  &--warning {
+    border-color: $warning;
+    background: $warning;
+  }
+  &--warning .notification__title,
+  &--warning .notification__close {
+    color: $white;
   }
 }
 

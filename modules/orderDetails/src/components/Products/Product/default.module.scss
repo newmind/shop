@@ -18,7 +18,9 @@
   &__name {
 
     display: block;
-    font: 14px "Istok Web", sans-serif;
+    font-family: inherit;
+    font-weight: 300;
+    font-size: 14px;
     color: $coal-dark;
   }
 }
@@ -48,7 +50,9 @@
 .uuid {
 
   display: block;
-  font: 12px "Istok Web", sans-serif;
+  font-family: inherit;
+  font-weight: 300;
+  font-size: 12px;
   text-align: center;
   color: rgba($gray, .6);
   margin: 6px 0 15px;
@@ -62,8 +66,9 @@
   &__link {
 
     display: inline-block;
-    font: 16px "Istok Web", sans-serif;
-    font-weight: bold;
+    font-family: inherit;
+    font-weight: 700;
+    font-size: 16px;
     color: $coal-dark;
     letter-spacing: .5px;
     vertical-align: middle;
@@ -73,8 +78,9 @@
 .name {
 
   display: inline-block;
-  font: 14px "Istok Web", sans-serif;
-  font-weight: normal;
+  font-family: inherit;
+  font-weight: 300;
+  font-size: 14px;
   color: $blue-grey;
   margin: 0 0 0 14px;
   vertical-align: middle;
@@ -84,7 +90,9 @@
 .type {
 
   display: block;
-  font: 14px "Istok Web", sans-serif;
+  font-family: inherit;
+  font-weight: 300;
+  font-size: 14px;
   color: $coal-dark;
   margin: 15px 0 0;
 }

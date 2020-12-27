@@ -12,13 +12,13 @@ export const cartSlice = createSlice({
   name: 'cart',
   initialState,
   reducers: {
-    openCart: (state) => {
+    openCart(state) {
       state['isOpen'] = true;
     },
-    closeCart: (state) => {
+    closeCart(state) {
       state['isOpen'] = false;
     },
-    addProductToCart: (state, { payload }) => {
+    addProductToCart(state, { payload }) {
       const { localStorage } = window;
       const item = {
         ...payload,
@@ -37,7 +37,7 @@ export const cartSlice = createSlice({
       state['items'] = newItems;
       localStorage.setItem('cart', JSON.stringify(newItems));
     },
-    removeProductFromCart: (state, { payload }) => {
+    removeProductFromCart(state, { payload }) {
       const itemIndex = state['items'].findIndex(item => item['uuid'] === payload);
       const newItems = [
         ...state['items'].slice(0, itemIndex),
@@ -47,11 +47,11 @@ export const cartSlice = createSlice({
       state['items'] = newItems;
       localStorage.setItem('cart', JSON.stringify(newItems));
     },
-    restoreCart: (state) => {
+    restoreCart(state) {
       const store = localStorage.getItem('cart');
-      state['items'] = JSON.parse(store);
+      state['items'] = JSON.parse(store) || [];
     },
-    resetCart: (state) => {
+    resetCart(state) {
       state['items'] = [];
       localStorage.clear();
     }

@@ -61,7 +61,9 @@
   &__label {
 
     display: block;
-    font: 14px "Istok Web", sans-serif;
+    font-family: inherit;
+    font-weight: 300;
+    font-size: 14px;
     margin: 0 15px 0 0;
     color: $coal-dark;
     transition: color 400ms;

@@ -14,7 +14,7 @@
     background: transparent;
     cursor: pointer;
     transition: color 400ms;
-    vertical-align: bottom;
+    vertical-align: middle;
 
     &:hover {
 
@@ -34,7 +34,7 @@
     text-decoration: none;
     color: inherit;
     outline: none;
-    padding: 14px 14px 20px 0;
+    padding: 14px 14px 14px 0;
   }
 
   &__home-text {
@@ -50,7 +50,7 @@
     cursor: pointer;
     transition: color 400ms;
     align-items: center;
-    vertical-align: bottom;
+    vertical-align: middle;
 
     &:before {
 
@@ -77,7 +77,7 @@
   &__link {
 
     display: block;
-    padding: 18px 14px 15px;
+    padding: 18px 14px;
     text-decoration: none;
     color: inherit;
     outline: none;
@@ -85,7 +85,9 @@
 
   &__text {
 
-    font: 16px "Istok Web", sans-serif;
+    font-family: inherit;
+    font-weight: 300;
+    font-size: 15px;
     color: inherit;
   }
 }

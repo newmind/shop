@@ -1,0 +1,104 @@
+
+@import "~@ui.packages/theme";
+
+
+.button {
+
+  display: inline-block;
+  padding: 9px 26px;
+  border: 1px solid $coal-dark;
+  border-radius: 5px;
+  cursor: pointer;
+  background: transparent;
+  color: $coal-dark;
+  font-family: inherit;
+  font-weight: 400;
+  font-size: 14px;
+  letter-spacing: .5px;
+  outline: none;
+  text-decoration: none;
+  transition: border 400ms, color 400ms;
+
+  & + & {
+    margin: 0 0 0 10px;
+  }
+
+  &:disabled,
+  &:disabled:hover {
+
+    border-color: $gray;
+    color: $pale-grey;
+    cursor: default;
+  }
+}
+
+.mode {
+  &--info {
+
+    border-color: $information;
+    color: $information;
+
+    &:hover {
+      border-color: darken($information, 10%);
+      color: darken($information, 10%);
+    }
+  }
+
+  &--primary {
+
+    border-color: $primary;
+    color: $primary;
+
+    &:hover {
+      border-color: darken($primary, 10%);
+      color: darken($primary, 10%);
+    }
+  }
+
+  &--success {
+
+    border-color: $success;
+    color: $success;
+
+    &:hover {
+      border-color: darken($success, 10%);
+      color: darken($success, 10%);
+    }
+  }
+
+  &--warning {
+
+    border-color: $warning;
+    color: $warning;
+
+    &:hover {
+      border-color: darken($warning, 10%);
+      color: darken($warning, 10%);
+    }
+  }
+
+  &--danger {
+
+    border-color: $danger;
+    color: $danger;
+
+    &:hover {
+      border-color: darken($danger, 10%);
+      color: darken($danger, 10%);
+    }
+  }
+}
+
+.size {
+  &--small {
+
+    font-size: 12px;
+    padding: 8px 12px;
+  }
+
+  &--large {
+
+    font-size: 16px;
+    padding: 16px 25px;
+  }
+}

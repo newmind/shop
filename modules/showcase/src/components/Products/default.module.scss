@@ -2,54 +2,35 @@
 @import "~@ui.packages/theme";
 
 
-.block {
+.wrapper {
 
   display: block;
+}
 
-  &__header {
+.header {
 
-    display: block;
-    font: 16px "Istok Web", sans-serif;
-    text-transform: uppercase;
-    letter-spacing: .5px;
-    color: $coal-dark;
-    padding: 0 0 4px;
-    margin: 0 0 60px;
-  }
+  display: block;
+  margin: 0 0 60px;
+}
 
-  &__content {
+.content {
 
-    display: block;
-  }
+  display: block;
+}
 
-  &__line {
+.list {
 
-    display: flex;
-    flex: 1 0 auto;
-    flex-direction: row;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  flex: 1 0;
+  margin: 0 -30px 0 0;
+}
 
-    & + & {
+.section {
 
-      margin: 70px 0 0;
-    }
-  }
-
-  &__col {
-
-    display: flex;
-    flex-direction: column;
-    flex: 1 0;
-
-    & + & {
-
-      margin: 0 0 0 35px;
-    }
-  }
-
-  &__controls {
-
-    display: block;
-    margin: 60px 0 90px;
-    text-align: center;
-  }
+  display: flex;
+  flex-direction: column;
+  flex: 0 1 320px;
+  margin: 0 30px 30px 0;
 }

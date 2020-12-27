@@ -40,35 +40,9 @@
 .message {
 
   display: block;
-  font: 14px "Istok Web", sans-serif;
+  font-family: inherit;
+  font-weight: 300;
+  font-size: 14px;
   color: $coal-dark;
   margin: 0 0 20px;
-}
-
-.empty {
-
-  text-align: center;
-
-  &__message {
-
-    display: block;
-    margin: 0 0 40px;
-    font: 20px "Arial", sans-serif;
-    text-align: center;
-    color: $blue-grey;
-  }
-
-  &__description {
-
-    display: block;
-    font: 14px "Arial", sans-serif;
-    text-align: center;
-    color: $dark-grey;
-  }
-}
-
-.link {
-
-  display: inline-block;
-  color: $primary;
 }

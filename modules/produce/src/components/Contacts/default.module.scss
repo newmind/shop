@@ -10,7 +10,9 @@
 .header {
 
   display: block;
-  font: 700 18px "Exo 2";
+  font-family: inherit;
+  font-weight: 700;
+  font-size: 18px;
   letter-spacing: .5px;
 }
 
@@ -56,7 +58,9 @@
 
     display: inline-block;
     vertical-align: middle;
-    font: bold 12px "Istok Web";
+    font-family: inherit;
+    font-weight: 700;
+    font-size: 12px;
     text-transform: uppercase;
     letter-spacing: .5px;
     color: $blue-grey;
@@ -67,6 +71,8 @@
 .paragraph {
 
   display: block;
-  font: 500 14px "Istok Web";
+  font-family: inherit;
+  font-weight: 500;
+  font-size: 14px;
   color: $coal-dark;
 }

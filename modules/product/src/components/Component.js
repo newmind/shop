@@ -1,8 +1,9 @@
 
-import numeral from '@ui.packages/numeral';
+import numeral from '@packages/numeral';
+
 import { Dialog } from '@ui.packages/dialog';
 import { nounDeclension } from "@ui.packages/utils";
-import { Gallery, Breadcrumbs } from '@ui.packages/kit';
+import { Gallery, Breadcrumbs, Header, Text } from '@ui.packages/kit';
 
 import types from 'prop-types';
 import { Link, useParams } from 'react-router-dom';
@@ -70,8 +71,8 @@ function Product({ addProductToCart, getProductById, product, openDialog, closeD
             </div>
             <div className={styles['product__commands']}>
               <span className={styles['product__uuid']}>{ product['uuid'] }</span>
-              <h3 className={styles['product__brand']}>{ product['brand'] }</h3>
-              {name && <p className={styles['product__name']}>{ name }</p>}
+              <Header level={1}>{ product['brand'] }</Header>
+              {product['name'] && <Text>{ product['name'] }</Text>}
               <p className={styles['product__amount']}>{ numeral(product['amount']).format() } {product['currency']['value']}</p>
               <div className={styles['controls']}>
               <span className={styles['cart']} onClick={(event) => handleClickCart(event)}>
@@ -90,8 +91,8 @@ function Product({ addProductToCart, getProductById, product, openDialog, closeD
               )}
               {product['description'] && (
                 <div className={styles['product__description']}>
-                  <h3 className={styles['product__description__header']}>О товаре</h3>
-                  <p className={styles['paragraph']}>{ product['description'] }</p>
+                  <Header level={3}>Описание</Header>
+                  <Text>{ product['description'] }</Text>
                 </div>)}
             </div>
           </div>
@@ -99,7 +100,7 @@ function Product({ addProductToCart, getProductById, product, openDialog, closeD
             {product['attributes'].length
               ? (
                 <div className={styles['product__feature']}>
-                  <h4 className={styles['header']}>Характеристика товара:</h4>
+                  <Header level={3}>Характеристика:</Header>
                   <div className={styles['product__list']}>
                     <Suspense fallback={null}>
                       <Properties list={product['attributes']} />
@@ -110,7 +111,7 @@ function Product({ addProductToCart, getProductById, product, openDialog, closeD
               : null}
             <div className={styles['comments']}>
               <div className={styles['comments__controls']}>
-                <h4 className={styles['comments__header']}>Отзывы о товаре {product['comments'].length ? <span className={styles['comments__count']}>({ product['comments'].length })</span> : null}</h4>
+                <Header level={3}>Отзывы {product['comments'].length ? <span className={styles['comments__count']}>({ product['comments'].length })</span> : null}</Header>
                 <span className={styles['comments__link']} onClick={() => handleOpenCommentDialog()}>Оставить отзыв</span>
               </div>
               <div className={styles['comments__content']}>

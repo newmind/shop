@@ -1,4 +1,6 @@
 
+import { Mode } from '@ui.packages/types';
+
 import types from 'prop-types';
 import React, { useState } from 'react';
 
@@ -6,11 +8,8 @@ import cn from 'classnames';
 import styles from './default.module.scss';
 
 
-const PRIMARY_MODE = 'primary';
-const INFO_MODE = 'info';
-const WARNING_MODE = 'warning';
-const DANGER_MODE = 'danger';
-const SUCCESS_MODE = 'success';
+const TYPE_TEXT = 'text';
+const TYPE_PASSWORD = 'password';
 
 
 function Input({ value, mode, className, disabled, onBlur, onChange, onFocus, ...props }) {
@@ -33,12 +32,13 @@ function Input({ value, mode, className, disabled, onBlur, onChange, onFocus, ..
   const classNameInputContainer = cn(className, styles['container'], {
     [styles['container--focus']]: isFocus,
   }, {
-    [styles['container--primary']]: mode === PRIMARY_MODE,
-    [styles['container--success']]: mode === SUCCESS_MODE,
-    [styles['container--info']]: mode === INFO_MODE,
-    [styles['container--danger']]: mode === DANGER_MODE,
-    [styles['container--warning']]: mode === WARNING_MODE,
-    [styles['container--disabled']]: disabled,
+    [styles['mode--info']]: mode === Mode.INFO,
+    [styles['mode--danger']]: mode === Mode.DANGER,
+    [styles['mode--primary']]: mode === Mode.PRIMARY,
+    [styles['mode--success']]: mode === Mode.SUCCESS,
+    [styles['mode--warning']]: mode === Mode.WARNING,
+  }, {
+    [styles['disabled']]: disabled,
   });
 
   return (
@@ -56,9 +56,9 @@ function Input({ value, mode, className, disabled, onBlur, onChange, onFocus, ..
 
 Input.propTypes = {
   className: types.string,
-  type: types.oneOf(['text', 'password']),
+  type: types.oneOf([TYPE_TEXT, TYPE_PASSWORD]),
   format: types.oneOf(['string', 'number']),
-  mode: types.oneOf(['info', 'primary', 'danger', 'warning', 'success', 'default']),
+  mode: types.oneOf([Mode.DEFAULT, Mode.DANGER, Mode.INFO, Mode.SUCCESS, Mode.PRIMARY, Mode.WARNING]),
   value: types.any,
   disabled: types.bool,
   onChange: types.func,
@@ -69,9 +69,9 @@ Input.propTypes = {
 
 Input.defaultProps = {
   className: '',
-  type: 'text',
+  type: TYPE_TEXT,
   format: 'string',
-  mode: 'default',
+  mode: Mode.DEFAULT,
   message: null,
   value: '',
   disabled: false,

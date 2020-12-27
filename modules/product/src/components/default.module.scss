@@ -5,8 +5,9 @@
 .header {
 
   display: block;
-  font: 14px "Istok Web", sans-serif;
+  font-family: inherit;
   font-weight: 700;
+  font-size: 14px;
   text-transform: uppercase;
   letter-spacing: .5px;
 }
@@ -14,7 +15,9 @@
 .paragraph {
 
   display: block;
-  font: 14px "Istok Web", sans-serif;
+  font-family: inherit;
+  font-weight: 300;
+  font-size: 14px;
   line-height: 1.4;
 }
 
@@ -54,16 +57,19 @@
   &__uuid {
 
     display: block;
-    font: 12px "Istok Web", sans-serif;
+    font-family: inherit;
+    font-weight: 300;
+    font-size: 12px;
     color: $gray;
-    margin: 0 0 10px;
+    margin: 0 0 14px;
   }
 
   &__brand {
 
     display: block;
-    font: 25px "Istok Web", sans-serif;
-    font-weight: bold;
+    font-family: inherit;
+    font-weight: 700;
+    font-size: 25px;
     color: $coal-dark;
     letter-spacing: 1px;
   }
@@ -71,7 +77,9 @@
   &__name {
 
     display: block;
-    font: 13px "Istok Web", sans-serif;
+    font-family: inherit;
+    font-weight: 300;
+    font-size: 13px;
     color: $blue-grey;
     margin: 4px 0 0;
   }
@@ -79,7 +87,9 @@
   &__amount {
 
     display: block;
-    font: 20px "Istok Web", sans-serif;
+    font-family: inherit;
+    font-weight: 300;
+    font-size: 20px;
     margin: 30px 0 0;
     color: $coal-dark;
   }
@@ -95,8 +105,9 @@
     &__header {
 
       display: block;
-      font: 14px "Istok Web", sans-serif;
+      font-family: inherit;
       font-weight: 700;
+      font-size: 14px;
       letter-spacing: .5px;
       text-transform: uppercase;
       color: $coal-dark;
@@ -179,9 +190,11 @@
 
   &__caption {
 
-    font: 14px "Istok Web", sans-serif;
     display: inline-block;
     margin: 0 10px 0 0;
+    font-family: inherit;
+    font-weight: 300;
+    font-size: 14px;
   }
 }
 
@@ -212,7 +225,9 @@
 
   display: block;
   margin: 15px 0 0;
-  font: 12px "Istok Web", sans-serif;
+  font-family: inherit;
+  font-weight: 300;
+  font-size: 12px;
   color: $blue-grey;
 }
 
@@ -236,16 +251,19 @@
 
     display: flex;
     flex: 1 0;
-    font: 14px "Istok Web", sans-serif;
-    text-transform: uppercase;
+    font-family: inherit;
     font-weight: 700;
+    font-size: 14px;
+    text-transform: uppercase;
     letter-spacing: .5px;
   }
 
   &__link {
 
     display: inline-block;
-    font: 14px "Istok Web", sans-serif;
+    font-family: inherit;
+    font-weight: 300;
+    font-size: 14px;
     color: $primary;
     cursor: pointer;
     border-radius: 4px;
@@ -262,7 +280,9 @@
   &__empty {
 
     display: inline-block;
-    font: 14px "Istok Web", sans-serif;
+    font-family: inherit;
+    font-weight: 300;
+    font-size: 14px;
     color: $coal-dark;
   }
 
@@ -275,6 +295,7 @@
   &__count {
 
     color: $blue-grey;
+    font-size: inherit;
     font-weight: normal;
     padding: 0 0 0 20px;
   }

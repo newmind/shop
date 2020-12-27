@@ -122,9 +122,10 @@
 
     display: flex;
     flex: 1 0;
-    font: 700 16px "Istok Web", sans-serif;
+    font-family: inherit;
+    font-weight: 700;
+    font-size: 16px;
     color: $coal-dark;
-    letter-spacing: .5px;
     justify-content: center;
     align-items: center;
   }
@@ -137,42 +138,32 @@
   &__uuid {
 
     display: block;
-    font: 12px "Istok Web", sans-serif;
     text-align: center;
-    color: $gray;
-    margin: 0 0 10px;
+    margin: 0 0 12px;
   }
 
   &__brand {
 
     display: block;
-    font: 16px "Istok Web", sans-serif;
-    font-weight: 700;
     text-align: center;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-    color: $black;
   }
 
   &__name {
 
     display: block;
-    font: 12px "Istok Web", sans-serif;
     text-align: center;
-    height: 16px;
-    letter-spacing: .5px;
+    letter-spacing: 1px;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
-    color: $blue-grey;
   }
 
   &__controls {
 
     display: flex;
     flex-direction: row;
-    flex: 1 0 auto;
-    margin: 25px 5px 0;
+    flex: 1 0;
+    margin: 25px 0 0;
   }
 
   &__cart {
@@ -201,8 +192,9 @@
     width: 16px;
     height: 16px;
     color: $whitesmoke;
-    font: 11px "Istok Web", sans-serif;
-    font-weight: bold;
+    font-family: inherit;
+    font-weight: 700;
+    font-size: 11px;
   }
 
   &__button {
@@ -211,7 +203,9 @@
     flex: 1 0 auto;
     padding: 10px 20px;
     margin: 0 40px 0 70px;
-    font: 16px "Istok Web", sans-serif;
+    font-family: inherit;
+    font-weight: 300;
+    font-size: 16px;
     justify-content: center;
     color: $primary;
     text-decoration: underline;

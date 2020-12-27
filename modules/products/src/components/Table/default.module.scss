@@ -14,8 +14,9 @@
 .header {
 
   display: block;
-  font: 16px "Istok Web";
+  font-family: inherit;
   font-weight: 700;
+  font-size: 16px;
   color: $coal-dark;
   margin: 0 0 30px;
 }

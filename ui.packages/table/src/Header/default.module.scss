@@ -32,8 +32,9 @@
 
   display: block;
   padding: 16px 8px 13px;
-  font: 11px "Istok Web", sans-serif;
+  font-family: inherit;
   font-weight: 700;
+  font-size: 11px;
   color: $dark-grey;
   text-align: center;
   text-transform: uppercase;

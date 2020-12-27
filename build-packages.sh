@@ -24,6 +24,8 @@ echo '[--- Kit ---]'
 cd ../kit && npx yarn build
 echo '[--- Yandex Map ---]'
 cd ../yandex-map && npx yarn build
+echo '[--- HOC ---]'
+cd ../yandex-map && npx yarn build
 
 echo ''
 echo 'Сборка модулей для приложения "Client"'
@@ -31,8 +33,10 @@ echo '------------------------------------'
 
 cd ../../modules || return
 
+echo '[--- Main ---]'
+cd  ./main && npx yarn build
 echo '[--- Order Details ---]'
-cd  ./orderDetails && npx yarn build
+cd ../orderDetails && npx yarn build
 echo '[--- Not Found ---]'
 cd ../not-found && npx yarn build
 echo '[--- Showcase ---]'
@@ -45,6 +49,8 @@ echo '[--- Order ---]'
 cd ../order && npx yarn build
 echo '[--- About ---]'
 cd ../about && npx yarn build
+echo '[--- Sign Up ---]'
+cd ../sign-up && npx yarn build
 
 echo ''
 echo 'Сборка модулей для приложения "Admin"'
@@ -66,5 +72,7 @@ echo '[--- Profile ---]'
 cd ../profile && npx yarn build
 echo '[--- Sign In ---]'
 cd ../sign-in && npx yarn build
+echo '[--- Users ---]'
+cd ../users && npx yarn build
 
 exit 0

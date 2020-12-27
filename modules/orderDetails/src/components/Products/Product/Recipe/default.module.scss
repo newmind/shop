@@ -29,7 +29,9 @@
     display: block;
     width: 30px;
     padding: 6px 0 6px 6px;
-    font: 12px "Istok Web", sans-serif;
+    font-family: inherit;
+    font-weight: 300;
+    font-size: 12px;
   }
 
   &__value {
@@ -37,7 +39,9 @@
     display: flex;
     flex: 1 0;
     flex-direction: column;
-    font: 12px "Istok Web", sans-serif;
+    font-family: inherit;
+    font-weight: 300;
+    font-size: 12px;
     padding: 6px 0;
     text-align: center;
   }

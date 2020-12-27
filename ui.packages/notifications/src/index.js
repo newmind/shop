@@ -1,5 +1,5 @@
 
 export { default as Notifications } from './components';
 
-export { default as notificationReducer } from './ducks/reducer';
-export { pushNotification } from './ducks/commands';
+export { reducer as notificationReducer } from './ducks/slice';
+export { cleanNotifications, pushNotification, closeNotification } from './ducks/slice';

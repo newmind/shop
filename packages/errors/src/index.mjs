@@ -150,13 +150,11 @@ export const middlewareErrors = () => async (ctx, next) => {
     checkStatus(ctx['status']);
   }
   catch(error) {
-
     if (error instanceof ReferenceError) {
       ctx.status = 500;
-      ctx.body = { code: '1.0.0', message: error['message'] };
+      ctx.body = { code: '0.0.0', message: error['message'] };
     }
     else {
-
       ctx.status = Number(error['status'] || 500);
       ctx.body = error['data'];
     }

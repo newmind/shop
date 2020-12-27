@@ -1,5 +1,6 @@
 
-import moment from '@ui.packages/moment';
+import moment from '@packages/moment';
+
 import { Table, Column } from '@ui.packages/table';
 
 import types from 'prop-types';

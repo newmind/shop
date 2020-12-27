@@ -37,7 +37,9 @@
 
     display: block;
     padding: 20px;
-    font: 14px "Istok Web", sans-serif;
+    font-family: inherit;
+    font-weight: 300;
+    font-size: 14px;
     color: $coal-dark;
     text-align: center;
     background: $white;
@@ -46,8 +48,9 @@
   &__full-amount {
 
     text-align: right;
-    font: 14px "Istok Web", sans-serif;
+    font-family: inherit;
     font-weight: 700;
+    font-size: 14px;
     color: $coal-dark;
   }
 
@@ -56,13 +59,14 @@
     display: inline-block;
     vertical-align: middle;
     padding: 10px 10px 8px;
-    font: 12px "Istok Web", sans-serif;
+    font-family: inherit;
+    font-weight: 700;
+    font-size: 12px;
     border: 1px solid $pale-lilac;
     text-decoration: none;
     outline: none;
     color: $coal-dark;
     background: $pale-lilac;
-    font-weight: bold;
     letter-spacing: .5px;
     cursor: pointer;
 
@@ -77,8 +81,9 @@
     vertical-align: middle;
     padding: 10px 20px;
     border-radius: 4px;
-    font: 12px "Istok Web", sans-serif;
+    font-family: inherit;
     font-weight: 700;
+    font-size: 12px;
     text-decoration: none;
     outline: none;
     color: $white;
@@ -186,22 +191,27 @@
 
     display: block;
     text-align: right;
-    font: 13px "Istok Web", sans-serif;
+    font-family: inherit;
+    font-weight: 300;
+    font-size: 13px;
     color: $coal-dark;
   }
 
   &__brand {
 
     display: block;
-    font: 14px "Istok Web", sans-serif;
+    font-family: inherit;
     font-weight: 700;
+    font-size: 14px;
     color: $coal-dark;
   }
 
   &__name {
 
     display: block;
-    font: 12px "Istok Web", sans-serif;
+    font-family: inherit;
+    font-weight: 300;
+    font-size: 12px;
     line-height: 1.4;
     color: $coal-dark;
     margin: 5px 0 0;

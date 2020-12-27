@@ -1,0 +1,35 @@
+
+@import "~@ui.packages/theme";
+
+
+.empty {
+
+  text-align: center;
+}
+
+.message {
+
+  display: block;
+  margin: 0 0 40px;
+  font-family: inherit;
+  font-weight: 300;
+  font-size: 20px;
+  text-align: center;
+  color: $blue-grey;
+}
+
+.description {
+
+  display: block;
+  font-family: inherit;
+  font-weight: 300;
+  font-size: 14px;
+  text-align: center;
+  color: $dark-grey;
+}
+
+.link {
+
+  display: inline-block;
+  color: $primary;
+}

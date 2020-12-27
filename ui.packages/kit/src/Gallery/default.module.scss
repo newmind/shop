@@ -5,8 +5,11 @@
 
   position: relative;
   display: flex;
-  flex: 1 0 auto;
   flex-direction: column;
+  width: 100%;
+  height: 100%;
+  flex: 1 1;
+  box-sizing: border-box;
 
   &__next {
 
@@ -81,8 +84,9 @@
 
   &__numbers {
 
-    font: 11px "Istok Web", sans-serif;
+    font-family: inherit;
     font-weight: 700;
+    font-size: 11px;
   }
 }
 
@@ -101,7 +105,9 @@
     flex-direction: column;
     background: $whitesmoke;
     color: $coal-dark;
-    font: 13px "Istok Web", sans-serif;
+    font-family: inherit;
+    font-weight: 300;
+    font-size: 13px;
     z-index: 20;
     justify-content: center;
     text-align: center;

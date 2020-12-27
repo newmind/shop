@@ -19,149 +19,106 @@
 
 .gallery {
 
-  display: flex;
-  flex: 0 0 500px;
+  display: block;
   width: 500px;
   height: 400px;
 }
 
-.common {
-
-  display: flex;
-  flex: 1 0;
-  flex-direction: column;
-  border-radius: 15px;
-  border: 1px solid $pale-lilac;
-  margin: 0 0 0 20px;
-  padding: 30px;
-}
-
-.uuid {
-
-  display: block;
-  font: 10px "Istok Web", sans-serif;
-  color: $gray;
-  margin: 0 0 10px;
-}
-
-.brand {
-
-  display: block;
-  font: 20px "Istok Web", sans-serif;
-  font-weight: bold;
-  color: $coal-dark;
-  letter-spacing: 1px;
-}
-
-.name {
-
-  display: block;
-  font: 12px "Istok Web", sans-serif;
-  color: $blue-grey;
-  margin: 4px 0 0;
-}
-
-.amount {
-
-  display: block;
-  font: 700 18px "Istok Web", sans-serif;
-  margin: 20px 0 0;
-  color: $coal-dark;
-}
-
-.controls {
-
-  display: block;
-  margin: 20px 0 0;
-}
-
-.description {
+.information {
 
   display: flex;
   flex-direction: column;
   flex: 1 0;
-  padding: 30px 0 0;
-  margin: 30px 0 0;
-  border-top: 1px solid $pale-lilac;
-
-  &__header {
-
-    display: block;
-    font: 14px "Istok Web", sans-serif;
-    font-weight: 700;
-    letter-spacing: .5px;
-    text-transform: uppercase;
-    color: $coal-dark;
-    margin: 0 0 20px;
-  }
 }
+//
+//.uuid {
+//
+//  display: block;
+//  font-family: inherit;
+//  font-weight: 300;
+//  font-size: 10px;
+//  color: $gray;
+//  margin: 0 0 10px;
+//}
+//
+//.brand {
+//
+//  display: block;
+//  font-family: inherit;
+//  font-weight: 700;
+//  font-size: 20px;
+//  color: $coal-dark;
+//  letter-spacing: 1px;
+//}
+//
+//.name {
+//
+//  display: block;
+//  font-family: inherit;
+//  font-weight: 300;
+//  font-size: 12px;
+//  color: $blue-grey;
+//  margin: 4px 0 0;
+//}
+//
+//.amount {
+//
+//  display: block;
+//  font-family: inherit;
+//  font-weight: 700;
+//  font-size: 18px;
+//  margin: 20px 0 0;
+//  color: $coal-dark;
+//}
+//
+//.controls {
+//
+//  display: block;
+//  margin: 20px 0 0;
+//}
+//
+//.description {
+//
+//  display: flex;
+//  flex-direction: column;
+//  flex: 1 0;
+//  padding: 30px 0 0;
+//  margin: 30px 0 0;
+//  border-top: 1px solid $pale-lilac;
+//
+//  &__header {
+//
+//    display: block;
+//    font-family: inherit;
+//    font-weight: 700;
+//    font-size: 14px;
+//    letter-spacing: .5px;
+//    text-transform: uppercase;
+//    color: $coal-dark;
+//    margin: 0 0 20px;
+//  }
+//}
+//
+//.paragraph {
+//
+//  display: block;
+//  font-family: inherit;
+//  font-weight: 300;
+//  font-size: 14px;
+//  line-height: 1.4;
+//}
+//
+//
+//
+//
+//
+//.to-order {
+//
+//  display: inline-block;
+//  color: $primary;
+//}
+//
 
-.paragraph {
-
-  display: block;
-  font: 14px "Istok Web", sans-serif;
-  line-height: 1.4;
-}
-
-.cart {
-
-  display: inline-block;
-  background: $primary;
-  color: $white;
-  font-size: 14px;
-  border-radius: 8px;
-  padding: 12px 16px;
-  font-weight: bold;
-  width: 160px;
-  text-align: center;
-  cursor: pointer;
-  box-shadow: 0 0 4px 0 rgba($primary, .5);
-  white-space: nowrap;
-  transition: background 400ms;
-  vertical-align: middle;
-
-  &:hover {
-    background: darken($primary, 10%);
-  }
-
-  &__caption {
-
-    font: 14px "Istok Web", sans-serif;
-    display: inline-block;
-    margin: 0 10px 0 0;
-  }
-}
-
-.remove {
-
-  display: inline-block;
-  font-size: 16px;
-  padding: 10px;
-  margin: 0 0 0 10px;
-  color: $gray;
-  vertical-align: middle;
-  cursor: pointer;
-  transition: color 200ms;
-
-  &:hover {
-
-    color: $danger;
-  }
-}
-
-.to-order {
-
-  display: inline-block;
-  color: $primary;
-}
-
-.has-in-case {
-
-  display: block;
-  margin: 15px 0 0;
-  font: 12px "Istok Web", sans-serif;
-  color: $blue-grey;
-}
 
 .property {
 

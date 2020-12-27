@@ -33,8 +33,9 @@
 .person {
 
   display: block;
-  font: 14px "Istok Web", sans-serif;
+  font-family: inherit;
   font-weight: 700;
+  font-size: 14px;
   color: $coal-dark;
 }
 
@@ -47,7 +48,9 @@
 
   display: block;
   margin: 0 0 0 20px;
-  font: 12px "Istok Web", sans-serif;
+  font-family: inherit;
+  font-weight: 300;
+  font-size: 12px;
   color: $gray;
 }
 
@@ -55,6 +58,8 @@
 
   display: block;
   margin: 15px 0 0;
-  font: 12px "Istok Web", sans-serif;
+  font-family: inherit;
+  font-weight: 300;
+  font-size: 12px;
   line-height: 1.4;
 }

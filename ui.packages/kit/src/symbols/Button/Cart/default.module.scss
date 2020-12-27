@@ -1,0 +1,49 @@
+
+@import "~@ui.packages/theme";
+
+
+.button {
+
+  display: inline-block;
+  background: $primary;
+  color: $white;
+  font-size: 14px;
+  border: none;
+  border-radius: 8px;
+  padding: 12px 16px 12px 20px;
+  font-weight: 400;
+  text-align: center;
+  cursor: pointer;
+  box-shadow: 0 0 4px 0 rgba($primary, .5);
+  white-space: nowrap;
+  transition: background 400ms;
+  outline: none;
+  vertical-align: middle;
+
+  &:hover {
+    background: darken($primary, 10%);
+  }
+}
+
+.caption {
+
+  display: inline-block;
+  font-family: inherit;
+  font-weight: 300;
+  font-size: 14px;
+  margin: 0 10px 0 0;
+}
+
+.size {
+  &--small {
+
+    font-size: 12px;
+    padding: 8px 12px;
+  }
+
+  &--large {
+
+    font-size: 16px;
+    padding: 16px 25px;
+  }
+}

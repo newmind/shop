@@ -17,7 +17,33 @@
 
     border-color: $coal-dark;
   }
+}
 
+.textarea {
+
+  display: block;
+  padding: 10px 0 8px 10px;
+  color: $coal-dark;
+  font-family: inherit;
+  font-weight: 300;
+  font-size: 14px;
+  outline: none;
+  width: 100%;
+  min-height: 100px;
+  box-sizing: border-box;
+  border: none;
+  letter-spacing: .5px;
+  background: transparent;
+  resize: none;
+
+  &:disabled {
+
+    border-color: $pale-lilac;
+    color: $gray;
+  }
+}
+
+.mode {
   &--info {
     border-color: $information;
   }
@@ -42,27 +68,5 @@
 
     background: $pale-lilac;
     border-color: $gray;
-  }
-}
-
-.textarea {
-
-  display: block;
-  padding: 10px 0 8px 10px;
-  color: $coal-dark;
-  font: 14px "Istok Web", sans-serif;
-  outline: none;
-  width: 100%;
-  min-height: 100px;
-  box-sizing: border-box;
-  border: none;
-  letter-spacing: .5px;
-  background: transparent;
-  resize: none;
-
-  &:disabled {
-
-    border-color: $pale-lilac;
-    color: $gray;
   }
 }

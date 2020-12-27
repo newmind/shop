@@ -64,8 +64,9 @@
     display: block;
     background: $whitesmoke;
     border-bottom: 1px solid $very-light-pink;
-    font: 14px "Istok Web", sans-serif;
+    font-family: inherit;
     font-weight: 700;
+    font-size: 14px;
     padding: 14px 20px 10px;
     color: $coal-dark;
   }

@@ -49,8 +49,9 @@
   &__text {
 
     display: inline-block;
-    font: 30px 'Exo 2', sans-serif;
+    font-family: inherit;
     font-weight: 700;
+    font-size: 30px;
     vertical-align: baseline;
     color: $coal-dark;
   }

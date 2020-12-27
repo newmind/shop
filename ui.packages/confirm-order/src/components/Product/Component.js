@@ -1,6 +1,7 @@
 
+import numeral from "@packages/numeral";
+
 import { Gallery } from "@ui.packages/kit";
-import numeral from "@ui.packages/numeral";
 
 import React from 'react';
 import types from "prop-types";

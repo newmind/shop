@@ -1,4 +1,6 @@
 
+import { middlewareErrors } from '@packages/errors';
+
 import logger from '@sys.packages/logger';
 import appServer, { initRouter } from '@sys.packages/server';
 import { connectToRabbit, queueToExchange } from '@sys.packages/rabbit';
@@ -21,6 +23,8 @@ import { orderCreated } from './actions/order';
       autoescape: true,
       watch: true,
     });
+
+    appServer.use(middlewareErrors());
 
     const httpServer = http.createServer(appServer.callback());
 

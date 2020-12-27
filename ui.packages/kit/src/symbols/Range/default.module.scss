@@ -92,7 +92,9 @@
 .value {
 
   display: inline-block;
-  font: 500 10px "Istok Web", sans-serif;
+  font-family: inherit;
+  font-weight: 500;
+  font-size: 10px;
   width: 50px;
   text-align: right;
 

@@ -1,0 +1,19 @@
+
+@import "~@ui.packages/theme";
+
+
+.header {
+
+  display: block;
+  font-family: inherit;
+  font-weight: 300;
+  font-size: 14px;
+  color: $coal-dark;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+}
+
+.bold {
+
+  font-weight: 500;
+}

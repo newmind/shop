@@ -30,7 +30,26 @@
   display: flex;
   flex: 1 0 auto;
   flex-direction: column;
+}
 
+.label {
+
+  display: block;
+  font-family: inherit;
+  font-weight: 300;
+  font-size: 14px;
+  color: $blue-grey;
+  margin: 0 0 6px 15px;
+  transition: color 400ms;
+}
+
+.container {
+
+  display: block;
+  margin: 0 0 0 14px;
+}
+
+.mode {
   &--info  .evaluation__star {
 
     color: darken($information, 10%);
@@ -75,7 +94,9 @@
       color: darken($danger, 10%);
     }
   }
+}
 
+.size {
   &--small .evaluation__star {
 
     font-size: 14px;
@@ -85,19 +106,4 @@
 
     font-size: 18px;
   }
-}
-
-.label {
-
-  display: block;
-  font: 14px "Istok Web", sans-serif;
-  color: $blue-grey;
-  margin: 0 0 6px 15px;
-  transition: color 400ms;
-}
-
-.container {
-
-  display: block;
-  margin: 0 0 0 14px;
 }

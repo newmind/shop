@@ -15,7 +15,10 @@
     flex-direction: row;
 
     &:first-child {
-      font: 14px "Istok Web", sans-serif;
+
+      font-family: inherit;
+      font-weight: 300;
+      font-size: 14px;
       background: $pale-lilac;
     }
 
@@ -32,7 +35,9 @@
     height: 35px;
     align-items: center;
     justify-content: center;
-    font: 13px "Istok Web", sans-serif;
+    font-family: inherit;
+    font-weight: 300;
+    font-size: 13px;
 
     & + & {
       border-left: 1px solid $pale-lilac;

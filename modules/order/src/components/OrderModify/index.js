@@ -1,23 +1,10 @@
 
 import { validation } from '@ui.packages/utils';
 
-import { connect } from 'react-redux';
 import { reduxForm } from 'redux-form';
 
 import Component from './Component';
 
-
-const mapStateToProps = (state) => {
-  const cart = state['cart'];
-  return {
-    items: cart['items'],
-    initialValues: {
-      items: cart['items'],
-      delivery: 'post',
-      pay: 'cash',
-    },
-  };
-};
 
 const validate = (values) => {
   const errors = {};
@@ -75,10 +62,7 @@ const validate = (values) => {
 };
 
 
-export default connect(
-  mapStateToProps,
-)(reduxForm({
+export default reduxForm({
   form: 'order',
-  enableReinitialize: true,
   validate,
-})(Component));
+})(Component);

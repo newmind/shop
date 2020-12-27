@@ -3,7 +3,7 @@ import React from 'react';
 import types from 'prop-types';
 
 import BaseField from '../BaseField';
-import Select from '../../symbols/Select2';
+import Select from '../../symbols/Select';
 
 
 function SelectField(props) {

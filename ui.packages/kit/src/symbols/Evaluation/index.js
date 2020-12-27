@@ -1,35 +1,33 @@
 
+import { Mode, Size } from '@ui.packages/types';
+
 import types from 'prop-types';
-import React, { useRef, useEffect } from 'react';
+import React from 'react';
 
 import cn from 'classnames';
 import styles from './default.module.scss';
 
 
-const PRIMARY_MODE = 'primary';
-const INFO_MODE = 'info';
-const WARNING_MODE = 'warning';
-const DANGER_MODE = 'danger';
-const SUCCESS_MODE = 'success';
-
-
-function Evaluation({ className, disabled, label, mode, size, type, value, onChange }) {
+function Evaluation({ className, disabled, label, mode, size, value, onChange }) {
   function handleClick(index) {
     onChange && onChange(index);
   }
 
   const classNameInputWrapper = cn(className, styles['wrapper'], {
-    [styles['wrapper--primary']]: mode === PRIMARY_MODE,
-    [styles['wrapper--success']]: mode === SUCCESS_MODE,
-    [styles['wrapper--info']]: mode === INFO_MODE,
-    [styles['wrapper--danger']]: mode === DANGER_MODE,
-    [styles['wrapper--warning']]: mode === WARNING_MODE,
-    [styles['wrapper--disabled']]: disabled,
-    [styles['wrapper--with-label']]: !! label,
+    [styles['mode--info']]: mode === Mode.INFO,
+    [styles['mode--danger']]: mode === Mode.DANGER,
+    [styles['mode--primary']]: mode === Mode.PRIMARY,
+    [styles['mode--success']]: mode === Mode.SUCCESS,
+    [styles['mode--warning']]: mode === Mode.WARNING,
   }, {
-    [styles['wrapper--small']]: size === 's',
-    [styles['wrapper--large']]: size === 'l',
+    [styles['disabled']]: disabled,
+  }, {
+    [styles['with-label']]: !! label,
+  }, {
+    [styles['size--small']]: size === Size.SMALL,
+    [styles['size--large']]: size === Size.LARGE,
   });
+
   return (
     <div className={classNameInputWrapper}>
       {label && (
@@ -51,9 +49,9 @@ function Evaluation({ className, disabled, label, mode, size, type, value, onCha
 Evaluation.propTypes = {
   className: types.string,
   label: types.string,
-  mode: types.oneOf(['info', 'primary', 'danger', 'warning', 'success', 'default']),
+  mode: types.oneOf([Mode.DEFAULT, Mode.DANGER, Mode.INFO, Mode.SUCCESS, Mode.PRIMARY, Mode.WARNING]),
   value: types.oneOf([0, 1, 2, 3, 4, 5]),
-  size: types.oneOf(['s', 'm', 'l']),
+  size: types.oneOf([Size.SMALL, Size.LARGE]),
   disabled: types.bool,
   onChange: types.func,
 };
@@ -63,7 +61,7 @@ Evaluation.defaultProps = {
   label: '',
   mode: 'default',
   value: 0,
-  size: 'm',
+  size: Size.MEDIUM,
   disabled: false,
 };
 

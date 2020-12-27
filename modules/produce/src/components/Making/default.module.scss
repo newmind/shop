@@ -10,7 +10,9 @@
 .header {
 
   display: block;
-  font: 700 18px "Exo 2";
+  font-family: inherit;
+  font-weight: 700;
+  font-size: 18px;
   letter-spacing: .5px;
 }
 
@@ -28,7 +30,9 @@
 .paragraph {
 
   display: block;
-  font: 500 14px "Istok Web";
+  font-family: inherit;
+  font-weight: 500;
+  font-size: 14px;
   color: $coal-dark;
   line-height: 1.5;
 
@@ -46,7 +50,9 @@
   li {
 
     display: block;
-    font: 500 14px "Istok Web";
+    font-family: inherit;
+    font-weight: 500;
+    font-size: 14px;
 
     &:before {
 
@@ -73,7 +79,9 @@
   h3 {
 
     display: block;
-    font: bold 16px "Istok Web";
+    font-family: inherit;
+    font-weight: 700;
+    font-size: 16px;
     color: $danger;
     margin: 0 0 10px;
   }

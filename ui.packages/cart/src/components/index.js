@@ -1,11 +1,12 @@
 
-import { Button } from '@ui.packages/kit';
-import numeral from '@ui.packages/numeral';
+import numeral from '@packages/numeral';
+
+import { Button, Text, Link } from '@ui.packages/kit';
 
 import types from 'prop-types';
 import React, { useEffect, useRef } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { Link, useLocation, useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 
 import Icon from './Icon';
 import Product from './Product';
@@ -98,15 +99,15 @@ function Cart() {
                     <p className={styles['cart__full-amount']}>Итого: { fullAmount } руб.</p>
                   </div>
                   <div className={styles['list__controls']}>
-                    <Button onClick={handleResetCart}>Очистить</Button>
+                    <Button form="context" onClick={handleResetCart}>Очистить</Button>
                     <Button onClick={handleGoToCart} mode="success">Оформить заказ</Button>
                   </div>
                 </div>
               )
               : (
                 <span className={styles['cart__empty']}>
-                  В карзине нет выбранных товаров<br/>
-                  перейдите в раздел <Link className={styles['link']} to={process.env['PUBLIC_URL'] + '/products'}>Витрина</Link> для выбора товаров
+                  <Text>В карзине нет выбранных товаров<br/>
+                    перейдите в раздел <Link href={'/products'}>Витрина</Link> для выбора товаров</Text>
                 </span>
               )
             }

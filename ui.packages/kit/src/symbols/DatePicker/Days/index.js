@@ -1,5 +1,6 @@
 
-import moment from '@ui.packages/moment';
+import moment from '@packages/moment';
+
 import { reduceToArray } from "@ui.packages/utils";
 
 import types from "prop-types";

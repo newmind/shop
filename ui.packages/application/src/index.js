@@ -1,5 +1,6 @@
 
 import { middleware as requestMiddleware } from '@ui.packages/request';
+import { Notifications, notificationReducer } from '@ui.packages/notifications';
 
 import React from 'react';
 import thunk from 'redux-thunk';
@@ -61,6 +62,7 @@ class App {
       ...options,
       reducers: {
         application: applicationReducer,
+        notifications: notificationReducer,
         ...options['reducers'] || {},
       },
       middleware: [
@@ -86,16 +88,15 @@ class App {
     }, this.options['middleware']);
 
     ReactDOM.render(
-      <React.StrictMode>
-        <Provider store={this.store}>
-          <BrowserRouter>
-            <Application options={{
-              ...this.options,
-              routes
-            }} />
-          </BrowserRouter>
-        </Provider>
-      </React.StrictMode>
+      <Provider store={this.store}>
+        <BrowserRouter>
+          <Application options={{
+            ...this.options,
+            routes
+          }} />
+        </BrowserRouter>
+        <Notifications />
+      </Provider>
     , this.options['portal']);
 
     worker.unregister();

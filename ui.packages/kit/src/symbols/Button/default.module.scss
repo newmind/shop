@@ -11,7 +11,9 @@
   cursor: pointer;
   background: $white;
   color: $coal-dark;
-  font: 14px "Istok Web", sans-serif;
+  font-family: inherit;
+  font-weight: 300;
+  font-size: 14px;
   letter-spacing: .5px;
   outline: none;
   text-decoration: none;

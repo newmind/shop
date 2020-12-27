@@ -1,5 +1,6 @@
 
-import moment from '@ui.packages/moment';
+import moment from '@packages/moment';
+
 import { Evaluation } from '@ui.packages/kit';
 
 import types from 'prop-types';

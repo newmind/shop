@@ -140,7 +140,9 @@
   &__placeholder {
 
     display: block;
-    font: 14px "Istok Web", sans-serif;
+    font-family: inherit;
+    font-weight: 300;
+    font-size: 14px;
     padding: 10px 14px 7px;
     width: 100%;
     box-sizing: border-box;
@@ -222,7 +224,9 @@
 
     display: inline-block;
     vertical-align: middle;
-    font: 14px "Istok Web", sans-serif;
+    font-family: inherit;
+    font-weight: 300;
+    font-size: 14px;
     margin: 0 4px;
   }
 
@@ -249,7 +253,9 @@
 
     display: inline-block;
     vertical-align: middle;
-    font: 14px "Istok Web", sans-serif;
+    font-family: inherit;
+    font-weight: 300;
+    font-size: 14px;
     margin: 0 4px;
   }
 
