@@ -30,4 +30,5 @@ export const { createOperationAction, createOperationFailAction, createOperation
 
 export const selectData = (state) => state['order']['data'];
 
+export const name = showcaseSlice['name'];
 export const reducer = showcaseSlice['reducer'];

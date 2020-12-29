@@ -14,12 +14,12 @@ import styles from './default.module.scss';
 export default function Order() {
   const items = useSelector(selectItems);
 
-  // function handleSendOrderData(formData) {
+  function handleSendOrderData(formData) {
   //   createOperation({
   //     ...formData,
   //     amount: calculateFullAmount(formData['items']),
   //   });
-  // }
+  }
 
   return (
     <section className={styles['wrapper']}>
@@ -43,6 +43,7 @@ export default function Order() {
                 delivery: 'post',
                 pay: 'cash',
               }}
+              onSubmit={handleSendOrderData}
             />
           )
           : <Empty />

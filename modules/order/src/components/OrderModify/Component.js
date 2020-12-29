@@ -41,8 +41,6 @@ const calculateFullAmount = (products) => {
 export default function OrderModify({ handleSubmit }) {
   const items = useSelector(selectItems);
 
-  console.log(items)
-
   return (
     <div className={styles['wrapper']}>
       <form onSubmit={handleSubmit}>
@@ -59,10 +57,10 @@ export default function OrderModify({ handleSubmit }) {
           </div>
         </div>
         <div className={styles['controls']}>
-          <Text>Нажимая на кнопку ”Оформить заказ”, Вы подтверждаете согласие на обработку "Персональных данных".</Text>
           <Button type="submit" mode="success" size="l">
             Оформить заказ на сумму { numeral(calculateFullAmount(items)).format() } руб.
           </Button>
+          <Text>Нажимая на кнопку ”Оформить заказ”, Вы подтверждаете согласие на обработку "Персональных данных".</Text>
         </div>
       </form>
     </div>

@@ -64,7 +64,7 @@ function InputMask({ className, disabled, mode, label, message, onFocus, onBlur,
       <MaskedInput
         className={styles['input']}
         disabled={disabled}
-        maskPlaceholder={'_'}
+        maskplaceholder={'_'}
         alwaysShowMask={false}
         {...props}
         onFocus={handleFocus}

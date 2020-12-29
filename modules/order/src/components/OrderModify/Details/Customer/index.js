@@ -17,7 +17,7 @@ function Customer() {
       </Row>
       <Row>
         <Col>
-          <MaskInputField label="Номер телефона" name="phone" placeholder="+7 (___) ___-__-__" mask="+7 (999) 999-99-99" />
+          <MaskInputField label="Номер телефона" name="phone" mask="+7 (999) 999-99-99" />
         </Col>
         <Col>
           <InputField label="E-Mail" name="email" placeholder="example@mail.su" />

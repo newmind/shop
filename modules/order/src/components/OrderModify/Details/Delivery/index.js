@@ -26,6 +26,24 @@ function Delivery() {
     <Container>
       <Row>
         <Col>
+          <RadioBoxField name="delivery" defaultValue="post">
+            <Radio name="post">
+              <Block>
+                <i className={cn(styles['block__icon'], 'far fa-envelope')} />
+                <span className={styles['block__caption']}>По почте</span>
+              </Block>
+            </Radio>
+            <Radio name="courier">
+              <Block>
+                <i className={cn(styles['block__icon'], 'fas fa-shipping-fast')} />
+                <span className={styles['block__caption']}>Курьером</span>
+              </Block>
+            </Radio>
+          </RadioBoxField>
+        </Col>
+      </Row>
+      <Row>
+        <Col>
           <Suggest name="address" label="Адрес доставки" />
         </Col>
       </Row>
@@ -35,24 +53,6 @@ function Delivery() {
             name="details"
             label="Дополнительно"
           />
-        </Col>
-      </Row>
-      <Row>
-        <Col>
-          <RadioBoxField name="delivery" defaultValue="post">
-            <Radio name="post">
-              <Block>
-                <i className={cn(styles['block__icon'], 'far fa-envelope')} />
-                <span className={styles['block__caption']}>Доставка по почте</span>
-              </Block>
-            </Radio>
-            <Radio name="courier">
-              <Block>
-                <i className={cn(styles['block__icon'], 'fas fa-shipping-fast')} />
-                <span className={styles['block__caption']}>Доставка курьером</span>
-              </Block>
-            </Radio>
-          </RadioBoxField>
         </Col>
       </Row>
     </Container>

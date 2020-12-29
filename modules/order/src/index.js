@@ -1,5 +1,3 @@
 
-export const name = 'order';
-
 export { default } from './components';
-export { reducer } from './ducks/slice';
+export { name, reducer } from './ducks/slice';
