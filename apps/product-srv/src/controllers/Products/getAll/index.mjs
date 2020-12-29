@@ -50,15 +50,15 @@ export default () => async (ctx) => {
 
   if (amountFrom && ! amountTo) {
     where['amount'] = {
-      [Op.gte]: amountFrom
+      [Op.gte]: Number(amountFrom)
     };
   } else if (amountTo && ! amountFrom) {
     where['amount'] = {
-      [Op.lte]: amountTo
+      [Op.lte]: Number(amountTo)
     };
   } else if (amountFrom && amountTo) {
     where['amount'] = {
-      [Op.between]: [amountFrom, amountTo]
+      [Op.between]: [Number(amountFrom), Number(amountTo)]
     };
   }
 
@@ -77,12 +77,12 @@ export default () => async (ctx) => {
   }
 
   if (limit) {
-    options['limit'] = limit;
+    options['limit'] = Number(limit);
   }
 
   if (skip && take) {
-    offset['offset'] = skip;
-    offset['limit'] = take;
+    offset['offset'] = Number(skip);
+    offset['limit'] = Number(take);
   }
 
   const products = await Product.findAndCountAll({

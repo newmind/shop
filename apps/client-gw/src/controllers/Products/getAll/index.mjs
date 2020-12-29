@@ -43,8 +43,8 @@ export default () => async (ctx) => {
     method: 'get',
     url: `${PRODUCT_API_SRV}/products`,
     params: {
-      take: process.env['TAKE'],
-      skip: (page > 0 ? page - 1 : 0) * process.env['TAKE'],
+      take: Number(process.env['TAKE']),
+      skip: (page > 0 ? page - 1 : 0) * Number(process.env['TAKE']),
       ...params,
     },
   });
