@@ -71,7 +71,7 @@ WORKDIR /app/modules/showcase
 RUN ["yarn", "run", "build"]
 
 # BUILD APPLICATION
-WORKDIR /app/apps/showcase-ui
+WORKDIR /app/apps/client-ui
 RUN ["yarn", "run", "build"]
 
 # START NGINX

@@ -36,7 +36,7 @@ services:
       - db
       - mail_srv
 
-  gallery_proxy:
+  gallery_srv:
     container_name: gallery_srv
     build:
       context: ./
@@ -47,7 +47,7 @@ services:
     links:
       - db
 
-  operation_proxy:
+  operation_srv:
     container_name: operation_srv
     build:
       context: ./
@@ -62,7 +62,7 @@ services:
       - rabbit
       - mail_srv
 
-  product_proxy:
+  product_srv:
     container_name: product_srv
     build:
       context: ./

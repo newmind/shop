@@ -7,19 +7,19 @@ RUN npm config set package-lock false
 
 WORKDIR /app
 
-COPY apps/gallery-srv/db                ./apps/gallery-proxy/db
-COPY apps/gallery-srv/src               ./apps/gallery-proxy/src
-COPY apps/gallery-srv/.env.production   ./apps/gallery-proxy
-COPY apps/gallery-srv/package.json      ./apps/gallery-proxy
-COPY apps/gallery-srv/.sequelizerc      ./apps/gallery-proxy
-COPY ./sys.packages                         ./sys.packages
-COPY ./packages                             ./packages
-COPY ./package.json                         .
-COPY ./lerna.json                           .
-COPY ./yarn.lock                            .
+COPY apps/gallery-srv/db                ./apps/gallery-srv/db
+COPY apps/gallery-srv/src               ./apps/gallery-srv/src
+COPY apps/gallery-srv/.env.production   ./apps/gallery-srv
+COPY apps/gallery-srv/package.json      ./apps/gallery-srv
+COPY apps/gallery-srv/.sequelizerc      ./apps/gallery-srv
+COPY ./sys.packages                     ./sys.packages
+COPY ./packages                         ./packages
+COPY ./package.json                     .
+COPY ./lerna.json                       .
+COPY ./yarn.lock                        .
 
 RUN yarn
 
-WORKDIR /app/apps/gallery-proxy
+WORKDIR /app/apps/gallery-srv
 
 ENTRYPOINT ["yarn", "run", "start"]
