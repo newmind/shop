@@ -1,7 +1,7 @@
 'use strict';
 
 import axios from '@sys.packages/request';
-import { NotFoundError } from "@packages/errors";
+import { NotfoundError } from "@packages/errors";
 
 const INVOICE_API_SRV = process.env['INVOICE_API_SRV'];
 
@@ -15,7 +15,7 @@ export default async (formData) => {
   });
 
   if ( ! result['data']) {
-    throw new NotFoundError({
+    throw new NotfoundError({
       code: '404',
       message: 'Пользователь не найден'
     });
