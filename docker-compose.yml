@@ -100,7 +100,7 @@ services:
       - operation_srv
 
 
-  showcase_gw:
+  client_gw:
     container_name: client_gw
     build:
       context: ./
@@ -136,7 +136,7 @@ services:
       - NODE_ENV=production
 
 
-  showcase_ui:
+  client_ui:
     container_name: client_ui
     build:
       context: ./
