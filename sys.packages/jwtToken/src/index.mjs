@@ -97,7 +97,7 @@ export default (options) => async (ctx, next) => {
 
   } catch(error) {
 
-    if (error instanceof NotAuthError) {
+    if (error instanceof UnauthorizedError) {
       ctx.status = 401;
       return ctx.body = {
         success: true,
