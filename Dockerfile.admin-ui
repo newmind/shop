@@ -40,6 +40,9 @@ RUN ["yarn", "run", "build"]
 WORKDIR /app/ui.packages/kit
 RUN ["yarn", "run", "build"]
 
+WORKDIR /app/ui.packages/hoc
+RUN ["yarn", "run", "build"]
+
 # BUILD MODULES
 WORKDIR /app/modules/comments
 RUN ["yarn", "run", "build"]
