@@ -1,4 +1,6 @@
 
+import { middlewareErrors } from '@packages/errors';
+
 import koaCORS from '@sys.packages/cors';
 import jwtToken from '@sys.packages/jwt';
 import logger from '@sys.packages/logger';
@@ -63,6 +65,7 @@ import { createComment, updateComment, deleteComment } from './actions/comments'
     await queueToExchange(process.env['RABBIT_ADMIN_GW_QUEUE_UNIT_UPDATED'], process.env['RABBIT_PRODUCT_SRV_EXCHANGE_UNIT_UPDATED'], (message) => io.emit('action', { type: process.env['SOCKET_UNIT_UPDATED'], payload: JSON.parse(message) }));
     await queueToExchange(process.env['RABBIT_ADMIN_GW_QUEUE_UNIT_DELETED'], process.env['RABBIT_PRODUCT_SRV_EXCHANGE_UNIT_DELETED'], (message) => io.emit('action', { type: process.env['SOCKET_UNIT_DELETED'], payload: JSON.parse(message) }));
 
+    appServer.use(middlewareErrors());
 
     appServer.use(koaCORS({
       credentials: true,

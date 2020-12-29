@@ -136,6 +136,20 @@ export class LockedError extends BaseError {
   }
 }
 
+export class SyntaxError extends BaseError {
+  constructor(data = 'Синтаксическая ошибка') {
+    super(500, data);
+
+    this.name = 'LockedError';
+
+    if ('captureStackTrace' in Error) {
+      Error.captureStackTrace(this, LockedError);
+    }
+  }
+}
+
+
+
 
 function checkStatus(status) {
   if (status === 404) {
@@ -154,9 +168,13 @@ export const middlewareErrors = () => async (ctx, next) => {
       ctx.status = 500;
       ctx.body = { code: '0.0.0', message: error['message'] };
     }
-    else {
-      ctx.status = Number(error['status'] || 500);
+    else if (error instanceof BaseError) {
+      ctx.status = error['status'];
       ctx.body = error['data'];
+    }
+    else {
+      ctx.status = 500;
+      ctx.body = { code: '1.0.0', message: error['message'] };
     }
   }
 };
