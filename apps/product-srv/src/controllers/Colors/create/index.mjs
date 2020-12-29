@@ -11,7 +11,7 @@ export default () => async (ctx) => {
 
   const result = await Color.create(data, { transaction });
 
-  await sendEvent(process.env['RABBIT_PRODUCT_PROXY_EXCHANGE_COLOR_CREATED'], JSON.stringify(result.toJSON()));
+  await sendEvent(process.env['RABBIT_PRODUCT_SRV_EXCHANGE_COLOR_CREATED'], JSON.stringify(result.toJSON()));
 
   await transaction.commit();
 

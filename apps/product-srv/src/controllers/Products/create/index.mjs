@@ -35,7 +35,7 @@ const saveFiles = (files, { productId }, { transaction }) => {
           transaction
         });
 
-        await sendEvent(process.env['RABBIT_PRODUCT_PROXY_EXCHANGE_GALLERY_CREATED'], JSON.stringify({
+        await sendEvent(process.env['RABBIT_PRODUCT_SRV_EXCHANGE_GALLERY_CREATED'], JSON.stringify({
           productId,
           externalId: data['externalId'],
         }));
@@ -138,7 +138,7 @@ export default () => async (ctx) => {
     ],
   });
 
-  await sendEvent(process.env['RABBIT_PRODUCT_PROXY_EXCHANGE_PRODUCT_CREATED'], JSON.stringify(result.toJSON()));
+  await sendEvent(process.env['RABBIT_PRODUCT_SRV_EXCHANGE_PRODUCT_CREATED'], JSON.stringify(result.toJSON()));
 
   ctx.body = {
     success: true,

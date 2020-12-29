@@ -20,22 +20,22 @@ import routes from './routes';
 
     // EXCHANGES
 
-    await createExchange(process.env['RABBIT_OPERATION_PROXY_EXCHANGE_ORDER_CREATED']);
-    await createExchange(process.env['RABBIT_OPERATION_PROXY_EXCHANGE_ORDER_UPDATED']);
+    await createExchange(process.env['RABBIT_OPERATION_SRV_EXCHANGE_ORDER_CREATED']);
+    await createExchange(process.env['RABBIT_OPERATION_SRV_EXCHANGE_ORDER_UPDATED']);
 
     // CONSUMER
 
-    await queueToExchange(process.env['RABBIT_OPERATION_PROXY_QUEUE_GALLERY_DELETE'], process.env['RABBIT_GALLERY_PROXY_EXCHANGE_GALLERY_DELETED'], deleteImage);
+    await queueToExchange(process.env['RABBIT_OPERATION_SRV_QUEUE_GALLERY_DELETE'], process.env['RABBIT_GALLERY_SRV_EXCHANGE_GALLERY_DELETED'], deleteImage);
 
-    await queueToExchange(process.env['RABBIT_OPERATION_PROXY_QUEUE_GALLERY_CREATED'], process.env['RABBIT_PRODUCT_PROXY_EXCHANGE_GALLERY_CREATED'], createImage);
+    await queueToExchange(process.env['RABBIT_OPERATION_SRV_QUEUE_GALLERY_CREATED'], process.env['RABBIT_PRODUCT_SRV_EXCHANGE_GALLERY_CREATED'], createImage);
 
-    await queueToExchange(process.env['RABBIT_OPERATION_PROXY_QUEUE_PRODUCT_CREATED'], process.env['RABBIT_PRODUCT_PROXY_EXCHANGE_PRODUCT_CREATED'], createProduct);
-    await queueToExchange(process.env['RABBIT_OPERATION_PROXY_QUEUE_PRODUCT_UPDATED'], process.env['RABBIT_PRODUCT_PROXY_EXCHANGE_PRODUCT_UPDATED'], updateProductById);
-    await queueToExchange(process.env['RABBIT_OPERATION_PROXY_QUEUE_PRODUCT_DELETED'], process.env['RABBIT_PRODUCT_PROXY_EXCHANGE_PRODUCT_DELETED'], deleteProductById);
+    await queueToExchange(process.env['RABBIT_OPERATION_SRV_QUEUE_PRODUCT_CREATED'], process.env['RABBIT_PRODUCT_SRV_EXCHANGE_PRODUCT_CREATED'], createProduct);
+    await queueToExchange(process.env['RABBIT_OPERATION_SRV_QUEUE_PRODUCT_UPDATED'], process.env['RABBIT_PRODUCT_SRV_EXCHANGE_PRODUCT_UPDATED'], updateProductById);
+    await queueToExchange(process.env['RABBIT_OPERATION_SRV_QUEUE_PRODUCT_DELETED'], process.env['RABBIT_PRODUCT_SRV_EXCHANGE_PRODUCT_DELETED'], deleteProductById);
 
-    await queueToExchange(process.env['RABBIT_OPERATION_PROXY_QUEUE_CURRENCY_CREATED'], process.env['RABBIT_PRODUCT_PROXY_EXCHANGE_CURRENCY_CREATED'], createCurrency);
-    await queueToExchange(process.env['RABBIT_OPERATION_PROXY_QUEUE_CURRENCY_UPDATED'], process.env['RABBIT_PRODUCT_PROXY_EXCHANGE_CURRENCY_UPDATED'], updateCurrency);
-    await queueToExchange(process.env['RABBIT_OPERATION_PROXY_QUEUE_CURRENCY_DELETED'], process.env['RABBIT_PRODUCT_PROXY_EXCHANGE_CURRENCY_DELETED'], deleteCurrencies);
+    await queueToExchange(process.env['RABBIT_OPERATION_SRV_QUEUE_CURRENCY_CREATED'], process.env['RABBIT_PRODUCT_SRV_EXCHANGE_CURRENCY_CREATED'], createCurrency);
+    await queueToExchange(process.env['RABBIT_OPERATION_SRV_QUEUE_CURRENCY_UPDATED'], process.env['RABBIT_PRODUCT_SRV_EXCHANGE_CURRENCY_UPDATED'], updateCurrency);
+    await queueToExchange(process.env['RABBIT_OPERATION_SRV_QUEUE_CURRENCY_DELETED'], process.env['RABBIT_PRODUCT_SRV_EXCHANGE_CURRENCY_DELETED'], deleteCurrencies);
 
 
     const httpServer = http.createServer(appServer.callback());

@@ -13,7 +13,7 @@ export default () => async (ctx) => {
     transaction
   });
 
-  await sendEvent(process.env['RABBIT_PRODUCT_PROXY_EXCHANGE_CATEGORY_CREATED'], JSON.stringify(result.toJSON()));
+  await sendEvent(process.env['RABBIT_PRODUCT_SRV_EXCHANGE_CATEGORY_CREATED'], JSON.stringify(result.toJSON()));
 
   await transaction.commit();
 

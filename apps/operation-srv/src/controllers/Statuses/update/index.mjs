@@ -20,7 +20,7 @@ export default () => async (ctx) => {
       transaction
     });
 
-    await sendEvent(process.env['RABBIT_OPERATION_PROXY_EXCHANGE_STATUS_UPDATED'], JSON.stringify(status.toJSON()));
+    await sendEvent(process.env['RABBIT_OPERATION_SRV_EXCHANGE_STATUS_UPDATED'], JSON.stringify(status.toJSON()));
 
     await transaction.commit();
 

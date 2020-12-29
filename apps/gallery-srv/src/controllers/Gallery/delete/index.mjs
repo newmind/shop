@@ -15,7 +15,7 @@ export default () => async (ctx) => {
     transaction,
   });
 
-  await sendEvent(process.env['RABBIT_GALLERY_PROXY_EXCHANGE_GALLERY_DELETED'], JSON.stringify(data['externalId']))
+  await sendEvent(process.env['RABBIT_GALLERY_SRV_EXCHANGE_GALLERY_DELETED'], JSON.stringify(data['externalId']))
 
   await transaction.commit();
 
