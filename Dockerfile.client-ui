@@ -52,13 +52,13 @@ RUN ["yarn", "run", "build"]
 WORKDIR /app/modules/main
 RUN ["yarn", "run", "build"]
 
-WORKDIR /app/modules/notFound
+WORKDIR /app/modules/not-found
 RUN ["yarn", "run", "build"]
 
 WORKDIR /app/modules/order
 RUN ["yarn", "run", "build"]
 
-WORKDIR /app/modules/orderDetails
+WORKDIR /app/modules/order-details
 RUN ["yarn", "run", "build"]
 
 WORKDIR /app/modules/produce
