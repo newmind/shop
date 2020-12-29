@@ -27,7 +27,7 @@ export default () => async (ctx) => {
     attributes: ['id', 'value', 'description', 'imageId', 'createdAt', 'updatedAt'],
   });
 
-  await sendEvent(process.env['RABBIT_PRODUCT_PROXY_EXCHANGE_CATEGORY_UPDATED'], JSON.stringify(result.toJSON()));
+  await sendEvent(process.env['RABBIT_PRODUCT_SRV_EXCHANGE_CATEGORY_UPDATED'], JSON.stringify(result.toJSON()));
 
   ctx.body = {
     success: true,

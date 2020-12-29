@@ -23,7 +23,7 @@ export default () => async (ctx) => {
       attributes: ['id', 'name', 'description', 'createdAt', 'updatedAt'],
     });
 
-    await sendEvent(process.env['RABBIT_OPERATION_PROXY_EXCHANGE_STATUS_CREATED'], JSON.stringify(status.toJSON()));
+    await sendEvent(process.env['RABBIT_OPERATION_SRV_EXCHANGE_STATUS_CREATED'], JSON.stringify(status.toJSON()));
 
     await transaction.commit();
 

@@ -13,7 +13,7 @@ export default () => async (ctx) => {
     where: { id }
   });
 
-  await sendEvent(process.env['RABBIT_PRODUCT_PROXY_EXCHANGE_COMMENT_DELETED'], JSON.stringify(id));
+  await sendEvent(process.env['RABBIT_PRODUCT_SRV_EXCHANGE_COMMENT_DELETED'], JSON.stringify(id));
 
   await transaction.commit();
 

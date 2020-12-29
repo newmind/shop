@@ -11,7 +11,7 @@ export default () => async (ctx) => {
 
   const result = await Material.create(data, { transaction });
 
-  await sendEvent(process.env['RABBIT_PRODUCT_PROXY_EXCHANGE_MATERIAL_CREATED'], JSON.stringify(result.toJSON()));
+  await sendEvent(process.env['RABBIT_PRODUCT_SRV_EXCHANGE_MATERIAL_CREATED'], JSON.stringify(result.toJSON()));
 
   await transaction.commit();
 

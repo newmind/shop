@@ -15,7 +15,7 @@ export default () => async (ctx) => {
     transaction,
   });
 
-  await sendEvent(process.env['RABBIT_PRODUCT_PROXY_EXCHANGE_TYPE_DELETED'], JSON.stringify(id));
+  await sendEvent(process.env['RABBIT_PRODUCT_SRV_EXCHANGE_TYPE_DELETED'], JSON.stringify(id));
 
   await transaction.commit();
 

@@ -154,7 +154,7 @@ export default () => async (ctx) => {
       ]
     });
 
-    await sendEvent(process.env['RABBIT_OPERATION_PROXY_EXCHANGE_ORDER_CREATED'], JSON.stringify(operations[0]));
+    await sendEvent(process.env['RABBIT_OPERATION_SRV_EXCHANGE_ORDER_CREATED'], JSON.stringify(operations[0]));
 
     console.log(operations[0].toJSON()['products']);
 
