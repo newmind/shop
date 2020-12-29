@@ -11,6 +11,8 @@
   color: $coal-dark;
   text-transform: uppercase;
   letter-spacing: 1.5px;
+  text-overflow: ellipsis;
+  overflow: hidden;
 }
 
 .bold {

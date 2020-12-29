@@ -1,40 +1,27 @@
 
-import { Image } from '@ui.packages/kit';
-import { reduceToArray } from '@ui.packages/utils';
+import { Header } from '@ui.packages/kit';
 
 import React from 'react';
-import { Link } from 'react-router-dom';
+
+import Section from './Section';
 
 import styles from './default.module.scss';
 
 
 function Types({ items } ) {
-  const types = reduceToArray(items, 4, { fillNull: true });
-
   return (
-    <div className={styles['wrapper']}>
-      <h2 className={styles['header']}>Какой тип товара Вас интересует?</h2>
-      {types.map((line, index) => (
-        <div key={index} className={styles['line']}>
-          {line.map((type, index) => (
-            <div key={index} className={styles['line__col']}>
-              { !! type && (
-                <Link className={styles['type']} to={ process.env['PUBLIC_URL'] + '/products?typeId=' + type['id'] }>
-                  <div className={styles['promo']}>
-                    <Image src={ process.env['REACT_APP_API_HOST'] + '/gallery/' + type['imageId'] } />
-                  </div>
-                  <div className={styles['information']}>
-                    <div className={styles['caption']}>
-                      <span className={styles['caption__text']}>{ type['value'] }</span>
-                    </div>
-                  </div>
-                </Link>
-              )}
-            </div>
+    <section className={styles['wrapper']}>
+      <header className={styles['header']}>
+        <Header level={1}>Какой тип товара Вас интересует?</Header>
+      </header>
+      <div className={styles['content']}>
+        <div className={styles['container']}>
+          {items.map((item, index) => (
+            <Section key={index} {...item} />
           ))}
         </div>
-      ))}
-    </div>
+      </div>
+    </section>
   );
 }
 

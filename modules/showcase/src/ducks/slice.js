@@ -46,4 +46,5 @@ export const { nextPageAction, getProductsAction, getProductsFailAction, getProd
 export const selectItems = (state) => state['showcase']['items'];
 export const selectMeta = (state) => state['showcase']['meta'];
 
+export const name = showcaseSlice['name'];
 export const reducer = showcaseSlice['reducer'];

@@ -1,40 +1,27 @@
 
-import { Image } from '@ui.packages/kit';
-import { reduceToArray } from '@ui.packages/utils';
+import { Header } from '@ui.packages/kit';
 
 import React from 'react';
 import types from 'prop-types';
-import { Link } from 'react-router-dom';
+
+import Section from './Section';
 
 import styles from './default.module.scss';
 
 
-function Categories({ items }) {
-  const categories = reduceToArray(items, 3);
-
+export default function Categories({ items }) {
   return (
     <div className={styles['wrapper']}>
-      <h2 className={styles['header']}>Выберите интересующую вас категорию</h2>
-      {categories.map((line, index) => (
-        <div key={index} className={styles['line']}>
-          {line.map((category, index) => (
-            <div key={index} className={styles['line__col']}>
-              { !! category && (
-                <Link className={styles['category']} to={process.env['PUBLIC_URL'] + '/products?categoryId=' + category['id']}>
-                  <div className={styles['promo']}>
-                    <Image src={process.env['REACT_APP_API_HOST'] + '/gallery/' + category['imageId']} />
-                  </div>
-                  <div className={styles['information']}>
-                    <div className={styles['caption']}>
-                      <span className={styles['caption__text']}>{ category['value'] }</span>
-                    </div>
-                  </div>
-                </Link>
-              )}
-            </div>
+      <header className={styles['header']}>
+        <Header level={1}>Выберите интересующую вас категорию</Header>
+      </header>
+      <div className={styles['content']}>
+        <div className={styles['container']}>
+          {items.map((item, index) => (
+            <Section key={index} {...item} />
           ))}
         </div>
-      ))}
+      </div>
     </div>
   );
 }
@@ -46,5 +33,3 @@ Categories.propTypes = {
 Categories.defaultProps = {
   items: [],
 };
-
-export default Categories;

@@ -1,28 +1,18 @@
 
-import { connect } from 'react-redux';
-import { bindActionCreators } from 'redux';
+import hoc from '@ui.packages/hoc';
 
 import Component from './Component';
 
-import {
-  pageInProcess,
-  getTypes,
-  getCategories,
-} from '../ducks/commands';
+import { getTypes, getCategories } from '../ducks/commands';
 
 
-const mapStateToProps = (state) => ({
-  inProcess: state['main']['inProcess'],
-});
+export default hoc({
+  onMount({ dispatch }) {
 
-const mapActionsToProps = (dispatch) => bindActionCreators({
-  pageInProcess,
-  getTypes,
-  getCategories,
-}, dispatch);
+    document.title = `${process.env['REACT_APP_WEBSITE_NAME']} - Главная страница`;
+    document.querySelector('meta[name="description"]').setAttribute('content', 'Выбор очков, оправ и аксесуаров');
 
-
-export default connect(
-  mapStateToProps,
-  mapActionsToProps,
-)(Component);
+    dispatch(getTypes());
+    dispatch(getCategories());
+  }
+})(Component);

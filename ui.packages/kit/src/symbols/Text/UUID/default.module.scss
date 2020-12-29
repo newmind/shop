@@ -11,4 +11,6 @@
   letter-spacing: 1px;
   text-transform: uppercase;
   color: $gray;
+  text-overflow: ellipsis;
+  overflow: hidden;
 }

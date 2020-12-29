@@ -13,18 +13,15 @@ import cn from 'classnames';
 import styles from './default.module.scss';
 
 
-function Product({ isSale, isHit, uuid, amount, currency, brand, name, gallery, onCart, onView }) {
-  const classNameForSale = cn('fas fa-percent', styles['product__sale']);
-  const classNameForHit = cn('fas fa-star', styles['product__hit']);
-  const classNameForFastView = cn('far fa-eye', styles['product__view']);
-  const classNameForCart = cn('fas fa-shopping-cart', styles['product__cart']);
+export default function Product({ isSale, isHit, uuid, amount, currency, brand, name, gallery, onCart, onView }) {
+  const classNameForSale = cn('fas fa-percent', styles['sale']);
+  const classNameForHit = cn('fas fa-star', styles['hit']);
+  const classNameForFastView = cn('far fa-eye', styles['view']);
+  const classNameForCart = cn('fas fa-shopping-cart', styles['cart']);
 
   const cart = useSelector(selectItems);
   const countInCart = cart.filter((item) => (item['uuid'] === uuid)).length;
 
-  const productClassName = cn(styles['product'], {
-    [styles['product--in-cart']]: !! countInCart,
-  });
 
   function handleClickCart(event) {
     event.preventDefault();
@@ -39,30 +36,30 @@ function Product({ isSale, isHit, uuid, amount, currency, brand, name, gallery, 
   }
 
   return (
-    <Link className={productClassName} to={`/products/${uuid}`}>
-      <div className={styles['product__meta']}>
+    <Link className={styles['wrapper']} to={`/products/${uuid}`}>
+      <div className={styles['meta']}>
         {isHit && <span className={classNameForHit} title="хит продаж" />}
         {isSale && <span className={classNameForSale} title="распродажа" />}
       </div>
-      <div className={styles['product__description']}>
-        <div className={styles['product__uuid']}>
+      <div className={styles['description']}>
+        <div className={styles['uuid']}>
           <Text type="uuid">{ uuid }</Text>
         </div>
-        <div className={styles['product__brand']}>
+        <div className={styles['brand']}>
           <Header level={2}>{ brand }</Header>
         </div>
       </div>
-      <div className={styles['product__promo']}>
+      <div className={styles['promo']}>
         <Gallery items={gallery} isList={false} valueKey="externalId" path={`${process.env['REACT_APP_API_HOST']}/gallery`} />
       </div>
-      <div className={styles['product__name']}>
+      <div className={styles['name']}>
         <Text type={Text.TYPE_COMMENT}>{ name }</Text>
       </div>
-      <div className={styles['product__controls']}>
+      <div className={styles['controls']}>
         <span className={classNameForFastView} onClick={(event) => handleClickFastView(event)} />
-        <div className={styles['product__amount']}>{ numeral(amount).format() } {currency['value']}</div>
+        <div className={styles['amount']}>{ numeral(amount).format() } {currency['value']}</div>
         <span className={classNameForCart} onClick={(event) => handleClickCart(event)}>
-          { !! countInCart && <span className={styles['product__count']}>{countInCart}</span>}
+          { !! countInCart && <span className={styles['count']}>{countInCart}</span>}
         </span>
       </div>
     </Link>
@@ -93,5 +90,3 @@ Product.defaultProps = {
   brand: 'None',
   name: 'None',
 };
-
-export default Product;

@@ -11,4 +11,6 @@
   line-height: 1.4;
   letter-spacing: .5px;
   color: $blue-grey;
+  text-overflow: ellipsis;
+  overflow: hidden;
 }

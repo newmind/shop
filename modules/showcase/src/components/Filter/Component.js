@@ -14,7 +14,6 @@ function Filter({ types, categories, brands, colors, forms, materials, inProcess
   const { minAmount, maxAmount, ...query } = queryToObject(location['search']);
 
   function handleFilter({ amount, ...formData }) {
-    console.log(formData)
     formData['page'] = 1;
     formData['minAmount'] = amount[0];
     formData['maxAmount'] = amount[1];

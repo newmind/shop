@@ -1,50 +1,43 @@
 
 import request from "@ui.packages/request";
+import { pushNotification } from '@ui.packages/notifications';
 
 import {
-  pageInProcessAction,
-
-  getTypesRequest,
-  getTypesRequestFail,
-  getTypesRequestSuccess,
-
-  getCategoriesRequest,
-  getCategoriesRequestFail,
-  getCategoriesRequestSuccess,
-} from './actions';
-
-
-export const pageInProcess = (status) => (dispatch) => dispatch(pageInProcessAction(status));
+  getTypesAction,
+  getCategoriesAction,
+} from './slice';
 
 
 export const getTypes = () => async (dispatch) => {
   try {
-    dispatch(getTypesRequest());
-
     const result = await request({
       url: '/types',
     });
 
-    dispatch(getTypesRequestSuccess(result['data']));
+    dispatch(getTypesAction(result['data']));
   }
   catch(error) {
 
-    dispatch(getTypesRequestFail(error));
+    dispatch(pushNotification({
+      title: 'Ошибка при загрузке типов товаров',
+      mode: 'danger',
+    }));
   }
 };
 
 export const getCategories = () => async (dispatch) => {
   try {
-    dispatch(getCategoriesRequest());
-
     const result = await request({
       url: '/categories',
     });
 
-    dispatch(getCategoriesRequestSuccess(result['data']));
+    dispatch(getCategoriesAction(result['data']));
   }
   catch(error) {
 
-    dispatch(getCategoriesRequestFail());
+    dispatch(pushNotification({
+      title: 'Ошибка при загрузке категорий товаров',
+      mode: 'danger',
+    }));
   }
 };
