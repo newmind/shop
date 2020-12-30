@@ -359,6 +359,10 @@ module.exports = {
           type: Sequelize.STRING(1024),
           defaultValue: ''
         },
+        imageId: {
+          type: Sequelize.UUID,
+          allowNull: true,
+        },
         createdAt: {
           type: Sequelize.DATE,
         },
