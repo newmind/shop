@@ -21,7 +21,7 @@ COPY ./build-packages.sh             .
 
 RUN yarn
 
-RUN build-packages.sh
+RUN ./build-packages.sh
 
 # BUILD APPLICATION
 WORKDIR /app/apps/admin-ui
