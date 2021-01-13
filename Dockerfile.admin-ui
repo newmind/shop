@@ -17,60 +17,11 @@ COPY ./packages                      ./packages
 COPY ./package.json                  .
 COPY ./lerna.json                    .
 COPY ./yarn.lock                     .
+COPY ./build-packages.sh             .
 
 RUN yarn
 
-# BUILD COMPONENTS
-WORKDIR /app/ui.packages/application
-RUN ["yarn", "run", "build"]
-
-WORKDIR /app/ui.packages/table
-RUN ["yarn", "run", "build"]
-
-# BUILD COMPONENTS
-WORKDIR /app/ui.packages/dialog
-RUN ["yarn", "run", "build"]
-
-WORKDIR /app/ui.packages/notifications
-RUN ["yarn", "run", "build"]
-
-WORKDIR /app/ui.packages/tabs
-RUN ["yarn", "run", "build"]
-
-WORKDIR /app/ui.packages/kit
-RUN ["yarn", "run", "build"]
-
-WORKDIR /app/ui.packages/hoc
-RUN ["yarn", "run", "build"]
-
-# BUILD MODULES
-WORKDIR /app/modules/comments
-RUN ["yarn", "run", "build"]
-
-WORKDIR /app/modules/users
-RUN ["yarn", "run", "build"]
-
-WORKDIR /app/modules/attributes
-RUN ["yarn", "run", "build"]
-
-WORKDIR /app/modules/not-found
-RUN ["yarn", "run", "build"]
-
-WORKDIR /app/modules/orders
-RUN ["yarn", "run", "build"]
-
-WORKDIR /app/modules/product-modify
-RUN ["yarn", "run", "build"]
-
-WORKDIR /app/modules/products
-RUN ["yarn", "run", "build"]
-
-WORKDIR /app/modules/profile
-RUN ["yarn", "run", "build"]
-
-WORKDIR /app/modules/sign-in
-RUN ["yarn", "run", "build"]
-
+RUN build-packages.sh
 
 # BUILD APPLICATION
 WORKDIR /app/apps/admin-ui
