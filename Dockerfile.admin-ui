@@ -2,6 +2,7 @@
 # BUILD APP
 FROM node:14-alpine as ui
 
+RUN apk update && apk add bash
 RUN npm config set package-lock false
 #RUN npm i yarn -g --yes
 
