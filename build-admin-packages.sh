@@ -28,7 +28,7 @@ echo '-----------------------------------------'
 cd ../../modules || return
 
 echo '[--- Comments ---]'
-cd ../comments && npx yarn build
+cd  ./comments && npx yarn build
 echo '[--- Types ---]'
 cd ../types && npx yarn build
 echo '[--- Categories ---]'
