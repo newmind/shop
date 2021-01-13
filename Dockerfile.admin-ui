@@ -21,6 +21,7 @@ COPY ./build-packages.sh             .
 
 RUN yarn
 
+RUN chmod +x ./build-packages.sh
 RUN ./build-packages.sh
 
 # BUILD APPLICATION
