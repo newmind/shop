@@ -25,6 +25,8 @@ echo ''
 echo 'Сборка модулей для приложения "Admin"'
 echo '-----------------------------------------'
 
+cd ../../modules || return
+
 echo '[--- Comments ---]'
 cd ../comments && npx yarn build
 echo '[--- Types ---]'
