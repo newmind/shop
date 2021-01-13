@@ -6,7 +6,7 @@ import jwtToken from '@sys.packages/jwt';
 import logger from '@sys.packages/logger';
 import createSocket from '@sys.packages/socket.io';
 import appServer, { initRouter } from '@sys.packages/server';
-import { connectToRabbit } from "@sys.packages/rabbit";
+import { connectToRabbit, queueToExchange } from "@sys.packages/rabbit";
 
 import http from 'http';
 
