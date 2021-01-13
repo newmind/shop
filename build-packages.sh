@@ -36,7 +36,7 @@ cd ../../modules || return
 echo '[--- Main ---]'
 cd  ./main && npx yarn build
 echo '[--- Order Details ---]'
-cd ../orderDetails && npx yarn build
+cd ../order-details && npx yarn build
 echo '[--- Not Found ---]'
 cd ../not-found && npx yarn build
 echo '[--- Showcase ---]'
