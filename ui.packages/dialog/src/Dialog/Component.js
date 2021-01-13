@@ -42,7 +42,7 @@ function Dialog({ isOpen, data, name, title, mode, actionDialogName, children, c
   });
 
   return isOpen && (name === actionDialogName) && ReactDOM.createPortal((
-    <div ref={this.wrapperRef} className={styles['wrapper']} onClick={handleOutClick}>
+    <div ref={wrapperRef} className={styles['wrapper']} onClick={handleOutClick}>
       <div className={classNameDialog}>
         <span className={classNameCloseDialog} onClick={handleCloseDialog} />
         {title && (
