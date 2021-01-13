@@ -1,66 +1,56 @@
 
-import { Button } from '@ui.packages/kit';
+import { Button, Header } from '@ui.packages/kit';
 
-import types from 'prop-types';
-import React, { PureComponent } from 'react';
+import React from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+import { submit, isValid, isPristine } from 'redux-form';
 
 import ProfileForm from './ProfileForm';
 
 import styles from './default.module.scss';
 
+import { updateProfile } from '../ducks/commands';
+import { selectProfile, selectInProcess } from '../ducks/slice';
 
-class Component extends PureComponent {
-  static propTypes = {
-    profile: types.object,
-    inProcess: types.bool,
-    isValid: types.bool,
-    isPristine: types.bool,
-  };
 
-  static defaultProps = {
-    profile: {},
-    inProcess: false,
-    isValid: false,
-    isPristine: false,
-  };
+function Profile() {
+  const dispatch = useDispatch();
+  const profile = useSelector(selectProfile);
+  const inProcess = useSelector(selectInProcess);
+  const valid = useSelector(isValid('profile'));
+  const pristine = useSelector(isPristine('profile'));
 
-  _handleSave(data) {
-    const { saveProfile } = this.props;
-    saveProfile(data);
+  function handleSave(data) {
+    dispatch(updateProfile(data));
   }
 
-  _handleSubmit() {
-    const { submit } = this.props;
-    submit('profile');
+  function handleSubmit() {
+    dispatch(submit('profile'));
   }
 
-  render() {
-    const { profile, inProcess, isValid, isPristine } = this.props;
-
-    return (
-      <div className={styles['wrapper']}>
-        <div className={styles['header']}>
-          <h2>Пользователь</h2>
+  return (
+    <div className={styles['wrapper']}>
+      <div className={styles['header']}>
+        <Header level={2}>Пользователь</Header>
+      </div>
+      <div className={styles['container']}>
+        <div className={styles['form']}>
+          <ProfileForm
+            initialValues={profile}
+            disabled={inProcess}
+            onSubmit={(data) => handleSave(data)}
+          />
         </div>
-        <div className={styles['container']}>
-          <div className={styles['form']}>
-            <ProfileForm
-              initialValues={profile}
-              disabled={inProcess}
-              onSubmit={this._handleSave.bind(this)}
-            />
-          </div>
-          <div className={styles['controls']}>
-            <Button
-              mode="success"
-              disabled={ ! isValid || isPristine || inProcess}
-              onClick={this._handleSubmit.bind(this)}
-            >Сохранить</Button>
-          </div>
+        <div className={styles['controls']}>
+          <Button
+            mode="success"
+            disabled={ ! valid || pristine || inProcess}
+            onClick={() => handleSubmit()}
+          >Сохранить</Button>
         </div>
       </div>
-    );
-  }
+    </div>
+  );
 }
 
-export default Component;
+export default Profile;

@@ -197,7 +197,7 @@ Select.defaultProps = {
   optionKey: 'id',
   optionValue: 'value',
   placeholder: 'Выбери значение',
-  disabled: true,
+  disabled: false,
   value: null,
   options: [],
   inProcess: false,

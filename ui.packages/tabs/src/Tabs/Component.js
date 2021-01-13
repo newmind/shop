@@ -1,23 +1,12 @@
 
-import types from 'prop-types';
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect } from 'react';
 
 import TabContext from "../contexts/TabContext";
 
 import styles from './defaults.module.scss';
 
 
-const usePrevious = (value) => {
-  const ref = useRef();
-  useEffect(() => {
-    ref.current = value;
-  });
-  return ref.current;
-}
-
-
 function Tabs({ name, defaultTab, children, createTabs, removeTabs, setActiveTab, onChange }) {
-
   function handleChangeTab(name) {
     onChange && onChange(name);
   }
@@ -31,12 +20,12 @@ function Tabs({ name, defaultTab, children, createTabs, removeTabs, setActiveTab
 
   useEffect(() => {
     setActiveTab(name);
-  }, [defaultTab]);
+  }, [ defaultTab ]);
 
   return (
     <TabContext.Provider value={{
       tabsName: name,
-      onChange: handleChangeTab
+      onChange: (name) => handleChangeTab(name),
     }}>
       <div className={styles['wrapper']}>
         { children }

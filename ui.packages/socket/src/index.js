@@ -1,5 +1,5 @@
 
-import SocketIO from 'socket.io-client';
+import { io } from 'socket.io-client';
 
 
 let socket = null;
@@ -7,9 +7,9 @@ let room = null;
 
 
 export default (host, options) => {
-  socket = SocketIO(host, {
+  socket = io(host, {
     forceNew: true,
-    path: options['path'] || '/admin.socket.io',
+    path: options['path'] || '/socket.io',
     transports: ['websocket'],
     reconnection: true,
   });
@@ -18,31 +18,37 @@ export default (host, options) => {
     if (room) {
       joinToRoom(room);
     }
-    process.env['NODE_ENV'] === 'development' && console.log('Connected')
+    process.env['NODE_ENV'] === 'development' && console.debug(`Socket has been connected to ${host}${options['path']}`);
   });
-  socket.on('disconnect', () => process.env['NODE_ENV'] === 'development' && console.log('Disconnected'));
+  socket.on('disconnect', (reason) => process.env['NODE_ENV'] === 'development' && console.debug('Disconnected: ' + reason));
 
   return socket;
 }
 
 export const connect = () => {
-
+  if ( ! socket) {
+    return void 0;
+  }
   socket.open();
 };
 
 export const disconnect = () => {
-
+  if ( ! socket) {
+    return void 0;
+  }
   socket.close();
 };
 
 export const joinToRoom = (roomName) => {
 
-  socket.emit('join', roomName);
+  socket.emit('join', String(roomName));
   room = roomName;
 };
 
-export const instance = () => {
-  return socket;
+export const leaveFromRoom = (roomName) => {
+
+  socket.emit('leave', String(roomName));
+  room = null;
 };
 
 export const on = (eventName, cb) => {

@@ -1,0 +1,42 @@
+
+@import "~@ui.packages/theme";
+
+
+.dialog {
+
+  display: block;
+  width: 380px;
+  background: $white;
+  border: 1px solid $pale-lilac;
+  border-radius: 15px;
+  padding: 60px 50px;
+  box-sizing: border-box;
+}
+
+.header {
+
+  display: block;
+  text-align: center;
+  margin: 0 0 30px;
+}
+
+.content {
+
+  display: block;
+  margin: 0 0 32px;
+}
+
+.row {
+
+  display: block;
+
+  & + & {
+    margin: 25px 0 0;
+  }
+}
+
+.controls {
+
+  display: block;
+  text-align: center;
+}

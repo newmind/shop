@@ -1,108 +1,104 @@
 
-import types from 'prop-types';
-import React, { PureComponent } from 'react';
-
 import { Row, Col, Button, Container } from '@ui.packages/kit';
+
+import React from 'react';
+import types from 'prop-types';
+import { useNavigate } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
+import { submit, reset, isPristine, isValid } from 'redux-form';
 
 import ModifyForm from './ModifyForm';
 
 import styles from './default.module.scss';
 
+import { selectProduct } from '../ducks/slice';
+import { updateProductsById, createProduct, deleteImages } from '../ducks/commands';
 
-class Component extends PureComponent {
-  static propTypes = {
-    hasId: types.bool,
-    isInvalid: types.bool,
-    isPristine: types.bool,
-    types: types.array,
-    colors: types.array,
-    product: types.object,
-    units: types.array,
-    currencies: types.array,
-    materials: types.array,
-    isError: types.bool,
-    submit: types.func,
-    createProduct: types.func,
-    updateProductsById: types.func,
-  };
 
-  static defaultProps = {
-    product: {},
-    types: [],
-    colors: [],
-    units: [],
-    currencies: [],
-    materials: [],
-    isError: false,
-  };
+const FORM_NAME = 'modify-product';
 
-  _handleSubmitProduct(formData) {
-    const { updateProductsById, createProduct } = this.props;
 
+function ProductModify() {
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const product = useSelector(selectProduct);
+  const valid = useSelector(isValid(FORM_NAME));
+  const pristine = useSelector(isPristine(FORM_NAME));
+
+  function handleSubmitProduct(formData) {
     if (formData['uuid']) {
-      updateProductsById(formData);
+      dispatch(updateProductsById(formData));
     } else {
-      createProduct(formData);
+      dispatch(createProduct(formData));
+      navigate('/');
     }
   }
 
-  _handleDeleteImages(uuid) {
-    const { deleteImages } = this.props;
-    deleteImages([ uuid ]);
+  function handleDeleteImages(uuid) {
+    dispatch(deleteImages([ uuid ]));
   }
 
-  _handleSubmit() {
-    const { submit } = this.props;
-    submit('modify-product');
+  function handleSubmit() {
+    dispatch(submit(FORM_NAME));
   }
 
-  _handleReset() {
-    const { reset } = this.props;
-    reset('modify-product');
+  function handleReset() {
+    dispatch(reset(FORM_NAME));
   }
 
-  render() {
-    const { isError, hasId, isInvalid, isPristine, product, currencies, units, colors, materials, types, forms, categories } = this.props;
-
-    return (isError
-      ? (
-        <p>Error</p>
-      )
-      : (
-        <Container className={styles['form']}>
-          <Row>
-            <Col>
-              <ModifyForm
-                types={types}
-                forms={forms}
-                units={units}
-                colors={colors}
-                materials={materials}
-                currencies={currencies}
-                categories={categories}
-                initialValues={product}
-                onDelete={this._handleDeleteImages.bind(this)}
-                onSubmit={this._handleSubmitProduct.bind(this)}
-              />
-            </Col>
-          </Row>
-          <Row>
-            <Col>
-              <Button
-                disabled={isPristine}
-                onClick={this._handleReset.bind(this)}
-              >Отмена</Button>
-              <Button
-                type="submit"
-                disabled={isInvalid || isPristine}
-                mode="success"
-                onClick={this._handleSubmit.bind(this)}
-              >{hasId ? 'Сохранить' : 'Добавить'}</Button>
-            </Col>
-          </Row>
-        </Container>
-      ));
-  }
+  return (
+    <Container className={styles['form']}>
+      <Row>
+        <Col>
+          <ModifyForm
+            initialValues={product}
+            onDelete={handleDeleteImages}
+            onSubmit={handleSubmitProduct}
+          />
+        </Col>
+      </Row>
+      <Row>
+        <Col>
+          <Button
+            disabled={pristine}
+            onClick={handleReset}
+          >Отмена</Button>
+          <Button
+            type={Button.TYPE_BUTTON}
+            disabled={ ! valid || pristine}
+            mode="success"
+            onClick={handleSubmit}
+          >{product['uuid'] ? 'Сохранить' : 'Добавить'}</Button>
+        </Col>
+      </Row>
+    </Container>
+  );
 }
 
-export default Component;
+ProductModify.propTypes = {
+  hasId: types.bool,
+  isInvalid: types.bool,
+  isPristine: types.bool,
+  types: types.array,
+  colors: types.array,
+  product: types.object,
+  units: types.array,
+  currencies: types.array,
+  materials: types.array,
+  isError: types.bool,
+  submit: types.func,
+  createProduct: types.func,
+  updateProductsById: types.func,
+};
+
+ProductModify.defaultProps = {
+  product: {},
+  types: [],
+  colors: [],
+  units: [],
+  currencies: [],
+  materials: [],
+  isError: false,
+};
+
+export default ProductModify;

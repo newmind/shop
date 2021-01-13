@@ -72,7 +72,6 @@ const refreshToken = async (cookie, { serviceUrl }) => {
 
 
 export default (options) => async (ctx, next) => {
-
   const { name, serviceUrl } = options;
 
   try {
@@ -109,7 +108,7 @@ export default (options) => async (ctx, next) => {
     ctx.body = {
       success: false,
       error: {
-        code: '',
+        code: '4.4.4',
         message: error['message']
       },
     };

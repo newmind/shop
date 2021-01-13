@@ -1,4 +1,5 @@
 
+import { Mode } from '@ui.packages/types';
 import { Button } from "@ui.packages/kit";
 
 import types from 'prop-types';
@@ -19,12 +20,19 @@ function ConfirmDialog({ name, title, message, onConfirm, onCancel }) {
   }
 
   return (
-    <Dialog name={name} title={title} mode="danger" onClose={handleCancel}>
+    <Dialog name={name} title={title} mode={Mode.DANGER} onClose={() => handleCancel()}>
       <div className={styles['confirm']}>
         <p className={styles['confirm__message']}>{ message }</p>
         <div className={styles['confirm__controls']}>
-          <Button mode="danger" onClick={handleConfirm}>Подтверждаю</Button>
-          <Button onClick={handleCancel}>Отмена</Button>
+          <Button
+            form={Button.FORM_CONTEXT}
+            mode={Mode.DEFAULT}
+            onClick={() => handleCancel()}
+          >Отмена</Button>
+          <Button
+            mode={Mode.DANGER}
+            onClick={() => handleConfirm()}
+          >Подтверждаю</Button>
         </div>
       </div>
     </Dialog>
@@ -35,14 +43,16 @@ ConfirmDialog.propTypes = {
   name: types.string,
   title: types.string,
   message: types.string,
-  onConfirm: null,
-  onCancel: null,
+  onConfirm: types.func,
+  onCancel: types.func,
 };
 
 ConfirmDialog.defaultProps = {
   name: 'confirm',
   title: null,
   message: null,
+  onCancel: null,
+  onConfirm: null,
 };
 
 export default ConfirmDialog;

@@ -55,12 +55,12 @@ export default () => async (ctx) => {
   const { Product, Attribute, Units, Gallery, Currency, Category, Type, Color, Material, Form } = models;
   const { files = [], fields = {}} = await getFiles(ctx['req']);
   const { attributes = null } = fields;
-
+try {
   const transaction = await sequelize.transaction();
 
-  const { uuid } = await Product.create(fields, { transaction });
+  const {uuid} = await Product.create(fields, {transaction});
 
-  await saveFiles(files, { productId: uuid }, { transaction });
+  await saveFiles(files, { productId: uuid }, {transaction});
 
   if (attributes) {
 
@@ -70,13 +70,13 @@ export default () => async (ctx) => {
         return item;
       });
 
-    await Attribute.bulkCreate(attributes, { transaction });
+    await Attribute.bulkCreate(attributes, {transaction});
   }
 
   await transaction.commit();
 
   const result = await Product.findOne({
-    where: { uuid },
+    where: {uuid},
     attributes: ['uuid', 'brand', 'name', 'description', 'params', 'status', 'amount', 'saleAmount', 'count', 'createdAt'],
     include: [
       {
@@ -144,4 +144,8 @@ export default () => async (ctx) => {
     success: true,
     data: result.toJSON(),
   };
+}
+catch (e) {
+  console.log(e)
+}
 };

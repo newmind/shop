@@ -1,8 +1,8 @@
-'use strict';
 
 import fs from "fs";
 import BusBoy from 'busboy';
 import crypto from "crypto";
+
 
 const extensions = {
   'image/jpeg': 'jpg',
@@ -64,8 +64,17 @@ export const saveFile = (buffer, path) => {
   });
 };
 
-export const getFiles = async (req) => {
+function convertData(value) {
+  if (/^\d+(.\d+)?$/.test(value)) {
+    return Number(value);
+  }
+  else if (/^null$/.test(value)) {
+    return null;
+  }
+  return value;
+}
 
+export const getFiles = async (req) => {
   return new Promise((resolve, reject) => {
 
     const result = { files: {}, fields: {} };
@@ -94,7 +103,7 @@ export const getFiles = async (req) => {
 
     // bb.on('field', function(fieldname, val, fieldnameTruncated, valTruncated, encoding, mimetype) {
     bb.on('field', function(fieldname, val) {
-      result['fields'][fieldname] = val;
+      result['fields'][fieldname] = convertData(val);
     });
 
     bb.on('error', error => reject(error));

@@ -5,16 +5,14 @@
 .button {
 
   display: inline-block;
-  padding: 9px 26px;
+  padding: 10px 30px;
   border: 1px solid transparent;
-  border-radius: 5px;
   cursor: pointer;
   background: transparent;
   color: $coal-dark;
   font-family: inherit;
-  font-weight: 400;
+  font-weight: 600;
   font-size: 14px;
-  letter-spacing: .5px;
   outline: none;
   text-decoration: underline;
   transition: color 200ms;

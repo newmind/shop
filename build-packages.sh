@@ -58,8 +58,20 @@ echo '-----------------------------------------'
 
 echo '[--- Comments ---]'
 cd ../comments && npx yarn build
-echo '[--- Attributes ---]'
-cd ../attributes && npx yarn build
+echo '[--- Types ---]'
+cd ../types && npx yarn build
+echo '[--- Categories ---]'
+cd ../categories && npx yarn build
+echo '[--- Colors ---]'
+cd ../colors && npx yarn build
+echo '[--- Materials ---]'
+cd ../materials && npx yarn build
+echo '[--- Forms ---]'
+cd ../forms && npx yarn build
+echo '[--- Units ---]'
+cd ../units && npx yarn build
+echo '[--- Currencies ---]'
+cd ../currencies && npx yarn build
 echo '[--- Not Found ---]'
 cd ../not-found && npx yarn build
 echo '[--- Orders ---]'

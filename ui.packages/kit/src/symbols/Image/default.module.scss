@@ -65,10 +65,30 @@
   z-index: 20;
 }
 
+.empty {
+
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  flex: 1 0;
+  justify-content: center;
+  align-items: center;
+  background: $white;
+  color: $blue-grey;
+  border: 1px solid $pale-lilac;
+  background-color: $pale-grey;
+  border-radius: 20px;
+  z-index: 20;
+}
+
 .icon {
 
   display: block;
   font-size: 32px;
+}
+
+.animation {
+
   -webkit-animation: spin 2s infinite linear;
   animation: spin 2s infinite linear;
 }

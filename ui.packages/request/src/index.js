@@ -56,6 +56,7 @@ const request = async (options) => {
     return data;
   }
   catch(error) {
+
     if (error['response']) {
       const { status, data } = error['response'];
 

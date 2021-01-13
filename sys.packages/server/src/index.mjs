@@ -12,7 +12,7 @@ const router = new Router();
 
 app.use(async (ctx, next) => {
 
-  logger['info'](`REQUEST ---> [${ctx.request.method}] "${ctx.request.url}" (${ctx.request.body ? JSON.stringify(ctx.request.body) : 'null'})`);
+  logger['info'](`[REQUEST] ---> [${ctx.request.method}] "${ctx.request.url}" (${ctx.request.body ? JSON.stringify(ctx.request.body) : 'null'})`);
 
   await next();
 
@@ -20,14 +20,20 @@ app.use(async (ctx, next) => {
   const body = ctx.response.body;
 
   if (body) {
-    if (body.constructor === Object) {
-      response = JSON.stringify(body);
-    } else if (body.constructor === Array) {
-      response = JSON.stringify(body);
+    if (body['req']) {
+      response = ctx.response.message;
+    }
+    else {
+      if (body instanceof Object) {
+        response = JSON.stringify(body);
+      }
+      else if (Array.isArray(body)) {
+        response = JSON.stringify(body);
+      }
     }
   }
 
-  logger['info'](`RESPONSE <--- [${ctx.request.method}] "${ctx.request.url}" [${ctx.response.status}] (${response})`);
+  logger['info'](`[RESPONSE] <--- [${ctx.request.method}] "${ctx.request.url}" [${ctx.response.status}] (${response})`);
 });
 
 app.use(koaBodyParser({
@@ -36,17 +42,6 @@ app.use(koaBodyParser({
     ctx.throw(422, 'body parse error');
   }
 }));
-
-app.use(async (ctx, next) => {
-  try {
-    await next();
-  }
-  catch(error) {
-    console.log(error)
-    ctx.status = error['status'];
-    ctx.body = error['data'];
-  }
-});
 
 export const initRouter = (callback) => {
 

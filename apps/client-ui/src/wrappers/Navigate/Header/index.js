@@ -12,7 +12,7 @@ function Header() {
     <div className={styles['header']}>
       <div className={styles['header__title']}>
         <div className={styles['container']}>
-          <Link className={styles['logotype']} to={'/'}><i className="fas fa-glasses" />&nbsp;&nbsp;&nbsp;Магазин очков</Link>
+          <Link className={styles['logotype']} to={'/'}><i className="fas fa-hands" />&nbsp;&nbsp;&nbsp;Ваш магазин</Link>
         </div>
       </div>
       <div className={styles['header__cart']}>

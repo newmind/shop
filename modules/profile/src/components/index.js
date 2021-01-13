@@ -1,35 +1,34 @@
 
-import { bindActionCreators } from 'redux';
-import PageHOC from '@ui.packages/hocs';
-
-import { submit, isValid, isPristine } from 'redux-form';
+import HOC from '@ui.packages/hoc';
 
 import Component from './Component';
 
-import { getProfile, saveProfile } from '../ducks/commands';
+import { getProfile } from '../ducks/commands';
+import { resetStateAction } from '../ducks/slice';
 
 
-const mapStateToProps = state => {
-  const Profile = state['profile'];
-  return {
-    profile: Profile['profile'],
-    isValid: isValid('profile')(state),
-    isPristine: isPristine('profile')(state),
-  };
-};
+// const mapStateToProps = state => {
+//   const Profile = state['profile'];
+//   return {
+//     profile: Profile['profile'],
+//     isValid: isValid('profile')(state),
+//     isPristine: isPristine('profile')(state),
+//   };
+// };
+//
+// const mapActionsToProps = (dispatch) => {
+//   return {
+//     submit: bindActionCreators(submit, dispatch),
+//     getProfile: bindActionCreators(getProfile, dispatch),
+//     saveProfile: bindActionCreators(saveProfile, dispatch),
+//   };
+// };
 
-const mapActionsToProps = (dispatch) => {
-  return {
-    submit: bindActionCreators(submit, dispatch),
-    getProfile: bindActionCreators(getProfile, dispatch),
-    saveProfile: bindActionCreators(saveProfile, dispatch),
-  };
-};
-
-export default PageHOC({
-  mapStateToProps,
-  mapActionsToProps,
-  onEnter: async ({ getProfile }) => {
-    await getProfile();
+export default HOC({
+  onMount({ dispatch }) {
+    dispatch(getProfile());
+  },
+  onUnmount({ dispatch }) {
+    dispatch(resetStateAction());
   },
 })(Component);

@@ -18,7 +18,7 @@ function Tab({ name, setActiveTab, tabs, caption }) {
 
   const activeTab = tabs[tabsName] && tabs[tabsName]['activeTab'];
   const classNameTab = cn(styles['tab'], {
-    [styles['tab--active']]: activeTab === name,
+    [styles['tab--active']]: (activeTab === name),
   });
 
   return (
@@ -41,4 +41,4 @@ Tab.defaultProps = {
   tabs: {},
 };
 
-export default Comment;
+export default Tab;

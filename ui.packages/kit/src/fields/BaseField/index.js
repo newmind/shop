@@ -1,17 +1,12 @@
 
+import { Mode } from '@ui.packages/types';
+
 import React from 'react';
 import types from 'prop-types';
 import { Field } from 'redux-form';
 
 import cn from "classnames";
 import styles from "./default.module.scss";
-
-
-const PRIMARY_MODE = 'primary';
-const INFO_MODE = 'info';
-const WARNING_MODE = 'warning';
-const DANGER_MODE = 'danger';
-const SUCCESS_MODE = 'success';
 
 
 function FieldComponent({ input, label, disabled, message, meta: { touched, error, warning }, children, onChange, ...props }) {
@@ -22,24 +17,24 @@ function FieldComponent({ input, label, disabled, message, meta: { touched, erro
     onChange && onChange(value);
   }
 
-  let mode = 'default';
+  let mode = Mode.DEFAULT;
 
   if (touched && (error || message)) {
-    mode = 'danger';
+    mode = Mode.DANGER;
   }
 
   if (touched && warning) {
-    mode = 'warning';
+    mode = Mode.WARNING;
   }
 
   const hasError = ! disabled && (error || message) && touched;
   const classNameInputWrapper = cn(styles['wrapper'], {
-    [styles['wrapper--primary']]: mode === PRIMARY_MODE,
-    [styles['wrapper--success']]: mode === SUCCESS_MODE,
-    [styles['wrapper--info']]: mode === INFO_MODE,
-    [styles['wrapper--danger']]: mode === DANGER_MODE,
-    [styles['wrapper--warning']]: mode === WARNING_MODE,
-    [styles['wrapper--disabled']]: disabled,
+    [styles['mode--info']]: mode === Mode.INFO,
+    [styles['mode--danger']]: mode === Mode.DANGER,
+    [styles['mode--warning']]: mode === Mode.WARNING,
+    [styles['mode--primary']]: mode === Mode.PRIMARY,
+    [styles['mode--success']]: mode === Mode.SUCCESS,
+    [styles['disabled']]: disabled,
   });
 
   return (

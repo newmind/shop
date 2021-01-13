@@ -1,4 +1,5 @@
 
+import Socket from '@ui.packages/socket';
 import { middleware as requestMiddleware } from '@ui.packages/request';
 import { Notifications, notificationReducer } from '@ui.packages/notifications';
 
@@ -9,7 +10,7 @@ import { Provider } from 'react-redux';
 import { BrowserRouter } from 'react-router-dom';
 
 import Application from './Application';
-import applicationReducer from './ducks/reducer';
+import { reducer as applicationReducer } from './ducks/slice';
 
 import initStore from './redux/initStore';
 
@@ -76,11 +77,15 @@ class App {
     };
   }
 
-
-
   async start() {
     const routes = await createRoutes(this.options['routes']);
     const reducers = await createReducers(this.options['routes']);
+
+    if (process.env['REACT_APP_SOCKET_HOST'] && process.env['REACT_APP_SOCKET_PATH']) {
+      Socket(process.env['REACT_APP_SOCKET_HOST'], {
+        path: process.env['REACT_APP_SOCKET_PATH'],
+      })
+    }
 
     this.store = initStore({
       ...reducers,

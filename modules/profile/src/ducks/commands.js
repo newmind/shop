@@ -2,23 +2,18 @@
 import request from '@ui.packages/request';
 
 import {
-  pageInProcess,
-
   getProfileRequestAction,
   getProfileRequestFailAction,
   getProfileRequestSuccessAction,
 
-  saveProfileRequestAction,
-  saveProfileRequestFailAction,
-  saveProfileRequestSuccessAction,
-
-  applicationGetProfileRequestSuccessAction,
-} from './actions';
+  updateProfileRequestAction,
+  updateProfileRequestFailAction,
+  updateProfileRequestSuccessAction,
+} from './slice';
 
 
 export const getProfile = () => async dispatch => {
   try {
-    dispatch(pageInProcess(true));
     dispatch(getProfileRequestAction());
 
     const { data } = await request({
@@ -31,14 +26,11 @@ export const getProfile = () => async dispatch => {
   catch(error) {
     dispatch(getProfileRequestFailAction(error));
   }
-  finally {
-    dispatch(pageInProcess(false));
-  }
 };
 
-export const saveProfile = (formData) => async dispatch => {
+export const updateProfile = (formData) => async dispatch => {
   try {
-    dispatch(saveProfileRequestAction());
+    dispatch(updateProfileRequestAction());
 
     const { data } = await request({
       method: 'put',
@@ -46,11 +38,9 @@ export const saveProfile = (formData) => async dispatch => {
       data: formData,
     });
 
-    dispatch(saveProfileRequestSuccessAction(data));
-    dispatch(applicationGetProfileRequestSuccessAction(data));
+    dispatch(updateProfileRequestSuccessAction(data));
   }
   catch(error) {
-
-    dispatch(saveProfileRequestFailAction(error));
+    dispatch(updateProfileRequestFailAction(error));
   }
 };

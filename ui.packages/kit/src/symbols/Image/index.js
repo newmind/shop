@@ -128,14 +128,19 @@ export default function Image({ className, src, size, isResize }) {
       <div ref={wrapperRef} className={imageClassName}>
         {src && <img ref={imageRef} src={src} alt="" />}
       </div>
-      {isLoadingState && (
+      {src && isLoadingState && (
         <div className={styles['loading']}>
-          <span className={cn(styles['icon'], 'fas fa-circle-notch')} />
+          <span className={cn(styles['icon'], styles['animation'], 'fas fa-circle-notch')} />
         </div>
       )}
-      {isError && (
+      {src && isError && (
         <div className={styles['error']}>
           <span className={cn(styles['icon'], 'fas fa-exclamation-circle')} />
+        </div>
+      )}
+      { ! src && (
+        <div className={styles['empty']}>
+          <span className={cn(styles['icon'], 'far fa-image')} />
         </div>
       )}
     </div>

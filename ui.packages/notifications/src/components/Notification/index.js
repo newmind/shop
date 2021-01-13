@@ -1,6 +1,6 @@
 
-import { Timeout } from '@ui.packages/timer';
 import { Mode } from '@ui.packages/types';
+import { Timeout } from '@ui.packages/timer';
 
 import types from 'prop-types';
 import React, { useEffect } from 'react';

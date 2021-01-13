@@ -6,16 +6,26 @@
 
   background: transparent;
   vertical-align: top;
+
+  &:first-child .content {
+    padding-left: 10px;
+  }
+
+  &:last-child .content {
+    padding-right: 10px;
+  }
 }
 
 .content {
 
   display: block;
-  margin: 20px 8px 30px;
+  padding: 20px 5px;
+  height: 100%;
   text-align: center;
   font-family: inherit;
   font-weight: 300;
   font-size: 14px;
+  box-sizing: border-box;
   overflow: hidden;
   text-overflow: ellipsis;
 

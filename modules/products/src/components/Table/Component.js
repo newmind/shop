@@ -1,4 +1,6 @@
 
+import numeral from '@packages/numeral';
+
 import { Confirm } from "@ui.packages/dialog";
 import { Column, Table } from "@ui.packages/table";
 import { Actions, Gallery } from "@ui.packages/kit";
@@ -58,7 +60,7 @@ function List({ items, meta, openDialog, closeDialog, removeProductById }) {
                 {uuid && <div className={styles['description__item']}><b className={styles['description__label']}>{ uuid }</b></div>}
                 {brand && <div className={styles['description__item']}><b className={styles['description__label']}>Бренд:</b> { brand }</div>}
                 {name && <div className={styles['description__item']}><b className={styles['description__label']}>Название:</b> { name }</div>}
-                {name && <div className={styles['description__item']}><b className={styles['description__label']}>Цена:</b> { amount } { currency['value'] }</div>}
+                {name && <div className={styles['description__item']}><b className={styles['description__label']}>Цена:</b> { numeral(amount).format() } { currency['value'] }</div>}
                 {description && <div className={styles['description__item']}><b className={styles['description__label']}>Описание:</b> { description }</div>}
               </div>
             )
@@ -104,7 +106,7 @@ function List({ items, meta, openDialog, closeDialog, removeProductById }) {
         </Column>
         <Column
           align="right"
-          width="70"
+          width="50"
         >
           {({ uuid }) => (
             <Actions
@@ -114,6 +116,7 @@ function List({ items, meta, openDialog, closeDialog, removeProductById }) {
           )}
         </Column>
       </Table>
+
       <Confirm
         name="remove-confirm"
         message="Вы уверены, что хотите удалить товар?"

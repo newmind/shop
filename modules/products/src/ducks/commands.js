@@ -1,30 +1,19 @@
 
 import moment from '@packages/moment';
 
+import { Mode } from '@ui.packages/types';
 import request from '@ui.packages/request';
 import { pushNotification } from '@ui.packages/notifications';
 
 import {
-  openDialogAction,
-  closeDialogAction,
-
   getProductsRequestAction,
   getProductsRequestFailAction,
   getProductsRequestSuccessAction,
 
-  createProductsRequestAction,
-  createProductsRequestFailAction,
-  createProductsRequestSuccessAction,
-
-  removeProductsRequestAction,
-  removeProductsRequestFailAction,
-  removeProductsRequestSuccessAction,
-} from './actions';
-
-
-export const openDialog = () => (dispatch) => dispatch(openDialogAction());
-
-export const closeDialog = () => (dispatch) => dispatch(closeDialogAction());
+  removeProductRequestAction,
+  removeProductRequestFailRequest,
+  removeProductRequestSuccessAction,
+} from './slice';
 
 
 export const getProducts = (params = {}) => async (dispatch) => {
@@ -44,38 +33,19 @@ export const getProducts = (params = {}) => async (dispatch) => {
     dispatch(getProductsRequestSuccessAction(result));
   }
   catch(error) {
-
     dispatch(getProductsRequestFailAction());
-  }
-};
-
-export const createProducts = (data) => async dispatch => {
-  try {
-
-    dispatch(createProductsRequestAction());
-
-    const result = await request({
-      method: 'post',
-      url: '/products',
-      data: data,
-    });
-
-    dispatch(createProductsRequestSuccessAction(result['data']));
-    dispatch(closeDialog());
-
-  } catch(error) {
     dispatch(pushNotification({
-      type: 'Ошибка запроса',
-      message: error['message'],
-      mode: 'danger'
+      title: 'Ошибка при запросе данных',
+      connect: `${error['data']['message']} (${error['data']['code']})`,
+      mode: Mode.DANGER,
+      autoClose: false,
     }));
-    dispatch(createProductsRequestFailAction());
   }
 };
 
 export const removeProductById = (uuid) => async dispatch => {
   try {
-    dispatch(removeProductsRequestAction());
+    dispatch(removeProductRequestAction());
 
     const result = await request({
       method: 'delete',
@@ -83,9 +53,19 @@ export const removeProductById = (uuid) => async dispatch => {
       data: { uuid },
     });
 
-    dispatch(removeProductsRequestSuccessAction(result['data']));
+    dispatch(removeProductRequestSuccessAction(result['data']));
+    dispatch(pushNotification({
+      title: 'Продукт удален',
+      mode: Mode.SUCCESS,
+    }));
   }
   catch(error) {
-    dispatch(removeProductsRequestFailAction());
+    dispatch(removeProductRequestFailRequest(error));
+    dispatch(pushNotification({
+      title: 'Ошибка при удаленнии продукта',
+      connect: `${error['data']['message']} (${error['data']['code']})`,
+      mode: Mode.DANGER,
+      autoClose: false,
+    }));
   }
 };

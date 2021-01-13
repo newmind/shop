@@ -4,43 +4,28 @@ import { sendEvent } from "@sys.packages/rabbit";
 
 
 export default () => async (ctx) => {
+  const { Passport } = models;
+  const { id } = ctx['params'];
+  const { body } = ctx['request'];
 
-  try {
+  const transaction = await sequelize.transaction();
 
-    const { Passport } = models;
-    const { id } = ctx['params'];
-    const { body } = ctx['request'];
+  await Passport.update(body, {
+    where: { userId: id },
+    transaction,
+  });
 
-    const transaction = await sequelize.transaction();
+  const result = await Passport.findOne({
+    where: { userId: id },
+    transaction,
+  });
 
-    await Passport.update(body, {
-      where: { userId: id },
-      transaction,
-    });
+  await transaction.commit();
 
-    const result = await Passport.findOne({
-      where: { userId: id },
-      transaction,
-    });
+  sendEvent(process.env['RABBIT_IDENTITY_SRV_EXCHANGE_PASSPORT_UPDATED'], JSON.stringify(result.toJSON()));
 
-    await transaction.commit();
-
-    sendEvent(process.env['RABBIT_IDENTITY_SRV_EXCHANGE_PASSPORT_UPDATED'], JSON.stringify(result.toJSON()));
-
-    ctx.body = {
-      success: true,
-      data: result.toJSON(),
-    };
-
-  } catch(e) {
-
-    ctx.status = 500;
-    ctx.body = {
-      success: false,
-      error: {
-        code: 500,
-        message: e['message'],
-      },
-    };
-  }
+  ctx.body = {
+    success: true,
+    data: result.toJSON(),
+  };
 };

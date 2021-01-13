@@ -1,27 +1,20 @@
 
-import { connect } from 'react-redux';
-import { bindActionCreators } from 'redux';
+import HOC from '@ui.packages/hoc';
+import { queryToObject } from "@ui.packages/utils";
 
 import Component from './Component';
 
-import {
-  getProducts,
-  createProducts,
-} from '../ducks/commands';
+import { resetState } from '../ducks/slice';
+import { getProducts } from '../ducks/commands';
 
 
-const mapStateToProps = () => {
-  return {};
-};
+export default HOC({
+  onMount({ dispatch, location }) {
+    const search = queryToObject(location['search']);
 
-const mapActionsToProps = (dispatch) => {
-  return {
-    getProducts: bindActionCreators(getProducts, dispatch),
-    createProducts: bindActionCreators(createProducts, dispatch),
-  };
-};
-
-export default connect(
-  mapStateToProps,
-  mapActionsToProps,
-)(Component);
+    dispatch(getProducts(search));
+  },
+  onUnmount({ dispatch }) {
+    dispatch(resetState());
+  }
+})(Component);

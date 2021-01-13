@@ -1,79 +1,8 @@
 
 @import "~@ui.packages/theme";
 
+
 .wrapper {
 
-}
-
-.dialog {
-
-  position: relative;
-  display: flex;
-  flex: 0 0 auto;
-  flex-direction: column;
-  background: $white;
-  min-width: 500px;
-  min-height: 100px;
-  max-height: 90%;
-  border-radius: 4px;
-  margin: auto;
-  box-shadow: 0 6px 10px 0 rgba(34, 34, 34, 0.3);
-  overflow: hidden;
-
-
-  &--info { background: lighten($information, 30%); }
-  &--info &__header { background: $information;  }
-
-  &--primary { background: lighten($primary, 40%); }
-  &--primary &__header { background: $primary; color: $white; }
-  &--primary &__close:hover { color: $white; }
-
-  &--success { background: lighten($success, 40%); }
-  &--success &__header { background: $success; color: $white; }
-  &--success &__close:hover { color: $white; }
-
-  &--warning { background: lighten($warning, 40%); }
-  &--warning &__header { background: $warning; color: $white; }
-  &--warning &__close:hover { color: $white; }
-
-  &--danger { background: lighten($danger, 40%); }
-  &--danger &__header { background: $danger; color: $white; }
-  &--danger &__close:hover { color: $white; }
-
-
-  &__close {
-
-    position: absolute;
-    top: 10px;
-    right: 10px;
-    display: block;
-    width: 16px;
-    height: 16px;
-    font-size: 20px;
-    color: $very-light-pink;
-    cursor: pointer;
-    transition: color 400ms;
-
-    &:hover {
-      color: $coal-dark;
-    }
-  }
-
-  &__header {
-
-    display: block;
-    background: $whitesmoke;
-    border-bottom: 1px solid $very-light-pink;
-    font-family: inherit;
-    font-weight: 700;
-    font-size: 14px;
-    padding: 14px 20px 10px;
-    color: $coal-dark;
-  }
-
-  &__content {
-
-    display: block;
-    overflow: auto;
-  }
+  display: block;
 }

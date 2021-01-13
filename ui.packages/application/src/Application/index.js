@@ -4,7 +4,7 @@ import { bindActionCreators } from 'redux';
 
 import Component from './Component';
 
-import { signIn, signOut, getProfile } from '../ducks/commands';
+import { signIn, signOut, getProfile, changeState } from '../ducks/commands';
 
 
 function mapStateToProps(state) {
@@ -19,6 +19,7 @@ function mapActionsToProps(dispatch) {
     signIn,
     signOut,
     getProfile,
+    changeState,
   }, dispatch);
 }
 

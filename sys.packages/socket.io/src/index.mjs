@@ -18,14 +18,22 @@ export default async (server, options = {}) => {
       return next();
     });
 
-    io.on('connection', client => {
+    io.on('connection', (client) => {
 
       client.on('join', (room) => {
         client.join(room);
         logger['info']('Socket: joined to room: ' + room);
       });
 
-      client.on('disconnect', () => { logger['info']('Socket: disconnect') });
+      client.on('leave', (room) => {
+        client.leave(room);
+        logger['info']('Socket: leave from room: ' + room);
+      });
+
+      client.on('disconnect', () => {
+        logger['info']('Socket: disconnect');
+      });
+
       logger['info']('Socket: connected');
     });
 
@@ -34,6 +42,7 @@ export default async (server, options = {}) => {
     return io;
   }
   catch(error) {
+
     logger['error']('Socket: ' + error)
   }
 }

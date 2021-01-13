@@ -1,6 +1,6 @@
 
-import PropTypes from 'prop-types';
 import React from 'react';
+import PropTypes from 'prop-types';
 
 import cn from 'classnames';
 import styles from './default.module.scss';
@@ -9,13 +9,16 @@ import styles from './default.module.scss';
 function Header({ children }) {
 
   function renderItem() {
-    return React.Children.map(children, (Item) => {
+    return React.Children.map(children, (Item, index) => {
       const params = Item['props'];
       const { title, width, align } = params;
       const columnProps = {};
 
+      const isFirst = (index === 0);
+      const isLast = (index === React.Children.count(children) - 1);
+
       if (width) {
-        columnProps['width'] = Number(width) + 16;
+        columnProps['width'] = Number(width) + ((isFirst || isLast) ? 15 : 10);
       }
 
       const titleClassName = cn(styles['title'], {
@@ -25,9 +28,11 @@ function Header({ children }) {
 
       return (
         <td className={styles['col']} {...columnProps}>
-          <span className={titleClassName}>
-            { title }
-          </span>
+          {title && (
+            <span className={titleClassName}>
+              { title }
+            </span>
+          )}
         </td>
       );
     });

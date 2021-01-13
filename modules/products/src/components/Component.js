@@ -1,25 +1,17 @@
 
-import { Button } from '@ui.packages/kit';
-import { queryToObject } from "@ui.packages/utils";
+import { Mode } from '@ui.packages/types';
+import { Button, Header } from '@ui.packages/kit';
 
-import React, { useEffect } from 'react';
-import { useLocation, useNavigate } from 'react-router-dom';
+import React from 'react';
+import { useNavigate } from 'react-router-dom';
 
 import Table from './Table';
 
 import styles from './default.module.scss';
 
 
-function Products({ getProducts }) {
-  const location = useLocation();
+function Products() {
   const navigate = useNavigate();
-
-  useEffect(function init() {
-    const search = queryToObject(location['search']);
-    getProducts(search);
-    return () => {
-    }
-  }, []);
 
   function handleAddProduct() {
     navigate('/products/create');
@@ -29,13 +21,13 @@ function Products({ getProducts }) {
     <section className={styles['wrapper']}>
       <aside className={styles['controls']}>
         <Button
-          mode="success"
+          mode={Mode.SUCCESS}
           onClick={() => handleAddProduct()}
         >Добавить товар</Button>
       </aside>
       <article className={styles['content']}>
         <div className={styles['header']}>
-          <h2>Управление витриной</h2>
+          <Header level={2}>Управление витриной</Header>
         </div>
         <div className={styles['filter']}>
           {/*<Filter initialValues={search} onSubmit={(data) => setQuery(data)} />*/}

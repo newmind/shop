@@ -6,7 +6,7 @@
 
   position: relative;
   display: flex;
-  flex: 1 0 auto;
+  flex: 1 0;
   flex-direction: column;
 }
 
@@ -19,26 +19,22 @@
 .page {
 
   display: flex;
-  flex: 1 0 auto;
+  flex: 1 0;
   flex-direction: column;
+  overflow: hidden;
 }
 
 .aside {
 
   display: block;
-  background: $primary;
+  background: $pale-grey;
+  box-shadow: 0 3px 10px 0 rgba($pale-lilac, .5);
 }
 
 .content {
 
   display: flex;
-  flex: 1 1 auto;
+  flex: 1 0;
   flex-direction: column;
-  width: 100%;
-}
-
-.footer {
-
-  display: block;
-  background: $whitesmoke;
+  overflow: auto;
 }

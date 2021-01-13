@@ -164,6 +164,7 @@ export const middlewareErrors = () => async (ctx, next) => {
     checkStatus(ctx['status']);
   }
   catch(error) {
+
     if (error instanceof ReferenceError) {
       ctx.status = 500;
       ctx.body = { code: '0.0.0', message: error['message'] };

@@ -32,7 +32,7 @@ function Dialog({ isOpen, data, name, title, mode, actionDialogName, children, c
     }
   }
 
-  const classNameCloseDialog = cn('fas fa-times', styles['dialog__close']);
+  const classNameCloseDialog = cn(styles['dialog__close'], 'fas fa-times');
   const classNameDialog = cn(styles['dialog'], {
     [styles['dialog--primary']]: mode === PRIMARY_MODE,
     [styles['dialog--success']]: mode === SUCCESS_MODE,

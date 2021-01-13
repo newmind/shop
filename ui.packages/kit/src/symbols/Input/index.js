@@ -12,7 +12,7 @@ const TYPE_TEXT = 'text';
 const TYPE_PASSWORD = 'password';
 
 
-function Input({ value, mode, className, disabled, onBlur, onChange, onFocus, ...props }) {
+function Input({ mode, className, disabled, onBlur, onFocus, ...props }) {
   const [isFocus, setFocus] = useState(false);
 
   function handleFocus(event) {

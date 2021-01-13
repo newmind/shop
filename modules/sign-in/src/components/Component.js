@@ -1,5 +1,4 @@
 
-import { Button } from '@ui.packages/kit';
 import { ApplicationContext } from '@ui.packages/application';
 
 import types from 'prop-types';
@@ -11,7 +10,7 @@ import Form from './Form';
 import styles from './default.module.scss';
 
 
-function SignIn({ isValid, isPristine, submit }) {
+function SignIn() {
   const navigate = useNavigate();
   const { isAuth, signIn } = useContext(ApplicationContext);
 
@@ -21,33 +20,16 @@ function SignIn({ isValid, isPristine, submit }) {
     }
   }, []);
 
-  async function onSubmit(data) {
+  async function handleSignIn(data) {
     const isSuccess = await signIn(data);
     if (isSuccess) {
       navigate(process.env['PUBLIC_URL'] + '/');
     }
   }
 
-  function onSubmitForm() {
-    submit('sign-in');
-  }
-
   return (
-    <div className="page">
-      <div className={styles['wrapper']}>
-        <div className={styles['dialog']}>
-          <h2 className={styles['header']}>Авторизация</h2>
-          <div className={styles['dialog__content']}>
-            <Form onSubmit={(data) => onSubmit(data)} />
-          </div>
-          <div className={styles['dialog__controls']}>
-            <Button
-              mode="success"
-              disabled={ ! isValid || isPristine}
-              onClick={() => onSubmitForm()}>Выполнить</Button>
-          </div>
-        </div>
-      </div>
+    <div className={styles['wrapper']}>
+      <Form onSubmit={(data) => handleSignIn(data)} />
     </div>
   );
 }

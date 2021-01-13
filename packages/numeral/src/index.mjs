@@ -2,14 +2,15 @@
 import numeral from 'numeral';
 
 
-numeral.register('locale', 'user-local', {
+numeral.register('locale', 'ru-2', {
   delimiters: {
     thousands: ' ',
     decimal: ','
   },
 });
 
-numeral.locale('user-local');
-numeral.defaultFormat('0 0.00');
+numeral.locale('ru-2');
+numeral.defaultFormat('0,0.00');
+
 
 export default numeral;

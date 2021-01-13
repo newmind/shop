@@ -9,31 +9,6 @@
   flex-direction: column;
 }
 
-.center {
-
-  position: relative;
-  display: flex;
-  flex: 1 0 auto;
-  flex-direction: column;
-  margin: 0 auto;
-  width: 1024px;
-}
-
-.header {
-
-  display: block;
-  background: $coal-dark;
-}
-
-.page {
-
-  position: relative;
-  display: flex;
-  flex: 1 0 auto;
-  flex-direction: column;
-  z-index: 10;
-}
-
 .content {
 
   display: flex;

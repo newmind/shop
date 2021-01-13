@@ -7,67 +7,14 @@
   display: flex;
   flex: 1 0;
   flex-direction: column;
-
-  &--info {
-
-    .label,
-    .info__icon {
-
-      color: darken($information, 10%);
-    }
-  }
-
-  &--primary {
-
-    .label,
-    .info__icon {
-
-      color: darken($primary, 10%);
-    }
-  }
-
-  &--success {
-
-    .label,
-    .info__icon {
-
-      color: darken($success, 10%);
-    }
-  }
-
-  &--warning {
-
-    .label,
-    .info__icon {
-      color: darken($warning, 10%);
-    }
-  }
-
-  &--danger {
-
-    .label,
-    .info__icon {
-      color: darken($danger, 10%);
-    }
-  }
-
-  &--disabled {
-
-    background: $very-light-pink;
-
-    .label {
-      color: $gray;
-      text-shadow: -1px 1px 0 $white;
-    }
-  }
 }
 
 .label {
 
   display: block;
   font-family: inherit;
-  font-weight: 300;
-  font-size: 13px;
+  font-weight: 400;
+  font-size: 12px;
   color: $blue-grey;
   margin: 0 0 6px 15px;
   transition: color 400ms;
@@ -89,9 +36,48 @@
   &__message {
 
     font-family: inherit;
-    font-weight: 300;
-    font-size: 11px;
+    font-weight: 400;
+    font-size: 10px;
     color: $danger;
-    letter-spacing: .5px;
+  }
+}
+
+.mode {
+  &--info {
+    .label{
+      color: $information;
+    }
+  }
+
+  &--primary {
+    .label{
+      color: $primary;
+    }
+  }
+
+  &--success {
+
+    .label {
+      color: $success;
+    }
+  }
+
+  &--warning {
+    .label {
+      color: $warning;
+    }
+  }
+
+  &--danger {
+    .label {
+      color: $danger;
+    }
+  }
+
+}
+
+.disabled {
+  .label {
+    color: $pale-lilac;
   }
 }

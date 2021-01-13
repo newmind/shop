@@ -1,14 +1,9 @@
 
-import { connect } from 'react-redux';
-import { bindActionCreators } from 'redux';
-import { getFormValues, isInvalid, isPristine, submit, reset } from 'redux-form';
+import HOC from '@ui.packages/hoc';
 
 import Component from './Component';
 
 import {
-  pageInProcess,
-
-  resetData,
   getTypes,
   getUnits,
   getColors,
@@ -17,63 +12,29 @@ import {
   getMaterials,
   getForms,
   getProductById,
-  updateProductsById,
-  createProduct,
-  deleteImages,
 } from '../ducks/commands';
 
+import { resetState } from '../ducks/slice';
 
-const mapStateToProps = state => {
-  const Product = state['product-modify'];
 
-  const formValues = getFormValues('modify-product')(state);
-  const isFormInvalid = isInvalid('modify-product')(state);
-  const isFormPristine = isPristine('modify-product')(state);
+export default HOC({
+  onMount({ dispatch, params }) {
 
-  return {
-    hasId: formValues ? !! formValues['id'] : false,
-    isInvalid: isFormInvalid,
-    isPristine: isFormPristine,
-    units: Product['units'],
-    colors: Product['colors'],
-    forms: Product['forms'],
-    types: Product['types'],
-    materials: Product['materials'],
-    currencies: Product['currencies'],
-    categories: Product['categories'],
-    product: Product['product'],
-    isError: Product['isError'],
-  };
-};
+    document.title = `${process.env['REACT_APP_WEBSITE_NAME']} - Редактирование товара`;
 
-const mapActionsToProps = (dispatch) => bindActionCreators({
-  pageInProcess,
-  reset, submit,
-  resetData,
-  getTypes, getUnits, getCurrencies, getCategories, getMaterials, getColors, getForms, deleteImages,
-  getProductById, updateProductsById, createProduct,
-}, dispatch);
+    if (params['id']) {
+      dispatch(getProductById(params['id']));
+    }
 
-export default connect(
-  mapStateToProps,
-  mapActionsToProps,
-  // onEnter: async ({ getProductById, getUnits, getTypes, getCurrencies, getCategories, getMaterials, getColors, getForms, match: { params: { id }}, pageInProcess }) => {
-  //
-  //   if (id) {
-  //     await getProductById(id);
-  //   }
-  //
-  //   await getTypes();
-  //   await getUnits();
-  //   await getForms();
-  //   await getColors();
-  //   await getMaterials();
-  //   await getCurrencies();
-  //   await getCategories();
-  //
-  //   pageInProcess(false);
-  // },
-  // onDestroy: ({ resetData }) => {
-  //   resetData();
-  // }
-)(Component);
+    dispatch(getTypes());
+    dispatch(getUnits());
+    dispatch(getForms());
+    dispatch(getColors());
+    dispatch(getMaterials());
+    dispatch(getCurrencies());
+    dispatch(getCategories());
+  },
+  onUnmount({ dispatch }) {
+    dispatch(resetState());
+  }
+})(Component);

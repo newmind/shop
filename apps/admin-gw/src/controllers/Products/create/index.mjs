@@ -2,16 +2,15 @@
 import request from "@sys.packages/request";
 import { getBuffer } from "@sys.packages/sys.utils";
 
-
-const PRODUCT_API_SRV = process.env['PRODUCT_API_SRV'];
+import productBuilder from '../_utils/productBuilder.mjs';
 
 
 export default () => async (ctx) => {
   const buffer = await getBuffer(ctx['req']);
 
-  const data = await request({
+  const result = await request({
     method: 'post',
-    url: PRODUCT_API_SRV + '/products',
+    url: process.env['PRODUCT_API_SRV'] + '/products',
     headers: {
       'content-type': ctx['req']['headers']['content-type']
     },
@@ -19,11 +18,11 @@ export default () => async (ctx) => {
     data: buffer,
   });
 
-  const resultBuffer = await getBuffer(data);
-  const result = JSON.parse(resultBuffer.toString());
+  const resultBuffer = await getBuffer(result);
+  const resultData = JSON.parse(resultBuffer.toString());
 
   ctx.body = {
     success: true,
-    data: result['data'],
+    data: productBuilder(resultData['data']),
   };
 }

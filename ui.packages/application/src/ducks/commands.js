@@ -1,12 +1,9 @@
 
 import request from "@ui.packages/request";
+import { joinToRoom, leaveFromRoom } from '@ui.packages/socket';
 import { pushNotification } from "@ui.packages/notifications";
-// import { instance, joinToRoom, connect, disconnect } from '@ui.packages/socket';
-
-import { useNavigate } from 'react-router-dom';
 
 import {
-  signOutAction,
   changeStateAction,
 
   applicationAuthRequestAction,
@@ -20,7 +17,7 @@ import {
   applicationSignOutRequestAction,
   applicationSignOutRequestFailAction,
   applicationSignOutRequestSuccessAction,
-} from './actions';
+} from './slice';
 
 
 export const changeState = (state) => async (dispatch) => {
@@ -38,7 +35,7 @@ export const getProfile = () => async (dispatch) => {
     });
 
     dispatch(applicationGetProfileRequestSuccessAction(data));
-    // joinToRoom(data['id']);
+    joinToRoom(data['id']);
 
     return true;
   }
@@ -50,7 +47,7 @@ export const getProfile = () => async (dispatch) => {
   }
 };
 
-export const signIn = (formData) => async dispatch => {
+export const signIn = (formData) => async (dispatch) => {
   try {
     dispatch(applicationAuthRequestAction());
 
@@ -63,15 +60,6 @@ export const signIn = (formData) => async dispatch => {
     });
 
     dispatch(getProfile());
-
-    // const socketInstance = instance();
-
-    // if ( ! socketInstance.connected) {
-    //   connect();
-    // }
-
-    // joinToRoom(result['id']);
-
     dispatch(applicationAuthRequestSuccessAction(result));
 
     return true;
@@ -82,6 +70,7 @@ export const signIn = (formData) => async dispatch => {
       mode: '',
       title: '',
       content: '',
+      autoClose: false,
     };
 
     if (error['status'] === 404) {
@@ -92,7 +81,7 @@ export const signIn = (formData) => async dispatch => {
     else if (error['status'] === 500) {
       notification['mode'] = 'danger';
       notification['title'] = 'Ошибка доступа';
-      notification['content'] = `${error['data']['error']['message']} (${error['data']['error']['code']})`;
+      notification['content'] = `${error['data']['message']} (${error['data']['code']})`;
     }
 
     dispatch(pushNotification(notification));
@@ -103,27 +92,24 @@ export const signIn = (formData) => async dispatch => {
 };
 
 
-export const signOut = () => async (dispatch) => {
-  const navigate = useNavigate();
-
+export const signOut = (userId) => async (dispatch) => {
   try {
-
     dispatch(applicationSignOutRequestAction());
 
     await request({
       url: '/sign-out',
-      method: 'post'
+      method: 'post',
     });
 
-    disconnect();
-
-    dispatch(signOutAction());
+    leaveFromRoom(userId);
     dispatch(applicationSignOutRequestSuccessAction());
 
-    navigate('/sign-in');
+    return true;
   }
   catch(error) {
 
     dispatch(applicationSignOutRequestFailAction(error));
+
+    return false;
   }
 };

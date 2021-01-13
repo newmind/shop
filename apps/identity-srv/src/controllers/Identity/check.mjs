@@ -1,5 +1,8 @@
 
+import { NetworkError, BadRequestError } from '@packages/errors';
+
 import jwt from 'jsonwebtoken';
+
 
 const { TokenExpiredError } = jwt;
 
@@ -34,20 +37,9 @@ export default () => async (ctx) => {
 
     if (error instanceof TokenExpiredError) {
 
-      ctx.status = 400;
-      return ctx.body = {
-        success: true,
-        data: null,
-      };
+      throw new BadRequestError('Время жизни токена истекло');
     }
 
-    ctx.status = 500;
-    ctx.body = {
-      success: false,
-      error: {
-        code: 500,
-        message: error['message'],
-      }
-    };
+    throw new NetworkError('Что-то пошло не так');
   }
 };

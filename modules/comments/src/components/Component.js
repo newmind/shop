@@ -1,142 +1,130 @@
 
 import { Table, Column } from "@ui.packages/table";
-import { Actions, Row, Col } from '@ui.packages/kit';
-import { Confirm, Dialog } from "@ui.packages/dialog";
+import { Actions, Row, Col, Header } from '@ui.packages/kit';
+import { Confirm, openDialog, closeDialog } from "@ui.packages/dialog";
 
-import types from 'prop-types';
 import { Link } from 'react-router-dom';
-import React, { PureComponent } from 'react';
+import React, { useState } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
 
-import FormModify from './FormModify';
+import { deleteComments } from '../ducks/commands';
+import { selectItems } from '../ducks/slice';
 
 import styles from './default.module.scss';
 
 
-class Component extends PureComponent {
-  static propTypes = {
-    items: types.array,
-    getComment: types.func,
-    getComments: types.func,
-    updateComment: types.func,
-  };
+function Comments() {
+  const dispatch = useDispatch();
+  const items = useSelector(selectItems);
+  const [commentId, setCommentId] = useState(null);
 
-  static defaultProps = {
-    items: [],
-  };
+  // async _handleUpdate(formData) {
+  //   const { updateComment, closeDialog } = this.props;
+  //
+  //   await updateComment(formData);
+  //   closeDialog('remove-confirm');
+  // }
 
-  state = {
-    commentId: null,
-    comment: null,
-  };
+  function handleCancelRemove() {
 
-  async _handleUpdate(formData) {
-    const { updateComment, closeDialog } = this.props;
-
-    await updateComment(formData);
-    closeDialog('remove-confirm');
+    setCommentId(null);
+    dispatch(closeDialog('remove-confirm'));
   }
 
-  _handleCancelRemove() {
-    const { closeDialog } = this.props;
+  function handleRemoveComment(id) {
 
-    this.setState({ commentId: null }, () => closeDialog('remove-confirm'));
+    setCommentId(id);
+    dispatch(openDialog('remove-confirm'));
   }
 
-  _handleRemoveComment(id) {
-    const { openDialog } = this.props;
+  // async _handleEditComment(id) {
+  //   const { getComment, openDialog } = this.props;
+  //   const comment = await getComment(id);
+  //
+  //   this.setState({ comment }, () => openDialog('comment-modify'));
+  // }
 
-    this.setState({ commentId: id }, () => openDialog('remove-confirm'));
+  function handleConfirmRemove() {
+
+    dispatch(deleteComments([ commentId ]));
+    setCommentId(null);
+    dispatch(closeDialog('remove-confirm'));
   }
 
-  async _handleEditComment(id) {
-    const { getComment, openDialog } = this.props;
-    const comment = await getComment(id);
-
-    this.setState({ comment }, () => openDialog('comment-modify'));
-  }
-
-  async _handleConfirmRemove() {
-    const { commentId } = this.state;
-    const { deleteComments, closeDialog } =  this.props;
-
-    await deleteComments([ commentId ]);
-
-    this.setState({ commentId: null }, () => closeDialog('remove-confirm'));
-  }
-
-  render() {
-    const { comment } = this.state;
-    const { items } = this.props;
-
-    return (
-      <div className={styles['wrapper']}>
-        <div className={styles['header']}>
-          <h2>Комментарии</h2>
-        </div>
-        <Row>
-          <Col>
-            <div className={styles['block']}>
-              <Table columns={items}>
-                <Column
-                  title="ID"
-                  alias="id"
-                  width="30"
-                  align="left"
-                />
-                <Column
-                  title="Оценка"
-                  alias="evaluation"
-                  width="80"
-                  align="left"
-                />
-                <Column
-                  title="Автор"
-                  alias="person"
-                  width="200"
-                  align="left"
-                />
-                <Column
-                  title="Комментарий"
-                  alias="comment"
-                  align="left"
-                />
-                <Column
-                  title="Продукт"
-                  alias="product"
-                >
-                  {(product) => {
-                    return product && (
-                      <Link className={styles['link']} to={'/products/' + product['uuid']}>{ product['brand'] }</Link>
-                    )
-                  }}
-                </Column>
-                <Column
-                  align="right"
-                  width="70"
-                >
-                  {({ id }) => (
-                    <Actions
-                      onEdit={this._handleEditComment.bind(this, id)}
-                      onDelete={this._handleRemoveComment.bind(this, id)}
-                    />
-                  )}
-                </Column>
-              </Table>
-            </div>
-          </Col>
-        </Row>
-        <Confirm
-          name="remove-confirm"
-          message="Вы уверены, что хотите удалить комментарий?"
-          onConfirm={this._handleConfirmRemove.bind(this)}
-          onCancel={this._handleCancelRemove.bind(this)}
-        />
-        <Dialog title="Редактировать комментарий" name="comment-modify">
-          <FormModify initialValues={comment} onSubmit={this._handleUpdate.bind(this)} />
-        </Dialog>
+  return (
+    <div className={styles['wrapper']}>
+      <div className={styles['header']}>
+        <Header level={2}>Комментарии</Header>
       </div>
-    );
-  }
+      <Row>
+        <Col>
+          <div className={styles['block']}>
+            <Table columns={items}>
+              <Column
+                title="ID"
+                alias="id"
+                width="30"
+                align="right"
+              />
+              <Column
+                title="Оценка"
+                alias="evaluation"
+                width="80"
+                align="left"
+              />
+              <Column
+                title="Автор"
+                alias="person"
+                width="200"
+                align="left"
+              />
+              <Column
+                title="Комментарий"
+                alias="comment"
+                align="left"
+              />
+              <Column
+                title="Продукт"
+                alias="product"
+              >
+                {(product) => {
+                  return product && (
+                    <Link className={styles['link']} to={'/products/' + product['uuid']}>{ product['brand'] }</Link>
+                  )
+                }}
+              </Column>
+              <Column
+                align="right"
+                width="70"
+              >
+                {({ id }) => (
+                  <Actions
+                    // onEdit={() => handleEditComment(id)}
+                    onDelete={() => handleRemoveComment(id)}
+                  />
+                )}
+              </Column>
+            </Table>
+          </div>
+        </Col>
+      </Row>
+
+      <Confirm
+        name="remove-confirm"
+        message="Вы уверены, что хотите удалить комментарий?"
+        onConfirm={() => handleConfirmRemove()}
+        onCancel={() => handleCancelRemove()}
+      />
+
+      {/*<Dialog title="Редактировать комментарий" name="comment-modify">*/}
+        {/*<FormModify initialValues={comment} onSubmit={this._handleUpdate.bind(this)} />*/}
+      {/*</Dialog>*/}
+    </div>
+  );
 }
 
-export default Component;
+Comments.propTypes = {};
+
+Comments.defaultProps = {};
+
+export default Comments;

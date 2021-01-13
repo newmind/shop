@@ -54,20 +54,25 @@ const responseLogger = (response) => {
 const errorLogger = (error) => {
   let status = 0;
   let data = null;
-  const { config: { url, method }, response } = error;
+  const { config: { url, method, responseType }, response } = error;
 
   if (response) {
     status = response['status'];
     if ('data' in response) {
-      data = JSON.stringify(response.data);
+      if (responseType === 'stream') {
+        data = 'stream';
+      }
+      else {
+        data = JSON.stringify(response.data);
+      }
     }
   }
 
   logger['error'](`[${method.toLocaleUpperCase()}] <--- "${url}" [${status}] (${data})`);
 
   if ('errno' in error) {
-    if (error['errno'] === 'ECONNREFUSED') {
-      return Promise.reject(new NetworkError('Сервис временно недоступен'));
+    if (error['code'] === 'ECONNREFUSED') {
+      return Promise.reject(new NetworkError({ code: '0.0.0', message: 'Сервис временно недоступен' }));
     }
   }
 

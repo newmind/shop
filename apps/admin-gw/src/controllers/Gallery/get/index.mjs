@@ -11,8 +11,5 @@ export default () => async (ctx) => {
     responseType: 'stream',
   });
 
-  ctx.body = {
-    success: true,
-    data: result['data'],
-  };
+  ctx.body = result['data'];
 }

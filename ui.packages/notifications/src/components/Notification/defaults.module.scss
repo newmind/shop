@@ -47,7 +47,7 @@
 
   &__title + &__content {
 
-    margin: 20px 0 0;
+    margin: 12px 0 0;
   }
 
   &__content {
@@ -85,45 +85,30 @@
   &--success {
     border-color: $success;
     background: $success;
-  }
-  &--success .notification__title,
-  &--success .notification__close {
     color: $white;
   }
 
   &--danger {
     border-color: $danger;
     background: $danger;
-  }
-  &--danger .notification__title,
-  &--danger .notification__close {
     color: $white;
   }
 
   &--info {
+    color: $white;
     border-color: $information;
     background: $information;
-  }
-  &--info .notification__title,
-  &--info .notification__close {
-    color: $white;
   }
 
   &--primary {
     border-color: $primary;
     background: $primary;
-  }
-  &--primary .notification__title,
-  &--primary .notification__close {
     color: $white;
   }
 
   &--warning {
     border-color: $warning;
     background: $warning;
-  }
-  &--warning .notification__title,
-  &--warning .notification__close {
     color: $white;
   }
 }

@@ -1,5 +1,5 @@
 
-@import "../../../../node_modules/@ui.packages/theme";
+@import "~@ui.packages/theme";
 
 
 .wrapper {
@@ -7,14 +7,15 @@
   display: flex;
   flex: 1 0;
   flex-direction: column;
-  background: $very-light-pink;
+  background: $coal-dark;
+  justify-content: center;
+  align-items: center;
 }
 
 .dialog {
 
   display: block;
-  margin: 100px auto;
-  width: 340px;
+  width: 380px;
   background: $white;
   border: 1px solid $pale-lilac;
   border-radius: 15px;
@@ -37,9 +38,6 @@
 .header {
 
   display: block;
-  padding: 30px 0 0;
-  font-size: 14px;
+  padding: 50px 0 0;
   text-align: center;
-  text-transform: uppercase;
-  letter-spacing: .8px;
 }
