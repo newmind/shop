@@ -1,10 +1,21 @@
 
-@import "../../../../node_modules/@ui.packages/theme";
+@import "~@ui.packages/theme";
 
 
-.form {
+.wrapper {
 
   display: block;
-  padding: 40px;
-  width: 800px;
+  padding: 40px 40px 180px;
+  max-width: 900px;
+}
+
+.header {
+
+  display: block;
+}
+
+.content {
+
+  display: block;
+  margin: 40px 0 0;
 }

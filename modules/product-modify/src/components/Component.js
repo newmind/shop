@@ -1,5 +1,6 @@
 
-import { Row, Col, Button, Container } from '@ui.packages/kit';
+
+import { Row, Col, Button, Container, Header } from '@ui.packages/kit';
 
 import React from 'react';
 import types from 'prop-types';
@@ -47,31 +48,38 @@ function ProductModify() {
   }
 
   return (
-    <Container className={styles['form']}>
-      <Row>
-        <Col>
-          <ModifyForm
-            initialValues={product}
-            onDelete={handleDeleteImages}
-            onSubmit={handleSubmitProduct}
-          />
-        </Col>
-      </Row>
-      <Row>
-        <Col>
-          <Button
-            disabled={pristine}
-            onClick={handleReset}
-          >Отмена</Button>
-          <Button
-            type={Button.TYPE_BUTTON}
-            disabled={ ! valid || pristine}
-            mode="success"
-            onClick={handleSubmit}
-          >{product['uuid'] ? 'Сохранить' : 'Добавить'}</Button>
-        </Col>
-      </Row>
-    </Container>
+    <section className={styles['wrapper']}>
+      <header className={styles['header']}>
+        <Header level={1}>{product['uuid'] ? 'Редактировать товар' : 'Новый товар'}</Header>
+      </header>
+      <article className={styles['content']}>
+        <Container className={styles['form']}>
+          <Row>
+            <Col>
+              <ModifyForm
+                initialValues={product}
+                onDelete={handleDeleteImages}
+                onSubmit={handleSubmitProduct}
+              />
+            </Col>
+          </Row>
+          <Row>
+            <Col>
+              <Button
+                disabled={pristine}
+                onClick={handleReset}
+              >Отмена</Button>
+              <Button
+                type={Button.TYPE_BUTTON}
+                disabled={ ! valid || pristine}
+                mode="success"
+                onClick={handleSubmit}
+              >{product['uuid'] ? 'Сохранить' : 'Добавить'}</Button>
+            </Col>
+          </Row>
+        </Container>
+      </article>
+    </section>
   );
 }
 

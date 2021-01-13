@@ -12,9 +12,9 @@ function Types() {
    return (
     <section className={styles['wrapper']}>
       <div className={styles['header']}>
-        <Header level={2}>Тип продукта</Header>
+        <Header level={1}>Тип продукта</Header>
       </div>
-      <article className={styles['block__content']}>
+      <article className={styles['content']}>
         <Table />
       </article>
     </section>

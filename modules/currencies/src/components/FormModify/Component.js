@@ -16,6 +16,7 @@ export default ({ handleSubmit, valid, pristine }) => {
             <InputField
               name="value"
               label="Значение"
+              maxLength={8}
             />
           </Col>
         </Row>
@@ -24,6 +25,7 @@ export default ({ handleSubmit, valid, pristine }) => {
             <TextareaField
               name="description"
               label="Описание"
+              maxLength={2024}
             />
           </Col>
         </Row>

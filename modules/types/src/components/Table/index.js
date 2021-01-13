@@ -1,6 +1,6 @@
 
-import { Button, Actions } from '@ui.packages/kit';
 import { Table, Column } from '@ui.packages/table';
+import { Button, Actions, Text } from '@ui.packages/kit';
 import { Dialog, Confirm, openDialog, closeDialog } from '@ui.packages/dialog';
 
 import React, { useState } from 'react';
@@ -60,24 +60,28 @@ function Types() {
             alias="value"
             width="200"
             align="left"
-          />
+          >
+            {(value) => <Text type={Text.TYPE_BODY}>{ value }</Text>}
+          </Column>
           <Column
             title="Описание"
             alias="description"
             align="left"
-          />
+          >
+            {(value) => <Text type={Text.TYPE_COMMENT}>{ value }</Text>}
+          </Column>
           <Column
             title="Изображение"
             alias="imageId"
             width="140"
             align="center"
           >{(value) => {
-            return value ? <img src={`${process.env['REACT_APP_API_HOST']}/gallery/${value}`} width="40" alt="" /> : null;
+            return value ? <img src={`${process.env['REACT_APP_API_HOST']}/gallery/${value}`} width="140" alt="" /> : null;
           }}
           </Column>
           <Column
             align="right"
-            width="80"
+            width="45"
           >
             {(value) => <Actions onEdit={() => handleEdit(value)} onDelete={() => handleSetDeletedItem(value['id'])} />}
           </Column>

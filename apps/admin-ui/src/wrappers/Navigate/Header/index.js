@@ -25,8 +25,8 @@ export default function Header() {
           <Link className={styles['logotype']} to={'/'}><i className="fas fa-hands" />&nbsp;&nbsp;&nbsp;Ваш магазин</Link>
         </div>
       </div>
-      <div>
-        <span onClick={() => handleSignOut()}>Выйти</span>
+      <div className={styles['controls']}>
+        <span className={styles['sign-out']} onClick={() => handleSignOut()}>Выйти</span>
       </div>
     </div>
   );

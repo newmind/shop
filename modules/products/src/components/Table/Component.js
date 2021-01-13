@@ -1,9 +1,10 @@
 
 import numeral from '@packages/numeral';
 
+import { nounDeclension } from '@ui.packages/utils';
 import { Confirm } from "@ui.packages/dialog";
 import { Column, Table } from "@ui.packages/table";
-import { Actions, Gallery } from "@ui.packages/kit";
+import { Actions, Gallery, Header } from "@ui.packages/kit";
 
 import types from 'prop-types';
 import React, { useState } from 'react';
@@ -40,7 +41,7 @@ function List({ items, meta, openDialog, closeDialog, removeProductById }) {
   return (
     <div className={styles['wrapper']}>
       <div className={styles['header']}>
-        <p>Найдено { meta['total'] } продуктов</p>
+        <Header level={4}>Найдено { meta['total'] } {nounDeclension(meta['total'], ['товар', 'товара', 'товаров'])}</Header>
       </div>
       <Table columns={items}>
         <Column

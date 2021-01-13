@@ -10,12 +10,6 @@
   flex-direction: column;
 }
 
-.header {
-
-  display: block;
-  background: $whitesmoke;
-}
-
 .page {
 
   display: flex;
@@ -27,7 +21,7 @@
 .aside {
 
   display: block;
-  background: $pale-grey;
+  background: $white;
   box-shadow: 0 3px 10px 0 rgba($pale-lilac, .5);
 }
 

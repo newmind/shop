@@ -19,15 +19,18 @@ function Products() {
 
   return (
     <section className={styles['wrapper']}>
-      <aside className={styles['controls']}>
-        <Button
-          mode={Mode.SUCCESS}
-          onClick={() => handleAddProduct()}
-        >Добавить товар</Button>
+      <aside className={styles['aside']}>
+        <div className={styles['controls']}>
+          <Button
+            size={Button.SMALL}
+            mode={Mode.SUCCESS}
+            onClick={() => handleAddProduct()}
+          >Добавить товар</Button>
+        </div>
       </aside>
       <article className={styles['content']}>
         <div className={styles['header']}>
-          <Header level={2}>Управление витриной</Header>
+          <Header level={1}>Управление витриной</Header>
         </div>
         <div className={styles['filter']}>
           {/*<Filter initialValues={search} onSubmit={(data) => setQuery(data)} />*/}

@@ -1,12 +1,12 @@
 
-@import "../../../../../node_modules/@ui.packages/theme";
+@import "~@ui.packages/theme";
 
 
 .wrapper {
 
   display: block;
   border: 1px solid $pale-lilac;
-  border-radius: 8px;
+  border-radius: 5px;
   padding: 30px;
   background: $white;
 }
@@ -18,7 +18,7 @@
   font-weight: 700;
   font-size: 16px;
   color: $coal-dark;
-  margin: 0 0 30px;
+  margin: 0 10px 30px;
 }
 
 .amount {

@@ -43,7 +43,19 @@
 
 .controls {
 
-  display: flex;
-  flex-direction: column;
-  flex: 1 0;
+  display: block;
+}
+
+.sign-out {
+
+  font-size: 14px;
+  font-weight: 700;
+  color: $white;
+  cursor: pointer;
+  transition: color 200ms;
+
+  &:hover {
+
+    color: $danger;
+  }
 }

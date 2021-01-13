@@ -12,9 +12,9 @@ function Currencies() {
    return (
     <section className={styles['wrapper']}>
       <div className={styles['header']}>
-        <Header level={2}>Валюта</Header>
+        <Header level={1}>Валюта</Header>
       </div>
-      <article className={styles['block__content']}>
+      <article className={styles['content']}>
         <Table />
       </article>
     </section>

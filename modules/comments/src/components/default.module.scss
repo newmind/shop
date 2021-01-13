@@ -1,5 +1,5 @@
 
-@import "../../../../node_modules/@ui.packages/theme";
+@import "~@ui.packages/theme";
 
 
 .wrapper {
@@ -23,11 +23,12 @@
   display: block;
   background: $white;
   border: 1px solid $pale-lilac;
-  border-radius: 15px;
+  border-radius: 5px;
   padding: 30px;
 }
 
 .link {
 
+  font-size: 13px;
   color: $primary;
 }

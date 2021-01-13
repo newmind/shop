@@ -4,6 +4,8 @@
 
 .row {
 
+  background: transparent;
+
   & + & {
     background: transparent;
     border-top: 1px solid $pale-lilac;

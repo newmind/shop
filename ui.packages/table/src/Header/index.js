@@ -18,7 +18,7 @@ function Header({ children }) {
       const isLast = (index === React.Children.count(children) - 1);
 
       if (width) {
-        columnProps['width'] = Number(width) + ((isFirst || isLast) ? 15 : 10);
+        columnProps['width'] = Number(width) + ((isFirst || isLast) ? 25 : 30);
       }
 
       const titleClassName = cn(styles['title'], {

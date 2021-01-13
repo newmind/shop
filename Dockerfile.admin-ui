@@ -18,12 +18,12 @@ COPY ./packages                      ./packages
 COPY ./package.json                  .
 COPY ./lerna.json                    .
 COPY ./yarn.lock                     .
-COPY ./build-packages.sh             .
+COPY ./build-admin-packages.sh       .
 
 RUN yarn
 
-RUN chmod +x ./build-packages.sh
-RUN ./build-packages.sh
+RUN chmod +x ./build-admin-packages.sh
+RUN ./build-admin-packages.sh
 
 # BUILD APPLICATION
 WORKDIR /app/apps/admin-ui

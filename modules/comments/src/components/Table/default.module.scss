@@ -1,0 +1,28 @@
+
+@import "~@ui.packages/theme";
+
+
+.wrapper {
+
+  display: block;
+  border: 1px solid $pale-lilac;
+  border-radius: 5px;
+  padding: 30px;
+  background: $white;
+}
+
+.header {
+
+  display: block;
+  font-family: inherit;
+  font-weight: 700;
+  font-size: 16px;
+  color: $coal-dark;
+  margin: 0 10px 30px;
+}
+
+.link {
+
+  font-size: 13px;
+  color: $primary;
+}

@@ -12,9 +12,9 @@ function Units() {
    return (
     <section className={styles['wrapper']}>
       <div className={styles['header']}>
-        <Header level={2}>Единицы измерения</Header>
+        <Header level={1}>Единицы измерения</Header>
       </div>
-      <article className={styles['block__content']}>
+      <article className={styles['content']}>
         <Table />
       </article>
     </section>

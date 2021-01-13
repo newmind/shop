@@ -1,5 +1,5 @@
 
-@import "../../../../node_modules/@ui.packages/theme";
+@import "~@ui.packages/theme";
 
 
 .wrapper {
@@ -8,13 +8,19 @@
   padding: 0 0 120px;
 }
 
+.aside {
+
+  display: block;
+  background: $white;
+  box-shadow: 0 3px 10px 0 rgba($pale-lilac,.5);
+
+}
+
 .controls {
 
   display: block;
   padding: 20px 40px;
   text-align: right;
-  background: $white;
-  border-bottom: 1px solid $pale-lilac;
 }
 
 .content {

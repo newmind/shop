@@ -12,9 +12,9 @@ function Materials() {
    return (
     <section className={styles['wrapper']}>
       <div className={styles['header']}>
-        <Header level={2}>Материал продукта</Header>
+        <Header level={1}>Материал продукта</Header>
       </div>
-      <article className={styles['block__content']}>
+      <article className={styles['content']}>
         <Table />
       </article>
     </section>
