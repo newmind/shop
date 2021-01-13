@@ -25,7 +25,7 @@ cd ../kit && npx yarn build
 echo '[--- Yandex Map ---]'
 cd ../yandex-map && npx yarn build
 echo '[--- HOC ---]'
-cd ../yandex-map && npx yarn build
+cd ../hoc && npx yarn build
 
 echo ''
 echo 'Сборка модулей для приложения "Client"'
