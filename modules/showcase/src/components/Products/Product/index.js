@@ -46,7 +46,7 @@ export default function Product({ isSale, isHit, uuid, amount, currency, brand, 
           <Text type="uuid">{ uuid }</Text>
         </div>
         <div className={styles['brand']}>
-          <Header level={2}>{ brand }</Header>
+          <Header level={3}>{ brand }</Header>
         </div>
       </div>
       <div className={styles['promo']}>
@@ -57,7 +57,9 @@ export default function Product({ isSale, isHit, uuid, amount, currency, brand, 
       </div>
       <div className={styles['controls']}>
         <span className={classNameForFastView} onClick={(event) => handleClickFastView(event)} />
-        <div className={styles['amount']}>{ numeral(amount).format() } {currency['value']}</div>
+        <div className={styles['amount']}>
+          <Text type={Text.TYPE_AMOUNT}>{ numeral(amount).format() } {currency['value']}</Text>
+        </div>
         <span className={classNameForCart} onClick={(event) => handleClickCart(event)}>
           { !! countInCart && <span className={styles['count']}>{countInCart}</span>}
         </span>

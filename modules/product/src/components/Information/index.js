@@ -1,26 +1,24 @@
 
-import numeral from "@packages/numeral";
+import numeral from '@packages/numeral';
 
 import { nounDeclension } from "@ui.packages/utils";
-import { Button, Header, Text, Link } from "@ui.packages/kit";
-import { selectItems, addProductToCart, removeProductFromCart } from '@ui.packages/cart';
+import { Header, Text, Button, Link } from '@ui.packages/kit';
+import { addProductToCart, removeProductFromCart, selectItems } from '@ui.packages/cart';
 
 import React from 'react';
 import types from 'prop-types';
 import { useSelector, useDispatch } from 'react-redux';
 
-import styles from './default.module.scss';
 import cn from "classnames";
+import styles from './default.module.scss';
+
+import { selectProduct } from '../../ducks/slice';
 
 
-export default function Information({ product }) {
-  const { uuid, brand, name, amount, currency, description } = product;
-
+function Product({ uuid, brand, name, amount, currency }) {
   const dispatch = useDispatch();
-  const items = useSelector(selectItems);
-
-  const countInCart = items.filter(item => item['uuid'] === uuid).length;
-  const removeFromCartClassName= cn(styles['remove'], 'far fa-trash-alt');
+  const cart = useSelector(selectItems);
+  const product = useSelector(selectProduct);
 
   function handleAddToCart() {
     dispatch(addProductToCart(product));
@@ -29,6 +27,9 @@ export default function Information({ product }) {
   function handleRemoveFromCart(uuid) {
     dispatch(removeProductFromCart(uuid));
   }
+
+  const countInCart = cart.filter(item => item['uuid'] === uuid).length;
+  const removeFromCartClassName= cn(styles['remove'], 'far fa-trash-alt');
 
   return (
     <div className={styles['wrapper']}>
@@ -62,39 +63,34 @@ export default function Information({ product }) {
           </>)}
         </div>
       </div>
-      {description && (
-        <div className={styles['description']}>
-          <div className={styles['header']}>
-            <Header level={3}>Описание</Header>
-          </div>
-          <div className={styles['content']}>
-            <Text type={Text.TYPE_COMMENT}>{ description }</Text>
-          </div>
-        </div>)}
     </div>
   );
 }
 
-Information.propTypes = {
-  product: types.shape({
-    uuid: types.string,
-    brand: types.string,
-    name: types.string,
-    amount: types.number,
-    currency: types.shape({
-      value: types.string,
-    }),
-    description: types.string,
+Product.propTypes = {
+  uuid: types.string,
+  isSale: types.bool,
+  isHit: types.bool,
+  amount: types.number,
+  saleAmount: types.number,
+  currency: types.shape({
+    value: types.string,
   }),
+  brand: types.string,
+  name: types.string,
 };
 
-Information.defaultProps = {
-  product: {
-    uuid: '',
-    brand: '',
-    name: '',
-    amount: 0,
-    currency: { value: '' },
-    description: '',
+Product.defaultProps = {
+  uuid: null,
+  isSale: false,
+  isHit: false,
+  amount: 0.00,
+  saleAmount: 0.00,
+  currency: {
+    value: '',
   },
+  brand: 'None',
+  name: 'None',
 };
+
+export default Product;

@@ -14,6 +14,11 @@ function Table({ columns, children }) {
     <div className={styles['wrapper']}>
       <table className={styles['table']}>
         <Header>{ children }</Header>
+        { ! columns.length && (
+          <caption className={styles['empty']}>
+            <span className={styles['message']}>Нет данных для отображения</span>
+          </caption>
+        )}
         {columns.map((item, index) => (
           <Row key={index} data={item}>
             { children }

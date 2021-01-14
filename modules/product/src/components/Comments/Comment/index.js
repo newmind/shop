@@ -1,7 +1,7 @@
 
 import moment from '@packages/moment';
 
-import { Evaluation } from '@ui.packages/kit';
+import { Evaluation, Text } from '@ui.packages/kit';
 
 import types from 'prop-types';
 import React from 'react';
@@ -32,15 +32,15 @@ function Comment({ evaluation, person, comment, createdAt }) {
     <div className={commentClassName}>
       <div className={styles['header']}>
         <div className={styles['wrapper']}>
-          <span className={styles['person']}>{ person }</span>
-          <span className={styles['date']}>({ moment(createdAt).format('DD.MM.YYYY HH:mm') })</span>
+          <Text type={Text.TYPE_BODY}>{ person }</Text>&nbsp;
+          <Text type={Text.TYPE_COMMENT}>({ moment(createdAt).format('DD.MM.YYYY HH:mm') })</Text>
         </div>
         <div className={styles['evaluation']}>
           <Evaluation mode={mode} size="s" value={ evaluation } />
         </div>
       </div>
       <div className={styles['content']}>
-        { comment }
+        <Text>{ comment }</Text>
       </div>
     </div>
   );

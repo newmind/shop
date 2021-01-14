@@ -1,43 +1,25 @@
 
-import numeral from '@packages/numeral';
-
-import { Button, Text, Link } from '@ui.packages/kit';
-
-import types from 'prop-types';
+import { useLocation } from 'react-router-dom';
 import React, { useEffect, useRef } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { useLocation, useNavigate } from 'react-router-dom';
 
 import Icon from './Icon';
-import Product from './Product';
+import List from './List';
+import Empty from './Empty';
 
-import {
-  closeCart,
-  removeProductFromCart,
-  resetCart,
-  restoreCart,
-  selectItems,
-  selectIsOpen,
-} from '../ducks/cartSlice';
+import { closeCart, restoreCart, selectItems, selectIsOpen } from '../ducks/cartSlice';
 
 import styles from './defaults.module.scss';
 
 
-function calculateFullAmount(items) {
-  const fullAmount = items.reduce((accumulator, product) => accumulator + product['amount'], 0);
-  return numeral(fullAmount).format();
-}
-
-
 function Cart() {
   const location = useLocation();
-  const navigate = useNavigate();
   const dispatch = useDispatch();
   const items = useSelector(selectItems);
   const isOpen = useSelector(selectIsOpen);
   const cartRef = useRef(null);
 
-  useEffect(() => {
+  useEffect(function init() {
     function onClick(event) {
       const target = event.target;
       const { current: cartElement } = cartRef;
@@ -56,61 +38,21 @@ function Cart() {
     dispatch(restoreCart());
   }, []);
 
-  function handleRemoveProductFromCart(id) {
-    dispatch(removeProductFromCart(id));
-  }
-
-  function handleResetCart() {
-    dispatch(resetCart());
-    dispatch(closeCart());
-  }
-
-  function handleGoToCart() {
-    dispatch(closeCart());
-    navigate(process.env['PUBLIC_URL'] + '/order');
-  }
-
   if (/order/.test(location['pathname'])) {
     return null;
   }
 
   const hasProductsInCart = !! items.length;
-  const fullAmount = calculateFullAmount(items);
 
   return (
     <div ref={cartRef} className={styles['cart']}>
       <Icon />
       {isOpen && (
-        <div className={styles['cart__list']}>
-          <div className={styles['list']}>
+        <div className={styles['wrapper']}>
+          <div className={styles['container']}>
             {hasProductsInCart
-              ? (
-                <div>
-                  <div className={styles['list__content']}>
-                    {items.map((item, index) => (
-                      <Product
-                        key={item['uuid'] + '_' + index}
-                        {...item}
-                        onRemove={handleRemoveProductFromCart}
-                      />
-                    ))}
-                  </div>
-                  <div className={styles['list__info']}>
-                    <p className={styles['cart__full-amount']}>Итого: { fullAmount } руб.</p>
-                  </div>
-                  <div className={styles['list__controls']}>
-                    <Button form="context" onClick={handleResetCart}>Очистить</Button>
-                    <Button onClick={handleGoToCart} mode="success">Оформить заказ</Button>
-                  </div>
-                </div>
-              )
-              : (
-                <span className={styles['cart__empty']}>
-                  <Text>В карзине нет выбранных товаров<br/>
-                    перейдите в раздел <Link href={'/products'}>Витрина</Link> для выбора товаров</Text>
-                </span>
-              )
-            }
+              ? <List />
+              : <Empty />}
           </div>
         </div>
       )}
@@ -118,19 +60,8 @@ function Cart() {
   );
 }
 
-Cart.propTypes = {
-  items: types.array,
-  isOpen: types.bool,
-  match: types.object,
-  closeCart: types.func,
-  resetCart: types.func,
-  removeProduct: types.func,
-  push: types.func,
-};
+Cart.propTypes = {};
 
-Cart.defaultProps = {
-  items: [],
-  isOpen: false,
-};
+Cart.defaultProps = {};
 
 export default Cart;

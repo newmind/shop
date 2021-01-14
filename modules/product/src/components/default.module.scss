@@ -2,301 +2,76 @@
 @import "~@ui.packages/theme";
 
 
-.header {
+.wrapper {
 
   display: block;
-  font-family: inherit;
-  font-weight: 700;
-  font-size: 14px;
-  text-transform: uppercase;
-  letter-spacing: .5px;
-}
-
-.paragraph {
-
-  display: block;
-  font-family: inherit;
-  font-weight: 300;
-  font-size: 14px;
-  line-height: 1.4;
-}
-
-.features {
-
-  display: block;
-  margin: 20px 0 0;
-  padding: 80px 0 0;
 }
 
 .breadcrumbs {
 
   display: block;
+  background: $white;
   box-shadow: 0 1px 20px 0 rgba($coal-dark, .08);
 
   &__content {
 
     display: block;
     width: 1024px;
-    margin: 20px auto;
+    margin: 0 auto;
+    padding: 20px 0;
   }
 }
 
-.product {
+.content {
+
+  display: block;
+  width: 1024px;
+  margin: 20px auto 190px;
+}
+
+.common {
+
+  display: flex;
+  flex-direction: row;
+  flex: 1 0;
+}
+
+.gallery {
 
   display: flex;
   flex-direction: column;
-  flex: 1 0;
-
-  &__content {
-
-    display: block;
-    width: 1024px;
-    margin: 20px auto 190px;
-  }
-
-  &__uuid {
-
-    display: block;
-    font-family: inherit;
-    font-weight: 300;
-    font-size: 12px;
-    color: $gray;
-    margin: 0 0 14px;
-  }
-
-  &__brand {
-
-    display: block;
-    font-family: inherit;
-    font-weight: 700;
-    font-size: 25px;
-    color: $coal-dark;
-    letter-spacing: 1px;
-  }
-
-  &__name {
-
-    display: block;
-    font-family: inherit;
-    font-weight: 300;
-    font-size: 13px;
-    color: $blue-grey;
-    margin: 4px 0 0;
-  }
-
-  &__amount {
-
-    display: block;
-    font-family: inherit;
-    font-weight: 300;
-    font-size: 20px;
-    margin: 30px 0 0;
-    color: $coal-dark;
-  }
-
-  &__description {
-
-    display: block;
-    padding: 30px 0 0;
-    margin: 30px 0 0;
-    border-top: 1px solid $pale-lilac;
-    width: 340px;
-
-    &__header {
-
-      display: block;
-      font-family: inherit;
-      font-weight: 700;
-      font-size: 14px;
-      letter-spacing: .5px;
-      text-transform: uppercase;
-      color: $coal-dark;
-      margin: 0 0 20px;
-    }
-  }
-
-  &__common {
-
-    display: flex;
-    flex: 1 0;
-    flex-direction: row;
-    margin: 30px 0 0;
-  }
-
-  &__gallery {
-
-    display: flex;
-    width: 700px;
-    height: 600px;
-    background: $pale-lilac;
-  }
-
-  &__commands {
-
-    display: block;
-    flex: 1 0;
-    flex-direction: column;
-    border-radius: 15px;
-    border: 1px solid $pale-lilac;
-    margin: 0 0 0 20px;
-    padding: 30px;
-    width: 400px;
-  }
-
-  &__feature {
-
-    display: flex;
-    flex: 0 0;
-    flex-direction: column;
-    margin: 0 0 80px;
-    border-radius: 15px;
-    border: 1px solid $pale-lilac;
-    padding: 30px;
-  }
-
-  &__list {
-
-    display: block;
-    margin: 30px 0 0;
-  }
+  flex: 1 0 600px;
+  height: 450px;
+  border-radius: 5px;
+  overflow: hidden;
 }
 
-.controls {
+.information {
 
   display: block;
-  margin: 30px 0 0;
+  border: 1px solid $pale-lilac;
+  border-radius: 5px;
+  width: 390px;
+  margin: 0 0 0 30px;
+  background: $white;
+  padding: 30px;
+  box-sizing: border-box;
 }
 
-.cart {
-
-  display: inline-block;
-  background: $primary;
-  color: $white;
-  font-size: 14px;
-  border-radius: 8px;
-  padding: 16px 20px;
-  font-weight: bold;
-  width: 160px;
-  text-align: center;
-  cursor: pointer;
-  box-shadow: 0 0 4px 0 rgba($primary, .5);
-  white-space: nowrap;
-  transition: background 400ms;
-  vertical-align: middle;
-
-  &:hover {
-    background: darken($primary, 10%);
-  }
-
-  &__caption {
-
-    display: inline-block;
-    margin: 0 10px 0 0;
-    font-family: inherit;
-    font-weight: 300;
-    font-size: 14px;
-  }
-}
-
-.remove {
-
-  display: inline-block;
-  font-size: 16px;
-  padding: 10px;
-  margin: 0 0 0 10px;
-  color: $gray;
-  vertical-align: middle;
-  cursor: pointer;
-  transition: color 200ms;
-
-  &:hover {
-
-    color: $danger;
-  }
-}
-
-.to-order {
-
-  display: inline-block;
-  color: $primary;
-}
-
-.has-in-case {
+.description {
 
   display: block;
-  margin: 15px 0 0;
-  font-family: inherit;
-  font-weight: 300;
-  font-size: 12px;
-  color: $blue-grey;
+  margin: 60px 0 0;
+}
+
+.attributes {
+
+  display: block;
+  margin: 50px 0 0;
 }
 
 .comments {
 
   display: block;
-  border: 1px solid $pale-lilac;
-  padding: 30px 30px 70px;
-  border-radius: 15px;
-
-  &__controls {
-
-    display: flex;
-    flex: 1 0;
-    border-bottom: 1px solid rgba($coal-dark, .05);
-    padding: 0 0 25px;
-    align-items: center;
-  }
-
-  &__header {
-
-    display: flex;
-    flex: 1 0;
-    font-family: inherit;
-    font-weight: 700;
-    font-size: 14px;
-    text-transform: uppercase;
-    letter-spacing: .5px;
-  }
-
-  &__link {
-
-    display: inline-block;
-    font-family: inherit;
-    font-weight: 300;
-    font-size: 14px;
-    color: $primary;
-    cursor: pointer;
-    border-radius: 4px;
-    border: 1px solid $primary;
-    padding: 7px 12px 6px;
-    text-decoration: none;
-
-    &:hover {
-
-      text-decoration: underline;
-    }
-  }
-
-  &__empty {
-
-    display: inline-block;
-    font-family: inherit;
-    font-weight: 300;
-    font-size: 14px;
-    color: $coal-dark;
-  }
-
-  &__content {
-
-    display: block;
-    margin: 30px 0 0;
-  }
-
-  &__count {
-
-    color: $blue-grey;
-    font-size: inherit;
-    font-weight: normal;
-    padding: 0 0 0 20px;
-  }
+  margin: 50px 0 0;
 }

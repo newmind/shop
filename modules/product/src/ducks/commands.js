@@ -3,46 +3,31 @@ import request from "@ui.packages/request";
 import {pushNotification} from "@ui.packages/notifications";
 
 import {
-  pageInProcessAction,
-
-  addProductToCartAction,
-  removeProductFromCartAction,
-
-  getProductByIdRequest,
-  getProductByIdRequestFail,
-  getProductByIdRequestSuccess,
+  getProductRequestAction,
+  getProductRequestFailAction,
+  getProductRequestSuccessAction,
 
   createCommentRequestAction,
   createCommentRequestFailAction,
   createCommentRequestSuccessAction,
-} from './actions';
-
-
-export const pageInProcess = (status) => (dispatch) => dispatch(pageInProcessAction(status));
-
-
-export const addProductToCart = (product) => (dispatch) => dispatch(addProductToCartAction(product));
-export const removeProductFromCart = (id) => (dispatch) => dispatch(removeProductFromCartAction(id));
+} from './slice';
 
 
 export const getProductById = (id) => async (dispatch) => {
   try {
-    dispatch(getProductByIdRequest());
+    dispatch(getProductRequestAction());
 
-    const { data } = await request({
+    const result = await request({
       method: 'get',
       url: `/products/${id}`
     });
 
-    console.log(data)
-
-    dispatch(getProductByIdRequestSuccess(data));
+    dispatch(getProductRequestSuccessAction(result['data']));
 
     return data;
   }
   catch(error) {
-console.log(error)
-    dispatch(getProductByIdRequestFail(error));
+    dispatch(getProductRequestFailAction(error));
   }
 };
 

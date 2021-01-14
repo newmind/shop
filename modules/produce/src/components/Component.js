@@ -1,37 +1,28 @@
 
-import React, { lazy, Suspense } from 'react';
+import React from 'react';
+
+import Pay from './Pay';
+import Making from './Making';
+import Contacts from './Contacts';
+import Delivery from './Delivery';
 
 import styles from "./default.module.scss";
-
-
-const Pay = lazy(() => import('./Pay'));
-const Making = lazy(() => import('./Making'));
-const Contacts = lazy(() => import('./Contacts'));
-const Delivery = lazy(() => import('./Delivery'));
 
 
 function Produce() {
   return (
     <section className={styles['wrapper']}>
       <div className={styles['content']}>
-        <Suspense fallback={null}>
-          <Contacts />
-        </Suspense>
+        <Contacts />
       </div>
       <div className={styles['content']}>
-        <Suspense fallback={null}>
-          <Pay />
-        </Suspense>
+        <Pay />
       </div>
       <div className={styles['content']}>
-        <Suspense fallback={null}>
-          <Delivery />
-        </Suspense>
+        <Delivery />
       </div>
       <div className={styles['content']}>
-        <Suspense fallback={null}>
-          <Making />
-        </Suspense>
+        <Making />
       </div>
     </section>
   );

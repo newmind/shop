@@ -1,4 +1,5 @@
 
+import { Text } from '@ui.packages/kit';
 import { reduceToArray } from '@ui.packages/utils';
 
 import React from 'react';
@@ -18,10 +19,10 @@ function Properties({ list }) {
             <div key={index} className={styles['list__row']}>
               {item && (<>
                 <div className={styles['list__col']}>
-                  <p className={styles['list__title']}>{ item['name'] }:</p>
+                  <Text type={Text.TYPE_BODY}>{ item['name'] }:</Text>
                 </div>
                 <div className={styles['list__col']}>
-                  <p className={styles['list__value']}>{ item['value'] } { item['unit'] && item['unit']['value'] }</p>
+                  <Text>{ item['value'] } { item['unit'] && item['unit']['value'] }</Text>
                 </div>
               </>)}
             </div>

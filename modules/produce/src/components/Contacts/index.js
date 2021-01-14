@@ -1,4 +1,6 @@
 
+import { Header, Text } from '@ui.packages/kit';
+
 import React from 'react';
 
 import cn from 'classnames';
@@ -9,14 +11,14 @@ function Contacts() {
   return (
     <section className={styles['container']}>
       <header className={styles['header']}>
-        <h2>Контакты</h2>
+        <Header level={3}>Контакты</Header>
       </header>
       <article className={styles['content']}>
         <div className={styles['block']}>
           <div className={styles['block__label']}>
             <span className={styles['label']}>
               <span className={cn(styles['label__icon'], 'fas fa-map-marker-alt')} />
-              <span className={styles['label__caption']}>Адрес</span>
+              <Text type={Text.TYPE_BODY}>Адрес</Text>
             </span>
           </div>
           <div className={styles['block__content']}>

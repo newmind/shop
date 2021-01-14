@@ -31,7 +31,7 @@ function Profile() {
   return (
     <div className={styles['wrapper']}>
       <div className={styles['header']}>
-        <Header level={2}>Пользователь</Header>
+        <Header level={1}>Профайл</Header>
       </div>
       <div className={styles['container']}>
         <div className={styles['form']}>

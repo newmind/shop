@@ -1,165 +1,66 @@
 
-import numeral from '@packages/numeral';
+import {Gallery, Breadcrumbs, Text} from '@ui.packages/kit';
 
-import { Dialog } from '@ui.packages/dialog';
-import { nounDeclension } from "@ui.packages/utils";
-import { Gallery, Breadcrumbs, Header, Text } from '@ui.packages/kit';
+import React from 'react';
+import { useSelector } from 'react-redux';
 
-import types from 'prop-types';
-import { Link, useParams } from 'react-router-dom';
-import React, { lazy, Suspense, useEffect } from 'react';
+import Information from './Information';
+import Comments from './Comments';
+import Attributes from './Attributes';
 
-import cn from "classnames";
 import styles from './default.module.scss';
 
-
-const Comments = lazy(() => import(/* webpackChunkName: "product.comments" */'./Comments'));
-const Properties = lazy(() => import(/* webpackChunkName: "showcase.properties" */'./Properties'));
-const CommentModify = lazy(() => import(/* webpackChunkName: "showcase.properties" */'./CommentModify'));
+import { selectProduct } from '../ducks/slice';
 
 
-function Product({ addProductToCart, getProductById, product, openDialog, closeDialog, createComment, removeProductFromCart, cart, initialValues }) {
-  const params = useParams();
+function Product() {
+  const product = useSelector(selectProduct);
 
-  useEffect(function init() {
-
-    document.title = `${process.env['REACT_APP_WEBSITE_NAME']} - ${product['brand']} (${product['uuid']})`;
-    document.querySelector('meta[name="description"]').setAttribute("content", product['description']);
-
-    getProductById(params['id'])
-
-  }, []);
-
-  function handleClickCart(event) {
-    event.preventDefault();
-
-    addProductToCart(product);
+  if ( ! product) {
+    return null;
   }
-
-  function handleOpenCommentDialog() {
-    openDialog('comment');
-  }
-
-  async function handleCreateComment(formData) {
-    await createComment(product['uuid'], formData);
-    closeDialog('comment');
-  }
-
-  function handleRemoveFromCart(uuid) {
-    removeProductFromCart(uuid);
-  }
-
-  const countInCart = cart.filter(item => item['uuid'] === product['uuid']).length;
-  const removeFromCartClassName= cn(styles['remove'], 'far fa-trash-alt');
 
   return (
-      <article className={styles['product']}>
-        <div className={styles['breadcrumbs']}>
-          <div className={styles['breadcrumbs__content']}>
-            <Breadcrumbs
-              items={[
-                { title: 'Витрина', href: '/products' },
-                { title: product['brand'] },
-              ]}
-            />
+    <article className={styles['wrapper']}>
+      <div className={styles['breadcrumbs']}>
+        <div className={styles['breadcrumbs__content']}>
+          <Breadcrumbs
+            items={[
+              { title: 'Витрина', href: '/products' },
+              { title: product['brand'] },
+            ]}
+          />
+        </div>
+      </div>
+      <div className={styles['content']}>
+        <div className={styles['common']}>
+          <div className={styles['gallery']}>
+            <Gallery items={product['gallery']} valueKey="externalId" path={`${process.env['REACT_APP_API_HOST']}/gallery`} />
+          </div>
+          <div className={styles['information']}>
+            <Information {...product} />
           </div>
         </div>
-        <div className={styles['product__content']}>
-          <div className={styles['product__common']}>
-            <div className={styles['product__gallery']}>
-              <Gallery items={product['gallery']} valueKey="externalId" path={`${process.env['REACT_APP_API_HOST']}/gallery`} />
-            </div>
-            <div className={styles['product__commands']}>
-              <span className={styles['product__uuid']}>{ product['uuid'] }</span>
-              <Header level={1}>{ product['brand'] }</Header>
-              {product['name'] && <Text>{ product['name'] }</Text>}
-              <p className={styles['product__amount']}>{ numeral(product['amount']).format() } {product['currency']['value']}</p>
-              <div className={styles['controls']}>
-              <span className={styles['cart']} onClick={(event) => handleClickCart(event)}>
-                <span className={styles['cart__caption']}>Добавить в корзину</span>
-                <span className="fas fa-shopping-cart" />
-              </span>
-                { !! countInCart && (
-                  <span className={removeFromCartClassName} onClick={() => handleRemoveFromCart(product['uuid'])} />
-                )}
-              </div>
-              { !! countInCart && (
-                <span className={styles['has-in-case']}>
-              Уже {nounDeclension(countInCart, ['выбран', 'выбрано', 'выбрано'])} {countInCart} {nounDeclension(countInCart, ['товар', 'товара', 'товаров'])}.&nbsp;
-                  <Link className={styles['to-order']} to={process.env['PUBLIC_URL'] + '/order'}>Перейти к оформлению заказа</Link>
-            </span>
-              )}
-              {product['description'] && (
-                <div className={styles['product__description']}>
-                  <Header level={3}>Описание</Header>
-                  <Text>{ product['description'] }</Text>
-                </div>)}
-            </div>
+        { !! product['description'] && (
+          <div className={styles['description']}>
+            <Text>{ product['description'] || '' }</Text>
           </div>
-          <div className={styles['features']}>
-            {product['attributes'].length
-              ? (
-                <div className={styles['product__feature']}>
-                  <Header level={3}>Характеристика:</Header>
-                  <div className={styles['product__list']}>
-                    <Suspense fallback={null}>
-                      <Properties list={product['attributes']} />
-                    </Suspense>
-                  </div>
-                </div>
-              )
-              : null}
-            <div className={styles['comments']}>
-              <div className={styles['comments__controls']}>
-                <Header level={3}>Отзывы {product['comments'].length ? <span className={styles['comments__count']}>({ product['comments'].length })</span> : null}</Header>
-                <span className={styles['comments__link']} onClick={() => handleOpenCommentDialog()}>Оставить отзыв</span>
-              </div>
-              <div className={styles['comments__content']}>
-                { !! product['comments'].length
-                  ? (
-                    <Suspense fallback={null}>
-                      <Comments comments={product['comments']} />
-                    </Suspense>
-                  )
-                  : <p className={styles['comments__empty']}>Отзывов о товаре еще нет</p>}
-              </div>
-            </div>
+        )}
+        { !! product['attributes'].length && (
+          <div className={styles['attributes']}>
+            <Attributes list={product['attributes']} />
           </div>
+        )}
+        <div className={styles['comments']}>
+          <Comments comments={product['comments']} />
         </div>
-        <Dialog name="comment" title="Ваш отзыв о товаре">
-          <Suspense fallback={null}>
-            <CommentModify onSubmit={(data) => handleCreateComment(data)} initialValues={initialValues} />
-          </Suspense>
-        </Dialog>
-      </article>
+      </div>
+    </article>
   );
 }
 
-Product.propTypes = {
-  cart: types.array,
-  product: types.object,
-  initialValues: types.object,
-  closeDialog: types.func,
-  openDialog: types.func,
-};
+Product.propTypes = {};
 
-Product.defaultProps = {
-  cart: [],
-  product: {
-    uuid: null,
-    isSale: false,
-    isHit: false,
-    amount: 0.00,
-    currency: {
-      value: '',
-    },
-    comments: [],
-    gallery: [],
-    brand: 'None',
-    name: 'None',
-    description: '',
-    attributes: [],
-  },
-};
+Product.defaultProps = {};
 
 export default Product;

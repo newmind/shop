@@ -1,14 +1,13 @@
 
 import numeral from "@packages/numeral";
 
-import { Gallery } from "@ui.packages/kit";
+import { Gallery, Header, Text, Link } from "@ui.packages/kit";
 
 import React from 'react';
 import types from "prop-types";
-import { Link } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 
-import { closeCart } from '../../ducks/cartSlice';
+import { closeCart } from '../../../ducks/cartSlice';
 
 import cn from "classnames";
 import styles from "./defaults.module.scss";
@@ -25,10 +24,16 @@ function Product({ uuid, gallery, brand, name, amount, currency, onRemove }) {
       </div>
       <div className={styles['item__description']}>
         <div className={styles['item__names']}>
-          <span className={styles['item__brand']}>
-            <Link className={styles['item__brand-link']} to={process.env['PUBLIC_URL'] + `/products/${uuid}`} onClick={() => dispatch(closeCart())}>{ brand }</Link>
+          <span className={styles['brand']}>
+            <Header level={4}>
+              <Link to={process.env['PUBLIC_URL'] + `/products/${uuid}`} onClick={() => dispatch(closeCart())}>
+                { brand }
+              </Link>
+            </Header>
           </span>
-          <p className={styles['item__name']}>{ name }</p>
+          <div className={styles['name']}>
+            <Text type={Text.TYPE_COMMENT}>{ name }</Text>
+          </div>
         </div>
         <div className={styles['item__count']}>
           <p className={styles['item__amount']}>{numeral(amount).format()} {currency['value']}</p>

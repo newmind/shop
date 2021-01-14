@@ -68,7 +68,7 @@ function List({ items, meta, openDialog, closeDialog, removeProductById }) {
           }}
         </Column>
         <Column
-          title="Описание"
+          title="Аттрибуты"
           align="left"
           width="200"
         >
@@ -85,7 +85,7 @@ function List({ items, meta, openDialog, closeDialog, removeProductById }) {
           }}
         </Column>
         <Column
-          title="Аттрибуты"
+          title="Параметры"
           alias="attributes"
           align="left"
           width="200"

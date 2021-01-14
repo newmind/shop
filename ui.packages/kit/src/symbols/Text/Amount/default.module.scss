@@ -2,19 +2,14 @@
 @import "~@ui.packages/theme";
 
 
-.header {
+.text {
 
   display: block;
   font-family: inherit;
   font-weight: 400;
   font-size: 18px;
-  color: $coal-dark;
-  text-transform: uppercase;
+  line-height: 1.4;
+  color: $black;
   text-overflow: ellipsis;
   overflow: hidden;
-}
-
-.bold {
-
-  font-weight: 700;
 }

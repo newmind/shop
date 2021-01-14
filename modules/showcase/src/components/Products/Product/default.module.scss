@@ -10,9 +10,10 @@
   background: $white;
   text-decoration: none;
   outline: none;
-  border-radius: 15px;
-  padding: 25px 20px;
+  border-radius: 5px;
+  padding: 20px 20px 25px;
   box-sizing: border-box;
+  //border: 1px solid $pale-lilac;
   box-shadow: 0 0 6px 0 $pale-lilac, inset 0 0 0 0 transparent;
   transition: box-shadow 200ms, box-shadow 200ms;
   cursor: pointer;
@@ -117,12 +118,7 @@
 
   display: flex;
   flex: 1 0;
-  font-family: inherit;
-  font-weight: 600;
-  font-size: 16px;
-  color: $coal-dark;
   justify-content: center;
-  align-items: center;
 }
 
 .description {
