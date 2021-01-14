@@ -1,5 +1,5 @@
 
-import { createSlice } from '@reduxjs/toolkit';
+import { createAction, createSlice } from '@reduxjs/toolkit';
 
 
 const initialState = {
@@ -15,9 +15,12 @@ const initialState = {
   isInitialize: false,
 };
 
+const REDUCER_NAME = 'showcase';
+const SOCKET_PRODUCT_UPDATED = createAction('@@socket/PRODUCT_UPDATED');
 
-export const showcaseSlice = createSlice({
-  name: 'showcase',
+
+export const slice = createSlice({
+  name: REDUCER_NAME,
   initialState,
   reducers: {
     getProductsAction: (state) => {
@@ -39,12 +42,26 @@ export const showcaseSlice = createSlice({
       state['inProcess'] = false;
     }
   },
+  extraReducers(builder) {
+    builder
+      .addCase(SOCKET_PRODUCT_UPDATED, function(state, { payload }) {
+        state['items'] = state['items'].map((item) => {
+          if (item['uuid'] === payload['uuid']) {
+            return {
+              ...item,
+              ...payload,
+            };
+          }
+          return item;
+        });
+      });
+  },
 });
 
-export const { nextPageAction, getProductsAction, getProductsFailAction, getProductsSuccessAction } = showcaseSlice['actions'];
+export const { nextPageAction, getProductsAction, getProductsFailAction, getProductsSuccessAction } = slice['actions'];
 
-export const selectItems = (state) => state['showcase']['items'];
-export const selectMeta = (state) => state['showcase']['meta'];
+export const selectItems = (state) => state[REDUCER_NAME]['items'];
+export const selectMeta = (state) => state[REDUCER_NAME]['meta'];
 
-export const name = showcaseSlice['name'];
-export const reducer = showcaseSlice['reducer'];
+export const name = slice['name'];
+export const reducer = slice['reducer'];

@@ -1,5 +1,5 @@
 
-import { createSlice } from '@reduxjs/toolkit';
+import { createSlice, createAction } from '@reduxjs/toolkit';
 
 
 const initialState = {
@@ -8,6 +8,8 @@ const initialState = {
 };
 
 const REDUCER_NAME = 'product';
+const SOCKET_COMMENT_CREATED = createAction('@@socket/COMMENT_CREATED');
+const SOCKET_PRODUCT_UPDATED = createAction('@@socket/PRODUCT_UPDATED');
 
 
 const slice = createSlice({
@@ -45,7 +47,45 @@ const slice = createSlice({
         comments: [payload, ...state['product']['comments']],
       };
     },
-  }
+  },
+  extraReducers(builder) {
+    builder
+      .addCase(SOCKET_COMMENT_CREATED, function(state, { payload }) {
+        if ( ! state['product']) {
+          return void 0;
+        }
+
+        if (state['product']['uuid'] !== payload['productId']) {
+          return  void 0;
+        }
+
+        if (state['product']['comments'].some((item) => item['id'] === payload['id'])) {
+          return void 0;
+        }
+
+        state['product'] = {
+          ...state['product'],
+          comments: [
+            payload,
+            ...state['product']['comments'],
+          ]
+        };
+      })
+      .addCase(SOCKET_PRODUCT_UPDATED, function(state, { payload }) {
+        if ( ! state['product']) {
+          return void 0;
+        }
+
+        if (state['product']['uuid'] !== payload['uuid']) {
+          return  void 0;
+        }
+
+        state['product'] = {
+          ...state['product'],
+          ...payload,
+        };
+      });
+  },
 });
 
 export const {

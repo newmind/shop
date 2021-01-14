@@ -53,7 +53,7 @@ function Gallery({ index, items, path, valueKey, className, isList }) {
         </span>
       )}
       <div className={styles['gallery__content']}>
-        <Image src={src} />
+        <Image size="cover" src={src} />
         {isList && hasCount && (
           <div className={styles['gallery__count']}>
             <span className={styles['gallery__numbers']}>{activeIndex + 1} из {items.length}</span>

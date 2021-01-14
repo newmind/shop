@@ -50,7 +50,7 @@ function setProportionalImageSize(img, container) {
 function setCoverImageSize(img, container) {
   const direction = getDirection(img, container);
   const containerRECT = container.getBoundingClientRect();
-
+  
   if (direction === LANDSCAPE_DIRECTION) {
     img.height = containerRECT['height'];
   }

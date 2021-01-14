@@ -1,5 +1,5 @@
 
-import { createSlice } from '@reduxjs/toolkit';
+import { createSlice, createAction } from '@reduxjs/toolkit';
 
 
 const initialState = {
@@ -11,9 +11,10 @@ const initialState = {
 };
 
 const REDUCER_NAME = 'products';
+const SOCKET_PRODUCT_UPDATED = createAction('@@socket/PRODUCT_UPDATED');
 
 
-const productsSlice = createSlice({
+const slice = createSlice({
   name: REDUCER_NAME,
   initialState,
   reducers: {
@@ -63,7 +64,21 @@ const productsSlice = createSlice({
         }
         return item;
       });
-    }
+    },
+  },
+  extraReducers(builder) {
+    builder
+      .addCase(SOCKET_PRODUCT_UPDATED, function(state, { payload }) {
+        state['items'] = state['items'].map((item) => {
+          if (item['uuid'] === payload['uuid']) {
+            return {
+              ...item,
+              ...payload,
+            };
+          }
+          return item;
+        });
+      });
   }
 });
 
@@ -83,7 +98,7 @@ export const {
   removeProductRequestSuccessAction,
 
   updateProductAction,
-} = productsSlice['actions'];
+} = slice['actions'];
 
-export const name = productsSlice['name'];
-export const reducer = productsSlice['reducer'];
+export const name = slice['name'];
+export const reducer = slice['reducer'];

@@ -62,3 +62,12 @@ export const on = (eventName, cb) => {
     setTimeout(() => on(eventName, cb), 1000);
   }
 };
+
+export const middleware = (socket) => {
+  return ({ dispatch }) => {
+    socket.on('action', dispatch);
+    return (next) => (action) => {
+      return next(action);
+    };
+  };
+};

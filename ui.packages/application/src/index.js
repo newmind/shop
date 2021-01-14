@@ -1,6 +1,6 @@
 
-import Socket from '@ui.packages/socket';
 import { middleware as requestMiddleware } from '@ui.packages/request';
+import Socket, { middleware as socketMiddleware} from '@ui.packages/socket';
 import { Notifications, notificationReducer } from '@ui.packages/notifications';
 
 import React from 'react';
@@ -58,6 +58,14 @@ async function createRoutes(routes) {
 class App {
   constructor(options) {
 
+    let socket;
+
+    if (process.env['REACT_APP_SOCKET_HOST'] && process.env['REACT_APP_SOCKET_PATH']) {
+      socket = Socket(process.env['REACT_APP_SOCKET_HOST'], {
+        path: process.env['REACT_APP_SOCKET_PATH'],
+      })
+    }
+
     this.options = {
       ...defaultOptions,
       ...options,
@@ -68,6 +76,7 @@ class App {
       },
       middleware: [
         thunk,
+        socketMiddleware(socket),
         requestMiddleware({
           host: process.env['REACT_APP_API_HOST'],
           silent: true,
@@ -80,12 +89,6 @@ class App {
   async start() {
     const routes = await createRoutes(this.options['routes']);
     const reducers = await createReducers(this.options['routes']);
-
-    if (process.env['REACT_APP_SOCKET_HOST'] && process.env['REACT_APP_SOCKET_PATH']) {
-      Socket(process.env['REACT_APP_SOCKET_HOST'], {
-        path: process.env['REACT_APP_SOCKET_PATH'],
-      })
-    }
 
     this.store = initStore({
       ...reducers,
