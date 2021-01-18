@@ -16,13 +16,11 @@ export default function Paging({ total, skip, disabled, onChange }) {
 
   const query = new URLSearchParams(location['search']);
   const page = Number(query.get('page')) || 1;
-  const pages = Math.pow(total / skip, 0);
+  const pages = Math.pow(total / skip, 0) + 1;
 
   function handleClick(number) {
     query.delete('page');
     query.append('page', number);
-    query.delete('skip');
-    query.append('skip', skip);
 
     navigate('?' + query.toString());
 
@@ -43,7 +41,7 @@ export default function Paging({ total, skip, disabled, onChange }) {
     }
   }
 
-  if (pages === 1) {
+  if (pages <= 1) {
     return null;
   }
 

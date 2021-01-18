@@ -6,7 +6,7 @@ export default () => async (ctx) => {
   const where = {};
 
   const { Op } = Sequelize;
-  const { Product, Type } = models;
+  const { ProductType, Type } = models;
   const {
     status = null, categoryId = null, brand = null, amountFrom = null,
     amountTo = null, colorId = null, formId = null, typeId = null,
@@ -53,14 +53,15 @@ export default () => async (ctx) => {
   const result = await Type.findAll({
     distinct: true,
     group: ['Type.id'],
-    attributes: ['id', 'value', [sequelize.fn('COUNT', sequelize.col('product.typeId')), 'count']],
+    attributes: ['id', 'value', [sequelize.fn('COUNT', sequelize.col('product_types.typeId')), 'count']],
     include: [
       {
-        model: Product,
-        required: false,
-        as: 'product',
+        model: ProductType,
+        as: 'product_types',
         attributes: [],
-        where: { ...where },
+        include: [
+
+        ],
       }
     ],
   });

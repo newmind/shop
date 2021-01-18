@@ -22,11 +22,18 @@ module.exports = (db, DataType) => {
     },
   });
 
-  Type.associate = ({ Product }) => {
+  Type.associate = ({ Product, ProductType }) => {
 
-    Type.hasMany(Product, {
+    Type.belongsToMany(Product, {
+      through: ProductType,
       foreignKey: 'typeId',
-      as: 'product',
+      otherKey: 'productUuid',
+      as: 'products',
+    });
+
+    Type.hasMany(ProductType, {
+      foreignKey: 'typeId',
+      as: 'product_types',
     });
   };
 

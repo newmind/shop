@@ -18,11 +18,18 @@ module.exports = (db, DataType) => {
     }
   });
 
-  Form.associate = ({ Product }) => {
+  Form.associate = ({ Product, ProductForm }) => {
 
-    Form.hasMany(Product, {
+    Form.belongsToMany(Product, {
+      through: ProductForm,
       foreignKey: 'formId',
-      as: 'product',
+      otherKey: 'productUuid',
+      as: 'forms',
+    });
+
+    Form.hasMany(ProductForm, {
+      foreignKey: 'formId',
+      as: 'product_forms',
     });
   };
 

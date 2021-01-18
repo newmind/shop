@@ -22,11 +22,18 @@ module.exports = (db, DataType) => {
     },
   });
 
-  Category.associate = ({ Product }) => {
+  Category.associate = ({ Product, ProductCategory }) => {
 
-    Category.hasMany(Product, {
+    Category.belongsToMany(Product, {
+      through: ProductCategory,
       foreignKey: 'categoryId',
-      as: 'product',
+      otherKey: 'productUuid',
+      as: 'categories',
+    });
+
+    Category.hasMany(ProductCategory, {
+      foreignKey: 'categoryId',
+      as: 'product_categories',
     });
   };
 

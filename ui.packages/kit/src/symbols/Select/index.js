@@ -1,186 +1,32 @@
 
-import React, { useRef, useState, useEffect, useLayoutEffect } from 'react';
-import types from 'prop-types';
+import React from 'react';
+import types from "prop-types";
 
-import Control from './Control';
-import Options from './Options';
-
-import Context from './Context';
-
-import styles from './default.module.scss';
+import SelectDefault from "./Default";
+import SelectMultiselect from "./Multiselect";
 
 
-function useIsOptionObject(options) {
-  if (options[0]) {
-    if (options[0] instanceof Object) {
-      return true;
-    }
+function SelectFactory({ type, ...props }) {
+  switch(type) {
+    case SelectFactory.TYPE_DEFAULT: return <SelectDefault {...props} />;
+    case SelectFactory.TYPE_MULTISELECT: return <SelectMultiselect {...props} />;
+    default: return <SelectDefault {...props} />;
   }
-  return false;
 }
 
-function useFindSelectedValue(value, options, optionKey) {
-  if (value instanceof Object) {
-    return options.find(option => option[optionKey] === value[optionKey]);
-  }
 
-  const isOptionObject = useIsOptionObject(options);
+SelectFactory.TYPE_DEFAULT = 'default';
+SelectFactory.TYPE_MULTISELECT = 'multiselect';
 
-  if (isOptionObject) {
-    return options.find(option => {
-      return option[optionKey] === value
-    });
-  }
-  return options.find(option => option === value);
-}
 
-function useGetValue(value, options, optionKey, optionValue) {
-  const selectedValue = useFindSelectedValue(value, options, optionKey);
-  if (selectedValue instanceof Object) {
-    return selectedValue[optionValue];
-  }
-  return value;
-}
-
-function Select({
-  simple,
-  disabled,
-  options,
-  value,
-  placeholder,
-  optionKey,
-  optionValue,
-  inProcess,
-  OptionTemplate,
-  transformValue,
-  onChange,
-  onBlur,
-  onTransformSelectedValue,
-}) {
-  const wrapperRef = useRef(null);
-  const optionsRef = useRef(null);
-  const [isOpen, setOpen] = useState(false);
-  const [selectedValue, setSelectedValue] = useState(null);
-
-  useEffect(function changeValue() {
-    setSelectedValue(useGetValue(value, options, optionKey, optionValue));
-  }, [value, options]);
-
-  useEffect(function clickEvents() {
-    function handleClick(event) {
-      event.preventDefault();
-      event.stopPropagation();
-
-      if (isOpen) {
-        const { current: wrapperElement } = wrapperRef;
-        const portalElement = document.querySelector('#selectOptionsPortal');
-        const { current: optionsElement } = optionsRef;
-
-        if (optionsElement && ! optionsElement.contains(event['target'])) {
-          handleClose();
-        }
-
-        if (portalElement && ! portalElement.contains(event['target']) && ! portalElement.contains(wrapperElement)) {
-          handleClose();
-        }
-      }
-    }
-
-    document.addEventListener('click', handleClick);
-    document.querySelector('#root').addEventListener('scroll', handleClose);
-    return function() {
-      document.removeEventListener('click', handleClick);
-      document.querySelector('#root').removeEventListener('scroll', handleClose);
-    };
-  });
-
-  useLayoutEffect(function openSelect() {
-    if (isOpen) {
-      calculatePositionOptions();
-    }
-  }, [value, options, isOpen]);
-
-  function calculatePositionOptions() {
-    const { current: wrapperElement } = wrapperRef;
-    const { current: optionsElement } = optionsRef;
-
-    const wrapperRect = wrapperElement.getBoundingClientRect();
-
-    optionsElement.style.left = wrapperRect['left'] + 'px';
-    optionsElement.style.top = wrapperRect['bottom'] + 'px';
-    optionsElement.style.width = wrapperRect['width'] + 'px';
-  }
-
-  function handleClose() {
-    setOpen(false);
-    onBlur();
-  }
-
-  function handleControlClick() {
-    setOpen( ! isOpen);
-  }
-
-  function handleResetClick() {
-    onChange(null);
-    handleClose();
-  }
-
-  function handleSelectValue(option) {
-    if (option instanceof Object) {
-      onChange(simple ? option[optionKey] : option);
-    }
-    else {
-      onChange(option);
-    }
-    handleClose();
-  }
-
-  return (
-    <Context.Provider value={{
-      simple,
-      value,
-      isOpen,
-      isDisabled: disabled || inProcess,
-      selectedValue,
-      optionValue,
-      optionKey,
-      OptionTemplate,
-      options,
-      inProcess,
-      transformValue,
-      selectedObject: useFindSelectedValue(value, options, optionKey),
-      onTransformSelectedValue,
-    }}>
-      <div ref={wrapperRef} className={styles['wrapper']}>
-        <Control
-          value={value}
-          placeholder={placeholder}
-          isDisabled={disabled || inProcess}
-          onClick={handleControlClick}
-          onReset={handleResetClick}
-        />
-        {isOpen && (
-          <Options
-            ref={optionsRef}
-            options={options}
-            optionKey={optionKey}
-            optionValue={optionValue}
-            value={value}
-            onClick={handleSelectValue}
-          />
-        )}
-      </div>
-    </Context.Provider>
-  );
-}
-
-Select.propTypes = {
+SelectFactory.propTypes = {
+  type: types.oneOf([]),
   simple: types.bool,
   optionKey: types.string,
   optionValue: types.string,
   placeholder: types.string,
   options: types.array,
-  value: types.oneOfType([types.string, types.object, types.number]),
+  value: types.oneOfType([types.string, types.object, types.number, types.array]),
   disabled: types.bool,
   inProcess: types.bool,
   transformValue: types.func,
@@ -192,7 +38,7 @@ Select.propTypes = {
   onTransformOptionValue: types.func,
 };
 
-Select.defaultProps = {
+SelectFactory.defaultProps = {
   simple: true,
   optionKey: 'id',
   optionValue: 'value',
@@ -207,4 +53,4 @@ Select.defaultProps = {
   onTransformOptionValue: null,
 };
 
-export default Select;
+export default SelectFactory;

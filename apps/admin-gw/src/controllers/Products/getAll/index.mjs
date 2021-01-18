@@ -2,39 +2,36 @@
 import request from '@sys.packages/request';
 
 
-const PRODUCT_API_SRV = process.env['PRODUCT_API_SRV'];
-
-
 export default () => async (ctx) => {
-  const {...params} = ctx['request']['query'];
+  const { ...params } = ctx['request']['query'];
 
   const {data: types} = await request({
-    url: `${PRODUCT_API_SRV}/products/types`,
-    method: 'get',
-    params,
-  });
-  const {data: forms} = await request({
-    url: `${PRODUCT_API_SRV}/products/forms`,
-    method: 'get',
-    params,
-  });
-  const {data: colors} = await request({
-    url: `${PRODUCT_API_SRV}/products/colors`,
-    method: 'get',
-    params,
-  });
-  const {data: brands} = await request({
-    url: `${PRODUCT_API_SRV}/products/brands`,
-    method: 'get',
-    params,
-  });
-  const {data: materials} = await request({
-    url: `${PRODUCT_API_SRV}/products/materials`,
+    url: process.env['PRODUCT_API_SRV'] + '/products/types',
     method: 'get',
     params,
   });
   const {data: categories} = await request({
-    url: `${PRODUCT_API_SRV}/products/categories`,
+    url: process.env['PRODUCT_API_SRV'] + '/products/categories',
+    method: 'get',
+    params,
+  });
+  const {data: forms} = await request({
+    url: process.env['PRODUCT_API_SRV'] + '/products/forms',
+    method: 'get',
+    params,
+  });
+  const {data: colors} = await request({
+    url: process.env['PRODUCT_API_SRV'] + '/products/colors',
+    method: 'get',
+    params,
+  });
+  const {data: brands} = await request({
+    url: process.env['PRODUCT_API_SRV'] + '/products/brands',
+    method: 'get',
+    params,
+  });
+  const {data: materials} = await request({
+    url: process.env['PRODUCT_API_SRV'] + '/products/materials',
     method: 'get',
     params,
   });
@@ -42,7 +39,7 @@ export default () => async (ctx) => {
 
   const {data, meta} = await request({
     method: 'get',
-    url: PRODUCT_API_SRV + '/products',
+    url: process.env['PRODUCT_API_SRV'] + '/products',
     params,
   });
 

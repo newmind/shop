@@ -58,10 +58,11 @@ export const slice = createSlice({
   },
 });
 
-export const { nextPageAction, getProductsAction, getProductsFailAction, getProductsSuccessAction } = slice['actions'];
+export const { getProductsAction, getProductsFailAction, getProductsSuccessAction } = slice['actions'];
 
 export const selectItems = (state) => state[REDUCER_NAME]['items'];
 export const selectMeta = (state) => state[REDUCER_NAME]['meta'];
+export const selectInProcess = (state) => state[REDUCER_NAME]['inProcess'];
 
 export const name = slice['name'];
 export const reducer = slice['reducer'];

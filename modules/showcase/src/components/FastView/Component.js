@@ -1,5 +1,5 @@
 
-import { Gallery } from "@ui.packages/kit";
+import { Gallery, Text } from "@ui.packages/kit";
 
 import React from 'react';
 import types from 'prop-types';
@@ -10,7 +10,7 @@ import Information from './Information';
 import styles from './default.module.scss';
 
 
-function FastView({ product: { gallery, attributes }, product }) {
+function FastView({ product: { gallery, attributes, description }, product }) {
   return (
     <div className={styles['wrapper']}>
       <div className={styles['product']}>
@@ -21,6 +21,11 @@ function FastView({ product: { gallery, attributes }, product }) {
           <Information product={product} />
         </div>
       </div>
+      { !! description && (
+        <div className={styles['description']}>
+          <Text>{ description }</Text>
+        </div>
+      )}
       { !! attributes.length && (
         <div className={styles['property']}>
           <Properties list={attributes} />

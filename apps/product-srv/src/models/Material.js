@@ -18,11 +18,18 @@ module.exports = (db, DataType) => {
     }
   });
 
-  Material.associate = ({ Product }) => {
+  Material.associate = ({ Product, ProductMaterial }) => {
 
-    Material.hasMany(Product, {
+    Material.belongsToMany(Product, {
+      through: ProductMaterial,
+      foreignKey: 'colorId',
+      otherKey: 'productUuid',
+      as: 'materials',
+    });
+
+    Material.hasMany(ProductMaterial, {
       foreignKey: 'materialId',
-      as: 'product',
+      as: 'product_materials',
     });
   };
 

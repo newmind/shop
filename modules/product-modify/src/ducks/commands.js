@@ -246,11 +246,11 @@ export const updateProductsById = (data) => async (dispatch) => {
 
     formData.append('brand', data['brand']);
     formData.append('name', data['name']);
-    formData.append('typeId', data['typeId']);
-    formData.append('categoryId', data['categoryId']);
-    formData.append('colorId', data['colorId']);
-    formData.append('materialId', data['materialId']);
-    formData.append('formId', data['formId']);
+    formData.append('types', data['types']);
+    formData.append('categories', data['categories']);
+    formData.append('colors', data['colors']);
+    formData.append('materials', data['materials']);
+    formData.append('forms', data['forms']);
     formData.append('description', data['description']);
     formData.append('params', data['params'] || null);
     formData.append('amount', data['amount']);
@@ -304,7 +304,7 @@ export const createProduct = (data) => async dispatch => {
     formData.append('saleAmount', data['saleAmount'] || null);
     formData.append('attributes', JSON.stringify(data['attributes'] || []));
 
-    data['typeId'] && formData.append('typeId', data['typeId']);
+    data['types'] && formData.append('types', data['types']);
     data['formId'] && formData.append('formId', data['formId']);
     data['colorId'] && formData.append('colorId', data['colorId']);
     data['materialId'] && formData.append('materialId', data['materialId']);

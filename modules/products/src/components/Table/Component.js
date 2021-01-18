@@ -61,7 +61,7 @@ function List({ items, meta, openDialog, closeDialog, removeProductById }) {
                 {uuid && <div className={styles['description__item']}><b className={styles['description__label']}>{ uuid }</b></div>}
                 {brand && <div className={styles['description__item']}><b className={styles['description__label']}>Бренд:</b> { brand }</div>}
                 {name && <div className={styles['description__item']}><b className={styles['description__label']}>Название:</b> { name }</div>}
-                {name && <div className={styles['description__item']}><b className={styles['description__label']}>Цена:</b> { numeral(amount).format() } { currency['value'] }</div>}
+                {amount && <div className={styles['description__item']}><b className={styles['description__label']}>Цена:</b> { numeral(amount).format() } { currency['value'] }</div>}
                 {description && <div className={styles['description__item']}><b className={styles['description__label']}>Описание:</b> { description }</div>}
               </div>
             )
@@ -70,16 +70,15 @@ function List({ items, meta, openDialog, closeDialog, removeProductById }) {
         <Column
           title="Аттрибуты"
           align="left"
-          width="200"
         >
-          {({ type, category, color, form, material }) => {
+          {({ types, categories, colors, forms, materials }) => {
             return (
               <div className={styles['description']}>
-                {type && <div className={styles['description__item']}><b className={styles['description__label']}>Тип:</b> { type['value'] }</div>}
-                {category && <div className={styles['description__item']}><b className={styles['description__label']}>Категория:</b> { category['value'] }</div>}
-                {color && <div className={styles['description__item']}><b className={styles['description__label']}>Цвет:</b> { color['value'] }</div>}
-                {form && <div className={styles['description__item']}><b className={styles['description__label']}>Форма:</b> { form['value'] }</div>}
-                {material && <div className={styles['description__item']}><b className={styles['description__label']}>Материал:</b> { material['value'] }</div>}
+                { !! types.length && <div className={styles['description__item']}><b className={styles['description__label']}>Тип:</b> { types.map((type) => <span key={type['id']} className={styles['item']}>{ type['value'] }</span>) }</div>}
+                { !! categories.length && <div className={styles['description__item']}><b className={styles['description__label']}>Категория:</b> { categories.map((type) => <span key={type['id']} className={styles['item']}>{ type['value'] }</span>) }</div>}
+                { !! colors.length && <div className={styles['description__item']}><b className={styles['description__label']}>Цвет:</b> { colors.map((type) => <span key={type['id']} className={styles['item']}>{ type['value'] }</span>) }</div>}
+                { !! materials.length && <div className={styles['description__item']}><b className={styles['description__label']}>Материал:</b> { materials.map((type) => <span key={type['id']} className={styles['item']}>{ type['value'] }</span>) }</div>}
+                { !! forms.length && <div className={styles['description__item']}><b className={styles['description__label']}>Форма:</b> { forms.map((type) => <span key={type['id']} className={styles['item']}>{ type['value'] }</span>) }</div>}
               </div>
             );
           }}

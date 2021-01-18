@@ -13,8 +13,8 @@ export default () => async (ctx) => {
     method: 'get',
     params: ctx['request']['query'],
   });
-  const { data: forms } = await request({
-    url: `${PRODUCT_API_SRV}/products/forms`,
+  const { data: categories } = await request({
+    url: `${PRODUCT_API_SRV}/products/categories`,
     method: 'get',
     params: ctx['request']['query'],
   });
@@ -33,8 +33,8 @@ export default () => async (ctx) => {
     method: 'get',
     params: ctx['request']['query'],
   });
-  const { data: categories } = await request({
-    url: `${PRODUCT_API_SRV}/products/categories`,
+  const { data: forms } = await request({
+    url: `${PRODUCT_API_SRV}/products/forms`,
     method: 'get',
     params: ctx['request']['query'],
   });

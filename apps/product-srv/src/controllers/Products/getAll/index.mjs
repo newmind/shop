@@ -4,6 +4,11 @@ import { models, Sequelize } from '@sys.packages/db';
 
 export default () => async (ctx) => {
   let where = {};
+  let whereForTypes = {};
+  let whereForCategories = {};
+  let whereForColors = {};
+  let whereForMaterials = {};
+  let whereForForms = {};
   let offset = {};
   let options = {};
 
@@ -24,28 +29,53 @@ export default () => async (ctx) => {
     where['uuid'] = uuid;
   }
 
-  if (categoryId) {
-    where['categoryId'] = categoryId;
-  }
-
   if (brand) {
     where['brand'] = brand;
   }
 
-  if (colorId) {
-    where['colorId'] = colorId;
+  if (typeId) {
+    if (/^\d+$/.test(typeId)) {
+      whereForTypes['id'] = Number(typeId);
+    }
+    else {
+      whereForTypes['id'] = typeId;
+    }
   }
 
-  if (formId) {
-    where['formId'] = formId;
+  if (categoryId) {
+    if (/^\d+$/.test(categoryId)) {
+      whereForCategories['id'] = Number(categoryId);
+    }
+    else {
+      whereForCategories['id'] = categoryId;
+    }
+  }
+
+  if (colorId) {
+    if (/^\d+$/.test(colorId)) {
+      whereForColors['id'] = Number(colorId);
+    }
+    else {
+      whereForColors['id'] = colorId;
+    }
   }
 
   if (materialId) {
-    where['materialId'] = materialId;
+    if (/^\d+$/.test(materialId)) {
+      whereForMaterials['id'] = Number(materialId);
+    }
+    else {
+      whereForMaterials['id'] = materialId;
+    }
   }
 
-  if (typeId) {
-    where['typeId'] = typeId;
+  if (formId) {
+    if (/^\d+$/.test(formId)) {
+      whereForForms['id'] = Number(formId);
+    }
+    else {
+      whereForForms['id'] = formId;
+    }
   }
 
   if (amountFrom && ! amountTo) {
@@ -90,41 +120,51 @@ export default () => async (ctx) => {
     ...options,
     ...offset,
     distinct: true,
-    where: { ...where, count: { [Op.gt]: 0 } },
+    where: { ...where, count: { [Op.gt]: 0 }},
     order: [
       ['createdAt', 'desc'],
       ['comments', 'createdAt', 'desc']
     ],
     include: [
       {
-        model: Category,
-        required: false,
-        as: 'category',
-        attributes: ['id', 'value']
-      },
-      {
         model: Type,
-        required: false,
-        as: 'type',
-        attributes: ['id', 'value']
+        required: !! whereForTypes['id'],
+        as: 'types',
+        where: { ...whereForTypes },
+        attributes: ['id', 'value'],
+        through: { attributes: [] },
       },
       {
-        model: Material,
-        required: false,
-        as: 'material',
-        attributes: ['id', 'value']
+        model: Category,
+        required: !! whereForCategories['id'],
+        as: 'categories',
+        where: { ...whereForCategories },
+        attributes: ['id', 'value'],
+        through: { attributes: [] },
       },
       {
         model: Color,
-        required: false,
-        as: 'color',
-        attributes: ['id', 'value']
+        required: !! whereForColors['id'],
+        as: 'colors',
+        where: { ...whereForColors },
+        attributes: ['id', 'value'],
+        through: { attributes: [] },
+      },
+      {
+        model: Material,
+        required: !! whereForMaterials['id'],
+        as: 'materials',
+        where: { ...whereForMaterials },
+        attributes: ['id', 'value'],
+        through: { attributes: [] },
       },
       {
         model: Form,
-        required: false,
-        as: 'form',
-        attributes: ['id', 'value']
+        required: !! whereForForms['id'],
+        as: 'forms',
+        where: { ...whereForColors },
+        attributes: ['id', 'value'],
+        through: { attributes: [] },
       },
       {
         model: Currency,

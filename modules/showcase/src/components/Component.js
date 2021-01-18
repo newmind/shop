@@ -1,18 +1,24 @@
 
+import { Paging } from '@ui.packages/kit';
 import { Dialog } from '@ui.packages/dialog';
 
 import React from 'react';
+import { useSelector } from 'react-redux';
 
 import FastView from "./FastView";
 
 import Filter from './Filter';
 import Products from './Products';
-import Paging from "./Paging";
 
 import styles from './default.module.scss';
 
+import { selectMeta, selectInProcess } from '../ducks/slice';
+
 
 export default function Showcase() {
+  const meta = useSelector(selectMeta);
+  const inProcess = useSelector(selectInProcess);
+
   return (
     <section className={styles['wrapper']}>
       <aside className={styles['filters']}>
@@ -24,7 +30,7 @@ export default function Showcase() {
         <Products />
       </section>
       <div className={styles['controls']}>
-        <Paging />
+        <Paging total={meta['total']} skip={12} disabled={inProcess} />
       </div>
 
       <Dialog name="fast-view-product">

@@ -14,7 +14,7 @@ import cn from "classnames";
 
 
 export default function Information({ product }) {
-  const { uuid, brand, name, amount, currency, description } = product;
+  const { uuid, brand, name, amount, currency } = product;
 
   const dispatch = useDispatch();
   const items = useSelector(selectItems);
@@ -62,15 +62,6 @@ export default function Information({ product }) {
           </>)}
         </div>
       </div>
-      {description && (
-        <div className={styles['description']}>
-          <div className={styles['header']}>
-            <Header level={3}>Описание</Header>
-          </div>
-          <div className={styles['content']}>
-            <Text type={Text.TYPE_COMMENT}>{ description }</Text>
-          </div>
-        </div>)}
     </div>
   );
 }
@@ -84,7 +75,6 @@ Information.propTypes = {
     currency: types.shape({
       value: types.string,
     }),
-    description: types.string,
   }),
 };
 
@@ -95,6 +85,5 @@ Information.defaultProps = {
     name: '',
     amount: 0,
     currency: { value: '' },
-    description: '',
   },
 };

@@ -53,7 +53,7 @@ function ModifyForm({ handleSubmit, onDelete }) {
         <Row>
           <Col>
             <SelectField
-              name="typeId"
+              name="types"
               label="Тип"
               options={types}
               optionKey="id"
@@ -64,7 +64,7 @@ function ModifyForm({ handleSubmit, onDelete }) {
         <Row>
           <Col>
             <SelectField
-              name="categoryId"
+              name="categories"
               label="Категория"
               options={categories}
               optionKey="id"
@@ -75,7 +75,7 @@ function ModifyForm({ handleSubmit, onDelete }) {
         <Row>
           <Col>
             <SelectField
-              name="colorId"
+              name="colors"
               label="Цвет"
               options={colors}
               optionKey="id"
@@ -86,7 +86,7 @@ function ModifyForm({ handleSubmit, onDelete }) {
         <Row>
           <Col>
             <SelectField
-              name="materialId"
+              name="materials"
               label="Материал"
               options={materials}
               optionKey="id"
@@ -97,7 +97,7 @@ function ModifyForm({ handleSubmit, onDelete }) {
         <Row>
           <Col>
             <SelectField
-              name="formId"
+              name="forms"
               label="Форма"
               options={forms}
               optionKey="id"

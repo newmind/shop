@@ -15,6 +15,7 @@ function SelectField(props) {
 }
 
 SelectField.propTypes = {
+  type: types.string,
   name: types.string,
   mode: types.string,
   label: types.string,
