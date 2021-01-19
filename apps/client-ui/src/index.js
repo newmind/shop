@@ -11,7 +11,6 @@ import navigate from './configs/navigate';
 
 import Empty from './wrappers/Empty';
 import Navigate from './wrappers/Navigate';
-import Composite from './wrappers/Composite';
 
 import './styles/index.module.scss';
 
@@ -29,7 +28,7 @@ import './styles/index.module.scss';
       },
       routes,
       navigate,
-      wrappers: { Empty, Navigate, Composite },
+      wrappers: { Empty, Navigate },
     });
 
     await app.start();

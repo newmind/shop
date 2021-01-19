@@ -52,11 +52,26 @@ const saveFiles = (files, { productId }, { transaction }) => {
 };
 
 export default () => async (ctx) => {
-  const { Product, Attribute, Units, Gallery, Currency, Category, Type, Color, Material, Form,
-  ProductType, ProductCategory, ProductColor, ProductMaterial, ProductForm } = models;
   const { files = [], fields = {}} = await getFiles(ctx['req']);
   const { attributes = null } = fields;
-try {
+  const {
+    Product,
+    Attribute,
+    Units,
+    Gallery,
+    Currency,
+    Category,
+    Type,
+    Color,
+    Material,
+    Form,
+    ProductType,
+    ProductCategory,
+    ProductColor,
+    ProductMaterial,
+    ProductForm
+  } = models;
+
   const transaction = await sequelize.transaction();
 
   const { uuid } = await Product.create(fields, {transaction});
@@ -70,7 +85,6 @@ try {
   await ProductForm.bulkCreate(JSON.parse(fields['forms']).map(item => ({ productUuid: uuid, formId: item })), { transaction })
 
   if (attributes) {
-
     const attributes = [...JSON.parse(fields['attributes'])]
       .map(item => {
         item['productId'] = uuid;
@@ -84,7 +98,7 @@ try {
 
   const result = await Product.findOne({
     where: {uuid},
-    attributes: ['uuid', 'brand', 'name', 'description', 'params', 'status', 'amount', 'fiscal', 'saleAmount', 'createdAt'],
+    attributes: ['uuid', 'brand', 'name', 'description', 'params', 'status', 'amount', 'fiscal', 'saleAmount'],
     include: [
       {
         model: Type,
@@ -147,8 +161,4 @@ try {
     success: true,
     data: result.toJSON(),
   };
-}
-catch (e) {
-  console.log(e)
-}
 };

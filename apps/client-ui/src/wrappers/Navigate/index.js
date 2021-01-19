@@ -17,7 +17,7 @@ function NavigateModule({ children }) {
   });
 
   return (
-    <section className={styles['wrapper']}>
+    <section id="scroller" className={styles['wrapper']}>
       <section className={styles['page']}>
         <aside className={styles['aside']}>
           <header className={styles['header']}>

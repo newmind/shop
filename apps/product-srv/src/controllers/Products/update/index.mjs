@@ -88,27 +88,21 @@ export default () => async (ctx) => {
   });
 
   await Attribute.bulkCreate(attributes, { transaction });
-  delete fields['attributes'];
 
   await ProductType.destroy({ where: { productUuid: uuid }}, { transaction });
   await ProductType.bulkCreate(JSON.parse(fields['types']).map(item => ({ productUuid: uuid, typeId: item })), { transaction })
-  delete fields['types'];
 
   await ProductCategory.destroy({ where: { productUuid: uuid }}, { transaction });
   await ProductCategory.bulkCreate(JSON.parse(fields['categories']).map(item => ({ productUuid: uuid, categoryId: item })), { transaction })
-  delete fields['categories'];
 
   await ProductColor.destroy({ where: { productUuid: uuid }}, { transaction });
   await ProductColor.bulkCreate(JSON.parse(fields['colors']).map(item => ({ productUuid: uuid, colorId: item })), { transaction })
-  delete fields['colors'];
 
   await ProductMaterial.destroy({ where: { productUuid: uuid }}, { transaction });
   await ProductMaterial.bulkCreate(JSON.parse(fields['materials']).map(item => ({ productUuid: uuid, materialId: item })), { transaction })
-  delete fields['materials'];
 
   await ProductForm.destroy({ where: { productUuid: uuid }}, { transaction });
   await ProductForm.bulkCreate(JSON.parse(fields['forms']).map(item => ({ productUuid: uuid, formId: item })), { transaction })
-  delete fields['forms'];
 
   const normalize = {};
   for (let key in fields) {
@@ -121,8 +115,6 @@ export default () => async (ctx) => {
       }
     }
   }
-
-  console.log(normalize)
 
   await Product.update(normalize, {
     where: { uuid },

@@ -5,9 +5,10 @@
 .wrapper {
 
   display: flex;
-  flex: 1 0 auto;
+  flex: 1 0;
   flex-direction: column;
   background: $pale-grey;
+  overflow: auto;
 }
 
 .center {
