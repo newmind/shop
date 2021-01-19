@@ -14,6 +14,11 @@ module.exports = (db, DataType) => {
       index: true,
       unique: 'compositeIndex',
     },
+    fiscal: {
+      type: DataType.STRING(255),
+      allowNull: true,
+      index: true,
+    },
     brand: {
       type: DataType.STRING(255),
       allowNull: false,

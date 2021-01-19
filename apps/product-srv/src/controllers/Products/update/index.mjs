@@ -54,12 +54,31 @@ const saveFiles = (files, { productId }, { transaction }) => {
 export default () => async (ctx) => {
   const { uuid } = ctx['params'];
   const { files, fields } = await getFiles(ctx['req']);
-  const { Product, Attribute, Units, Gallery, Currency, Category, Type, Color,
-    Material, Form, ProductType, ProductCategory, ProductColor, ProductMaterial, ProductForm } = models;
+  const {
+    Product,
+    Attribute,
+    Units,
+    Gallery,
+    Currency,
+    Category,
+    Type,
+    Color,
+    Material,
+    Form,
+    ProductType,
+    ProductCategory,
+    ProductColor,
+    ProductMaterial,
+    ProductForm
+  } = models;
 
   const transaction = await sequelize.transaction();
 
-  await Attribute.destroy({ where: { productId: uuid }}, { transaction });
+  await Attribute.destroy({
+    where: { productId: uuid },
+  }, {
+    transaction,
+  });
 
   const attributes = [...JSON.parse(fields['attributes'])].map(item => {
     delete item['id'];
@@ -69,6 +88,27 @@ export default () => async (ctx) => {
   });
 
   await Attribute.bulkCreate(attributes, { transaction });
+  delete fields['attributes'];
+
+  await ProductType.destroy({ where: { productUuid: uuid }}, { transaction });
+  await ProductType.bulkCreate(JSON.parse(fields['types']).map(item => ({ productUuid: uuid, typeId: item })), { transaction })
+  delete fields['types'];
+
+  await ProductCategory.destroy({ where: { productUuid: uuid }}, { transaction });
+  await ProductCategory.bulkCreate(JSON.parse(fields['categories']).map(item => ({ productUuid: uuid, categoryId: item })), { transaction })
+  delete fields['categories'];
+
+  await ProductColor.destroy({ where: { productUuid: uuid }}, { transaction });
+  await ProductColor.bulkCreate(JSON.parse(fields['colors']).map(item => ({ productUuid: uuid, colorId: item })), { transaction })
+  delete fields['colors'];
+
+  await ProductMaterial.destroy({ where: { productUuid: uuid }}, { transaction });
+  await ProductMaterial.bulkCreate(JSON.parse(fields['materials']).map(item => ({ productUuid: uuid, materialId: item })), { transaction })
+  delete fields['materials'];
+
+  await ProductForm.destroy({ where: { productUuid: uuid }}, { transaction });
+  await ProductForm.bulkCreate(JSON.parse(fields['forms']).map(item => ({ productUuid: uuid, formId: item })), { transaction })
+  delete fields['forms'];
 
   const normalize = {};
   for (let key in fields) {
@@ -82,20 +122,7 @@ export default () => async (ctx) => {
     }
   }
 
-  await ProductType.destroy({ where: { productUuid: uuid }}, { transaction });
-  await ProductType.bulkCreate(JSON.parse(fields['types']).map(item => ({ productUuid: uuid, typeId: item })), { transaction })
-
-  await ProductCategory.destroy({ where: { productUuid: uuid }}, { transaction });
-  await ProductCategory.bulkCreate(JSON.parse(fields['categories']).map(item => ({ productUuid: uuid, categoryId: item })), { transaction })
-
-  await ProductColor.destroy({ where: { productUuid: uuid }}, { transaction });
-  await ProductColor.bulkCreate(JSON.parse(fields['colors']).map(item => ({ productUuid: uuid, colorId: item })), { transaction })
-
-  await ProductMaterial.destroy({ where: { productUuid: uuid }}, { transaction });
-  await ProductMaterial.bulkCreate(JSON.parse(fields['materials']).map(item => ({ productUuid: uuid, materialId: item })), { transaction })
-
-  await ProductForm.destroy({ where: { productUuid: uuid }}, { transaction });
-  await ProductForm.bulkCreate(JSON.parse(fields['forms']).map(item => ({ productUuid: uuid, formId: item })), { transaction })
+  console.log(normalize)
 
   await Product.update(normalize, {
     where: { uuid },
@@ -104,9 +131,11 @@ export default () => async (ctx) => {
 
   await saveFiles(files, { productId: uuid }, { transaction });
 
+  await transaction.commit();
+
   const product = await Product.findOne({
     where: { uuid },
-    attributes: ['uuid', 'brand', 'name', 'description', 'status', 'amount', 'saleAmount', 'params', 'fiscal', 'createdAt'],
+    attributes: ['uuid', 'brand', 'name', 'description', 'status', 'amount', 'saleAmount', 'params', 'fiscal', 'updatedAt'],
     include: [
       {
         model: Type,
@@ -161,12 +190,9 @@ export default () => async (ctx) => {
         attributes: ['externalId'],
       },
     ],
-    transaction
   });
 
   await sendEvent(process.env['RABBIT_PRODUCT_SRV_EXCHANGE_PRODUCT_UPDATED'], JSON.stringify(product.toJSON()));
-
-  await transaction.commit();
 
   ctx.body = {
     success: true,

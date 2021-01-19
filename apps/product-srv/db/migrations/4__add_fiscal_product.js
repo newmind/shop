@@ -1,13 +1,13 @@
 
 module.exports = {
-  async up(queryInterface, DataTypes) {
+  async up(queryInterface, DataType) {
     const transaction = await queryInterface.sequelize.transaction();
     try {
 
       await queryInterface.addColumn('Products', 'fiscal', {
-        type: DataTypes.STRING(255),
-        unique: true,
+        type: DataType.STRING(255),
         allowNull: true,
+        index: true,
       });
 
       await transaction.commit();

@@ -52,13 +52,14 @@ function List({ items, meta, openDialog, closeDialog, removeProductById }) {
           {(items) => <Gallery className={styles['image']} valueKey={'externalId'} items={items} path={`${process.env['REACT_APP_API_HOST']}/gallery`} />}
         </Column>
         <Column
-          title="Основное"
+          title="Основные"
           align="left"
         >
-          {({ uuid, name, brand, description, amount, currency }) => {
+          {({ uuid, fiscal, name, brand, description, amount, currency }) => {
             return (
               <div className={styles['description']}>
                 {uuid && <div className={styles['description__item']}><b className={styles['description__label']}>{ uuid }</b></div>}
+                {fiscal && <div className={styles['description__item']}><b className={styles['description__label']}>{ fiscal }</b></div>}
                 {brand && <div className={styles['description__item']}><b className={styles['description__label']}>Бренд:</b> { brand }</div>}
                 {name && <div className={styles['description__item']}><b className={styles['description__label']}>Название:</b> { name }</div>}
                 {amount && <div className={styles['description__item']}><b className={styles['description__label']}>Цена:</b> { numeral(amount).format() } { currency['value'] }</div>}

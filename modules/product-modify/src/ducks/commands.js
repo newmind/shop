@@ -252,6 +252,8 @@ export const updateProductsById = (data) => async (dispatch) => {
     formData.append('params', data['params'] || null);
     formData.append('saleAmount', data['saleAmount'] || null);
 
+    formData.append('fiscal', data['fiscal']);
+
     formData.append('types', JSON.stringify(data['types']));
     formData.append('categories', JSON.stringify(data['categories']));
     formData.append('colors', JSON.stringify(data['colors']));
@@ -302,6 +304,8 @@ export const createProduct = (data) => async dispatch => {
     formData.append('description', data['description']);
     formData.append('params', data['params'] || null);
     formData.append('saleAmount', data['saleAmount'] || null);
+
+    formData.append('fiscal', data['fiscal']);
 
     formData.append('types', JSON.stringify(data['types'] || []));
     formData.append('forms', JSON.stringify(data['forms'] || []));
