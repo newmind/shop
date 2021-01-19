@@ -9,10 +9,15 @@ import { getProducts } from '../ducks/commands';
 
 
 export default HOC({
+  combineEvents: true,
   onMount({ dispatch, location }) {
-    const search = queryToObject(location['search']);
 
-    dispatch(getProducts(search));
+    document.title = `${process.env['REACT_APP_WEBSITE_NAME']} - Товар`;
+    document.querySelector('meta[name="description"]').setAttribute('content', '');
+
+    const query = queryToObject(location['search']);
+
+    dispatch(getProducts(query));
   },
   onUnmount({ dispatch }) {
     dispatch(resetState());

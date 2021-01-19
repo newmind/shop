@@ -1,6 +1,4 @@
 
-import moment from '@packages/moment';
-
 import { Mode } from '@ui.packages/types';
 import request from '@ui.packages/request';
 import { pushNotification } from '@ui.packages/notifications';
@@ -23,11 +21,7 @@ export const getProducts = (params = {}) => async (dispatch) => {
     const result = await request({
       url: '/products',
       method: 'get',
-      params: {
-        ...params,
-        createdFrom: params['createdFrom'] ? moment(params['createdFrom']).format('YYYY-MM-DD 00:00:00+03:00') : null,
-        createdTo: params['createdTo'] ? moment(params['createdTo']).format('YYYY-MM-DD 23:59:59+03:00') : null,
-      },
+      params,
     });
 
     dispatch(getProductsRequestSuccessAction(result));

@@ -18,7 +18,7 @@ function Control({
   onReset
 }) {
   const [isHover, setHover] = useState(false);
-  const { inProcess, isOpen, isDisabled, selectedObject, options, selectedValue, OptionTemplate, onTransformSelectedValue, transformValue } = useContext(Context);
+  const { inProcess, isOpen, isDisabled, selectedObject, options, selectedValue, onTransformSelectedValue, transformValue } = useContext(Context);
 
   function handleSelectClick(event) {
     event.preventDefault();
@@ -60,15 +60,14 @@ function Control({
       <div className={styles['container']}>
         <div className={styles['content']}>
           <div className={styles['values']}>
-            { !! selectedValue && !! options.length
+            { !! selectedText.length && !! options.length
               ? (
-                !! OptionTemplate
-                  ? <OptionTemplate { ...selectedObject } />
-                  : <span className={textColorClassName}>{
-                    transformValue
-                      ? transformValue(selectedObject)
-                      : selectedText
-                  }</span>
+                <span className={textColorClassName}>
+                  {selectedText.map((item, index) => transformValue
+                    ? transformValue(item)
+                    : <span key={index} className={styles['item']}>{ item }</span>
+                  )}
+                </span>
               )
               : <span className={styles['placeholder']}>{ placeholder }</span>}
           </div>

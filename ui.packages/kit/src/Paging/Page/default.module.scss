@@ -5,11 +5,12 @@
 .wrapper {
 
   display: inline-block;
-  border: 1px solid $blue-grey;
+  border: 1px solid $pale-lilac;
   border-radius: 5px;
+  background: $white;
   color: $blue-grey;
   font-family: inherit;
-  font-weight: 300;
+  font-weight: 600;
   font-size: 14px;
   transition: color 200ms, border 200ms, background-color 200ms;
   overflow: hidden;

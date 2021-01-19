@@ -3,7 +3,7 @@ import request from '@sys.packages/request';
 
 
 export default () => async (ctx) => {
-  const { ...params } = ctx['request']['query'];
+  const { page = 0, ...params } = ctx['request']['query'];
 
   const {data: types} = await request({
     url: process.env['PRODUCT_API_SRV'] + '/products/types',
@@ -40,7 +40,11 @@ export default () => async (ctx) => {
   const {data, meta} = await request({
     method: 'get',
     url: process.env['PRODUCT_API_SRV'] + '/products',
-    params,
+    params: {
+      take: Number(process.env['TAKE']),
+      skip: (page > 0 ? page - 1 : 0) * Number(process.env['TAKE']),
+      ...params,
+    },
   });
 
   ctx.body = {

@@ -5,9 +5,7 @@ import { createSlice, createAction } from '@reduxjs/toolkit';
 const initialState = {
   items: [],
   filter: {},
-  meta: {
-    total: 0,
-  },
+  meta: {},
 };
 
 const REDUCER_NAME = 'products';
@@ -21,9 +19,7 @@ const slice = createSlice({
     resetState(state) {
       state['items'] = [];
       state['filter'] = {};
-      state['meta'] = {
-        total: 0,
-      };
+      state['meta'] = {};
     },
 
     getProductsRequestAction(state) {},
@@ -89,16 +85,13 @@ export const {
   getProductsRequestFailAction,
   getProductsRequestSuccessAction,
 
-  createProductRequestAction,
-  createProductRequestFailAction,
-  createProductRequestSuccessAction,
-
   removeProductRequestAction,
   removeProductRequestFailRequest,
   removeProductRequestSuccessAction,
-
-  updateProductAction,
 } = slice['actions'];
+
+export const selectItems = (state) => state[REDUCER_NAME]['items'];
+export const selectMeta = (state) => state[REDUCER_NAME]['meta'];
 
 export const name = slice['name'];
 export const reducer = slice['reducer'];

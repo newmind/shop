@@ -14,6 +14,9 @@ function SelectField(props) {
   );
 }
 
+SelectField.TYPE_DEFAULT = Select.TYPE_DEFAULT;
+SelectField.TYPE_MULTISELECT = Select.TYPE_MULTISELECT;
+
 SelectField.propTypes = {
   type: types.string,
   name: types.string,

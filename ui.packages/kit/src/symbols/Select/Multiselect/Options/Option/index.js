@@ -22,9 +22,7 @@ function Option({ value, optionValue, isActive, onClick }) {
   function handleClick(event) {
     event.preventDefault();
 
-    if ( ! isActive) {
-      onClick();
-    }
+    onClick();
   }
 
   const optionClassName = cn(styles['option'], {

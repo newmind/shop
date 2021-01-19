@@ -52,15 +52,22 @@ const saveFiles = (files, { productId }, { transaction }) => {
 };
 
 export default () => async (ctx) => {
-  const { Product, Attribute, Units, Gallery, Currency, Category, Type, Color, Material, Form } = models;
+  const { Product, Attribute, Units, Gallery, Currency, Category, Type, Color, Material, Form,
+  ProductType, ProductCategory, ProductColor, ProductMaterial, ProductForm } = models;
   const { files = [], fields = {}} = await getFiles(ctx['req']);
   const { attributes = null } = fields;
 try {
   const transaction = await sequelize.transaction();
 
-  const {uuid} = await Product.create(fields, {transaction});
+  const { uuid } = await Product.create(fields, {transaction});
 
   await saveFiles(files, { productId: uuid }, {transaction});
+
+  await ProductType.bulkCreate(JSON.parse(fields['types']).map(item => ({ productUuid: uuid, typeId: item })), { transaction })
+  await ProductCategory.bulkCreate(JSON.parse(fields['categories']).map(item => ({ productUuid: uuid, categoryId: item })), { transaction })
+  await ProductColor.bulkCreate(JSON.parse(fields['colors']).map(item => ({ productUuid: uuid, colorId: item })), { transaction })
+  await ProductMaterial.bulkCreate(JSON.parse(fields['materials']).map(item => ({ productUuid: uuid, materialId: item })), { transaction })
+  await ProductForm.bulkCreate(JSON.parse(fields['forms']).map(item => ({ productUuid: uuid, formId: item })), { transaction })
 
   if (attributes) {
 
@@ -80,50 +87,47 @@ try {
     attributes: ['uuid', 'brand', 'name', 'description', 'params', 'status', 'amount', 'saleAmount', 'count', 'createdAt'],
     include: [
       {
-        model: Category,
-        required: false,
-        as: 'category',
-        attributes: ['id', 'value']
-      },
-      {
         model: Type,
-        required: false,
-        as: 'type',
-        attributes: ['id', 'value']
+        as: 'types',
+        attributes: ['id', 'value'],
+        through: { attributes: [] },
       },
       {
-        model: Material,
-        required: false,
-        as: 'material',
-        attributes: ['id', 'value']
+        model: Category,
+        as: 'categories',
+        attributes: ['id', 'value'],
+        through: { attributes: [] },
       },
       {
         model: Color,
-        required: false,
-        as: 'color',
-        attributes: ['id', 'value']
+        as: 'colors',
+        attributes: ['id', 'value'],
+        through: { attributes: [] },
+      },
+      {
+        model: Material,
+        as: 'materials',
+        attributes: ['id', 'value'],
+        through: { attributes: [] },
       },
       {
         model: Form,
-        required: false,
-        as: 'form',
-        attributes: ['id', 'value']
+        as: 'forms',
+        attributes: ['id', 'value'],
+        through: { attributes: [] },
       },
       {
         model: Currency,
-        required: false,
         as: 'currency',
         attributes: ['uuid', 'value']
       },
       {
         model: Attribute,
-        required: false,
         as: 'attributes',
         attributes: ['id', 'name', 'value'],
         include: [
           {
             model: Units,
-            required: false,
             as: 'unit',
             attributes: ['id', 'value']
           }
@@ -131,7 +135,6 @@ try {
       },
       {
         model: Gallery,
-        required: false,
         as: 'gallery',
         attributes: ['externalId'],
       },

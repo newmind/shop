@@ -73,6 +73,20 @@
   font-style: italic;
 }
 
+.item {
+
+  display: inline-block;
+
+  & + & {
+    &:before {
+
+      display: inline-block;
+      content: ',';
+      padding: 0 4px 0 0;
+    }
+  }
+}
+
 .controls {
 
   display: flex;

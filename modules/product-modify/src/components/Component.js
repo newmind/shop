@@ -1,10 +1,9 @@
 
-
-import { Row, Col, Button, Container, Header } from '@ui.packages/kit';
+import { Mode } from '@ui.packages/types';
+import { Row, Col, Button, Container, Header, Page, PageContent, PageControls } from '@ui.packages/kit';
 
 import React from 'react';
 import types from 'prop-types';
-import { useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { submit, reset, isPristine, isValid } from 'redux-form';
 
@@ -21,7 +20,6 @@ const FORM_NAME = 'modify-product';
 
 function ProductModify() {
   const dispatch = useDispatch();
-  const navigate = useNavigate();
   const product = useSelector(selectProduct);
   const valid = useSelector(isValid(FORM_NAME));
   const pristine = useSelector(isPristine(FORM_NAME));
@@ -31,7 +29,6 @@ function ProductModify() {
       dispatch(updateProductsById(formData));
     } else {
       dispatch(createProduct(formData));
-      navigate('/');
     }
   }
 
@@ -48,38 +45,43 @@ function ProductModify() {
   }
 
   return (
-    <section className={styles['wrapper']}>
-      <header className={styles['header']}>
-        <Header level={1}>{product['uuid'] ? 'Редактировать товар' : 'Новый товар'}</Header>
-      </header>
-      <article className={styles['content']}>
-        <Container className={styles['form']}>
-          <Row>
-            <Col>
-              <ModifyForm
-                initialValues={product}
-                onDelete={handleDeleteImages}
-                onSubmit={handleSubmitProduct}
-              />
-            </Col>
-          </Row>
-          <Row>
-            <Col>
-              <Button
-                disabled={pristine}
-                onClick={handleReset}
-              >Отмена</Button>
-              <Button
-                type={Button.TYPE_BUTTON}
-                disabled={ ! valid || pristine}
-                mode="success"
-                onClick={handleSubmit}
-              >{product['uuid'] ? 'Сохранить' : 'Добавить'}</Button>
-            </Col>
-          </Row>
-        </Container>
-      </article>
-    </section>
+    <Page className={styles['wrapper']}>
+      <PageControls>
+        <div className={styles['controls']}>
+          <Button
+            form={Button.FORM_CONTEXT}
+            mode={Mode.PRIMARY}
+            disabled={pristine}
+            onClick={handleReset}
+          >Отмена</Button>
+          <Button
+            type={Button.TYPE_BUTTON}
+            disabled={ ! valid || pristine}
+            mode="success"
+            onClick={handleSubmit}
+          >{product['uuid'] ? 'Сохранить' : 'Добавить'}</Button>
+        </div>
+      </PageControls>
+      <PageContent>
+        <header className={styles['header']}>
+          <Header level={1}>{product['uuid'] ? 'Редактировать товар' : 'Новый товар'}</Header>
+        </header>
+        <article className={styles['content']}>
+          <Container className={styles['form']}>
+            <Row>
+              <Col>
+                <ModifyForm
+                  initialValues={product}
+                  onDelete={handleDeleteImages}
+                  onSubmit={handleSubmitProduct}
+                />
+              </Col>
+            </Row>
+          </Container>
+        </article>
+      </PageContent>
+
+    </Page>
   );
 }
 

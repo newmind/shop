@@ -42,3 +42,7 @@ export { default as Hr } from './form/Hr';
 export { default as Header } from './symbols/Header';
 export { default as Text } from './symbols/Text';
 export { default as Link } from './symbols/Link';
+
+export { default as Page } from './Page';
+export { default as PageContent } from './Page/Content';
+export { default as PageControls } from './Page/Controls';

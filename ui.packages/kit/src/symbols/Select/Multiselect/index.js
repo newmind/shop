@@ -35,11 +35,13 @@ function useFindSelectedValue(value, options, optionKey) {
 }
 
 function useGetValue(value, options, optionKey, optionValue) {
-  const selectedValue = useFindSelectedValue(value, options, optionKey);
-  if (selectedValue instanceof Object) {
-    return selectedValue[optionValue];
-  }
-  return value;
+  return value.map((item) => {
+    const selectedValue = useFindSelectedValue(item, options, optionKey);
+    if (selectedValue instanceof Object) {
+      return selectedValue[optionValue];
+    }
+    return item;
+  });
 }
 
 function Select({
@@ -60,7 +62,7 @@ function Select({
   const wrapperRef = useRef(null);
   const optionsRef = useRef(null);
   const [isOpen, setOpen] = useState(false);
-  const [selectedValue, setSelectedValue] = useState(null);
+  const [selectedValue, setSelectedValue] = useState([]);
 
   useEffect(function changeValue() {
     setSelectedValue(useGetValue(value, options, optionKey, optionValue));
@@ -125,14 +127,10 @@ function Select({
     handleClose();
   }
 
-  function handleSelectValue(option) {
-    if (option instanceof Object) {
-      onChange(simple ? option[optionKey] : option);
-    }
-    else {
-      onChange(option);
-    }
-    handleClose();
+  function handleSelectValue(options) {
+    console.log(options)
+    onChange(options);
+    // handleClose();
   }
 
   return (
@@ -180,7 +178,7 @@ Select.propTypes = {
   optionValue: types.string,
   placeholder: types.string,
   options: types.array,
-  value: types.oneOfType([types.string, types.object, types.number]),
+  value: types.array,
   disabled: types.bool,
   inProcess: types.bool,
   transformValue: types.func,
@@ -198,7 +196,7 @@ Select.defaultProps = {
   optionValue: 'value',
   placeholder: 'Выбери значение',
   disabled: false,
-  value: null,
+  value: [],
   options: [],
   inProcess: false,
   transformValue: null,

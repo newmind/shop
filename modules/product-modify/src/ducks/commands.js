@@ -246,17 +246,18 @@ export const updateProductsById = (data) => async (dispatch) => {
 
     formData.append('brand', data['brand']);
     formData.append('name', data['name']);
-    formData.append('types', data['types']);
-    formData.append('categories', data['categories']);
-    formData.append('colors', data['colors']);
-    formData.append('materials', data['materials']);
-    formData.append('forms', data['forms']);
     formData.append('description', data['description']);
     formData.append('params', data['params'] || null);
     formData.append('amount', data['amount']);
     formData.append('saleAmount', data['saleAmount'] || null);
     formData.append('currencyId', data['currencyId']);
     formData.append('count', data['count']);
+
+    formData.append('types', JSON.stringify(data['types']));
+    formData.append('categories', JSON.stringify(data['categories']));
+    formData.append('colors', JSON.stringify(data['colors']));
+    formData.append('materials', JSON.stringify(data['materials']));
+    formData.append('forms', JSON.stringify(data['forms']));
     formData.append('attributes', JSON.stringify(data['attributes'] || []));
 
     const result = await request({
@@ -267,7 +268,7 @@ export const updateProductsById = (data) => async (dispatch) => {
 
     dispatch(updateProductRequestSuccessAction(result['data']));
     dispatch(pushNotification({
-      content: 'Товар успешно обновлен',
+      title: 'Товар успешно обновлен',
       mode: Mode.SUCCESS,
     }));
   }
@@ -299,17 +300,17 @@ export const createProduct = (data) => async dispatch => {
     formData.append('brand', data['brand']);
     formData.append('count', data['count']);
     formData.append('amount', data['amount']);
+    formData.append('currencyId', data['currencyId']);
     formData.append('description', data['description']);
     formData.append('params', data['params'] || null);
     formData.append('saleAmount', data['saleAmount'] || null);
-    formData.append('attributes', JSON.stringify(data['attributes'] || []));
 
-    data['types'] && formData.append('types', data['types']);
-    data['formId'] && formData.append('formId', data['formId']);
-    data['colorId'] && formData.append('colorId', data['colorId']);
-    data['materialId'] && formData.append('materialId', data['materialId']);
-    data['currencyId'] && formData.append('currencyId', data['currencyId']);
-    data['categoryId'] && formData.append('categoryId', data['categoryId']);
+    formData.append('types', JSON.stringify(data['types'] || []));
+    formData.append('forms', JSON.stringify(data['forms'] || []));
+    formData.append('colors', JSON.stringify(data['colors'] || []));
+    formData.append('materials', JSON.stringify(data['materials'] || []));
+    formData.append('categories', JSON.stringify(data['categories'] || []));
+    formData.append('attributes', JSON.stringify(data['attributes'] || []));
 
     const result = await request({
       method: 'post',
@@ -318,11 +319,15 @@ export const createProduct = (data) => async dispatch => {
     });
 
     dispatch(createProductRequestSuccessAction(result['data']));
+    dispatch(pushNotification({
+      title: 'Товар успешно добавлен',
+      mode: Mode.SUCCESS,
+    }));
   }
   catch(error) {
     dispatch(createProductRequestFailAction(error));
     dispatch(pushNotification({
-      title: 'Ошибка присозранении данных',
+      title: 'Ошибка при добавлении товара',
       content: error['message'],
       type: 'danger'
     }));

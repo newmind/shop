@@ -55,6 +55,7 @@ function ModifyForm({ handleSubmit, onDelete }) {
             <SelectField
               name="types"
               label="Тип"
+              type={SelectField.TYPE_MULTISELECT}
               options={types}
               optionKey="id"
               optionValue="value"
@@ -66,6 +67,7 @@ function ModifyForm({ handleSubmit, onDelete }) {
             <SelectField
               name="categories"
               label="Категория"
+              type={SelectField.TYPE_MULTISELECT}
               options={categories}
               optionKey="id"
               optionValue="value"
@@ -77,6 +79,7 @@ function ModifyForm({ handleSubmit, onDelete }) {
             <SelectField
               name="colors"
               label="Цвет"
+              type={SelectField.TYPE_MULTISELECT}
               options={colors}
               optionKey="id"
               optionValue="value"
@@ -88,6 +91,7 @@ function ModifyForm({ handleSubmit, onDelete }) {
             <SelectField
               name="materials"
               label="Материал"
+              type={SelectField.TYPE_MULTISELECT}
               options={materials}
               optionKey="id"
               optionValue="value"
@@ -99,6 +103,7 @@ function ModifyForm({ handleSubmit, onDelete }) {
             <SelectField
               name="forms"
               label="Форма"
+              type={SelectField.TYPE_MULTISELECT}
               options={forms}
               optionKey="id"
               optionValue="value"

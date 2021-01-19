@@ -9,18 +9,17 @@ import SelectMultiselect from "./Multiselect";
 function SelectFactory({ type, ...props }) {
   switch(type) {
     case SelectFactory.TYPE_DEFAULT: return <SelectDefault {...props} />;
-    case SelectFactory.TYPE_MULTISELECT: return <SelectMultiselect {...props} />;
+    case SelectFactory.TYPE_MULTISELECT: return <SelectMultiselect {...props} value={props['value'] || []} />;
     default: return <SelectDefault {...props} />;
   }
 }
-
 
 SelectFactory.TYPE_DEFAULT = 'default';
 SelectFactory.TYPE_MULTISELECT = 'multiselect';
 
 
 SelectFactory.propTypes = {
-  type: types.oneOf([]),
+  type: types.oneOf([SelectFactory.TYPE_DEFAULT, SelectFactory.TYPE_MULTISELECT]),
   simple: types.bool,
   optionKey: types.string,
   optionValue: types.string,
@@ -39,6 +38,7 @@ SelectFactory.propTypes = {
 };
 
 SelectFactory.defaultProps = {
+  type: SelectFactory.TYPE_DEFAULT,
   simple: true,
   optionKey: 'id',
   optionValue: 'value',

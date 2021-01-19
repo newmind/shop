@@ -7,6 +7,7 @@ import { useSelector } from 'react-redux';
 
 import FastView from "./FastView";
 
+import Empty from './Empty';
 import Filter from './Filter';
 import Products from './Products';
 
@@ -27,7 +28,9 @@ export default function Showcase() {
         </div>
       </aside>
       <section className={styles['products']}>
-        <Products />
+        { !! meta['total']
+        ? <Products />
+        : <Empty />}
       </section>
       <div className={styles['controls']}>
         <Paging total={meta['total']} skip={12} disabled={inProcess} />

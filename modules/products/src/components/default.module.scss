@@ -2,31 +2,10 @@
 @import "~@ui.packages/theme";
 
 
-.wrapper {
-
-  display: block;
-  padding: 0 0 120px;
-}
-
-.aside {
-
-  display: block;
-  background: $white;
-  box-shadow: 0 3px 10px 0 rgba($pale-lilac,.5);
-
-}
-
 .controls {
 
   display: block;
-  padding: 20px 40px;
   text-align: right;
-}
-
-.content {
-
-  display: block;
-  padding: 40px;
 }
 
 .header {
@@ -53,4 +32,6 @@
 .paging {
 
   display: block;
+  margin: 40px 0 0;
+  text-align: center;
 }

@@ -63,7 +63,6 @@ function FieldComponent({ input, label, disabled, message, meta: { touched, erro
 
 
 function BaseField({ children, ...props }) {
-
  return (
     <Field {...props} component={FieldComponent}>
       { children }

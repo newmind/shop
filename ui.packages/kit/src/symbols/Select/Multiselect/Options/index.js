@@ -13,13 +13,47 @@ import styles from './default.module.scss';
 function useCheckActive(option) {
   const { simple, value, optionKey } = useContext(Context);
 
-  if (value instanceof Object) {
-    return value[optionKey] === option[optionKey];
+  return value.some((item) => {
+    if (item instanceof Object) {
+      return item[optionKey] === option[optionKey];
+    }
+    else if (simple) {
+      return item === option[optionKey];
+    }
+    return item === option;
+  });
+}
+
+function useIndexOf(option, simple, value, optionKey) {
+  for (let key in value) {
+    if (value.hasOwnProperty(key)) {
+      const item = value[key];
+      if (item instanceof Object) {
+        if (item[optionKey] === option[optionKey]) {
+          return key;
+        }
+      }
+      else if (simple) {
+        if (item === option[optionKey]) {
+          return key;
+        }
+      }
+      else if (item === option) {
+        return key;
+      }
+    }
+  }
+  return -1;
+}
+
+function getValue(option, simple, optionKey) {
+  if (option instanceof Object) {
+    return option[optionKey];
   }
   else if (simple) {
-    return value === option[optionKey];
+    return option[optionKey];
   }
-  return value === option;
+  return option;
 }
 
 function useChangeElement() {
@@ -34,10 +68,19 @@ function useChangeElement() {
 
 const Options = forwardRef(({ onClick }, ref) => {
   const portalElement = useChangeElement();
-  const { optionValue, options } = useContext(Context);
+  const { optionValue, options, simple, value, optionKey } = useContext(Context);
 
   function handleOptionClick(option) {
-    onClick(option);
+    let newValue = [...value];
+    const index = useIndexOf(option, simple, value, optionKey);
+
+    if (index !== -1) {
+      newValue.splice(index, 1);
+    }
+    else {
+      newValue.push(getValue(option, simple, optionKey));
+    }
+    onClick(newValue);
   }
 
   return ReactDOM.createPortal(
@@ -61,7 +104,7 @@ const Options = forwardRef(({ onClick }, ref) => {
 });
 
 Options.propTypes = {
-  value: types.oneOfType([types.string, types.number, types.object]),
+  value: types.array,
   optionValue: types.string,
   options: types.array,
   onClick: types.func,

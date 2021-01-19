@@ -151,7 +151,7 @@ function Select({
       selectedObject: useFindSelectedValue(value, options, optionKey),
       onTransformSelectedValue,
     }}>
-      <div ref={wrapperRef} className={styles['wrapper']}>
+      <div ref={wrapperRef} className={styles['wrapper']} role="options">
         <Control
           value={value}
           placeholder={placeholder}

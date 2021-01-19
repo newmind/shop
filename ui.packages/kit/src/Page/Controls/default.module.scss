@@ -1,0 +1,12 @@
+
+@import "~@ui.packages/theme";
+
+
+.wrapper {
+
+  display: block;
+  padding: 10px 30px;
+  background: $white;
+  box-shadow: 0 3px 10px 0 rgba($pale-lilac,.5);
+  z-index: 10;
+}
