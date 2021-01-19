@@ -13,7 +13,7 @@ export default HOC({
   onMount: ({ dispatch, location }) => {
 
     document.title = `${process.env['REACT_APP_WEBSITE_NAME']} - Витрина`;
-    document.querySelector('meta[name="description"]').setAttribute('content', 'Выбор очков, оправ и аксесуаров');
+    document.querySelector('meta[name="description"]').setAttribute('content', '');
 
     const query = queryToObject(location['search']);
 
