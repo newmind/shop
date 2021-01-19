@@ -268,34 +268,9 @@ module.exports = {
           allowNull: true,
           index: true,
         },
-        typeId: {
-          type: Sequelize.INTEGER,
-          allowNull: false,
-          index: true,
-        },
-        categoryId: {
-          type: Sequelize.INTEGER,
-          allowNull: true,
-          index: true,
-        },
         currencyId: {
           type: Sequelize.UUID,
           allowNull: false,
-        },
-        colorId: {
-          type: Sequelize.INTEGER,
-          allowNull: true,
-          index: true,
-        },
-        materialId: {
-          type: Sequelize.INTEGER,
-          allowNull: true,
-          index: true,
-        },
-        formId: {
-          type: Sequelize.INTEGER,
-          allowNull: true,
-          index: true,
         },
         description: {
           type: Sequelize.STRING(1024),
@@ -323,11 +298,6 @@ module.exports = {
             const amount = this.getDataValue('saleAmount');
             return amount ? Number(amount) : '';
           },
-        },
-        count: {
-          type: Sequelize.INTEGER,
-          allowNull: false,
-          defaultValue: 0,
         },
         params: {
           type: Sequelize.ENUM,

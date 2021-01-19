@@ -1,5 +1,5 @@
 
-import { Row, Col, InputField, TextareaField, SelectField } from '@ui.packages/kit';
+import { Row, Col, InputField, TextareaField, SelectField, Header } from '@ui.packages/kit';
 
 import React from 'react';
 import { useSelector } from 'react-redux';
@@ -24,153 +24,152 @@ function ModifyForm({ handleSubmit, onDelete }) {
 
   return (
     <form className={styles['wrapper']} onSubmit={handleSubmit}>
-      <div className={styles['form']}>
-        <Row>
-          <Col>
-            <h3 className="header-3">Изображения</h3>
-          </Col>
-        </Row>
-        <Row>
-          <Col>
-            <Field name="gallery" path={`${process.env['REACT_APP_API_HOST']}/gallery`} component={AddImageForm} onDelete={onDelete} />
-          </Col>
-        </Row>
-        <Row>
-          <Col>
-            <h3 className="header-3">Основные аттрибуты</h3>
-          </Col>
-        </Row>
-        <Row>
-          <Col>
-            <InputField name="brand" label="Бренд" />
-          </Col>
-        </Row>
-        <Row>
-          <Col>
-            <InputField name="name" label="Назвние" />
-          </Col>
-        </Row>
-        <Row>
-          <Col>
-            <SelectField
-              name="types"
-              label="Тип"
-              type={SelectField.TYPE_MULTISELECT}
-              options={types}
-              optionKey="id"
-              optionValue="value"
-            />
-          </Col>
-        </Row>
-        <Row>
-          <Col>
-            <SelectField
-              name="categories"
-              label="Категория"
-              type={SelectField.TYPE_MULTISELECT}
-              options={categories}
-              optionKey="id"
-              optionValue="value"
-            />
-          </Col>
-        </Row>
-        <Row>
-          <Col>
-            <SelectField
-              name="colors"
-              label="Цвет"
-              type={SelectField.TYPE_MULTISELECT}
-              options={colors}
-              optionKey="id"
-              optionValue="value"
-            />
-          </Col>
-        </Row>
-        <Row>
-          <Col>
-            <SelectField
-              name="materials"
-              label="Материал"
-              type={SelectField.TYPE_MULTISELECT}
-              options={materials}
-              optionKey="id"
-              optionValue="value"
-            />
-          </Col>
-        </Row>
-        <Row>
-          <Col>
-            <SelectField
-              name="forms"
-              label="Форма"
-              type={SelectField.TYPE_MULTISELECT}
-              options={forms}
-              optionKey="id"
-              optionValue="value"
-            />
-          </Col>
-        </Row>
-        <Row>
-          <Col>
-            <TextareaField name="description" label="Описание" />
-          </Col>
-        </Row>
-        <Row>
-          <Col>
-            <h3 className="header-3">Дополнительно</h3>
-          </Col>
-        </Row>
-        <Row>
-          <Col>
-            <SelectField
-              label="Дополнительные данные"
-              simple
-              options={[{ id: 'further', value: 'Рецепт' }]}
-              name="params"
-            />
-          </Col>
-        </Row>
-        <Row>
-          <Col>
-            <h3 className="header-3">Склад</h3>
-          </Col>
-        </Row>
-        <Row>
-          <Col>
-            <InputField name="amount" label="Цена" />
-          </Col>
-        </Row>
-        <Row>
-          <Col>
-            <InputField name="saleAmount" label="Цена со скидкой" />
-          </Col>
-        </Row>
-        <Row>
-          <Col>
-            <SelectField
-              name="currencyId"
-              label="Валюта"
-              options={currencies}
-              optionKey="uuid"
-              optionValue="value"
-            />
-          </Col>
-        </Row>
-        <Row>
-          <Col>
-            <InputField name="count" label="Количество" />
-          </Col>
-        </Row>
-        <Row>
-          <Col>
-            <h3 className="header-3">Дополнительные аттрибуты</h3>
-          </Col>
-        </Row>
-        <Row>
-          <Col>
-            <FieldArray name="attributes" units={units} component={AttrsForm} />
-          </Col>
-        </Row>
+      <div className={styles['block']}>
+        <div className={styles['header']}>
+          <Header level={3}>Изображения</Header>
+        </div>
+        <div className={styles['content']}>
+          <Field name="gallery" path={`${process.env['REACT_APP_API_HOST']}/gallery`} component={AddImageForm} onDelete={onDelete} />
+        </div>
+      </div>
+
+      <div className={styles['block']}>
+        <div className={styles['header']}>
+          <Header level={3}>Основные</Header>
+        </div>
+        <div className={styles['content']}>
+          <Row>
+            <Col>
+              <InputField name="brand" label="Бренд" />
+            </Col>
+          </Row>
+          <Row>
+            <Col>
+              <InputField name="name" label="Назвние" />
+            </Col>
+          </Row>
+          <Row>
+            <Col>
+              <SelectField
+                name="types"
+                label="Тип"
+                type={SelectField.TYPE_MULTISELECT}
+                options={types}
+                optionKey="id"
+                optionValue="value"
+              />
+            </Col>
+          </Row>
+          <Row>
+            <Col>
+              <SelectField
+                name="categories"
+                label="Категория"
+                type={SelectField.TYPE_MULTISELECT}
+                options={categories}
+                optionKey="id"
+                optionValue="value"
+              />
+            </Col>
+          </Row>
+          <Row>
+            <Col>
+              <SelectField
+                name="colors"
+                label="Цвет"
+                type={SelectField.TYPE_MULTISELECT}
+                options={colors}
+                optionKey="id"
+                optionValue="value"
+              />
+            </Col>
+          </Row>
+          <Row>
+            <Col>
+              <SelectField
+                name="materials"
+                label="Материал"
+                type={SelectField.TYPE_MULTISELECT}
+                options={materials}
+                optionKey="id"
+                optionValue="value"
+              />
+            </Col>
+          </Row>
+          <Row>
+            <Col>
+              <SelectField
+                name="forms"
+                label="Форма"
+                type={SelectField.TYPE_MULTISELECT}
+                options={forms}
+                optionKey="id"
+                optionValue="value"
+              />
+            </Col>
+          </Row>
+          <Row>
+            <Col>
+              <TextareaField name="description" label="Описание" />
+            </Col>
+          </Row>
+        </div>
+      </div>
+
+      <div className={styles['block']}>
+        <div className={styles['header']}>
+          <Header level={3}>Аттрибуты</Header>
+        </div>
+        <div className={styles['content']}>
+          <FieldArray name="attributes" units={units} component={AttrsForm} />
+        </div>
+      </div>
+
+      <div className={styles['block']}>
+        <div className={styles['header']}>
+          <Header level={3}>Дополнительные</Header>
+        </div>
+        <div className={styles['content']}>
+          <Row>
+            <Col>
+              <SelectField
+                label="Дополнительные данные"
+                simple
+                options={[{ id: 'further', value: 'Рецепт' }]}
+                name="params"
+              />
+            </Col>
+          </Row>
+        </div>
+      </div>
+
+      <div className={styles['block']}>
+        <div className={styles['header']}>
+          <Header level={3}>Стоимость</Header>
+        </div>
+        <div className={styles['content']}>
+          <Row>
+            <Col>
+              <InputField name="amount" label="Цена" />
+            </Col>
+          </Row>
+          <Row>
+            <Col>
+              <InputField name="saleAmount" label="Цена со скидкой" />
+            </Col>
+          </Row>
+          <Row>
+            <Col>
+              <SelectField
+                name="currencyId"
+                label="Валюта"
+                options={currencies}
+                optionKey="uuid"
+                optionValue="value"
+              />
+            </Col>
+          </Row>
+        </div>
       </div>
     </form>
   );

@@ -88,9 +88,15 @@ function Select({
 
     document.addEventListener('click', handleClick);
     document.querySelector('#root').addEventListener('scroll', handleClose);
+    if (document.querySelector('#scroller')) {
+      document.querySelector('#scroller').addEventListener('scroll', handleClose);
+    }
     return function() {
       document.removeEventListener('click', handleClick);
       document.querySelector('#root').removeEventListener('scroll', handleClose);
+      if (document.querySelector('#scroller')) {
+        document.querySelector('#scroller').removeEventListener('scroll', handleClose);
+      }
     };
   });
 

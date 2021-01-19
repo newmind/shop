@@ -10,7 +10,7 @@
   border: 1px solid $pale-lilac;
   border-radius: 3px;
   overflow: hidden;
-  transition: border 400ms;
+  transition: border 200ms;
 
   &:hover,
   &--focus {
@@ -29,7 +29,7 @@
   font-size: 14px;
   outline: none;
   width: 100%;
-  min-height: 100px;
+  min-height: 250px;
   box-sizing: border-box;
   border: none;
   letter-spacing: .5px;

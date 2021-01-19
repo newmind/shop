@@ -1,6 +1,6 @@
 
 import { Mode } from '@ui.packages/types';
-import { Row, Col, Button, Container, Header, Page, PageContent, PageControls } from '@ui.packages/kit';
+import { Button, Header, Page, PageContent, PageControls } from '@ui.packages/kit';
 
 import React from 'react';
 import types from 'prop-types';
@@ -67,20 +67,13 @@ function ProductModify() {
           <Header level={1}>{product['uuid'] ? 'Редактировать товар' : 'Новый товар'}</Header>
         </header>
         <article className={styles['content']}>
-          <Container className={styles['form']}>
-            <Row>
-              <Col>
-                <ModifyForm
-                  initialValues={product}
-                  onDelete={handleDeleteImages}
-                  onSubmit={handleSubmitProduct}
-                />
-              </Col>
-            </Row>
-          </Container>
+          <ModifyForm
+            initialValues={product}
+            onDelete={handleDeleteImages}
+            onSubmit={handleSubmitProduct}
+          />
         </article>
       </PageContent>
-
     </Page>
   );
 }

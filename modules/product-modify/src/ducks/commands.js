@@ -244,14 +244,13 @@ export const updateProductsById = (data) => async (dispatch) => {
       }
     });
 
-    formData.append('brand', data['brand']);
     formData.append('name', data['name']);
+    formData.append('brand', data['brand']);
+    formData.append('amount', data['amount']);
+    formData.append('currencyId', data['currencyId']);
     formData.append('description', data['description']);
     formData.append('params', data['params'] || null);
-    formData.append('amount', data['amount']);
     formData.append('saleAmount', data['saleAmount'] || null);
-    formData.append('currencyId', data['currencyId']);
-    formData.append('count', data['count']);
 
     formData.append('types', JSON.stringify(data['types']));
     formData.append('categories', JSON.stringify(data['categories']));
@@ -298,7 +297,6 @@ export const createProduct = (data) => async dispatch => {
     formData.append('uuid', uniqName());
     formData.append('name', data['name']);
     formData.append('brand', data['brand']);
-    formData.append('count', data['count']);
     formData.append('amount', data['amount']);
     formData.append('currencyId', data['currencyId']);
     formData.append('description', data['description']);

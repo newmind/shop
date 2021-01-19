@@ -6,7 +6,6 @@ export default function productBuilder(data) {
     brand: data['brand'],
     categories: data['categories'].map(item => item['id']),
     colors: data['colors'].map(item => item['id']),
-    count: Number(data['count']),
     currencyId: data['currency'] ? data['currency']['uuid'] : null,
     description: data['description'],
     forms: data['forms'].map(item => item['id']),

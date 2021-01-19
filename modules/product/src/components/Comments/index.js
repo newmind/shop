@@ -1,6 +1,7 @@
 
 import { Mode, Size } from '@ui.packages/types';
 import { Header, Button } from '@ui.packages/kit';
+import { nounDeclension } from '@ui.packages/utils';
 import { Dialog, openDialog, closeDialog } from '@ui.packages/dialog';
 
 import React from 'react';
@@ -33,7 +34,7 @@ function Comments({ comments }) {
     <div className={styles['wrapper']}>
       <div className={styles['aside']}>
         <div className={styles['header']}>
-          <Header level={4}>Оставлено {comments.length} отзывов</Header>
+          <Header level={4}>{nounDeclension(comments.length, ['Оставлен', 'Оставлено', 'Оставлено'])} {comments.length} {nounDeclension(comments.length, ['отзыв', 'отзыва', 'отзывов'])}</Header>
         </div>
         <div className={styles['controls']}>
           <Button

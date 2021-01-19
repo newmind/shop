@@ -8,7 +8,6 @@ export default function(data) {
     amount: data['amount'],
     saleAmount: data['saleAmount'] || 0,
     description: data['description'],
-    count: data['count'],
     params: data['params'],
     createdAt: data['createdAt'],
     category: data['category'],

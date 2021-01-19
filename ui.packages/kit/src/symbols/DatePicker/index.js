@@ -29,7 +29,7 @@ const DatePickerBoard = forwardRef((props, ref) => {
 });
 
 
-function DatePicker({ className, label, message, mode, disabled, value, minDate, maxDate, clearable, format, displayFormat, scroller, onBlur, onChange, onFocus }) {
+function DatePicker({ className, mode, disabled, value, minDate, maxDate, clearable, format, displayFormat, onBlur, onChange, onFocus }) {
   const selectRef = useRef(null);
   const optionsRef = useRef(null);
 
@@ -91,13 +91,17 @@ function DatePicker({ className, label, message, mode, disabled, value, minDate,
       }
     }
 
-    window.addEventListener('click', eventReset);
+    document.body.addEventListener('click', eventReset);
     window.addEventListener('resize', eventHandleResize);
-    document.querySelector('body').addEventListener('scroll', eventHandleScrolling);
+    if (document.querySelector('#scroller')) {
+      document.querySelector('#scroller').addEventListener('scroll', eventHandleScrolling);
+    }
     return () => {
-      window.removeEventListener('click', eventReset);
+      document.body.removeEventListener('click', eventReset);
       window.removeEventListener('resize', eventHandleResize);
-      document.querySelector('body').removeEventListener('scroll', eventHandleScrolling);
+      if (document.querySelector('#scroller')) {
+        document.querySelector('#scroller').removeEventListener('scroll', eventHandleScrolling);
+      }
     };
   });
 
@@ -108,8 +112,6 @@ function DatePicker({ className, label, message, mode, disabled, value, minDate,
   function calculateDirection() {
     const { current: selectElement } = selectRef;
     const { current: optionsElement } = optionsRef;
-
-    console.log(123, selectElement, optionsElement);
 
     if ( ! selectElement || ! optionsElement) {
       return;

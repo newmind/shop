@@ -6,6 +6,7 @@ import React from 'react';
 import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 
+import Filter from './Filter';
 import Table from './Table';
 
 import styles from './default.module.scss';
@@ -37,7 +38,7 @@ function Products() {
           <Header level={1}>Управление витриной</Header>
         </div>
         <div className={styles['filter']}>
-          {/*<Filter initialValues={search} onSubmit={(data) => setQuery(data)} />*/}
+          <Filter initialValues={{}} onSubmit={(data) => console.log(data)} />
         </div>
         <div className={styles['table']}>
           <Table />

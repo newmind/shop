@@ -1,4 +1,5 @@
 
+import { Mode } from '@ui.packages/types';
 import { Row, Col, InputField, SelectField, Button } from '@ui.packages/kit';
 
 import types from 'prop-types';
@@ -80,7 +81,7 @@ class Component extends PureComponent {
         </Row>)}
         <Row>
           <Col className={styles['align-right']}>
-            <Button mode="success" onClick={this._handleAddAttr.bind(this)}>Добавить</Button>
+            <Button mode={Mode.PRIMARY} onClick={this._handleAddAttr.bind(this)}>Добавить</Button>
           </Col>
         </Row>
       </div>
