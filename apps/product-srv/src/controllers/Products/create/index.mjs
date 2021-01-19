@@ -84,7 +84,7 @@ try {
 
   const result = await Product.findOne({
     where: {uuid},
-    attributes: ['uuid', 'brand', 'name', 'description', 'params', 'status', 'amount', 'saleAmount', 'createdAt'],
+    attributes: ['uuid', 'brand', 'name', 'description', 'params', 'status', 'amount', 'fiscal', 'saleAmount', 'createdAt'],
     include: [
       {
         model: Type,

@@ -9,7 +9,7 @@ import cn from "classnames";
 import styles from "./default.module.scss";
 
 
-function FieldComponent({ input, label, disabled, message, meta: { touched, error, warning }, children, onChange, ...props }) {
+function FieldComponent({ input, label, require, disabled, message, meta: { touched, error, warning }, children, onChange, ...props }) {
   function handleChange(value) {
     if ('onChange' in input) {
       input.onChange(value);
@@ -40,7 +40,9 @@ function FieldComponent({ input, label, disabled, message, meta: { touched, erro
   return (
     <div className={classNameInputWrapper}>
       {label && (
-        <p className={styles['label']}>{ label }</p>
+        <p className={cn(styles['label'], {
+          [styles['label--require']]: require,
+        })}>{ label }</p>
       )}
       <div className={styles['container']}>
         {React.cloneElement(children, {
@@ -73,6 +75,11 @@ function BaseField({ children, ...props }) {
 BaseField.propTypes = {
   name: types.string,
   label: types.string,
+  require: types.bool,
+};
+
+BaseField.defaultProps = {
+  require: false,
 };
 
 export default BaseField;

@@ -18,6 +18,16 @@
   color: $blue-grey;
   margin: 0 0 6px 15px;
   transition: color 400ms;
+
+  &--require {
+    &:after {
+
+      display: inline-block;
+      content: '*';
+      color: $danger;
+      margin: 0 0 0 2px;
+    }
+  }
 }
 
 .container {
@@ -74,10 +84,4 @@
     }
   }
 
-}
-
-.disabled {
-  .label {
-    color: $pale-lilac;
-  }
 }

@@ -41,7 +41,8 @@
   }
 }
 
-.disabled {
+.disabled,
+.disabled:hover {
 
   border-color: $pale-lilac;
 }

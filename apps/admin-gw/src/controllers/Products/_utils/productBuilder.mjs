@@ -2,6 +2,7 @@
 export default function productBuilder(data) {
   return {
     uuid: data['uuid'],
+    fiscal: data['fiscal'],
     amount: Number(data['amount']),
     brand: data['brand'],
     categories: data['categories'].map(item => item['id']),

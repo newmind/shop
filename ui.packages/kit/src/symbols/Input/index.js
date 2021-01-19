@@ -18,12 +18,20 @@ function Input({ mode, className, disabled, onBlur, onFocus, ...props }) {
   function handleFocus(event) {
     event.stopPropagation();
 
+    if (disabled) {
+      return void 0;
+    }
+
     onFocus && onFocus(event);
     setFocus(true);
   }
 
   function handleBlur(event) {
     event.stopPropagation();
+
+    if (disabled) {
+      return void 0;
+    }
 
     onBlur && onBlur(event);
     setFocus(false);

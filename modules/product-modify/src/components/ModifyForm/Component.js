@@ -40,12 +40,18 @@ function ModifyForm({ handleSubmit, onDelete }) {
         <div className={styles['content']}>
           <Row>
             <Col>
-              <InputField name="brand" label="Бренд" />
+              <InputField name="uuid" label="Номер товара" disabled />
+            </Col>
+            <Col>
+              <InputField name="fiscal" label="Фискальный номер" />
             </Col>
           </Row>
           <Row>
             <Col>
-              <InputField name="name" label="Назвние" />
+              <InputField require name="brand" label="Бренд" />
+            </Col>
+            <Col>
+              <InputField require name="name" label="Назвние" />
             </Col>
           </Row>
           <Row>
@@ -110,7 +116,7 @@ function ModifyForm({ handleSubmit, onDelete }) {
           </Row>
           <Row>
             <Col>
-              <TextareaField name="description" label="Описание" />
+              <TextareaField require name="description" label="Описание" />
             </Col>
           </Row>
         </div>
@@ -139,6 +145,8 @@ function ModifyForm({ handleSubmit, onDelete }) {
                 name="params"
               />
             </Col>
+            <Col />
+            <Col />
           </Row>
         </div>
       </div>
@@ -152,13 +160,9 @@ function ModifyForm({ handleSubmit, onDelete }) {
             <Col>
               <InputField name="amount" label="Цена" />
             </Col>
-          </Row>
-          <Row>
             <Col>
               <InputField name="saleAmount" label="Цена со скидкой" />
             </Col>
-          </Row>
-          <Row>
             <Col>
               <SelectField
                 name="currencyId"
