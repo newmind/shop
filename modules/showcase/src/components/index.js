@@ -4,6 +4,7 @@ import { queryToObject } from "@ui.packages/utils";
 
 import Component from './Component';
 
+import { resetState } from '../ducks/slice';
 import { getProducts } from '../ducks/commands';
 
 
@@ -18,7 +19,8 @@ export default HOC({
 
     dispatch(getProducts(query));
   },
-  onUnmount: () => {
+  onUnmount: ({ dispatch }) => {
 
+    dispatch(resetState());
   }
 })(Component);

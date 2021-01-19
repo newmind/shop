@@ -23,6 +23,18 @@ export const slice = createSlice({
   name: REDUCER_NAME,
   initialState,
   reducers: {
+    resetState(state) {
+      state['items'] = [];
+      state['meta'] = {};
+      state['types'] = [];
+      state['forms'] = [];
+      state['brands'] = [];
+      state['colors'] = [];
+      state['materials'] = [];
+      state['categories'] = [];
+      state['isInitialize'] = false;
+      state['inProcess'] = false;
+    },
     getProductsAction: (state) => {
       state['inProcess'] = true;
     },
@@ -58,7 +70,7 @@ export const slice = createSlice({
   },
 });
 
-export const { getProductsAction, getProductsFailAction, getProductsSuccessAction } = slice['actions'];
+export const { resetState, getProductsAction, getProductsFailAction, getProductsSuccessAction } = slice['actions'];
 
 export const selectItems = (state) => state[REDUCER_NAME]['items'];
 export const selectMeta = (state) => state[REDUCER_NAME]['meta'];
