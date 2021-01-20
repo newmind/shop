@@ -20,9 +20,11 @@
     "ui.packages/*",
     "packages/*",
     "modules/*",
-    "apps/*"
+    "clients/*",
+    "gateway/*",
+    "services/*"
   ],
   "scripts": {
-    "build:packages": "sh ./build-packages.sh"
+    "build:packages": "sh ./build-client-packages.sh && sh ./build-admin-packages.sh"
   }
 }

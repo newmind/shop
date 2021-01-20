@@ -6,6 +6,7 @@ const initialState = {
   items: [],
   filter: {},
   meta: {},
+  inProcess: false,
 };
 
 const REDUCER_NAME = 'products';
@@ -20,46 +21,26 @@ const slice = createSlice({
       state['items'] = [];
       state['filter'] = {};
       state['meta'] = {};
+      state['inProcess'] = false;
     },
 
-    getProductsRequestAction(state) {},
-    getProductsRequestFailAction(state) {},
+    getProductsRequestAction(state) {
+      state['inProcess'] = true;
+    },
+    getProductsRequestFailAction(state) {
+      state['inProcess'] = false;
+    },
     getProductsRequestSuccessAction(state, { payload }) {
       state['items'] = payload['data'];
       state['filter'] = payload['filter'];
       state['meta'] = payload['meta'];
-    },
-
-    createProductRequestAction() {},
-    createProductRequestFailAction() {},
-    createProductRequestSuccessAction(state, { payload }) {
-      if (state['items'].some((item) => (item['id'] === payload['id']))) {
-        return void 0;
-      }
-      state['items'] = [...state['items'], payload].sort((left, right) => {
-        if (left['id'] > right['id']) {
-          return 1;
-        }
-        else if (left['id'] < right['id']) {
-          return -1;
-        }
-        return 0;
-      });
+      state['inProcess'] = false;
     },
 
     removeProductRequestAction() {},
     removeProductRequestFailRequest() {},
     removeProductRequestSuccessAction(state, { payload }) {
       state['items'] = [...state['items']].filter((item) => (payload.indexOf(item['uuid']) === -1));
-    },
-
-    updateProductAction(state, { payload }) {
-      state['items'] = [...state['items']].map((item) => {
-        if (item['id'] === payload['id']) {
-          return payload;
-        }
-        return item;
-      });
     },
   },
   extraReducers(builder) {
@@ -90,8 +71,10 @@ export const {
   removeProductRequestSuccessAction,
 } = slice['actions'];
 
-export const selectItems = (state) => state[REDUCER_NAME]['items'];
 export const selectMeta = (state) => state[REDUCER_NAME]['meta'];
+export const selectItems = (state) => state[REDUCER_NAME]['items'];
+export const selectFilter = (state) => state[REDUCER_NAME]['filter'];
+export const selectInProcess = (state) => state[REDUCER_NAME]['inProcess'];
 
 export const name = slice['name'];
 export const reducer = slice['reducer'];

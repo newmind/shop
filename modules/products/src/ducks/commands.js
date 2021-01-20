@@ -25,6 +25,10 @@ export const getProducts = (params = {}) => async (dispatch) => {
     });
 
     dispatch(getProductsRequestSuccessAction(result));
+
+    if (document.querySelector('#scroller')) {
+      document.querySelector('#scroller').scroll(0, 0);
+    }
   }
   catch(error) {
     dispatch(getProductsRequestFailAction());

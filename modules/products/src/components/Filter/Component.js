@@ -1,60 +1,98 @@
 
-import { Row, Col, InputField, SelectField, DatePickerField, Button } from '@ui.packages/kit';
+import { Mode } from '@ui.packages/types';
+import { Row, Col, InputField, SelectField, Button } from '@ui.packages/kit';
 
-import types from 'prop-types';
-import React, { PureComponent } from 'react';
+import React from 'react';
+import { useSelector } from 'react-redux';
 
 import styles from './default.module.scss';
 
+import { selectFilter, selectInProcess } from '../../ducks/slice';
 
-class Component extends PureComponent {
-  static propTypes = {
-    types: types.array,
-    forms: types.array,
-    brands: types.array,
-    colors: types.array,
-    materials: types.array,
-    categories: types.array,
-    handleSubmit: types.func,
-  };
 
-  static defaultProps = {
-    types: [],
-    forms: [],
-    brands: [],
-    colors: [],
-    materials: [],
-    categories: [],
-  };
+export default function Filter({ handleSubmit, submit }) {
+  const { types, brands, categories, colors, forms, materials } = useSelector(selectFilter);
+  const inProcess = useSelector(selectInProcess);
 
-  render() {
-    const { handleSubmit, types, brands, categories, colors, forms, materials } = this.props;
-
-    return (
-      <form className={styles['form']} onSubmit={handleSubmit}>
-        <Row>
-          <Col><DatePickerField name="createdFrom" clearable /></Col>
-          <Col><DatePickerField name="createdTo" clearable /></Col>
-          <Col><InputField name="uuid" placeholder="UUID" /></Col>
-          <Col><SelectField placeholder="Тип" name="typeId" clearable simple options={types} /></Col>
-          <Col><SelectField placeholder="Бренд" name="brand" clearable simple options={brands} optionKey="value" /></Col>
-        </Row>
-        <Row>
-          <Col><SelectField placeholder="Категория" name="categoryId" clearable simple options={categories} /></Col>
-          <Col><SelectField placeholder="Цвет" name="colorId" clearable simple options={colors} /></Col>
-          <Col><SelectField placeholder="Форма" name="formId" clearable simple options={forms} /></Col>
-          <Col><SelectField placeholder="Материал" name="materialId" clearable options={materials} /></Col>
-          <Col />
-          {/*<AmountField min={0} max={4000} /></Col>*/}
-        </Row>
-        <Row>
-          <Col>
-            <Button type="submit" mode="primary">Применить</Button>
-          </Col>
-        </Row>
-      </form>
-    );
-  }
-}
-
-export default Component;
+  return (
+    <form className={styles['form']} onSubmit={handleSubmit}>
+      <Row>
+        <Col>
+          <InputField
+            name="fiscal"
+            placeholder="Фискальный номер"
+            disabled={inProcess}
+          />
+        </Col>
+        <Col>
+          <InputField
+            name="uuid"
+            placeholder="Номер товара"
+            disabled={inProcess}
+          />
+        </Col>
+        <Col>
+          <SelectField
+            placeholder="Тип"
+            name="typeId"
+            options={types}
+            disabled={inProcess}
+          />
+        </Col>
+        <Col>
+          <SelectField
+            placeholder="Бренд"
+            name="brand"
+            options={brands}
+            optionKey="value"
+            disabled={inProcess}
+          />
+        </Col>
+      </Row>
+      <Row>
+        <Col>
+          <SelectField
+            placeholder="Категория"
+            name="categoryId"
+            options={categories}
+            disabled={inProcess}
+          />
+        </Col>
+        <Col>
+          <SelectField
+            placeholder="Цвет"
+            name="colorId"
+            options={colors}
+            disabled={inProcess}
+          />
+        </Col>
+        <Col>
+          <SelectField
+            placeholder="Форма"
+            name="formId"
+            options={forms}
+            disabled={inProcess}
+          />
+        </Col>
+        <Col>
+          <SelectField
+            placeholder="Материал"
+            name="materialId"
+            options={materials}
+            disabled={inProcess}
+          />
+        </Col>
+      </Row>
+      <Row>
+        <Col>
+          <Button
+            type={Button.TYPE_SUBMIT}
+            mode={Mode.PRIMARY}
+            onClick={submit}
+            disabled={inProcess}
+          >Применить</Button>
+        </Col>
+      </Row>
+    </form>
+  );
+};

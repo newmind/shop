@@ -7,16 +7,16 @@ RUN npm config set package-lock false
 
 WORKDIR /app
 
-COPY apps/operation-srv/db                ./apps/operation-srv/db
-COPY apps/operation-srv/src               ./apps/operation-srv/src
-COPY apps/operation-srv/.env.production   ./apps/operation-srv
-COPY apps/operation-srv/package.json      ./apps/operation-srv
-COPY apps/operation-srv/.sequelizerc      ./apps/operation-srv
-COPY ./sys.packages                       ./sys.packages
-COPY ./packages                           ./packages
-COPY ./package.json                       .
-COPY ./lerna.json                         .
-COPY ./yarn.lock                          .
+COPY ./services/operation-srv/db                ./services/operation-srv/db
+COPY ./services/operation-srv/src               ./services/operation-srv/src
+COPY ./services/operation-srv/.env.production   ./services/operation-srv
+COPY ./services/operation-srv/package.json      ./services/operation-srv
+COPY ./services/operation-srv/.sequelizerc      ./services/operation-srv
+COPY ./sys.packages                             ./sys.packages
+COPY ./packages                                 ./packages
+COPY ./package.json                             ./
+COPY ./lerna.json                               ./
+COPY ./yarn.lock                                ./
 
 RUN yarn
 

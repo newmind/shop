@@ -7,14 +7,14 @@ RUN npm config set package-lock false
 
 WORKDIR /app
 
-COPY ./apps/admin-gw/src              ./apps/admin-gw/src
-COPY ./apps/admin-gw/.env.production  ./apps/admin-gw
-COPY ./apps/admin-gw/package.json     ./apps/admin-gw
-COPY ./sys.packages                   ./sys.packages
-COPY ./packages                       ./packages
-COPY ./package.json                   .
-COPY ./lerna.json                     .
-COPY ./yarn.lock                      .
+COPY ./gateway/admin-gw/src              ./gateway/admin-gw/src
+COPY ./gateway/admin-gw/.env.production  ./gateway/admin-gw
+COPY ./gateway/admin-gw/package.json     ./gateway/admin-gw
+COPY ./sys.packages                      ./sys.packages
+COPY ./packages                          ./packages
+COPY ./package.json                      ./
+COPY ./lerna.json                        ./
+COPY ./yarn.lock                         ./
 
 RUN yarn
 

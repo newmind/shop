@@ -8,17 +8,17 @@ RUN npm config set package-lock false
 
 WORKDIR /app
 
-COPY ./apps/client-ui/src                ./apps/client-ui/src
-COPY ./apps/client-ui/public             ./apps/client-ui/public
-COPY ./apps/client-ui/package.json       ./apps/client-ui
-COPY ./apps/client-ui/.env.production    ./apps/client-ui
-COPY ./ui.packages                       ./ui.packages
-COPY ./packages                          ./packages
-COPY ./modules                           ./modules
-COPY ./package.json                      .
-COPY ./lerna.json                        .
-COPY ./yarn.lock                         .
-COPY ./build-client-packages.sh          .
+COPY ./clients/client-ui/src                ./clients/client-ui/src
+COPY ./clients/client-ui/public             ./clients/client-ui/public
+COPY ./clients/client-ui/package.json       ./clients/client-ui
+COPY ./clients/client-ui/.env.production    ./clients/client-ui
+COPY ./ui.packages                          ./ui.packages
+COPY ./packages                             ./packages
+COPY ./modules                              ./modules
+COPY ./package.json                         ./
+COPY ./lerna.json                           ./
+COPY ./yarn.lock                            ./
+COPY ./build-client-packages.sh             ./
 
 RUN yarn
 

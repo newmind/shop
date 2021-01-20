@@ -9,10 +9,16 @@ const initialState = {
 };
 
 
-export const showcaseSlice = createSlice({
+export const alice = createSlice({
   name: 'order',
   initialState,
   reducers: {
+    resetState(state) {
+      state['data'] = null;
+      state['error'] = null;
+      state['inProcess'] = false;
+    },
+
     createOperationAction: (state) => {
       state['inProcess'] = true;
     },
@@ -26,9 +32,9 @@ export const showcaseSlice = createSlice({
   },
 });
 
-export const { createOperationAction, createOperationFailAction, createOperationSuccessAction } = showcaseSlice['actions'];
+export const { resetState, createOperationAction, createOperationFailAction, createOperationSuccessAction } = alice['actions'];
 
 export const selectData = (state) => state['order']['data'];
 
-export const name = showcaseSlice['name'];
-export const reducer = showcaseSlice['reducer'];
+export const name = alice['name'];
+export const reducer = alice['reducer'];

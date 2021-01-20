@@ -25,7 +25,6 @@ export const createOperation = (order) => async (dispatch) => {
     });
 
     dispatch(createOperationSuccessAction(result));
-    // dispatch(push(process.env['PUBLIC_URL'] + `/order/${result['externalId']}`));
   }
   catch(error) {
 

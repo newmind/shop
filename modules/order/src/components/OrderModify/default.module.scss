@@ -5,7 +5,6 @@
 .wrapper {
 
   display: block;
-  padding: 40px 20px;
 }
 
 .section {
@@ -20,21 +19,16 @@
 .header {
 
   display: block;
-  font-family: inherit;
-  font-weight: 700;
-  font-size: 14px;
-  text-transform: uppercase;
-  letter-spacing: 1px;
-  color: $coal-dark;
-  padding: 0 0 0 38px;
+  padding: 0 0 0 20px;
 }
 
 .content {
 
   display: block;
-  margin: 25px 0 0;
+  margin: 15px 0 0;
+  background: $white;
   border: 1px solid $pale-lilac;
-  border-radius: 15px;
+  border-radius: 5px;
   padding: 60px 80px 110px 80px;
 
   &--no-border {
@@ -48,5 +42,17 @@
 
   display: block;
   margin: 80px 0 0;
+}
+
+.information {
+
+  display: block;
   text-align: right;
+}
+
+.buttons {
+
+  display: block;
+  text-align: right;
+  margin: 15px 0 0;
 }

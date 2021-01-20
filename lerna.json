@@ -6,7 +6,9 @@
     "ui.packages/*",
     "packages/*",
     "modules/*",
-    "apps/*"
+    "clients/*",
+    "gateway/*",
+    "services/*"
   ],
   "npmClient": "yarn",
   "useWorkspaces": true,
