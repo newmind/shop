@@ -1,8 +1,9 @@
 
 import numeral from "@packages/numeral";
 
-import { Button, Header, Text, Link } from "@ui.packages/kit";
+import { Mode, Size } from '@ui.packages/types';
 import { selectItems } from '@ui.packages/cart';
+import { Button, Header, Text, Link } from "@ui.packages/kit";
 
 import React from 'react';
 import types from "prop-types";
@@ -66,9 +67,11 @@ export default function OrderModify({ handleSubmit }) {
             <Text>Для возврата или замены товара, ознакомтесь с информацией в разделе <Link href="/produce">Информация для Вас</Link></Text>
           </div>
           <div className={styles['buttons']}>
-            <Button type="submit" mode="success" size="l">
-              Оформить заказ на сумму { numeral(calculateFullAmount(items)).format() } руб.
-            </Button>
+            <Button
+              type={Button.TYPE_SUBMIT}
+              mode={Mode.SUCCESS}
+              size={Size.LARGE}
+            >Оформить заказ на сумму { numeral(calculateFullAmount(items)).format() } руб.</Button>
           </div>
         </div>
       </form>
