@@ -29,6 +29,37 @@ const typesSlice = createSlice({
       state['categories'] = payload;
     },
 
+    createCategoryRequestSuccessAction(state, { payload }) {
+      state['categories'] = [payload, ...state['categories']];
+    },
+
+    updateCategoryRequestSuccessAction(state, { payload }) {
+      state['items'] = state['items'].map((item) => {
+        return {
+          ...item,
+          categories: item['categories'].map((category) => {
+            if (category['id'] === payload['id']) {
+              return {
+                ...category,
+                ...payload,
+              };
+            }
+            return category;
+          }),
+        }
+      });
+    },
+
+    deleteCategoryRequestSuccessAction(state, { payload }) {
+      state['categories'] = [...state['categories']].filter((item) => !~ payload.indexOf(item['id']));
+      state['items'] = state['items'].map((item) => {
+        return {
+          ...item,
+          categories: item['categories'].filter((item) => !~ payload.indexOf(item['id'])),
+        }
+      });
+    },
+
     getTypesRequestAction() {},
     getTypesRequestFailAction() {},
     getTypesRequestSuccessAction(state, { payload }) {
@@ -76,6 +107,10 @@ export const {
   getCategoriesRequestAction,
   getCategoriesRequestFailAction,
   getCategoriesRequestSuccessAction,
+
+  createCategoryRequestSuccessAction,
+  updateCategoryRequestSuccessAction,
+  deleteCategoryRequestSuccessAction,
 
   getTypesRequestAction,
   getTypesRequestFailAction,

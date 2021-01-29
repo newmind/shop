@@ -10,13 +10,12 @@ export default () => async (ctx) => {
 
   const transaction = await sequelize.transaction();
 
-  await Type.update(data, {
-    where: { id },
-    transaction
-  });
+  await Type.update(data, { where: { id }, transaction });
 
-  await TypeCategory.destroy({ where: { typeId: data['id'] }});
-  await TypeCategory.bulkCreate(data['categories'].map((category) => ({ typeId: data['id'], categoryId: category })));
+  await TypeCategory.destroy({ where: { typeId: data['id'] }, transaction });
+  await TypeCategory.bulkCreate(data['categories'].map((category) => ({ typeId: data['id'], categoryId: category })), { transaction });
+
+  await transaction.commit();
 
   const result = await Type.findOne({
     where: { id },
@@ -28,15 +27,14 @@ export default () => async (ctx) => {
         through: { attributes: [] },
       }
     ],
-    transaction,
   });
 
-  await transaction.commit();
+  const type = result.toJSON();
 
-  await sendEvent(process.env['RABBIT_PRODUCT_SRV_EXCHANGE_TYPE_UPDATED'], JSON.stringify(result.toJSON()));
+  await sendEvent(process.env['EXCHANGE_TYPE_UPDATE'], JSON.stringify(type));
 
   ctx.body = {
     success: true,
-    data: result.toJSON(),
+    data: type,
   };
 };

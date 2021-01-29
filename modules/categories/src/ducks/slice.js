@@ -36,20 +36,30 @@ const categoriesSlice = createSlice({
     createCategoryRequestSuccessAction(state, { payload }) {
       if (payload['parentId']) {
         state['items'] = state['items'].map((item) => {
-          if (item['id'] === payload['parentId']) {
-            return {
-              ...item,
-              'sub-categories': [
-                ...item['sub-categories'],
-                payload,
-              ],
+          if ( ! item['sub-categories'].some(attr => attr['id'] === payload['id'])) {
+            if (item['id'] === payload['parentId']) {
+              return {
+                ...item,
+                'sub-categories': [
+                  ...item['sub-categories'],
+                  payload,
+                ],
+              }
             }
           }
           return item;
         });
       }
       else {
-        state['items'] = [payload, ...state['items']];
+        if ( ! state['items'].some(attr => attr['id'] === payload['id'])) {
+          state['items'] = [
+            {
+              ...payload,
+              'sub-categories': [],
+            },
+            ...state['items'
+          ]];
+        }
       }
       state['inProcess'] = false;
     },
@@ -90,7 +100,20 @@ const categoriesSlice = createSlice({
     deleteCategoryRequestAction() {},
     deleteCategoryRequestFailAction() {},
     deleteCategoryRequestSuccessAction(state, { payload }) {
-      state['items'] = [...state['items']].filter((item) => !~ payload.indexOf(item['id']));
+      if ( ! state['items'].some((item) => !!~ payload.indexOf(item['id']))) {
+        state['items'] = state['items'].map((item) => {
+          if ( !! item['sub-categories'].length) {
+            return {
+              ...item,
+              'sub-categories': item['sub-categories'].filter((item) => !~ payload.indexOf(item['id'])),
+            };
+          }
+          return item;
+        });
+      }
+      else {
+        state['items'] = [...state['items']].filter((item) => !~ payload.indexOf(item['id']));
+      }
     },
   },
 });

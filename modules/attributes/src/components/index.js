@@ -11,6 +11,10 @@ import {
   createItemRequestSuccessAction,
   updateItemRequestSuccessAction,
   deleteItemRequestSuccessAction,
+
+  createUnitRequestSuccessAction,
+  updateUnitRequestSuccessAction,
+  deleteUnitRequestSuccessAction,
 } from '../ducks/slice';
 
 
@@ -23,6 +27,11 @@ export default HOC({
     on(process.env['REACT_APP_SOCKET_ATTRIBUTE_CREATE'], (data) => dispatch(createItemRequestSuccessAction(data)));
     on(process.env['REACT_APP_SOCKET_ATTRIBUTE_UPDATE'], (data) => dispatch(updateItemRequestSuccessAction(data)));
     on(process.env['REACT_APP_SOCKET_ATTRIBUTE_DELETE'], (data) => dispatch(deleteItemRequestSuccessAction(data)));
+
+    on(process.env['REACT_APP_SOCKET_UNIT_CREATE'], (data) => dispatch(createUnitRequestSuccessAction(data)));
+    on(process.env['REACT_APP_SOCKET_UNIT_UPDATE'], (data) => dispatch(updateUnitRequestSuccessAction(data)));
+    on(process.env['REACT_APP_SOCKET_UNIT_DELETE'], (data) => dispatch(deleteUnitRequestSuccessAction(data)));
+
   },
   async onUnmount({ dispatch }) {
     await dispatch(resetStateAction());
@@ -30,5 +39,9 @@ export default HOC({
     off(process.env['REACT_APP_SOCKET_ATTRIBUTE_CREATE']);
     off(process.env['REACT_APP_SOCKET_ATTRIBUTE_UPDATE']);
     off(process.env['REACT_APP_SOCKET_ATTRIBUTE_DELETE']);
+
+    off(process.env['REACT_APP_SOCKET_UNIT_CREATE']);
+    off(process.env['REACT_APP_SOCKET_UNIT_UPDATE']);
+    off(process.env['REACT_APP_SOCKET_UNIT_DELETE']);
   }
 })(Component);

@@ -24,10 +24,12 @@ export default () => async (ctx) => {
     transaction,
   });
 
-  await sendEvent(process.env['RABBIT_PRODUCT_SRV_EXCHANGE_TYPE_CREATED'], JSON.stringify(result.toJSON()));
+  const type = result.toJSON();
+
+  await sendEvent(process.env['EXCHANGE_TYPE_CREATE'], JSON.stringify(type));
 
   ctx.body = {
     success: true,
-    data: result.toJSON(),
+    data: type,
   };
 };

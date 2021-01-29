@@ -82,7 +82,7 @@ export default class CreateSaga {
       .step('Send event')
       .invoke(async (params) => {
         const product = params.getProduct();
-        await sendEvent(process.env['RABBIT_PRODUCT_SRV_EXCHANGE_PRODUCT_CREATED'], JSON.stringify(product));
+        await sendEvent(process.env['EXCHANGE_PRODUCT_CREATE'], JSON.stringify(product));
       })
 
       .build();

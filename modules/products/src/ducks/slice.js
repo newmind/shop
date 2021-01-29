@@ -1,5 +1,5 @@
 
-import { createSlice, createAction } from '@reduxjs/toolkit';
+import { createSlice } from '@reduxjs/toolkit';
 
 
 const initialState = {
@@ -10,7 +10,6 @@ const initialState = {
 };
 
 const REDUCER_NAME = 'products';
-const SOCKET_PRODUCT_UPDATED = createAction('@@socket/PRODUCT_UPDATED');
 
 
 const slice = createSlice({
@@ -37,25 +36,23 @@ const slice = createSlice({
       state['inProcess'] = false;
     },
 
+    updateProductsRequestSuccessAction(state, { payload }) {
+      state['items'] = state['items'].map((item) => {
+        if (item['uuid'] === payload['uuid']) {
+          return {
+            ...item,
+            ...payload,
+          };
+        }
+        return item;
+      });
+    },
+
     removeProductRequestAction() {},
     removeProductRequestFailRequest() {},
     removeProductRequestSuccessAction(state, { payload }) {
       state['items'] = [...state['items']].filter((item) => (payload.indexOf(item['uuid']) === -1));
     },
-  },
-  extraReducers(builder) {
-    builder
-      .addCase(SOCKET_PRODUCT_UPDATED, function(state, { payload }) {
-        state['items'] = state['items'].map((item) => {
-          if (item['uuid'] === payload['uuid']) {
-            return {
-              ...item,
-              ...payload,
-            };
-          }
-          return item;
-        });
-      });
   }
 });
 
@@ -65,6 +62,8 @@ export const {
   getProductsRequestAction,
   getProductsRequestFailAction,
   getProductsRequestSuccessAction,
+
+  updateProductsRequestSuccessAction,
 
   removeProductRequestAction,
   removeProductRequestFailRequest,

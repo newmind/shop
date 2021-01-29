@@ -29,6 +29,40 @@ const typesSlice = createSlice({
       state['units'] = payload;
     },
 
+    createUnitRequestSuccessAction(state, { payload }) {
+      if ( ! state['units'].some((unit) => unit['id'] === payload['id'])) {
+        state['units'] = [payload, ...state['units']];
+      }
+    },
+    updateUnitRequestSuccessAction(state, { payload }) {
+      state['units'] = state['units'].map((unit) => {
+        if (unit['id'] === payload['id']) {
+          return {
+            ...unit,
+            ...payload,
+          };
+        }
+        return unit;
+      });
+      state['items'] = state['items'].map((item) => {
+        if (item['unit']) {
+          if (item['unit']['id'] === payload['id']) {
+            return {
+              ...item,
+              unit: {
+                id: payload['id'],
+                value: payload['value'],
+              }
+            }
+          }
+        }
+        return item;
+      });
+    },
+    deleteUnitRequestSuccessAction(state, { payload }) {
+      state['units'] = [...state['units']].filter((unit) => !~ payload.indexOf(unit['id']));
+    },
+
     getItemsRequestAction() {},
     getItemsRequestFailAction() {},
     getItemsRequestSuccessAction(state, { payload }) {
@@ -78,6 +112,10 @@ export const {
   getUnitsRequestAction,
   getUnitsRequestFailAction,
   getUnitsRequestSuccessAction,
+
+  createUnitRequestSuccessAction,
+  updateUnitRequestSuccessAction,
+  deleteUnitRequestSuccessAction,
 
   getItemsRequestAction,
   getItemsRequestFailAction,

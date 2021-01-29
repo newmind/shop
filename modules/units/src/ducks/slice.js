@@ -34,7 +34,9 @@ const unitsSlice = createSlice({
       state['inProcess'] = false;
     },
     createUnitRequestSuccessAction(state, { payload }) {
-      state['items'] = [payload, ...state['items']];
+      if ( ! state['items'].some((item) => item['id'] === payload['id'])) {
+        state['items'] = [payload, ...state['items']];
+      }
       state['inProcess'] = false;
     },
 

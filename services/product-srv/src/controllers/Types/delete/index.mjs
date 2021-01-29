@@ -10,7 +10,7 @@ export default () => async (ctx) => {
   await Type.destroy({ where: { id }});
   await TypeCategory.destroy({ where: { typeId: id }});
 
-  await sendEvent(process.env['RABBIT_PRODUCT_SRV_EXCHANGE_TYPE_DELETED'], JSON.stringify(id));
+  await sendEvent(process.env['EXCHANGE_TYPE_DELETE'], JSON.stringify(id));
 
   ctx.body = {
     success: true,

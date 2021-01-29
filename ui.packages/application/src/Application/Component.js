@@ -21,8 +21,6 @@ function Application({ options, isAuth, inProcess, signIn, signOut, getProfile }
   const isSignIn = useMatch('/sign-in');
 
   useEffect(async function init() {
-    console.log('application mount');
-
     if (options['useSign']) {
       const isAuth = await getProfile();
       if ( ! isAuth) {
@@ -35,9 +33,6 @@ function Application({ options, isAuth, inProcess, signIn, signOut, getProfile }
       }
     }
     dispatch(applicationHasLoadedAction());
-    return () => {
-      console.log('application unmount');
-    }
   }, []);
 
   return (

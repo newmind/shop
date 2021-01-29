@@ -1,6 +1,6 @@
 
 import { Routes, Route } from 'react-router-dom';
-import React, { useContext, useEffect } from 'react';
+import React, { useContext } from 'react';
 
 import Error from '../Error';
 
@@ -15,13 +15,6 @@ function Router() {
   const { routes, wrappers } = useContext(ApplicationContext);
 
   const hasNotFound = checkNotFound(routes);
-
-  useEffect(() => {
-    console.log('router mount')
-    return () => {
-      console.log('router destroy')
-    }
-  }, []);
 
   return (
     <Routes>

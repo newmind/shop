@@ -75,7 +75,7 @@ export default class UpdateSaga {
       .step('Send event')
       .invoke(async (params) => {
         const product = params.getProduct();
-        await sendEvent(process.env['RABBIT_PRODUCT_SRV_EXCHANGE_PRODUCT_UPDATED'], JSON.stringify(product));
+        await sendEvent(process.env['EXCHANGE_PRODUCT_UPDATE'], JSON.stringify(product));
       })
 
       .build();

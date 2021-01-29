@@ -6,7 +6,7 @@ import React from 'react';
 import styles from './default.module.scss';
 
 
-function Sub({ data, onEdit, onDeleted }) {
+function Sub({ data, onEdit, onDelete }) {
   return !! data['sub-categories'].length
     ? (
       <div className={styles['wrapper']}>
@@ -19,7 +19,7 @@ function Sub({ data, onEdit, onDeleted }) {
               <Text type={Text.TYPE_COMMENT}>{ item['description'] }</Text>
             </span>
             <span className={styles['actions']}>
-              <Actions onEdit={() => onEdit(item)} onDelete={() => onDeleted(item['id'])} />
+              <Actions onEdit={() => onEdit(item)} onDelete={() => onDelete(item['id'])} />
             </span>
           </div>
         ))}
