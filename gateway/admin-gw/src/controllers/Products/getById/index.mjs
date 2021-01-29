@@ -3,7 +3,7 @@ import { NotfoundError } from '@packages/errors';
 
 import request from '@sys.packages/request';
 
-import productBuilder from '../_utils/productBuilder.mjs';
+import productBuilder from './productBuilder.mjs';
 
 
 async function getProductById(uuid) {
@@ -29,6 +29,6 @@ export default () => async (ctx) => {
 
   ctx.body = {
     success: true,
-    data: productBuilder(product),
+    data: productBuilder(product, true),
   };
 }

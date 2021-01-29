@@ -11,7 +11,7 @@ import { selectFilter, selectInProcess } from '../../ducks/slice';
 
 
 export default function Filter({ handleSubmit, submit }) {
-  const { types, brands, categories, colors, forms, materials } = useSelector(selectFilter);
+  const { types, brands, categories } = useSelector(selectFilter);
   const inProcess = useSelector(selectInProcess);
 
   return (
@@ -39,6 +39,8 @@ export default function Filter({ handleSubmit, submit }) {
             disabled={inProcess}
           />
         </Col>
+      </Row>
+      <Row>
         <Col>
           <SelectField
             placeholder="Бренд"
@@ -48,8 +50,6 @@ export default function Filter({ handleSubmit, submit }) {
             disabled={inProcess}
           />
         </Col>
-      </Row>
-      <Row>
         <Col>
           <SelectField
             placeholder="Категория"
@@ -58,32 +58,6 @@ export default function Filter({ handleSubmit, submit }) {
             disabled={inProcess}
           />
         </Col>
-        <Col>
-          <SelectField
-            placeholder="Цвет"
-            name="colorId"
-            options={colors}
-            disabled={inProcess}
-          />
-        </Col>
-        <Col>
-          <SelectField
-            placeholder="Форма"
-            name="formId"
-            options={forms}
-            disabled={inProcess}
-          />
-        </Col>
-        <Col>
-          <SelectField
-            placeholder="Материал"
-            name="materialId"
-            options={materials}
-            disabled={inProcess}
-          />
-        </Col>
-      </Row>
-      <Row>
         <Col>
           <Button
             type={Button.TYPE_SUBMIT}

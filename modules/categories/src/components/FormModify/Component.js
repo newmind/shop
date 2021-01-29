@@ -1,13 +1,24 @@
 
 import { Mode } from '@ui.packages/types';
-import { Row, Col, Button, InputField, TextareaField, FileField } from '@ui.packages/kit';
+import { Row, Col, Button, InputField, SelectField, TextareaField } from '@ui.packages/kit';
 
 import React from 'react';
+import { submit } from "redux-form";
+import { useDispatch, useSelector } from 'react-redux';
 
 import styles from './default.module.scss';
 
+import { selectItems } from '../../ducks/slice';
+
 
 export default ({ handleSubmit, valid, pristine }) => {
+  const categories = useSelector(selectItems);
+  const dispatch = useDispatch();
+
+  function handleSubmitForm() {
+    dispatch(submit('category-modify'));
+  }
+
   return (
     <form className={styles['form']} onSubmit={handleSubmit}>
       <div className={styles['content']}>
@@ -21,17 +32,18 @@ export default ({ handleSubmit, valid, pristine }) => {
         </Row>
         <Row>
           <Col>
-            <TextareaField
-              name="description"
-              label="Описание"
+            <SelectField
+              name="parentId"
+              label="Родительская категория"
+              options={categories}
             />
           </Col>
         </Row>
         <Row>
           <Col>
-            <FileField
-              label="Изображение"
-              name="file"
+            <TextareaField
+              name="description"
+              label="Описание"
             />
           </Col>
         </Row>
@@ -41,6 +53,7 @@ export default ({ handleSubmit, valid, pristine }) => {
           type={Button.TYPE_SUBMIT}
           mode={Mode.SUCCESS}
           disabled={ ! valid || pristine}
+          onClick={handleSubmitForm}
         >Выполнить</Button>
       </div>
     </form>

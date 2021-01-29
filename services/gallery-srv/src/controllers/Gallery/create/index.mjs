@@ -1,6 +1,8 @@
 
+import { models } from '@sys.packages/db';
 import { UUID } from '@sys.packages/sys.utils';
-import { sequelize, models } from '@sys.packages/db';
+
+import sharp from 'sharp';
 
 
 const getBufferFromRequest = (req) => {
@@ -19,28 +21,38 @@ const getBufferFromRequest = (req) => {
   });
 };
 
+async function resize(buffer, options) {
+  return await sharp(buffer)
+    .resize(options['size'])
+    .jpeg({
+      quality: 85,
+    })
+    .toBuffer();
+}
+
+
 export default () => async (ctx) => {
   const { Gallery } = models;
-  const externalId = UUID();
+  const uuid = UUID();
 
   const buffer = await getBufferFromRequest(ctx['req']);
 
-  const transaction = await sequelize.transaction();
+  const smallImgBuffer = await resize(buffer, { size: 124 });
+  const middleImgBuffer = await resize(buffer, { size: 320 });
+  const largeImgBuffer = await resize(buffer, { size: 1024 });
+
+  const fileName = `${uuid}.jpg`;
 
   await Gallery.create({
-    file: buffer,
-    externalId,
-  }, {
-    transaction,
+    uuid: fileName,
+    small: smallImgBuffer,
+    middle: middleImgBuffer,
+    large: largeImgBuffer,
   });
-
-  await transaction.commit();
 
   ctx.status = 200;
   ctx.body = {
     success: true,
-    data: {
-      externalId,
-    },
+    data: fileName,
   };
 };

@@ -16,17 +16,17 @@ import styles from "./defaults.module.scss";
 function Product({ uuid, gallery, brand, name, amount, currency, onRemove }) {
   const dispatch = useDispatch();
   const classNameRemoveProduct = cn(styles['remove'], 'far fa-trash-alt');
-
+console.log(uuid)
   return (
     <div className={styles['item']}>
       <div className={styles['item__promo']}>
-        <Gallery items={gallery} isList={false} valueKey="externalId" path={`${process.env['REACT_APP_API_HOST']}/gallery`} />
+        <Gallery items={gallery} isList={false} size="small" path={`${process.env['REACT_APP_API_HOST']}/gallery`} />
       </div>
       <div className={styles['item__description']}>
         <div className={styles['item__names']}>
           <span className={styles['brand']}>
             <Header level={4}>
-              <Link to={process.env['PUBLIC_URL'] + `/products/${uuid}`} onClick={() => dispatch(closeCart())}>
+              <Link href={process.env['PUBLIC_URL'] + `/products/${uuid}`} onClick={() => dispatch(closeCart())}>
                 { brand }
               </Link>
             </Header>

@@ -14,15 +14,13 @@ import {
   updateById as updateOperationById,
 } from '../controllers/Orders/index.mjs';
 
-import { getAllTypes, createType, updateType, deleteType } from '../controllers/Types/index.mjs';
-import { getAllForms, createForm, updateForm, deleteForms } from '../controllers/Forms/index.mjs';
-import { getAllUnits, createUnit, updateUnit, deleteUnits } from '../controllers/Units/index.mjs';
-import { getAllColors, createColor, updateColor, deleteColors } from '../controllers/Colors/index.mjs';
-import { getAllMaterials, createMaterial, updateMaterial, deleteMaterials } from '../controllers/Meterials/index.mjs';
-import { getAllCategories, createCategory, updateCategory, deleteCategories } from '../controllers/Category/index.mjs';
-import { getAllCurrencies, createCurrency, updateCurrency, deleteCurrencies } from '../controllers/Currency/index.mjs';
+import { getAllTypes, createType, updateType, deleteType } from '../controllers/Types';
+import { getAllUnits, createUnit, updateUnit, deleteUnits } from '../controllers/Units';
+import { getAllCategories, createCategory, updateCategory, deleteCategories } from '../controllers/Category';
+import { getAllCurrencies, createCurrency, updateCurrency, deleteCurrencies } from '../controllers/Currency';
+import { getAllAttributes, createAttribute, deleteAttributes, updateAttribute } from '../controllers/Attribute';
 
-import { getProducts, getProduct,  createProduct, updateProduct, deleteProducts } from '../controllers/Products/index.mjs';
+import { getProducts, getProduct,  createProduct, updateProduct, deleteProducts } from '../controllers/Products';
 
 import { getImage, deleteImages } from '../controllers/Gallery/index.mjs';
 import { getComments, createComment, updateComment, deleteComments } from '../controllers/Comments/index.mjs';
@@ -44,20 +42,10 @@ export default (router) => {
   router.put('/categories/:id', updateCategory());
   router.delete('/categories', deleteCategories());
 
-  router.get('/colors', getAllColors());
-  router.post('/colors', createColor());
-  router.put('/colors/:id', updateColor());
-  router.delete('/colors', deleteColors());
-
-  router.get('/materials', getAllMaterials());
-  router.post('/materials', createMaterial());
-  router.put('/materials/:id', updateMaterial());
-  router.delete('/materials', deleteMaterials());
-
-  router.get('/forms', getAllForms());
-  router.post('/forms', createForm());
-  router.put('/forms/:id', updateForm());
-  router.delete('/forms', deleteForms());
+  router.get('/attributes', getAllAttributes());
+  router.post('/attributes', createAttribute());
+  router.put('/attributes/:id', updateAttribute());
+  router.delete('/attributes', deleteAttributes());
 
   router.get('/currencies', getAllCurrencies());
   router.post('/currencies', createCurrency());

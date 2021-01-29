@@ -4,6 +4,10 @@ import { closeDialog } from '@ui.packages/dialog';
 import { pushNotification } from '@ui.packages/notifications';
 
 import {
+  getCategoriesRequestAction,
+  getCategoriesRequestFailAction,
+  getCategoriesRequestSuccessAction,
+
   getTypesRequestAction,
   getTypesRequestFailAction,
   getTypesRequestSuccessAction,
@@ -21,6 +25,27 @@ import {
   deleteTypeRequestSuccessAction,
 } from './slice';
 
+
+export const getCategories = () => async (dispatch) => {
+  try {
+    dispatch(getCategoriesRequestAction());
+
+    const { data } = await request({
+      url: '/categories',
+      method: 'get',
+    });
+
+    dispatch(getCategoriesRequestSuccessAction(data));
+  }
+  catch(error) {
+
+    dispatch(getCategoriesRequestFailAction(error));
+    dispatch(pushNotification({
+      mode: 'danger',
+      content: 'Ошибка получения списка "Категория"'
+    }));
+  }
+};
 
 export const getTypes = () => async (dispatch) => {
   try {
@@ -46,16 +71,10 @@ export const createType = (data) => async (dispatch) => {
   try {
     dispatch(createTypeRequestAction());
 
-    const formData = new FormData();
-
-    formData.append('value', data['value']);
-    formData.append('description', data['description'] || '');
-    formData.append('file', data['file']);
-
     const result = await request({
       url: '/types',
       method: 'post',
-      data: formData,
+      data,
     });
 
     dispatch(createTypeRequestSuccessAction(result['data']));
@@ -70,18 +89,10 @@ export const updateType = (data) => async (dispatch) => {
   try {
     dispatch(updateTypeRequestAction());
 
-    const formData = new FormData();
-
-    formData.append('value', data['value']);
-    formData.append('description', data['description'] || '');
-    data['imageId'] && formData.append('imageId', data['imageId']);
-    formData.append('updatedAt', data['updatedAt']);
-    formData.append('file', data['file']);
-
     const result = await request({
       url: '/types/' + data['id'],
       method: 'put',
-      data: formData,
+      data,
     });
 
     dispatch(updateTypeRequestSuccessAction(result['data']));

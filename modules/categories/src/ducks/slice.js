@@ -34,7 +34,23 @@ const categoriesSlice = createSlice({
       state['inProcess'] = false;
     },
     createCategoryRequestSuccessAction(state, { payload }) {
-      state['items'] = [payload, ...state['items']];
+      if (payload['parentId']) {
+        state['items'] = state['items'].map((item) => {
+          if (item['id'] === payload['parentId']) {
+            return {
+              ...item,
+              'sub-categories': [
+                ...item['sub-categories'],
+                payload,
+              ],
+            }
+          }
+          return item;
+        });
+      }
+      else {
+        state['items'] = [payload, ...state['items']];
+      }
       state['inProcess'] = false;
     },
 
@@ -45,9 +61,26 @@ const categoriesSlice = createSlice({
       state['inProcess'] = false;
     },
     updateCategoryRequestSuccessAction(state, { payload }) {
-      state['items'] = [...state['items']].map((item) => {
+      state['items'] = state['items'].map((item) => {
         if (item['id'] === payload['id']) {
-          return payload;
+          return {
+            ...item,
+            ...payload,
+          };
+        }
+        else if ( !! item['sub-categories'].length) {
+          return {
+            ...item,
+            'sub-categories': item['sub-categories'].map((sub) => {
+              if (sub['id'] === payload['id']) {
+                return {
+                  ...sub,
+                  ...payload,
+                };
+              }
+              return sub;
+            }),
+          };
         }
         return item;
       });

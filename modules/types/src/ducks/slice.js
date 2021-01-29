@@ -4,6 +4,7 @@ import { createSlice } from '@reduxjs/toolkit';
 
 const initialState = {
   items: [],
+  categories: [],
   error: null,
   inProcess: false,
 };
@@ -17,8 +18,15 @@ const typesSlice = createSlice({
   reducers: {
     resetStateAction(state) {
       state['items'] = [];
+      state['categories'] = [];
       state['error'] = null;
       state['inProcess'] = false;
+    },
+
+    getCategoriesRequestAction() {},
+    getCategoriesRequestFailAction() {},
+    getCategoriesRequestSuccessAction(state, { payload }) {
+      state['categories'] = payload;
     },
 
     getTypesRequestAction() {},
@@ -65,6 +73,10 @@ const typesSlice = createSlice({
 export const {
   resetStateAction,
 
+  getCategoriesRequestAction,
+  getCategoriesRequestFailAction,
+  getCategoriesRequestSuccessAction,
+
   getTypesRequestAction,
   getTypesRequestFailAction,
   getTypesRequestSuccessAction,
@@ -83,6 +95,7 @@ export const {
 } = typesSlice['actions'];
 
 export const selectItems = (state) => state[REDUCER_NAME]['items'];
+export const selectCategories = (state) => state[REDUCER_NAME]['categories'];
 export const selectInProcess = (state) => state[REDUCER_NAME]['inProcess'];
 
 export const name = typesSlice['name'];

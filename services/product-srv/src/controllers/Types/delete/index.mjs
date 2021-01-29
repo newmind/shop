@@ -1,23 +1,16 @@
 
-import {sendEvent} from "@sys.packages/rabbit";
-import { sequelize, models } from '@sys.packages/db';
+import {sendEvent} from "@sys.packages/rabbit2";
+import { models } from '@sys.packages/db';
 
 
 export default () => async (ctx) => {
-  const { Type } = models;
+  const { Type, TypeCategory } = models;
   const { id } = ctx['request']['body'];
 
-  const transaction = await sequelize.transaction();
-
-  await Type.destroy({
-    where: { id },
-  }, {
-    transaction,
-  });
+  await Type.destroy({ where: { id }});
+  await TypeCategory.destroy({ where: { typeId: id }});
 
   await sendEvent(process.env['RABBIT_PRODUCT_SRV_EXCHANGE_TYPE_DELETED'], JSON.stringify(id));
-
-  await transaction.commit();
 
   ctx.body = {
     success: true,

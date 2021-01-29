@@ -2,18 +2,15 @@
 module.exports = (db, DataType) => {
 
   const Gallery = db.define('Gallery', {
-    id: {
-      type: DataType.INTEGER,
+    uuid: {
+      type: DataType.STRING(64),
       primaryKey: true,
-      autoIncrement: true,
-      index: true,
     },
-    externalId: {
-      type: DataType.STRING(36),
-    },
-    productId: {
+    productUuid: {
       type: DataType.STRING(9),
     },
+  }, {
+    timestamps: false,
   });
 
   Gallery.associate = ({}) => {};

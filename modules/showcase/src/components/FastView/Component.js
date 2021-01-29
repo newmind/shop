@@ -15,7 +15,7 @@ function FastView({ product: { gallery, attributes, description }, product }) {
     <div className={styles['wrapper']}>
       <div className={styles['product']}>
         <div className={styles['gallery']}>
-          <Gallery items={gallery} valueKey="externalId" path={ `${process.env['REACT_APP_API_HOST']}/gallery` } />
+          <Gallery items={gallery} size="middle" path={ `${process.env['REACT_APP_API_HOST']}/gallery` } />
         </div>
         <div className={styles['information']}>
           <Information product={product} />

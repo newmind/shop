@@ -1,16 +1,14 @@
 
-import { getAllTypes, createType, updateType, deleteType } from '../controllers/Types/index.mjs';
-import { getAllForms, createForm, updateForm, deleteForms } from '../controllers/Forms/index.mjs';
-import { getAllUnits, createUnit, updateUnit, deleteUnits } from '../controllers/Units/index.mjs';
-import { getAllColors, createColor, updateColor, deleteColor } from '../controllers/Colors/index.mjs';
-import { getAllMaterials, createMaterial, updateMaterial, deleteMaterials } from '../controllers/Materials/index.mjs';
-import { getAllCategories, createCategory, updateCategory, deleteCategories } from '../controllers/Category/index.mjs';
-import { getAllCurrencies, createCurrency, updateCurrency, deleteCurrencies } from '../controllers/Currency/index.mjs';
+import { getAllTypes, createType, updateType, deleteType } from '../controllers/Types';
+import { getAllUnits, createUnit, updateUnit, deleteUnits } from '../controllers/Units';
+import { getAllCategories, createCategory, updateCategory, deleteCategories } from '../controllers/Category';
+import { getAllCurrencies, createCurrency, updateCurrency, deleteCurrencies } from '../controllers/Currency';
+import { getAllAttributes, deleteAttributes, updateAttribute, createAttribute } from '../controllers/Attributes';
 
-import { getProducts, createProduct, deleteProductById, updateProductById } from '../controllers/Products/index.mjs';
-import { getTypesCount, getFormsCount, getBrandsCount, getColorsCount, getMaterialsCount, getCategoriesCount } from '../controllers/Products/index.mjs';
+import { getProducts, createProduct, deleteProductById, updateProductById } from '../controllers/Products';
+import { getTypesCount, getBrandsCount, getCategoriesCount } from '../controllers/Products';
 
-import { getAllComments, deleteComments, createComment, updateComment } from '../controllers/Comments/index.mjs';
+import { getAllComments, deleteComments, createComment, updateComment } from '../controllers/Comments';
 
 
 export default (router) => {
@@ -25,20 +23,10 @@ export default (router) => {
   router.put('/v1/api/categories/:id', updateCategory());
   router.delete('/v1/api/categories', deleteCategories());
 
-  router.get('/v1/api/colors', getAllColors());
-  router.post('/v1/api/colors', createColor());
-  router.put('/v1/api/colors/:id', updateColor());
-  router.delete('/v1/api/colors', deleteColor());
-
-  router.get('/v1/api/materials', getAllMaterials());
-  router.post('/v1/api/materials', createMaterial());
-  router.put('/v1/api/materials/:id', updateMaterial());
-  router.delete('/v1/api/materials', deleteMaterials());
-
-  router.get('/v1/api/forms', getAllForms());
-  router.post('/v1/api/forms', createForm());
-  router.put('/v1/api/forms/:id', updateForm());
-  router.delete('/v1/api/forms', deleteForms());
+  router.get('/v1/api/attributes', getAllAttributes());
+  router.post('/v1/api/attributes', createAttribute());
+  router.put('/v1/api/attributes/:id', updateAttribute());
+  router.delete('/v1/api/attributes', deleteAttributes());
 
   router.get('/v1/api/currencies', getAllCurrencies());
   router.post('/v1/api/currencies', createCurrency());
@@ -51,10 +39,7 @@ export default (router) => {
   router.delete('/v1/api/units', deleteUnits());
 
   router.get('/v1/api/products/types', getTypesCount());
-  router.get('/v1/api/products/forms', getFormsCount());
   router.get('/v1/api/products/brands', getBrandsCount());
-  router.get('/v1/api/products/colors', getColorsCount());
-  router.get('/v1/api/products/materials', getMaterialsCount());
   router.get('/v1/api/products/categories', getCategoriesCount());
 
   router.get('/v1/api/products', getProducts());

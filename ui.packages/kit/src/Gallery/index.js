@@ -8,7 +8,7 @@ import cn from 'classnames';
 import styles from './default.module.scss';
 
 
-function Gallery({ index, items, path, valueKey, className, isList }) {
+function Gallery({ index, items, path, valueKey, className, isList, size }) {
   const [activeIndex, setActiveIndex] = useState(index);
 
   function hasCountItems(items) {
@@ -36,7 +36,7 @@ function Gallery({ index, items, path, valueKey, className, isList }) {
     if (fileSrc && fileSrc.constructor === Object) {
       fileSrc = fileSrc[valueKey];
     }
-    return fileSrc ? `${path}/${fileSrc}` : '';
+    return fileSrc ? `${path}/${fileSrc}?size=${size}` : '';
   }
 
   const src = getFileName();
@@ -76,6 +76,7 @@ Gallery.propTypes = {
   items: types.array,
   index: types.number,
   isList: types.bool,
+  size: types.oneOf(['small', 'middle', 'large']),
 };
 
 Gallery.defaultProps = {
@@ -85,6 +86,7 @@ Gallery.defaultProps = {
   items: [],
   index: 0,
   isList: true,
+  size: 'large',
 };
 
 export default Gallery;

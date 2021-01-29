@@ -1,21 +1,20 @@
 
-import { sendEvent } from "@sys.packages/rabbit";
-import { sequelize, models } from '@sys.packages/db';
+import { sendEvent } from "@sys.packages/rabbit2";
+import { models } from '@sys.packages/db';
 
 
 export default () => async (ctx) => {
   const { Category } = models;
   const formData = ctx['request']['body'];
 
-  const transaction = await sequelize.transaction();
+  const { id } = await Category.create(formData);
 
-  const result = await Category.create(formData, {
-    transaction
+  const result = await Category.findOne({
+    attributes: ['id', 'value', 'description', 'parentId'],
+    where: { id },
   });
 
-  await sendEvent(process.env['RABBIT_PRODUCT_SRV_EXCHANGE_CATEGORY_CREATED'], JSON.stringify(result.toJSON()));
-
-  await transaction.commit();
+  await sendEvent(process.env['EXCHANGE_CATEGORY_CREATE'], JSON.stringify(result.toJSON()));
 
   ctx.body = {
     success: true,

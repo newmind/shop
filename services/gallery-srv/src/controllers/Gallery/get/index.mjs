@@ -7,16 +7,17 @@ import { Duplex } from 'stream';
 export default () => async (ctx) => {
   const { Gallery } = models;
   const { id } = ctx['params'];
+  const { size = 'large' } = ctx['query'];
 
   const image = await Gallery.findOne({
-    where: { externalId: id },
-    attributes: ['file']
+    where: { uuid: id },
+    attributes: ['small', 'middle', 'large'],
   });
 
   const stream = new Duplex();
 
   if (image) {
-    stream.push(image['file']);
+    stream.push(image[size]);
   }
 
   stream.push(null);

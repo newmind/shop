@@ -1,5 +1,5 @@
 
-import { sendEvent } from "@sys.packages/rabbit";
+import { sendEvent } from "@sys.packages/rabbit2";
 import { sequelize, models } from '@sys.packages/db';
 
 
@@ -14,9 +14,9 @@ export default () => async (ctx) => {
     transaction,
   });
 
-  await sendEvent(process.env['RABBIT_PRODUCT_SRV_EXCHANGE_CURRENCY_DELETED'], JSON.stringify(uuid));
-
   await transaction.commit();
+
+  await sendEvent(process.env['RABBIT_PRODUCT_SRV_EXCHANGE_CURRENCY_DELETED'], JSON.stringify(uuid));
 
   ctx.body = {
     success: true,

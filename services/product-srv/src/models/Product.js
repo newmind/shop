@@ -2,11 +2,6 @@
 module.exports = (db, DataType) => {
 
   const Product = db.define('Product', {
-    id: {
-      type: DataType.INTEGER,
-      autoIncrement: true,
-      index: true,
-    },
     uuid: {
       type: DataType.STRING(9),
       primaryKey: true,
@@ -29,19 +24,6 @@ module.exports = (db, DataType) => {
       allowNull: true,
       index: true,
     },
-    currencyId: {
-      type: DataType.UUID,
-      allowNull: false,
-    },
-    description: {
-      type: DataType.STRING(1024),
-      allowNull: true,
-    },
-    status: {
-      type: DataType.INTEGER,
-      defaultValue: 1,
-      index: true,
-    },
     amount: {
       type: DataType.DECIMAL(10, 2),
       allowNull: false,
@@ -60,19 +42,22 @@ module.exports = (db, DataType) => {
         return amount ? Number(amount) : '';
       },
     },
-    count: {
-      type: DataType.INTEGER,
+    currencyId: {
+      type: DataType.UUID,
       allowNull: false,
-      defaultValue: 0,
     },
-    params: {
-      type: DataType.ENUM,
-      values: ['further'],
+    description: {
+      type: DataType.STRING(1024),
       allowNull: true,
+    },
+    status: {
+      type: DataType.INTEGER,
+      defaultValue: 1,
+      index: true,
     },
   });
 
-  Product.associate = function({ Attribute, Gallery, Category, Type, ProductType, ProductCategory, ProductForm, ProductMaterial, ProductColor, Material, Form, Color, Currency, Comment }) {
+  Product.associate = function({ Attribute, Gallery, Category, Type, ProductType, ProductCategory, ProductAttribute, Currency, Comment }) {
 
     Product.belongsTo(Currency, {
       foreignKey: 'currencyId',
@@ -93,36 +78,17 @@ module.exports = (db, DataType) => {
       as: 'categories',
     });
 
-    Product.belongsToMany(Color, {
-      through: ProductColor,
+    Product.belongsToMany(Attribute, {
+      through: ProductAttribute,
       foreignKey: 'productUuid',
-      otherKey: 'colorId',
-      as: 'colors',
-    });
-
-    Product.belongsToMany(Material, {
-      through: ProductMaterial,
-      foreignKey: 'productUuid',
-      otherKey: 'materialId',
-      as: 'materials',
-    });
-
-    Product.belongsToMany(Form, {
-      through: ProductForm,
-      foreignKey: 'productUuid',
-      otherKey: 'formId',
-      as: 'forms',
-    });
-
-    Product.hasMany(Attribute, {
-      sourceKey: 'uuid',
-      foreignKey: 'productId',
+      otherKey: 'attributeId',
       as: 'attributes',
     });
 
+
     Product.hasMany(Gallery, {
-      sourceKey: 'uuid',
-      foreignKey: 'productId',
+      primaryKey: 'uuid',
+      foreignKey: 'productUuid',
       as: 'gallery'
     });
 

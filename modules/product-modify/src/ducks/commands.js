@@ -9,25 +9,9 @@ import {
   getTypesRequestFailAction,
   getTypesRequestSuccessAction,
 
-  getUnitsRequestAction,
-  getUnitsRequestFailAction,
-  getUnitsRequestSuccessAction,
-
-  getColorsRequestAction,
-  getColorsRequestFailAction,
-  getColorsRequestSuccessAction,
-
   getCategoriesRequestAction,
   getCategoriesRequestFailAction,
   getCategoriesRequestSuccessAction,
-
-  getMaterialsRequestAction,
-  getMaterialsRequestFailAction,
-  getMaterialsRequestSuccessAction,
-
-  getFormsRequestAction,
-  getFormsRequestFailAction,
-  getFormsRequestSuccessAction,
 
   getCurrenciesRequestAction,
   getCurrenciesRequestFailAction,
@@ -36,6 +20,10 @@ import {
   getProductRequestAction,
   getProductRequestFailAction,
   getProductRequestSuccessAction,
+
+  getAttributesRequestAction,
+  getAttributesRequestFailAction,
+  getAttributesRequestSuccessAction,
 
   updateProductRequestAction,
   updateProductRequestFailAction,
@@ -73,22 +61,25 @@ export const getTypes = () => async (dispatch) => {
   }
 };
 
-export const getUnits = () => async (dispatch) => {
+export const getCategories = () => async (dispatch) => {
   try {
-    dispatch(getUnitsRequestAction());
+    dispatch(getCategoriesRequestAction());
 
     const result = await request({
       method: 'get',
-      url: '/units'
+      url: '/categories',
+      params: {
+        all: true,
+      }
     });
 
-    dispatch(getUnitsRequestSuccessAction(result['data']));
+    dispatch(getCategoriesRequestSuccessAction(result['data']));
   }
   catch(error) {
-    dispatch(getUnitsRequestFailAction(error));
+    dispatch(getCategoriesRequestFailAction(error));
     dispatch(pushNotification({
       mode: Mode.DANGER,
-      title: 'Ошибка при получании данный Units',
+      title: 'Ошибка при получании данный Categories',
       content: `${error['data']['message']} (${error['data']['code']})`,
       autoClose: false,
     }));
@@ -107,6 +98,7 @@ export const getCurrencies = () => async (dispatch) => {
     dispatch(getCurrenciesRequestSuccessAction(result['data']));
   }
   catch(error) {
+    console.log(error)
     dispatch(getCurrenciesRequestFailAction(error));
     dispatch(pushNotification({
       mode: Mode.DANGER,
@@ -117,88 +109,22 @@ export const getCurrencies = () => async (dispatch) => {
   }
 };
 
-export const getCategories = () => async (dispatch) => {
+export const getAttributes = () => async (dispatch) => {
   try {
-    dispatch(getCategoriesRequestAction());
+    dispatch(getAttributesRequestAction());
 
     const result = await request({
       method: 'get',
-      url: '/categories'
+      url: '/attributes'
     });
 
-    dispatch(getCategoriesRequestSuccessAction(result['data']));
+    dispatch(getAttributesRequestSuccessAction(result['data']));
   }
   catch(error) {
-    dispatch(getCategoriesRequestFailAction(error));
+    dispatch(getAttributesRequestFailAction(error));
     dispatch(pushNotification({
       mode: Mode.DANGER,
-      title: 'Ошибка при получании данный Categories',
-      content: `${error['data']['message']} (${error['data']['code']})`,
-      autoClose: false,
-    }));
-  }
-};
-
-export const getColors = () => async (dispatch) => {
-  try {
-    dispatch(getColorsRequestAction());
-
-    const result = await request({
-      method: 'get',
-      url: '/colors'
-    });
-
-    dispatch(getColorsRequestSuccessAction(result['data']));
-  }
-  catch(error) {
-    dispatch(getColorsRequestFailAction(error));
-    dispatch(pushNotification({
-      mode: Mode.DANGER,
-      title: 'Ошибка при получании данный Colors',
-      content: `${error['data']['message']} (${error['data']['code']})`,
-      autoClose: false,
-    }));
-  }
-};
-
-export const getMaterials = () => async (dispatch) => {
-  try {
-    dispatch(getMaterialsRequestAction());
-
-    const result = await request({
-      method: 'get',
-      url: '/materials'
-    });
-
-    dispatch(getMaterialsRequestSuccessAction(result['data']));
-  }
-  catch(error) {
-    dispatch(getMaterialsRequestFailAction(error));
-    dispatch(pushNotification({
-      mode: Mode.DANGER,
-      title: 'Ошибка при получании данный Materials',
-      content: `${error['data']['message']} (${error['data']['code']})`,
-      autoClose: false,
-    }));
-  }
-};
-
-export const getForms = () => async (dispatch) => {
-  try {
-    dispatch(getFormsRequestAction());
-
-    const result = await request({
-      method: 'get',
-      url: '/forms'
-    });
-
-    dispatch(getFormsRequestSuccessAction(result['data']));
-  }
-  catch(error) {
-    dispatch(getFormsRequestFailAction(error));
-    dispatch(pushNotification({
-      mode: Mode.DANGER,
-      title: 'Ошибка при получании данный Forms',
+      title: 'Ошибка при получании данный Attributes',
       content: `${error['data']['message']} (${error['data']['code']})`,
       autoClose: false,
     }));
@@ -249,22 +175,26 @@ export const updateProductsById = (data) => async (dispatch) => {
     formData.append('amount', data['amount']);
     formData.append('currencyId', data['currencyId']);
     formData.append('description', data['description']);
-    formData.append('params', data['params'] || null);
     formData.append('saleAmount', data['saleAmount'] || null);
 
-    formData.append('fiscal', data['fiscal']);
+    formData.append('fiscal', data['fiscal'] || null);
 
     formData.append('types', JSON.stringify(data['types']));
     formData.append('categories', JSON.stringify(data['categories']));
-    formData.append('colors', JSON.stringify(data['colors']));
-    formData.append('materials', JSON.stringify(data['materials']));
-    formData.append('forms', JSON.stringify(data['forms']));
-    formData.append('attributes', JSON.stringify(data['attributes'] || []));
+    formData.append('attributes', JSON.stringify(data['attributes'].map((attr) => ({
+      id: attr['id'],
+      value: attr['value'],
+    })) || []));
 
-    const result = await request({
+    await request({
       method: 'put',
       url: `/products/${data['uuid']}`,
       data: formData,
+    });
+
+    const result = await request({
+      method: 'get',
+      url: `/products/${data['uuid']}`
     });
 
     dispatch(updateProductRequestSuccessAction(result['data']));
@@ -288,6 +218,7 @@ export const createProduct = (data) => async dispatch => {
   try {
     dispatch(createProductRequestAction());
 
+    const uuid = uniqName();
     const formData = new FormData();
 
     (data['gallery'] || []).forEach((file, index) => {
@@ -296,43 +227,43 @@ export const createProduct = (data) => async dispatch => {
       }
     });
 
-    formData.append('uuid', uniqName());
+    formData.append('uuid', uuid);
     formData.append('name', data['name']);
     formData.append('brand', data['brand']);
     formData.append('amount', data['amount']);
     formData.append('currencyId', data['currencyId']);
     formData.append('description', data['description']);
-    formData.append('params', data['params'] || null);
     formData.append('saleAmount', data['saleAmount'] || null);
 
-    formData.append('fiscal', data['fiscal']);
+    formData.append('fiscal', data['fiscal'] || null);
 
     formData.append('types', JSON.stringify(data['types'] || []));
-    formData.append('forms', JSON.stringify(data['forms'] || []));
-    formData.append('colors', JSON.stringify(data['colors'] || []));
-    formData.append('materials', JSON.stringify(data['materials'] || []));
     formData.append('categories', JSON.stringify(data['categories'] || []));
     formData.append('attributes', JSON.stringify(data['attributes'] || []));
 
-    const result = await request({
+    await request({
       method: 'post',
       url: `/products`,
       data: formData,
     });
 
-    dispatch(createProductRequestSuccessAction(result['data']));
+    dispatch(createProductRequestSuccessAction());
     dispatch(pushNotification({
       title: 'Товар успешно добавлен',
       mode: Mode.SUCCESS,
     }));
+
+    return uuid;
   }
   catch(error) {
     dispatch(createProductRequestFailAction(error));
     dispatch(pushNotification({
       title: 'Ошибка при добавлении товара',
       content: error['message'],
-      type: 'danger'
+      mode: Mode.DANGER,
     }));
+
+    return false;
   }
 };
 
@@ -347,13 +278,17 @@ export const deleteImages = (uuid) => async (dispatch) => {
     });
 
     dispatch(deleteImageRequestSuccessAction(result['data']));
+    dispatch(pushNotification({
+      title: 'Изображения успешно удалено',
+      type: Mode.SUCCESS,
+    }));
   }
   catch(error) {
     dispatch(deleteImageRequestFailAction(error));
     dispatch(pushNotification({
       title: 'Ошибка удаления изображения',
       content: error['message'],
-      type: 'danger'
+      type: Mode.DANGER,
     }));
   }
 };

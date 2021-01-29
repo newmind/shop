@@ -37,58 +37,60 @@ export const getCategories = () => async (dispatch) => {
     dispatch(getCategoriesRequestFailAction(error));
     dispatch(pushNotification({
       mode: 'danger',
-      content: 'Ошибка получения списка "Тип"'
+      title: 'Ошибка получения списка "Категория"'
     }));
   }
 };
 
-export const createCategory = (data) => async (dispatch) => {
+export const createCategory = (formData) => async (dispatch) => {
   try {
     dispatch(createCategoryRequestAction());
 
-    const formData = new FormData();
-
-    formData.append('value', data['value']);
-    formData.append('description', data['description'] || '');
-    formData.append('file', data['file']);
-
-    const result = await request({
+    const { data } = await request({
       url: '/categories',
       method: 'post',
       data: formData,
     });
 
-    dispatch(createCategoryRequestSuccessAction(result['data']));
+    dispatch(createCategoryRequestSuccessAction(data));
     dispatch(closeDialog('category'));
+    dispatch(pushNotification({
+      mode: 'success',
+      title: 'Категория успешно добавлена'
+    }));
   }
   catch(error) {
     dispatch(createCategoryRequestFailAction(error));
+    dispatch(pushNotification({
+      mode: 'danger',
+      title: 'Ошибка создания "Категории"'
+    }));
   }
 };
 
-export const updateCategory = (data) => async (dispatch) => {
+export const updateCategory = (formData) => async (dispatch) => {
   try {
     dispatch(updateCategoryRequestAction());
 
-    const formData = new FormData();
-
-    formData.append('value', data['value']);
-    formData.append('description', data['description'] || '');
-    data['imageId'] && formData.append('imageId', data['imageId']);
-    formData.append('updatedAt', data['updatedAt']);
-    formData.append('file', data['file']);
-
-    const result = await request({
-      url: '/categories/' + data['id'],
+    const { data } = await request({
+      url: '/categories/' + formData['id'],
       method: 'put',
       data: formData,
     });
 
-    dispatch(updateCategoryRequestSuccessAction(result['data']));
+    dispatch(updateCategoryRequestSuccessAction(data));
     dispatch(closeDialog('category'));
+    dispatch(pushNotification({
+      mode: 'success',
+      title: 'Категория успешно обновлена'
+    }));
   }
   catch(error) {
     dispatch(updateCategoryRequestFailAction(error));
+    dispatch(pushNotification({
+      mode: 'danger',
+      title: 'Ошибка обновления "Категории"'
+    }));
   }
 };
 
@@ -96,15 +98,23 @@ export const deleteCategory = (id) => async (dispatch) => {
   try {
     dispatch(deleteCategoryRequestAction());
 
-    const result = await request({
+    const { data } = await request({
       url: '/categories',
       method: 'delete',
       data: { id }
     });
 
-    dispatch(deleteCategoryRequestSuccessAction(result['data']));
+    dispatch(deleteCategoryRequestSuccessAction(data));
+    dispatch(pushNotification({
+      mode: 'success',
+      title: 'Категория успешно удалена'
+    }));
   }
   catch(error) {
     dispatch(deleteCategoryRequestFailAction(error));
+    dispatch(pushNotification({
+      mode: 'danger',
+      title: 'Ошибка удаления "Категории"'
+    }));
   }
 };

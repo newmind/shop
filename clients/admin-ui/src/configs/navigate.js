@@ -19,16 +19,8 @@ const navigate = [
         path: '/attributes/categories',
       },
       {
-        title: 'Цвет',
-        path: '/attributes/colors',
-      },
-      {
-        title: 'Материал',
-        path: '/attributes/materials',
-      },
-      {
-        title: 'Форма',
-        path: '/attributes/forms',
+        title: 'Аттрибуты',
+        path: '/attributes/attributes',
       },
       {
         title: 'Единица измерения',

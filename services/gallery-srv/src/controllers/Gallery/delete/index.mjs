@@ -1,26 +1,15 @@
 
-import { sendEvent } from '@sys.packages/rabbit';
-import { sequelize, models } from '@sys.packages/db';
+import { models } from '@sys.packages/db';
 
 
 export default () => async (ctx) => {
-  const { Gallery } = models;
   const data = ctx['request']['body'];
+  const { Gallery } = models;
 
-  const transaction = await sequelize.transaction();
-
-  await Gallery.destroy({
-    where: { externalId: data['externalId'] },
-  }, {
-    transaction,
-  });
-
-  await sendEvent(process.env['RABBIT_GALLERY_SRV_EXCHANGE_GALLERY_DELETED'], JSON.stringify(data['externalId']))
-
-  await transaction.commit();
+  await Gallery.destroy({ where: { uuid: data['uuid'] }});
 
   ctx.body = {
     success: true,
-    data: data['externalId'],
+    data,
   };
 };

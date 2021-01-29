@@ -53,13 +53,21 @@ export const leaveFromRoom = (roomName) => {
 
 export const on = (eventName, cb) => {
   if (socket) {
-    socket.on('action', (event) => {
-      if (event['type'] === eventName) {
-        cb(event['payload']);
-      }
+    socket.on(eventName, (event) => {
+      cb(event);
     });
-  } else {
+  }
+  else {
     setTimeout(() => on(eventName, cb), 1000);
+  }
+};
+
+export const off = (eventName) => {
+  if (socket) {
+    socket.off(eventName);
+  }
+  else {
+    setTimeout(() => off(eventName), 1000);
   }
 };
 

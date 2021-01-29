@@ -17,7 +17,10 @@ const validate = (values) => {
 
 const mapStateToProps = (state, props) => {
   return {
-    initialValues: props['data'],
+    initialValues: {
+      ...props['data'],
+      categories: props['data'] ? props['data']['categories'].map((category) => category['id']) : [],
+    },
   }
 };
 

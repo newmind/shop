@@ -4,12 +4,10 @@ import { createSlice } from '@reduxjs/toolkit';
 
 const initialState = {
   types: [],
+  categories: [],
+  attributes: [],
   units: [],
   currencies: [],
-  categories: [],
-  colors: [],
-  materials: [],
-  forms: [],
   product: {},
   inProcess: false,
 };
@@ -26,9 +24,7 @@ const productModifySlice = createSlice({
       state['units'] = [];
       state['currencies'] = [];
       state['categories'] = [];
-      state['colors'] = [];
-      state['materials'] = [];
-      state['forms'] = [];
+      state['attributes'] = [];
       state['product'] = {};
       state['inProcess'] = false;
     },
@@ -51,22 +47,10 @@ const productModifySlice = createSlice({
       state['categories'] = payload;
     },
 
-    getColorsRequestAction() {},
-    getColorsRequestFailAction() {},
-    getColorsRequestSuccessAction(state, { payload }) {
-      state['colors'] = payload;
-    },
-
-    getMaterialsRequestAction() {},
-    getMaterialsRequestFailAction() {},
-    getMaterialsRequestSuccessAction(state, { payload }) {
-      state['materials'] = payload;
-    },
-
-    getFormsRequestAction() {},
-    getFormsRequestFailAction() {},
-    getFormsRequestSuccessAction(state, { payload }) {
-      state['forms'] = payload;
+    getAttributesRequestAction() {},
+    getAttributesRequestFailAction() {},
+    getAttributesRequestSuccessAction(state, { payload }) {
+      state['attributes'] = payload;
     },
 
     getCurrenciesRequestAction() {},
@@ -98,9 +82,8 @@ const productModifySlice = createSlice({
     createProductRequestFailAction(state) {
       state['inProcess'] = false;
     },
-    createProductRequestSuccessAction(state, { payload }) {
+    createProductRequestSuccessAction(state) {
       state['inProcess'] = false;
-      state['product'] = payload;
     },
 
     deleteImageRequestAction(state) {
@@ -126,21 +109,9 @@ export const {
   getCategoriesRequestFailAction,
   getCategoriesRequestSuccessAction,
 
-  getColorsRequestAction,
-  getColorsRequestFailAction,
-  getColorsRequestSuccessAction,
-
   getCurrenciesRequestAction,
   getCurrenciesRequestFailAction,
   getCurrenciesRequestSuccessAction,
-
-  getFormsRequestAction,
-  getFormsRequestFailAction,
-  getFormsRequestSuccessAction,
-
-  getMaterialsRequestAction,
-  getMaterialsRequestFailAction,
-  getMaterialsRequestSuccessAction,
 
   getProductRequestAction,
   getProductRequestFailAction,
@@ -153,6 +124,10 @@ export const {
   getTypesRequestAction,
   getTypesRequestFailAction,
   getTypesRequestSuccessAction,
+
+  getAttributesRequestAction,
+  getAttributesRequestFailAction,
+  getAttributesRequestSuccessAction,
 
   createProductRequestAction,
   createProductRequestFailAction,
@@ -169,13 +144,11 @@ export const {
 
 export const selectTypes = (state) => state[REDUCER_NAME]['types'];
 export const selectUnits = (state) => state[REDUCER_NAME]['units'];
-export const selectForms = (state) => state[REDUCER_NAME]['forms'];
-export const selectColors = (state) => state[REDUCER_NAME]['colors'];
 export const selectProduct = (state) => state[REDUCER_NAME]['product'];
-export const selectMaterials = (state) => state[REDUCER_NAME]['materials'];
 export const selectInProcess = (state) => state[REDUCER_NAME]['inProcess'];
 export const selectCategories = (state) => state[REDUCER_NAME]['categories'];
 export const selectCurrencies = (state) => state[REDUCER_NAME]['currencies'];
+export const selectAttributes = (state) => state[REDUCER_NAME]['attributes'];
 
 export const name = productModifySlice['name'];
 export const reducer = productModifySlice['reducer'];

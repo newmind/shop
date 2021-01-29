@@ -49,7 +49,7 @@ function List({ items, meta, openDialog, closeDialog, removeProductById }) {
           alias="gallery"
           width="140"
         >
-          {(items) => <Gallery className={styles['image']} valueKey={'externalId'} items={items} path={`${process.env['REACT_APP_API_HOST']}/gallery`} />}
+          {(items) => <Gallery className={styles['image']} size="small" items={items} path={`${process.env['REACT_APP_API_HOST']}/gallery`} />}
         </Column>
         <Column
           title="Основные"
@@ -62,7 +62,7 @@ function List({ items, meta, openDialog, closeDialog, removeProductById }) {
                 {fiscal && <div className={styles['description__item']}><b className={styles['description__label']}>{ fiscal }</b></div>}
                 {brand && <div className={styles['description__item']}><b className={styles['description__label']}>Бренд:</b> { brand }</div>}
                 {name && <div className={styles['description__item']}><b className={styles['description__label']}>Название:</b> { name }</div>}
-                {amount && <div className={styles['description__item']}><b className={styles['description__label']}>Цена:</b> { numeral(amount).format() } { currency['value'] }</div>}
+                {amount && <div className={styles['description__item']}><b className={styles['description__label']}>Цена:</b> { numeral(amount).format() } { currency }</div>}
                 {description && <div className={styles['description__item']}><b className={styles['description__label']}>Описание:</b> { description }</div>}
               </div>
             )
@@ -72,14 +72,11 @@ function List({ items, meta, openDialog, closeDialog, removeProductById }) {
           title="Основные"
           align="left"
         >
-          {({ types, categories, colors, forms, materials }) => {
+          {({ types, categories }) => {
             return (
               <div className={styles['description']}>
-                { !! types.length && <div className={styles['description__item']}><b className={styles['description__label']}>Тип:</b> { types.map((type) => <span key={type['id']} className={styles['item']}>{ type['value'] }</span>) }</div>}
-                { !! categories.length && <div className={styles['description__item']}><b className={styles['description__label']}>Категория:</b> { categories.map((type) => <span key={type['id']} className={styles['item']}>{ type['value'] }</span>) }</div>}
-                { !! colors.length && <div className={styles['description__item']}><b className={styles['description__label']}>Цвет:</b> { colors.map((type) => <span key={type['id']} className={styles['item']}>{ type['value'] }</span>) }</div>}
-                { !! materials.length && <div className={styles['description__item']}><b className={styles['description__label']}>Материал:</b> { materials.map((type) => <span key={type['id']} className={styles['item']}>{ type['value'] }</span>) }</div>}
-                { !! forms.length && <div className={styles['description__item']}><b className={styles['description__label']}>Форма:</b> { forms.map((type) => <span key={type['id']} className={styles['item']}>{ type['value'] }</span>) }</div>}
+                { !! types.length && <div className={styles['description__item']}><b className={styles['description__label']}>Тип:</b> { types.map((type, index) => <span key={index} className={styles['item']}>{ type['value'] }</span>) }</div>}
+                { !! categories.length && <div className={styles['description__item']}><b className={styles['description__label']}>Категория:</b> { categories.map((category, index) => <span key={index} className={styles['item']}>{ category['value'] }</span>) }</div>}
               </div>
             );
           }}
@@ -98,7 +95,7 @@ function List({ items, meta, openDialog, closeDialog, removeProductById }) {
                   <li key={index} className={styles['attributes__item']}>
                     <span className={styles['attributes__name']}>{ attr['name'] }:</span>
                     <span className={styles['attributes__value']}>{ attr['value'] }</span>
-                    {attr['unit'] && <span className={styles['attributes__unit']}>{ attr['unit']['value'] }</span>}
+                    {attr['unit'] && <span className={styles['attributes__unit']}>{ attr['unit'] }</span>}
                   </li>
                 ))}
               </ul>

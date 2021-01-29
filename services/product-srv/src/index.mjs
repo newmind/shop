@@ -4,16 +4,19 @@ import { middlewareErrors } from '@packages/errors';
 import logger from '@sys.packages/logger';
 import connectToDatabase from '@sys.packages/db';
 import appServer, { initRouter } from '@sys.packages/server';
+import { connection as rabbitConnection } from "@sys.packages/rabbit2";
 
 import http from 'http';
 
-import routes from './routes/index.mjs';
-import rabbit from './rabbit/index.mjs';
+import routes from './routes';
+import rabbit from './rabbit';
 
 
 (async () => {
   try {
     await connectToDatabase(process.env['DB_CONNECTION_HOST']);
+    await rabbitConnection(process.env['RABBIT_CONNECTION_HOST']);
+
     await rabbit();
 
     appServer.use(middlewareErrors());
@@ -25,6 +28,7 @@ import rabbit from './rabbit/index.mjs';
     httpServer.listen(process.env['PORT'], () => logger['info']('Server started on port: ' + process.env['PORT']));
   }
   catch(error) {
+
     logger['error'](error);
   }
 })();

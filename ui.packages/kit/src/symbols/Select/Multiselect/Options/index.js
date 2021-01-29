@@ -7,6 +7,7 @@ import Option from './Option';
 
 import Context from '../Context';
 
+import cn from 'classnames';
 import styles from './default.module.scss';
 
 
@@ -66,7 +67,8 @@ function useChangeElement() {
   return portalElement;
 }
 
-const Options = forwardRef(({ onClick }, ref) => {
+
+const Options = forwardRef(({ onClick, onApply, onReset }, ref) => {
   const portalElement = useChangeElement();
   const { optionValue, options, simple, value, optionKey } = useContext(Context);
 
@@ -87,15 +89,23 @@ const Options = forwardRef(({ onClick }, ref) => {
     <div ref={ref} className={styles['wrapper']}>
       <div className={styles['options']}>
         {options.length
-          ? options.map((option, index) => (
-            <Option
-              key={index}
-              isActive={useCheckActive(option)}
-              optionValue={optionValue}
-              value={option}
-              onClick={handleOptionClick.bind(null, option)}
-            />
-          ))
+          ? (
+            <div className={styles['content']}>
+              {options.map((option, index) => (
+                <Option
+                  key={index}
+                  isActive={useCheckActive(option)}
+                  optionValue={optionValue}
+                  value={option}
+                  onClick={handleOptionClick.bind(null, option)}
+                />
+              ))}
+              <div className={styles['controls']}>
+                <span className={cn(styles['reset'], 'fas fa-times')} onClick={onReset} />
+                <span className={cn(styles['apply'], 'fas fa-check')} onClick={onApply} />
+              </div>
+            </div>
+          )
           : <p className={styles['empty']}>Нет данных</p>
         }
       </div>
@@ -108,6 +118,8 @@ Options.propTypes = {
   optionValue: types.string,
   options: types.array,
   onClick: types.func,
+  onReset: types.func,
+  onApply: types.func,
 };
 
 Options.defaultProps = {

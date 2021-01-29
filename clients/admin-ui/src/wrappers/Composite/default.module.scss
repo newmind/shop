@@ -23,6 +23,7 @@
   display: block;
   background: $white;
   box-shadow: 0 3px 10px 0 rgba($pale-lilac, .5);
+  z-index: 20;
 }
 
 .content {
@@ -31,4 +32,5 @@
   flex: 1 0;
   flex-direction: column;
   overflow: auto;
+  z-index: 10;
 }

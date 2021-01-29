@@ -35,7 +35,7 @@ function Product() {
       <div className={styles['content']}>
         <div className={styles['common']}>
           <div className={styles['gallery']}>
-            <Gallery items={product['gallery']} valueKey="externalId" path={`${process.env['REACT_APP_API_HOST']}/gallery`} />
+            <Gallery items={product['gallery']} path={`${process.env['REACT_APP_API_HOST']}/gallery`} />
           </div>
           <div className={styles['information']}>
             <Information {...product} />

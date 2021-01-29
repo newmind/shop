@@ -16,6 +16,8 @@ module.exports = (db, DataType) => {
       type: DataType.STRING(2024),
       defaultValue: ''
     }
+  }, {
+    timestamps: false,
   });
 
   Unit.associate = () => {};

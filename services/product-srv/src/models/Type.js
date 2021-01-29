@@ -16,13 +16,11 @@ module.exports = (db, DataType) => {
       type: DataType.STRING(1024),
       defaultValue: ''
     },
-    imageId: {
-      type: DataType.UUID,
-      allowNull: true,
-    },
+  }, {
+    timestamps: false,
   });
 
-  Type.associate = ({ Product, ProductType }) => {
+  Type.associate = ({ Product, Category, ProductType, TypeCategory }) => {
 
     Type.belongsToMany(Product, {
       through: ProductType,
@@ -34,6 +32,19 @@ module.exports = (db, DataType) => {
     Type.hasMany(ProductType, {
       foreignKey: 'typeId',
       as: 'product_types',
+    });
+
+    Type.belongsToMany(Category, {
+      through: TypeCategory,
+      foreignKey: 'typeId',
+      otherKey: 'categoryId',
+      as: 'categories',
+    });
+
+
+    Type.hasMany(TypeCategory, {
+      foreignKey: 'typeId',
+      as: 'type_categories',
     });
   };
 

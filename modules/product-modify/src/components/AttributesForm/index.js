@@ -2,91 +2,115 @@
 import { Mode } from '@ui.packages/types';
 import { Row, Col, InputField, SelectField, Button } from '@ui.packages/kit';
 
+import React from 'react';
 import types from 'prop-types';
-import React, { PureComponent } from 'react';
+import { useSelector } from 'react-redux';
+import { getFormValues } from 'redux-form';
 
 import cn from 'classnames';
 import styles from './default.module.scss';
 
+import { selectAttributes } from '../../ducks/slice';
 
-class Attribute extends PureComponent {
-  static propTypes = {
-    field: types.string,
-    units: types.array,
-    onRemove: types.func,
-  };
 
-  static defaultProps = {
-    field: '',
-    units: [],
-  };
+function AttributeField({ field, data, disabled, onRemove }) {
+  const attributes = useSelector(selectAttributes);
+  const attributeId = data ? data['id'] : null;
+  const attribute = attributeId ? attributes.find((item) => item['id'] === attributeId) : null;
+  const unit = attribute ? attribute['unit'] : null;
 
-  _handleRemove() {
-    const { onRemove } = this.props;
+  function handleRemove() {
     onRemove && onRemove();
   }
 
-  render() {
-    const { field, units } = this.props;
-    const classNameRemoveAttr = cn(styles['attr__remove'], 'far fa-trash-alt');
-    return (
-      <div className={styles['attr']}>
-        <div className={styles['attr__title']}>
-          <InputField label="Назавание" name={`${field}.name`} />
-        </div>
-        <div className={styles['attr__value']}>
-          <InputField label="Значение" name={`${field}.value`} />
-        </div>
-        <div className={styles['attr__units']}>
-          <SelectField label="Единица измерения" name={`${field}.unitId`} options={units} simple={true} optionKey="id" optionValue="value" />
-        </div>
-        <div className={styles['attr__controls']}>
-          <span className={classNameRemoveAttr} onClick={this._handleRemove.bind(this)} />
-        </div>
+  const classNameRemoveAttr = cn(styles['attr__remove'], 'far fa-trash-alt');
+
+  return (
+    <div className={styles['attr']}>
+      <div className={styles['attr__title']}>
+        <SelectField
+          require
+          label="Назавание"
+          name={`${field}.id`}
+          disabled={disabled}
+          options={attributes}
+          optionKey="id"
+          optionValue="value"
+        />
       </div>
-    );
-  }
+      <div className={styles['attr__value']}>
+        <InputField require label="Значение" name={`${field}.value`} disabled={disabled} />
+      </div>
+      <div className={styles['attr__units']}>
+        <span className={styles['unit']}>{ unit ? unit['value'] : '---' }</span>
+      </div>
+      <div className={styles['attr__controls']}>
+        <span className={classNameRemoveAttr} onClick={() => handleRemove()} />
+      </div>
+    </div>
+  );
 }
 
+AttributeField.propTypes = {
+  field: types.string,
+  onRemove: types.func,
+};
 
-class Component extends PureComponent {
-  static propTypes = {
-    path: types.string,
-    units: types.array,
-  };
+AttributeField.defaultProps = {
+  field: '',
+};
 
-  static defaultProps = {
-    path: '',
-    units: [],
-  };
 
-  _handleAddAttr() {
-    const { fields } = this.props;
+function Attributes({ fields, disabled }) {
+  const data = useSelector(getFormValues('modify-product'));
+
+  function handleAddAttr() {
     fields.push({});
   }
 
-  _handleRemoveAttr(index) {
-    const { fields } = this.props;
+  function handleRemoveAttr(index) {
     fields.remove(index)
   }
 
-  render() {
-    const { fields, units } = this.props;
-    return (
-      <div className={styles['wrapper']}>
-        {!!fields.length && (<Row>
-          <div className={styles['attrs']}>
-            {fields.map((field, index) => <Attribute key={index} units={units} field={field} onRemove={this._handleRemoveAttr.bind(this, index)} />)}
-          </div>
-        </Row>)}
+  return (
+    <div className={styles['wrapper']}>
+      { !! fields.length && (
         <Row>
-          <Col className={styles['align-right']}>
-            <Button mode={Mode.PRIMARY} onClick={this._handleAddAttr.bind(this)}>Добавить</Button>
-          </Col>
+          <div className={styles['attrs']}>
+            {fields.map((field, index) => (
+              <AttributeField
+                key={index}
+                field={field}
+                data={data['attributes'][index]}
+                disabled={disabled}
+                onRemove={() => handleRemoveAttr(index)}
+              />
+            ))}
+          </div>
         </Row>
-      </div>
-    );
-  }
+      )}
+      <Row>
+        <Col className={styles['align-right']}>
+          <Button
+            mode={Mode.PRIMARY}
+            form={Button.FORM_CONTEXT}
+            disabled={disabled}
+            onClick={() => handleAddAttr()}
+          >Добавить</Button>
+        </Col>
+      </Row>
+    </div>
+  );
 }
 
-export default Component;
+Attributes.propTypes = {
+  path: types.string,
+  units: types.array,
+};
+
+Attributes.defaultProps = {
+  path: '',
+  units: [],
+};
+
+export default Attributes;

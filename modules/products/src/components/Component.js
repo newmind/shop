@@ -36,8 +36,8 @@ function Products() {
       <PageControls className={styles['aside']}>
         <div className={styles['controls']}>
           <Button
-            size={Button.SMALL}
-            mode={Mode.SUCCESS}
+            mode={Mode.PRIMARY}
+            form={Button.FORM_CONTEXT}
             onClick={() => handleAddProduct()}
           >Добавить товар</Button>
         </div>

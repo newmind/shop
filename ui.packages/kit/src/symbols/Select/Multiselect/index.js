@@ -134,9 +134,7 @@ function Select({
   }
 
   function handleSelectValue(options) {
-    console.log(options)
     onChange(options);
-    // handleClose();
   }
 
   return (
@@ -171,6 +169,8 @@ function Select({
             optionValue={optionValue}
             value={value}
             onClick={handleSelectValue}
+            onReset={handleResetClick}
+            onApply={handleClose}
           />
         )}
       </div>

@@ -1,0 +1,45 @@
+
+@import "~@ui.packages/theme";
+
+
+.wrapper {
+
+  display: block;
+  padding: 0 0 0 30px;
+  margin: 0 0 20px;
+}
+
+.row {
+
+  display: flex;
+  flex-direction: row;
+  flex: 1 0;
+
+  & + & {
+
+    margin: 15px 0 0;
+    padding: 15px 0 0;
+    border-top: 1px solid $pale-grey;
+  }
+}
+
+.value {
+
+  display: block;
+  width: 260px;
+}
+
+.description {
+
+  display: flex;
+  flex-direction: column;
+  flex: 1 0;
+}
+
+.actions {
+
+  display: block;
+  width: 80px;
+  text-align: right;
+  padding: 0 10px 0 0;
+}

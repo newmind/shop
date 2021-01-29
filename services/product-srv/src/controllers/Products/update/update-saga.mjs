@@ -1,5 +1,15 @@
 
+import { models } from "@sys.packages/db";
+import { NetworkError } from "@packages/errors";
+import { sendEvent } from '@sys.packages/rabbit2';
+import { getFiles } from '@sys.packages/sys.utils';
+
 import Sagas from 'node-sagas';
+
+import getProduct from './getProduct';
+import saveImages from './saveImages';
+import deleteImages from './deleteImages';
+import updateProperties from './updateProperties';
 
 
 export default class UpdateSaga {
@@ -10,44 +20,64 @@ export default class UpdateSaga {
   }
 
   async execute(params) {
-    const saga = this.getUpdateProductSagaDefinition();
+    const saga = await this.getUpdateProductSagaDefinition(this.ctx);
     try {
       return await saga.execute(params);
     }
     catch (e) {
       if (e instanceof Sagas.SagaExecutionFailed) {
-        // Throws, when invocation flow was failed, but compensation has been completed
-        console.log('SagaExecutionFailed', e.message);
+        throw new NetworkError({ code: '2.0.0', message: e['message'] });
       }
       if (e instanceof Sagas.SagaCompensationFailed) {
-        // Throws, when compensation flow was failed
-        console.log('SagaCompensationFailed');
+        throw new NetworkError({ code: '2.0.1', message: e['message'] });
       }
     }
   }
 
-  getUpdateProductSagaDefinition() {
+  async getUpdateProductSagaDefinition(ctx) {
     const sagaBuilder = new Sagas.SagaBuilder();
 
+    const { uuid } = ctx['params'];
+    const { files, fields } = await getFiles(ctx['req']);
+    const { Gallery } = models;
+
     return sagaBuilder
-      .step()
-      .invoke((params) => {
+      .step('Сохранение изображений')
+      .invoke(async (params) => {
+        if ( !! Object.keys(files).length) {
+          const imagesID = await saveImages(files);
+          params.setImageIDs(imagesID);
+          await Gallery.bulkCreate(imagesID.map((item) => ({
+            productUuid: uuid,
+            uuid: item,
+          })));
+        }
+      })
+      .withCompensation(async (params) => {
+        const ids = params.getImageIDs();
+        if (ids) {
+          await deleteImages(ids);
+          await Gallery.destroy({ where: { uuid: ids }});
+        }
+      })
 
+      .step('Update product properties')
+      .invoke(async () => {
+        await updateProperties(uuid, fields);
       })
-      .withCompensation((params) => {
 
+      .step('Get product')
+      .invoke(async (params) => {
+        const product = await getProduct(uuid);
+        params.setProduct(product)
       })
-      .step()
-      .invoke((params) => {
 
+      .step('Send event')
+      .invoke(async (params) => {
+        const product = params.getProduct();
+        await sendEvent(process.env['RABBIT_PRODUCT_SRV_EXCHANGE_PRODUCT_UPDATED'], JSON.stringify(product));
       })
-      .withCompensation((params) => {
 
-      })
-      .step()
-      .invoke((params) => {
-        this.ctx.body = 'hello world';
-      })
       .build();
   }
 }

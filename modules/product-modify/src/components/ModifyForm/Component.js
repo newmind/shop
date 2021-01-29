@@ -10,17 +10,14 @@ import AttrsForm from '../AttributesForm';
 
 import styles from './default.module.scss';
 
-import { selectTypes, selectCategories, selectColors, selectMaterials, selectForms, selectCurrencies, selectUnits } from '../../ducks/slice';
+import { selectTypes, selectCategories, selectCurrencies, selectInProcess } from '../../ducks/slice';
 
 
 function ModifyForm({ handleSubmit, onDelete }) {
   const types = useSelector(selectTypes);
-  const units = useSelector(selectUnits);
-  const forms = useSelector(selectForms);
-  const colors = useSelector(selectColors);
-  const materials = useSelector(selectMaterials);
   const categories = useSelector(selectCategories);
   const currencies = useSelector(selectCurrencies);
+  const inProcess = useSelector(selectInProcess);
 
   return (
     <form className={styles['wrapper']} onSubmit={handleSubmit}>
@@ -43,15 +40,15 @@ function ModifyForm({ handleSubmit, onDelete }) {
               <InputField name="uuid" label="Номер товара" disabled />
             </Col>
             <Col>
-              <InputField name="fiscal" label="Фискальный номер" />
+              <InputField name="fiscal" label="Фискальный номер" disabled={inProcess} />
             </Col>
           </Row>
           <Row>
             <Col>
-              <InputField require name="brand" label="Бренд" />
+              <InputField require name="brand" label="Бренд" disabled={inProcess} />
             </Col>
             <Col>
-              <InputField require name="name" label="Назвние" />
+              <InputField require name="name" label="Назвние" disabled={inProcess} />
             </Col>
           </Row>
           <Row>
@@ -63,6 +60,7 @@ function ModifyForm({ handleSubmit, onDelete }) {
                 options={types}
                 optionKey="id"
                 optionValue="value"
+                disabled={inProcess}
               />
             </Col>
           </Row>
@@ -75,48 +73,18 @@ function ModifyForm({ handleSubmit, onDelete }) {
                 options={categories}
                 optionKey="id"
                 optionValue="value"
+                disabled={inProcess}
               />
             </Col>
           </Row>
           <Row>
             <Col>
-              <SelectField
-                name="colors"
-                label="Цвет"
-                type={SelectField.TYPE_MULTISELECT}
-                options={colors}
-                optionKey="id"
-                optionValue="value"
+              <TextareaField
+                require
+                name="description"
+                label="Описание"
+                disabled={inProcess}
               />
-            </Col>
-          </Row>
-          <Row>
-            <Col>
-              <SelectField
-                name="materials"
-                label="Материал"
-                type={SelectField.TYPE_MULTISELECT}
-                options={materials}
-                optionKey="id"
-                optionValue="value"
-              />
-            </Col>
-          </Row>
-          <Row>
-            <Col>
-              <SelectField
-                name="forms"
-                label="Форма"
-                type={SelectField.TYPE_MULTISELECT}
-                options={forms}
-                optionKey="id"
-                optionValue="value"
-              />
-            </Col>
-          </Row>
-          <Row>
-            <Col>
-              <TextareaField require name="description" label="Описание" />
             </Col>
           </Row>
         </div>
@@ -127,27 +95,11 @@ function ModifyForm({ handleSubmit, onDelete }) {
           <Header level={3}>Аттрибуты</Header>
         </div>
         <div className={styles['content']}>
-          <FieldArray name="attributes" units={units} component={AttrsForm} />
-        </div>
-      </div>
-
-      <div className={styles['block']}>
-        <div className={styles['header']}>
-          <Header level={3}>Дополнительные</Header>
-        </div>
-        <div className={styles['content']}>
-          <Row>
-            <Col>
-              <SelectField
-                label="Дополнительные данные"
-                simple
-                options={[{ id: 'further', value: 'Рецепт' }]}
-                name="params"
-              />
-            </Col>
-            <Col />
-            <Col />
-          </Row>
+          <FieldArray
+            name="attributes"
+            disabled={inProcess}
+            component={AttrsForm}
+          />
         </div>
       </div>
 
@@ -158,18 +110,20 @@ function ModifyForm({ handleSubmit, onDelete }) {
         <div className={styles['content']}>
           <Row>
             <Col>
-              <InputField name="amount" label="Цена" />
+              <InputField require name="amount" label="Цена" disabled={inProcess} />
             </Col>
             <Col>
-              <InputField name="saleAmount" label="Цена со скидкой" />
+              <InputField name="saleAmount" label="Цена со скидкой" disabled={inProcess} />
             </Col>
             <Col>
               <SelectField
+                require
                 name="currencyId"
                 label="Валюта"
                 options={currencies}
                 optionKey="uuid"
                 optionValue="value"
+                disabled={inProcess}
               />
             </Col>
           </Row>

@@ -7,7 +7,7 @@ export default () => async (ctx) => {
 
   const currencies = await Currency.findAll({
     attributes: ['uuid', 'value', 'description'],
-    order: [['createdAt', 'desc']],
+    order: [['value', 'desc']],
   });
 
   ctx.body = {

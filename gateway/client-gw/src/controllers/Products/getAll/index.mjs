@@ -1,6 +1,8 @@
 
 import request from '@sys.packages/request';
 
+import productBuilder from "../_utils/productBuilder.mjs";
+
 
 const PRODUCT_API_SRV = process.env['PRODUCT_API_SRV'];
 
@@ -18,23 +20,8 @@ export default () => async (ctx) => {
     method: 'get',
     params: ctx['request']['query'],
   });
-  const { data: colors } = await request({
-    url: `${PRODUCT_API_SRV}/products/colors`,
-    method: 'get',
-    params: ctx['request']['query'],
-  });
   const { data: brands } = await request({
     url: `${PRODUCT_API_SRV}/products/brands`,
-    method: 'get',
-    params: ctx['request']['query'],
-  });
-  const { data: materials } = await request({
-    url: `${PRODUCT_API_SRV}/products/materials`,
-    method: 'get',
-    params: ctx['request']['query'],
-  });
-  const { data: forms } = await request({
-    url: `${PRODUCT_API_SRV}/products/forms`,
     method: 'get',
     params: ctx['request']['query'],
   });
@@ -51,14 +38,11 @@ export default () => async (ctx) => {
 
   ctx.body = {
     success: true,
-    data: products,
+    data: products.map((product) => productBuilder(product)),
     meta: meta,
     filter: {
       types: types,
-      forms: forms,
-      colors: colors,
       brands: brands,
-      materials: materials,
       categories: categories,
     }
   };

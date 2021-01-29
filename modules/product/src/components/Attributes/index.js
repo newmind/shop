@@ -21,7 +21,7 @@ function Properties({ list }) {
                   <p className={styles['list__title']}>{ item['name'] }:</p>
                 </div>
                 <div className={styles['list__col']}>
-                  <p className={styles['list__value']}>{ item['value'] } { item['unit'] && item['unit']['value'] }</p>
+                  <p className={styles['list__value']}>{ item['value'] } { item['unit'] && item['unit'] }</p>
                 </div>
               </>)}
             </div>

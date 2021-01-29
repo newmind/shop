@@ -9,7 +9,7 @@ import Option from './Option';
 import styles from './default.module.scss';
 
 
-function Form({ handleSubmit, submit, types, categories, brands, colors, forms, materials, inProcess }) {
+function Form({ handleSubmit, submit, types, categories, brands, inProcess }) {
   function onSubmit() {
     setTimeout(() => submit('filter-showcase-ui'), 50);
   }
@@ -46,52 +46,11 @@ function Form({ handleSubmit, submit, types, categories, brands, colors, forms, 
           </div>
           <div className={styles['col']}>
             <SelectField
-              placeholder="Цвет"
-              name="colorId"
-              optionKey="id"
-              optionValue="value"
-              options={colors}
-              simple={true}
-              OptionTemplate={Option}
-              disabled={inProcess}
-              onChange={onSubmit}
-            />
-          </div>
-          <div className={styles['col']}>
-            <SelectField
-              placeholder="Материал"
-              name="materialId"
-              optionKey="id"
-              optionValue="value"
-              options={materials}
-              simple={true}
-              OptionTemplate={Option}
-              disabled={inProcess}
-              onChange={onSubmit}
-            />
-          </div>
-        </div>
-        <div className={styles['line']}>
-          <div className={styles['col']}>
-            <SelectField
               placeholder="Бренд"
               name="brand"
               optionKey="value"
               optionValue="value"
               options={brands}
-              simple={true}
-              OptionTemplate={Option}
-              disabled={inProcess}
-              onChange={onSubmit}
-            />
-          </div>
-          <div className={styles['col']}>
-            <SelectField
-              placeholder="Форма"
-              name="formId"
-              optionKey="id"
-              optionValue="value"
-              options={forms}
               simple={true}
               OptionTemplate={Option}
               disabled={inProcess}

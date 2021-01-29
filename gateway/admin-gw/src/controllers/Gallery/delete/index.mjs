@@ -8,7 +8,7 @@ export default () => async (ctx) => {
   const result = await request({
     url: process.env['GALLERY_API_SRV'] + '/images',
     method: 'delete',
-    data: {externalId: uuid},
+    data: { uuid },
   });
 
   ctx.body = {

@@ -50,7 +50,7 @@ export default function Product({ isSale, isHit, uuid, amount, currency, brand, 
         </div>
       </div>
       <div className={styles['promo']}>
-        <Gallery items={gallery} isList={false} valueKey="externalId" path={`${process.env['REACT_APP_API_HOST']}/gallery`} />
+        <Gallery items={gallery} isList={false} size="middle" path={`${process.env['REACT_APP_API_HOST']}/gallery`} />
       </div>
       <div className={styles['name']}>
         <Text type={Text.TYPE_COMMENT}>{ name }</Text>
@@ -58,7 +58,7 @@ export default function Product({ isSale, isHit, uuid, amount, currency, brand, 
       <div className={styles['controls']}>
         <span className={classNameForFastView} onClick={(event) => handleClickFastView(event)} />
         <div className={styles['amount']}>
-          <Text type={Text.TYPE_AMOUNT}>{ numeral(amount).format() } {currency['value']}</Text>
+          <Text type={Text.TYPE_AMOUNT}>{ numeral(amount).format() } { currency }</Text>
         </div>
         <span className={classNameForCart} onClick={(event) => handleClickCart(event)}>
           { !! countInCart && <span className={styles['count']}>{countInCart}</span>}

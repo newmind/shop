@@ -33,7 +33,12 @@ function Option({ value, optionValue, isActive, onClick }) {
     <div className={optionClassName} onClick={handleClick}>
       { !! OptionTemplate
        ? <OptionTemplate { ...value } />
-       : <div className={styles['text']}>{ optionText }</div>}
+       : (
+         <div className={styles['text']}>
+           {isActive && <span className={cn(styles['icon'], 'fas fa-check')} />}
+           { optionText }
+         </div>
+        )}
     </div>
   );
 }

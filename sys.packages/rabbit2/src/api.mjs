@@ -116,6 +116,8 @@ export async function createConsumer(channel, queue, options, callback) {
       channel.prefetch(1);
 
       channel.consume(queue, function(message) {
+        logger.info(`RabbitMQ: Получено сообщение "${message.content.toString()}" в очередь "${queue}"`);
+
         callback(message.content.toString(), function(isOk, replyMessage) {
 
           if (defaultOptions['reply']) {
@@ -169,9 +171,7 @@ export async function bindQueueToExchange(channel, queue, exchange) {
       if (error) {
         return reject(new NetworkError({ code: '10.5.0', message: error['message'] }));
       }
-
       logger.info(`RabbitMQ: Очередь "${queue}" успешно привязана к exchange "${exchange}"`);
-
       resolve();
     });
   });

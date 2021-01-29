@@ -50,7 +50,7 @@ export default () => async (ctx) => {
     include: [{
       model: Product,
       as: 'product',
-      attributes: ['id', 'uuid', 'brand']
+      attributes: ['uuid', 'brand', 'name']
     }],
   });
 

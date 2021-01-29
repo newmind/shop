@@ -9,7 +9,7 @@ import Column from '../Column';
 import styles from './default.module.scss';
 
 
-function Table({ columns, children }) {
+function Table({ useSub, subTemplate, columns, children }) {
   return (
     <div className={styles['wrapper']}>
       <table className={styles['table']}>
@@ -20,7 +20,7 @@ function Table({ columns, children }) {
           </caption>
         )}
         {columns.map((item, index) => (
-          <Row key={index} data={item}>
+          <Row key={index} data={item} useSub={useSub} subTemplate={subTemplate}>
             { children }
           </Row>
         ))}
@@ -30,11 +30,15 @@ function Table({ columns, children }) {
 }
 
 Table.propTypes = {
+  useSub: types.bool,
+  subTemplate: types.func,
   columns: types.array,
   children: types.any,
 };
 
 Table.defaultProps = {
+  useSub: false,
+  subTemplate: null,
   columns: [],
   children: Column,
 };

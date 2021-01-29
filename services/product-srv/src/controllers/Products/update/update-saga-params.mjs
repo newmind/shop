@@ -1,12 +1,21 @@
 
 export default class UpdateSagaParams {
-  _imageId = null;
+  _imageIDs = null;
+  _product = null;
 
-  getImageId() {
-    return this._imageId;
+  getImageIDs() {
+    return this._imageIDs;
   }
 
-  setImageId(id) {
-    this._imageId = id;
+  setImageIDs(ids) {
+    this._imageIDs = ids;
+  }
+
+  getProduct() {
+    return this._product;
+  }
+
+  setProduct(product) {
+    this._product = product;
   }
 }

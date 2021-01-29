@@ -45,7 +45,7 @@ function Product({ uuid, brand, name, amount, currency }) {
         </div>
       )}
       <div className={styles['amount']}>
-        <Text type={Text.TYPE_AMOUNT}>{ numeral(amount).format() } { currency['value'] }</Text>
+        <Text type={Text.TYPE_AMOUNT}>{ numeral(amount).format() } { currency }</Text>
       </div>
       <div className={styles['controls']}>
         <div className={styles['buttons']}>
@@ -73,9 +73,7 @@ Product.propTypes = {
   isHit: types.bool,
   amount: types.number,
   saleAmount: types.number,
-  currency: types.shape({
-    value: types.string,
-  }),
+  currency: types.string,
   brand: types.string,
   name: types.string,
 };

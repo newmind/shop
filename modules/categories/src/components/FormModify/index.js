@@ -24,5 +24,4 @@ const mapStateToProps = (state, props) => {
 export default connect(mapStateToProps)(reduxForm({
   form: 'category-modify',
   validate,
-  enableReinitialize: true,
 })(Component));

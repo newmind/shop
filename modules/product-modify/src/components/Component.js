@@ -4,6 +4,7 @@ import { Button, Header, Page, PageContent, PageControls } from '@ui.packages/ki
 
 import React from 'react';
 import types from 'prop-types';
+import { useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { submit, reset, isPristine, isValid } from 'redux-form';
 
@@ -20,15 +21,19 @@ const FORM_NAME = 'modify-product';
 
 function ProductModify() {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const product = useSelector(selectProduct);
   const valid = useSelector(isValid(FORM_NAME));
   const pristine = useSelector(isPristine(FORM_NAME));
 
-  function handleSubmitProduct(formData) {
+  async function handleSubmitProduct(formData) {
     if (formData['uuid']) {
-      dispatch(updateProductsById(formData));
+      await dispatch(updateProductsById(formData));
     } else {
-      dispatch(createProduct(formData));
+      const uuid = await dispatch(createProduct(formData));
+      if (uuid) {
+        navigate(process.env['PUBLIC_URL'] + '/products/' + uuid);
+      }
     }
   }
 
@@ -59,7 +64,7 @@ function ProductModify() {
             disabled={ ! valid || pristine}
             mode="success"
             onClick={handleSubmit}
-          >{product['uuid'] ? 'Сохранить' : 'Добавить'}</Button>
+          >Сохранить</Button>
         </div>
       </PageControls>
       <PageContent>

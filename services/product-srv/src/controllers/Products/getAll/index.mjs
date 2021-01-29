@@ -13,7 +13,7 @@ export default () => async (ctx) => {
   let options = {};
 
   const { Op } = Sequelize;
-  const { Product, Attribute, Units, Gallery, Currency, Category, Type, Color, Material, Form, Comment } = models;
+  const { Product, Currency, Category, Type, Attribute, Units, Gallery, Comment } = models;
   const {
     fiscal = null,
     status = null,
@@ -132,13 +132,13 @@ export default () => async (ctx) => {
   }
 
   const products = await Product.findAndCountAll({
-    attributes: ['uuid', 'brand', 'name', 'description', 'status', 'amount', 'saleAmount', 'params', 'fiscal', 'createdAt'],
+    attributes: ['uuid', 'brand', 'name', 'description', 'status', 'amount', 'saleAmount', 'fiscal', 'updatedAt'],
     ...options,
     ...offset,
     distinct: true,
     where: { ...where },
     order: [
-      ['createdAt', 'desc'],
+      ['updatedAt', 'desc'],
       ['comments', 'createdAt', 'desc'],
     ],
     include: [
@@ -159,30 +159,6 @@ export default () => async (ctx) => {
         through: { attributes: [] },
       },
       {
-        model: Color,
-        required: !! whereForColors['id'],
-        as: 'colors',
-        where: { ...whereForColors },
-        attributes: ['id', 'value'],
-        through: { attributes: [] },
-      },
-      {
-        model: Material,
-        required: !! whereForMaterials['id'],
-        as: 'materials',
-        where: { ...whereForMaterials },
-        attributes: ['id', 'value'],
-        through: { attributes: [] },
-      },
-      {
-        model: Form,
-        required: !! whereForForms['id'],
-        as: 'forms',
-        where: { ...whereForColors },
-        attributes: ['id', 'value'],
-        through: { attributes: [] },
-      },
-      {
         model: Currency,
         required: false,
         as: 'currency',
@@ -192,25 +168,24 @@ export default () => async (ctx) => {
         model: Attribute,
         required: false,
         as: 'attributes',
-        attributes: ['id', 'name', 'value'],
+        attributes: ['value'],
+        through: { attributes: ['value', 'attributeId'], as: 'attribute' },
         include: [
           {
             model: Units,
             required: false,
             as: 'unit',
-            attributes: ['id', 'value']
+            attributes: ['value']
           }
         ]
       },
       {
         model: Gallery,
-        required: false,
         as: 'gallery',
-        attributes: ['externalId'],
+        attributes: ['uuid'],
       },
       {
         model: Comment,
-        required: false,
         as: 'comments',
         attributes: ['id', 'evaluation', 'person', 'comment', 'createdAt'],
       },

@@ -4,23 +4,24 @@ module.exports = (db, DataType) => {
   const Attribute = db.define('Attribute', {
     id: {
       type: DataType.INTEGER,
-      primaryKey: true,
       autoIncrement: true,
-      index: true,
+      primaryKey: true,
+      unique: true,
     },
-    productId: {
-      type: DataType.STRING(9),
+    value: {
+      type: DataType.STRING(256),
+      allowNull: false,
+    },
+    description: {
+      type: DataType.STRING(1024),
+      allowNull: true,
     },
     unitId: {
       type: DataType.INTEGER,
       allowNull: true,
     },
-    name: {
-      type: DataType.STRING(256),
-    },
-    value: {
-      type: DataType.STRING(256),
-    },
+  }, {
+    timestamps: false,
   });
 
   Attribute.associate = ({ Units }) => {

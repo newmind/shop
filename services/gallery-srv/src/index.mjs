@@ -7,14 +7,12 @@ import appServer, { initRouter } from '@sys.packages/server';
 
 import http from 'http';
 
-import routes from './routes/index.mjs';
-import rabbit from './rabbit/index.mjs';
+import routes from './routes';
 
 
 (async () => {
   try {
     await connectToDatabase(process.env['DB_CONNECTION_HOST']);
-    await rabbit();
 
     appServer.use(middlewareErrors());
 

@@ -55,12 +55,18 @@ export const emitToRoom = (room, type, payload) => {
   })
 };
 
-export const emit = (type, payload) => {
-
-  io.sockets.emit('action', {
-    type,
-    payload,
-  });
+export const emit = (type, payload, isAction = false) => {
+  if (isAction) {
+    io.sockets.emit('action', {
+      type,
+      payload,
+    });
+    logger.info(`Socket: Отправлено сообщение "${JSON.stringify(payload)}" в канал "action"`);
+  }
+  else {
+    io.sockets.emit(type, payload);
+    logger.info(`Socket: Отправлено сообщение "${JSON.stringify(payload)}" в канал "${type}"`);
+  }
 };
 
 export const on = (type, cb) => {

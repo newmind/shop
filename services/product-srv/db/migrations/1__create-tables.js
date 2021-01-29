@@ -7,30 +7,23 @@ module.exports = {
       await queryInterface.createTable('Attributes', {
         id: {
           type: Sequelize.INTEGER,
-          primaryKey: true,
           autoIncrement: true,
-          index: true,
-        },
-        productId: {
-          type: Sequelize.STRING(9),
-          allowNull: false
-        },
-        unitId: {
-          type: Sequelize.INTEGER,
-          allowNull: false
-        },
-        name: {
-          type: Sequelize.STRING(256),
+          primaryKey: true,
+          unique: true,
         },
         value: {
           type: Sequelize.STRING(256),
+          unique: true,
+          allowNull: false,
         },
-        createdAt: {
-          type: Sequelize.DATE,
+        description: {
+          type: Sequelize.STRING(1024),
+          allowNull: true,
         },
-        updatedAt: {
-          type: Sequelize.DATE,
-        }
+        unitId: {
+          type: Sequelize.INTEGER,
+          allowNull: true,
+        },
       }, {
         transaction
       });
@@ -48,66 +41,24 @@ module.exports = {
         },
         description: {
           type: Sequelize.STRING(1024),
-          defaultValue: ''
-        },
-        imageId: {
-          type: Sequelize.UUID,
           allowNull: true,
         },
-        createdAt: {
-          type: Sequelize.DATE,
+        parentId: {
+          type: Sequelize.INTEGER,
+          allowNull: true,
         },
-        updatedAt: {
-          type: Sequelize.DATE,
-        }
       }, {
         transaction
       });
 
       await queryInterface.createTable('Galleries', {
-        id: {
-          type: Sequelize.INTEGER,
+        uuid: {
+          type: Sequelize.STRING(64),
           primaryKey: true,
-          autoIncrement: true,
-          index: true,
         },
-        externalId: {
-          type: Sequelize.STRING(36),
-        },
-        productId: {
+        productUuid: {
           type: Sequelize.STRING(9),
         },
-        createdAt: {
-          type: Sequelize.DATE,
-        },
-        updatedAt: {
-          type: Sequelize.DATE,
-        }
-      }, {
-        transaction
-      });
-
-      await queryInterface.createTable('Colors', {
-        id: {
-          type: Sequelize.INTEGER,
-          primaryKey: true,
-          autoIncrement: true,
-          index: true,
-        },
-        value: {
-          type: Sequelize.STRING(255),
-          allowNull: false,
-        },
-        description: {
-          type: Sequelize.STRING(1024),
-          defaultValue: ''
-        },
-        createdAt: {
-          type: Sequelize.DATE,
-        },
-        updatedAt: {
-          type: Sequelize.DATE,
-        }
       }, {
         transaction
       });
@@ -144,11 +95,6 @@ module.exports = {
       });
 
       await queryInterface.createTable('Currencies', {
-        id: {
-          type: Sequelize.INTEGER,
-          autoIncrement: true,
-          index: true,
-        },
         uuid: {
           type: Sequelize.UUID,
           primaryKey: true,
@@ -162,95 +108,11 @@ module.exports = {
           type: Sequelize.STRING(2024),
           defaultValue: ''
         },
-        createdAt: {
-          type: Sequelize.DATE,
-        },
-        updatedAt: {
-          type: Sequelize.DATE,
-        }
-      }, {
-        transaction
-      });
-
-      await queryInterface.createTable('Forms', {
-        id: {
-          type: Sequelize.INTEGER,
-          primaryKey: true,
-          autoIncrement: true,
-          index: true,
-        },
-        value: {
-          type: Sequelize.STRING(255),
-          allowNull: false,
-        },
-        description: {
-          type: Sequelize.STRING(1024),
-          defaultValue: ''
-        },
-        createdAt: {
-          type: Sequelize.DATE,
-        },
-        updatedAt: {
-          type: Sequelize.DATE,
-        }
-      }, {
-        transaction
-      });
-
-      await queryInterface.createTable('Galleries', {
-        id: {
-          type: Sequelize.INTEGER,
-          primaryKey: true,
-          autoIncrement: true,
-          index: true,
-        },
-        externalId: {
-          type: Sequelize.STRING(36),
-        },
-        productId: {
-          type: Sequelize.STRING(9),
-        },
-        createdAt: {
-          type: Sequelize.DATE,
-        },
-        updatedAt: {
-          type: Sequelize.DATE,
-        }
-      }, {
-        transaction
-      });
-
-      await queryInterface.createTable('Materials', {
-        id: {
-          type: Sequelize.INTEGER,
-          primaryKey: true,
-          autoIncrement: true,
-          index: true,
-        },
-        value: {
-          type: Sequelize.STRING(255),
-          allowNull: false,
-        },
-        description: {
-          type: Sequelize.STRING(1024),
-          defaultValue: ''
-        },
-        createdAt: {
-          type: Sequelize.DATE,
-        },
-        updatedAt: {
-          type: Sequelize.DATE,
-        }
       }, {
         transaction
       });
 
       await queryInterface.createTable('Products', {
-        id: {
-          type: Sequelize.INTEGER,
-          autoIncrement: true,
-          index: true,
-        },
         uuid: {
           type: Sequelize.STRING(9),
           primaryKey: true,
@@ -264,6 +126,11 @@ module.exports = {
           index: true,
         },
         name: {
+          type: Sequelize.STRING(255),
+          allowNull: true,
+          index: true,
+        },
+        fiscal: {
           type: Sequelize.STRING(255),
           allowNull: true,
           index: true,
@@ -299,11 +166,6 @@ module.exports = {
             return amount ? Number(amount) : '';
           },
         },
-        params: {
-          type: Sequelize.ENUM,
-          values: ['further'],
-          allowNull: true,
-        },
         createdAt: {
           type: Sequelize.DATE,
         },
@@ -329,16 +191,6 @@ module.exports = {
           type: Sequelize.STRING(1024),
           defaultValue: ''
         },
-        imageId: {
-          type: Sequelize.UUID,
-          allowNull: true,
-        },
-        createdAt: {
-          type: Sequelize.DATE,
-        },
-        updatedAt: {
-          type: Sequelize.DATE,
-        }
       }, {
         transaction
       });
@@ -358,22 +210,15 @@ module.exports = {
           type: Sequelize.STRING(2024),
           defaultValue: ''
         },
-        createdAt: {
-          type: Sequelize.DATE,
-        },
-        updatedAt: {
-          type: Sequelize.DATE,
-        }
       }, {
         transaction
       });
 
       await transaction.commit();
-
-    } catch (err) {
+    }
+    catch (err) {
 
       await transaction.rollback();
-
       throw err;
     }
   },
@@ -381,7 +226,8 @@ module.exports = {
     const transaction = await queryInterface.sequelize.transaction();
     try {
       await transaction.commit();
-    } catch (err) {
+    }
+    catch (err) {
       await transaction.rollback();
       throw err;
     }

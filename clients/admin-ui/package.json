@@ -9,9 +9,7 @@
   "dependencies": {
     "@modules/types": "1.0.0",
     "@modules/categories": "1.0.0",
-    "@modules/colors": "1.0.0",
-    "@modules/materials": "1.0.0",
-    "@modules/forms": "1.0.0",
+    "@modules/attributes": "1.0.0",
     "@modules/units": "1.0.0",
     "@modules/currencies": "1.0.0",
     "@modules/comments": "1.0.0",

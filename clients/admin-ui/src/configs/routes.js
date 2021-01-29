@@ -57,27 +57,11 @@ const routes = [
     ),
   },
   {
-    path: '/attributes/colors',
+    path: '/attributes/attributes',
     wrapper: 'Composite',
     module: import(
-      /* webpackChunkName: "colors" */
-      '@modules/colors'
-    ),
-  },
-  {
-    path: '/attributes/materials',
-    wrapper: 'Composite',
-    module: import(
-      /* webpackChunkName: "materials" */
-      '@modules/materials'
-    ),
-  },
-  {
-    path: '/attributes/forms',
-    wrapper: 'Composite',
-    module: import(
-      /* webpackChunkName: "forms" */
-      '@modules/forms'
+      /* webpackChunkName: "attributes" */
+      '@modules/attributes'
     ),
   },
   {

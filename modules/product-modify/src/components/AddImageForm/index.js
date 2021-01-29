@@ -41,7 +41,7 @@ class Component extends PureComponent {
     if (src && src.constructor === File) {
       return URL.createObjectURL(src);
     } else {
-      return path + '/' + src;
+      return path + '/' + src + '?size=middle';
     }
   }
 

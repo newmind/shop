@@ -5,31 +5,28 @@ module.exports = {
     try {
 
       await queryInterface.createTable('Galleries', {
-        id: {
-          type: Sequelize.INTEGER,
+        uuid: {
+          type: Sequelize.STRING(64),
           primaryKey: true,
-          autoIncrement: true,
           index: true,
+          unique: true,
         },
-        externalId: {
-          type: Sequelize.STRING(36),
-        },
-        file: {
+        small: {
           type: Sequelize.BLOB,
         },
-        createdAt: {
-          type: Sequelize.DATE,
+        middle: {
+          type: Sequelize.BLOB,
         },
-        updatedAt: {
-          type: Sequelize.DATE,
+        large: {
+          type: Sequelize.BLOB,
         }
       }, {
         transaction
       });
 
       await transaction.commit();
-
-    } catch (err) {
+    }
+    catch (err) {
 
       await transaction.rollback();
 
