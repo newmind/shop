@@ -131,7 +131,7 @@ services:
     links:
       - admin_gw
     volumes:
-      - ./apps/admin-ui/nginx/conf.d:/etc/nginx/conf.d:ro
+      - ./clients/admin-ui/nginx/conf.d:/etc/nginx/conf.d:ro
     environment:
       - NODE_ENV=production
 
@@ -147,7 +147,7 @@ services:
     links:
       - client_gw
     volumes:
-      - ./apps/client-ui/nginx/conf.d:/etc/nginx/conf.d:ro
+      - ./clients/client-ui/nginx/conf.d:/etc/nginx/conf.d:ro
     environment:
       - NODE_ENV=production
 
