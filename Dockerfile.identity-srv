@@ -20,6 +20,6 @@ COPY ./yarn.lock                               ./
 
 RUN yarn
 
-WORKDIR /app/apps/identity-srv
+WORKDIR /app/services/identity-srv
 
 ENTRYPOINT ["yarn", "run", "start"]

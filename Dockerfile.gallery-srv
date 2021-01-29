@@ -20,6 +20,6 @@ COPY ./yarn.lock                              ./
 
 RUN yarn
 
-WORKDIR /app/apps/gallery-srv
+WORKDIR /app/services/gallery-srv
 
 ENTRYPOINT ["yarn", "run", "start"]

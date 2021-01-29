@@ -20,6 +20,6 @@ COPY ./yarn.lock                                 ./
 
 RUN yarn
 
-WORKDIR /app/apps/product-srv
+WORKDIR /app/services/product-srv
 
 ENTRYPOINT ["yarn", "run", "start"]

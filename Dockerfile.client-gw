@@ -18,6 +18,6 @@ COPY ./yarn.lock                               ./
 
 RUN yarn
 
-WORKDIR /app/apps/client-gw
+WORKDIR /app/gateway/client-gw
 
 ENTRYPOINT ["yarn", "run", "start"]

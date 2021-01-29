@@ -18,6 +18,6 @@ COPY ./yarn.lock                           ./
 
 RUN yarn
 
-WORKDIR /app/apps/mail-srv
+WORKDIR /app/services/mail-srv
 
 ENTRYPOINT ["yarn", "run", "start"]
