@@ -26,13 +26,13 @@ RUN chmod +x ./build-client-packages.sh
 RUN ./build-client-packages.sh
 
 # BUILD APPLICATION
-WORKDIR /app/apps/client-ui
+WORKDIR /app/clients/client-ui
 RUN ["yarn", "run", "build"]
 
 # START NGINX
 FROM nginx
 
-COPY --from=ui /app/apps/client-ui/build /app
+COPY --from=ui /app/clients/client-ui/build /app
 
 WORKDIR /etc/nginx
 

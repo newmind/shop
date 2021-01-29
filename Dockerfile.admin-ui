@@ -26,13 +26,13 @@ RUN chmod +x ./build-admin-packages.sh
 RUN ./build-admin-packages.sh
 
 # BUILD APPLICATION
-WORKDIR /app/apps/admin-ui
+WORKDIR /app/clients/admin-ui
 RUN ["yarn", "run", "build"]
 
 # START NGINX
 FROM nginx
 
-COPY --from=ui /app/apps/admin-ui/build /app
+COPY --from=ui /app/clients/admin-ui/build /app
 
 WORKDIR /etc/nginx
 
