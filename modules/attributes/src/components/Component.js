@@ -10,7 +10,7 @@ import Table from './Table';
 import styles from './default.module.scss';
 
 
-function Types() {
+function Attributes() {
   const dispatch = useDispatch();
 
   function handleCreate() {
@@ -18,26 +18,30 @@ function Types() {
   }
 
   return (
-    <Page className={styles['wrapper']}>
+    <Page>
       <PageControls>
         <div className={styles['controls']}>
           <Button mode="success" onClick={() => handleCreate()}>Добавить</Button>
         </div>
       </PageControls>
       <PageContent>
-        <div className={styles['header']}>
-          <Header level={1}>Аттрибуты продукта</Header>
-        </div>
-        <article className={styles['content']}>
-          <Table />
-        </article>
+        <section className={styles['wrapper']}>
+          <div className={styles['header']}>
+            <Header level={1}>Аттрибуты продукта</Header>
+          </div>
+          <article className={styles['content']}>
+            <Table />
+          </article>
+        </section>
       </PageContent>
     </Page>
   );
 }
 
-Types.propTypes = {};
 
-Types.defaultProps = {};
 
-export default Types;
+Attributes.propTypes = {};
+
+Attributes.defaultProps = {};
+
+export default Attributes;

@@ -6,101 +6,22 @@
 
   position: relative;
   display: flex;
-  flex-direction: row;
-  flex: 1 0;
+  flex-direction: column;
   background: $white;
   text-decoration: none;
   outline: none;
   border-radius: 5px;
-  cursor: pointer;
-  overflow: hidden;
-}
-
-.gallery {
-
-  display: block;
-  width: 240px;
-  height: 210px;
-  padding: 20px;
+  padding: 20px 20px 25px;
   box-sizing: border-box;
-}
-
-.common {
-
-  display: flex;
-  flex-direction: column;
-  flex: 1 0;
-}
-
-.description {
-
-  display: block;
-  padding: 40px 20px 0 0;
-}
-
-.uuid {
-
-  display: block;
-  margin: 20px 0 0;
-}
-
-.brand {
-
-  display: block;
-  padding: 8px 0 0;
-}
-
-.name {
-
-  display: block;
-}
-
-.information {
-
-  display: block;
-  width: 320px;
-  background: $whitesmoke;
-  box-shadow: -1px 0 4px 0 rgba($blue-grey, .6);
-  padding: 25px 20px;
-  box-sizing: border-box;
-  border-radius: 5px 0 0 5px
-}
-
-.amount {
-
-  display: block;
-}
-
-.controls {
-
-  display: block;
-  margin: 20px 0 0;
-  padding: 25px 0 0;
-  border-top: 1px solid $pale-lilac;
-}
-
-.remove {
-
-  display: inline-block;
-  font-size: 16px;
-  padding: 10px;
-  margin: 0 0 0 10px;
-  color: $gray;
-  vertical-align: middle;
+  //border: 1px solid $pale-lilac;
+  box-shadow: 0 0 6px 0 $pale-lilac, inset 0 0 0 0 transparent;
+  transition: box-shadow 200ms, box-shadow 200ms;
   cursor: pointer;
-  transition: color 200ms;
 
   &:hover {
-
-    color: $danger;
+    box-shadow: 0 0 6px 0 $pale-lilac, inset 0 0 0 4px $very-light-pink;
   }
 }
-
-
-
-
-
-
 
 .meta {
 
@@ -193,10 +114,48 @@
   flex-direction: column;
 }
 
+.amount {
 
+  display: flex;
+  flex: 1 0;
+  justify-content: center;
+}
 
+.description {
 
+  display: block;
+}
 
+.uuid {
+
+  display: block;
+  text-align: center;
+  margin: 0 0 12px;
+}
+
+.brand {
+
+  display: block;
+  text-align: center;
+  white-space: nowrap;
+  padding: 0 15px;
+}
+
+.name {
+
+  display: block;
+  text-align: center;
+  white-space: nowrap;
+  padding: 0 15px;
+}
+
+.controls {
+
+  display: flex;
+  flex-direction: row;
+  flex: 1 0;
+  margin: 25px 0 0;
+}
 
 .cart {
 

@@ -34,12 +34,12 @@ export const getCurrencies = () => async (dispatch) => {
     dispatch(getCurrenciesRequestSuccessAction(data));
   }
   catch(error) {
+
     dispatch(getCurrenciesRequestFailAction(error));
     dispatch(pushNotification({
       mode: 'danger',
       content: 'Ошибка получения списка "Валюта"'
     }));
-    dispatch(pageInProcessAction(false));
   }
 };
 
@@ -55,9 +55,17 @@ export const createCurrency = (data) => async (dispatch) => {
 
     dispatch(createCurrencyRequestSuccessAction(result['data']));
     dispatch(closeDialog('currency'));
+    dispatch(pushNotification({
+      mode: 'success',
+      content: 'Операция выполнена успешно'
+    }));
   }
   catch(error) {
     dispatch(createCurrencyRequestFailAction(error));
+    dispatch(pushNotification({
+      mode: 'danger',
+      content: 'Ошибка создания "Валюты"'
+    }));
   }
 };
 
@@ -73,9 +81,17 @@ export const updateCurrency = (data) => async (dispatch) => {
 
     dispatch(updateCurrencyRequestSuccessAction(result['data']));
     dispatch(closeDialog('currency'));
+    dispatch(pushNotification({
+      mode: 'success',
+      content: 'Операция выполнена успешно'
+    }));
   }
   catch(error) {
     dispatch(updateCurrencyRequestFailAction(error));
+    dispatch(pushNotification({
+      mode: 'danger',
+      content: 'Ошибка обновления "Валюты"'
+    }));
   }
 };
 
@@ -90,8 +106,16 @@ export const deleteCurrencies = (uuid) => async (dispatch) => {
     });
 
     dispatch(deleteCurrencyRequestSuccessAction(data));
+    dispatch(pushNotification({
+      mode: 'success',
+      content: 'Операция выполнена успешно'
+    }));
   }
   catch(error) {
     dispatch(deleteCurrencyRequestFailAction(error));
+    dispatch(pushNotification({
+      mode: 'danger',
+      content: 'Ошибка удаления "Валюты"'
+    }));
   }
 };

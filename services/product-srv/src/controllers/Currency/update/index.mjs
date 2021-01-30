@@ -1,6 +1,6 @@
 
 import { sendEvent } from '@sys.packages/rabbit2';
-import { sequelize, models } from '@sys.packages/db';
+import { models } from '@sys.packages/db';
 
 
 export default () => async (ctx) => {
@@ -8,24 +8,19 @@ export default () => async (ctx) => {
   const { uuid } = ctx['params'];
   const formData = ctx['request']['body'];
 
-  const transaction = await sequelize.transaction();
-
-  await Currency.update(formData, {
-    where: { uuid },
-    transaction
-  });
+  await Currency.update(formData, { where: { uuid }});
 
   const result = await Currency.findOne({
     where: { uuid },
-    transaction
+    attributes: ['uuid', 'value', 'description'],
   });
 
-  await transaction.commit();
+  const currency = result.toJSON();
 
-  await sendEvent(process.env['RABBIT_PRODUCT_SRV_EXCHANGE_CURRENCY_UPDATED'], JSON.stringify(result.toJSON()));
+  await sendEvent(process.env['EXCHANGE_CURRENCY_UPDATE'], JSON.stringify(currency));
 
   ctx.body = {
     success: true,
-    data: result.toJSON(),
+    data: currency,
   };
 };

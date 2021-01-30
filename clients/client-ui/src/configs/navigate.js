@@ -1,11 +1,11 @@
 
 const navigate = [
   {
-    title: 'Витрина',
+    title: 'Каталог',
     path: '/products',
   },
   {
-    title: 'Информация для Вас',
+    title: 'Информация для вас',
     path: '/produce',
   },
   {

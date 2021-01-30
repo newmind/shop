@@ -18,19 +18,21 @@ function Types() {
   }
 
   return (
-    <Page className={styles['wrapper']}>
+    <Page>
       <PageControls>
         <div className={styles['controls']}>
           <Button mode="success" onClick={() => handleCreate()}>Добавить</Button>
         </div>
       </PageControls>
       <PageContent>
-        <div className={styles['header']}>
-          <Header level={1}>Тип продукта</Header>
-        </div>
-        <article className={styles['content']}>
-          <Table />
-        </article>
+        <section className={styles['wrapper']}>
+          <div className={styles['header']}>
+            <Header level={1}>Тип продукта</Header>
+          </div>
+          <article className={styles['content']}>
+            <Table />
+          </article>
+        </section>
       </PageContent>
     </Page>
   );

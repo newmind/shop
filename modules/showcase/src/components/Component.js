@@ -29,8 +29,8 @@ export default function Showcase() {
       </aside>
       <section className={styles['products']}>
         { !! meta['total']
-        ? <Products />
-        : <Empty />}
+          ? <Products />
+          : <Empty />}
       </section>
       <div className={styles['controls']}>
         <Paging total={meta['total']} skip={12} disabled={inProcess} />

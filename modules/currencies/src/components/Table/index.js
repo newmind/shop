@@ -1,6 +1,6 @@
 
 import { Table, Column } from '@ui.packages/table';
-import { Button, Actions, Text } from '@ui.packages/kit';
+import { Actions, Text } from '@ui.packages/kit';
 import { Dialog, Confirm, openDialog, closeDialog } from '@ui.packages/dialog';
 
 import React, { useState } from 'react';
@@ -18,10 +18,6 @@ function List() {
   const dispatch = useDispatch();
   const items = useSelector(selectItems);
   const [itemId, setItemId] = useState(null);
-
-  function handleCreate() {
-    dispatch(openDialog('currency'));
-  }
 
   function handleEdit(value) {
     dispatch(openDialog('currency', value));
@@ -77,9 +73,6 @@ function List() {
             {(value) => <Actions onEdit={() => handleEdit(value)} onDelete={() => handleSetDeletedItem(value['uuid'])} />}
           </Column>
         </Table>
-      </div>
-      <div className={styles['controls']}>
-        <Button mode="success" onClick={() => handleCreate()}>Добавить</Button>
       </div>
 
       <Dialog title="Валюта" name="currency">
