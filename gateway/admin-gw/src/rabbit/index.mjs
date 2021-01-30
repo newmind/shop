@@ -6,6 +6,7 @@ import categories from './categories';
 import types from './types';
 import units from './units';
 import products from './products';
+import currency from './currency';
 
 
 export default async function rabbitInit() {
@@ -17,4 +18,5 @@ export default async function rabbitInit() {
   await types();
   await units();
   await products();
+  await currency();
 }

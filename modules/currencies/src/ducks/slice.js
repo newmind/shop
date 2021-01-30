@@ -34,7 +34,9 @@ const currenciesSlice = createSlice({
       state['inProcess'] = false;
     },
     createCurrencyRequestSuccessAction(state, { payload }) {
-      state['items'] = [payload, ...state['items']];
+      if ( ! state['items'].some((currency) => currency['uuid'] === payload['uuid'])) {
+        state['items'] = [payload, ...state['items']];
+      }
       state['inProcess'] = false;
     },
 
