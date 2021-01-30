@@ -1,5 +1,5 @@
 
-import { sendEvent } from "@sys.packages/rabbit";
+import { sendEvent } from "@sys.packages/rabbit2";
 import { sequelize, models } from '@sys.packages/db';
 
 
