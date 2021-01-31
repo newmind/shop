@@ -53,5 +53,7 @@ echo '[--- Sign In ---]'
 cd ../sign-in && npx yarn build
 echo '[--- Users ---]'
 cd ../users && npx yarn build
+echo '[--- Promotions ---]'
+cd ../promotions && npx yarn build
 
 exit 0
