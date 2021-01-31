@@ -1,5 +1,6 @@
 
 export default function productBuilder(data) {
+  console.log(data)
   return {
     uuid: data['uuid'],
     brand: data['brand'],

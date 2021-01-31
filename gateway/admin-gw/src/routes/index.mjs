@@ -5,14 +5,14 @@ import {
   getAll as getAllUsers,
   get as getUser,
   update as updateUser,
-} from '../controllers/User/index.mjs';
+} from '../controllers/User';
 
 import {
   getAll as getOperations,
   getById as getOperationById,
   create as createOperation,
   updateById as updateOperationById,
-} from '../controllers/Orders/index.mjs';
+} from '../controllers/Orders';
 
 import { getAllTypes, createType, updateType, deleteType } from '../controllers/Types';
 import { getAllUnits, createUnit, updateUnit, deleteUnits } from '../controllers/Units';
@@ -21,11 +21,12 @@ import { getAllCurrencies, createCurrency, updateCurrency, deleteCurrencies } fr
 import { getAllAttributes, createAttribute, deleteAttributes, updateAttribute } from '../controllers/Attribute';
 
 import { getProducts, getProduct,  createProduct, updateProduct, deleteProducts } from '../controllers/Products';
+import { getAllPromotions, deletePromotions, updatePromotion, createPromotion } from '../controllers/Promotion';
 
-import { getImage, deleteImages } from '../controllers/Gallery/index.mjs';
-import { getComments, createComment, updateComment, deleteComments } from '../controllers/Comments/index.mjs';
+import { getImage, deleteImages } from '../controllers/Gallery';
+import { getComments, createComment, updateComment, deleteComments } from '../controllers/Comments';
 
-import { getAllStatuses } from '../controllers/Statuses/index.mjs';
+import { getAllStatuses } from '../controllers/Statuses';
 
 
 export default (router) => {
@@ -36,6 +37,11 @@ export default (router) => {
   router.post('/types', createType());
   router.put('/types/:id', updateType());
   router.delete('/types', deleteType());
+
+  router.get('/promotions', getAllPromotions());
+  router.post('/promotions', createPromotion());
+  router.put('/promotions/:id', updatePromotion());
+  router.delete('/promotions', deletePromotions());
 
   router.get('/categories', getAllCategories());
   router.post('/categories', createCategory());

@@ -57,7 +57,7 @@ module.exports = (db, DataType) => {
     },
   });
 
-  Product.associate = function({ Attribute, Gallery, Category, Type, ProductType, ProductCategory, ProductAttribute, Currency, Comment }) {
+  Product.associate = function({ Attribute, Gallery, Category, Type, Promotion, ProductPromotion, ProductType, ProductCategory, ProductAttribute, Currency, Comment }) {
 
     Product.belongsTo(Currency, {
       foreignKey: 'currencyId',
@@ -85,6 +85,12 @@ module.exports = (db, DataType) => {
       as: 'attributes',
     });
 
+    Product.belongsToMany(Promotion, {
+      through: ProductPromotion,
+      foreignKey: 'productUuid',
+      otherKey: 'promotionUuid',
+      as: 'promotion',
+    });
 
     Product.hasMany(Gallery, {
       primaryKey: 'uuid',

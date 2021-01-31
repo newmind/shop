@@ -13,7 +13,7 @@ export default () => async (ctx) => {
   let options = {};
 
   const { Op } = Sequelize;
-  const { Product, Currency, Category, Type, Attribute, Units, Gallery, Comment } = models;
+  const { Product, Currency, Category, Type, Attribute, Units, Gallery, Comment, Promotion } = models;
   const {
     fiscal = null,
     status = null,
@@ -159,6 +159,21 @@ export default () => async (ctx) => {
         through: { attributes: [] },
       },
       {
+        model: Promotion,
+        required: false,
+        as: 'promotion',
+        attributes: ['uuid', 'name', 'percent'],
+        where: {
+          dateFrom: {
+            [Sequelize.Op.lte]: new Date(),
+          },
+          dateTo: {
+            [Sequelize.Op.gte]: new Date(),
+          },
+        },
+        through: { attributes: [] },
+      },
+      {
         model: Currency,
         required: false,
         as: 'currency',
@@ -188,7 +203,7 @@ export default () => async (ctx) => {
         model: Comment,
         as: 'comments',
         attributes: ['id', 'evaluation', 'person', 'comment', 'createdAt'],
-      },
+      }
     ],
   });
 

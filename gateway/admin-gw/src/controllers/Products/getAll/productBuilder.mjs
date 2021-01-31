@@ -1,5 +1,6 @@
 
 export default function productBuilder(data) {
+  console.log(data)
   return {
     uuid: data['uuid'],
     fiscal: data['fiscal'],
@@ -9,7 +10,7 @@ export default function productBuilder(data) {
     categories: data['categories'],
     description: data['description'],
     amount: Number(data['amount']),
-    saleAmount: Number(data['saleAmount']),
+    promotion: data['promotion'],
     currency: data['currency'] ? data['currency']['value'] : null,
     status: Number(data['status']),
     gallery: data['gallery'].map((img) => img['uuid']),

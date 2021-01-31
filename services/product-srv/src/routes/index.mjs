@@ -10,6 +10,8 @@ import { getTypesCount, getBrandsCount, getCategoriesCount } from '../controller
 
 import { getAllComments, deleteComments, createComment, updateComment } from '../controllers/Comments';
 
+import { getAllPromotions, deletePromotions, createPromotion, updatePromotion } from '../controllers/Promotion';
+
 
 export default (router) => {
 
@@ -51,4 +53,9 @@ export default (router) => {
   router.post('/v1/api/comments', createComment());
   router.put('/v1/api/comments/:id', updateComment());
   router.delete('/v1/api/comments', deleteComments());
+
+  router.get('/v1/api/promotions', getAllPromotions());
+  router.post('/v1/api/promotions', createPromotion());
+  router.put('/v1/api/promotions/:uuid', updatePromotion());
+  router.delete('/v1/api/promotions', deletePromotions());
 };

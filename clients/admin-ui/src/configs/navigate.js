@@ -6,31 +6,36 @@ const navigate = [
     icon: 'fas fa-shopping-cart',
   },
   {
-    title: "Аттрибуты",
-    path: '/attributes/types',
+    title: "Свойства",
+    path: '/options/types',
     icon: 'fas fa-sliders-h',
     navigate: [
       {
         title: 'Тип',
-        path: '/attributes/types',
+        path: '/options/types',
       },
       {
         title: 'Категория',
-        path: '/attributes/categories',
+        path: '/options/categories',
       },
       {
         title: 'Аттрибуты',
-        path: '/attributes/attributes',
+        path: '/options/attributes',
       },
       {
         title: 'Единица измерения',
-        path: '/attributes/units',
+        path: '/options/units',
       },
       {
         title: 'Валюта',
-        path: '/attributes/currencies',
+        path: '/options/currencies',
       },
     ],
+  },
+  {
+    title: "Скидки",
+    path: '/promotions',
+    icon: 'fas fa-percentage',
   },
   {
     title: "Комментарии",

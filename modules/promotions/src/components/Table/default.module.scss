@@ -1,0 +1,30 @@
+
+@import "~@ui.packages/theme";
+
+
+.content {
+
+  display: block;
+}
+
+.table {
+
+  display: block;
+}
+
+.marker {
+
+  display: inline-block;
+  width: 8px;
+  height: 8px;
+  background: $pale-lilac;
+  border-radius: 50%;
+
+  &--active {
+    background: $success;
+  }
+
+  &--will {
+    background: $primary;
+  }
+}

@@ -41,7 +41,7 @@ const routes = [
     ),
   },
   {
-    path: '/attributes/types',
+    path: '/options/types',
     wrapper: 'Composite',
     module: import(
       /* webpackChunkName: "types" */
@@ -49,7 +49,7 @@ const routes = [
     ),
   },
   {
-    path: '/attributes/categories',
+    path: '/options/categories',
     wrapper: 'Composite',
     module: import(
       /* webpackChunkName: "categories" */
@@ -57,7 +57,7 @@ const routes = [
     ),
   },
   {
-    path: '/attributes/attributes',
+    path: '/options/attributes',
     wrapper: 'Composite',
     module: import(
       /* webpackChunkName: "attributes" */
@@ -65,7 +65,7 @@ const routes = [
     ),
   },
   {
-    path: '/attributes/units',
+    path: '/options/units',
     wrapper: 'Composite',
     module: import(
       /* webpackChunkName: "units" */
@@ -73,11 +73,19 @@ const routes = [
     ),
   },
   {
-    path: '/attributes/currencies',
+    path: '/options/currencies',
     wrapper: 'Composite',
     module: import(
       /* webpackChunkName: "currencies" */
       '@modules/currencies'
+    ),
+  },
+  {
+    path: '/promotions',
+    wrapper: 'Navigate',
+    module: import(
+      /* webpackChunkName: "promotions" */
+      '@modules/promotions'
     ),
   },
   // {
