@@ -7,7 +7,6 @@ export default () => async (ctx) => {
 
   const result = await Type.findAll({
     attributes: ['id', 'value', 'description'],
-    order: [['id', 'asc']],
     include: [
       {
         model: Category,
@@ -20,6 +19,6 @@ export default () => async (ctx) => {
 
   ctx.body = {
     success: true,
-    data: [ ...result ]
+    data: result.map((item) => item.toJSON()),
   };
 };

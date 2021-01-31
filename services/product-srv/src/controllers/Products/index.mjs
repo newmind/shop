@@ -1,9 +1,10 @@
 
-export { default as getProducts } from './getAll/index.mjs';
-export { default as createProduct } from './create/index.mjs';
-export { default as deleteProductById } from './delete/index.mjs';
-export { default as updateProductById } from './update/index.mjs';
+export { default as getProducts } from './getAll';
+export { default as createProduct } from './create';
+export { default as deleteProductById } from './delete';
+export { default as updateProductById } from './update';
+export { default as setPromotion } from './setPromotion';
 
-export { default as getTypesCount } from './attributes/getTypes/index.mjs';
-export { default as getBrandsCount } from './attributes/getBrands/index.mjs';
-export { default as getCategoriesCount } from './attributes/getCategories/index.mjs';
+export { default as getTypesCount } from './attributes/getTypes';
+export { default as getBrandsCount } from './attributes/getBrands';
+export { default as getCategoriesCount } from './attributes/getCategories';

@@ -5,10 +5,7 @@ import { createAction, createSlice } from '@reduxjs/toolkit';
 const initialState = {
   items: [],
   types: [],
-  forms: [],
   brands: [],
-  colors: [],
-  materials: [],
   categories: [],
   meta: {},
   inProcess: false,
@@ -27,10 +24,7 @@ export const slice = createSlice({
       state['items'] = [];
       state['meta'] = {};
       state['types'] = [];
-      state['forms'] = [];
       state['brands'] = [];
-      state['colors'] = [];
-      state['materials'] = [];
       state['categories'] = [];
       state['isInitialize'] = false;
       state['inProcess'] = false;
@@ -45,10 +39,7 @@ export const slice = createSlice({
       state['items'] = payload['data'];
       state['meta'] = payload['meta'];
       state['types'] = payload['filter']['types'];
-      state['forms'] = payload['filter']['forms'];
       state['brands'] = payload['filter']['brands'];
-      state['colors'] = payload['filter']['colors'];
-      state['materials'] = payload['filter']['materials'];
       state['categories'] = payload['filter']['categories'];
       state['isInitialize'] = true;
       state['inProcess'] = false;
@@ -70,9 +61,18 @@ export const slice = createSlice({
   },
 });
 
-export const { resetState, getProductsAction, getProductsFailAction, getProductsSuccessAction } = slice['actions'];
+export const {
+  resetState,
+
+  getProductsAction,
+  getProductsFailAction,
+  getProductsSuccessAction
+} = slice['actions'];
 
 export const selectItems = (state) => state[REDUCER_NAME]['items'];
+export const selectTypes = (state) => state[REDUCER_NAME]['types'];
+export const selectBrands = (state) => state[REDUCER_NAME]['brands'];
+export const selectCategories = (state) => state[REDUCER_NAME]['categories'];
 export const selectMeta = (state) => state[REDUCER_NAME]['meta'];
 export const selectInProcess = (state) => state[REDUCER_NAME]['inProcess'];
 

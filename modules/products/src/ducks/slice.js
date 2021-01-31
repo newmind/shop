@@ -4,6 +4,7 @@ import { createSlice } from '@reduxjs/toolkit';
 
 const initialState = {
   items: [],
+  promotions: [],
   filter: {},
   meta: {},
   inProcess: false,
@@ -18,9 +19,35 @@ const slice = createSlice({
   reducers: {
     resetState(state) {
       state['items'] = [];
+      state['promotions'] = [];
       state['filter'] = {};
       state['meta'] = {};
       state['inProcess'] = false;
+    },
+
+    getPromotionsRequestAction() {},
+    getPromotionsRequestFailAction() {},
+    getPromotionsRequestSuccessAction(state, { payload }) {
+      state['promotions'] = payload;
+    },
+
+    setPromotionRequestAction(state) {
+      state['inProcess'] = true;
+    },
+    setPromotionRequestFailAction(state) {
+      state['inProcess'] = false;
+    },
+    setPromotionRequestSuccessAction(state, { payload }) {
+      state['inProcess'] = false;
+      state['items'] = [...state['items']].map((item) => {
+        if (item['uuid'] === payload['uuid']) {
+          return {
+            ...item,
+            ...payload,
+          };
+        }
+        return item;
+      });
     },
 
     getProductsRequestAction(state) {
@@ -59,6 +86,14 @@ const slice = createSlice({
 export const {
   resetState,
 
+  getPromotionsRequestAction,
+  getPromotionsRequestFailAction,
+  getPromotionsRequestSuccessAction,
+
+  setPromotionRequestAction,
+  setPromotionRequestFailAction,
+  setPromotionRequestSuccessAction,
+
   getProductsRequestAction,
   getProductsRequestFailAction,
   getProductsRequestSuccessAction,
@@ -71,6 +106,7 @@ export const {
 } = slice['actions'];
 
 export const selectMeta = (state) => state[REDUCER_NAME]['meta'];
+export const selectPromotions = (state) => state[REDUCER_NAME]['promotions'];
 export const selectItems = (state) => state[REDUCER_NAME]['items'];
 export const selectFilter = (state) => state[REDUCER_NAME]['filter'];
 export const selectInProcess = (state) => state[REDUCER_NAME]['inProcess'];

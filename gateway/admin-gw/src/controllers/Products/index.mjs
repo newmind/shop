@@ -1,7 +1,7 @@
-'use strict';
 
-export { default as getProducts } from './getAll/index.mjs';
-export { default as getProduct } from './getById/index.mjs';
-export { default as createProduct } from './create/index.mjs';
-export { default as updateProduct } from './update/index.mjs';
-export { default as deleteProducts } from './delete/index.mjs';
+export { default as getProducts } from './getAll';
+export { default as getProduct } from './getById';
+export { default as createProduct } from './create';
+export { default as updateProduct } from './update';
+export { default as deleteProducts } from './delete';
+export { default as setPromotion } from './setPromotion';

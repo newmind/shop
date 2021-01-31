@@ -8,7 +8,7 @@ import { useSelector } from 'react-redux';
 import FastView from "./FastView";
 
 import Empty from './Empty';
-import Filter from './Filter';
+// import Filter from './Filter';
 import Products from './Products';
 
 import styles from './default.module.scss';
@@ -22,11 +22,11 @@ export default function Showcase() {
 
   return (
     <section className={styles['wrapper']}>
-      <aside className={styles['filters']}>
-        <div className={styles['filters__content']}>
-          <Filter />
-        </div>
-      </aside>
+      {/*<aside className={styles['filters']}>*/}
+      {/*  <div className={styles['filters__content']}>*/}
+      {/*    <Filter />*/}
+      {/*  </div>*/}
+      {/*</aside>*/}
       <section className={styles['products']}>
         { !! meta['total']
           ? <Products />

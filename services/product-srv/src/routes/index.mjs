@@ -5,7 +5,7 @@ import { getAllCategories, createCategory, updateCategory, deleteCategories } fr
 import { getAllCurrencies, createCurrency, updateCurrency, deleteCurrencies } from '../controllers/Currency';
 import { getAllAttributes, deleteAttributes, updateAttribute, createAttribute } from '../controllers/Attributes';
 
-import { getProducts, createProduct, deleteProductById, updateProductById } from '../controllers/Products';
+import { getProducts, createProduct, deleteProductById, updateProductById, setPromotion } from '../controllers/Products';
 import { getTypesCount, getBrandsCount, getCategoriesCount } from '../controllers/Products';
 
 import { getAllComments, deleteComments, createComment, updateComment } from '../controllers/Comments';
@@ -48,6 +48,7 @@ export default (router) => {
   router.post('/v1/api/products', createProduct());
   router.put('/v1/api/products/:uuid', updateProductById());
   router.delete('/v1/api/products', deleteProductById());
+  router.post('/v1/api/products/:uuid/promotion', setPromotion());
 
   router.get('/v1/api/comments', getAllComments());
   router.post('/v1/api/comments', createComment());

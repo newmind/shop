@@ -1,0 +1,67 @@
+
+@import "~@ui.packages/theme";
+
+
+.wrapper {
+
+  display: block;
+}
+
+.count {
+
+  display: block;
+  background: rgba($primary, .4);
+  font-size: 16px;
+  color: $white;
+  padding: 15px;
+  border-radius: 5px;
+  margin-bottom: 8px;
+}
+
+.block {
+
+  display: block;
+  border-radius: 3px;
+  overflow: hidden;
+  background: rgba($white, .15);
+  //border: 1px solid rgba($white, .2);
+
+  & + & {
+
+    margin: 8px 0 0;
+  }
+}
+
+.header {
+
+  display: block;
+  font-size: 12px;
+  font-weight: 700;
+  color: $white;
+  padding: 15px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+}
+
+.content {
+
+  display: block;
+  padding: 8px 0 20px;
+}
+
+.item {
+
+  display: block;
+  padding: 0 15px;
+  color: $pale-lilac;
+
+  & + & {
+
+    margin: 12px 0 0;
+  }
+}
+
+.check-box {
+
+  color: $white;
+}

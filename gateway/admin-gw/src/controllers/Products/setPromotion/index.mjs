@@ -1,0 +1,45 @@
+
+import { NotfoundError } from '@packages/errors';
+
+import request from '@sys.packages/request';
+
+import productBuilder from './productBuilder.mjs';
+
+
+async function getProductById(uuid) {
+  const { data } = await request({
+    url: process.env['PRODUCT_API_SRV'] + '/products',
+    method: 'get',
+    params: {
+      uuid,
+    }
+  });
+
+  if ( ! data[0]) {
+    throw new NotfoundError('Товар не найден');
+  }
+
+  return data[0];
+}
+
+async function setPromotion(productUuid, data) {
+  await request({
+    url: process.env['PRODUCT_API_SRV'] + '/products/' + productUuid + '/promotion',
+    method: 'post',
+    data,
+  });
+}
+
+export default () => async (ctx) => {
+  const { uuid } = ctx['params'];
+  const data = ctx['request']['body'];
+
+  await setPromotion(uuid, data);
+
+  const product = await getProductById(uuid);
+
+  ctx.body = {
+    success: true,
+    data: productBuilder(product, true),
+  };
+}

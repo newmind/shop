@@ -53,15 +53,14 @@ export default () => async (ctx) => {
   const result = await Type.findAll({
     distinct: true,
     group: ['Type.id'],
+    order: [['value', 'asc']],
     attributes: ['id', 'value', [sequelize.fn('COUNT', sequelize.col('product_types.typeId')), 'count']],
     include: [
       {
         model: ProductType,
         as: 'product_types',
         attributes: [],
-        include: [
-
-        ],
+        include: [],
       }
     ],
   });

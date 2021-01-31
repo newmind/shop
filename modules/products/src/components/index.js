@@ -5,7 +5,7 @@ import { queryToObject } from "@ui.packages/utils";
 
 import Component from './Component';
 
-import { getProducts } from '../ducks/commands';
+import { getProducts, getPromotions } from '../ducks/commands';
 import {
   resetState,
 
@@ -21,6 +21,7 @@ export default HOC({
 
     const query = queryToObject(location['search']);
 
+    await dispatch(getPromotions());
     await dispatch(getProducts(query));
 
     on(process.env['REACT_APP_SOCKET_PRODUCT_CREATE'], () => {});

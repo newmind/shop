@@ -52,6 +52,7 @@ export default () => async (ctx) => {
 
   const result = await Product.findAll({
     group: ['Product.brand'],
+    order: [['brand', 'asc']],
     attributes: [['brand', 'value'], [sequelize.fn('COUNT', sequelize.col('brand')), 'count']],
   });
 

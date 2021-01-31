@@ -89,7 +89,7 @@ module.exports = (db, DataType) => {
       through: ProductPromotion,
       foreignKey: 'productUuid',
       otherKey: 'promotionUuid',
-      as: 'promotion',
+      as: 'promotions',
     });
 
     Product.hasMany(Gallery, {

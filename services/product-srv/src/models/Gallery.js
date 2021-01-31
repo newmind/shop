@@ -1,13 +1,18 @@
 
-module.exports = (db, DataType) => {
+module.exports = (db, DataTypes) => {
 
   const Gallery = db.define('Gallery', {
     uuid: {
-      type: DataType.STRING(64),
+      type: DataTypes.STRING(64),
       primaryKey: true,
     },
     productUuid: {
-      type: DataType.STRING(9),
+      type: DataTypes.STRING(9),
+    },
+    order: {
+      type: DataTypes.INTEGER,
+      defaultValue: 1,
+      allowNull: false,
     },
   }, {
     timestamps: false,

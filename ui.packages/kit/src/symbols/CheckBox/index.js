@@ -13,7 +13,7 @@ export default function Checkbox({ className, disabled, mode, value, label, onCh
     onChange && onChange( ! value);
   }
 
-  const classNameCheckbox = cn(className, styles['checkbox'], {
+  const classNameCheckbox = cn(styles['checkbox'], className, {
     [styles['checkbox--checked']]: value,
   }, {
     [styles['disabled']]: disabled,

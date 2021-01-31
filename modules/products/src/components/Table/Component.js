@@ -72,11 +72,12 @@ function List({ items, meta, openDialog, closeDialog, removeProductById }) {
           title="Основные"
           align="left"
         >
-          {({ types, categories }) => {
+          {({ types, categories, promotions }) => {
             return (
               <div className={styles['description']}>
                 { !! types.length && <div className={styles['description__item']}><b className={styles['description__label']}>Тип:</b> { types.map((type, index) => <span key={index} className={styles['item']}>{ type['value'] }</span>) }</div>}
                 { !! categories.length && <div className={styles['description__item']}><b className={styles['description__label']}>Категория:</b> { categories.map((category, index) => <span key={index} className={styles['item']}>{ category['value'] }</span>) }</div>}
+                { !! promotions.length && <div className={styles['description__item']}><b className={styles['description__label']}>Скидки:</b> { promotions.map((promo, index) => <span key={index} className={styles['item']}>{ promo['name'] } ({promo['percent']} %)</span>) }</div>}
               </div>
             );
           }}

@@ -1,7 +1,13 @@
 
-module.exports = (db) => {
+module.exports = (db, DataTypes) => {
 
-  const ProductCategory = db.define('ProductCategory', {}, {
+  const ProductCategory = db.define('ProductCategory', {
+    order: {
+      type: DataTypes.INTEGER,
+      defaultValue: 1,
+      allowNull: false,
+    },
+  }, {
     timestamps: false,
   });
 

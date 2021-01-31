@@ -53,6 +53,7 @@ export default () => async (ctx) => {
   const result = await Category.findAll({
     distinct: true,
     group: ['Category.id'],
+    order: [['value', 'asc']],
     attributes: ['id', 'value', [sequelize.fn('COUNT', sequelize.col('product_categories.categoryId')), 'count']],
     include: [
       {

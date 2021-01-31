@@ -4,6 +4,14 @@ import request from '@ui.packages/request';
 import { pushNotification } from '@ui.packages/notifications';
 
 import {
+  getPromotionsRequestAction,
+  getPromotionsRequestFailAction,
+  getPromotionsRequestSuccessAction,
+
+  setPromotionRequestAction,
+  setPromotionRequestFailAction,
+  setPromotionRequestSuccessAction,
+
   getProductsRequestAction,
   getProductsRequestFailAction,
   getProductsRequestSuccessAction,
@@ -13,6 +21,58 @@ import {
   removeProductRequestSuccessAction,
 } from './slice';
 
+
+export const getPromotions = (params = {}) => async (dispatch) => {
+  try {
+    dispatch(getPromotionsRequestAction());
+
+    const { data } = await request({
+      url: '/promotions',
+      method: 'get',
+      params,
+    });
+
+    dispatch(getPromotionsRequestSuccessAction(data));
+  }
+  catch(error) {
+    dispatch(getPromotionsRequestFailAction());
+    dispatch(pushNotification({
+      title: 'Ошибка при запросе данных',
+      connect: `${error['data']['message']} (${error['data']['code']})`,
+      mode: Mode.DANGER,
+      autoClose: false,
+    }));
+  }
+};
+
+export const setPromotions = (promotionUuid, productUuid) => async (dispatch) => {
+  try {
+    dispatch(setPromotionRequestAction());
+
+    const { data } = await request({
+      url: '/products/' + productUuid + '/promotion',
+      method: 'post',
+      data: {
+        promotionUuid,
+      },
+    });
+
+    dispatch(setPromotionRequestSuccessAction(data));
+    dispatch(pushNotification({
+      title: 'Изменения сохранены',
+      mode: Mode.SUCCESS,
+    }));
+  }
+  catch(error) {
+    dispatch(setPromotionRequestFailAction());
+    dispatch(pushNotification({
+      title: 'Ошибка при запросе данных',
+      connect: `${error['data']['message']} (${error['data']['code']})`,
+      mode: Mode.DANGER,
+      autoClose: false,
+    }));
+  }
+};
 
 export const getProducts = (params = {}) => async (dispatch) => {
   try {

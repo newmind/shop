@@ -6,6 +6,11 @@ module.exports = (db, DataTypes) => {
       type: DataTypes.STRING(32),
       allowNull: true
     },
+    order: {
+      type: DataTypes.INTEGER,
+      defaultValue: 1,
+      allowNull: false,
+    },
   }, {
     timestamps: false,
   });

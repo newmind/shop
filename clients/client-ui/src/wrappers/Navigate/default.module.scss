@@ -18,7 +18,7 @@
   flex: 1 0;
   flex-direction: row;
   margin: 0 auto;
-  width: 1024px;
+  width: 1200px;
 }
 
 .menu {
@@ -47,14 +47,6 @@
   vertical-align: bottom;
 }
 
-.tablet {
-
-  .center {
-    width: 800px;
-    background: red;
-  }
-}
-
 .header {
 
   display: block;
@@ -78,7 +70,7 @@
 .navigate {
 
   display: block;
-  background: $whitesmoke;
+  border-top: 1px solid rgba($gray, .2);
   border-bottom: 1px solid rgba($gray, .2);
 }
 

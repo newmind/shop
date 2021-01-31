@@ -148,7 +148,11 @@ export default () => async (ctx) => {
         as: 'types',
         where: { ...whereForTypes },
         attributes: ['id', 'value'],
-        through: { attributes: [] },
+        through: {
+          attributes: [],
+          order: [['order', 'asc']],
+          as: 'type',
+        },
       },
       {
         model: Category,
@@ -156,12 +160,16 @@ export default () => async (ctx) => {
         as: 'categories',
         where: { ...whereForCategories },
         attributes: ['id', 'value'],
-        through: { attributes: [] },
+        through: {
+          attributes: [],
+          order: [['order', 'asc']],
+          as: 'category',
+        },
       },
       {
         model: Promotion,
         required: false,
-        as: 'promotion',
+        as: 'promotions',
         attributes: ['uuid', 'name', 'percent'],
         where: {
           dateFrom: {
@@ -184,7 +192,11 @@ export default () => async (ctx) => {
         required: false,
         as: 'attributes',
         attributes: ['value'],
-        through: { attributes: ['value', 'attributeId'], as: 'attribute' },
+        through: {
+          attributes: ['value', 'attributeId'],
+          order: [['order', 'asc']],
+          as: 'attribute',
+        },
         include: [
           {
             model: Units,

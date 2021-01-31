@@ -117,7 +117,7 @@ function Select({
 
   function handleClose() {
     setOpen(false);
-    onBlur();
+    onBlur && onBlur();
   }
 
   function handleControlClick() {

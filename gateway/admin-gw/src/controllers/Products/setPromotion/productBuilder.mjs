@@ -9,7 +9,7 @@ export default function productBuilder(data) {
     categories: data['categories'],
     description: data['description'],
     amount: Number(data['amount']),
-    promotions: data['promotions'],
+    promotion: !! data['promotion'].length ? data['promotion'][0]['uuid'] : null,
     currency: data['currency'] ? data['currency']['value'] : null,
     status: Number(data['status']),
     gallery: data['gallery'].map((img) => img['uuid']),
