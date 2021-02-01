@@ -21,7 +21,7 @@ export default async function updateProperties(uuid, properties) {
   await ProductAttribute.bulkCreate(newAttributes, { transaction });
 
   await ProductBrand.destroy({ where: { productUuid: uuid }}, { transaction });
-  await ProductType.create({ productUuid: uuid, brandId: properties['brandId'] }, { transaction })
+  await ProductBrand.create({ productUuid: uuid, brandId: properties['brandId'] }, { transaction })
 
   await ProductType.destroy({ where: { productUuid: uuid }}, { transaction });
   const types = JSON.parse(properties['types']);
