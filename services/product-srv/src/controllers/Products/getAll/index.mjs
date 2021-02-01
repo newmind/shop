@@ -81,6 +81,7 @@ export default () => async (ctx) => {
     where: { ...where },
     order: [
       ['updatedAt', 'desc'],
+      ['gallery', 'order', 'desc'],
       ['comments', 'createdAt', 'desc'],
     ],
     include: [

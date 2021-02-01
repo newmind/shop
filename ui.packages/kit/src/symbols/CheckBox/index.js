@@ -4,42 +4,26 @@ import { Mode } from '@ui.packages/types';
 import React from 'react';
 import types from 'prop-types';
 
-import cn from 'classnames';
-import styles from './default.module.scss';
+import DarkDefault from './Dark/Default';
+
+import LightDefault from './Dark/Default';
 
 
-export default function Checkbox({ className, disabled, mode, value, label, onChange }) {
-  function handleClick() {
-    onChange && onChange( ! value);
+export default function CheckboxFactory({ theme, type, ...props }) {
+  if (theme === 'light') {
+    switch(type) {
+      default: return <LightDefault {...props} />;
+    }
   }
-
-  const classNameCheckbox = cn(styles['checkbox'], className, {
-    [styles['checkbox--checked']]: value,
-  }, {
-    [styles['disabled']]: disabled,
-  }, {
-    [styles['mode--info']]: mode === Mode.INFO,
-    [styles['mode--danger']]: mode === Mode.DANGER,
-    [styles['mode--primary']]: mode === Mode.PRIMARY,
-    [styles['mode--success']]: mode === Mode.SUCCESS,
-    [styles['mode--warning']]: mode === Mode.WARNING,
-  });
-
-  return (
-    <div className={styles['wrapper']} onClick={handleClick}>
-      <span className={classNameCheckbox}>
-        {value && (
-          <span className={cn(styles['checkbox__marker'], 'fas fa-check')} />
-        )}
-      </span>
-      {label && (
-        <span className={styles['label']}>{ label }</span>
-      )}
-    </div>
-  );
+  if (theme === 'dark') {
+    switch(type) {
+      default: return <DarkDefault {...props} />;
+    }
+  }
 }
 
-Checkbox.propTypes = {
+CheckboxFactory.propTypes = {
+  theme: types.oneOf(['dark', 'light']),
   className: types.string,
   label: types.string,
   mode: types.oneOf([Mode.INFO, Mode.PRIMARY, Mode.DANGER, Mode.WARNING, Mode.SUCCESS, Mode.DEFAULT]),
@@ -48,7 +32,8 @@ Checkbox.propTypes = {
   onChange: types.func,
 };
 
-Checkbox.defaultProps = {
+CheckboxFactory.defaultProps = {
+  theme: 'light',
   mode: Mode.DEFAULT,
   disabled: false,
   value: false,

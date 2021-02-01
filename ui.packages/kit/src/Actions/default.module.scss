@@ -29,6 +29,16 @@
     }
   }
 
+  &--copy {
+
+    color: $gray;
+
+    &:hover {
+
+      color: $primary;
+    }
+  }
+
   &--delete {
 
     color: $gray;

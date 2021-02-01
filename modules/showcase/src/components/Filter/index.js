@@ -2,13 +2,14 @@
 import { CheckBox } from '@ui.packages/kit';
 import { queryToObject, objectToQuery, nounDeclension } from "@ui.packages/utils";
 
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import types from 'prop-types';
 import { useSelector } from 'react-redux';
 import { useLocation, useNavigate } from 'react-router-dom';
 
 import { selectTypes, selectBrands, selectCategories, selectMeta } from '../../ducks/slice';
 
+import cn from 'classnames';
 import styles from "./default.module.scss";
 
 
@@ -17,30 +18,42 @@ function Products() {
   const navigate = useNavigate();
   const query = queryToObject(location['search']);
 
-  if (query['brand'] && ! (query['brand'] instanceof Array)) {
-    query['brand'] = [query['brand']];
-  }
-
-  if (query['typeId'] && ! (query['typeId'] instanceof Array)) {
-    query['typeId'] = [query['typeId']];
-  }
-
-  if (query['categoryId'] && ! (query['categoryId'] instanceof Array)) {
-    query['categoryId'] = [query['categoryId']];
-  }
-
   const meta = useSelector(selectMeta);
   const types = useSelector(selectTypes);
   const brands = useSelector(selectBrands);
   const categories = useSelector(selectCategories);
 
-  const [brandId, setBrandId] = useState(query['brandId'] || []);
-  const [typeId, setTypesId] = useState(query['typeId'] || []);
-  const [categoryId, setCategoryId] = useState(query['categoryId'] || []);
+  let typeId = [];
+  let categoryId = [];
+  let brandId = [];
 
-  useEffect(() => {
-    navigate(objectToQuery({ ...query, brandId, typeId, categoryId }));
-  }, [brandId, typeId, categoryId]);
+  if (query['typeId']) {
+    if ( ! (query['typeId'] instanceof Array)) {
+      typeId = [query['typeId']];
+    }
+    else {
+      typeId = query['typeId'];
+    }
+  }
+
+  if (query['categoryId']) {
+    if ( ! (query['categoryId'] instanceof Array)) {
+      categoryId = [query['categoryId']];
+    }
+    else {
+      categoryId = query['categoryId'];
+    }
+  }
+
+  if (query['brandId']) {
+    if ( ! (query['brandId'] instanceof Array)) {
+      brandId = [query['brandId']];
+    }
+    else {
+      brandId = query['brandId'];
+    }
+  }
+
 
   function handleChangeBrands(id) {
     const brands = [...brandId];
@@ -51,7 +64,7 @@ function Products() {
     else {
       brands.push(id);
     }
-    setBrandId(brands);
+    navigate(objectToQuery({ ...query, brandId: brands }));
   }
 
   function handleChangeTypes(id) {
@@ -63,7 +76,7 @@ function Products() {
     else {
       types.push(id);
     }
-    setTypesId(types);
+    navigate(objectToQuery({ ...query, typeId: types }));
   }
 
   function handleChangeCategories(id) {
@@ -75,13 +88,24 @@ function Products() {
     else {
       categories.push(id);
     }
-    setCategoryId(categories);
+    navigate(objectToQuery({ ...query, categoryId: categories }));
+  }
+
+  function handleFilterReset() {
+    navigate(objectToQuery({}));
   }
 
   return (
     <div className={styles['wrapper']}>
       <div className={styles['count']}>
-        Найдено { meta['total'] } {nounDeclension(meta['total'], ['товар', 'товара', 'товаров'])}
+        <div className={styles['value']}>
+          Найдено { meta['total'] } {nounDeclension(meta['total'], ['товар', 'товара', 'товаров'])}
+        </div>
+        { !! Object.keys(query).length && (
+          <div className={styles['control']}>
+            <span className={cn(styles['icon'], 'fas fa-times')} onClick={() => handleFilterReset()} />
+          </div>
+        )}
       </div>
       <div className={styles['block']}>
         <div className={styles['header']}>
@@ -90,13 +114,18 @@ function Products() {
         <div className={styles['content']}>
           {types.map((item) => (
             <div key={item['id']} className={styles['item']}>
-              <CheckBox
-                className={styles['check-box']}
-                label={item['value'] + ' [' + item['count'] + ']'}
-                disabled={ ! item['count']}
-                value={ !!~ typeId.indexOf(item['id'])}
-                onChange={() => handleChangeTypes(item['id'])}
-              />
+              <div className={styles['item__value']}>
+                <CheckBox
+                  className={styles['check-box']}
+                  label={item['value']}
+                  disabled={ ! item['count']}
+                  value={ !!~ (typeId || []).indexOf(item['id'])}
+                  onChange={() => handleChangeTypes(item['id'])}
+                />
+              </div>
+              <div className={styles['item__count']}>
+                { item['count'] }
+              </div>
             </div>
           ))}
         </div>
@@ -108,13 +137,18 @@ function Products() {
         <div className={styles['content']}>
           {categories.map((item) => (
             <div key={item['id']} className={styles['item']}>
-              <CheckBox
-                className={styles['check-box']}
-                label={item['value'] + ' [' + item['count'] + ']'}
-                disabled={ ! item['count']}
-                value={ !!~ categoryId.indexOf(item['id'])}
-                onChange={() => handleChangeCategories(item['id'])}
-              />
+              <div className={styles['item__value']}>
+                <CheckBox
+                  className={styles['check-box']}
+                  label={item['value']}
+                  disabled={ ! item['count']}
+                  value={ !!~ (categoryId || []).indexOf(item['id'])}
+                  onChange={() => handleChangeCategories(item['id'])}
+                />
+              </div>
+              <div className={styles['item__count']}>
+                { item['count'] }
+              </div>
             </div>
           ))}
         </div>
@@ -126,13 +160,18 @@ function Products() {
         <div className={styles['content']}>
           {brands.map((item) => (
             <div key={item['id']} className={styles['item']}>
-              <CheckBox
-                className={styles['check-box']}
-                label={item['value'] + ' [' + item['count'] + ']'}
-                disabled={ ! item['count']}
-                value={ !!~ brandId.indexOf(item['id'])}
-                onChange={() => handleChangeBrands(item['id'])}
-              />
+              <div className={styles['item__value']}>
+                <CheckBox
+                  className={styles['check-box']}
+                  label={item['value']}
+                  disabled={ ! item['count']}
+                  value={ !!~ (brandId || []).indexOf(item['id'])}
+                  onChange={() => handleChangeBrands(item['id'])}
+                />
+              </div>
+              <div className={styles['item__count']}>
+                { item['count'] }
+              </div>
             </div>
           ))}
         </div>

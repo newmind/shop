@@ -6,11 +6,7 @@ export default () => async (ctx) => {
   const where = {};
 
   const { Product, Category, Type } = models;
-  const { brand = null, typeId = null } = ctx['request']['query'];
-
-  if (brand) {
-    where['brand'] = brand;
-  }
+  const { typeId = null } = ctx['request']['query'];
 
   if (typeId) {
     where['typeId'] = typeId;
@@ -33,7 +29,7 @@ export default () => async (ctx) => {
         include: [
           {
             model: Type,
-            required: !! Object.keys(where).length,
+            required: !! where['typeId'],
             as: 'types',
             where: { id: where['typeId'] || [] },
             attributes: [],

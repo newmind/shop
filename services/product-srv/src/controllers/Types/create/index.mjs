@@ -21,7 +21,6 @@ export default () => async (ctx) => {
         through: { attributes: [] },
       }
     ],
-    transaction,
   });
 
   const type = result.toJSON();

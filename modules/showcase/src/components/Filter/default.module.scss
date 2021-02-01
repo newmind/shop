@@ -9,13 +9,45 @@
 
 .count {
 
-  display: block;
+  display: flex;
+  flex-direction: row;
+  flex: 1 0;
+  align-items: center;
+  margin-bottom: 8px;
+}
+
+.value {
+
+  display: flex;
+  flex-direction: column;
+  flex: 1 0;
   background: rgba($primary, .4);
   font-size: 16px;
   color: $white;
   padding: 15px;
   border-radius: 5px;
-  margin-bottom: 8px;
+}
+
+.control {
+
+  display: block;
+  margin: 0 0 0 6px;
+}
+
+.icon {
+
+  display: block;
+  padding: 8px 12px;
+  font-size: 20px;
+  color: rgba($danger, .5);
+  border-radius: 5px;
+  cursor: pointer;
+  transition: color 200ms;
+
+  &:hover {
+
+    color: rgba($danger, .8);
+  }
 }
 
 .block {
@@ -50,13 +82,29 @@
 
 .item {
 
-  display: block;
+  display: flex;
+  flex-direction: row;
+  flex: 1 0;
   padding: 0 15px;
   color: $pale-lilac;
+  align-items: center;
 
   & + & {
 
     margin: 12px 0 0;
+  }
+
+  &__value {
+
+    display: flex;
+    flex-direction: column;
+    flex: 1 0;
+  }
+
+  &__count {
+
+    display: block;
+    font-size: 13px;
   }
 }
 

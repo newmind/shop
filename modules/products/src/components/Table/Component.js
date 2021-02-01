@@ -105,10 +105,11 @@ function List({ items, meta, openDialog, closeDialog, removeProductById }) {
         </Column>
         <Column
           align="right"
-          width="50"
+          width="70"
         >
           {({ uuid }) => (
             <Actions
+              onCopy={() => handleEdit(uuid)}
               onEdit={() => handleEdit(uuid)}
               onDelete={() => handleRemoveProduct(uuid)}
             />
