@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 echo ''
-echo 'Сборка пакетов "UI"'
+echo 'Сборка пакетов "UI" для "Admin"'
 echo '-------------------'
 
 cd ./ui.packages || return
