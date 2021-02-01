@@ -1,24 +1,30 @@
 
-import { Image, Row, Col } from '@ui.packages/kit';
+import { Image } from '@ui.packages/kit';
 
 import types from 'prop-types';
-import React, { PureComponent } from 'react';
+import React from 'react';
 
 import cn from 'classnames';
 import styles from './default.module.scss';
 
 
-class Component extends PureComponent {
-  static propTypes = {
-    path: types.string,
-  };
+function AddImageForm({ path, input, onDelete }) {
 
-  static defaultProps = {
-    path: '',
-  };
+  function handleDelete(file) {
+    if (file instanceof File) {
+      const index = input['value'].indexOf(file);
+      if (index > -1) {
+        let files = [...(input['value'] || [])];
+        files.splice(index, 1);
+        input.onChange(files);
+      }
+    }
+    else {
+      onDelete(file);
+    }
+  }
 
-  _handleAddImages() {
-    const { input } = this.props;
+  function handleAddImages() {
     const inputElement = document.createElement('input');
 
     inputElement.classList.add(styles['input']);
@@ -28,16 +34,14 @@ class Component extends PureComponent {
 
     inputElement.onchange = () => {
       let files = [...input['value'] || [], ...inputElement['files']];
-      this.setState({ files }, () => input.onChange(files));
+      input.onChange(files);
       inputElement.remove();
     };
 
     inputElement.click();
   }
 
-  _normalizeURI(src) {
-    const { path } = this.props;
-
+  function normalizeURI(src) {
     if (src && src.constructor === File) {
       return URL.createObjectURL(src);
     } else {
@@ -45,33 +49,37 @@ class Component extends PureComponent {
     }
   }
 
-  render() {
-    const { input, onDelete } = this.props;
-
-    return (
-      <div className={styles['wrapper']}>
-        <Row>
-          <Col>
-            <div className={styles['content']}>
-              <span className={styles['add-image']} onClick={this._handleAddImages.bind(this)}>
-                <span className={cn('fas fa-plus', styles['add-image__icon'])}/>
-              </span>
-              {(input['value'] || []).map((externalId, key) => {
-                return (
-                  <div key={key} className={styles['image']}>
-                    {(externalId && externalId.constructor !== File) && (
-                      <span className={cn(styles['remove-image'], 'fas fa-times')} onClick={onDelete.bind(this, externalId)} />
-                    )}
-                    <Image src={this._normalizeURI(externalId)} />
-                  </div>
-                );
-              })}
+  return (
+    <div className={styles['wrapper']}>
+      <div className={styles['content']}>
+        <div className={styles['section']}>
+          <span className={styles['add-image']} onClick={() => handleAddImages()}>
+            <span className={cn('fas fa-plus', styles['add-image__icon'])}/>
+          </span>
+        </div>
+        {(input['value'] || []).map((externalId, key) => {
+          return (
+            <div className={styles['section']} key={key}>
+              <div className={cn(styles['image'], {
+                [styles['new']]: externalId.constructor === File,
+              })}>
+                <span className={cn(styles['remove-image'], 'fas fa-times')} onClick={() => handleDelete(externalId)} />
+                <Image src={normalizeURI(externalId)} />
+              </div>
             </div>
-          </Col>
-        </Row>
+          );
+        })}
       </div>
-    );
-  }
+    </div>
+  );
 }
 
-export default Component;
+AddImageForm.propTypes = {
+  path: types.string,
+};
+
+AddImageForm.defaultProps = {
+  path: '',
+};
+
+export default AddImageForm;
