@@ -20,7 +20,7 @@ export default () => async (ctx) => {
     row: true,
     group: ["Brand.id"],
     order: [['value', 'asc']],
-    attributes: ['id', 'value', [sequelize.fn('COUNT', sequelize.col('Brand.id')), 'count']],
+    attributes: ['id', 'value', [sequelize.fn('COUNT', sequelize.col('products.uuid')), 'count']],
     include: [
       {
         model: Product,
