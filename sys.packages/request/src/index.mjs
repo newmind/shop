@@ -10,6 +10,7 @@ import {
   MethodNotAllowedError,
 } from '@packages/errors';
 
+import qs from 'qs';
 import axios from 'axios';
 
 
@@ -109,6 +110,12 @@ const request = async (options) => {
     timeout: 24000,
   });
 
+  instance.interceptors.request.use(function (config) {
+    config.paramsSerializer = (params) => {
+      return qs.stringify(params, { arrayFormat: 'repeat' })
+    }
+    return config;
+  });
   instance.interceptors.request.use(requestLogger, errorLogger);
   instance.interceptors.response.use(responseLogger, errorLogger);
 

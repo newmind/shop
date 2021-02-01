@@ -1,20 +1,12 @@
 
-import { models, Sequelize, sequelize } from '@sys.packages/db';
+import { models, sequelize } from '@sys.packages/db';
 
 
 export default () => async (ctx) => {
   const where = {};
 
-  const { Op } = Sequelize;
-  const { ProductCategory, Category } = models;
-  const {
-    status = null, brand = null, amountFrom = null, typeId = null,
-    amountTo = null, colorId = null, formId = null, materialId = null,
-  } = ctx['request']['query'];
-
-  if (status) {
-    where['status'] = status;
-  }
+  const { Product, Category, Type } = models;
+  const { brand = null, typeId = null } = ctx['request']['query'];
 
   if (brand) {
     where['brand'] = brand;
@@ -24,42 +16,30 @@ export default () => async (ctx) => {
     where['typeId'] = typeId;
   }
 
-  if (colorId) {
-    where['colorId'] = colorId;
-  }
-
-  if (formId) {
-    where['formId'] = formId;
-  }
-
-  if (materialId) {
-    where['materialId'] = materialId;
-  }
-
-  if (amountFrom && ! amountTo) {
-    where['amount'] = {
-      [Op.gte]: amountFrom
-    };
-  } else if (amountTo && ! amountFrom) {
-    where['amount'] = {
-      [Op.lte]: amountTo
-    };
-  } else if (amountFrom && amountTo) {
-    where['amount'] = {
-      [Op.between]: [amountFrom, amountTo]
-    };
-  }
-
   const result = await Category.findAll({
-    distinct: true,
+    row: true,
     group: ['Category.id'],
     order: [['value', 'asc']],
-    attributes: ['id', 'value', [sequelize.fn('COUNT', sequelize.col('product_categories.categoryId')), 'count']],
+    attributes: ['id', 'value', [sequelize.fn('COUNT', sequelize.col('products.uuid')), 'count']],
+    having: {
+    },
     include: [
       {
-        model: ProductCategory,
-        as: 'product_categories',
+        model: Product,
+        required: true,
+        as: 'products',
         attributes: [],
+        through: { attributes: [] },
+        include: [
+          {
+            model: Type,
+            required: !! Object.keys(where).length,
+            as: 'types',
+            where: { id: where['typeId'] || [] },
+            attributes: [],
+            through: { attributes: [] },
+          },
+        ]
       }
     ],
   });

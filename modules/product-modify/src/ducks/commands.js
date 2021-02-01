@@ -5,6 +5,10 @@ import { uniqName } from '@ui.packages/utils';
 import { pushNotification } from '@ui.packages/notifications';
 
 import {
+  getBrandsRequestAction,
+  getBrandsRequestFailAction,
+  getBrandsRequestSuccessAction,
+
   getTypesRequestAction,
   getTypesRequestFailAction,
   getTypesRequestSuccessAction,
@@ -38,6 +42,28 @@ import {
   deleteImageRequestSuccessAction,
 } from './slice';
 
+
+export const getBrands = () => async (dispatch) => {
+  try {
+    dispatch(getBrandsRequestAction());
+
+    const { data } = await request({
+      url: '/brands',
+      method: 'get',
+    });
+
+    dispatch(getBrandsRequestSuccessAction(data));
+  }
+  catch(error) {
+    dispatch(getBrandsRequestFailAction(error));
+    dispatch(pushNotification({
+      mode: Mode.DANGER,
+      title: 'Ошибка при получании данный',
+      content: `${error['data']['message']} (${error['data']['code']})`,
+      autoClose: false,
+    }));
+  }
+};
 
 export const getTypes = () => async (dispatch) => {
   try {
@@ -171,7 +197,7 @@ export const updateProductsById = (data) => async (dispatch) => {
     });
 
     formData.append('name', data['name']);
-    formData.append('brand', data['brand']);
+    formData.append('brandId', data['brandId']);
     formData.append('amount', data['amount']);
     formData.append('currencyId', data['currencyId']);
     formData.append('description', data['description']);
@@ -229,7 +255,7 @@ export const createProduct = (data) => async dispatch => {
 
     formData.append('uuid', uuid);
     formData.append('name', data['name']);
-    formData.append('brand', data['brand']);
+    formData.append('brandId', data['brandId']);
     formData.append('amount', data['amount']);
     formData.append('currencyId', data['currencyId']);
     formData.append('description', data['description']);

@@ -120,11 +120,6 @@ module.exports = {
           index: true,
           unique: 'compositeIndex',
         },
-        brand: {
-          type: Sequelize.STRING(255),
-          allowNull: false,
-          index: true,
-        },
         name: {
           type: Sequelize.STRING(255),
           allowNull: true,

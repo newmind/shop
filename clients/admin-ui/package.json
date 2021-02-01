@@ -7,6 +7,7 @@
     "start": "react-scripts start"
   },
   "dependencies": {
+    "@modules/brands": "1.0.0",
     "@modules/types": "1.0.0",
     "@modules/promotions": "1.0.0",
     "@modules/categories": "1.0.0",

@@ -1,9 +1,8 @@
 
 export default function productBuilder(data) {
-  console.log(data)
   return {
     uuid: data['uuid'],
-    brand: data['brand'],
+    brand: !! data['brands'].length ? data['brands'][0]['value'] : null,
     name: data['name'],
     amount: data['amount'],
     saleAmount: data['saleAmount'] || 0,

@@ -54,21 +54,31 @@ export const reduceToArray = (items, SIZE = 4, options = { fillNull: false }) =>
 };
 
 export const objectToQuery = (object) => {
-  let query = {};
+  let query = [];
   for (let key in object) {
     if (object.hasOwnProperty(key)) {
       const value = object[key];
-      if ( !! value) {
-        query[key] = value;
+      if (value instanceof Array) {
+        if ( !! value.length) {
+          query = [...query, ...value.map(item => [key, item])];
+        }
+      }
+      else {
+        if (value) {
+          query = [...query, [key, value]];
+        }
       }
     }
   }
+
   const searchURL = new URLSearchParams(query);
-  return '?' + searchURL.toString();
+  const search = searchURL.toString();
+  return search ? '?' + search : '';
 };
 
 export const queryToObject = (query) => {
   const searchURL = new URLSearchParams(query);
+
   let params = {};
   for (let param of searchURL) {
     if ( !! param[1]) {
@@ -80,9 +90,21 @@ export const queryToObject = (query) => {
       } else if (/^(false)$/.test(paramValue)) {
         paramValue = false;
       }
-      params[param[0]] = paramValue;
+
+      if (param[0] in params) {
+        if (params[param[0]] instanceof Array) {
+          params[param[0]] = [...params[param[0]], paramValue];
+        }
+        else {
+          params[param[0]] = [params[param[0]], paramValue];
+        }
+      }
+      else {
+        params[param[0]] = paramValue;
+      }
     }
   }
+
   return params;
 };
 

@@ -3,6 +3,7 @@ import { createSlice } from '@reduxjs/toolkit';
 
 
 const initialState = {
+  brands: [],
   types: [],
   categories: [],
   attributes: [],
@@ -21,12 +22,19 @@ const productModifySlice = createSlice({
   reducers: {
     resetState(state) {
       state['types'] = [];
+      state['brands'] = [];
       state['units'] = [];
       state['currencies'] = [];
       state['categories'] = [];
       state['attributes'] = [];
       state['product'] = {};
       state['inProcess'] = false;
+    },
+
+    getBrandsRequestAction() {},
+    getBrandsRequestFailAction() {},
+    getBrandsRequestSuccessAction(state, { payload }) {
+      state['brands'] = payload;
     },
 
     getTypesRequestAction() {},
@@ -105,6 +113,10 @@ const productModifySlice = createSlice({
 export const {
   resetState,
 
+  getBrandsRequestAction,
+  getBrandsRequestFailAction,
+  getBrandsRequestSuccessAction,
+
   getCategoriesRequestAction,
   getCategoriesRequestFailAction,
   getCategoriesRequestSuccessAction,
@@ -144,6 +156,7 @@ export const {
 
 export const selectTypes = (state) => state[REDUCER_NAME]['types'];
 export const selectUnits = (state) => state[REDUCER_NAME]['units'];
+export const selectBrands = (state) => state[REDUCER_NAME]['brands'];
 export const selectProduct = (state) => state[REDUCER_NAME]['product'];
 export const selectInProcess = (state) => state[REDUCER_NAME]['inProcess'];
 export const selectCategories = (state) => state[REDUCER_NAME]['categories'];

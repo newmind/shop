@@ -14,11 +14,6 @@ module.exports = (db, DataType) => {
       allowNull: true,
       index: true,
     },
-    brand: {
-      type: DataType.STRING(255),
-      allowNull: false,
-      index: true,
-    },
     name: {
       type: DataType.STRING(255),
       allowNull: true,
@@ -57,11 +52,18 @@ module.exports = (db, DataType) => {
     },
   });
 
-  Product.associate = function({ Attribute, Gallery, Category, Type, Promotion, ProductPromotion, ProductType, ProductCategory, ProductAttribute, Currency, Comment }) {
+  Product.associate = function({ Brand, Attribute, Gallery, Category, Type, Promotion, ProductBrand, ProductPromotion, ProductType, ProductCategory, ProductAttribute, Currency, Comment }) {
 
     Product.belongsTo(Currency, {
       foreignKey: 'currencyId',
       as: 'currency',
+    });
+
+    Product.belongsToMany(Brand, {
+      through: ProductBrand,
+      foreignKey: 'productUuid',
+      otherKey: 'brandId',
+      as: 'brands',
     });
 
     Product.belongsToMany(Type, {

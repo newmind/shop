@@ -19,6 +19,10 @@ const navigate = [
         path: '/options/categories',
       },
       {
+        title: 'Производитель',
+        path: '/options/brands',
+      },
+      {
         title: 'Аттрибуты',
         path: '/options/attributes',
       },

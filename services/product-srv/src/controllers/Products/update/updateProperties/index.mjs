@@ -3,7 +3,7 @@ import { sequelize, models } from '@sys.packages/db';
 
 
 export default async function updateProperties(uuid, properties) {
-  const { Product, ProductType, ProductCategory, ProductAttribute } = models;
+  const { Product, ProductBrand, ProductType, ProductCategory, ProductAttribute } = models;
 
   const transaction = await sequelize.transaction();
 
@@ -20,6 +20,9 @@ export default async function updateProperties(uuid, properties) {
 
   await ProductAttribute.bulkCreate(newAttributes, { transaction });
 
+  await ProductBrand.destroy({ where: { productUuid: uuid }}, { transaction });
+  await ProductType.create({ productUuid: uuid, brandId: properties['brandId'] }, { transaction })
+
   await ProductType.destroy({ where: { productUuid: uuid }}, { transaction });
   const types = JSON.parse(properties['types']);
   await ProductType.bulkCreate(types.map((item) => ({ productUuid: uuid, typeId: item })), { transaction })
@@ -30,7 +33,6 @@ export default async function updateProperties(uuid, properties) {
 
   await Product.update({
     name: properties['name'],
-    brand: properties['brand'],
     amount: properties['amount'],
     currencyId: properties['currencyId'],
     description: properties['description'],

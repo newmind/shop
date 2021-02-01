@@ -4,105 +4,63 @@
 
 .wrapper {
 
-  display: flex;
-  flex-direction: column;
-  flex: 1 0;
+  display: block;
 }
 
-.fields {
-
-  display: flex;
-  flex-direction: column;
-  flex: 1 0;
-}
-
-.line {
-
-  display: flex;
-  flex-direction: row;
-  flex: 1 0;
-
-  & + & {
-    margin: 20px 0 0;
-  }
-}
-
-.col {
+.count {
 
   display: block;
-  flex-direction: column;
-  flex: 1 0;
+  background: rgba($primary, .4);
+  font-size: 16px;
+  color: $white;
+  padding: 15px;
+  border-radius: 5px;
+  margin-bottom: 8px;
+}
+
+.block {
+
+  display: block;
+  border-radius: 3px;
   overflow: hidden;
+  background: rgba($white, .15);
 
   & + & {
-    margin: 0 0 0 20px;
+
+    margin: 8px 0 0;
   }
 }
 
-.controls {
-
-  position: relative;
-  display: block;
-}
-
-.amounts {
+.header {
 
   display: block;
-  flex: 283px 0;
+  font-size: 12px;
+  font-weight: 700;
+  color: $white;
+  padding: 15px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
 }
 
-.amount {
+.content {
 
-  display: inline-flex;
-  flex: 1 0;
-  flex-direction: row;
-  align-items: center;
+  display: block;
+  padding: 8px 0 20px;
+}
 
-  &__label {
+.item {
 
-    display: block;
-    font-family: inherit;
-    font-weight: 300;
-    font-size: 14px;
-    margin: 0 15px 0 0;
-    color: $coal-dark;
-    transition: color 400ms;
-  }
+  display: block;
+  padding: 0 15px;
+  color: $pale-lilac;
 
-  &__wrapper {
+  & + & {
 
-    display: inline-flex;
-    align-items: center;
-  }
-
-  &__input {
-
-    width: 100px;
-  }
-
-  &__delimiter {
-
-    margin: 0 6px;
-    color: $pale-lilac;
+    margin: 12px 0 0;
   }
 }
 
-.align-centered {
+.check-box {
 
-  justify-content: center;
-}
-
-.additional {
-
-  display: flex;
-  flex-direction: row;
-  flex: 1 0;
-  padding: 10px 0 0;
-
-  &__col {
-
-    display: flex;
-    flex-direction: column;
-    flex: 1 0;
-  }
+  color: $white;
 }

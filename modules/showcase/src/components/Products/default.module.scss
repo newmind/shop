@@ -4,43 +4,42 @@
 
 .wrapper {
 
-  display: block;
+  display: flex;
+  flex-direction: column;
+  flex: 1 0;
 }
 
-.header {
+.controls {
 
   display: block;
-  margin: 0 0 60px;
+  background: rgba($white, .15);
+  padding: 20px;
+  border-radius: 3px;
 }
 
 .content {
 
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   flex: 1 0;
-}
-
-.filter {
-
-  display: block;
-  width: 280px;
-}
-
-.list {
-
-  display: block;
-  margin: 0 0 0 20px;
+  margin: 20px 0 0;
 }
 
 .section {
 
-  display: flex;
-  flex-direction: column;
-  flex: 1 0;
-  box-sizing: border-box;
+  display: block;
 
   & + & {
 
     margin: 20px 0 0;
   }
+}
+
+.paging {
+
+  display: block;
+  background: rgba($white, .15);
+  padding: 20px;
+  margin: 40px 0 0;
+  border-radius: 3px;
 }

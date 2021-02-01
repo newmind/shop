@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 echo ''
-echo 'Сборка пакетов "UI"'
+echo 'Сборка пакетов "UI" для "Client"'
 echo '-------------------'
 
 cd ./ui.packages || return
@@ -55,5 +55,7 @@ echo '[--- Users ---]'
 cd ../users && npx yarn build
 echo '[--- Promotions ---]'
 cd ../promotions && npx yarn build
+echo '[--- Brands ---]'
+cd ../brands && npx yarn build
 
 exit 0

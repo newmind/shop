@@ -30,7 +30,7 @@ module.exports = (db, DataType) => {
       through: ProductCategory,
       foreignKey: 'categoryId',
       otherKey: 'productUuid',
-      as: 'categories',
+      as: 'products',
     });
 
     Category.hasMany(ProductCategory, {
@@ -42,7 +42,7 @@ module.exports = (db, DataType) => {
       through: TypeCategory,
       foreignKey: 'categoryId',
       otherKey: 'typeId',
-      as: 'type_categories',
+      as: 'types',
     });
 
     Category.hasMany(TypeCategory, {

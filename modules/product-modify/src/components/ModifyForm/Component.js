@@ -10,11 +10,12 @@ import AttrsForm from '../AttributesForm';
 
 import styles from './default.module.scss';
 
-import { selectTypes, selectCategories, selectCurrencies, selectInProcess } from '../../ducks/slice';
+import { selectBrands, selectTypes, selectCategories, selectCurrencies, selectInProcess } from '../../ducks/slice';
 
 
 function ModifyForm({ handleSubmit, onDelete }) {
   const types = useSelector(selectTypes);
+  const brands = useSelector(selectBrands);
   const categories = useSelector(selectCategories);
   const currencies = useSelector(selectCurrencies);
   const inProcess = useSelector(selectInProcess);
@@ -45,7 +46,7 @@ function ModifyForm({ handleSubmit, onDelete }) {
           </Row>
           <Row>
             <Col>
-              <InputField require name="brand" label="Бренд" disabled={inProcess} />
+              <SelectField require name="brandId" label="Бренд" options={brands} disabled={inProcess} />
             </Col>
             <Col>
               <InputField require name="name" label="Назвние" disabled={inProcess} />

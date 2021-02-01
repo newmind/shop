@@ -6,14 +6,12 @@ export default () => async (ctx) => {
   let where = {};
   let whereForTypes = {};
   let whereForCategories = {};
-  let whereForColors = {};
-  let whereForMaterials = {};
-  let whereForForms = {};
+  let whereForBrands = {};
   let offset = {};
   let options = {};
 
   const { Op } = Sequelize;
-  const { Product, Currency, Category, Type, Attribute, Units, Gallery, Comment, Promotion } = models;
+  const { Product, Currency, Category, Brand, Type, Attribute, Units, Gallery, Comment, Promotion } = models;
   const {
     fiscal = null,
     status = null,
@@ -22,15 +20,10 @@ export default () => async (ctx) => {
     take = null,
     uuid = null,
     categoryId = null,
-    brand = null,
+    brandId = null,
     amountFrom = null,
     amountTo = null,
-    colorId = null,
-    formId = null,
-    materialId = null,
     typeId = null,
-    createdFrom,
-    createdTo,
   } = ctx['request']['query'];
 
   if (status) {
@@ -45,53 +38,16 @@ export default () => async (ctx) => {
     where['uuid'] = uuid;
   }
 
-  if (brand) {
-    where['brand'] = brand;
+  if (brandId) {
+    whereForBrands['id'] = brandId;
   }
 
   if (typeId) {
-    if (/^\d+$/.test(typeId)) {
-      whereForTypes['id'] = Number(typeId);
-    }
-    else {
-      whereForTypes['id'] = typeId;
-    }
+    whereForTypes['id'] = typeId;
   }
 
   if (categoryId) {
-    if (/^\d+$/.test(categoryId)) {
-      whereForCategories['id'] = Number(categoryId);
-    }
-    else {
-      whereForCategories['id'] = categoryId;
-    }
-  }
-
-  if (colorId) {
-    if (/^\d+$/.test(colorId)) {
-      whereForColors['id'] = Number(colorId);
-    }
-    else {
-      whereForColors['id'] = colorId;
-    }
-  }
-
-  if (materialId) {
-    if (/^\d+$/.test(materialId)) {
-      whereForMaterials['id'] = Number(materialId);
-    }
-    else {
-      whereForMaterials['id'] = materialId;
-    }
-  }
-
-  if (formId) {
-    if (/^\d+$/.test(formId)) {
-      whereForForms['id'] = Number(formId);
-    }
-    else {
-      whereForForms['id'] = formId;
-    }
+    whereForCategories['id'] = categoryId;
   }
 
   if (amountFrom && ! amountTo) {
@@ -108,20 +64,6 @@ export default () => async (ctx) => {
     };
   }
 
-  if (createdFrom && ! createdTo) {
-    where['createdAt'] = {
-      [Op.gte]: createdFrom
-    };
-  } else if (createdTo && ! createdFrom) {
-    where['createdAt'] = {
-      [Op.lte]: createdTo
-    };
-  } else if (createdFrom && createdTo) {
-    where['createdAt'] = {
-      [Op.between]: [createdFrom, createdTo]
-    };
-  }
-
   if (limit) {
     options['limit'] = Number(limit);
   }
@@ -132,7 +74,7 @@ export default () => async (ctx) => {
   }
 
   const products = await Product.findAndCountAll({
-    attributes: ['uuid', 'brand', 'name', 'description', 'status', 'amount', 'saleAmount', 'fiscal', 'updatedAt'],
+    attributes: ['uuid', 'name', 'description', 'status', 'amount', 'saleAmount', 'fiscal', 'updatedAt'],
     ...options,
     ...offset,
     distinct: true,
@@ -142,6 +84,18 @@ export default () => async (ctx) => {
       ['comments', 'createdAt', 'desc'],
     ],
     include: [
+      {
+        model: Brand,
+        required: !! whereForBrands['id'],
+        as: 'brands',
+        where: { ...whereForBrands },
+        attributes: ['id', 'value'],
+        through: {
+          attributes: [],
+          order: [['order', 'asc']],
+          as: 'brand',
+        },
+      },
       {
         model: Type,
         required: !! whereForTypes['id'],

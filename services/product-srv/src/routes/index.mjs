@@ -1,4 +1,5 @@
 
+import { getAllBrands, createBrand, updateBrand, deleteBrand } from '../controllers/Brands';
 import { getAllTypes, createType, updateType, deleteType } from '../controllers/Types';
 import { getAllUnits, createUnit, updateUnit, deleteUnits } from '../controllers/Units';
 import { getAllCategories, createCategory, updateCategory, deleteCategories } from '../controllers/Category';
@@ -14,6 +15,11 @@ import { getAllPromotions, deletePromotions, createPromotion, updatePromotion } 
 
 
 export default (router) => {
+
+  router.get('/v1/api/brands', getAllBrands());
+  router.post('/v1/api/brands', createBrand());
+  router.put('/v1/api/brands/:id', updateBrand());
+  router.delete('/v1/api/brands', deleteBrand());
 
   router.get('/v1/api/types', getAllTypes());
   router.post('/v1/api/types', createType());

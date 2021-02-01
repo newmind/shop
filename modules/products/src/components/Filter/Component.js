@@ -44,9 +44,8 @@ export default function Filter({ handleSubmit, submit }) {
         <Col>
           <SelectField
             placeholder="Бренд"
-            name="brand"
+            name="brandId"
             options={brands}
-            optionKey="value"
             disabled={inProcess}
           />
         </Col>

@@ -1,20 +1,12 @@
 
-import { models, Sequelize, sequelize } from '@sys.packages/db';
+import { models, sequelize } from '@sys.packages/db';
 
 
 export default () => async (ctx) => {
   let where = {};
 
-  const { Op } = Sequelize;
-  const { Product } = models;
-  const {
-    status = null, categoryId = null, amountFrom = null, typeId = null,
-    amountTo = null, colorId = null, formId = null, materialId = null,
-  } = ctx['request']['query'];
-
-  if (status) {
-    where['status'] = status;
-  }
+  const { Brand, Product, Type, Category } = models;
+  const { categoryId = null, typeId = null } = ctx['request']['query'];
 
   if (typeId) {
     where['typeId'] = typeId;
@@ -24,36 +16,38 @@ export default () => async (ctx) => {
     where['categoryId'] = categoryId;
   }
 
-  if (colorId) {
-    where['colorId'] = colorId;
-  }
-
-  if (formId) {
-    where['formId'] = formId;
-  }
-
-  if (materialId) {
-    where['materialId'] = materialId;
-  }
-
-  if (amountFrom && ! amountTo) {
-    where['amount'] = {
-      [Op.gte]: amountFrom
-    };
-  } else if (amountTo && ! amountFrom) {
-    where['amount'] = {
-      [Op.lte]: amountTo
-    };
-  } else if (amountFrom && amountTo) {
-    where['amount'] = {
-      [Op.between]: [amountFrom, amountTo]
-    };
-  }
-
-  const result = await Product.findAll({
-    group: ['Product.brand'],
-    order: [['brand', 'asc']],
-    attributes: [['brand', 'value'], [sequelize.fn('COUNT', sequelize.col('brand')), 'count']],
+  const result = await Brand.findAll({
+    row: true,
+    group: ["Brand.id"],
+    order: [['value', 'asc']],
+    attributes: ['id', 'value', [sequelize.fn('COUNT', sequelize.col('Brand.id')), 'count']],
+    include: [
+      {
+        model: Product,
+        required: !! Object.keys(where).length,
+        as: 'products',
+        attributes: [],
+        through: { attributes: [] },
+        include: [
+          {
+            model: Type,
+            required: !! where['typeId'],
+            as: 'types',
+            where: { id: where['typeId'] || [] },
+            attributes: [],
+            through: { attributes: [] },
+          },
+          {
+            model: Category,
+            required: !! where['categoryId'],
+            as: 'categories',
+            where: { id: where['categoryId'] || [] },
+            attributes: [],
+            through: { attributes: [] },
+          },
+        ]
+      },
+    ]
   });
 
   ctx.body = {

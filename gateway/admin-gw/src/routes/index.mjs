@@ -14,6 +14,7 @@ import {
   updateById as updateOperationById,
 } from '../controllers/Orders';
 
+import { getAllBrands, createBrand, updateBrand, deleteBrands } from '../controllers/Brand';
 import { getAllTypes, createType, updateType, deleteType } from '../controllers/Types';
 import { getAllUnits, createUnit, updateUnit, deleteUnits } from '../controllers/Units';
 import { getAllCategories, createCategory, updateCategory, deleteCategories } from '../controllers/Category';
@@ -32,6 +33,11 @@ import { getAllStatuses } from '../controllers/Statuses';
 export default (router) => {
 
   router.get('/statuses', getAllStatuses());
+
+  router.get('/brands', getAllBrands());
+  router.post('/brands', createBrand());
+  router.put('/brands/:id', updateBrand());
+  router.delete('/brands', deleteBrands());
 
   router.get('/types', getAllTypes());
   router.post('/types', createType());

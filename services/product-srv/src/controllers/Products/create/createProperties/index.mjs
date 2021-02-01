@@ -3,14 +3,13 @@ import { sequelize, models } from '@sys.packages/db';
 
 
 export default async function createProperties(properties) {
-  const { Product, ProductType, ProductCategory, ProductAttribute } = models;
+  const { Product, ProductBrand, ProductType, ProductCategory, ProductAttribute } = models;
 
   const transaction = await sequelize.transaction();
 
   const { uuid } = await Product.create({
     uuid: properties['uuid'],
     name: properties['name'],
-    brand: properties['brand'],
     amount: properties['amount'],
     currencyId: properties['currencyId'],
     description: properties['description'],
@@ -30,6 +29,8 @@ export default async function createProperties(properties) {
   });
 
   await ProductAttribute.bulkCreate(newAttributes, { transaction });
+
+  await ProductBrand.create({ productUuid: uuid, brandId: properties['brandId'] }, { transaction })
 
   const types = JSON.parse(properties['types']);
   await ProductType.bulkCreate(types.map((item) => ({ productUuid: uuid, typeId: item })), { transaction })

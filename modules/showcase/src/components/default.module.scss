@@ -4,21 +4,31 @@
 
 .wrapper {
 
-  display: block;
+  display: flex;
+  flex-direction: row;
+  padding: 60px 0 120px;
+  width: 1200px;
+  margin: 0 auto;
 }
 
-.products {
+.filter {
+
+  display: block;
+  width: 280px;
+}
+
+.content {
 
   display: flex;
   flex-direction: column;
-  padding: 60px 0 30px;
-  width: 1200px;
-  margin: 0 auto;
+  flex: 1 0;
+  margin: 0 0 0 20px;
 }
 
 .controls {
 
   display: block;
-  margin: 0 0 180px;
-  text-align: center;
+  background: rgba($white, .15);
+  padding: 20px;
+  border-radius: 3px;
 }

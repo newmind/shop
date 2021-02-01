@@ -8,6 +8,7 @@ import units from './units';
 import products from './products';
 import currency from './currency';
 import promotion from './promotion';
+import brands from './brands';
 
 
 export default async function rabbitInit() {
@@ -21,4 +22,5 @@ export default async function rabbitInit() {
   await products();
   await currency();
   await promotion();
+  await brands();
 }

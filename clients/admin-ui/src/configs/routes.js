@@ -41,6 +41,14 @@ const routes = [
     ),
   },
   {
+    path: '/options/brands',
+    wrapper: 'Composite',
+    module: import(
+      /* webpackChunkName: "brands" */
+      '@modules/brands'
+    ),
+  },
+  {
     path: '/options/types',
     wrapper: 'Composite',
     module: import(

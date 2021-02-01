@@ -7,6 +7,7 @@ import {
   ValidationError
 } from '@packages/errors';
 
+import qs from 'qs';
 import axios from 'axios';
 
 
@@ -49,6 +50,13 @@ const request = async (options) => {
       timeout: 24000,
       headers: headers,
       withCredentials: true,
+    });
+
+    instance.interceptors.request.use(function (config) {
+      config.paramsSerializer = (params) => {
+        return qs.stringify(params, { arrayFormat: 'repeat' })
+      }
+      return config;
     });
 
     const { data } = await instance(options);
