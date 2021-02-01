@@ -36,7 +36,6 @@ export default async function updateProperties(uuid, properties) {
     amount: properties['amount'],
     currencyId: properties['currencyId'],
     description: properties['description'],
-    saleAmount: properties['saleAmount'],
     fiscal: properties['fiscal'],
   }, {
     where: { uuid },

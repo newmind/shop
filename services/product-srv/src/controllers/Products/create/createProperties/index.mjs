@@ -13,7 +13,6 @@ export default async function createProperties(properties) {
     amount: properties['amount'],
     currencyId: properties['currencyId'],
     description: properties['description'],
-    saleAmount: properties['saleAmount'],
     fiscal: properties['fiscal'],
   }, {
     transaction,

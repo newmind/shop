@@ -7,7 +7,7 @@ export default async function updateProperties(uuid) {
 
   const product = await Product.findOne({
     where: { uuid },
-    attributes: ['uuid', 'name', 'description', 'status', 'amount', 'saleAmount', 'fiscal', 'updatedAt'],
+    attributes: ['uuid', 'name', 'description', 'status', 'amount', 'fiscal', 'updatedAt'],
     include: [
       {
         model: Brand,

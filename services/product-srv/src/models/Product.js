@@ -28,15 +28,6 @@ module.exports = (db, DataType) => {
         return Number(amount)
       },
     },
-    saleAmount: {
-      type: DataType.DECIMAL(10, 2),
-      allowNull: true,
-      defaultValue: 0,
-      get() {
-        const amount = this.getDataValue('saleAmount');
-        return amount ? Number(amount) : '';
-      },
-    },
     currencyId: {
       type: DataType.UUID,
       allowNull: false,

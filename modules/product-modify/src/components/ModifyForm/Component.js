@@ -114,9 +114,6 @@ function ModifyForm({ handleSubmit, onDelete }) {
               <InputField require name="amount" label="Цена" disabled={inProcess} />
             </Col>
             <Col>
-              <InputField name="saleAmount" label="Цена со скидкой" disabled={inProcess} />
-            </Col>
-            <Col>
               <SelectField
                 require
                 name="currencyId"
@@ -127,6 +124,7 @@ function ModifyForm({ handleSubmit, onDelete }) {
                 disabled={inProcess}
               />
             </Col>
+            <Col />
           </Row>
         </div>
       </div>

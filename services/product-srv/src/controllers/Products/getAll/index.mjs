@@ -74,7 +74,7 @@ export default () => async (ctx) => {
   }
 
   const products = await Product.findAndCountAll({
-    attributes: ['uuid', 'name', 'description', 'status', 'amount', 'saleAmount', 'fiscal', 'updatedAt'],
+    attributes: ['uuid', 'name', 'description', 'status', 'amount', 'fiscal', 'updatedAt'],
     ...options,
     ...offset,
     distinct: true,
