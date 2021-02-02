@@ -1,5 +1,5 @@
 
-import { Row, Col, InputField, TextareaField, SelectField, Header } from '@ui.packages/kit';
+import { Row, Col, InputField, TextareaField, SelectField, ListField, Header } from '@ui.packages/kit';
 
 import React from 'react';
 import { useSelector } from 'react-redux';
@@ -54,10 +54,9 @@ function ModifyForm({ handleSubmit, onDelete }) {
           </Row>
           <Row>
             <Col>
-              <SelectField
+              <ListField
                 name="types"
                 label="Тип"
-                type={SelectField.TYPE_MULTISELECT}
                 options={types}
                 optionKey="id"
                 optionValue="value"
@@ -67,7 +66,7 @@ function ModifyForm({ handleSubmit, onDelete }) {
           </Row>
           <Row>
             <Col>
-              <SelectField
+              <ListField
                 name="categories"
                 label="Категория"
                 type={SelectField.TYPE_MULTISELECT}

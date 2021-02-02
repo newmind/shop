@@ -1,4 +1,5 @@
 
+export { default as List } from './symbols/List';
 export { default as Range } from './symbols/Range';
 export { default as Input } from './symbols/Input';
 export { default as Image } from './symbols/Image';
@@ -21,6 +22,7 @@ export { default as Gallery } from './Gallery';
 export { default as Breadcrumbs } from './Breadcrumbs';
 
 export { default as BaseField } from './fields/BaseField';
+export { default as ListField } from './fields/ListField';
 export { default as FileField } from './fields/FileField';
 export { default as RangeField } from './fields/RangeField';
 export { default as InputField } from './fields/InputField';
