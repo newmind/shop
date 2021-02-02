@@ -75,10 +75,26 @@ const slice = createSlice({
       });
     },
 
-    removeProductRequestAction() {},
-    removeProductRequestFailRequest() {},
+    removeProductRequestAction(state) {
+      state['inProcess'] = true;
+    },
+    removeProductRequestFailRequest(state) {
+      state['inProcess'] = false;
+    },
     removeProductRequestSuccessAction(state, { payload }) {
+      state['inProcess'] = false;
       state['items'] = [...state['items']].filter((item) => (payload.indexOf(item['uuid']) === -1));
+    },
+
+    copyProductRequestAction(state) {
+      state['inProcess'] = true;
+    },
+    copyProductRequestFailRequest(state) {
+      state['inProcess'] = false;
+    },
+    copyProductRequestSuccessAction(state, { payload }) {
+      state['inProcess'] = false;
+      state['items'] = [payload, ...state['items']];
     },
   }
 });
@@ -103,6 +119,10 @@ export const {
   removeProductRequestAction,
   removeProductRequestFailRequest,
   removeProductRequestSuccessAction,
+
+  copyProductRequestAction,
+  copyProductRequestFailRequest,
+  copyProductRequestSuccessAction,
 } = slice['actions'];
 
 export const selectMeta = (state) => state[REDUCER_NAME]['meta'];

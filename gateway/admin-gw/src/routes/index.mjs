@@ -21,7 +21,7 @@ import { getAllCategories, createCategory, updateCategory, deleteCategories } fr
 import { getAllCurrencies, createCurrency, updateCurrency, deleteCurrencies } from '../controllers/Currency';
 import { getAllAttributes, createAttribute, deleteAttributes, updateAttribute } from '../controllers/Attribute';
 
-import { getProducts, getProduct,  createProduct, updateProduct, deleteProducts, setPromotion } from '../controllers/Products';
+import { getProducts, getProduct,  createProduct, updateProduct, deleteProducts, setPromotion, copyProduct } from '../controllers/Products';
 import { getAllPromotions, deletePromotions, updatePromotion, createPromotion } from '../controllers/Promotion';
 
 import { getImage, deleteImages } from '../controllers/Gallery';
@@ -75,6 +75,7 @@ export default (router) => {
   router.put('/products/:id', updateProduct());
   router.delete('/products', deleteProducts());
   router.post('/products/:uuid/promotion', setPromotion());
+  router.post('/products/:uuid/copy', copyProduct());
 
   router.get('/operations', getOperations());
   router.get('/operations/:operationId', getOperationById());

@@ -7,7 +7,7 @@ import { getAllCurrencies, createCurrency, updateCurrency, deleteCurrencies } fr
 import { getAllAttributes, deleteAttributes, updateAttribute, createAttribute } from '../controllers/Attributes';
 
 import { getProducts, createProduct, deleteProductById, updateProductById, setPromotion } from '../controllers/Products';
-import { getTypesCount, getBrandsCount, getCategoriesCount } from '../controllers/Products';
+import { getTypesCount, getBrandsCount, getCategoriesCount, copyProductById } from '../controllers/Products';
 
 import { getAllComments, deleteComments, createComment, updateComment } from '../controllers/Comments';
 
@@ -54,6 +54,7 @@ export default (router) => {
   router.post('/v1/api/products', createProduct());
   router.put('/v1/api/products/:uuid', updateProductById());
   router.delete('/v1/api/products', deleteProductById());
+  router.post('/v1/api/products/:uuid/copy', copyProductById());
   router.post('/v1/api/products/:uuid/promotion', setPromotion());
 
   router.get('/v1/api/comments', getAllComments());

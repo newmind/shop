@@ -6,23 +6,25 @@ import cn from 'classnames';
 import styles from './default.module.scss';
 
 
-const Actions = ({ onEdit, onDelete, onCopy }) => {
+const Actions = ({ disabled, onEdit, onDelete, onCopy }) => {
   return (
     <div className={styles['block']}>
-      {onCopy && <span className={cn(styles['action'], styles['action--copy'], 'far fa-copy')} onClick={onCopy} />}
-      {onEdit && <span className={cn(styles['action'], styles['action--edit'], 'fas fa-edit')} onClick={onEdit} />}
-      {onDelete && <span className={cn(styles['action'], styles['action--delete'], 'far fa-trash-alt')} onClick={onDelete} />}
+      {onEdit && <span className={cn(styles['action'], styles['action--edit'], 'fas fa-edit', { [styles['disabled']]: disabled })} onClick={ ! disabled ? onEdit : undefined} />}
+      {onCopy && <span className={cn(styles['action'], styles['action--copy'], 'far fa-copy', { [styles['disabled']]: disabled })} onClick={ ! disabled ? onCopy : undefined} />}
+      {onDelete && <span className={cn(styles['action'], styles['action--delete'], 'far fa-trash-alt', { [styles['disabled']]: disabled })} onClick={ ! disabled ? onDelete : undefined} />}
     </div>
   );
 };
 
 Actions.propTypes = {
+  disabled: types.bool,
   onEdit: types.func,
   onCopy: types.func,
   onDelete: types.func,
 };
 
 Actions.defaultProps = {
+  disabled: false,
   onEdit: null,
   onCopy: null,
   onDelete: null,

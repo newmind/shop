@@ -1,5 +1,6 @@
 
 import { Mode } from '@ui.packages/types';
+import { uniqName } from '@ui.packages/utils';
 import request from '@ui.packages/request';
 import { pushNotification } from '@ui.packages/notifications';
 
@@ -19,6 +20,10 @@ import {
   removeProductRequestAction,
   removeProductRequestFailRequest,
   removeProductRequestSuccessAction,
+
+  copyProductRequestAction,
+  copyProductRequestFailRequest,
+  copyProductRequestSuccessAction,
 } from './slice';
 
 
@@ -119,6 +124,36 @@ export const removeProductById = (uuid) => async dispatch => {
   }
   catch(error) {
     dispatch(removeProductRequestFailRequest(error));
+    dispatch(pushNotification({
+      title: 'Ошибка при удаленнии продукта',
+      connect: `${error['data']['message']} (${error['data']['code']})`,
+      mode: Mode.DANGER,
+      autoClose: false,
+    }));
+  }
+};
+
+export const copyProductById = (uuid) => async dispatch => {
+  try {
+    dispatch(copyProductRequestAction());
+
+    const result = await request({
+      method: 'post',
+      url: `/products/${uuid}/copy`,
+      data: {
+        uuid: uniqName(),
+      },
+    });
+
+    dispatch(copyProductRequestSuccessAction(result['data']));
+    dispatch(pushNotification({
+      title: 'Операция выполнена успешно',
+      mode: Mode.SUCCESS,
+    }));
+  }
+  catch(error) {
+    console.log(error)
+    dispatch(copyProductRequestFailRequest(error));
     dispatch(pushNotification({
       title: 'Ошибка при удаленнии продукта',
       connect: `${error['data']['message']} (${error['data']['code']})`,

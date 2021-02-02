@@ -1,30 +1,60 @@
 
-import { models } from '@sys.packages/db';
+import { models, Sequelize } from '@sys.packages/db';
 
 
 export default async function updateProperties(uuid) {
-  const { Product, Attribute, Units, Gallery, Currency, Category, Type, Brand } = models;
+  const { Product, Attribute, Units, Gallery, Currency, Category, Promotion, Type, Brand } = models;
 
   const product = await Product.findOne({
     where: { uuid },
     attributes: ['uuid', 'name', 'description', 'status', 'amount', 'fiscal', 'updatedAt'],
+    order: [
+      ['gallery', 'order', 'desc'],
+    ],
     include: [
       {
         model: Brand,
         as: 'brands',
         attributes: ['id', 'value'],
-        through: { attributes: [] },
+        through: {
+          attributes: [],
+          order: [['order', 'asc']],
+          as: 'brand',
+        },
       },
       {
         model: Type,
         as: 'types',
         attributes: ['id', 'value'],
-        through: { attributes: [] },
+        through: {
+          attributes: [],
+          order: [['order', 'asc']],
+          as: 'type',
+        },
       },
       {
         model: Category,
         as: 'categories',
         attributes: ['id', 'value'],
+        through: {
+          attributes: [],
+          order: [['order', 'asc']],
+          as: 'category',
+        },
+      },
+      {
+        model: Promotion,
+        required: false,
+        as: 'promotions',
+        attributes: ['uuid', 'name', 'percent'],
+        where: {
+          dateFrom: {
+            [Sequelize.Op.lte]: new Date(),
+          },
+          dateTo: {
+            [Sequelize.Op.gte]: new Date(),
+          },
+        },
         through: { attributes: [] },
       },
       {
@@ -35,12 +65,18 @@ export default async function updateProperties(uuid) {
       },
       {
         model: Attribute,
+        required: false,
         as: 'attributes',
         attributes: ['value'],
-        through: { attributes: ['value', 'attributeId'], as: 'attribute' },
+        through: {
+          attributes: ['value', 'attributeId'],
+          order: [['order', 'asc']],
+          as: 'attribute',
+        },
         include: [
           {
             model: Units,
+            required: false,
             as: 'unit',
             attributes: ['value']
           }

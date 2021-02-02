@@ -1,27 +1,16 @@
 
-import { sendEvent } from "@sys.packages/rabbit2";
-import { sequelize, models } from '@sys.packages/db';
+import DeleteSagaParams from "./delete-saga-params.mjs";
+import DeleteSaga from "./delete-saga.mjs";
 
 
 export default () => async (ctx) => {
-  const { uuid } = ctx['request']['body'];
-  const { Product, ProductBrand, ProductAttribute, ProductType, ProductCategory, Gallery } = models;
+  const sagaParams = new DeleteSagaParams();
+  const saga = new DeleteSaga(ctx);
 
-  const transaction = await sequelize.transaction();
-
-  await ProductAttribute.destroy({ where: { productUuid: uuid }}, { transaction });
-  await ProductCategory.destroy({ where: { productUuid: uuid }}, { transaction });
-  await ProductType.destroy({ where: { productUuid: uuid }}, { transaction });
-  await ProductBrand.destroy({ where: { productUuid: uuid }}, { transaction });
-  await Gallery.destroy({ where: { productUuid: uuid }, transaction });
-  await Product.destroy({ where: { uuid }, transaction });
-
-  await transaction.commit();
-
-  await sendEvent(process.env['EXCHANGE_PRODUCT_DELETE'], JSON.stringify(uuid));
+  const params = await saga.execute(sagaParams);
 
   ctx.body = {
     success: true,
-    data: uuid,
+    data: params.getProductUuid(),
   };
 };

@@ -1,4 +1,5 @@
 
-export { default as getImage } from './get/index.mjs';
-export { default as createImage } from './create/index.mjs';
-export { default as deleteImages } from './delete/index.mjs';
+export { default as getImage } from './get';
+export { default as copyImage } from './copy';
+export { default as createImage } from './create';
+export { default as deleteImages } from './delete';
