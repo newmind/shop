@@ -40,6 +40,7 @@ function List({ options, optionKey, optionValue, value, onChange }) {
             onClick={(e) => handleOnClick(e, option[optionKey])}
             onDoubleClick={(e) => handleDoubleClick(e)}
           >
+            <span className={cn(styles['marker'], 'fas fa-check')} />
             <div className={styles['option__text']}>{ option[optionValue] }</div>
           </div>
         ))}

@@ -20,7 +20,7 @@ const productModifySlice = createSlice({
   name: REDUCER_NAME,
   initialState,
   reducers: {
-    resetState(state) {
+    resetStateAction(state) {
       state['types'] = [];
       state['brands'] = [];
       state['units'] = [];
@@ -104,14 +104,14 @@ const productModifySlice = createSlice({
       state['inProcess'] = false;
       state['product'] = {
         ...state['product'],
-        gallery: state['product']['gallery'].filter((item) => (payload.indexOf(item) === -1)),
+        gallery: state['product']['gallery'].filter((item) => (payload['uuid'].indexOf(item) === -1)),
       };
     },
   },
 });
 
 export const {
-  resetState,
+  resetStateAction,
 
   getBrandsRequestAction,
   getBrandsRequestFailAction,

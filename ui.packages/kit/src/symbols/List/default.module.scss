@@ -23,9 +23,10 @@
 
   &__text {
 
-    display: block;
+    display: inline-block;
     font-size: 14px;
     font-weight: 300;
+    vertical-align: middle;
   }
 
   &:hover {
@@ -43,4 +44,18 @@
 .active:hover {
 
   background: rgba($information, .3);
+}
+
+.active .marker {
+
+  display: inline-block;
+}
+
+.marker {
+
+  display: none;
+  font-size: 10px;
+  vertical-align: middle;
+  margin-right: 10px;
+  color: $success;
 }

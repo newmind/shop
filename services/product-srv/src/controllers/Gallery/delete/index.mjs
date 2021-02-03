@@ -1,17 +1,14 @@
 
-import { sequelize, models } from '@sys.packages/db';
+import { models } from '@sys.packages/db';
+import { sendEvent } from '@sys.packages/rabbit2';
 
 
-export default async (fields) => {
+export default async (uuid) => {
   const { Gallery } = models;
 
-  const transaction = await sequelize.transaction();
-
   await Gallery.destroy({
-    where: { externalId: fields },
-  }, {
-    transaction,
+    where: { uuid },
   });
 
-  await transaction.commit();
+  await sendEvent(process.env['EXCHANGE_IMAGE_DELETE'], JSON.stringify(uuid));
 };
