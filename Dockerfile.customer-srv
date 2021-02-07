@@ -7,11 +7,11 @@ RUN npm config set package-lock false
 
 WORKDIR /app
 
-COPY ./services/client-srv/db                ./services/client-srv/db
-COPY ./services/client-srv/src               ./services/client-srv/src
-COPY ./services/client-srv/.env.production   ./services/client-srv
-COPY ./services/client-srv/package.json      ./services/client-srv
-COPY ./services/client-srv/.sequelizerc      ./services/client-srv
+COPY services/customer-srv/db                ./services/customer-srv/db
+COPY services/customer-srv/src               ./services/customer-srv/src
+COPY services/customer-srv/.env.production   ./services/customer-srv
+COPY services/customer-srv/package.json      ./services/customer-srv
+COPY services/customer-srv/.sequelizerc      ./services/customer-srv
 COPY ./sys.packages                           ./sys.packages
 COPY ./packages                               ./packages
 COPY ./package.json                           ./
@@ -20,6 +20,6 @@ COPY ./yarn.lock                              ./
 
 RUN yarn
 
-WORKDIR /app/services/client-srv
+WORKDIR /app/services/customer-srv
 
 ENTRYPOINT ["yarn", "run", "start"]
