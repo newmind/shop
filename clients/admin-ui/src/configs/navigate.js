@@ -53,7 +53,7 @@ const navigate = [
   },
   {
     title: "Клиенты",
-    path: '/users',
+    path: '/customers',
     icon: 'fas fa-users',
   },
   {

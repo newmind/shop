@@ -21,7 +21,7 @@
     "@modules/products": "1.0.0",
     "@modules/profile": "1.0.0",
     "@modules/sign-in": "1.0.0",
-    "@modules/users": "1.0.0",
+    "@modules/customers": "1.0.0",
     "@ui.packages/application": "1.0.0",
     "@ui.packages/dialog": "1.0.0",
     "@ui.packages/notifications": "1.0.0",

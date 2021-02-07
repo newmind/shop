@@ -51,8 +51,8 @@ echo '[--- Profile ---]'
 cd ../profile && npx yarn build
 echo '[--- Sign In ---]'
 cd ../sign-in && npx yarn build
-echo '[--- Users ---]'
-cd ../users && npx yarn build
+echo '[--- Customers ---]'
+cd ../customers && npx yarn build
 echo '[--- Promotions ---]'
 cd ../promotions && npx yarn build
 echo '[--- Brands ---]'

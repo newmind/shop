@@ -96,14 +96,14 @@ const routes = [
       '@modules/promotions'
     ),
   },
-  // {
-  //   path: '/users',
-  //   wrapper: 'Navigate',
-  //   module: import(
-  //     /* webpackChunkName: "users" */
-  //     '@modules/users'
-  //   ),
-  // },
+  {
+    path: '/customers',
+    wrapper: 'Navigate',
+    module: import(
+      /* webpackChunkName: "customers" */
+      '@modules/customers'
+    ),
+  },
   // // {
   // //   path: '/currency',
   // //   wrapper: 'Navigate',
