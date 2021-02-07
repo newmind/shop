@@ -1,208 +1,88 @@
 
 module.exports = {
-  async up(queryInterface, Sequelize) {
+  async up(queryInterface, DataType) {
     const transaction = await queryInterface.sequelize.transaction();
 
     try {
 
-      await queryInterface.createTable('Currencies', {
+      await queryInterface.createTable('Clients', {
         id: {
-          type: Sequelize.INTEGER,
-          autoIncrement: true,
-          index: true,
-        },
-        uuid: {
-          type: Sequelize.UUID,
-          primaryKey: true,
-          unique: true,
-          allowNull: false,
-        },
-        value: {
-          type: Sequelize.STRING(8),
-          allowNull: false,
-        },
-        description: {
-          type: Sequelize.STRING(2024),
-          defaultValue: ''
-        },
-        createdAt: {
-          type: Sequelize.DATE,
-        },
-        updatedAt: {
-          type: Sequelize.DATE,
-        }
-      }, {
-        transaction
-      });
-
-      await queryInterface.createTable('Galleries', {
-        id: {
-          type: Sequelize.INTEGER,
-          primaryKey: true,
-          autoIncrement: true,
-          index: true,
-        },
-        externalId: {
-          type: Sequelize.STRING(36),
-        },
-        productId: {
-          type: Sequelize.STRING(9),
-        },
-        createdAt: {
-          type: Sequelize.DATE,
-        },
-        updatedAt: {
-          type: Sequelize.DATE,
-        }
-      }, {
-        transaction
-      });
-
-      await queryInterface.createTable('Products', {
-        id: {
-          type: Sequelize.INTEGER,
-          autoIncrement: true,
-          index: true,
-        },
-        uuid: {
-          type: Sequelize.STRING(9),
+          type: DataType.INTEGER,
           primaryKey: true,
           allowNull: false,
-          index: true,
-          unique: true,
-        },
-        brand: {
-          type: Sequelize.STRING(255),
-          allowNull: false,
-          index: true,
+          autoIncrement: true,
         },
         name: {
-          type: Sequelize.STRING(255),
-          allowNull: true,
-          index: true,
-        },
-        currencyId: {
-          type: Sequelize.UUID,
+          type: DataType.STRING(32),
           allowNull: false,
         },
-        createdAt: {
-          type: Sequelize.DATE,
-        },
-        updatedAt: {
-          type: Sequelize.DATE,
-        }
-      }, {
-        transaction
-      });
-
-      await queryInterface.createTable('Orders', {
-        id: {
-          type: Sequelize.INTEGER,
-          primaryKey: true,
-          autoIncrement: true,
-          index: true,
-        },
-        externalId: {
-          type: Sequelize.STRING(64),
-          allowNull: false,
-        },
-        invoiceId: {
-          type: Sequelize.STRING(64),
-          allowNull: false,
-        },
-        paymentLink: {
-          type: Sequelize.STRING,
-          allowNull: false,
-        },
-        address: {
-          type: Sequelize.STRING(512),
-          allowNull: false,
-        },
-        email: {
-          type: Sequelize.STRING(126),
-          allowNull: false,
-        },
-        phone: {
-          type: Sequelize.STRING(126),
-          allowNull: false,
-        },
-        name: {
-          type: Sequelize.STRING(126),
+        patronymic: {
+          type: DataType.STRING(32),
           allowNull: false,
         },
         surname: {
-          type: Sequelize.STRING(126),
+          type: DataType.STRING(32),
           allowNull: false,
         },
-        amount: {
-          type: Sequelize.DECIMAL(10, 2),
-          allowNull: false,
-          defaultValue: 0.00,
+        gender: {
+          type: DataType.STRING(16),
+          allowNull: true,
         },
-        pay: {
-          type: Sequelize.STRING(32),
-          allowNull: false,
+        age: {
+          type: DataType.INTEGER,
+          allowNull: true,
         },
-        delivery: {
-          type: Sequelize.STRING(32),
-          allowNull: false,
-        },
-        status: {
-          type: Sequelize.INTEGER,
-          allowNull: false,
-        },
-        statusInvoice: {
-          type: Sequelize.INTEGER,
-          allowNull: false,
-          defaultValue: 0,
-        },
-        createdAt: {
-          type: Sequelize.DATE,
-        },
-        updatedAt: {
-          type: Sequelize.DATE,
+        birthday: {
+          type: DataType.DATE,
+          allowNull: true,
         }
       }, {
-        transaction
+        transaction,
       });
 
-      await queryInterface.createTable('OrderProducts', {
-        id: {
-          type: Sequelize.INTEGER,
+      await queryInterface.createTable('ClientAddresses', {
+        clientId: {
+          type: DataType.INTEGER,
           primaryKey: true,
-          autoIncrement: true,
-          index: true,
-        },
-        orderId: {
-          type: Sequelize.INTEGER,
-        },
-        productId: {
-          type: Sequelize.STRING(9),
-        },
-        type: {
-          type: Sequelize.STRING,
-        },
-        recipe: {
-          type: Sequelize.JSON,
-        },
-        lens: {
-          type: Sequelize.JSON,
-        },
-        amount: {
-          type: Sequelize.DECIMAL(10, 2),
-          allowNull: false,
-          defaultValue: 0,
-        },
-        currencyId: {
-          type: Sequelize.UUID,
           allowNull: false,
         },
-        createdAt: {
-          type: Sequelize.DATE,
+        postcode: {
+          type: DataType.INTEGER,
+          allowNull: true,
         },
-        updatedAt: {
-          type: Sequelize.DATE,
-        }
+        country: {
+          type: DataType.STRING(32),
+          allowNull: true,
+          defaultValue: 'Россия',
+        },
+        region: {
+          type: DataType.STRING(32),
+          allowNull: true,
+        },
+        district: {
+          type: DataType.STRING(32),
+          allowNull: true,
+        },
+        locality: {
+          type: DataType.STRING(32),
+          allowNull: true,
+        },
+        street: {
+          type: DataType.STRING(32),
+          allowNull: true,
+        },
+        home: {
+          type: DataType.STRING(32),
+          allowNull: true,
+        },
+        float: {
+          type: DataType.STRING(32),
+          allowNull: true,
+        },
+        flat: {
+          type: DataType.STRING(32),
+          allowNull: true,
+        },
       }, {
         transaction
       });
