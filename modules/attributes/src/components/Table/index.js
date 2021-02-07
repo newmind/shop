@@ -62,7 +62,7 @@ function Types() {
           <Column
             title="Величина"
             alias="unit"
-            width="150"
+            width="70"
             align="left"
           >
             {(value) => (
@@ -70,6 +70,13 @@ function Types() {
                 ? <Text type={Text.TYPE_BODY}>{ value['value'] }</Text>
                 : <Text>---</Text>
               )}
+          </Column>
+          <Column
+            title="Тип поля"
+            alias="type"
+            align="left"
+          >
+            {(value) => <Text type={Text.TYPE_BODY}>{ value }</Text>}
           </Column>
           <Column
             title="Описание"

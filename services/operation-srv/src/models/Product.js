@@ -2,21 +2,16 @@
 module.exports = (db, DataType) => {
 
   const Product = db.define('Product', {
-    id: {
-      type: DataType.INTEGER,
-      autoIncrement: true,
-      index: true,
-    },
     uuid: {
       type: DataType.STRING(9),
       primaryKey: true,
       allowNull: false,
       index: true,
-      unique: true,
+      unique: 'compositeIndex',
     },
-    brand: {
+    fiscal: {
       type: DataType.STRING(255),
-      allowNull: false,
+      allowNull: true,
       index: true,
     },
     name: {
@@ -24,13 +19,31 @@ module.exports = (db, DataType) => {
       allowNull: true,
       index: true,
     },
+    amount: {
+      type: DataType.DECIMAL(10, 2),
+      allowNull: false,
+      defaultValue: 0,
+      get() {
+        const amount = this.getDataValue('amount');
+        return Number(amount)
+      },
+    },
     currencyId: {
       type: DataType.UUID,
       allowNull: false,
     },
+    description: {
+      type: DataType.STRING(1024),
+      allowNull: true,
+    },
+    status: {
+      type: DataType.INTEGER,
+      defaultValue: 1,
+      index: true,
+    },
   });
 
-  Product.associate = function({ Gallery, Currency }) {
+  Product.associate = function({ Order, Gallery, Currency, OrderProduct }) {
 
     Product.belongsTo(Currency, {
       foreignKey: 'currencyId',
@@ -38,9 +51,16 @@ module.exports = (db, DataType) => {
     });
 
     Product.hasMany(Gallery, {
-      sourceKey: 'uuid',
-      foreignKey: 'productId',
+      primaryKey: 'uuid',
+      foreignKey: 'productUuid',
       as: 'gallery'
+    });
+
+    Product.belongsToMany(Order, {
+      through: OrderProduct,
+      foreignKey: 'productUuid',
+      otherKey: 'orderUuid',
+      as: 'orders',
     });
   };
 

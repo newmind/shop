@@ -1,6 +1,6 @@
 
 import logger from '@sys.packages/logger';
-import { UUID } from '@sys.packages/sys.utils';
+import { UUID } from '@sys.packages/utils';
 
 import amqp from 'amqplib/callback_api';
 

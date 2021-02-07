@@ -26,33 +26,61 @@ function Delivery() {
     <Container>
       <Row>
         <Col>
-          <RadioBoxField name="delivery" defaultValue="post">
-            <Radio name="post">
-              <Block>
-                <i className={cn(styles['block__icon'], 'far fa-envelope')} />
-                <span className={styles['block__caption']}>По почте</span>
-              </Block>
-            </Radio>
-            <Radio name="courier">
-              <Block>
-                <i className={cn(styles['block__icon'], 'fas fa-shipping-fast')} />
-                <span className={styles['block__caption']}>Курьером</span>
-              </Block>
-            </Radio>
-          </RadioBoxField>
+          <Row>
+            <Col>
+              <RadioBoxField name="delivery" defaultValue="post">
+                <Radio name="post">
+                  <Block>
+                    <i className={cn(styles['block__icon'], 'fas fa-people-carry')} />
+                    <span className={styles['block__caption']}>Самовывоз</span>
+                  </Block>
+                </Radio>
+                <Radio name="courier">
+                  <Block>
+                    <i className={cn(styles['block__icon'], 'fas fa-shipping-fast')} />
+                    <span className={styles['block__caption']}>Курьером</span>
+                  </Block>
+                </Radio>
+              </RadioBoxField>
+            </Col>
+          </Row>
+          <Row>
+            <Col>
+              <Suggest
+                name="address"
+                label="Адрес доставки"
+              />
+            </Col>
+          </Row>
+          <Row>
+            <Col>
+              <InputField
+                name="house"
+                label="Корпус"
+              />
+            </Col>
+            <Col>
+              <InputField
+                name="front"
+                label="Подъезд"
+              />
+            </Col>
+            <Col>
+              <InputField
+                name="floor"
+                label="Этаж"
+              />
+            </Col>
+            <Col>
+              <InputField
+                name="flat"
+                label="Квартра"
+              />
+            </Col>
+          </Row>
         </Col>
-      </Row>
-      <Row>
         <Col>
-          <Suggest name="address" label="Адрес доставки" />
-        </Col>
-      </Row>
-      <Row>
-        <Col>
-          <InputField
-            name="details"
-            label="Дополнительно"
-          />
+
         </Col>
       </Row>
     </Container>

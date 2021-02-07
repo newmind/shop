@@ -2,6 +2,14 @@
 module.exports = (db, DataTypes) => {
 
   const ProductAttribute = db.define('ProductAttribute', {
+    productUuid: {
+      type: DataTypes.STRING(9),
+      allowNull: false,
+    },
+    attributeId: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+    },
     value: {
       type: DataTypes.STRING(32),
       allowNull: true
@@ -15,7 +23,17 @@ module.exports = (db, DataTypes) => {
     timestamps: false,
   });
 
-  ProductAttribute.associate = () => {};
+  ProductAttribute.associate = ({ Attribute, Product }) => {
+
+    ProductAttribute.belongsTo(Product, {
+      as: 'product',
+    });
+
+    ProductAttribute.belongsTo(Attribute, {
+      foreignKey: 'attributeId',
+      as: 'attribute',
+    });
+  };
 
   return ProductAttribute;
 };

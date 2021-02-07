@@ -1,5 +1,5 @@
 
-import { createAction, createSlice } from '@reduxjs/toolkit';
+import { createSlice } from '@reduxjs/toolkit';
 
 
 const initialState = {
@@ -13,7 +13,6 @@ const initialState = {
 };
 
 const REDUCER_NAME = 'showcase';
-const SOCKET_PRODUCT_UPDATED = createAction('@@socket/PRODUCT_UPDATED');
 
 
 export const slice = createSlice({
@@ -44,20 +43,6 @@ export const slice = createSlice({
       state['isInitialize'] = true;
       state['inProcess'] = false;
     }
-  },
-  extraReducers(builder) {
-    builder
-      .addCase(SOCKET_PRODUCT_UPDATED, function(state, { payload }) {
-        state['items'] = state['items'].map((item) => {
-          if (item['uuid'] === payload['uuid']) {
-            return {
-              ...item,
-              ...payload,
-            };
-          }
-          return item;
-        });
-      });
   },
 });
 

@@ -4,13 +4,7 @@ module.exports = (db, DataType) => {
   const Currency = db.define('Currency', {
     id: {
       type: DataType.INTEGER,
-      autoIncrement: true,
-      index: true,
-    },
-    uuid: {
-      type: DataType.UUID,
       primaryKey: true,
-      unique: true,
       allowNull: false,
     },
     value: {
@@ -21,6 +15,8 @@ module.exports = (db, DataType) => {
       type: DataType.STRING(2024),
       defaultValue: ''
     }
+  }, {
+    timestamps: false,
   });
 
   Currency.associate = () => {};

@@ -1,6 +1,7 @@
 
 import numeral from '@packages/numeral';
 
+import { Mode } from '@ui.packages/types';
 import { Button, Text } from '@ui.packages/kit';
 
 import React from 'react';
@@ -10,41 +11,37 @@ import { useSelector, useDispatch } from 'react-redux';
 import Product from './Product';
 
 import {
-  closeCart,
-  resetCart,
-  removeProductFromCart,
+  closeCartAction,
+  resetCartAction,
+
+  removeProductFromCartAction,
+
   selectItems,
-} from '../../ducks/cartSlice';
+  selectAmount,
+} from '../../ducks/slice';
 
 import styles from './defaults.module.scss';
-
-
-function calculateFullAmount(items) {
-  const fullAmount = items.reduce((accumulator, product) => accumulator + product['amount'], 0);
-  return numeral(fullAmount).format();
-}
 
 
 function List() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const items = useSelector(selectItems);
+  const amount = useSelector(selectAmount);
 
-  function handleRemoveProductFromCart(id) {
-    dispatch(removeProductFromCart(id));
+  function handleRemoveProductFromCart(uuid) {
+    dispatch(removeProductFromCartAction(uuid));
   }
 
   function handleResetCart() {
-    dispatch(resetCart());
-    dispatch(closeCart());
+    dispatch(resetCartAction());
+    dispatch(closeCartAction());
   }
 
   function handleGoToCart() {
-    dispatch(closeCart());
+    dispatch(closeCartAction());
     navigate(process.env['PUBLIC_URL'] + '/order');
   }
-
-  const fullAmount = calculateFullAmount(items);
 
   return (
     <div className={styles['wrapper']}>
@@ -58,11 +55,13 @@ function List() {
         ))}
       </div>
       <div className={styles['info']}>
-        <Text type={Text.TYPE_BODY}>На сумму: { fullAmount } руб.</Text>
+        {amount && (
+          <Text type={Text.TYPE_BODY}>На сумму: { numeral(amount['amount']).format() } { amount['currency']['value'] }</Text>
+        )}
       </div>
       <div className={styles['controls']}>
-        <Button form="context" onClick={handleResetCart}>Очистить</Button>
-        <Button onClick={handleGoToCart} mode="success">Оформить заказ</Button>
+        <Button form={Button.FORM_CONTEXT} onClick={() => handleResetCart()}>Очистить</Button>
+        <Button mode={Mode.SUCCESS} onClick={() => handleGoToCart()}>Оформить заказ</Button>
       </div>
     </div>
   );

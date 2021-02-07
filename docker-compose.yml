@@ -36,6 +36,17 @@ services:
       - db
       - mail_srv
 
+  client_srv:
+    container_name: client_srv
+    build:
+      context: ./
+      dockerfile: Dockerfile.client-srv
+    restart: always
+    depends_on:
+      - db
+    links:
+      - db
+
   gallery_srv:
     container_name: gallery_srv
     build:
@@ -57,10 +68,12 @@ services:
       - db
       - rabbit
       - mail_srv
+      - client_srv
     links:
       - db
       - rabbit
       - mail_srv
+      - client_srv
 
   product_srv:
     container_name: product_srv
@@ -92,12 +105,14 @@ services:
       - gallery_srv
       - identity_srv
       - operation_srv
+      - client_srv
     links:
       - rabbit
       - product_srv
       - gallery_srv
       - identity_srv
       - operation_srv
+      - client_srv
 
 
   client_gw:

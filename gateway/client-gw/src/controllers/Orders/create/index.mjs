@@ -5,35 +5,54 @@ import request from "@sys.packages/request";
 export default () => async (ctx) => {
   const data = ctx['request']['body'];
 
-  const items = data['items'].map((item) => {
+  let address = data['address'].trim();
+
+  if (data['house']) {
+    address += `, корп.${data['house']}`;
+  }
+  if (data['front']) {
+    address += `, под.${data['front']}`;
+  }
+  if (data['floor']) {
+    address += `, эт.${data['floor']}`;
+  }
+  if (data['flat']) {
+    address += `, кв.${data['flat']}`;
+  }
+
+  const products = data['items'].map((item) => {
     return {
-      type: item['type'],
-      lens: item['lens'],
-      productId: item['uuid'],
-      recipe: item['recipe'],
-      amount: item['amount'] - item['saleAmount'],
-      currencyId: item['currency']['uuid'],
+      uuid: item['uuid'],
+      name: item['name'],
+      brand: item['brand'],
+      amount: item['saleAmount'] || item['amount'],
+      currencyUuid: item['currency']['uuid'],
+      gallery: item['gallery'],
     };
   });
+
+  const order = {
+    products: products,
+    delivery: data['delivery'],
+    pay: data['pay'],
+    address: address,
+    name: data['name'],
+    surname: data['surname'],
+    email: data['email'],
+    description: data['description'],
+    amount: data['amount']
+  };
 
   const result = await request({
     url: process.env['OPERATION_API_SRV'] + '/operations',
     method: 'post',
-    data: {
-      status: 1,
-      items: items,
-      pay: data['pay'],
-      name: data['name'],
-      phone: data['phone'],
-      email: data['email'],
-      surname: data['surname'],
-      address: data['address'],
-      delivery: data['delivery'],
-      amount: Number(data['amount']),
-    },
+    data: order,
   });
 
   ctx.body = {
-    externalId: result['data']['externalId'],
+    success: true,
+    data: {
+      externalId: result['data'],
+    },
   };
 }

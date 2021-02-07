@@ -39,7 +39,7 @@ module.exports = (db, DataTypes) => {
       through: ProductPromotion,
       foreignKey: 'promotionUuid',
       otherKey: 'productUuid',
-      as: 'product',
+      as: 'products',
     });
   };
 

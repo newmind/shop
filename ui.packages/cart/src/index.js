@@ -2,14 +2,19 @@
 export { default as Cart } from './components';
 
 export {
-  cartSlice,
+  name,
   reducer,
+
+  selectUuid,
   selectItems,
   selectIsOpen,
-  openCart,
-  closeCart,
-  addProductToCart,
-  removeProductFromCart,
-  resetCart,
-  restoreCart,
-} from './ducks/cartSlice';
+
+  openCartAction,
+  closeCartAction,
+
+  addProductToCartAction,
+  removeProductFromCartAction,
+
+  resetCartAction,
+  restoreCartAction,
+} from './ducks/slice';

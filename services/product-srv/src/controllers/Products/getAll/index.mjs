@@ -11,7 +11,7 @@ export default () => async (ctx) => {
   let options = {};
 
   const { Op } = Sequelize;
-  const { Product, Currency, Category, Brand, Type, Attribute, Units, Gallery, Comment, Promotion } = models;
+  const { Product, Currency, Attribute, Category, Brand, Type, ProductAttribute, Units, Gallery, Comment, Promotion } = models;
   const {
     fiscal = null,
     status = null,
@@ -143,21 +143,23 @@ export default () => async (ctx) => {
         attributes: ['uuid', 'value']
       },
       {
-        model: Attribute,
+        model: ProductAttribute,
         required: false,
         as: 'attributes',
-        attributes: ['value'],
-        through: {
-          attributes: ['value', 'attributeId'],
-          order: [['order', 'asc']],
-          as: 'attribute',
-        },
+        attributes: ['value', 'order'],
         include: [
           {
-            model: Units,
-            required: false,
-            as: 'unit',
-            attributes: ['value']
+            model: Attribute,
+            attributes: ['id', 'value'],
+            as: 'attribute',
+            include: [
+              {
+                model: Units,
+                required: false,
+                as: 'unit',
+                attributes: ['value']
+              }
+            ]
           }
         ]
       },

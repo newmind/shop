@@ -16,8 +16,10 @@ export default function productBuilder(data) {
     comments: data['comments'],
     updatedAt: data['updatedAt'],
     attributes: data['attributes'].map((item) => ({
-      id: item['attribute']['attributeId'],
-      value: item['attribute']['value']
+      id: item['attribute']['id'],
+      value: item['value'],
+      unit: item['attribute']['unit'] ? item['attribute']['unit']['value'] : null,
+
     })),
   };
 }

@@ -1,0 +1,25 @@
+
+# BUILD APP
+FROM node:14-alpine
+
+RUN npm config set package-lock false
+#RUN npm i yarn -g --yes
+
+WORKDIR /app
+
+COPY ./services/client-srv/db                ./services/client-srv/db
+COPY ./services/client-srv/src               ./services/client-srv/src
+COPY ./services/client-srv/.env.production   ./services/client-srv
+COPY ./services/client-srv/package.json      ./services/client-srv
+COPY ./services/client-srv/.sequelizerc      ./services/client-srv
+COPY ./sys.packages                           ./sys.packages
+COPY ./packages                               ./packages
+COPY ./package.json                           ./
+COPY ./lerna.json                             ./
+COPY ./yarn.lock                              ./
+
+RUN yarn
+
+WORKDIR /app/services/client-srv
+
+ENTRYPOINT ["yarn", "run", "start"]

@@ -4,10 +4,6 @@ import { closeDialog } from '@ui.packages/dialog';
 import { pushNotification } from '@ui.packages/notifications';
 
 import {
-  getCategoriesRequestAction,
-  getCategoriesRequestFailAction,
-  getCategoriesRequestSuccessAction,
-
   getTypesRequestAction,
   getTypesRequestFailAction,
   getTypesRequestSuccessAction,
@@ -26,27 +22,6 @@ import {
 } from './slice';
 
 
-export const getCategories = () => async (dispatch) => {
-  try {
-    dispatch(getCategoriesRequestAction());
-
-    const { data } = await request({
-      url: '/categories',
-      method: 'get',
-    });
-
-    dispatch(getCategoriesRequestSuccessAction(data));
-  }
-  catch(error) {
-
-    dispatch(getCategoriesRequestFailAction(error));
-    dispatch(pushNotification({
-      mode: 'danger',
-      content: 'Ошибка получения списка "Категория"'
-    }));
-  }
-};
-
 export const getTypes = () => async (dispatch) => {
   try {
     dispatch(getTypesRequestAction());
@@ -62,7 +37,7 @@ export const getTypes = () => async (dispatch) => {
     dispatch(getTypesRequestFailAction(error));
     dispatch(pushNotification({
       mode: 'danger',
-      content: 'Ошибка получения списка "Тип"'
+      content: 'Ошибка при выполнении операции'
     }));
   }
 };
@@ -79,9 +54,17 @@ export const createType = (data) => async (dispatch) => {
 
     dispatch(createTypeRequestSuccessAction(result['data']));
     dispatch(closeDialog('type'));
+    dispatch(pushNotification({
+      mode: 'success',
+      title: 'Операция успешно выполнена',
+    }));
   }
   catch(error) {
     dispatch(createTypeRequestFailAction(error));
+    dispatch(pushNotification({
+      mode: 'danger',
+      title: 'Ошибка при выполнении операции'
+    }));
   }
 };
 
@@ -97,9 +80,17 @@ export const updateType = (data) => async (dispatch) => {
 
     dispatch(updateTypeRequestSuccessAction(result['data']));
     dispatch(closeDialog('type'));
+    dispatch(pushNotification({
+      mode: 'success',
+      title: 'Операция успешно выполнена',
+    }));
   }
   catch(error) {
     dispatch(updateTypeRequestFailAction(error));
+    dispatch(pushNotification({
+      mode: 'danger',
+      title: 'Ошибка при выполнении операции'
+    }));
   }
 };
 
@@ -114,8 +105,16 @@ export const deleteTypes = (id) => async (dispatch) => {
     });
 
     dispatch(deleteTypeRequestSuccessAction(result['data']));
+    dispatch(pushNotification({
+      mode: 'success',
+      title: 'Операция успешно выполнена',
+    }));
   }
   catch(error) {
     dispatch(deleteTypeRequestFailAction(error));
+    dispatch(pushNotification({
+      mode: 'danger',
+      title: 'Ошибка при выполнении операции'
+    }));
   }
 };

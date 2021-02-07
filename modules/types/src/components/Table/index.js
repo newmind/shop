@@ -7,7 +7,6 @@ import React, { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 
 import FormModify from '../FormModify';
-import Sub from './Sub';
 
 import styles from './default.module.scss';
 
@@ -52,11 +51,7 @@ function Types() {
   return (
     <div className={styles['content']}>
       <div className={styles['table']}>
-        <Table
-          useSub
-          subTemplate={(data) => <Sub data={data} />}
-          columns={items}
-        >
+        <Table columns={items}>
           <Column
             title="Значение"
             alias="value"

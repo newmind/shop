@@ -3,10 +3,12 @@ import request from "@sys.packages/request";
 
 
 export default () => async (ctx) => {
+  const params = ctx['params'];
+
   const result = await request({
     url: process.env['OPERATION_API_SRV'] + '/operations',
     method: 'get',
-    params: {},
+    params,
   });
 
   ctx.body = {

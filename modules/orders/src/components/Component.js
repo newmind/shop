@@ -1,28 +1,42 @@
 
-import { Col, Row } from "@ui.packages/kit";
+import { Mode } from "@ui.packages/types";
+import { Page, PageContent, PageControls, Header, Button, Paging } from "@ui.packages/kit";
 
-import React, { PureComponent } from 'react';
+import React from 'react';
+import { useSelector } from "react-redux";
 
 import Table from './Table';
 
 import styles from './default.module.scss';
+import { selectMeta } from "../ducks/slice";
 
 
-class Component extends PureComponent {
-  render() {
-    return (
-      <div className={styles['wrapper']}>
-        <div className={styles['header']}>
-          <h2>Заказы</h2>
+function Operations() {
+  const meta = useSelector(selectMeta);
+
+  return (
+    <Page>
+      <PageControls>
+        <div className={styles['controls']}>
+          <Button
+            mode={Mode.PRIMARY}
+            form={Button.FORM_CONTEXT}
+          >Добавить заказ</Button>
         </div>
-        <Row>
-          <Col>
-            <Table />
-          </Col>
-        </Row>
-      </div>
-    );
-  }
+      </PageControls>
+      <PageContent>
+        <div className={styles['header']}>
+          <Header level={1}>Заказы</Header>
+        </div>
+        <div className={styles['table']}>
+          <Table />
+        </div>
+        <div className={styles['paging']}>
+          <Paging total={meta['total']} skip={12} />
+        </div>
+      </PageContent>
+    </Page>
+  );
 }
 
-export default Component;
+export default Operations;

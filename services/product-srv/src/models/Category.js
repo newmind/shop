@@ -24,7 +24,7 @@ module.exports = (db, DataType) => {
     timestamps: false,
   });
 
-  Category.associate = ({ Product, Type, ProductCategory, TypeCategory }) => {
+  Category.associate = ({ Product, ProductCategory }) => {
 
     Category.belongsToMany(Product, {
       through: ProductCategory,
@@ -36,18 +36,6 @@ module.exports = (db, DataType) => {
     Category.hasMany(ProductCategory, {
       foreignKey: 'categoryId',
       as: 'product_categories',
-    });
-
-    Category.belongsToMany(Type, {
-      through: TypeCategory,
-      foreignKey: 'categoryId',
-      otherKey: 'typeId',
-      as: 'types',
-    });
-
-    Category.hasMany(TypeCategory, {
-      foreignKey: 'categoryId',
-      as: 'type_category',
     });
 
     Category.hasMany(Category, {

@@ -2,7 +2,6 @@
 import numeral from "@packages/numeral";
 
 import { Mode, Size } from '@ui.packages/types';
-import { selectItems } from '@ui.packages/cart';
 import { Button, Header, Text, Link } from "@ui.packages/kit";
 
 import React from 'react';
@@ -16,38 +15,18 @@ import Details from './Details';
 // import cn from 'classnames';
 import styles from "./default.module.scss";
 
+import { selectAmount } from '../../ducks/slice';
 
-const calculateFullAmount = (products) => {
-  let fullAmount = 0;
-  for (let index in products) {
-    if (products.hasOwnProperty(index)) {
-      const product = products[index];
-      fullAmount += product['amount'];
-      if ('lens' in product) {
-        const lens = product['lens'];
-        for (let key in lens) {
-          if (lens.hasOwnProperty(key)) {
-            const position = lens[key];
-            if (position) {
-              fullAmount += position['coast'];
-            }
-          }
-        }
-      }
-    }
-  }
-  return fullAmount;
-};
 
 export default function OrderModify({ handleSubmit }) {
-  const items = useSelector(selectItems);
+  const amount = useSelector(selectAmount);
 
   return (
     <div className={styles['wrapper']}>
       <form onSubmit={handleSubmit}>
         <div className={styles['section']}>
           <div className={styles['header']}>
-            <Header level={3}>Выбранные товары</Header>
+            <Header theme="light" level={3}>Выбранные товары</Header>
           </div>
           <div className={styles['content']}>
             <FieldArray name="items" component={Products} />
@@ -55,7 +34,7 @@ export default function OrderModify({ handleSubmit }) {
         </div>
         <div className={styles['section']}>
           <div className={styles['header']}>
-            <Header level={3}>Оформление заказа</Header>
+            <Header theme="light" level={3}>Оформление заказа</Header>
           </div>
           <div className={styles['content']}>
             <Details />
@@ -63,15 +42,17 @@ export default function OrderModify({ handleSubmit }) {
         </div>
         <div className={styles['controls']}>
           <div className={styles['information']}>
-            <Text>Нажимая на кнопку ”Оформить заказ”, Вы подтверждаете согласие на обработку <Link href="/offer">Персональных данных</Link></Text>
-            <Text>Для возврата или замены товара, ознакомтесь с информацией в разделе <Link href="/produce">Информация для Вас</Link></Text>
+            <Text theme="light">Нажимая на кнопку ”Оформить заказ”, Вы подтверждаете согласие на обработку <Link href="/offer">Персональных данных</Link></Text>
+            <Text theme="light">Для возврата или замены товара, ознакомтесь с информацией в разделе <Link href="/produce">Информация для Вас</Link></Text>
           </div>
           <div className={styles['buttons']}>
-            <Button
-              type={Button.TYPE_SUBMIT}
-              mode={Mode.SUCCESS}
-              size={Size.LARGE}
-            >Оформить заказ на сумму { numeral(calculateFullAmount(items)).format() } руб.</Button>
+            { !! amount && (
+              <Button
+                type={Button.TYPE_SUBMIT}
+                mode={Mode.SUCCESS}
+                size={Size.LARGE}
+              >Оформить заказ на сумму { numeral(amount['amount']).format() } {amount['currency']['value']}</Button>
+            )}
           </div>
         </div>
       </form>

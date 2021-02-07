@@ -2,7 +2,7 @@
 import { models } from "@sys.packages/db";
 import { NetworkError } from '@packages/errors';
 import { sendEvent } from '@sys.packages/rabbit2';
-import { getFiles } from '@sys.packages/sys.utils';
+import { getFiles } from '@sys.packages/utils';
 
 import Sagas from 'node-sagas';
 

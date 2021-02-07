@@ -1,6 +1,6 @@
 
 import request from "@sys.packages/request";
-import { getBuffer } from "@sys.packages/sys.utils";
+import { getBuffer } from "@sys.packages/utils";
 
 
 export default () => async (ctx) => {

@@ -1,6 +1,6 @@
 
 import request from "@sys.packages/request";
-import { getBuffer } from "@sys.packages/sys.utils";
+import { getBuffer } from "@sys.packages/utils";
 
 
 const PRODUCT_API_SRV = process.env['PRODUCT_API_SRV'];

@@ -1,22 +1,71 @@
 
 import request from '@ui.packages/request';
-import { openDialog } from '@ui.packages/dialog';
+import { pushNotification } from "@ui.packages/notifications";
 
 import {
-  createOperationAction,
-  createOperationFailAction,
-  createOperationSuccessAction,
+  getProductsRequestAction,
+  getProductsRequestFailAction,
+  getProductsRequestSuccessAction,
+
+  getAmountRequestAction,
+  getAmountRequestFailAction,
+  getAmountRequestSuccessAction,
+
+  createOperationRequestAction,
+  createOperationRequestFailAction,
+  createOperationRequestSuccessAction,
 } from './slice';
 
 
-export const pageInProcess = (status) => (dispatch) => {
-  dispatch(pageInProcessAction(status));
-  dispatch(openDialog('success'));
+export const getProducts = (uuid) => async (dispatch) => {
+  try {
+    dispatch(getProductsRequestAction());
+
+    const result = await request({
+      url: '/products',
+      method: 'get',
+      params: {
+        uuid,
+      },
+    });
+
+    dispatch(getProductsRequestSuccessAction(result['data']));
+  }
+  catch(error) {
+    dispatch(getProductsRequestFailAction(error));
+    dispatch(pushNotification({
+      title: 'Ошибка при выполнении операции',
+      mode: 'danger',
+    }));
+  }
+};
+
+export const getAmount = (uuid) => async (dispatch) => {
+  try {
+    dispatch(getAmountRequestAction());
+
+    const result = await request({
+      url: '/products/amount',
+      method: 'post',
+      data: {
+        uuid,
+      },
+    });
+
+    dispatch(getAmountRequestSuccessAction(result['data']));
+  }
+  catch(error) {
+    dispatch(getAmountRequestFailAction(error));
+    dispatch(pushNotification({
+      title: 'Ошибка при выполнении операции',
+      mode: 'danger',
+    }));
+  }
 };
 
 export const createOperation = (order) => async (dispatch) => {
   try {
-    dispatch(createOperationAction());
+    dispatch(createOperationRequestAction());
 
     const result = await request({
       method: 'post',
@@ -24,10 +73,13 @@ export const createOperation = (order) => async (dispatch) => {
       data: order,
     });
 
-    dispatch(createOperationSuccessAction(result));
+    dispatch(createOperationRequestSuccessAction(result));
   }
   catch(error) {
-
-    dispatch(createOperationFailAction(error));
+    dispatch(createOperationRequestFailAction(error));
+    dispatch(pushNotification({
+      title: 'Ошибка при выполнении операции',
+      mode: 'danger',
+    }));
   }
 };

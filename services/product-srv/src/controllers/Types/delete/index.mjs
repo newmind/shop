@@ -4,13 +4,12 @@ import { sequelize, models } from '@sys.packages/db';
 
 
 export default () => async (ctx) => {
-  const { Type, TypeCategory, ProductType } = models;
+  const { Type, ProductType } = models;
   const { id } = ctx['request']['body'];
 
   const transaction = await sequelize.transaction();
 
   await Type.destroy({ where: { id }});
-  await TypeCategory.destroy({ where: { typeId: id }});
   await ProductType.destroy({ where: { typeId: id }});
 
   await transaction.commit();

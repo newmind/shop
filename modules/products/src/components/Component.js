@@ -32,8 +32,8 @@ function Products() {
   }
 
   return (
-    <Page className={styles['wrapper']}>
-      <PageControls className={styles['aside']}>
+    <Page>
+      <PageControls>
         <div className={styles['controls']}>
           <Button
             mode={Mode.PRIMARY}
@@ -42,7 +42,7 @@ function Products() {
           >Добавить товар</Button>
         </div>
       </PageControls>
-      <PageContent className={styles['content']}>
+      <PageContent>
         <div className={styles['header']}>
           <Header level={1}>Управление витриной</Header>
         </div>

@@ -1,5 +1,5 @@
 
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { useLocation, useParams } from 'react-router-dom';
 import React, { Suspense, useEffect, useState } from 'react';
 
@@ -13,20 +13,20 @@ export default function HOC(options) {
       const [isRendered, setRendered] = useState(false);
 
       useEffect(() => {
-        options['onMount'] && options.onMount({ dispatch, location, params });
+        options['onMount'] && options.onMount({ useSelector, dispatch, location, params });
         setRendered(true);
         return () => {
-          options['onUnmount'] && options.onUnmount({ dispatch, location, params });
+          options['onUnmount'] && options.onUnmount({ useSelector, dispatch, location, params });
         }
       }, []);
 
       useEffect(function () {
         if (isRendered) {
           if (options['combineEvents']) {
-            options['onMount'] && options.onMount({ dispatch, location, params });
+            options['onMount'] && options.onMount({ useSelector, dispatch, location, params });
           }
           else {
-            options['onUpdate'] && options.onUpdate({ dispatch, location, params });
+            options['onUpdate'] && options.onUpdate({ useSelector, dispatch, location, params });
           }
         }
       }, [location])

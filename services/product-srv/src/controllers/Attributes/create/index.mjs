@@ -9,12 +9,13 @@ export default () => async (ctx) => {
 
   await Attribute.create({
     value: formData['value'],
+    type: formData['type'],
     description: formData['description'],
     unitId: formData['unit'] ? formData['unit']['id'] : null,
   });
 
   const result = await Attribute.findOne({
-    attributes: ['id', 'value', 'description'],
+    attributes: ['id', 'value', 'type', 'description'],
     order: [['id', 'desc']],
     include: [
       {

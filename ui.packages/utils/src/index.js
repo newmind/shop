@@ -181,3 +181,13 @@ export const validation = {
 
   },
 };
+
+export const isJSON = (value) => {
+  try {
+    JSON.parse(value);
+    return true;
+  }
+  catch(e) {
+    return false;
+  }
+};

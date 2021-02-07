@@ -1,5 +1,5 @@
 
-import { UUID } from '@sys.packages/sys.utils';
+import { UUID } from '@sys.packages/utils';
 import { sequelize, models } from '@sys.packages/db';
 
 

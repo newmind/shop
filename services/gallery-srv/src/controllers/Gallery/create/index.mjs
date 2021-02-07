@@ -1,6 +1,6 @@
 
 import { models } from '@sys.packages/db';
-import { UUID } from '@sys.packages/sys.utils';
+import { UUID } from '@sys.packages/utils';
 
 import sharp from 'sharp';
 

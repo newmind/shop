@@ -22,6 +22,11 @@ export default () => async (ctx) => {
     method: 'get',
     params,
   });
+  const { data: attributes } = await request({
+    url: process.env['PRODUCT_API_SRV'] + '/products/attributes',
+    method: 'get',
+    params,
+  });
 
   const { data, meta } = await request({
     method: 'get',
@@ -40,6 +45,7 @@ export default () => async (ctx) => {
       types: types,
       brands: brands,
       categories: categories,
+      attributes,
     },
     meta: {
       total: meta['total'],

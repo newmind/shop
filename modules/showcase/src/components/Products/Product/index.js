@@ -3,7 +3,7 @@ import numeral from '@packages/numeral';
 
 // import { nounDeclension } from "@ui.packages/utils";
 import { Gallery, Header, Text, Button, Link } from '@ui.packages/kit';
-import { removeProductFromCart, selectItems } from '@ui.packages/cart';
+import { removeProductFromCartAction, selectUuid } from '@ui.packages/cart';
 
 import React from 'react';
 import types from 'prop-types';
@@ -13,24 +13,19 @@ import cn from 'classnames';
 import styles from './default.module.scss';
 
 
-export default function Product({ isSale, isHit, uuid, amount, currency, brand, name, gallery, onCart, onView }) {
+export default function Product({ uuid, amount, currency, brand, name, gallery, onCart }) {
   const dispatch = useDispatch();
-
-  // const classNameForSale = cn('fas fa-percent', styles['sale']);
-  // const classNameForHit = cn('fas fa-star', styles['hit']);
-  // const classNameForFastView = cn('far fa-eye', styles['view']);
-  // const classNameForCart = cn('fas fa-shopping-cart', styles['cart']);
 
   const removeFromCartClassName= cn(styles['remove'], 'far fa-trash-alt');
 
-  const cart = useSelector(selectItems);
-  const countInCart = cart.filter((item) => (item['uuid'] === uuid)).length;
+  const cart = useSelector(selectUuid);
+  const product = cart.find((item) => (item[0] === uuid));
 
   function handleRemoveFromCart(uuid, event) {
     event.preventDefault();
     event.stopPropagation();
 
-    dispatch(removeProductFromCart(uuid));
+    dispatch(removeProductFromCartAction(uuid));
   }
 
   function handleClickCart(event) {
@@ -68,26 +63,17 @@ export default function Product({ isSale, isHit, uuid, amount, currency, brand, 
           <Text type={Text.TYPE_AMOUNT}>{ numeral(amount).format() } { currency }</Text>
         </div>
         <div className={styles['controls']}>
-          <Button form={Button.FORM_CART} onClick={handleClickCart} />
-          { !! countInCart && (
+          <Button form={Button.FORM_CART} onClick={(event) => handleClickCart(event)} />
+          { !! product && (
             <span className={removeFromCartClassName} onClick={(event) => handleRemoveFromCart(uuid, event)} />
           )}
         </div>
+        {product && (
+          <div className={styles['count']}>
+            <Text type={Text.TYPE_COMMENT}>{ product[1] } товар в корзине</Text>
+          </div>
+        )}
       </div>
-      {/*<div className={styles['meta']}>*/}
-      {/*  {isHit && <span className={classNameForHit} title="хит продаж" />}*/}
-      {/*  {isSale && <span className={classNameForSale} title="распродажа" />}*/}
-      {/*</div>*/}
-
-      {/*<div className={styles['promo']}>*/}
-      {/*  */}
-      {/*</div>*/}
-      {/*<div className={styles['controls']}>*/}
-      {/*  <span className={classNameForFastView} onClick={(event) => handleClickFastView(event)} />*/}
-      {/*  <span className={classNameForCart} onClick={(event) => handleClickCart(event)}>*/}
-      {/*    { !! countInCart && <span className={styles['count']}>{countInCart}</span>}*/}
-      {/*  </span>*/}
-      {/*</div>*/}
     </Link>
   );
 }

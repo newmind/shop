@@ -1,6 +1,6 @@
 
 import request from '@sys.packages/request';
-import { getFiles } from '@sys.packages/sys.utils';
+import { getFiles } from '@sys.packages/utils';
 
 
 export default () => async (ctx) => {

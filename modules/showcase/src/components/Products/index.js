@@ -1,7 +1,7 @@
 
 import { Paging } from "@ui.packages/kit";
 import { Mode } from '@ui.packages/types';
-import { addProductToCart } from '@ui.packages/cart';
+import { addProductToCartAction } from '@ui.packages/cart';
 import { pushNotification } from '@ui.packages/notifications';
 
 import React from 'react';
@@ -28,7 +28,7 @@ function Products() {
   }
 
   function handleAddToCart(product) {
-    dispatch(addProductToCart(product));
+    dispatch(addProductToCartAction(product['uuid']));
     dispatch(pushNotification({
       title: 'Товар добавлен в карзину',
       mode: Mode.SUCCESS,

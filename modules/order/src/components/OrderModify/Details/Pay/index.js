@@ -39,7 +39,7 @@ function Pay() {
         </Block>
       </Radio>
       <Radio name="online">
-        <Block disabled={true}>
+        <Block>
           <i className={cn(styles['block__icon'], 'fas fa-cash-register')} />
           <span className={styles['block__caption']}>Онлайн оплата</span>
         </Block>

@@ -22,6 +22,11 @@ export default () => async (ctx) => {
     method: 'get',
     params: ctx['request']['query'],
   });
+  const { data: attributes } = await request({
+    url: process.env['PRODUCT_API_SRV'] + `/products/attributes`,
+    method: 'get',
+    params: ctx['request']['query'],
+  });
 
   const { data: products, meta } = await request({
     method: 'get',
@@ -41,6 +46,7 @@ export default () => async (ctx) => {
       types: types.map((item) => ({ id: item['id'], value: item['value'], count: Number(item['count']) })),
       brands: brands.map((item) => ({ id: item['id'], value: item['value'], count: Number(item['count']) })),
       categories: categories.map((item) => ({ id: item['id'], value: item['value'], count: Number(item['count']) })),
+      attributes,
     }
   };
 }

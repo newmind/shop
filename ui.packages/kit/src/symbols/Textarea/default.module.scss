@@ -9,6 +9,7 @@
   flex-direction: column;
   border: 1px solid $pale-lilac;
   border-radius: 3px;
+  height: 122px;
   overflow: hidden;
   transition: border 200ms;
 
@@ -29,7 +30,7 @@
   font-size: 14px;
   outline: none;
   width: 100%;
-  min-height: 200px;
+  height: 100%;
   box-sizing: border-box;
   border: none;
   letter-spacing: .5px;

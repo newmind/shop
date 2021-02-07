@@ -1,16 +1,16 @@
 
-import { getImageByFileName } from '../controllers/Gallery/index.mjs';
+import { getImageByFileName } from '../controllers/Gallery';
 
-import { create as createOperation, get as getOperationById } from '../controllers/Orders/index.mjs';
+import { create as createOperation, get as getOperationById } from '../controllers/Orders';
 
-import { getProducts, getProductById } from '../controllers/Products/index.mjs';
+import { getProducts, getProductById, getProductsAmount } from '../controllers/Products';
 
-import { createComment } from '../controllers/Comments/index.mjs';
+import { createComment } from '../controllers/Comments';
 
-import { getAllTypes } from '../controllers/Type/index.mjs';
-import { getAllCategories } from '../controllers/Category/index.mjs';
+import { getAllTypes } from '../controllers/Type';
+import { getAllCategories } from '../controllers/Category';
 
-import { getProfile, signUp, signIn, signOut } from '../controllers/Profile/index.mjs';
+import { getProfile, signUp, signIn, signOut } from '../controllers/Profile';
 
 
 export default (router) => {
@@ -22,11 +22,11 @@ export default (router) => {
 
   router.get('/products', getProducts());
   router.get('/products/:uuid', getProductById());
+  router.post('/products/amount', getProductsAmount());
+  router.post('/products/:id/comments', createComment());
 
   router.get('/types', getAllTypes());
   router.get('/categories', getAllCategories());
-
-  router.post('/products/:id/comments', createComment());
 
   router.get('/gallery/:fileName', getImageByFileName());
 

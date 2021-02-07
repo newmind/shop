@@ -2,21 +2,39 @@
 import React from 'react';
 import types from 'prop-types';
 
-import Default from './Default';
-import Comment from './Comment';
-import Amount from './Amount';
-import Body from './Body';
-import UUID from './UUID';
+import DDefault from './Dark/Default';
+import DComment from './Dark/Comment';
+import DAmount from './Dark/Amount';
+import DBody from './Dark/Body';
+import DUUID from './Dark/UUID';
+
+import LDefault from './Light/Default';
+import LComment from './Light/Comment';
+import LAmount from './Light/Amount';
+import LBody from './Light/Body';
+import LUUID from './Light/UUID';
 
 
-function TextFactory({ className, children, type }) {
-  switch(type) {
-    case TextFactory.TYPE_DEFAULT: return <Default className={className}>{ children }</Default>;
-    case TextFactory.TYPE_COMMENT: return <Comment className={className}>{ children }</Comment>;
-    case TextFactory.TYPE_AMOUNT: return <Amount className={className}>{ children }</Amount>;
-    case TextFactory.TYPE_BODY: return <Body className={className}>{ children }</Body>;
-    case TextFactory.TYPE_UUID: return <UUID className={className}>{ children }</UUID>;
-    default: return <Default className={className}>{ children }</Default>;
+function TextFactory({ theme, className, children, type }) {
+  if (theme === 'dark') {
+    switch(type) {
+      case TextFactory.TYPE_DEFAULT: return <DDefault className={className}>{ children }</DDefault>;
+      case TextFactory.TYPE_COMMENT: return <DComment className={className}>{ children }</DComment>;
+      case TextFactory.TYPE_AMOUNT: return <DAmount className={className}>{ children }</DAmount>;
+      case TextFactory.TYPE_BODY: return <DBody className={className}>{ children }</DBody>;
+      case TextFactory.TYPE_UUID: return <DUUID className={className}>{ children }</DUUID>;
+      default: return <DDefault className={className}>{ children }</DDefault>;
+    }
+  }
+  if (theme === 'light') {
+    switch(type) {
+      case TextFactory.TYPE_DEFAULT: return <LDefault className={className}>{ children }</LDefault>;
+      case TextFactory.TYPE_COMMENT: return <LComment className={className}>{ children }</LComment>;
+      case TextFactory.TYPE_AMOUNT: return <LAmount className={className}>{ children }</LAmount>;
+      case TextFactory.TYPE_BODY: return <LBody className={className}>{ children }</LBody>;
+      case TextFactory.TYPE_UUID: return <LUUID className={className}>{ children }</LUUID>;
+      default: return <LDefault className={className}>{ children }</LDefault>;
+    }
   }
 }
 
@@ -27,12 +45,14 @@ TextFactory.TYPE_DEFAULT = 'default';
 TextFactory.TYPE_COMMENT = 'comment';
 
 TextFactory.propTypes = {
+  theme: types.oneOf(['light', 'dark']),
   type: types.oneOf([TextFactory.TYPE_DEFAULT, TextFactory.TYPE_COMMENT, TextFactory.TYPE_AMOUNT, TextFactory.TYPE_BODY, TextFactory.TYPE_UUID]),
   className: types.string,
   children: types.any,
 };
 
 TextFactory.defaultProps = {
+  theme: 'dark',
   type: TextFactory.TYPE_DEFAULT,
   className: '',
   children: null,

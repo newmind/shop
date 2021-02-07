@@ -24,14 +24,14 @@ const routes = [
       '@modules/product-modify'
     ),
   },
-  // {
-  //   path: '/orders',
-  //   wrapper: 'Navigate',
-  //   module: import(
-  //     /* webpackChunkName: "orders" */
-  //     '@modules/orders'
-  //   ),
-  // },
+  {
+    path: '/orders',
+    wrapper: 'Navigate',
+    module: import(
+      /* webpackChunkName: "orders" */
+      '@modules/orders'
+    ),
+  },
   {
     path: '/comments',
     wrapper: 'Navigate',

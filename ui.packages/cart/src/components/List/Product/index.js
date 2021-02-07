@@ -5,18 +5,27 @@ import { Gallery, Header, Text, Link } from "@ui.packages/kit";
 
 import React from 'react';
 import types from "prop-types";
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 
-import { closeCart } from '../../../ducks/cartSlice';
+import { closeCartAction } from '../../../ducks/slice';
 
 import cn from "classnames";
 import styles from "./defaults.module.scss";
 
+import { selectUuid } from '../../../ducks/slice';
+
 
 function Product({ uuid, gallery, brand, name, amount, currency, onRemove }) {
   const dispatch = useDispatch();
+  const uuids = useSelector(selectUuid);
   const classNameRemoveProduct = cn(styles['remove'], 'far fa-trash-alt');
-console.log(uuid)
+
+  const product = uuids.find(item => item[0] === uuid);
+
+  if ( ! product) {
+    return null;
+  }
+
   return (
     <div className={styles['item']}>
       <div className={styles['item__promo']}>
@@ -26,7 +35,7 @@ console.log(uuid)
         <div className={styles['item__names']}>
           <span className={styles['brand']}>
             <Header level={4}>
-              <Link href={process.env['PUBLIC_URL'] + `/products/${uuid}`} onClick={() => dispatch(closeCart())}>
+              <Link href={process.env['PUBLIC_URL'] + `/products/${uuid}`} onClick={() => dispatch(closeCartAction())}>
                 { brand }
               </Link>
             </Header>
@@ -36,7 +45,7 @@ console.log(uuid)
           </div>
         </div>
         <div className={styles['item__count']}>
-          <p className={styles['item__amount']}>{numeral(amount).format()} {currency['value']}</p>
+          <p className={styles['item__amount']}>{ product[1] } x { numeral(amount).format() } { currency }</p>
         </div>
       </div>
       <div className={styles['item__controls']}>

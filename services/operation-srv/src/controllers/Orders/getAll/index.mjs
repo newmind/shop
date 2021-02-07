@@ -6,62 +6,34 @@ export default () => async (ctx) => {
   try {
     const where = {};
 
-    const { Order, OrderProducts, Product, Gallery, Currency, Status } = models;
-    const { externalId } = ctx['request']['query'];
+    const { Order, Currency, Product, Gallery } = models;
+    const { uuid } = ctx['request']['query'];
 
-    if (externalId) {
-      where['externalId'] = externalId;
+    if (uuid) {
+      where['uuid'] = uuid;
     }
 
     const operations = await Order.findAndCountAll({
       where: { ...where },
       distinct: true,
       order: [['createdAt', 'desc']],
-      attributes: ['externalId', 'address', 'email', 'phone', 'name', 'surname', 'amount', 'pay', 'delivery', 'createdAt', 'updatedAt'],
+      attributes: ['uuid', 'amount', 'finalAmount', 'description', 'createdAt', 'updatedAt'],
       include: [
         {
           model: Currency,
-          required: false,
+          required: true,
           as: 'currency',
           attributes: ['uuid', 'value'],
         },
         {
-          model: Status,
-          required: true,
-          as: 'status',
-          attributes: ['code', 'name'],
-        },
-        {
-          model: OrderProducts,
+          model: Product,
           required: true,
           as: 'products',
-          attributes: ['id', 'type', 'recipe', 'lens', 'amount'],
+          attributes: ['name'],
           include: [
             {
-              model: Currency,
-              required: false,
-              as: 'currency',
-              attributes: ['uuid', 'value'],
-            },
-            {
-              model: Product,
-              attributes: ['uuid', 'name', 'brand'],
-              required: true,
-              as: 'product',
-              include: [
-                {
-                  model: Currency,
-                  required: false,
-                  as: 'currency',
-                  attributes: ['uuid', 'value'],
-                },
-                {
-                  model: Gallery,
-                  required: false,
-                  as: 'gallery',
-                  attributes: ['externalId'],
-                },
-              ]
+              model: Gallery,
+              as: 'gallery',
             }
           ]
         }
