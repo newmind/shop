@@ -12,6 +12,8 @@ export default () => async (ctx) => {
     where['id'] = id;
   }
 
+  console.log(where)
+
   const result = await Client.findAndCountAll({
     where: { ...where },
     distinct: true,

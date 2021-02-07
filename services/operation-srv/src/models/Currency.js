@@ -6,14 +6,18 @@ module.exports = (db, DataType) => {
       type: DataType.INTEGER,
       primaryKey: true,
       allowNull: false,
+      autoIncrement: true,
     },
     value: {
       type: DataType.STRING(8),
       allowNull: false,
     },
+    code: {
+      type: DataType.STRING(8),
+      allowNull: false,
+    },
     description: {
-      type: DataType.STRING(2024),
-      defaultValue: ''
+      type: DataType.STRING(1024),
     }
   }, {
     timestamps: false,

@@ -2,49 +2,70 @@
 module.exports = (db, DataType) => {
 
   const Order = db.define('Order', {
-    uuid: {
-      type: DataType.UUID,
+    id: {
+      type: DataType.INTEGER,
       primaryKey: true,
-      unique: true,
-      index: true,
+      autoIncrement: true,
     },
-    amount: {
-      type: DataType.INTEGER,
-    },
-    finalAmount: {
-      type: DataType.INTEGER,
-    },
-    description: {
-      type: DataType.STRING(1024),
-    },
-    currencyUuid: {
+    externalId: {
       type: DataType.UUID,
-      allowNull: false,
+      unique: true,
     },
-    statusCode: {
+    customerId: {
       type: DataType.INTEGER,
       allowNull: false,
+    },
+    paymentId: {
+      type: DataType.INTEGER,
+      allowNull: false,
+    },
+    deliveryId: {
+      type: DataType.INTEGER,
+      allowNull: false,
+    },
+    currencyId: {
+      type: DataType.INTEGER,
+      allowNull: false,
+    },
+    statusId: {
+      type: DataType.INTEGER,
+      allowNull: false,
+    },
+    price: {
+      type: DataType.DECIMAL(10, 2),
+      allowNull: false,
+      defaultValue: 0,
+      get() {
+        return Number(this.getDataValue('price'))
+      },
     }
   });
 
-  Order.associate = function({ Product, Currency, Status, OrderProduct }) {
+  Order.associate = ({ Product, Payment, Delivery, Status, Currency }) => {
 
-    Order.belongsTo(Currency, {
-      foreignKey: 'currencyUuid',
-      as: 'currency',
+    Order.hasMany(Product, {
+      foreignKey: 'orderId',
+      as: 'products',
     });
 
     Order.belongsTo(Status, {
-      foreignKey: 'statusCode',
-      sourceKey: 'code',
+      foreignKey: 'statusId',
       as: 'status',
     });
 
-    Order.belongsToMany(Product, {
-      through: OrderProduct,
-      foreignKey: 'orderUuid',
-      otherKey: 'productUuid',
-      as: 'products',
+    Order.belongsTo(Payment, {
+      foreignKey: 'paymentId',
+      as: 'payment',
+    });
+
+    Order.belongsTo(Delivery, {
+      foreignKey: 'deliveryId',
+      as: 'delivery',
+    });
+
+    Order.belongsTo(Currency, {
+      foreignKey: 'currencyId',
+      as: 'currency',
     });
   };
 

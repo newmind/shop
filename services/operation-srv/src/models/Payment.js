@@ -1,7 +1,7 @@
 
 module.exports = (db, DataType) => {
 
-  const Status = db.define('Status', {
+  const Payment = db.define('Payment', {
     id: {
       type: DataType.INTEGER,
       primaryKey: true,
@@ -9,7 +9,7 @@ module.exports = (db, DataType) => {
       autoIncrement: true,
     },
     code: {
-      type: DataType.INTEGER,
+      type: DataType.STRING,
       allowNull: false,
     },
     name: {
@@ -24,7 +24,7 @@ module.exports = (db, DataType) => {
     timestamps: false,
   });
 
-  Status.associate = () => {};
+  Payment.associate = () => {};
 
-  return Status;
+  return Payment;
 };

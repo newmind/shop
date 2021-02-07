@@ -3,54 +3,67 @@ import { models } from '@sys.packages/db';
 
 
 export default () => async (ctx) => {
-  try {
-    const where = {};
+  const where = {};
 
-    const { Order, Currency, Product, Gallery } = models;
-    const { uuid } = ctx['request']['query'];
+  const { Order, Currency, Payment, Delivery, Product, Status } = models;
+  const { externalId } = ctx['request']['query'];
 
-    if (uuid) {
-      where['uuid'] = uuid;
-    }
+  if (externalId) {
+    where['externalId'] = uuid;
+  }
 
-    const operations = await Order.findAndCountAll({
-      where: { ...where },
-      distinct: true,
-      order: [['createdAt', 'desc']],
-      attributes: ['uuid', 'amount', 'finalAmount', 'description', 'createdAt', 'updatedAt'],
-      include: [
-        {
-          model: Currency,
-          required: true,
-          as: 'currency',
-          attributes: ['uuid', 'value'],
-        },
-        {
-          model: Product,
-          required: true,
-          as: 'products',
-          attributes: ['name'],
-          include: [
-            {
-              model: Gallery,
-              as: 'gallery',
-            }
-          ]
-        }
-      ]
-    });
-
-    ctx.body = {
-      success: true,
-      data: operations['rows'],
-      meta: {
-        total: operations['count'],
+  const operations = await Order.findAndCountAll({
+    where: { ...where },
+    distinct: true,
+    order: [['createdAt', 'desc']],
+    attributes: ['externalId', 'customerId', 'price', 'createdAt', 'updatedAt'],
+    include: [
+      {
+        model: Currency,
+        required: true,
+        as: 'currency',
+        attributes: ['code', 'value'],
       },
-    };
-  }
-  catch(error) {
+      {
+        model: Product,
+        required: true,
+        as: 'products',
+        attributes: ['uuid', 'fiscal', 'price'],
+        include: [
+          {
+            model: Currency,
+            required: true,
+            as: 'currency',
+            attributes: ['code', 'value'],
+          },
+        ],
+      },
+      {
+        model: Payment,
+        required: true,
+        as: 'payment',
+        attributes: ['code', 'name'],
+      },
+      {
+        model: Delivery,
+        required: true,
+        as: 'delivery',
+        attributes: ['code', 'name'],
+      },
+      {
+        model: Status,
+        required: true,
+        as: 'status',
+        attributes: ['code', 'name'],
+      }
+    ]
+  });
 
-    ctx.status = 500;
-    ctx.body = { code: '500', message: error['message'] };
-  }
+  ctx.body = {
+    success: true,
+    data: operations['rows'],
+    meta: {
+      total: operations['count'],
+    },
+  };
 };

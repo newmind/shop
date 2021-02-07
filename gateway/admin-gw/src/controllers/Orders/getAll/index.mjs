@@ -11,9 +11,31 @@ export default () => async (ctx) => {
     params,
   });
 
+  const orders = [];
+  for (let index in result['data']) {
+    if (result['data'].hasOwnProperty(index)) {
+      const order = result['data'][index];
+
+      console.log(order)
+
+      const { data } = await request({
+        url: process.env['CUSTOMER_API_SRV'] + '/customers',
+        method: 'get',
+        params: {
+          id: order['customerId'],
+        }
+      });
+
+      orders.push({
+        ...order,
+        customer: data[0],
+      });
+    }
+  }
+
   ctx.body = {
     success: true,
-    data: result['data'],
+    data: orders,
     meta: result['meta'],
   };
 }
