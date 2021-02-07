@@ -1,7 +1,7 @@
 
 import { NotfoundError } from '@packages/errors';
 import { models } from '@sys.packages/db';
-import { genHash256, token } from '@sys.packages/sys.utils';
+import { genHash256, token } from '@sys.packages/utils';
 
 import jwt from 'jsonwebtoken';
 

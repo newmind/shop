@@ -1,5 +1,5 @@
 
-import {genHash256, token} from '@sys.packages/sys.utils';
+import {genHash256, token} from '@sys.packages/utils';
 import { models, sequelize, Sequelize } from '@sys.packages/db';
 
 import jwt from "jsonwebtoken";

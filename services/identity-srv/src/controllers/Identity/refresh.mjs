@@ -1,7 +1,7 @@
 
 import { models } from '@sys.packages/db';
 import { UnauthorizedError } from '@packages/errors';
-import { token } from '@sys.packages/sys.utils';
+import { token } from '@sys.packages/utils';
 
 import jwt from 'jsonwebtoken';
 
