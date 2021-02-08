@@ -8,7 +8,7 @@ export default function productBuilder(data) {
     types: data['types'],
     categories: data['categories'],
     description: data['description'],
-    amount: Number(data['amount']),
+    price: Number(data['price']),
     promotions: data['promotions'],
     currency: data['currency'] ? data['currency']['value'] : null,
     status: Number(data['status']),

@@ -3,9 +3,9 @@ import { models } from '@sys.packages/db';
 
 
 export default () => async (ctx) => {
-  const { Units } = models;
+  const { Unit } = models;
 
-  const result = await Units.findAll({
+  const result = await Unit.findAll({
     attributes: ['id', 'value', 'description'],
     order: [['id', 'desc']],
   });

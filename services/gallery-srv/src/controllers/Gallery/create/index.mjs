@@ -43,6 +43,8 @@ export default () => async (ctx) => {
 
   const fileName = `${uuid}.jpg`;
 
+  console.log(fileName, fileName.length)
+
   await Gallery.create({
     uuid: fileName,
     small: smallImgBuffer,

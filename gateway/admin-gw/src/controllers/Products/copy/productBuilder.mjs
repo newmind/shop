@@ -8,7 +8,7 @@ export default function productBuilder(data) {
     types: data['types'],
     categories: data['categories'],
     description: data['description'],
-    amount: Number(data['amount']),
+    price: Number(data['price']),
     promotions: data['promotions'],
     currency: data['currency'] ? data['currency']['value'] : null,
     status: Number(data['status']),
@@ -16,9 +16,9 @@ export default function productBuilder(data) {
     comments: data['comments'],
     updatedAt: data['updatedAt'],
     attributes: data['attributes'].map((item) => ({
-      name: item['value'],
-      value: item['attribute']['value'],
-      unit: item['unit'] ? item['unit']['value'] : null,
+      name: item['attribute']['value'],
+      value: item['value'],
+      unit: item['attribute']['unit'] ? item['attribute']['unit']['value'] : null,
     })),
   };
 }

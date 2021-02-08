@@ -8,6 +8,7 @@ module.exports = {
       await queryInterface.createTable('ProductAttributes', {
         productUuid: {
           type: DataType.STRING(9),
+          primaryKey: true,
           allowNull: false,
         },
         attributeId: {

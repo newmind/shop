@@ -12,6 +12,10 @@ module.exports = (db, DataType) => {
       type: DataType.STRING(256),
       allowNull: false,
     },
+    type: {
+      type: DataType.STRING,
+      allowNull: false,
+    },
     description: {
       type: DataType.STRING(1024),
       allowNull: true,
@@ -27,8 +31,9 @@ module.exports = (db, DataType) => {
   Attribute.associate = ({ Unit, ProductAttribute }) => {
 
     Attribute.hasOne(ProductAttribute, {
-      as: 'attribute'
-    });
+      foreignKey: 'attributeId',
+      as: 'product_attribute',
+    })
 
     Attribute.belongsTo(Unit, {
       as: 'unit'

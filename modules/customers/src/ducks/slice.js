@@ -37,7 +37,7 @@ const currenciesSlice = createSlice({
       state['inProcess'] = false;
     },
     createCustomerRequestSuccessAction(state, { payload }) {
-      if ( ! state['items'].some((currency) => currency['uuid'] === payload['uuid'])) {
+      if ( ! state['items'].some((customer) => customer['id'] === payload['id'])) {
         state['items'] = [payload, ...state['items']];
       }
       state['inProcess'] = false;

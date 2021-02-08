@@ -198,7 +198,7 @@ export const updateProductsById = (data) => async (dispatch) => {
 
     formData.append('name', data['name']);
     formData.append('brandId', data['brandId']);
-    formData.append('amount', data['amount']);
+    formData.append('price', data['price']);
     formData.append('currencyId', data['currencyId']);
     formData.append('description', data['description']);
     formData.append('saleAmount', data['saleAmount'] || null);
@@ -256,7 +256,7 @@ export const createProduct = (data) => async dispatch => {
     formData.append('uuid', uuid);
     formData.append('name', data['name']);
     formData.append('brandId', data['brandId']);
-    formData.append('amount', data['amount']);
+    formData.append('price', data['price']);
     formData.append('currencyId', data['currencyId']);
     formData.append('description', data['description']);
     formData.append('saleAmount', data['saleAmount'] || null);

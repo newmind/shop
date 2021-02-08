@@ -22,6 +22,15 @@ export default ({ handleSubmit, valid, pristine }) => {
         </Row>
         <Row>
           <Col>
+            <InputField
+              name="code"
+              label="Код"
+              maxLength={8}
+            />
+          </Col>
+        </Row>
+        <Row>
+          <Col>
             <TextareaField
               name="description"
               label="Описание"

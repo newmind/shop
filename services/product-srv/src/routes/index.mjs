@@ -38,7 +38,7 @@ export default (router) => {
 
   router.get('/v1/api/currencies', getAllCurrencies());
   router.post('/v1/api/currencies', createCurrency());
-  router.put('/v1/api/currencies/:uuid', updateCurrency());
+  router.put('/v1/api/currencies/:id', updateCurrency());
   router.delete('/v1/api/currencies', deleteCurrencies());
 
   router.get('/v1/api/units', getAllUnits());

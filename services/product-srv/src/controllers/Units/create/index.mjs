@@ -4,12 +4,12 @@ import { models } from '@sys.packages/db';
 
 
 export default () => async (ctx) => {
-  const { Units } = models;
+  const { Unit } = models;
   const formData = ctx['request']['body'];
 
-  const { id } = await Units.create(formData);
+  const { id } = await Unit.create(formData);
 
-  const result = await Units.findOne({
+  const result = await Unit.findOne({
     attributes: ['id', 'value', 'description'],
     where: { id },
   });

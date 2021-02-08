@@ -7,13 +7,13 @@ export default () => async (ctx) => {
   const { id } = ctx['params'];
   const formData = ctx['request']['body'];
 
-  const { Attribute, Units } = models;
+  const { Attribute, Unit } = models;
 
   await Attribute.update({
     value: formData['value'],
     type: formData['type'],
     description: formData['description'],
-    unitId: formData['unit'] ? formData['unit']['id'] : null,
+    unitId: formData['unitId'],
   }, {
     where: { id },
   });
@@ -23,7 +23,7 @@ export default () => async (ctx) => {
     order: [['id', 'desc']],
     include: [
       {
-        model: Units,
+        model: Unit,
         attributes: ['id', 'value'],
         as: 'unit',
       }

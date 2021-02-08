@@ -6,7 +6,7 @@ export default () => async (ctx) => {
   const { Currency } = models;
 
   const currencies = await Currency.findAll({
-    attributes: ['uuid', 'value', 'description'],
+    attributes: ['id', 'value', 'code', 'description'],
     order: [['value', 'desc']],
   });
 

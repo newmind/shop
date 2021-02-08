@@ -3,11 +3,11 @@ import {models, Sequelize} from '@sys.packages/db';
 
 
 export default async function updateProperties(uuid) {
-  const { Product, Attribute, Units, Gallery, Currency, Promotion, Category, Type, Brand, ProductAttribute } = models;
+  const { Product, Attribute, Unit, Gallery, Currency, Promotion, Category, Type, Brand, ProductAttribute } = models;
 
   const product = await Product.findOne({
     where: { uuid },
-    attributes: ['uuid', 'name', 'description', 'status', 'amount', 'fiscal', 'updatedAt'],
+    attributes: ['uuid', 'name', 'description', 'status', 'price', 'fiscal', 'updatedAt'],
     order: [
       ['gallery', 'order', 'desc'],
     ],
@@ -61,7 +61,7 @@ export default async function updateProperties(uuid) {
         model: Currency,
         required: false,
         as: 'currency',
-        attributes: ['uuid', 'value']
+        attributes: ['id', 'value']
       },
       {
         model: ProductAttribute,
@@ -75,7 +75,7 @@ export default async function updateProperties(uuid) {
             as: 'attribute',
             include: [
               {
-                model: Units,
+                model: Unit,
                 required: false,
                 as: 'unit',
                 attributes: ['value']

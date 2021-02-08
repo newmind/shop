@@ -10,7 +10,7 @@ export default async function createProperties(properties) {
   const { uuid } = await Product.create({
     uuid: properties['uuid'],
     name: properties['name'],
-    amount: properties['amount'],
+    price: properties['price'],
     currencyId: properties['currencyId'],
     description: properties['description'],
     fiscal: properties['fiscal'],

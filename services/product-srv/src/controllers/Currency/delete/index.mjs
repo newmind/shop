@@ -5,16 +5,16 @@ import { models } from '@sys.packages/db';
 
 export default () => async (ctx) => {
   const { Currency } = models;
-  const { uuid } = ctx['request']['body'];
+  const { id } = ctx['request']['body'];
 
   await Currency.destroy({
-    where: { uuid },
+    where: { id },
   });
 
-  await sendEvent(process.env['EXCHANGE_CURRENCY_DELETE'], JSON.stringify(uuid));
+  await sendEvent(process.env['EXCHANGE_CURRENCY_DELETE'], JSON.stringify(id));
 
   ctx.body = {
     success: true,
-    data: uuid,
+    data: id,
   };
 };

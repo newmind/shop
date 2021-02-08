@@ -6,7 +6,7 @@ module.exports = {
 
       await queryInterface.createTable('Galleries', {
         uuid: {
-          type: Sequelize.STRING(64),
+          type: Sequelize.STRING(40),
           primaryKey: true,
           index: true,
           unique: true,

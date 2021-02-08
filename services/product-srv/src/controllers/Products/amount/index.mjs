@@ -19,7 +19,7 @@ export default () => async (ctx) => {
       const item = uuid[index];
 
       const result = await Product.findOne({
-        attributes: ['uuid', 'amount'],
+        attributes: ['uuid', 'price'],
         where: { uuid: item[0] },
         include: [
           {
@@ -43,7 +43,7 @@ export default () => async (ctx) => {
       });
 
       const product = result.toJSON();
-      const productAmount = product['amount'] * item[1];
+      const productAmount = product['price'] * item[1];
 
       amount += productAmount;
     }

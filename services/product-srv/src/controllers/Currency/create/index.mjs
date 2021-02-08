@@ -1,19 +1,17 @@
 
 import { sendEvent } from "@sys.packages/rabbit2";
 import { models } from '@sys.packages/db';
-import { UUID } from '@sys.packages/utils';
 
 
 export default () => async (ctx) => {
   const { Currency } = models;
   const formData = ctx['request']['body'];
-  const uuid = UUID();
 
-  await Currency.create({ uuid, ...formData });
+  const { id } = await Currency.create(formData);
 
   const result = await Currency.findOne({
-    where: { uuid },
-    attributes: ['uuid', 'value', 'description'],
+    where: { id },
+    attributes: ['id', 'value', 'code', 'description'],
   });
 
   const currency = result.toJSON();

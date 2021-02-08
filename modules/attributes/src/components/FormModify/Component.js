@@ -11,6 +11,12 @@ import styles from './default.module.scss';
 import { selectUnits } from '../../ducks/slice';
 
 
+const types = [
+  { id: 'string', value: 'Текстовый' },
+  { id: 'number', value: 'Числовой' },
+  { id: 'bool', value: 'Булевый' },
+];
+
 export default ({ handleSubmit, valid, pristine }) => {
   const units = useSelector(selectUnits);
   const dispatch = useDispatch();
@@ -35,8 +41,18 @@ export default ({ handleSubmit, valid, pristine }) => {
         <Row>
           <Col>
             <SelectField
-              simple={false}
-              name="unit"
+              name="type"
+              label="Тип поля"
+              options={types}
+              optionKey="id"
+              optionValue="value"
+            />
+          </Col>
+        </Row>
+        <Row>
+          <Col>
+            <SelectField
+              name="unitId"
               label="Величина"
               options={units}
               optionKey="id"

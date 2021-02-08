@@ -110,15 +110,16 @@ function ModifyForm({ handleSubmit, onDelete }) {
         <div className={styles['content']}>
           <Row>
             <Col>
-              <InputField require name="amount" label="Цена" disabled={inProcess} />
+              <InputField require name="price" label="Цена" disabled={inProcess} />
             </Col>
             <Col>
               <SelectField
                 require
+                simple
                 name="currencyId"
                 label="Валюта"
                 options={currencies}
-                optionKey="uuid"
+                optionKey="id"
                 optionValue="value"
                 disabled={inProcess}
               />

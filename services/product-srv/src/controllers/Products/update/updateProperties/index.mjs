@@ -33,7 +33,7 @@ export default async function updateProperties(uuid, properties) {
 
   await Product.update({
     name: properties['name'],
-    amount: properties['amount'],
+    price: properties['price'],
     currencyId: properties['currencyId'],
     description: properties['description'],
     fiscal: properties['fiscal'],

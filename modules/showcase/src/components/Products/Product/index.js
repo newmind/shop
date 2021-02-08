@@ -13,7 +13,7 @@ import cn from 'classnames';
 import styles from './default.module.scss';
 
 
-export default function Product({ uuid, amount, currency, brand, name, gallery, onCart }) {
+export default function Product({ uuid, price, currency, brand, name, gallery, onCart }) {
   const dispatch = useDispatch();
 
   const removeFromCartClassName= cn(styles['remove'], 'far fa-trash-alt');
@@ -60,7 +60,7 @@ export default function Product({ uuid, amount, currency, brand, name, gallery, 
       </div>
       <div className={styles['information']}>
         <div className={styles['amount']}>
-          <Text type={Text.TYPE_AMOUNT}>{ numeral(amount).format() } { currency }</Text>
+          <Text type={Text.TYPE_AMOUNT}>{ numeral(price).format() } { currency }</Text>
         </div>
         <div className={styles['controls']}>
           <Button form={Button.FORM_CART} onClick={(event) => handleClickCart(event)} />

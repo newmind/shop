@@ -75,7 +75,8 @@ export const createItem = (formData) => async (dispatch) => {
       method: 'post',
       data: {
         value: formData['value'],
-        unit: formData['unit'] || null,
+        type: formData['type'],
+        unitId: formData['unitId'] || null,
         description: formData['description'] || null,
       },
     });
@@ -105,7 +106,8 @@ export const updateItem = (formData) => async (dispatch) => {
       method: 'put',
       data: {
         value: formData['value'],
-        unit: formData['unit'] || null,
+        type: formData['type'],
+        unitId: formData['unitId'] || null,
         description: formData['description'] || null,
       },
     });

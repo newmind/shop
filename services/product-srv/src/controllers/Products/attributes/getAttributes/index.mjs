@@ -6,7 +6,7 @@ export default () => async (ctx) => {
   const where = {};
   const { typeId = null, categoryId = null } = ctx['request']['query'];
 
-  const { Product, Type, Category, Units, Attribute, ProductAttribute } = models;
+  const { Product, Type, Category, Unit, Attribute, ProductAttribute } = models;
 
   if (typeId) {
     where['typeId'] = typeId;
@@ -18,15 +18,15 @@ export default () => async (ctx) => {
 
   const result = await Attribute.findAll({
     row: true,
-    group: ['Attribute.id', 'attribute.id', 'unit.value'],
+    group: ['Attribute.id', 'unit.value'],
     attributes: [
       'id',
       ['value', 'name'],
-      [sequelize.col('unit.value'), 'units']
+      [sequelize.col('unit.value'), 'Unit']
     ],
     include: [
       {
-        model: Units,
+        model: Unit,
         required: false,
         as: 'unit',
         attributes: []
@@ -34,7 +34,7 @@ export default () => async (ctx) => {
       {
         model: ProductAttribute,
         required: true,
-        as: 'attribute',
+        as: 'product_attribute',
         attributes: [],
         include: [
           {

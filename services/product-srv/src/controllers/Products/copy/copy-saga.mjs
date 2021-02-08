@@ -49,8 +49,8 @@ export default class CopySaga {
 
       .step('Copy product')
       .invoke(async (props) => {
-        const { amount, name, description, status, fiscal, currency } = props.getProduct();
-        await Product.create({ uuid: newUuid, amount, name, description, status, fiscal, currencyId: currency['uuid'] });
+        const { price, name, description, status, fiscal, currency } = props.getProduct();
+        await Product.create({ uuid: newUuid, price, name, description, status, fiscal, currencyId: currency['id'] });
       })
 
       .step('Copy images product')

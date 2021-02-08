@@ -4,10 +4,10 @@ import { models } from '@sys.packages/db';
 
 
 export default () => async (ctx) => {
-  const { Units } = models;
+  const { Unit } = models;
   const { id } = ctx['request']['body'];
 
-  await Units.destroy({
+  await Unit.destroy({
     where: { id },
   });
 

@@ -4,15 +4,15 @@ import { models } from '@sys.packages/db';
 
 
 export default () => async (ctx) => {
-  const { Units } = models;
+  const { Unit } = models;
   const { id } = ctx['params'];
   const data = ctx['request']['body'];
 
-  await Units.update(data, {
+  await Unit.update(data, {
     where: { id },
   });
 
-  const result = await Units.findOne({
+  const result = await Unit.findOne({
     attributes: ['id', 'value', 'description'],
     where: { id },
   });

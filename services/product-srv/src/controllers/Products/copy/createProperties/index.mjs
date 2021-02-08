@@ -11,9 +11,9 @@ export default async function createProperties(uuid, properties) {
   const newAttributes = attributes.map((item) => {
     return {
       productUuid: uuid,
-      attributeId: item['attribute']['attributeId'],
-      value: item['attribute']['value'],
-      order: item['attribute']['order'],
+      attributeId: item['attribute']['id'],
+      value: item['value'],
+      order: item['order'],
     }
   });
 

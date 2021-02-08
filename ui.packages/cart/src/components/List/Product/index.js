@@ -15,7 +15,7 @@ import styles from "./defaults.module.scss";
 import { selectUuid } from '../../../ducks/slice';
 
 
-function Product({ uuid, gallery, brand, name, amount, currency, onRemove }) {
+function Product({ uuid, gallery, brand, name, price, currency, onRemove }) {
   const dispatch = useDispatch();
   const uuids = useSelector(selectUuid);
   const classNameRemoveProduct = cn(styles['remove'], 'far fa-trash-alt');
@@ -45,7 +45,7 @@ function Product({ uuid, gallery, brand, name, amount, currency, onRemove }) {
           </div>
         </div>
         <div className={styles['item__count']}>
-          <p className={styles['item__amount']}>{ product[1] } x { numeral(amount).format() } { currency }</p>
+          <p className={styles['item__amount']}>{ product[1] } x { numeral(price).format() } { currency }</p>
         </div>
       </div>
       <div className={styles['item__controls']}>
@@ -60,7 +60,7 @@ Product.propTypes = {
   gallery: types.array,
   brand: types.string,
   name: types.string,
-  amount: types.number,
+  price: types.number,
   onRemove: types.func,
   closeCart: types.func,
   removeProduct: types.func,

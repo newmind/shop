@@ -81,14 +81,14 @@ function List() {
           title="Основные"
           align="left"
         >
-          {({ uuid, fiscal, name, brand, description, amount, currency }) => {
+          {({ uuid, fiscal, name, brand, description, price, currency }) => {
             return (
               <div className={styles['description']}>
                 {uuid && <div className={styles['description__item']}><b className={styles['description__label']}>{ uuid }</b></div>}
                 {fiscal && <div className={styles['description__item']}><b className={styles['description__label']}>{ fiscal }</b></div>}
                 {brand && <div className={styles['description__item']}><b className={styles['description__label']}>Бренд:</b> { brand }</div>}
                 {name && <div className={styles['description__item']}><b className={styles['description__label']}>Название:</b> { name }</div>}
-                {amount && <div className={styles['description__item']}><b className={styles['description__label']}>Цена:</b> { numeral(amount).format() } { currency }</div>}
+                {price && <div className={styles['description__item']}><b className={styles['description__label']}>Цена:</b> { numeral(price).format() } { currency }</div>}
                 {description && <div className={styles['description__item']}><b className={styles['description__label']}>Описание:</b> { description }</div>}
               </div>
             )

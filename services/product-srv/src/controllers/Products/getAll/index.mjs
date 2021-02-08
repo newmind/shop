@@ -11,7 +11,7 @@ export default () => async (ctx) => {
   let options = {};
 
   const { Op } = Sequelize;
-  const { Product, Currency, Attribute, Category, Brand, Type, ProductAttribute, Units, Gallery, Comment, Promotion } = models;
+  const { Product, Currency, Attribute, Category, Brand, Type, ProductAttribute, Unit, Gallery, Comment, Promotion } = models;
   const {
     fiscal = null,
     status = null,
@@ -51,15 +51,15 @@ export default () => async (ctx) => {
   }
 
   if (amountFrom && ! amountTo) {
-    where['amount'] = {
+    where['price'] = {
       [Op.gte]: Number(amountFrom)
     };
   } else if (amountTo && ! amountFrom) {
-    where['amount'] = {
+    where['price'] = {
       [Op.lte]: Number(amountTo)
     };
   } else if (amountFrom && amountTo) {
-    where['amount'] = {
+    where['price'] = {
       [Op.between]: [Number(amountFrom), Number(amountTo)]
     };
   }
@@ -74,7 +74,7 @@ export default () => async (ctx) => {
   }
 
   const products = await Product.findAndCountAll({
-    attributes: ['uuid', 'name', 'description', 'status', 'amount', 'fiscal', 'updatedAt'],
+    attributes: ['uuid', 'name', 'description', 'status', 'price', 'fiscal', 'updatedAt'],
     ...options,
     ...offset,
     distinct: true,
@@ -140,7 +140,7 @@ export default () => async (ctx) => {
         model: Currency,
         required: false,
         as: 'currency',
-        attributes: ['uuid', 'value']
+        attributes: ['id', 'value']
       },
       {
         model: ProductAttribute,
@@ -154,7 +154,7 @@ export default () => async (ctx) => {
             as: 'attribute',
             include: [
               {
-                model: Units,
+                model: Unit,
                 required: false,
                 as: 'unit',
                 attributes: ['value']

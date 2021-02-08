@@ -54,10 +54,18 @@ function List() {
           <Column
             title="Значение"
             alias="value"
-            width="200"
+            width="100"
             align="left"
           >
             {(value) => <Text type={Text.TYPE_BODY}>{ value }</Text>}
+          </Column>
+          <Column
+            title="Код"
+            alias="code"
+            width="100"
+            align="left"
+          >
+            {(value) => <Text>{ value }</Text>}
           </Column>
           <Column
             title="Описание"

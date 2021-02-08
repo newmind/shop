@@ -3,7 +3,7 @@ module.exports = (db, DataType) => {
 
   const Gallery = db.define('Gallery', {
     uuid: {
-      type: DataType.STRING(36),
+      type: DataType.STRING(40),
       primaryKey: true,
       index: true,
       unique: true,

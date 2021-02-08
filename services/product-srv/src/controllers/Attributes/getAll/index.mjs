@@ -3,14 +3,14 @@ import { models } from '@sys.packages/db';
 
 
 export default () => async (ctx) => {
-  const { Attribute, Units } = models;
+  const { Attribute, Unit } = models;
 
   const result = await Attribute.findAll({
-    attributes: ['id', 'value', 'description', 'type'],
+    attributes: ['id', 'value', 'type', 'description'],
     order: [['id', 'desc']],
     include: [
       {
-        model: Units,
+        model: Unit,
         attributes: ['id', 'value'],
         as: 'unit',
       }

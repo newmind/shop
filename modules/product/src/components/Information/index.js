@@ -3,7 +3,7 @@ import numeral from '@packages/numeral';
 
 import { nounDeclension } from "@ui.packages/utils";
 import { Header, Text, Button, Link } from '@ui.packages/kit';
-import { addProductToCart, removeProductFromCart, selectItems } from '@ui.packages/cart';
+import { addProductToCartAction, removeProductFromCartAction, selectUuid } from '@ui.packages/cart';
 
 import React from 'react';
 import types from 'prop-types';
@@ -12,23 +12,21 @@ import { useSelector, useDispatch } from 'react-redux';
 import cn from "classnames";
 import styles from './default.module.scss';
 
-import { selectProduct } from '../../ducks/slice';
 
-
-function Product({ uuid, brand, name, amount, currency }) {
+function Product({ uuid, brand, name, price, currency }) {
   const dispatch = useDispatch();
-  const cart = useSelector(selectItems);
-  const product = useSelector(selectProduct);
+  const cart = useSelector(selectUuid);
 
   function handleAddToCart() {
-    dispatch(addProductToCart(product));
+    dispatch(addProductToCartAction(uuid));
   }
 
-  function handleRemoveFromCart(uuid) {
-    dispatch(removeProductFromCart(uuid));
+  function handleRemoveFromCart() {
+    dispatch(removeProductFromCartAction(uuid));
   }
 
-  const countInCart = cart.filter(item => item['uuid'] === uuid).length;
+  const product = cart.find((item) => item[0] === uuid);
+  console.log(product);
   const removeFromCartClassName= cn(styles['remove'], 'far fa-trash-alt');
 
   return (
@@ -45,20 +43,20 @@ function Product({ uuid, brand, name, amount, currency }) {
         </div>
       )}
       <div className={styles['amount']}>
-        <Text type={Text.TYPE_AMOUNT}>{ numeral(amount).format() } { currency }</Text>
+        <Text type={Text.TYPE_AMOUNT}>{ numeral(price).format() } { currency }</Text>
       </div>
       <div className={styles['controls']}>
         <div className={styles['buttons']}>
           <Button form={Button.FORM_CART} onClick={() => handleAddToCart()} />
-          { !! countInCart && (
-            <span className={removeFromCartClassName} onClick={() => handleRemoveFromCart(uuid)} />
+          { !! product && (
+            <span className={removeFromCartClassName} onClick={() => handleRemoveFromCart()} />
           )}
         </div>
         <div className={styles['cart']}>
-          { !! countInCart && (<>
-            {nounDeclension(countInCart, ['Добавлен', 'Добавлено', 'Добавлено'])}&nbsp;
-            {countInCart}&nbsp;
-            {nounDeclension(countInCart, ['товар', 'товара', 'товаров'])}.&nbsp;
+          { !! product && (<>
+            {nounDeclension(product[1], ['Добавлен', 'Добавлено', 'Добавлено'])}&nbsp;
+            {product[1]}&nbsp;
+            {nounDeclension(product[1], ['товар', 'товара', 'товаров'])}.&nbsp;
             <Link className={styles['to-order']} href={'/order'}>Перейти к оформлению заказа</Link>
           </>)}
         </div>
@@ -69,9 +67,7 @@ function Product({ uuid, brand, name, amount, currency }) {
 
 Product.propTypes = {
   uuid: types.string,
-  isSale: types.bool,
-  isHit: types.bool,
-  amount: types.number,
+  price: types.number,
   saleAmount: types.number,
   currency: types.string,
   brand: types.string,
