@@ -19,17 +19,16 @@ module.exports = (db, DataType) => {
       allowNull: true,
       index: true,
     },
-    amount: {
+    price: {
       type: DataType.DECIMAL(10, 2),
       allowNull: false,
       defaultValue: 0,
       get() {
-        const amount = this.getDataValue('amount');
-        return Number(amount)
+        return Number(this.getDataValue('price'))
       },
     },
     currencyId: {
-      type: DataType.UUID,
+      type: DataType.INTEGER,
       allowNull: false,
     },
     description: {

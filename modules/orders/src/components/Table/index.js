@@ -1,6 +1,7 @@
 
 import numeral from '@packages/numeral';
-import { Actions, Select } from '@ui.packages/kit';
+
+import { Actions, Select, Text } from '@ui.packages/kit';
 import { Table, Column } from '@ui.packages/table';
 
 import React from 'react';
@@ -10,6 +11,20 @@ import styles from './default.module.scss';
 
 import { selectItems, selectMeta, selectInProcess } from '../../ducks/slice';
 
+
+function getCustomerName(value) {
+  let name = '';
+  if (value['surname']) {
+    name += value['surname'];
+  }
+  if (value['name']) {
+    name += ' ' + value['name'];
+  }
+  if (value['patronymic']) {
+    name += ' ' + value['patronymic'];
+  }
+  return name.trim();
+}
 
 function List() {
   const items = useSelector(selectItems);
@@ -28,32 +43,26 @@ function List() {
       </div>
       <Table columns={items}>
         <Column
-          title="Детали"
+          title="Счет"
           align="left"
         >{(value) => (
-          <div className={styles['details']}>
-            <span className={styles['details__line']}><b>Номер:</b> {value['externalId']}</span>
-            <span className={styles['details__line']}><b>Заказчик:</b> {value['surname']} {value['name']}</span>
-            <span className={styles['details__line']}><b>Контакты:</b> {value['phone']} [{value['email']}]</span>
-            <span className={styles['details__line']}><b>Адрес:</b> {value['address']}</span>
+          <div>
+            <Text><b>Номер:</b> { value['externalId'] }</Text>
+            <Text><b>Сумма:</b> { numeral(value['price']).format() } { value['currency']['value'] }</Text>
           </div>
         )}</Column>
         <Column
-          title="Способ доставки"
-          alias="delivery"
-          width="150"
-          align="right"
-        />
-        <Column
-          title="Сумма"
-          width="150"
-          align="right"
-        >{(value) => (
-          <div className={styles['amount']}>
-            <span className={styles['amount__value']}>{ numeral(value['amount']).format() }</span>
-            <span className={styles['amount__currency']}>{ value['currency']['value'] }</span>
-          </div>
-        )}</Column>
+          title="Покупатель"
+          align="left"
+        >
+          {(value) => (
+            <div>
+              <Text>{ getCustomerName(value['customer']) }</Text>
+              <Text><b>Доставка:</b> { value['delivery']['name'] }</Text>
+              <Text><b>Оплата:</b> { value['payment']['name'] }</Text>
+            </div>
+          )}
+        </Column>
         <Column
           title="Статус"
           width="160"

@@ -1,4 +1,3 @@
-'use strict';
 
 module.exports = (db, DataType) => {
 
@@ -26,8 +25,6 @@ module.exports = (db, DataType) => {
       as: 'user',
     });
   };
-
-  // User.sync({ force: true });
 
   return User;
 };

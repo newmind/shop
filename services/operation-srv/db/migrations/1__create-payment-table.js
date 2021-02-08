@@ -1,36 +1,28 @@
 
 module.exports = {
-  async up(queryInterface, Sequelize) {
+  async up(queryInterface, DataType) {
     const transaction = await queryInterface.sequelize.transaction();
+
     try {
 
-      await queryInterface.createTable('Promotions', {
-        uuid: {
-          type: Sequelize.UUID,
-          unique: true,
+      await queryInterface.createTable('Payments', {
+        id: {
+          type: DataType.INTEGER,
           primaryKey: true,
+          allowNull: false,
+          autoIncrement: true,
+        },
+        code: {
+          type: DataType.STRING,
           allowNull: false,
         },
         name: {
-          type: Sequelize.STRING(255),
+          type: DataType.STRING,
           allowNull: false,
         },
         description: {
-          type: Sequelize.STRING(1024),
-          allowNull: true,
-        },
-        percent: {
-          type: Sequelize.INTEGER,
-          allowNull: false,
-          defaultValue: 0,
-        },
-        dateFrom: {
-          type: Sequelize.DATE,
-          allowNull: false,
-        },
-        dateTo: {
-          type: Sequelize.DATE,
-          allowNull: false,
+          type: DataType.STRING(1024),
+          defaultValue: ''
         }
       }, {
         transaction
@@ -41,16 +33,20 @@ module.exports = {
     catch (err) {
 
       await transaction.rollback();
+
       throw err;
     }
   },
   async down(queryInterface) {
     const transaction = await queryInterface.sequelize.transaction();
+
     try {
       await transaction.commit();
     }
     catch (err) {
+
       await transaction.rollback();
+
       throw err;
     }
   },

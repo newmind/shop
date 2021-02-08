@@ -24,13 +24,13 @@ module.exports = (db, DataType) => {
     timestamps: false,
   });
 
-  Attribute.associate = ({ Units, ProductAttribute }) => {
+  Attribute.associate = ({ Unit, ProductAttribute }) => {
 
     Attribute.hasOne(ProductAttribute, {
       as: 'attribute'
     });
 
-    Attribute.belongsTo(Units, {
+    Attribute.belongsTo(Unit, {
       as: 'unit'
     });
   };

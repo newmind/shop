@@ -13,7 +13,7 @@ module.exports = (db, DataType) => {
       allowNull: false,
     },
     description: {
-      type: DataType.STRING(2024),
+      type: DataType.STRING(1024),
       defaultValue: ''
     }
   }, {
