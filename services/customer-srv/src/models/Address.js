@@ -1,13 +1,13 @@
 
 module.exports = (db, DataType) => {
 
-  const ClientAddress = db.define('ClientAddress', {
+  const Address = db.define('Address', {
     clientId: {
       type: DataType.INTEGER,
       primaryKey: true,
       allowNull: false,
     },
-    postcode: {
+    postalCode: {
       type: DataType.INTEGER,
       allowNull: true,
     },
@@ -16,11 +16,7 @@ module.exports = (db, DataType) => {
       allowNull: true,
       defaultValue: 'Россия',
     },
-    region: {
-      type: DataType.STRING(32),
-      allowNull: true,
-    },
-    district: {
+    province: {
       type: DataType.STRING(32),
       allowNull: true,
     },
@@ -32,28 +28,32 @@ module.exports = (db, DataType) => {
       type: DataType.STRING(32),
       allowNull: true,
     },
-    home: {
+    house: {
       type: DataType.STRING(32),
       allowNull: true,
     },
-    float: {
-      type: DataType.STRING(32),
+    entrance: {
+      type: DataType.INTEGER,
+      allowNull: true,
+    },
+    floor: {
+      type: DataType.INTEGER,
       allowNull: true,
     },
     flat: {
-      type: DataType.STRING(32),
+      type: DataType.STRING(8),
       allowNull: true,
     },
   }, {
     timestamps: false,
   });
 
-  ClientAddress.associate = ({ Client }) => {
+  Address.associate = ({ Client }) => {
 
-    ClientAddress.belongsTo(Client, {
+    Address.belongsTo(Client, {
       as: 'client',
     });
   };
 
-  return ClientAddress;
+  return Address;
 };

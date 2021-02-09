@@ -2,11 +2,13 @@
 import { RadioBoxField, Radio } from "@ui.packages/kit";
 
 import React from 'react';
-import { connect } from 'react-redux';
+import { connect, useSelector } from 'react-redux';
 import { getFormValues } from 'redux-form';
 
 import cn from 'classnames';
 import styles from './default.module.scss';
+
+import { selectPayments } from '../../../../ducks/slice';
 
 
 function Block({ children, selected, disabled, onClick }) {
@@ -30,20 +32,17 @@ function Block({ children, selected, disabled, onClick }) {
 }
 
 function Pay() {
+  const payments = useSelector(selectPayments);
+
   return (
-    <RadioBoxField name="pay" defaultValue="post">
-      <Radio name="cash">
-        <Block>
-          <i className={cn(styles['block__icon'], 'fas fa-wallet')} />
-          <span className={styles['block__caption']}>Наличными</span>
-        </Block>
-      </Radio>
-      <Radio name="online">
-        <Block>
-          <i className={cn(styles['block__icon'], 'fas fa-cash-register')} />
-          <span className={styles['block__caption']}>Онлайн оплата</span>
-        </Block>
-      </Radio>
+    <RadioBoxField name="payment" defaultValue="post">
+      {payments.map((payment, index) => (
+        <Radio key={index} name={payment['code']}>
+          <Block>
+            <span className={styles['block__caption']}>{ payment['name'] }</span>
+          </Block>
+        </Radio>
+      ))}
     </RadioBoxField>
   );
 }

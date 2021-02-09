@@ -4,13 +4,14 @@ module.exports = (db, DataType) => {
   const Payment = db.define('Payment', {
     id: {
       type: DataType.INTEGER,
-      primaryKey: true,
       allowNull: false,
       autoIncrement: true,
     },
     code: {
       type: DataType.STRING,
+      primaryKey: true,
       allowNull: false,
+      unique: true,
     },
     name: {
       type: DataType.STRING,

@@ -6,14 +6,12 @@ export default () => async (ctx) => {
   const { Currency } = models;
 
   const currencies = await Currency.findAll({
-    attributes: ['id', 'value', 'code', 'description'],
+    attributes: ['id', 'code', 'value', 'description'],
     order: [['value', 'desc']],
   });
 
   ctx.body = {
     success: true,
-    data: [
-      ...currencies,
-    ],
+    data: currencies.map((currency) => currency.toJSON()),
   };
 };

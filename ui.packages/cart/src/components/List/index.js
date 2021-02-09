@@ -27,7 +27,7 @@ function List() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const items = useSelector(selectItems);
-  const amount = useSelector(selectAmount);
+  const amounts = useSelector(selectAmount);
 
   function handleRemoveProductFromCart(uuid) {
     dispatch(removeProductFromCartAction(uuid));
@@ -55,8 +55,8 @@ function List() {
         ))}
       </div>
       <div className={styles['info']}>
-        {amount && (
-          <Text type={Text.TYPE_BODY}>На сумму: { numeral(amount['amount']).format() } { amount['currency']['value'] }</Text>
+        { !! amounts.length && (
+          <Text type={Text.TYPE_BODY}>На сумму: { amounts.map((amount) => numeral(amount[1]).format() + ' ' + amount[2])}</Text>
         )}
       </div>
       <div className={styles['controls']}>

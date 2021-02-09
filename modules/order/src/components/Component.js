@@ -1,5 +1,6 @@
 
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 
 import Empty from "./Empty";
@@ -13,15 +14,21 @@ import { createOperation } from '../ducks/commands';
 
 export default function Order() {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
+
   const uuid = useSelector(selectUuid);
   const items = useSelector(selectItems);
 
 
-  function handleSendOrderData(formData) {
-    dispatch(createOperation({
+  async function handleSendOrderData(formData) {
+    const result = await dispatch(createOperation({
       ...formData,
       items: uuid,
     }));
+
+    if (result) {
+      navigate(process.env['PUBLIC_URL'] + '/order/' + result['externalId']);
+    }
   }
 
   return (
@@ -33,7 +40,7 @@ export default function Order() {
               initialValues={{
                 items,
                 delivery: 'post',
-                pay: 'cash',
+                payment: 'cash',
               }}
               onSubmit={handleSendOrderData}
             />

@@ -22,14 +22,14 @@ function Icon() {
     [styles['cart__wrapper--open']]: isOpen,
   });
 
-  const hasItems = !! uuid.length;
+  const hasItems = uuid.reduce((total, item) => total + item[1], 0);
 
   return (
     <div className={classNameCartWrapper}>
       <span className={classNameCartIcon} />
       <span className={styles['cart__info']}>
         <span className={styles['cart__count']}>
-          {hasItems ? `${uuid['length']} ${nounDeclension(uuid['length'], ['товар', 'товара', 'товаров'])}` : 'пусто'}
+          { !! hasItems ? `${hasItems} ${nounDeclension(hasItems, ['товар', 'товара', 'товаров'])}` : 'пусто'}
         </span>
       </span>
     </div>

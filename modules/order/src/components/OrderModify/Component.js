@@ -19,7 +19,7 @@ import { selectAmount } from '../../ducks/slice';
 
 
 export default function OrderModify({ handleSubmit }) {
-  const amount = useSelector(selectAmount);
+  const amounts = useSelector(selectAmount);
 
   return (
     <div className={styles['wrapper']}>
@@ -46,12 +46,12 @@ export default function OrderModify({ handleSubmit }) {
             <Text theme="light">Для возврата или замены товара, ознакомтесь с информацией в разделе <Link href="/produce">Информация для Вас</Link></Text>
           </div>
           <div className={styles['buttons']}>
-            { !! amount && (
+            { !! amounts.length && (
               <Button
                 type={Button.TYPE_SUBMIT}
                 mode={Mode.SUCCESS}
                 size={Size.LARGE}
-              >Оформить заказ на сумму { numeral(amount['amount']).format() } {amount['currency']['value']}</Button>
+              >Оформить заказ на сумму { amounts.map((amount) => numeral(amount[1]).format() + ' ' + amount[2])}</Button>
             )}
           </div>
         </div>

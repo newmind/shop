@@ -19,19 +19,19 @@ module.exports = {
           type: DataType.INTEGER,
           allowNull: false,
         },
-        paymentId: {
-          type: DataType.INTEGER,
+        paymentCode: {
+          type: DataType.STRING,
           allowNull: false,
         },
-        deliveryId: {
-          type: DataType.INTEGER,
+        deliveryCode: {
+          type: DataType.STRING,
           allowNull: false,
         },
-        currencyId: {
-          type: DataType.INTEGER,
+        currencyCode: {
+          type: DataType.STRING(8),
           allowNull: false,
         },
-        statusId: {
+        statusCode: {
           type: DataType.INTEGER,
           allowNull: false,
         },

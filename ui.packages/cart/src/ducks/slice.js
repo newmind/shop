@@ -6,7 +6,7 @@ import { createSlice } from '@reduxjs/toolkit';
 const initialState = {
   uuid: [],
   items: [],
-  amount: null,
+  amount: [],
   isOpen: false,
   inProcess: false,
 };

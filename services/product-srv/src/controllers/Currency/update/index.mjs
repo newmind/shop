@@ -1,6 +1,6 @@
 
-import { sendEvent } from '@sys.packages/rabbit2';
 import { models } from '@sys.packages/db';
+import { sendEvent } from '@sys.packages/rabbit2';
 
 
 export default () => async (ctx) => {
@@ -12,7 +12,7 @@ export default () => async (ctx) => {
 
   const result = await Currency.findOne({
     where: { id },
-    attributes: ['id', 'value', 'code', 'description'],
+    attributes: ['id', 'code', 'value', 'description'],
   });
 
   const currency = result.toJSON();

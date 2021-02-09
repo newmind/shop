@@ -1,31 +1,34 @@
 
+import { Mode } from "@ui.packages/types";
 import request from '@ui.packages/request';
+import { pushNotification } from "@ui.packages/notifications";
 
 import {
-  pageInProcessAction,
-
-  getOperationByIdRequestAction,
-  getOperationByIdRequestFailAction,
-  getOperationByIdRequestSuccessAction,
-} from './actions';
+  getOrderRequestAction,
+  getOrderRequestFailAction,
+  getOrderRequestSuccessAction,
+} from './slice';
 
 
-export const pageInProcess = (status) => (dispatch) => {
-  dispatch(pageInProcessAction(status));
-};
-
-export const getOperationById = (id) => async (dispatch) => {
+export const getOperation = (id) => async (dispatch) => {
   try {
-    dispatch(getOperationByIdRequestAction());
+    dispatch(getOrderRequestAction());
 
     const result = await request({
-      url: `/operations/${id}`,
+      url: '/operations/' + id,
       method: 'get',
     });
 
-    dispatch(getOperationByIdRequestSuccessAction(result['data']));
+    dispatch(getOrderRequestSuccessAction(result['data']));
   }
-  catch(error) {
-    dispatch(getOperationByIdRequestFailAction(error));
+  catch (error) {
+
+    dispatch(getOrderRequestFailAction(error));
+    dispatch(pushNotification({
+      title: 'Ошибка при запросе данных',
+      connect: `${error['data']['message']} (${error['data']['code']})`,
+      mode: Mode.DANGER,
+      autoClose: false,
+    }));
   }
 };

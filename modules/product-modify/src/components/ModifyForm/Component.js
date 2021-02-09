@@ -116,10 +116,10 @@ function ModifyForm({ handleSubmit, onDelete }) {
               <SelectField
                 require
                 simple
-                name="currencyId"
+                name="currencyCode"
                 label="Валюта"
                 options={currencies}
-                optionKey="id"
+                optionKey="code"
                 optionValue="value"
                 disabled={inProcess}
               />

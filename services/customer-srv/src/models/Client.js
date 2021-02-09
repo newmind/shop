@@ -14,7 +14,7 @@ module.exports = (db, DataType) => {
     },
     patronymic: {
       type: DataType.STRING(32),
-      allowNull: false,
+      allowNull: true,
     },
     surname: {
       type: DataType.STRING(32),
@@ -36,9 +36,9 @@ module.exports = (db, DataType) => {
     timestamps: false,
   });
 
-  Client.associate = ({ ClientAddress }) => {
+  Client.associate = ({ Address }) => {
 
-    Client.hasOne(ClientAddress, {
+    Client.hasOne(Address, {
       foreignKey: 'clientId',
       as: 'address',
     });

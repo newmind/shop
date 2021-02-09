@@ -30,7 +30,11 @@ module.exports = (db, DataType) => {
         return Number(this.getDataValue('price'))
       },
     },
-    currencyId: {
+    currencyCode: {
+      type: DataType.STRING(8),
+      allowNull: false,
+    },
+    count: {
       type: DataType.INTEGER,
       allowNull: false,
     },
@@ -39,7 +43,7 @@ module.exports = (db, DataType) => {
   Product.associate = function({ Currency }) {
 
     Product.belongsTo(Currency, {
-      foreignKey: 'currencyId',
+      foreignKey: 'currencyCode',
       as: 'currency',
     });
   };

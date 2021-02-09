@@ -25,15 +25,15 @@ const routes = [
     wrapper: 'Navigate',
     module: import('@modules/order'),
   },
-  // {
-  //   path: '/order/:id',
-  //   wrapper: 'Navigate',
-  //   module: import(
-  //     /* webpackPreload: true */
-  //     /* webpackChunkName: "order-details" */
-  //     '@modules/order-details'
-  //   ),
-  // },
+  {
+    path: '/order/:id',
+    wrapper: 'Navigate',
+    module: import(
+      /* webpackPreload: true */
+      /* webpackChunkName: "order-details" */
+      '@modules/order-details'
+    ),
+  },
   {
     path: '*',
     wrapper: 'Empty',

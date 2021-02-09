@@ -4,15 +4,15 @@ module.exports = (db, DataType) => {
   const Currency = db.define('Currency', {
     id: {
       type: DataType.INTEGER,
-      primaryKey: true,
       allowNull: false,
       autoIncrement: true,
     },
-    value: {
+    code: {
       type: DataType.STRING(8),
+      primaryKey: true,
       allowNull: false,
     },
-    code: {
+    value: {
       type: DataType.STRING(8),
       allowNull: false,
     },

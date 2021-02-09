@@ -15,19 +15,19 @@ module.exports = (db, DataType) => {
       type: DataType.INTEGER,
       allowNull: false,
     },
-    paymentId: {
-      type: DataType.INTEGER,
+    paymentCode: {
+      type: DataType.STRING,
       allowNull: false,
     },
-    deliveryId: {
-      type: DataType.INTEGER,
+    deliveryCode: {
+      type: DataType.STRING,
       allowNull: false,
     },
-    currencyId: {
-      type: DataType.INTEGER,
+    currencyCode: {
+      type: DataType.STRING(8),
       allowNull: false,
     },
-    statusId: {
+    statusCode: {
       type: DataType.INTEGER,
       allowNull: false,
     },
@@ -49,22 +49,22 @@ module.exports = (db, DataType) => {
     });
 
     Order.belongsTo(Status, {
-      foreignKey: 'statusId',
+      foreignKey: 'statusCode',
       as: 'status',
     });
 
     Order.belongsTo(Payment, {
-      foreignKey: 'paymentId',
+      foreignKey: 'paymentCode',
       as: 'payment',
     });
 
     Order.belongsTo(Delivery, {
-      foreignKey: 'deliveryId',
+      foreignKey: 'deliveryCode',
       as: 'delivery',
     });
 
     Order.belongsTo(Currency, {
-      foreignKey: 'currencyId',
+      foreignKey: 'currencyCode',
       as: 'currency',
     });
   };

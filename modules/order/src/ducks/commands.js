@@ -14,8 +14,48 @@ import {
   createOperationRequestAction,
   createOperationRequestFailAction,
   createOperationRequestSuccessAction,
+
+  getPaymentsRequestAction,
+  getPaymentsRequestFailAction,
+  getPaymentsRequestSuccessAction,
+
+  getDeliveriesRequestAction,
+  getDeliveriesRequestFailAction,
+  getDeliveriesRequestSuccessAction,
 } from './slice';
 
+
+export const getPayments = () => async (dispatch) => {
+  try {
+    dispatch(getPaymentsRequestAction());
+
+    const result = await request({
+      url: '/operations/payments',
+      method: 'get',
+    });
+
+    dispatch(getPaymentsRequestSuccessAction(result['data']));
+  }
+  catch(error) {
+    dispatch(getPaymentsRequestFailAction(error));
+  }
+};
+
+export const getDeliveries = () => async (dispatch) => {
+  try {
+    dispatch(getDeliveriesRequestAction());
+
+    const result = await request({
+      url: '/operations/deliveries',
+      method: 'get',
+    });
+
+    dispatch(getDeliveriesRequestSuccessAction(result['data']));
+  }
+  catch(error) {
+    dispatch(getDeliveriesRequestFailAction(error));
+  }
+};
 
 export const getProducts = (uuid) => async (dispatch) => {
   try {
@@ -73,7 +113,9 @@ export const createOperation = (order) => async (dispatch) => {
       data: order,
     });
 
-    dispatch(createOperationRequestSuccessAction(result));
+    dispatch(createOperationRequestSuccessAction());
+
+    return result['data'];
   }
   catch(error) {
     dispatch(createOperationRequestFailAction(error));
@@ -81,5 +123,7 @@ export const createOperation = (order) => async (dispatch) => {
       title: 'Ошибка при выполнении операции',
       mode: 'danger',
     }));
+
+    return false;
   }
 };

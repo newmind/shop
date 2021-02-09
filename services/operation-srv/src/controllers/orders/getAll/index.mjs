@@ -8,8 +8,9 @@ export default () => async (ctx) => {
   const { Order, Currency, Payment, Delivery, Product, Status } = models;
   const { externalId } = ctx['request']['query'];
 
+
   if (externalId) {
-    where['externalId'] = uuid;
+    where['externalId'] = externalId;
   }
 
   const operations = await Order.findAndCountAll({
@@ -28,7 +29,7 @@ export default () => async (ctx) => {
         model: Product,
         required: true,
         as: 'products',
-        attributes: ['uuid', 'fiscal', 'price'],
+        attributes: ['uuid', 'fiscal', 'price', 'count'],
         include: [
           {
             model: Currency,

@@ -17,7 +17,7 @@ module.exports = {
           },
           {
             code: 'card',
-            name: 'Картой при получении',
+            name: 'При получении',
             description: '',
           },
         ],

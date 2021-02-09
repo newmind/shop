@@ -8,12 +8,12 @@ module.exports = {
       await queryInterface.createTable('Statuses', {
         id: {
           type: DataType.INTEGER,
-          primaryKey: true,
           allowNull: false,
           autoIncrement: true,
         },
         code: {
           type: DataType.INTEGER,
+          primaryKey: true,
           allowNull: false,
         },
         name: {

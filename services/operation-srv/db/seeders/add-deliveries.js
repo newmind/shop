@@ -17,7 +17,7 @@ module.exports = {
           },
           {
             code: 'delivery',
-            name: 'Доставка курьером',
+            name: 'Курьером',
             description: '',
           },
         ],

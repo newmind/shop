@@ -7,88 +7,66 @@
   display: flex;
   flex: 1 0;
   flex-direction: column;
-
-  &--info {
-
-    .label,
-    .info__icon {
-      color: darken($information, 10%);
-    }
-  }
-
-  &--primary {
-
-    .label,
-    .info__icon {
-      color: darken($primary, 10%);
-    }
-  }
-
-  &--success {
-
-    .label,
-    .info__icon {
-      color: darken($success, 10%);
-    }
-  }
-
-  &--warning {
-
-    .label,
-    .info__icon {
-      color: darken($warning, 10%);
-    }
-  }
-
-  &--danger {
-
-    .label,
-    .info__icon {
-      color: darken($danger, 10%);
-    }
-  }
-
-  &--disabled {
-
-    background: $pale-lilac;
-
-    .label {
-      color: $gray;
-      text-shadow: -1px 1px 0 $white;
-    }
-  }
 }
 
-.label {
-
-  display: block;
-  font-family: inherit;
-  font-weight: 300;
-  font-size: 13px;
-  color: $blue-grey;
-  margin: 0 0 6px 15px;
-  transition: color 400ms;
-}
-
-.container {
+.search {
 
   position: relative;
   display: block;
+
 }
 
-.error {
+.input {
+
+  display: block;
+  border: 1px solid $pale-lilac;
+  border-radius: 5px;
+  background: $white;
+  padding: 10px 15px;
+  color: $black;
+  font-family: inherit;
+  font-weight: 400;
+  font-size: 14px;
+  outline: none;
+  width: 100%;
+  box-sizing: border-box;
+  background: transparent;
+  overflow: hidden;
+  transition: border 200ms;
+
+  &:hover,
+  &--focus {
+
+    border-color: $coal-dark;
+  }
+}
+
+.icon {
 
   position: absolute;
-  top: 100%;
-  right: 5px;
-  display: block;
+  top: 12px;
+  right: 12px;
+  display: inline-block;
+  color: $pale-lilac;
+  font-size: 18px;
+}
 
-  &__message {
+.row {
 
-    font-family: inherit;
-    font-weight: 300;
-    font-size: 11px;
-    color: $warning;
-    letter-spacing: .5px;
+  display: flex;
+  flex-direction: row;
+  flex: 1 0;
+  margin: 20px 0 0;
+}
+
+.col {
+
+  display: flex;
+  flex-direction: column;
+  flex: 1 0;
+
+  & + & {
+
+    margin: 0 0 0 20px;
   }
 }

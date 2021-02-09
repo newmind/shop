@@ -2,117 +2,253 @@
 @import "~@ui.packages/theme";
 
 
-.product {
+.wrapper {
 
+  position: relative;
   display: flex;
+  flex-direction: row;
   flex: 1 0;
-  min-height: 200px;
-
-  & + & {
-
-    border-top: 1px solid $pale-lilac;
-    margin: 40px 0 0;
-    padding: 40px 0 0;
-  }
-
-  &__name {
-
-    display: block;
-    font-family: inherit;
-    font-weight: 300;
-    font-size: 14px;
-    color: $coal-dark;
-  }
+  background: $white;
+  text-decoration: none;
+  outline: none;
+  border-radius: 5px;
+  cursor: pointer;
+  overflow: hidden;
 }
 
 .gallery {
 
   display: block;
-  width: 250px;
-  text-align: center;
-
-  &__images {
-
-    display: flex;
-    height: 200px;
-  }
+  width: 240px;
+  height: 210px;
+  padding: 20px;
+  box-sizing: border-box;
 }
 
-.content {
+.common {
 
-  position: relative;
   display: flex;
-  flex: 1 0;
   flex-direction: column;
-  margin: 0 0 0 20px;
+  flex: 1 0;
+  padding: 40px 25px 0 0;
+}
+
+.description {
+
+  display: block;
 }
 
 .uuid {
 
   display: block;
-  font-family: inherit;
-  font-weight: 300;
-  font-size: 12px;
-  text-align: center;
-  color: rgba($gray, .6);
-  margin: 6px 0 15px;
+  margin: 20px 0 0;
 }
 
 .brand {
 
   display: block;
-
-
-  &__link {
-
-    display: inline-block;
-    font-family: inherit;
-    font-weight: 700;
-    font-size: 16px;
-    color: $coal-dark;
-    letter-spacing: .5px;
-    vertical-align: middle;
-  }
+  padding: 8px 0 0;
 }
 
 .name {
 
-  display: inline-block;
-  font-family: inherit;
-  font-weight: 300;
-  font-size: 14px;
-  color: $blue-grey;
-  margin: 0 0 0 14px;
-  vertical-align: middle;
-  padding: 0 0 2px;
+  display: block;
 }
 
-.type {
+.information {
 
   display: block;
-  font-family: inherit;
-  font-weight: 300;
-  font-size: 14px;
+  width: 280px;
+  background: $whitesmoke;
+  box-shadow: -1px 0 4px 0 rgba($blue-grey, .6);
+  padding: 25px 20px;
+  box-sizing: border-box;
+  border-radius: 5px 0 0 5px
+}
+
+.amount {
+
+  display: block;
+  margin: 20px 0 0;
+  padding: 20px 0 0;
+  border-top: 1px solid $pale-lilac;
+  text-align: right;
+}
+
+.controls {
+
+  display: block;
+  margin: 20px 0 0;
+  padding: 25px 0 0;
+  border-top: 1px solid $pale-lilac;
+}
+
+.remove {
+
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  display: inline-block;
+  font-size: 16px;
+  padding: 10px;
+  margin: 0 0 0 10px;
+  color: $gray;
+  vertical-align: middle;
+  cursor: pointer;
+  transition: color 200ms;
+
+  &:hover {
+
+    color: $danger;
+  }
+}
+
+
+
+
+
+
+
+.meta {
+
+  position: absolute;
+  right: 0;
+  top: 20px;
+  display: block;
+  z-index: 20;
+
+  & > * + * {
+
+    margin: 0 0 0 10px;
+  }
+}
+
+.hit {
+
+  display: inline-block;
+  font-size: 15px;
+  color: $primary;
+}
+
+.sale {
+
+  display: inline-block;
+  font-size: 15px;
+  color: $danger;
+}
+
+.view {
+
+  position: relative;
+  display: block;
+  width: 40px;
+  font-size: 26px;
+  color: rgba($success, 0.3);
+  cursor: pointer;
+  border-radius: 3px;
+  transition: color 400ms;
+  text-align: center;
+
+  &:hover {
+
+    color: $success;
+  }
+}
+
+.promo {
+
+  position: relative;
+  display: flex;
+  width: 100%;
+  height: 190px;
+  margin: 20px 0;
+  transition: transform 200ms;
+  overflow: hidden;
+  border-radius: 5px;
+  z-index: 10;
+}
+
+.promo:hover .view {
+
+  opacity: 1;
+}
+
+.image {
+
+  width: 230px;
+  outline: none;
+  border: none;
+  background: transparent;
+}
+
+.info {
+
+  display: flex;
+  flex: 1 0 auto;
+  flex-direction: row;
+  margin: 16px 0 0;
   color: $coal-dark;
-  margin: 15px 0 0;
+  align-items: flex-end;
+  border-top: 1px solid $pale-lilac;
+  padding: 15px 0 0;
 }
 
-.label {
+.mini {
 
-  display: inline-block;
-  font-weight: bold;
-  vertical-align: middle;
-  margin: 0 10px 0 0;
+  display: flex;
+  flex: 1 0 auto;
+  flex-direction: column;
 }
 
-.value {
 
-  display: inline-block;
-  vertical-align: middle;
-}
 
-.prescription {
 
+
+
+.cart {
+
+  position: relative;
   display: block;
-  margin: 10px 0 0;
+  width: 40px;
+  font-size: 26px;
+  color: rgba($danger, 0.3);
+  cursor: pointer;
+  border-radius: 3px;
+  transition: color 400ms;
+  text-align: center;
+
+  &:hover {
+    color: $danger;
+  }
+}
+
+.count {
+
+  position: absolute;
+  top: 4px;
+  right: 10px;
+  display: block;
+  width: 16px;
+  height: 16px;
+  color: $whitesmoke;
+  font-family: inherit;
+  font-weight: 700;
+  font-size: 11px;
+}
+
+.button {
+
+  display: flex;
+  flex: 1 0 auto;
+  padding: 10px 20px;
+  margin: 0 40px 0 70px;
+  font-family: inherit;
+  font-weight: 300;
+  font-size: 16px;
+  justify-content: center;
+  color: $primary;
+  text-decoration: underline;
+  letter-spacing: .3px;
+  cursor: pointer;
+  transition: color 200ms, background 200ms, border 200ms;
 }

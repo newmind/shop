@@ -10,20 +10,25 @@
 .header {
 
   display: block;
-  font-family: inherit;
-  font-weight: 700;
-  font-size: 14px;
-  text-transform: uppercase;
-  letter-spacing: 1px;
-  color: $coal-dark;
   padding: 0 0 4px 20px;
+  margin: 0 0 10px;
 }
 
 .content {
 
-  display: block;
-  margin: 10px 0 0;
-  border: 1px solid $pale-lilac;
-  border-radius: 15px;
-  padding: 40px 40px 80px;
+  display: flex;
+  flex-direction: row;
+  flex: 1 0;
+  flex-wrap: wrap;
+  margin: -8px -8px 0 0;
+}
+
+.section {
+
+  display: flex;
+  flex-direction: column;
+  flex: 0 0 auto;
+  width: 50%;
+  padding: 8px 8px 0 0;
+  box-sizing: border-box;
 }

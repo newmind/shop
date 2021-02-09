@@ -1,5 +1,5 @@
 
-import { Container, Col, InputField, MaskInputField, TextareaField, Row } from "@ui.packages/kit";
+import { Container, Col, InputField, MaskInputField, Row } from "@ui.packages/kit";
 
 import React from 'react';
 
@@ -11,10 +11,13 @@ function Customer() {
         <Col>
           <Row>
             <Col>
+              <InputField tabIndex={2} label="Фамилия" name="surname" require />
+            </Col>
+            <Col>
               <InputField tabIndex={1} label="Имя" name="name" require />
             </Col>
             <Col>
-              <InputField tabIndex={2} label="Фамилия" name="surname" require />
+              <InputField tabIndex={2} label="Отчество" name="patronymic" />
             </Col>
           </Row>
           <Row>
@@ -24,10 +27,8 @@ function Customer() {
             <Col>
               <InputField tabIndex={4} label="E-Mail" name="email" require />
             </Col>
+            <Col />
           </Row>
-        </Col>
-        <Col>
-          <TextareaField tabIndex={5} label="Дополнительно" name="description" />
         </Col>
       </Row>
     </Container>

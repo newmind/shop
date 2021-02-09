@@ -12,17 +12,31 @@ module.exports = {
           allowNull: false,
           autoIncrement: true,
         },
-        code: {
-          type: DataType.STRING,
+        orderId: {
+          type: DataType.INTEGER,
           allowNull: false,
         },
-        name: {
-          type: DataType.STRING,
+        uuid: {
+          type: DataType.STRING(9),
+          allowNull: false,
+          index: true,
+        },
+        fiscal: {
+          type: DataType.STRING(255),
+          allowNull: true,
+          index: true,
+        },
+        price: {
+          type: DataType.DECIMAL(10, 2),
           allowNull: false,
         },
-        description: {
-          type: DataType.STRING(1024),
-          defaultValue: ''
+        currencyCode: {
+          type: DataType.STRING(8),
+          allowNull: false,
+        },
+        count: {
+          type: DataType.INTEGER,
+          allowNull: false,
         },
         createdAt: {
           type: DataType.DATE,

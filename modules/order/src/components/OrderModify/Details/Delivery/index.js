@@ -1,11 +1,14 @@
 
 import { Suggest } from '@ui.packages/yandex-map';
-import { RadioBoxField, InputField, Radio, Container, Row, Col } from "@ui.packages/kit";
+import { RadioBoxField, Radio, Container, Row, Col } from "@ui.packages/kit";
 
 import React from 'react';
+import { useSelector } from 'react-redux';
 
 import cn from 'classnames';
 import styles from './default.module.scss';
+
+import { selectDeliveries } from '../../../../ducks/slice';
 
 
 function Block({ children, selected, onClick }) {
@@ -22,6 +25,8 @@ function Block({ children, selected, onClick }) {
 
 
 function Delivery() {
+  const deliveries = useSelector(selectDeliveries);
+
   return (
     <Container>
       <Row>
@@ -29,18 +34,13 @@ function Delivery() {
           <Row>
             <Col>
               <RadioBoxField name="delivery" defaultValue="post">
-                <Radio name="post">
-                  <Block>
-                    <i className={cn(styles['block__icon'], 'fas fa-people-carry')} />
-                    <span className={styles['block__caption']}>Самовывоз</span>
-                  </Block>
-                </Radio>
-                <Radio name="courier">
-                  <Block>
-                    <i className={cn(styles['block__icon'], 'fas fa-shipping-fast')} />
-                    <span className={styles['block__caption']}>Курьером</span>
-                  </Block>
-                </Radio>
+                {deliveries.map((delivery, index) => (
+                  <Radio key={index} name={delivery['code']}>
+                    <Block>
+                      <span className={styles['block__caption']}>{ delivery['name'] }</span>
+                    </Block>
+                  </Radio>
+                ))}
               </RadioBoxField>
             </Col>
           </Row>
@@ -52,36 +52,8 @@ function Delivery() {
               />
             </Col>
           </Row>
-          <Row>
-            <Col>
-              <InputField
-                name="house"
-                label="Корпус"
-              />
-            </Col>
-            <Col>
-              <InputField
-                name="front"
-                label="Подъезд"
-              />
-            </Col>
-            <Col>
-              <InputField
-                name="floor"
-                label="Этаж"
-              />
-            </Col>
-            <Col>
-              <InputField
-                name="flat"
-                label="Квартра"
-              />
-            </Col>
-          </Row>
         </Col>
-        <Col>
-
-        </Col>
+        <Col />
       </Row>
     </Container>
   );

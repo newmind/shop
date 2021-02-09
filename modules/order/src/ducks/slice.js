@@ -5,6 +5,8 @@ import { createSlice } from '@reduxjs/toolkit';
 const initialState = {
   uuid: [],
   items: [],
+  payments: [],
+  deliveries: [],
   amount: 0,
   error: null,
   inProcess: false,
@@ -27,9 +29,7 @@ const slice = createSlice({
 
     restoreStateAction(state) {
       const cart = window.localStorage.getItem('cart');
-      const uuid = JSON.parse(cart) || [];
-
-      state['uuid'] = uuid;
+      state['uuid'] = JSON.parse(cart) || [];
     },
 
     getProductsRequestAction() {},
@@ -70,10 +70,21 @@ const slice = createSlice({
     createOperationRequestFailAction(state) {
       state['inProcess'] = false;
     },
-    createOperationRequestSuccessAction(state, { payload }) {
-      state['uuid'] = payload;
+    createOperationRequestSuccessAction(state) {
       state['inProcess'] = false;
-    }
+    },
+
+    getPaymentsRequestAction(state) {},
+    getPaymentsRequestFailAction(state) {},
+    getPaymentsRequestSuccessAction(state, { payload }) {
+      state['payments'] = payload;
+    },
+
+    getDeliveriesRequestAction(state) {},
+    getDeliveriesRequestFailAction(state) {},
+    getDeliveriesRequestSuccessAction(state, { payload }) {
+      state['deliveries'] = payload;
+    },
   },
 });
 
@@ -94,10 +105,20 @@ export const {
   createOperationRequestAction,
   createOperationRequestFailAction,
   createOperationRequestSuccessAction,
+
+  getPaymentsRequestAction,
+  getPaymentsRequestFailAction,
+  getPaymentsRequestSuccessAction,
+
+  getDeliveriesRequestAction,
+  getDeliveriesRequestFailAction,
+  getDeliveriesRequestSuccessAction,
 } = slice['actions'];
 
 export const selectUuid = (state) => state[REDUCER_NAME]['uuid'];
 export const selectItems = (state) => state[REDUCER_NAME]['items'];
+export const selectPayments = (state) => state[REDUCER_NAME]['payments'];
+export const selectDeliveries = (state) => state[REDUCER_NAME]['deliveries'];
 export const selectAmount = (state) => state[REDUCER_NAME]['amount'];
 
 export const name = slice['name'];

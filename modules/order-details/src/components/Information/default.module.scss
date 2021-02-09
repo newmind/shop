@@ -2,7 +2,6 @@
 @import "~@ui.packages/theme";
 
 
-
 .wrapper {
 
   display: block;
@@ -11,50 +10,38 @@
 .header {
 
   display: block;
-  font-family: inherit;
-  font-weight: 700;
-  font-size: 14px;
-  text-transform: uppercase;
-  letter-spacing: 1px;
-  color: $coal-dark;
   padding: 0 0 4px 20px;
+  margin: 0 0 10px;
 }
 
 .content {
 
   display: block;
-  margin: 10px 0 0;
-  border: 1px solid $pale-lilac;
-  border-radius: 15px;
+  border-radius: 5px;
+  background: $whitesmoke;
   padding: 40px 40px 80px;
 }
 
-
 .line {
 
-  display: block;
-  font-family: inherit;
-  font-weight: 300;
-  font-size: 14px;
+  display: flex;
+  flex-direction: column;
 
   & + & {
 
-    margin: 20px 0 0;
+    margin: 30px 0 0;
   }
+}
 
-  &__label {
+.title {
 
-    display: inline-block;
-    vertical-align: middle;
-    font-weight: bold;
-    color: $coal-dark;
-  }
+  display: block;
+}
 
-  &__value {
+.value {
 
-    display: inline-block;
-    vertical-align: middle;
-    margin: 0 0 0 10px;
-    color: $black;
-  }
+  display: block;
+  margin: 15px 0 0;
+  padding: 0 0 15px 15px;
+  border-bottom: 1px solid $pale-lilac;
 }

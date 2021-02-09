@@ -6,8 +6,8 @@
 
   display: inline-flex;
   flex-direction: column;
-  width: 200px;
-  height: 120px;
+  width: 170px;
+  height: 70px;
   background: $gray;
   color: $white;
   border-radius: 4px;
@@ -34,7 +34,6 @@
 
   &__caption {
 
-    margin: 15px 0 0;
     font-family: inherit;
     font-weight: 600;
     font-size: 14px;

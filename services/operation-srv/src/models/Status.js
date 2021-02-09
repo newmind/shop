@@ -4,12 +4,12 @@ module.exports = (db, DataType) => {
   const Status = db.define('Status', {
     id: {
       type: DataType.INTEGER,
-      primaryKey: true,
       allowNull: false,
       autoIncrement: true,
     },
     code: {
       type: DataType.INTEGER,
+      primaryKey: true,
       allowNull: false,
     },
     name: {

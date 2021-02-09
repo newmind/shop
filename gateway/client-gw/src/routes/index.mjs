@@ -12,6 +12,9 @@ import { getAllCategories } from '../controllers/Category';
 
 import { getProfile, signUp, signIn, signOut } from '../controllers/Profile';
 
+import { getAllPayments } from '../controllers/payment';
+import { getAllDeliveries } from '../controllers/delivery';
+
 
 export default (router) => {
 
@@ -29,6 +32,9 @@ export default (router) => {
   router.get('/categories', getAllCategories());
 
   router.get('/gallery/:fileName', getImageByFileName());
+
+  router.get('/operations/payments', getAllPayments());
+  router.get('/operations/deliveries', getAllDeliveries());
 
   router.post('/operations', createOperation());
   router.get('/operations/:externalId', getOperationById());

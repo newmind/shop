@@ -4,7 +4,7 @@ import HOC from "@ui.packages/hoc";
 import Component from './Component';
 
 import { resetStateAction, restoreStateAction } from '../ducks/slice';
-import { getProducts, getAmount } from '../ducks/commands';
+import { getProducts, getAmount, getDeliveries, getPayments } from '../ducks/commands';
 
 
 export default HOC({
@@ -22,6 +22,9 @@ export default HOC({
     if (uuid.length) {
       dispatch(getProducts(uuid));
       dispatch(getAmount(uuid));
+
+      dispatch(getPayments());
+      dispatch(getDeliveries());
     }
   },
   onUnmount({ dispatch }) {

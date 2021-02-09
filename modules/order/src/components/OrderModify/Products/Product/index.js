@@ -13,9 +13,8 @@ import styles from './default.module.scss';
 import { selectUuid } from '../../../../ducks/slice';
 
 
-export default function Product({ uuid, amount, currency, brand, name, gallery, onDelete }) {
+export default function Product({ uuid, price, currency, brand, name, gallery, onDelete }) {
   const uuids = useSelector(selectUuid);
-  console.log(uuids)
   const product = uuids.find(item => item[0] === uuid);
 
   const removeFromCartClassName= cn(styles['remove'], 'far fa-trash-alt');
@@ -50,7 +49,7 @@ export default function Product({ uuid, amount, currency, brand, name, gallery, 
           </div>
         </div>
         <div className={styles['amount']}>
-          <Text type={Text.TYPE_AMOUNT}>{ product[1] } x { numeral(amount).format() } { currency }</Text>
+          <Text type={Text.TYPE_AMOUNT}>{ product[1] } x { numeral(price).format() } { currency }</Text>
         </div>
       </div>
     </Link>
@@ -58,12 +57,10 @@ export default function Product({ uuid, amount, currency, brand, name, gallery, 
 }
 
 Product.propTypes = {
-  isSale: types.bool,
-  isHit: types.bool,
   uuid: types.string,
   cart: types.array,
   gallery: types.array,
-  amount: types.number,
+  price: types.number,
   brand: types.string,
   name: types.string,
 
@@ -72,12 +69,13 @@ Product.propTypes = {
 };
 
 Product.defaultProps = {
-  isSale: false,
-  isHit: false,
   uuid: null,
   cart: [],
   gallery: [],
-  amount: 0.00,
+  price: 0.00,
   brand: 'None',
   name: 'None',
+
+  onView: null,
+  onCart: null,
 };

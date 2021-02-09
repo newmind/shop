@@ -1,11 +1,125 @@
 
+import { UUID } from '@sys.packages/utils';
 import request from '@sys.packages/request';
+import { models, sequelize } from '@sys.packages/db';
 
 
 export default () => async (ctx) => {
   const data = ctx['request']['body'];
+  const { Order, Product, Currency, Payment, Delivery, Status } = models;
 
-  console.log(data)
+  const { data: customer } = await request({
+    url: process.env['CUSTOMER_API_SRV'] + '/customers',
+    method: 'post',
+    data: {
+      name: data['name'],
+      patronymic: data['patronymic'],
+      surname: data['surname'],
+      email: data['email'],
+      phone: data['phone'].replace('+', ''),
+      address: data['address'],
+    }
+  });
+
+  const { data: amount } = await request({
+    url: process.env['PRODUCT_API_SRV'] + '/products/amount',
+    method: 'post',
+    data: {
+      uuid: data['items'],
+    }
+  });
+
+  const transaction = await sequelize.transaction();
+
+  const order = await Order.create({
+    externalId: UUID(),
+    customerId: customer['id'],
+    paymentCode: data['payment'],
+    deliveryCode: data['delivery'],
+    currencyCode: amount[0][0],
+    statusCode: 100,
+    price: amount[0][1],
+  }, {
+    toJSON: true,
+    transaction,
+  });
+
+  const products = [];
+  for (let index in data['items']) {
+    if (data['items'].hasOwnProperty(index)) {
+      const item = data['items'][index];
+
+      const { data: product } = await request({
+        url: process.env['PRODUCT_API_SRV'] + '/products',
+        method: 'get',
+        params: {
+          uuid: item[0],
+        },
+      });
+
+      if ( !! product.length) {
+        products.push({
+          orderId: order['id'],
+          uuid: product[0]['uuid'],
+          fiscal: product[0]['fiscal'],
+          price: product[0]['price'],
+          currencyCode: product[0]['currency']['code'],
+          count: item[1],
+        });
+      }
+    }
+  }
+
+  await Product.bulkCreate(products, {
+    transaction,
+  });
+
+  await transaction.commit();
+
+  const result = await Order.findOne({
+    where: { id: order['id'] },
+    attributes: ['externalId', 'customerId', 'price', 'createdAt', 'updatedAt'],
+    include: [
+      {
+        model: Currency,
+        required: true,
+        as: 'currency',
+        attributes: ['code', 'value'],
+      },
+      {
+        model: Product,
+        required: true,
+        as: 'products',
+        attributes: ['uuid', 'fiscal', 'price'],
+        include: [
+          {
+            model: Currency,
+            required: true,
+            as: 'currency',
+            attributes: ['code', 'value'],
+          },
+        ],
+      },
+      {
+        model: Payment,
+        required: true,
+        as: 'payment',
+        attributes: ['code', 'name'],
+      },
+      {
+        model: Delivery,
+        required: true,
+        as: 'delivery',
+        attributes: ['code', 'name'],
+      },
+      {
+        model: Status,
+        required: true,
+        as: 'status',
+        attributes: ['code', 'name'],
+      }
+    ]
+  });
 
   // const body = {
   //   externalId,
@@ -151,9 +265,8 @@ export default () => async (ctx) => {
   //
   // console.log(operations[0].toJSON()['products']);
 
-  ctx.status = 500;
   ctx.body = {
     success: true,
-    data: null,
+    data: result.toJSON(),
   };
 };

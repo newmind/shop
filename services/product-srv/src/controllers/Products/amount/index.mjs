@@ -11,9 +11,7 @@ export default () => async (ctx) => {
   const { Product, Promotion, Currency } = models;
   const { uuid } = ctx['request']['body'];
 
-  let amount = 0;
-  let currency = '';
-
+  const amounts = [];
   for (let index in uuid) {
     if (uuid.hasOwnProperty(index)) {
       const item = uuid[index];
@@ -36,24 +34,26 @@ export default () => async (ctx) => {
           {
             model: Currency,
             as: 'currency',
-            attributes: ['value'],
+            attributes: ['code', 'value'],
             required: true,
           },
         ],
       });
 
       const product = result.toJSON();
-      const productAmount = product['price'] * item[1];
+      const amountIndex = amounts.findIndex((item) => item[0] === product['currency']['code']);
 
-      amount += productAmount;
+      if (amountIndex > -1) {
+        amounts[amountIndex][1] += product['price'] * item[1]
+      }
+      else {
+        amounts.push([product['currency']['code'], product['price'] * item[1], product['currency']['value']]);
+      }
     }
   }
 
   ctx.body = {
     success: true,
-    data: {
-      amount,
-      currency,
-    },
+    data: amounts,
   };
 };

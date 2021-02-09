@@ -28,8 +28,8 @@ module.exports = {
           allowNull: false,
           defaultValue: 0,
         },
-        currencyId: {
-          type: DataType.INTEGER,
+        currencyCode: {
+          type: DataType.STRING(8),
           allowNull: false,
         },
         description: {
