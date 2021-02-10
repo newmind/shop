@@ -4,6 +4,7 @@ import { Mode, Size } from '@ui.packages/types';
 import React from 'react';
 import types from 'prop-types';
 
+import Bay from './Bay';
 import Cart from './Cart';
 import Default from './Default';
 import Context from "./Context";
@@ -16,6 +17,7 @@ export default function ButtonFactory({ form, children, ...props }) {
     case ButtonFactory.FORM_CONTEXT: return <Context {...props}>{ children }</Context>;
     case ButtonFactory.FORM_OUTLINE: return <Outline {...props}>{ children }</Outline>;
     case ButtonFactory.FORM_CART: return <Cart {...props}>{ children }</Cart>;
+    case ButtonFactory.FORM_BAY: return <Bay {...props}>{ children }</Bay>;
     default: return <Default {...props}>{ children }</Default>;
   }
 }
@@ -23,6 +25,7 @@ export default function ButtonFactory({ form, children, ...props }) {
 ButtonFactory.TYPE_BUTTON = 'button';
 ButtonFactory.TYPE_SUBMIT = 'submit';
 
+ButtonFactory.FORM_BAY = 'bay';
 ButtonFactory.FORM_CART = 'cart';
 ButtonFactory.FORM_DEFAULT = 'default';
 ButtonFactory.FORM_CONTEXT = 'context';
@@ -32,7 +35,7 @@ ButtonFactory.FORM_OUTLINE = 'outline';
 ButtonFactory.propTypes = {
   className: types.string,
   type: types.oneOf([ButtonFactory.TYPE_BUTTON, ButtonFactory.TYPE_SUBMIT]),
-  form: types.oneOf([ButtonFactory.FORM_DEFAULT, ButtonFactory.FORM_CONTEXT, ButtonFactory.FORM_OUTLINE, ButtonFactory.FORM_CART]),
+  form: types.oneOf([ButtonFactory.FORM_DEFAULT, ButtonFactory.FORM_CONTEXT, ButtonFactory.FORM_OUTLINE, ButtonFactory.FORM_CART, ButtonFactory.FORM_BAY]),
   mode: types.oneOf([Mode.DEFAULT, Mode.INFO, Mode.PRIMARY, Mode.DANGER, Mode.WARNING, Mode.SUCCESS]),
   size: types.oneOf([Size.SMALL, Size.MEDIUM, Size.LARGE]),
   children: types.any,

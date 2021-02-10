@@ -49,6 +49,7 @@ function Product({ uuid, brand, name, price, currency }) {
         </div>
         <div className={styles['controls']}>
           <div className={styles['buttons']}>
+            <Button form={Button.FORM_BAY} onClick={() => handleAddToCart()} />
             <Button form={Button.FORM_CART} onClick={() => handleAddToCart()} />
             { !! product && (
               <span className={removeFromCartClassName} onClick={() => handleRemoveFromCart()} />

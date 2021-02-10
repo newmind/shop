@@ -54,7 +54,7 @@ export default function Product({ uuid, price, currency, brand, name, gallery, o
             <Text type={Text.TYPE_COMMENT}>{ brand }</Text>
           </div>
           <div className={styles['uuid']}>
-            <Text type="uuid">{ uuid }</Text>
+            <Text type="uuid">Код: { uuid }</Text>
           </div>
         </div>
       </div>
@@ -63,6 +63,7 @@ export default function Product({ uuid, price, currency, brand, name, gallery, o
           <Text type={Text.TYPE_AMOUNT}>{ numeral(price).format() } { currency }</Text>
         </div>
         <div className={styles['controls']}>
+          <Button form={Button.FORM_BAY} />
           <Button form={Button.FORM_CART} onClick={(event) => handleClickCart(event)} />
           { !! product && (
             <span className={removeFromCartClassName} onClick={(event) => handleRemoveFromCart(uuid, event)} />

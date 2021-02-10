@@ -21,8 +21,8 @@ export default function ContextButton({ className, disabled, size, onClick }) {
       disabled={disabled}
       onClick={(event) => onClick && onClick(event)}
     >
-      <span className={styles['caption']}>В корзину</span>
-      <span className="fas fa-shopping-cart" />
+      <span className={styles['caption']}>Купить</span>
+      {/*<span className="fas fa-shopping-cart" />*/}
     </button>
 );
 }
