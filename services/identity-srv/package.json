@@ -18,7 +18,7 @@
     "@sys.packages/utils": "1.0.0",
     "dotenv": "8.2.0",
     "jsonwebtoken": "8.5.1",
-    "koa": "2.13.0",
+    "koa": "2.13.1",
     "koa-bodyparser": "4.3.0",
     "koa-logger": "3.2.1",
     "koa-router": "10.0.0",
@@ -28,7 +28,7 @@
   },
   "devDependencies": {
     "cross-env": "7.0.3",
-    "nodemon": "2.0.6",
+    "nodemon": "2.0.7",
     "sequelize-cli": "5.5.1"
   }
 }

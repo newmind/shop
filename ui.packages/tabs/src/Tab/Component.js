@@ -8,7 +8,7 @@ import cn from 'classnames';
 import styles from "./defaults.module.scss";
 
 
-function Tab({ name, setActiveTab, tabs, caption }) {
+function Tab({ name, setActiveTab, tabs, caption, count }) {
   const { tabsName, onChange } = useContext(Context);
 
   function handleSetActiveTab() {
@@ -23,7 +23,10 @@ function Tab({ name, setActiveTab, tabs, caption }) {
 
   return (
     <span className={classNameTab} onClick={handleSetActiveTab}>
-      <span className={styles['tab__caption']}>{ caption }</span>
+      <span className={styles['tab__caption']}>
+        <span className={styles['text']}>{ caption }</span>
+        {count && <span className={styles['count']}>{ count }</span>}
+      </span>
     </span>
   );
 }
@@ -31,6 +34,7 @@ function Tab({ name, setActiveTab, tabs, caption }) {
 Tab.propTypes = {
   caption: types.string,
   name: types.string,
+  count: types.number,
   tabs: types.object.isRequired,
   setActiveTab: types.func,
 };
@@ -38,6 +42,7 @@ Tab.propTypes = {
 Tab.defaultProps = {
   caption: 'No caption',
   name: '',
+  count: null,
   tabs: {},
 };
 

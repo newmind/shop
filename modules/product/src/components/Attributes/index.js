@@ -1,43 +1,38 @@
 
-import { reduceToArray } from '@ui.packages/utils';
+import { Text } from '@ui.packages/kit';
 
-import types from 'prop-types';
 import React from 'react';
+import { useSelector } from "react-redux";
 
 import styles from './default.module.scss';
 
+import { selectProduct } from "../../ducks/slice";
 
-function Properties({ list }) {
-  const rows = reduceToArray(list, 2, { fillNull: true });
+
+function Properties() {
+  const product = useSelector(selectProduct);
 
   return (
-    <div className={styles['list']}>
-      {rows.map((line, index) => (
-        <div key={index} className={styles['list__line']}>
-          {line.map((item, index) => (
-            <div key={index} className={styles['list__row']}>
-              {item && (<>
-                <div className={styles['list__col']}>
-                  <p className={styles['list__title']}>{ item['name'] }:</p>
-                </div>
-                <div className={styles['list__col']}>
-                  <p className={styles['list__value']}>{ item['value'] } { item['unit'] && item['unit'] }</p>
-                </div>
-              </>)}
-            </div>
-          ))}
+    <div className={styles['wrapper']}>
+      <div className={styles['description']}>
+        <Text type={Text.TYPE_COMMENT}>{ product['description'] }</Text>
+      </div>
+      {product['attributes'].map((item, index) => (
+        <div key={index} className={styles['line']}>
+          <span className={styles['title']}>
+            <Text theme="light" type={Text.TYPE_BODY}>{ item['name'] }:</Text>
+          </span>
+          <span className={styles['value']}>
+            <Text theme="light">{ item['value'] } { item['unit'] }</Text>
+          </span>
         </div>
       ))}
     </div>
   );
 }
 
-Properties.propTypes = {
-  list: types.array,
-};
+Properties.propTypes = {};
 
-Properties.defaultProps = {
-  list: [],
-};
+Properties.defaultProps = {};
 
 export default Properties;

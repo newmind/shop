@@ -7,7 +7,7 @@ export default () => async (ctx) => {
   const offset = {};
   const options = {};
 
-  const { Comment, Product } = models;
+  const { Comment, Product, Brand } = models;
   const { limit = null, take = null, skip = null, id = null, uuid = null, evaluation = null, person = null, createAt = null } = ctx['request']['query'];
 
   if (id) {
@@ -42,7 +42,6 @@ export default () => async (ctx) => {
   const result = await Comment.findAndCountAll({
     attributes: ['id', 'evaluation', 'person', 'comment', 'createdAt'],
     distinct: false,
-    subQuery: false,
     ...options,
     ...offset,
     where: { ...where },
@@ -50,7 +49,13 @@ export default () => async (ctx) => {
     include: [{
       model: Product,
       as: 'product',
-      attributes: ['uuid', 'brand', 'name']
+      attributes: ['uuid', 'name'],
+      include: [
+        {
+          model: Brand,
+          as: 'brands',
+        }
+      ]
     }],
   });
 

@@ -1,4 +1,5 @@
 
+import types from 'prop-types';
 import React, { useEffect } from 'react';
 
 import TabContext from "../contexts/TabContext";
@@ -16,10 +17,10 @@ function Tabs({ name, defaultTab, children, createTabs, removeTabs, setActiveTab
     return () => {
       removeTabs(name);
     };
-  });
+  }, []);
 
   useEffect(() => {
-    setActiveTab(name);
+    setActiveTab(name, defaultTab);
   }, [ defaultTab ]);
 
   return (
@@ -33,5 +34,25 @@ function Tabs({ name, defaultTab, children, createTabs, removeTabs, setActiveTab
     </TabContext.Provider>
   );
 }
+
+Tabs.propTypes = {
+  name: types.string,
+  defaultTab: types.string,
+
+  createTabs: types.func,
+  removeTabs: types.func,
+  setActiveTab: types.func,
+  onChange: types.func,
+};
+
+Tabs.defaultProps = {
+  name: 'default',
+  defaultTab: '',
+
+  createTabs: null,
+  removeTabs: null,
+  setActiveTab: null,
+  onChange: null,
+};
 
 export default Tabs;

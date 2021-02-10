@@ -7,21 +7,21 @@
     "start": "react-scripts start"
   },
   "dependencies": {
-    "@modules/brands": "1.0.0",
-    "@modules/types": "1.0.0",
-    "@modules/promotions": "1.0.0",
-    "@modules/categories": "1.0.0",
     "@modules/attributes": "1.0.0",
-    "@modules/units": "1.0.0",
-    "@modules/currencies": "1.0.0",
+    "@modules/brands": "1.0.0",
+    "@modules/categories": "1.0.0",
     "@modules/comments": "1.0.0",
+    "@modules/currencies": "1.0.0",
+    "@modules/customers": "1.0.0",
     "@modules/not-found": "1.0.0",
     "@modules/orders": "1.0.0",
     "@modules/product-modify": "1.0.0",
     "@modules/products": "1.0.0",
     "@modules/profile": "1.0.0",
+    "@modules/promotions": "1.0.0",
     "@modules/sign-in": "1.0.0",
-    "@modules/customers": "1.0.0",
+    "@modules/types": "1.0.0",
+    "@modules/units": "1.0.0",
     "@ui.packages/application": "1.0.0",
     "@ui.packages/dialog": "1.0.0",
     "@ui.packages/notifications": "1.0.0",
@@ -32,8 +32,8 @@
     "redux": "4.0.5"
   },
   "devDependencies": {
-    "react-scripts": "4.0.1",
-    "sass": "1.30.0"
+    "react-scripts": "4.0.2",
+    "sass": "1.32.7"
   },
   "browserslist": [
     ">0.2%",

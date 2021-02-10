@@ -18,9 +18,9 @@
     "react": "17.0.1"
   },
   "devDependencies": {
-    "@babel/cli": "7.12.10",
-    "@babel/core": "7.12.10",
-    "core-js": "3.8.1",
+    "@babel/cli": "7.12.13",
+    "@babel/core": "7.12.13",
+    "core-js": "3.8.3",
     "cross-env": "7.0.3",
     "resolve": "1.19.0"
   },

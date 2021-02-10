@@ -32,7 +32,7 @@ function Comment({ evaluation, person, comment, createdAt }) {
     <div className={commentClassName}>
       <div className={styles['header']}>
         <div className={styles['wrapper']}>
-          <Text type={Text.TYPE_BODY}>{ person }</Text>&nbsp;
+          <Text theme="light" type={Text.TYPE_BODY}>{ person }</Text>&nbsp;
           <Text type={Text.TYPE_COMMENT}>({ moment(createdAt).format('DD.MM.YYYY HH:mm') })</Text>
         </div>
         <div className={styles['evaluation']}>
@@ -40,7 +40,7 @@ function Comment({ evaluation, person, comment, createdAt }) {
         </div>
       </div>
       <div className={styles['content']}>
-        <Text>{ comment }</Text>
+        <Text theme="light">{ comment }</Text>
       </div>
     </div>
   );

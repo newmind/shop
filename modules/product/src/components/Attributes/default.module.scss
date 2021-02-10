@@ -2,63 +2,35 @@
 @import "~@ui.packages/theme";
 
 
-.list {
+.wrapper {
 
-  display: flex;
-  flex-direction: column;
-  flex: 1 0;
-  border: 1px solid $pale-lilac;
-  border-radius: 5px;
-  padding: 30px;
-  background: $white;
+  display: block;
+}
 
-  &__line {
+.line {
 
-    display: flex;
-    flex-direction: row;
-    flex: 1 0;
-    padding: 15px 0 13px;
+  display: block;
 
-    & + & {
+  & + & {
 
-      margin: 5px 0 0;
-      border-top: 1px solid $very-light-pink;
-    }
+    margin: 12px 0 0;
   }
+}
 
-  &__row {
+.title {
 
-    display: flex;
-    flex-direction: row;
-    flex: 1 0;
+  display: inline-block;
+  width: 250px;
+}
 
-    & + & {
+.value {
 
-      margin: 0 0 0 40px;
-    }
-  }
+  display: inline-block;
+  margin: 0 0 0 10px;
+}
 
-  &__col {
+.description {
 
-    display: flex;
-    flex: 1 0 50%;
-    flex-direction: column;
-    color: $coal-dark;
-  }
-
-  &__title {
-
-    display: inline-block;
-    font-family: inherit;
-    font-weight: 700;
-    font-size: 14px;
-  }
-
-  &__value {
-
-    display: inline-block;
-    font-family: inherit;
-    font-weight: 300;
-    font-size: 14px;
-  }
+  display: block;
+  margin: 0 0 40px;
 }

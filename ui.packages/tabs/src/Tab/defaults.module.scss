@@ -5,50 +5,56 @@
 .tab {
 
   display: inline-block;
-  padding: 12px 24px;
-  background: $pale-grey;
+  padding: 15px 24px;
   cursor: pointer;
-  border-top: 1px solid $pale-lilac;
-  border-bottom: 1px solid $pale-lilac;
+  color: $white;
+  border-radius: 5px;
   transition: background 200ms, color 200ms, border 200ms;
 
   & + & {
-    border-left: 1px solid $pale-lilac;
-  }
 
-  &:first-child {
-
-    border-radius: 8px 0 0 8px;
-    border-left: 1px solid $pale-lilac;
-  }
-
-  &:last-child {
-
-    border-radius: 0 8px 8px 0;
-    border-right: 1px solid $pale-lilac;
+    margin: 0 0 0 20px;
   }
 
   &:hover {
 
-    background: $pale-lilac;
+    background: $white;
     border-color: $pale-lilac;
+    color: $coal-dark;
   }
 
   &__caption {
 
     font-family: inherit;
-    font-weight: 600;
-    font-size: 14px;
+    font-weight: 700;
+    font-size: 12px;
     letter-spacing: .5px;
+    text-transform: uppercase;
   }
 
   &--active,
   &--active:hover {
 
-    background: $primary;
-    color: $white;
-    border-color: $primary !important;
+    background: $whitesmoke;
+    color: $coal-dark;
   }
 }
 
-.mode {}
+.text {
+
+  display: inline-block;
+  vertical-align: middle;
+  padding: 4px 0;
+}
+
+.count {
+
+  display: inline-block;
+  vertical-align: middle;
+  margin: 0 0 0 6px;
+  padding: 4px 3px;
+  background: $primary;
+  color: $white;
+  border-radius: 3px;
+  font-weight: 600;
+}

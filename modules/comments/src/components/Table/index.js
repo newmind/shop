@@ -85,7 +85,7 @@ export default function TableComments() {
         >
           {(product) => {
             return product && (
-              <Link className={styles['link']} to={'/products/' + product['uuid']}>{ product['brand'] }</Link>
+              <Link className={styles['link']} to={'/products/' + product['uuid']}>{ product['name'] }</Link>
             )
           }}
         </Column>

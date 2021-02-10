@@ -8,9 +8,10 @@
     "start:dev": "cross-env NODE_ENV=development babel ./src --out-dir ./lib --copy-files --watch"
   },
   "dependencies": {
-    "@packages/moment": "1.0.0",
     "@packages/errors": "1.0.0",
+    "@packages/moment": "1.0.0",
     "@packages/numeral": "1.0.0",
+    "@reduxjs/toolkit": "1.5.0",
     "@ui.packages/cart": "1.0.0",
     "@ui.packages/dialog": "1.0.0",
     "@ui.packages/kit": "1.0.0",
@@ -18,10 +19,9 @@
     "@ui.packages/request": "1.0.0",
     "@ui.packages/socket": "1.0.0",
     "@ui.packages/theme": "1.0.0",
-    "@ui.packages/utils": "1.0.0",
     "@ui.packages/types": "1.0.0",
+    "@ui.packages/utils": "1.0.0",
     "@ui.packages/yandex-map": "1.0.0",
-    "@reduxjs/toolkit": "1.5.0",
     "classnames": "2.2.6",
     "prop-types": "15.7.2",
     "react": "17.0.1",
@@ -31,8 +31,8 @@
     "redux-form": "8.3.7"
   },
   "devDependencies": {
-    "@babel/cli": "7.12.10",
-    "@babel/core": "7.12.10",
+    "@babel/cli": "7.12.13",
+    "@babel/core": "7.12.13",
     "cross-env": "7.0.3",
     "resolve": "1.19.0"
   },

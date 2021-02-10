@@ -8,8 +8,8 @@
     "start:dev": "cross-env NODE_ENV=development babel ./src --out-dir ./lib --copy-files --watch"
   },
   "dependencies": {
-    "@packages/moment": "1.0.0",
     "@packages/errors": "1.0.0",
+    "@packages/moment": "1.0.0",
     "@packages/numeral": "1.0.0",
     "@ui.packages/dialog": "1.0.0",
     "@ui.packages/kit": "1.0.0",
@@ -26,8 +26,8 @@
     "redux-form": "8.3.7"
   },
   "devDependencies": {
-    "@babel/cli": "7.12.10",
-    "@babel/core": "7.12.10",
+    "@babel/cli": "7.12.13",
+    "@babel/core": "7.12.13",
     "cross-env": "7.0.3",
     "resolve": "1.19.0"
   },
