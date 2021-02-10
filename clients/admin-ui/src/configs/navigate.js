@@ -1,7 +1,7 @@
 
 const navigate = [
   {
-    title: 'Витрина',
+    title: 'Каталог',
     path: '/',
     icon: 'fas fa-shopping-cart',
   },
