@@ -38,7 +38,7 @@ function ModifyForm({ handleSubmit, onDelete }) {
         <div className={styles['content']}>
           <Row>
             <Col>
-              <InputField name="uuid" label="Номер товара" disabled />
+              <InputField name="uuid" label="Номер товара (генерируется автоматически)" disabled />
             </Col>
             <Col>
               <InputField name="fiscal" label="Фискальный номер" disabled={inProcess} />
@@ -63,8 +63,6 @@ function ModifyForm({ handleSubmit, onDelete }) {
                 disabled={inProcess}
               />
             </Col>
-          </Row>
-          <Row>
             <Col>
               <ListField
                 name="categories"

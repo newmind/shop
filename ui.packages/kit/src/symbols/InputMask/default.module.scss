@@ -8,9 +8,10 @@
   flex: 1 0;
   flex-direction: column;
   border: 1px solid $pale-lilac;
-  border-radius: 5px;
+  border-radius: 3px;
+  background: $white;
   overflow: hidden;
-  transition: border 400ms;
+  transition: border 200ms;
 
   &:hover,
   &--focus {
