@@ -2,9 +2,14 @@
 module.exports = (db, DataTypes) => {
 
   const ProductAttribute = db.define('ProductAttribute', {
+    id: {
+      type: DataTypes.INTEGER,
+      primaryKey: true,
+      unique: true,
+      autoIncrement: true,
+    },
     productUuid: {
       type: DataTypes.STRING(9),
-      primaryKey: true,
       allowNull: false,
     },
     attributeId: {
