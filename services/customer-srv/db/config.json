@@ -3,15 +3,15 @@
   "development": {
     "port": 5432,
     "host": "localhost",
-    "database": "operation_srv",
-    "username": "admin",
-    "password": "1Ctdfcnjgjkm",
+    "database": "customer_srv",
+    "username": "postgres",
+    "password": "postgres",
     "dialect": "postgres"
   },
   "production": {
     "port": 5432,
     "host": "db",
-    "database": "operation_srv",
+    "database": "customer_srv",
     "username": "admin",
     "password": "1Ctdfcnjgjkm",
     "dialect": "postgres"
