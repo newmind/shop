@@ -8,8 +8,8 @@
   width: 380px;
   background: $white;
   border: 1px solid $pale-lilac;
-  border-radius: 15px;
-  padding: 60px 50px;
+  border-radius: 5px;
+  padding: 50px 60px 50px;
   box-sizing: border-box;
 }
 
@@ -17,13 +17,12 @@
 
   display: block;
   text-align: center;
-  margin: 0 0 30px;
+  margin: 0 0 35px;
 }
 
 .content {
 
   display: block;
-  margin: 0 0 32px;
 }
 
 .row {
@@ -39,4 +38,5 @@
 
   display: block;
   text-align: center;
+  margin: 60px 0 0;
 }
