@@ -7,37 +7,7 @@
   display: flex;
   flex: 1 0;
   flex-direction: column;
-  background: $coal-dark;
+  background: url("./noise.png"), $coal-dark;
   justify-content: center;
   align-items: center;
-}
-
-.dialog {
-
-  display: block;
-  width: 380px;
-  background: $white;
-  border: 1px solid $pale-lilac;
-  border-radius: 15px;
-  overflow: hidden;
-
-  &__content {
-
-    display: block;
-    padding: 40px 60px 0;
-  }
-
-  &__controls {
-
-    display: block;
-    padding: 50px 0 30px;
-    text-align: center;
-  }
-}
-
-.header {
-
-  display: block;
-  padding: 50px 0 0;
-  text-align: center;
 }

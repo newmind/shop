@@ -13,7 +13,7 @@
     color: $whitesmoke;
     background: transparent;
     cursor: pointer;
-    transition: color 400ms;
+    transition: color 200ms;
     vertical-align: middle;
 
     &:hover {
@@ -48,7 +48,7 @@
     color: $whitesmoke;
     background: transparent;
     cursor: pointer;
-    transition: color 400ms;
+    transition: color 200ms;
     align-items: center;
     vertical-align: middle;
 
@@ -86,7 +86,7 @@
   &__text {
 
     font-family: inherit;
-    font-weight: 300;
+    font-weight: 400;
     font-size: 15px;
     color: inherit;
   }
