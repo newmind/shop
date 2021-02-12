@@ -5,23 +5,30 @@
 .confirm {
 
   display: block;
-  padding: 20px 20px 0;
+  padding: 15px 50px 0;
+  width: 460px;
+  box-sizing: border-box;
+}
 
-  &__message {
+.content {
 
-    display: block;
-    font-family: inherit;
-    font-weight: 300;
-    font-size: 14px;
-    color: $coal-dark;
-    text-shadow: 2px 1px 0 $whitesmoke;
-    text-align: center
-  }
+  display: block;
+  text-align: center;
+}
 
-  &__controls {
+.controls {
 
-    display: block;
-    margin: 30px 0 0;
-    text-align: center
+  display: block;
+  margin: 40px 0 0;
+  text-align: center
+}
+
+.reset {
+
+  color: $white;
+
+  &:hover {
+
+    color: $pale-grey;
   }
 }

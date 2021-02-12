@@ -4,6 +4,7 @@ import { UnauthorizedError } from '@packages/errors';
 
 import jwt from 'jsonwebtoken';
 
+export const { TokenExpiredError, JsonWebTokenError } = jwt;
 
 function resetCookie(ctx, name) {
   ctx.cookies.set(name, null, { httpOnly: true });
@@ -72,6 +73,12 @@ export const decode = (token, secret) => {
     });
   });
 };
+
+export const sign = (data, secret) => {
+  return jwt.sign(data, secret, {
+    algorithm:  "HS256"
+  });
+}
 
 
 export const middleware = (options) => async (ctx, next) => {

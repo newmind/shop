@@ -5,7 +5,6 @@
   "dependencies": {
     "@packages/errors": "1.0.0",
     "@sys.packages/request": "1.0.0",
-    "axios": "0.21.1",
     "jsonwebtoken": "8.5.1"
   }
 }

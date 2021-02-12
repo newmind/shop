@@ -27,7 +27,7 @@ const navigate = [
         path: '/options/attributes',
       },
       {
-        title: 'Единица измерения',
+        title: 'Единицы измерения',
         path: '/options/units',
       },
       {

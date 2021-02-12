@@ -1,9 +1,9 @@
 
 import { NotfoundError } from '@packages/errors';
+
+import { sign } from '@sys.packages/jwt';
 import { models } from '@sys.packages/db';
 import { genHash256, token } from '@sys.packages/utils';
-
-import jwt from 'jsonwebtoken';
 
 
 export default () => async (ctx) => {
@@ -32,9 +32,7 @@ export default () => async (ctx) => {
     exp: expirationTime,
   };
 
-  const identityToken = jwt.sign(payload, process.env['JWT_SECRET'], {
-    algorithm:  "HS256"
-  });
+  const identityToken = sign(payload, process.env['JWT_SECRET']);
 
   ctx.body = {
     success: true,

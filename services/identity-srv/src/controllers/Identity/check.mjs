@@ -1,29 +1,14 @@
 
 import { NetworkError, BadRequestError, UnauthorizedError } from '@packages/errors';
 
-import jwt from 'jsonwebtoken';
-
-
-const { TokenExpiredError, JsonWebTokenError } = jwt;
-
-
-const decode = (token) => {
-  return new Promise((resolve, reject) => {
-    jwt.verify(token, process.env['JWT_SECRET'], (err, decoded) => {
-      if (err) {
-        reject(err);
-      }
-      resolve(decoded);
-    });
-  });
-};
+import { decode, TokenExpiredError, JsonWebTokenError } from '@sys.packages/jwt';
 
 
 export default () => async (ctx) => {
   try {
     const { token } = ctx['request']['body'];
 
-    await decode(token);
+    await decode(token, process.env['JWT_SECRET']);
 
     ctx.body = {
       success: true,

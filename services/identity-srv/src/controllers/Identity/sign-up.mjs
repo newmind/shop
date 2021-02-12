@@ -1,9 +1,7 @@
 
+import { sign } from '@sys.packages/jwt';
 import {genHash256, token} from '@sys.packages/utils';
 import { models, sequelize, Sequelize } from '@sys.packages/db';
-
-import jwt from "jsonwebtoken";
-
 
 const { UniqueConstraintError } = Sequelize;
 
@@ -46,9 +44,7 @@ export default () => async (ctx) => {
       exp: expirationTime,
     };
 
-    const identityToken = jwt.sign(payload, process.env['JWT_SECRET'], {
-      algorithm:  "HS256"
-    });
+    const identityToken = sign(payload, process.env['JWT_SECRET']);
 
     ctx.body = {
       success: true,

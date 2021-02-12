@@ -1,4 +1,6 @@
 
+import { Header } from '@ui.packages/kit';
+
 import types from 'prop-types';
 import ReactDOM from 'react-dom';
 import React, { useRef } from 'react';
@@ -7,14 +9,7 @@ import cn from 'classnames';
 import styles from './defaults.module.scss';
 
 
-const PRIMARY_MODE = 'primary';
-const INFO_MODE = 'info';
-const WARNING_MODE = 'warning';
-const DANGER_MODE = 'danger';
-const SUCCESS_MODE = 'success';
-
-
-function Dialog({ isOpen, data, name, title, mode, actionDialogName, children, closeDialog, onClose }) {
+function Dialog({ className, isOpen, data, name, title, actionDialogName, children, closeDialog, onClose }) {
   const wrapperRef = useRef(null);
 
   function handleCloseDialog() {
@@ -32,25 +27,19 @@ function Dialog({ isOpen, data, name, title, mode, actionDialogName, children, c
     }
   }
 
-  const classNameCloseDialog = cn(styles['dialog__close'], 'fas fa-times');
-  const classNameDialog = cn(styles['dialog'], {
-    [styles['dialog--primary']]: mode === PRIMARY_MODE,
-    [styles['dialog--success']]: mode === SUCCESS_MODE,
-    [styles['dialog--info']]: mode === INFO_MODE,
-    [styles['dialog--danger']]: mode === DANGER_MODE,
-    [styles['dialog--warning']]: mode === WARNING_MODE,
-  });
+  const classNameCloseDialog = cn(styles['close'], 'fas fa-times');
+  const classNameDialog = cn(styles['dialog'], className);
 
   return isOpen && (name === actionDialogName) && ReactDOM.createPortal((
     <div ref={wrapperRef} className={styles['wrapper']} onClick={handleOutClick}>
       <div className={classNameDialog}>
         <span className={classNameCloseDialog} onClick={handleCloseDialog} />
         {title && (
-          <div className={styles['dialog__header']}>
-            <h3>{ title }</h3>
+          <div className={styles['header']}>
+            <Header level={3}>{ title }</Header>
           </div>
         )}
-        <div className={styles['dialog__content']}>
+        <div className={styles['content']}>
           { React.cloneElement(children, { data }) }
         </div>
       </div>
@@ -59,20 +48,20 @@ function Dialog({ isOpen, data, name, title, mode, actionDialogName, children, c
 }
 
 Dialog.propTypes = {
+  className: types.string,
   isOpen: types.bool,
   title: types.string,
   name: types.string,
-  mode: types.oneOf(['info', 'primary', 'danger', 'warning', 'success', 'default']),
   actionDialogName: types.string,
   closeDialog: types.func,
   onClose: types.func,
 };
 
 Dialog.defaultProps = {
+  className: null,
   isOpen: false,
   title: null,
   name: null,
-  mode: 'default',
 };
 
 export default Dialog;

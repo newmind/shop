@@ -1,6 +1,6 @@
 
 import { Mode } from '@ui.packages/types';
-import { Button } from "@ui.packages/kit";
+import { Button, Text } from "@ui.packages/kit";
 
 import types from 'prop-types';
 import React from 'react';
@@ -20,10 +20,12 @@ function ConfirmDialog({ name, title, mode, message, disabled, onConfirm, onCanc
   }
 
   return (
-    <Dialog name={name} title={title} mode={mode} onClose={() => handleCancel()}>
+    <Dialog name={name} title={title} onClose={() => handleCancel()}>
       <div className={styles['confirm']}>
-        <p className={styles['confirm__message']}>{ message }</p>
-        <div className={styles['confirm__controls']}>
+        <div className={styles['content']}>
+          <Text type={Text.TYPE_BODY}>{ message }</Text>
+        </div>
+        <div className={styles['controls']}>
           <Button
             form={Button.FORM_CONTEXT}
             mode={Mode.DEFAULT}
