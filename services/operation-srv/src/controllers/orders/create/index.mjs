@@ -251,7 +251,7 @@ export default () => async (ctx) => {
   //             {
   //               model: Gallery,
   //               required: false,
-  //               as: 'gallery',
+  //               as: 'currency',
   //               attributes: ['externalId'],
   //             },
   //           ]

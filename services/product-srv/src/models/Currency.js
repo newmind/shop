@@ -11,6 +11,7 @@ module.exports = (db, DataType) => {
       type: DataType.STRING(8),
       primaryKey: true,
       allowNull: false,
+      unique: true,
     },
     value: {
       type: DataType.STRING(8),

@@ -1,12 +1,9 @@
 
-import { middlewareErrors } from '@packages/errors';
-
 import logger from '@sys.packages/logger';
-import appServer, { initRouter } from '@sys.packages/server';
+import { Server } from '@sys.packages/server';
 import { connectToRabbit, queueToExchange } from '@sys.packages/rabbit';
 
 import path from 'path';
-import http from 'http';
 import nunjucks from 'nunjucks';
 
 import routes from './routes/index.mjs';
@@ -24,15 +21,16 @@ import { orderCreated } from './actions/order/index.mjs';
       watch: true,
     });
 
-    appServer.use(middlewareErrors());
-
-    const httpServer = http.createServer(appServer.callback());
-
-    initRouter(routes);
-
-    httpServer.listen(process.env['PORT'], () => {
-      logger['info']('Server started on port: ' + process.env['PORT'])
+    const server = new Server({
+      server: {
+        port: process.env['PORT'],
+      },
+      routes: [
+        routes,
+      ],
     });
+
+    await server.start();
   }
   catch(error) {
 

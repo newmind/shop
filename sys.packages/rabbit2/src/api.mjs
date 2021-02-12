@@ -129,6 +129,7 @@ export async function createConsumer(channel, queue, options, callback) {
           }
 
           if (isOk) {
+            logger.info(`RabbitMQ: Подтверждениие о получении данных отправлено`);
             channel.ack(message);
           }
           else {

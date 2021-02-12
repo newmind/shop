@@ -1,54 +1,104 @@
 
 import logger from '@sys.packages/logger';
+import { middleware } from '@sys.packages/jwt';
+import createSocket from "@sys.packages/socket.io";
+import { middlewareErrors } from "@packages/errors";
 
 import Koa from 'koa';
+import http from "http";
 import Router from 'koa-router';
+import cookie from 'koa-cookie';
+import bodyParser from 'koa-bodyparser';
 
-import koaBodyParser from 'koa-bodyparser';
-
-const app = new Koa();
-const router = new Router();
+import CORS from "./cors.mjs";
+import loggerRequests from "./logger.mjs";
 
 
-app.use(async (ctx, next) => {
-
-  logger['info'](`[REQUEST] ---> [${ctx.request.method}] "${ctx.request.url}" (${ctx.request.body ? JSON.stringify(ctx.request.body) : 'null'})`);
-
-  await next();
-
-  let response = null;
-  const body = ctx.response.body;
-
-  if (body) {
-    if (body['req']) {
-      response = ctx.response.message;
-    }
-    else {
-      if (body instanceof Object) {
-        response = JSON.stringify(body);
-      }
-      else if (Array.isArray(body)) {
-        response = JSON.stringify(body);
-      }
-    }
-  }
-
-  logger['info'](`[RESPONSE] <--- [${ctx.request.method}] "${ctx.request.url}" [${ctx.response.status}] (${response})`);
-});
-
-app.use(koaBodyParser({
-  enableTypes: ['json', 'form'],
-  onerror: (err, ctx) => {
-    ctx.throw(422, 'body parse error');
-  }
-}));
-
-export const initRouter = (callback) => {
-
-  callback(router);
-
-  app.use(router.routes());
-  app.use(router.allowedMethods());
+const defaultOptions = {
+  name: 'Server app',
+  server: {
+    port: 8080,
+    origins: '',
+  },
+  auth: {
+    cookie: null,
+    endpoint: null,
+  },
+  socket: {
+    path: null,
+  },
+  middlewares: [],
+  routes: [],
+  authRoutes: [],
 };
 
-export default app;
+
+export class Server {
+  _server = null;
+  _koa = null;
+  _options = {};
+
+  constructor(options) {
+    this._options = {
+      ...defaultOptions,
+      ...options,
+    };
+
+    this._koa = new Koa();
+
+    this._koa.use(loggerRequests);
+
+    this._koa.use(bodyParser({
+      enableTypes: ['json', 'form'],
+      onerror: (err, ctx) => {
+        ctx.throw(422, 'body parse error');
+      }
+    }));
+
+    this._koa.use(middlewareErrors());
+
+    if (this._options.server.origins) {
+      this._koa.use(CORS({
+        credentials: true,
+        allowedOrigins: this._options.server.origins.split(','),
+        allowMethods: ['GET', 'POST', 'PATCH', 'PUT', 'DELETE', 'OPTIONS'],
+      }));
+    }
+
+    this._koa.use(cookie.default());
+
+    this._createRouters(this._options.routes);
+
+    if ( !! this._options.authRoutes.length) {
+      this._koa.use(middleware({
+        cookieName: this._options.cookie.name,
+        secret: this._options.cookie.secret,
+        checkUrl: this._options.cookie.endpoint,
+      }));
+
+      this._createRouters(this._options.authRoutes);
+    }
+  }
+
+  _createRouters(routers) {
+    routers.forEach((router) => {
+      const rt = new Router();
+      router(rt);
+      this._koa.use(rt.routes());
+      this._koa.use(rt.allowedMethods());
+    });
+  }
+
+  async start() {
+
+    this._server = http.createServer(this._koa.callback());
+
+    if (this._options.socket.path) {
+      await createSocket(this._server, { path: this._options.socket.path });
+    }
+
+    this._server.listen(this._options.server.port, () => {
+      logger['info']('Server started on port ' + this._options.server.port);
+    });
+  }
+}

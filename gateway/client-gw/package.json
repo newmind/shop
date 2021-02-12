@@ -8,7 +8,6 @@
   },
   "dependencies": {
     "@packages/errors": "1.0.0",
-    "@sys.packages/cors": "1.0.0",
     "@sys.packages/jwt": "1.0.0",
     "@sys.packages/logger": "1.0.0",
     "@sys.packages/rabbit": "1.0.0",

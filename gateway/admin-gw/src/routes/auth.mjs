@@ -90,8 +90,8 @@ export default (router) => {
   router.delete('/comments', deleteComments());
 
 
-  router.get('/gallery/:id', getImage());
-  router.delete('/gallery', deleteImages());
+  router.get('/currency/:id', getImage());
+  router.delete('/currency', deleteImages());
 
 
   router.post('/sign-in', signIn());

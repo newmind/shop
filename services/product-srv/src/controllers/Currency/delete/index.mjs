@@ -1,5 +1,5 @@
 
-import { sendEvent } from "@sys.packages/rabbit2";
+import {sendCommand, sendEvent} from "@sys.packages/rabbit2";
 import { models } from '@sys.packages/db';
 
 
@@ -11,6 +11,7 @@ export default () => async (ctx) => {
     where: { id },
   });
 
+  await sendCommand(process.env['QUEUE_CURRENCY_DELETE'], JSON.stringify(id));
   await sendEvent(process.env['EXCHANGE_CURRENCY_DELETE'], JSON.stringify(id));
 
   ctx.body = {

@@ -1,9 +1,8 @@
 
-import { connectToRabbit, createExchange } from "@sys.packages/rabbit";
+import { connection } from "@sys.packages/rabbit2";
 
 
 export default async function() {
-  await connectToRabbit(process.env['RABBIT_CONNECTION_HOST']);
+  await connection(process.env['RABBIT_CONNECTION_HOST']);
 
-  await createExchange(process.env['RABBIT_IDENTITY_SRV_EXCHANGE_PASSPORT_UPDATED']);
 }

@@ -1,10 +1,10 @@
 
-import { NetworkError, BadRequestError } from '@packages/errors';
+import { NetworkError, BadRequestError, UnauthorizedError } from '@packages/errors';
 
 import jwt from 'jsonwebtoken';
 
 
-const { TokenExpiredError } = jwt;
+const { TokenExpiredError, JsonWebTokenError } = jwt;
 
 
 const decode = (token) => {
@@ -21,25 +21,24 @@ const decode = (token) => {
 
 export default () => async (ctx) => {
   try {
-
     const { token } = ctx['request']['body'];
 
-    // декодируем авторизационный токен
-    const user = await decode(token);
+    await decode(token);
 
-    ctx.status = 200;
     ctx.body = {
       success: true,
-      data: user,
+      data: null,
     };
   }
   catch (error) {
 
     if (error instanceof TokenExpiredError) {
-
-      throw new BadRequestError('Время жизни токена истекло');
+      throw new UnauthorizedError({ code: '20.0.100', message: 'Время жизни токена истекло' });
+    }
+    else if (error instanceof JsonWebTokenError) {
+      throw new BadRequestError({ code: '20.0.150', message: 'Невалидный токен' });
     }
 
-    throw new NetworkError('Что-то пошло не так');
+    throw new NetworkError({ code: '20.0.200', message: error['message'] });
   }
 };

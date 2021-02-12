@@ -1,6 +1,6 @@
 
 import { models } from '@sys.packages/db';
-import { sendEvent } from '@sys.packages/rabbit2';
+import { sendEvent, sendCommand } from '@sys.packages/rabbit2';
 
 
 export default () => async (ctx) => {
@@ -17,6 +17,7 @@ export default () => async (ctx) => {
 
   const currency = result.toJSON();
 
+  await sendCommand(process.env['QUEUE_CURRENCY_UPDATE'], JSON.stringify(currency));
   await sendEvent(process.env['EXCHANGE_CURRENCY_UPDATE'], JSON.stringify(currency));
 
   ctx.body = {

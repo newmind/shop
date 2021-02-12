@@ -11,7 +11,7 @@ export default function Section({ id, imageId, value } ) {
   return (
     <Link className={styles['wrapper']} to={ process.env['PUBLIC_URL'] + '/products?typeId=' + id }>
       <div className={styles['promo']}>
-        <Image src={ process.env['REACT_APP_API_HOST'] + '/gallery/' + imageId } />
+        <Image src={ process.env['REACT_APP_API_HOST'] + '/currency/' + imageId } />
       </div>
       <div className={styles['information']}>
         <div className={styles['caption']}>

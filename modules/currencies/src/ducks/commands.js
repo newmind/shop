@@ -38,7 +38,7 @@ export const getCurrencies = () => async (dispatch) => {
     dispatch(getCurrenciesRequestFailAction(error));
     dispatch(pushNotification({
       mode: 'danger',
-      content: 'Ошибка получения списка "Валюта"'
+      title: 'Ошибка получения списка "Валюта"'
     }));
   }
 };
@@ -57,14 +57,14 @@ export const createCurrency = (data) => async (dispatch) => {
     dispatch(closeDialog('currency'));
     dispatch(pushNotification({
       mode: 'success',
-      content: 'Операция выполнена успешно'
+      title: 'Операция выполнена успешно'
     }));
   }
   catch(error) {
     dispatch(createCurrencyRequestFailAction(error));
     dispatch(pushNotification({
       mode: 'danger',
-      content: 'Ошибка создания "Валюты"'
+      title: 'Ошибка создания "Валюты"'
     }));
   }
 };
@@ -74,7 +74,7 @@ export const updateCurrency = (data) => async (dispatch) => {
     dispatch(updateCurrencyRequestAction());
 
     const result = await request({
-      url: '/currencies/' + data['uuid'],
+      url: '/currencies/' + data['id'],
       method: 'put',
       data,
     });
@@ -83,7 +83,7 @@ export const updateCurrency = (data) => async (dispatch) => {
     dispatch(closeDialog('currency'));
     dispatch(pushNotification({
       mode: 'success',
-      content: 'Операция выполнена успешно'
+      title: 'Операция выполнена успешно'
     }));
   }
   catch(error) {
@@ -95,27 +95,27 @@ export const updateCurrency = (data) => async (dispatch) => {
   }
 };
 
-export const deleteCurrencies = (uuid) => async (dispatch) => {
+export const deleteCurrencies = (id) => async (dispatch) => {
   try {
     dispatch(deleteCurrencyRequestAction());
 
     const { data } = await request({
       url: '/currencies',
       method: 'delete',
-      data: { uuid }
+      data: { id },
     });
 
     dispatch(deleteCurrencyRequestSuccessAction(data));
     dispatch(pushNotification({
       mode: 'success',
-      content: 'Операция выполнена успешно'
+      title: 'Операция выполнена успешно'
     }));
   }
   catch(error) {
     dispatch(deleteCurrencyRequestFailAction(error));
     dispatch(pushNotification({
       mode: 'danger',
-      content: 'Ошибка удаления "Валюты"'
+      title: 'Ошибка удаления "Валюты"'
     }));
   }
 };

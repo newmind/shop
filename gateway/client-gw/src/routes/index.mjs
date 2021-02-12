@@ -31,7 +31,7 @@ export default (router) => {
   router.get('/types', getAllTypes());
   router.get('/categories', getAllCategories());
 
-  router.get('/gallery/:fileName', getImageByFileName());
+  router.get('/currency/:fileName', getImageByFileName());
 
   router.get('/operations/payments', getAllPayments());
   router.get('/operations/deliveries', getAllDeliveries());

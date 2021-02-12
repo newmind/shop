@@ -11,7 +11,7 @@ const initialState = {
 const REDUCER_NAME = 'currencies';
 
 
-const currenciesSlice = createSlice({
+const slice = createSlice({
   name: REDUCER_NAME,
   initialState,
   reducers: {
@@ -34,7 +34,7 @@ const currenciesSlice = createSlice({
       state['inProcess'] = false;
     },
     createCurrencyRequestSuccessAction(state, { payload }) {
-      if ( ! state['items'].some((currency) => currency['uuid'] === payload['uuid'])) {
+      if ( ! state['items'].some((currency) => currency['id'] === payload['id'])) {
         state['items'] = [payload, ...state['items']];
       }
       state['inProcess'] = false;
@@ -48,7 +48,7 @@ const currenciesSlice = createSlice({
     },
     updateCurrencyRequestSuccessAction(state, { payload }) {
       state['items'] = [...state['items']].map((item) => {
-        if (item['uuid'] === payload['uuid']) {
+        if (item['id'] === payload['id']) {
           return payload;
         }
         return item;
@@ -59,7 +59,7 @@ const currenciesSlice = createSlice({
     deleteCurrencyRequestAction() {},
     deleteCurrencyRequestFailAction() {},
     deleteCurrencyRequestSuccessAction(state, { payload }) {
-      state['items'] = [...state['items']].filter((item) => !~ payload.indexOf(item['uuid']));
+      state['items'] = [...state['items']].filter((item) => !~ payload.indexOf(item['id']));
     },
   },
 });
@@ -82,10 +82,10 @@ export const {
   deleteCurrencyRequestAction,
   deleteCurrencyRequestFailAction,
   deleteCurrencyRequestSuccessAction,
-} = currenciesSlice['actions'];
+} = slice['actions'];
 
 export const selectItems = (state) => state[REDUCER_NAME]['items'];
 export const selectInProcess = (state) => state[REDUCER_NAME]['inProcess'];
 
-export const name = currenciesSlice['name'];
-export const reducer = currenciesSlice['reducer'];
+export const name = slice['name'];
+export const reducer = slice['reducer'];

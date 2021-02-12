@@ -16,6 +16,7 @@
     "@sys.packages/logger": "1.0.0",
     "@sys.packages/server": "1.0.0",
     "@sys.packages/utils": "1.0.0",
+    "@sys.packages/rabbit2": "1.0.0",
     "dotenv": "8.2.0",
     "jsonwebtoken": "8.5.1",
     "koa": "2.13.1",

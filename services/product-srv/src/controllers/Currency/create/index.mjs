@@ -1,5 +1,5 @@
 
-import { sendEvent } from "@sys.packages/rabbit2";
+import {sendCommand, sendEvent} from "@sys.packages/rabbit2";
 import { models } from '@sys.packages/db';
 
 
@@ -16,6 +16,7 @@ export default () => async (ctx) => {
 
   const currency = result.toJSON();
 
+  await sendCommand(process.env['QUEUE_CURRENCY_CREATE'], JSON.stringify(currency));
   await sendEvent(process.env['EXCHANGE_CURRENCY_CREATE'], JSON.stringify(currency));
 
   ctx.body = {

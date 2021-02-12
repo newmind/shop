@@ -1,5 +1,5 @@
 
-import { get } from "./requests/index.mjs";
+import { get } from "./requests";
 
 
 export default () => async (ctx) => {
