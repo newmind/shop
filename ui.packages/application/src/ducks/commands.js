@@ -65,7 +65,7 @@ export const signIn = (formData) => async (dispatch) => {
     return true;
   }
   catch(error) {
-
+console.log(123, error);
     const notification = {
       mode: '',
       title: '',

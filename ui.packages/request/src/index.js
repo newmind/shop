@@ -72,6 +72,10 @@ const request = async (options) => {
         return Promise.reject(new BadRequestError(data));
       }
       else if (status === 401) {
+        // navigate(process.env['PUBLIC_URL'] + '/sign-in');
+        if ( ! /\/sign-in/.test(window.location.href)) {
+          window.location.href = process.env['PUBLIC_URL'] + '/sign-in';
+        }
         return Promise.reject(new UnauthorizedError(data));
       }
       else if (status === 404) {

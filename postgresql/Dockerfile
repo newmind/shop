@@ -33,7 +33,8 @@ RUN    /etc/init.d/postgresql start &&\
     createdb -O admin identity_srv &&\
     createdb -O admin operation_srv &&\
     createdb -O admin gallery_srv &&\
-    createdb -O admin customer_srv
+    createdb -O admin customer_srv &&\
+    createdb -O admin promotion_srv
 
 # Adjust PostgreSQL configuration so that remote connections to the
 # database are possible.

@@ -21,7 +21,10 @@ function Categories() {
     <Page>
       <PageControls>
         <div className={styles['controls']}>
-          <Button mode="success" onClick={() => handleCreate()}>Добавить</Button>
+          <Button
+            form={Button.FORM_CREATE}
+            onClick={() => handleCreate()}
+          >Добавить</Button>
         </div>
       </PageControls>
       <PageContent>

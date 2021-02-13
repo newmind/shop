@@ -1,5 +1,4 @@
 
-import { Mode } from '@ui.packages/types';
 import { queryToObject, objectToQuery } from '@ui.packages/utils';
 import { Button, Header, Page, PageControls, PageContent, Paging } from '@ui.packages/kit';
 
@@ -36,8 +35,7 @@ function Products() {
       <PageControls>
         <div className={styles['controls']}>
           <Button
-            mode={Mode.PRIMARY}
-            form={Button.FORM_CONTEXT}
+            form={Button.FORM_CREATE}
             onClick={() => handleAddProduct()}
           >Добавить товар</Button>
         </div>

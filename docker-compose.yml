@@ -58,6 +58,19 @@ services:
     links:
       - db
 
+  promotion_srv:
+    container_name: promotion_srv
+    build:
+      context: ./
+      dockerfile: Dockerfile.promotion-srv
+    restart: always
+    depends_on:
+      - db
+      - rabbit
+    links:
+      - db
+      - rabbit
+
   operation_srv:
     container_name: operation_srv
     build:
@@ -69,11 +82,13 @@ services:
       - rabbit
       - mail_srv
       - customer_srv
+      - promotion_srv
     links:
       - db
       - rabbit
       - mail_srv
       - customer_srv
+      - product_srv
 
   product_srv:
     container_name: product_srv
@@ -86,11 +101,13 @@ services:
       - rabbit
       - mail_srv
       - gallery_srv
+      - promotion_srv
     links:
       - db
       - rabbit
       - mail_srv
       - gallery_srv
+      - promotion_srv
 
 
   admin_gw:
@@ -106,6 +123,7 @@ services:
       - identity_srv
       - operation_srv
       - customer_srv
+      - promotion_srv
     links:
       - rabbit
       - product_srv
@@ -113,6 +131,7 @@ services:
       - identity_srv
       - operation_srv
       - customer_srv
+      - promotion_srv
 
 
   client_gw:
@@ -127,12 +146,14 @@ services:
       - gallery_srv
       - identity_srv
       - operation_srv
+      - promotion_srv
     links:
       - rabbit
       - product_srv
       - gallery_srv
       - identity_srv
       - operation_srv
+      - promotion_srv
 
 
   admin_ui:

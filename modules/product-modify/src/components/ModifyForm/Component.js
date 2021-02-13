@@ -46,14 +46,6 @@ function ModifyForm({ handleSubmit, onDelete }) {
           </Row>
           <Row>
             <Col>
-              <SelectField require name="brandId" label="Бренд" options={brands} disabled={inProcess} />
-            </Col>
-            <Col>
-              <InputField require name="name" label="Назвние" disabled={inProcess} />
-            </Col>
-          </Row>
-          <Row>
-            <Col>
               <ListField
                 name="types"
                 label="Тип"
@@ -73,6 +65,14 @@ function ModifyForm({ handleSubmit, onDelete }) {
                 optionValue="value"
                 disabled={inProcess}
               />
+            </Col>
+          </Row>
+          <Row>
+            <Col>
+              <SelectField require name="brandId" label="Бренд" options={brands} disabled={inProcess} />
+            </Col>
+            <Col>
+              <InputField require name="name" label="Назвние" disabled={inProcess} />
             </Col>
           </Row>
           <Row>
