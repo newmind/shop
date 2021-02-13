@@ -1,8 +1,9 @@
 
+import { middlewareErrors } from "@packages/errors";
+
 import logger from '@sys.packages/logger';
 import { middleware } from '@sys.packages/jwt';
 import createSocket from "@sys.packages/socket.io";
-import { middlewareErrors } from "@packages/errors";
 
 import Koa from 'koa';
 import http from "http";
