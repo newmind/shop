@@ -18,12 +18,18 @@ export const slice = createSlice({
   name: REDUCER_NAME,
   initialState,
   reducers: {
+    inProcessAction(state, { payload }) {
+      state['inProcess'] = payload;
+    },
+
     openCartAction(state) {
       state['isOpen'] = true;
+      state['inProcess'] = true;
     },
     closeCartAction(state) {
       state['isOpen'] = false;
       state['items'] = [];
+      state['inProcess'] = true;
     },
 
     addProductToCartAction(state, { payload }) {
@@ -91,32 +97,24 @@ export const slice = createSlice({
       state['items'] = [];
     },
 
-    getProductsRequestAction(state) {
-      state['inProcess'] = true;
-    },
-    getProductsRequestFailAction(state) {
-      state['inProcess'] = false;
-    },
+    getProductsRequestAction(state) {},
+    getProductsRequestFailAction(state) {},
     getProductsRequestSuccessAction(state, { payload }) {
       state['items'] = payload;
-      state['inProcess'] = false;
     },
 
-    getAmountRequestAction(state) {
-      state['inProcess'] = true;
-    },
-    getAmountRequestFailAction(state) {
-      state['inProcess'] = false;
-    },
+    getAmountRequestAction(state) {},
+    getAmountRequestFailAction(state) {},
     getAmountRequestSuccessAction(state, { payload }) {
       state['amount'] = payload;
-      state['inProcess'] = false;
     },
   },
 });
 
 export const {
   resetStateAction,
+
+  inProcessAction,
 
   openCartAction,
   closeCartAction,

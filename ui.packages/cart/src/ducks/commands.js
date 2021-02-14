@@ -3,6 +3,8 @@ import request from '@ui.packages/request';
 import { pushNotification } from "@ui.packages/notifications";
 
 import {
+  inProcessAction,
+
   getProductsRequestAction,
   getProductsRequestFailAction,
   getProductsRequestSuccessAction,
@@ -12,6 +14,10 @@ import {
   getAmountRequestSuccessAction,
 } from './slice';
 
+
+export const inProcess = (state) => (dispatch) => {
+  dispatch(inProcessAction(state));
+};
 
 export const getProducts = (uuid) => async (dispatch) => {
   try {
