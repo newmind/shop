@@ -5,12 +5,12 @@ import { getBuffer } from "@sys.packages/utils";
 
 
 export default () => async (ctx) => {
-  const { id } = ctx['params'];
+  const { uuid } = ctx['params'];
   const buffer = await getBuffer(ctx['req']);
 
   await request({
     method: 'put',
-    url: process.env['PRODUCT_API_SRV'] + '/products/' + id,
+    url: process.env['PRODUCT_API_SRV'] + '/products/' + uuid,
     headers: {
       'content-type': ctx['req']['headers']['content-type']
     },

@@ -1,5 +1,6 @@
 
 import { models, Sequelize } from '@sys.packages/db';
+import request from "@sys.packages/request";
 
 
 export default () => async (ctx) => {
@@ -11,7 +12,7 @@ export default () => async (ctx) => {
   let options = {};
 
   const { Op } = Sequelize;
-  const { Product, Currency, Attribute, Category, Brand, Type, ProductAttribute, Unit, Gallery, Comment, Promotion } = models;
+  const { Product, Currency, Attribute, Category, Brand, Type, ProductAttribute, Unit, Gallery, Comment } = models;
   const {
     fiscal = null,
     status = null,
@@ -73,7 +74,7 @@ export default () => async (ctx) => {
     offset['limit'] = Number(take);
   }
 
-  const products = await Product.findAndCountAll({
+  const result = await Product.findAndCountAll({
     attributes: ['uuid', 'name', 'description', 'status', 'price', 'fiscal', 'updatedAt'],
     ...options,
     ...offset,
@@ -122,21 +123,6 @@ export default () => async (ctx) => {
         },
       },
       {
-        model: Promotion,
-        required: false,
-        as: 'promotions',
-        attributes: ['uuid', 'name', 'percent'],
-        where: {
-          dateFrom: {
-            [Sequelize.Op.lte]: new Date(),
-          },
-          dateTo: {
-            [Sequelize.Op.gte]: new Date(),
-          },
-        },
-        through: { attributes: [] },
-      },
-      {
         model: Currency,
         required: false,
         as: 'currency',
@@ -176,11 +162,37 @@ export default () => async (ctx) => {
     ],
   });
 
+  let products = result['rows'].map((product) => product.toJSON());
+  const productUuids = products.map((product) => product['uuid']);
+
+  if ( !! productUuids.length) {
+
+    const { data: promotions } = await request({
+      url: process.env['PROMOTION_API_SRV'] + '/products',
+      method: 'get',
+      params: {
+        uuid: productUuids,
+      },
+    });
+
+    products = products.map((product) => {
+      const promotion = promotions.find((promotion) => promotion['productUuid'] === product['uuid']);
+      if (promotion) {
+        return {
+          ...product,
+          prevPrice: product['price'],
+          price: product['price'] - Math.floor(product['price'] * promotion['percent'] / 100),
+        };
+      }
+      return product;
+    });
+  }
+
   ctx.body = {
     success: true,
-    data: products['rows'],
+    data: products,
     meta: {
-      total: products['count'],
+      total: result['count'],
     },
   };
 };

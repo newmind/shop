@@ -38,10 +38,16 @@ export default ({ handleSubmit, valid, pristine }) => {
         </Row>
         <Row>
           <Col>
-            <DatePickerField name="dateFrom" />
+            <DatePickerField
+              name="dateFrom"
+              label="От"
+            />
           </Col>
           <Col>
-            <DatePickerField name="dateTo" />
+            <DatePickerField
+              name="dateTo"
+              label="По"
+            />
           </Col>
         </Row>
       </div>

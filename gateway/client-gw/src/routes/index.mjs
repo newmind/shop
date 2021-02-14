@@ -25,13 +25,14 @@ export default (router) => {
 
   router.get('/products', getProducts());
   router.get('/products/:uuid', getProductById());
-  router.post('/products/amount', getProductsAmount());
   router.post('/products/:id/comments', createComment());
+
+  router.post('/products/amount', getProductsAmount());
 
   router.get('/types', getAllTypes());
   router.get('/categories', getAllCategories());
 
-  router.get('/currency/:fileName', getImageByFileName());
+  router.get('/gallery/:fileName', getImageByFileName());
 
   router.get('/operations/payments', getAllPayments());
   router.get('/operations/deliveries', getAllDeliveries());

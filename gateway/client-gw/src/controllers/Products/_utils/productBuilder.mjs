@@ -5,6 +5,7 @@ export default function productBuilder(data) {
     brand: !! data['brands'].length ? data['brands'][0]['value'] : null,
     name: data['name'],
     price: data['price'],
+    prevPrice: data['prevPrice'] || null,
     description: data['description'],
     params: data['params'],
     category: data['category'],

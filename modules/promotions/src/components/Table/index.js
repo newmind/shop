@@ -42,7 +42,7 @@ function List() {
   }
 
   function submitModify(data) {
-    if ('uuid' in data) {
+    if ('id' in data) {
       dispatch(updatePromotion(data));
     }
     else {
@@ -104,7 +104,7 @@ function List() {
             align="right"
             width="45"
           >
-            {(value) => <Actions onEdit={() => handleEdit(value)} onDelete={() => handleSetDeletedItem(value['uuid'])} />}
+            {(value) => <Actions onEdit={() => handleEdit(value)} onDelete={() => handleSetDeletedItem(value['id'])} />}
           </Column>
         </Table>
       </div>

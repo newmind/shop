@@ -1,10 +1,11 @@
 
 import { models } from '@sys.packages/db';
-import { sendEvent } from '@sys.packages/rabbit2';
 
 
 export default () => async (ctx) => {
-  const { Promotion } = models;
+  const where = {};
+
+  const { Promotion, ProductPromotion } = models;
   const { id } = ctx['params'];
   const data = ctx['request']['body'];
 
@@ -13,10 +14,19 @@ export default () => async (ctx) => {
   });
 
   const result = await Promotion.findOne({
-    where: { id },
-  });
+    attributes: ['id', 'percent', 'dateFrom', 'dateTo'],
+    where: {
 
-  await sendEvent(process.env['EXCHANGE_PROMOTION_UPDATE'], JSON.stringify(result.toJSON()));
+    },
+    include: [
+      {
+        model: ProductPromotion,
+        as: 'products',
+        where,
+        attributes: [],
+      }
+    ],
+  });
 
   ctx.body = {
     success: true,

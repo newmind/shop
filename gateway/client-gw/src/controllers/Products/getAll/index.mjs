@@ -28,7 +28,7 @@ export default () => async (ctx) => {
     params: ctx['request']['query'],
   });
 
-  const { data: products, meta } = await request({
+  let { data: products, meta } = await request({
     method: 'get',
     url: process.env['PRODUCT_API_SRV'] + `/products`,
     params: {

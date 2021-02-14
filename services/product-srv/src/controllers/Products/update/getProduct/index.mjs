@@ -1,9 +1,9 @@
 
-import { models, Sequelize } from '@sys.packages/db';
+import { models } from '@sys.packages/db';
 
 
 export default async function updateProperties(uuid) {
-  const { Product, Attribute, Unit, Gallery, Currency, Category, Promotion, Type, Brand, ProductAttribute } = models;
+  const { Product, Attribute, Unit, Gallery, Currency, Category, Type, Brand, ProductAttribute } = models;
 
   const product = await Product.findOne({
     where: { uuid },
@@ -41,21 +41,6 @@ export default async function updateProperties(uuid) {
           order: [['order', 'asc']],
           as: 'category',
         },
-      },
-      {
-        model: Promotion,
-        required: false,
-        as: 'promotions',
-        attributes: ['uuid', 'name', 'percent'],
-        where: {
-          dateFrom: {
-            [Sequelize.Op.lte]: new Date(),
-          },
-          dateTo: {
-            [Sequelize.Op.gte]: new Date(),
-          },
-        },
-        through: { attributes: [] },
       },
       {
         model: Currency,

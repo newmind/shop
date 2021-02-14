@@ -1,6 +1,5 @@
 
 import {
-  signIn,
   signOut,
   get as getUser,
   update as updateUser,
@@ -22,7 +21,7 @@ import { getAllCategories, createCategory, updateCategory, deleteCategories } fr
 import { getAllCurrencies, createCurrency, updateCurrency, deleteCurrencies } from '../controllers/Currency';
 import { getAllAttributes, createAttribute, deleteAttributes, updateAttribute } from '../controllers/Attribute';
 
-import { getProducts, getProduct,  createProduct, updateProduct, deleteProducts, setPromotion, copyProduct } from '../controllers/Products';
+import { getProducts, getProduct,  createProduct, updateProduct, copyProduct } from '../controllers/Products';
 import { getAllPromotions, deletePromotions, updatePromotion, createPromotion } from '../controllers/Promotion';
 
 import { getImage, deleteImages } from '../controllers/Gallery';
@@ -73,9 +72,7 @@ export default (router) => {
   router.get('/products', getProducts());
   router.get('/products/:uuid', getProduct());
   router.post('/products', createProduct());
-  router.put('/products/:id', updateProduct());
-  router.delete('/products', deleteProducts());
-  router.post('/products/:uuid/promotion', setPromotion());
+  router.put('/products/:uuid', updateProduct());
   router.post('/products/:uuid/copy', copyProduct());
 
   router.get('/operations', getOperations());
@@ -83,18 +80,14 @@ export default (router) => {
   router.post('/operations', createOperation());
   router.put('/operations/:externalId', updateOperationById());
 
-
   router.get('/comments', getComments());
   router.post('/comments', createComment());
   router.put('/comments/:id', updateComment());
   router.delete('/comments', deleteComments());
 
+  router.get('/gallery/:id', getImage());
+  router.delete('/gallery', deleteImages());
 
-  router.get('/currency/:id', getImage());
-  router.delete('/currency', deleteImages());
-
-
-  router.post('/sign-in', signIn());
   router.post('/sign-out', signOut());
   router.get('/profile', getUser());
   router.put('/profile', updateUser());

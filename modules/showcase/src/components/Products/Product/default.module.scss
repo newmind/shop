@@ -68,7 +68,18 @@
 
 .amount {
 
-  display: block;
+  display: flex;
+  flex: 1 0;
+  flex-direction: row;
+  align-items: baseline;
+}
+
+.prev-amount {
+
+  color: $danger;
+  text-decoration: line-through;
+  margin: 0 0 0 10px;
+  opacity: .6;
 }
 
 .controls {

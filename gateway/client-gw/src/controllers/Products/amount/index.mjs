@@ -6,7 +6,7 @@ export default () => async (ctx) => {
   const { uuid } = ctx['request']['body'];
 
   const result = await request({
-    url: process.env['PRODUCT_API_SRV'] + '/products/amount',
+    url: process.env['OPERATION_API_SRV'] + '/amounts',
     method: 'post',
     data: {
       uuid,

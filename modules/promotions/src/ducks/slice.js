@@ -34,7 +34,7 @@ const currenciesSlice = createSlice({
       state['inProcess'] = false;
     },
     createPromotionRequestSuccessAction(state, { payload }) {
-      if ( ! state['items'].some((currency) => currency['uuid'] === payload['uuid'])) {
+      if ( ! state['items'].some((currency) => currency['id'] === payload['id'])) {
         state['items'] = [payload, ...state['items']];
       }
       state['inProcess'] = false;
@@ -48,7 +48,7 @@ const currenciesSlice = createSlice({
     },
     updatePromotionRequestSuccessAction(state, { payload }) {
       state['items'] = [...state['items']].map((item) => {
-        if (item['uuid'] === payload['uuid']) {
+        if (item['id'] === payload['id']) {
           return payload;
         }
         return item;
@@ -59,7 +59,7 @@ const currenciesSlice = createSlice({
     deletePromotionRequestAction() {},
     deletePromotionRequestFailAction() {},
     deletePromotionRequestSuccessAction(state, { payload }) {
-      state['items'] = [...state['items']].filter((item) => !~ payload.indexOf(item['uuid']));
+      state['items'] = [...state['items']].filter((item) => !~ payload.indexOf(item['id']));
     },
   },
 });

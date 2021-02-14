@@ -2,7 +2,6 @@
 import request from '@ui.packages/request';
 import { closeDialog } from '@ui.packages/dialog';
 import { pushNotification } from '@ui.packages/notifications';
-import { UUID } from '@ui.packages/utils';
 
 import {
   getPromotionsRequestAction,
@@ -44,19 +43,14 @@ export const getPromotions = () => async (dispatch) => {
   }
 };
 
-export const createPromotion = (data) => async (dispatch) => {
+export const createPromotion = (formData) => async (dispatch) => {
   try {
     dispatch(createPromotionRequestAction());
-
-    const uuid = UUID();
 
     const result = await request({
       url: '/promotions',
       method: 'post',
-      data: {
-        uuid,
-        ...data,
-      },
+      data: formData,
     });
 
     dispatch(createPromotionRequestSuccessAction(result['data']));
@@ -75,14 +69,14 @@ export const createPromotion = (data) => async (dispatch) => {
   }
 };
 
-export const updatePromotion = (data) => async (dispatch) => {
+export const updatePromotion = (formData) => async (dispatch) => {
   try {
     dispatch(updatePromotionRequestAction());
 
     const result = await request({
-      url: '/promotions/' + data['uuid'],
+      url: '/promotions/' + formData['id'],
       method: 'put',
-      data,
+      data: formData,
     });
 
     dispatch(updatePromotionRequestSuccessAction(result['data']));
@@ -101,14 +95,14 @@ export const updatePromotion = (data) => async (dispatch) => {
   }
 };
 
-export const deletePromotions = (uuid) => async (dispatch) => {
+export const deletePromotions = (id) => async (dispatch) => {
   try {
     dispatch(deletePromotionRequestAction());
 
     const { data } = await request({
       url: '/promotions',
       method: 'delete',
-      data: { uuid }
+      data: { id },
     });
 
     dispatch(deletePromotionRequestSuccessAction(data));

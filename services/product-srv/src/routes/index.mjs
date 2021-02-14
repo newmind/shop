@@ -6,12 +6,10 @@ import { getAllCategories, createCategory, updateCategory, deleteCategories } fr
 import { getAllCurrencies, createCurrency, updateCurrency, deleteCurrencies } from '../controllers/Currency';
 import { getAllAttributes, deleteAttributes, updateAttribute, createAttribute } from '../controllers/Attributes';
 
-import { getProducts, createProduct, deleteProductById, updateProductById, setPromotion, getProductAmount } from '../controllers/Products';
+import { getProducts, createProduct, deleteProductById, updateProductById } from '../controllers/Products';
 import { getTypesCount, getBrandsCount, getCategoriesCount,getAttributesCount, copyProductById } from '../controllers/Products';
 
 import { getAllComments, deleteComments, createComment, updateComment } from '../controllers/Comments';
-
-import { getAllPromotions, deletePromotions, createPromotion, updatePromotion } from '../controllers/Promotion';
 
 
 export default (router) => {
@@ -53,19 +51,12 @@ export default (router) => {
 
   router.get('/v1/api/products', getProducts());
   router.post('/v1/api/products', createProduct());
-  router.post('/v1/api/products/amount', getProductAmount());
   router.put('/v1/api/products/:uuid', updateProductById());
   router.delete('/v1/api/products', deleteProductById());
   router.post('/v1/api/products/:uuid/copy', copyProductById());
-  router.post('/v1/api/products/:uuid/promotion', setPromotion());
 
   router.get('/v1/api/comments', getAllComments());
   router.post('/v1/api/comments', createComment());
   router.put('/v1/api/comments/:id', updateComment());
   router.delete('/v1/api/comments', deleteComments());
-
-  router.get('/v1/api/promotions', getAllPromotions());
-  router.post('/v1/api/promotions', createPromotion());
-  router.put('/v1/api/promotions/:uuid', updatePromotion());
-  router.delete('/v1/api/promotions', deletePromotions());
 };
