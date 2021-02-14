@@ -1,18 +1,9 @@
 
-import {
-  signOut,
-  get as getUser,
-  update as updateUser,
-} from '../controllers/User';
+import { signOut, get as getUser, update as updateUser } from '../controllers/User';
 
 import { getAllCustomers } from '../controllers/Customer';
 
-import {
-  getAll as getOperations,
-  getById as getOperationById,
-  create as createOperation,
-  updateById as updateOperationById,
-} from '../controllers/Orders';
+import { getAll as getOperations, getById as getOperationById, create as createOperation, updateById as updateOperationById } from '../controllers/Orders';
 
 import { getAllBrands, createBrand, updateBrand, deleteBrands } from '../controllers/Brand';
 import { getAllTypes, createType, updateType, deleteType } from '../controllers/Types';
