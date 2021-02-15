@@ -15,13 +15,17 @@ import {
 
 
 export default HOC({
-  onMount({ dispatch }) {
+  async onMount({ dispatch }) {
 
-    dispatch(getBrands());
+    await dispatch(getBrands());
 
     on(process.env['REACT_APP_SOCKET_BRAND_CREATE'], (data) => dispatch(createBrandRequestSuccessAction(data)));
     on(process.env['REACT_APP_SOCKET_BRAND_UPDATE'], (data) => dispatch(updateBrandRequestSuccessAction(data)));
     on(process.env['REACT_APP_SOCKET_BRAND_DELETE'], (data) => dispatch(deleteBrandRequestSuccessAction(data)));
+  },
+  async onUpdate({ dispatch }) {
+
+    await dispatch(getBrands());
   },
   onUnmount({ dispatch }) {
 

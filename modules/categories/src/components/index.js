@@ -24,6 +24,10 @@ export default HOC({
     on(process.env['REACT_APP_SOCKET_CATEGORY_DELETE'], (data) => dispatch(deleteCategoryRequestSuccessAction(data)));
 
   },
+  async onUpdate({ dispatch }) {
+
+    await dispatch(getCategories());
+  },
   async onUnmount({ dispatch }) {
 
     await dispatch(resetStateAction());

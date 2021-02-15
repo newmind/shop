@@ -23,6 +23,10 @@ export default HOC({
     on(process.env['REACT_APP_SOCKET_TYPE_UPDATE'], (data) => dispatch(updateTypeRequestSuccessAction(data)));
     on(process.env['REACT_APP_SOCKET_TYPE_DELETE'], (data) => dispatch(deleteTypeRequestSuccessAction(data)));
   },
+  async onUpdate({ dispatch }) {
+
+    await dispatch(getTypes());
+  },
   async onUnmount({ dispatch }) {
 
     await dispatch(resetStateAction());

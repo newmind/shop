@@ -8,18 +8,26 @@ import cn from 'classnames';
 import styles from './default.module.scss';
 
 
-export default function ContextButton({ className, children, disabled, size, onClick }) {
+function CreateButton({ className, children, disabled, size, onClick }) {
   const classNameButton = cn(styles['button'], className, {
+    [styles['disabled']]: disabled,
     [styles['size--small']]: size === Size.SMALL,
     [styles['size--large']]: size === Size.LARGE,
   });
+
+  function handleClick(event) {
+    if (disabled) {
+      return void 0;
+    }
+    onClick && onClick(event);
+  }
 
   return (
     <button
       type="button"
       className={classNameButton}
       disabled={disabled}
-      onClick={(event) => onClick && onClick(event)}
+      onClick={(event) => handleClick(event)}
     >
       <span className="fas fa-plus" />
       <span className={styles['caption']}>{ children }</span>
@@ -27,16 +35,18 @@ export default function ContextButton({ className, children, disabled, size, onC
 );
 }
 
-ContextButton.propTypes = {
+CreateButton.propTypes = {
   className: types.string,
   size: types.oneOf([Size.SMALL, Size.MEDIUM, Size.LARGE]),
   disabled: types.bool,
   onClick: types.func,
 };
 
-ContextButton.defaultProps = {
+CreateButton.defaultProps = {
   className: null,
   size: Size.MEDIUM,
   disabled: false,
   onClick: null,
 };
+
+export default CreateButton;

@@ -21,10 +21,15 @@ const slice = createSlice({
       state['inProcess'] = false;
     },
 
-    getBrandsRequestAction() {},
-    getBrandsRequestFailAction() {},
+    getBrandsRequestAction(state) {
+      state['inProcess'] = true;
+    },
+    getBrandsRequestFailAction(state) {
+      state['inProcess'] = false;
+    },
     getBrandsRequestSuccessAction(state, { payload }) {
       state['items'] = payload;
+      state['inProcess'] = false;
     },
 
     createBrandRequestAction(state) {
@@ -56,10 +61,15 @@ const slice = createSlice({
       state['inProcess'] = false;
     },
 
-    deleteBrandRequestAction() {},
-    deleteBrandRequestFailAction() {},
+    deleteBrandRequestAction(state) {
+      state['inProcess'] = true;
+    },
+    deleteBrandRequestFailAction(state) {
+      state['inProcess'] = false;
+    },
     deleteBrandRequestSuccessAction(state, { payload }) {
       state['items'] = [...state['items']].filter((item) => !~ payload.indexOf(item['id']));
+      state['inProcess'] = false;
     },
   },
 });

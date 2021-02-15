@@ -24,9 +24,12 @@ const typesSlice = createSlice({
     },
 
     getUnitsRequestAction() {},
-    getUnitsRequestFailAction() {},
+    getUnitsRequestFailAction(state) {
+      state['inProcess'] = false;
+    },
     getUnitsRequestSuccessAction(state, { payload }) {
       state['units'] = payload;
+      state['inProcess'] = false;
     },
 
     createUnitRequestSuccessAction(state, { payload }) {
@@ -63,8 +66,12 @@ const typesSlice = createSlice({
       state['units'] = state['units'].filter((unit) => !~ payload.indexOf(unit['id']));
     },
 
-    getItemsRequestAction() {},
-    getItemsRequestFailAction() {},
+    getItemsRequestAction(state) {
+      state['inProcess'] = true;
+    },
+    getItemsRequestFailAction(state) {
+      state['inProcess'] = false;
+    },
     getItemsRequestSuccessAction(state, { payload }) {
       state['items'] = payload;
     },

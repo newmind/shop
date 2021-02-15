@@ -21,10 +21,15 @@ const categoriesSlice = createSlice({
       state['inProcess'] = false;
     },
 
-    getCategoriesRequestAction() {},
-    getCategoriesRequestFailAction() {},
+    getCategoriesRequestAction(state) {
+      state['inProcess'] = true;
+    },
+    getCategoriesRequestFailAction(state) {
+      state['inProcess'] = false;
+    },
     getCategoriesRequestSuccessAction(state, { payload }) {
       state['items'] = payload;
+      state['inProcess'] = false;
     },
 
     createCategoryRequestAction(state) {
@@ -97,8 +102,12 @@ const categoriesSlice = createSlice({
       state['inProcess'] = false;
     },
 
-    deleteCategoryRequestAction() {},
-    deleteCategoryRequestFailAction() {},
+    deleteCategoryRequestAction(state) {
+      state['inProcess'] = true;
+    },
+    deleteCategoryRequestFailAction(state) {
+      state['inProcess'] = false;
+    },
     deleteCategoryRequestSuccessAction(state, { payload }) {
       if ( ! state['items'].some((item) => !!~ payload.indexOf(item['id']))) {
         state['items'] = state['items'].map((item) => {
@@ -114,6 +123,7 @@ const categoriesSlice = createSlice({
       else {
         state['items'] = [...state['items']].filter((item) => !~ payload.indexOf(item['id']));
       }
+      state['inProcess'] = false;
     },
   },
 });

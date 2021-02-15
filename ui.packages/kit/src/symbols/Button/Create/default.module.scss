@@ -26,6 +26,14 @@
   }
 }
 
+.disabled {
+
+  background: $gray;
+  border-color: $gray;
+  color: $pale-grey;
+  cursor: default;
+}
+
 .caption {
 
   display: inline-block;

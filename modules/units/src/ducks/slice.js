@@ -21,10 +21,15 @@ const unitsSlice = createSlice({
       state['inProcess'] = false;
     },
 
-    getUnitsRequestAction() {},
-    getUnitsRequestFailAction() {},
+    getUnitsRequestAction(state) {
+      state['inProcess'] = true;
+    },
+    getUnitsRequestFailAction(state) {
+      state['inProcess'] = false;
+    },
     getUnitsRequestSuccessAction(state, { payload }) {
       state['items'] = payload;
+      state['inProcess'] = false;
     },
 
     createUnitRequestAction(state) {
@@ -56,10 +61,15 @@ const unitsSlice = createSlice({
       state['inProcess'] = false;
     },
 
-    deleteUnitRequestAction() {},
-    deleteUnitRequestFailAction() {},
+    deleteUnitRequestAction(state) {
+      state['inProcess'] = true;
+    },
+    deleteUnitRequestFailAction(state) {
+      state['inProcess'] = false;
+    },
     deleteUnitRequestSuccessAction(state, { payload }) {
       state['items'] = [...state['items']].filter((item) => !~ payload.indexOf(item['id']));
+      state['inProcess'] = false;
     },
   },
 });

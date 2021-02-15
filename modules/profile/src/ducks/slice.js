@@ -19,10 +19,15 @@ const profileSlice = createSlice({
       state['inProcess'] = false;
     },
 
-    getProfileRequestAction() {},
-    getProfileRequestFailAction() {},
+    getProfileRequestAction(state) {
+      state['inProcess'] = true;
+    },
+    getProfileRequestFailAction(state) {
+      state['inProcess'] = false;
+    },
     getProfileRequestSuccessAction(state, { payload }) {
       state['profile'] = payload;
+      state['inProcess'] = false;
     },
 
     updateProfileRequestAction(state) {

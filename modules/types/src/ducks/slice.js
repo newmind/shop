@@ -21,10 +21,15 @@ const typesSlice = createSlice({
       state['inProcess'] = false;
     },
 
-    getTypesRequestAction() {},
-    getTypesRequestFailAction() {},
+    getTypesRequestAction(state) {
+      state['inProcess'] = true;
+    },
+    getTypesRequestFailAction(state) {
+      state['inProcess'] = false;
+    },
     getTypesRequestSuccessAction(state, { payload }) {
       state['items'] = payload;
+      state['inProcess'] = false;
     },
 
     createTypeRequestAction(state) {
@@ -56,10 +61,15 @@ const typesSlice = createSlice({
       state['inProcess'] = false;
     },
 
-    deleteTypeRequestAction() {},
-    deleteTypeRequestFailAction() {},
+    deleteTypeRequestAction(state) {
+      state['inProcess'] = true;
+    },
+    deleteTypeRequestFailAction(state) {
+      state['inProcess'] = false;
+    },
     deleteTypeRequestSuccessAction(state, { payload }) {
       state['items'] = [...state['items']].filter((item) => !~ payload.indexOf(item['id']));
+      state['inProcess'] = false;
     },
   },
 });

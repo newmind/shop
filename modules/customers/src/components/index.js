@@ -15,13 +15,17 @@ import {
 
 
 export default HOC({
-  onMount({ dispatch }) {
+  async onMount({ dispatch }) {
 
-    dispatch(getCustomers());
+    await dispatch(getCustomers());
 
     // on(process.env['REACT_APP_SOCKET_CURRENCY_CREATE'], (data) => dispatch(createCustomerRequestSuccessAction(data)));
     // on(process.env['REACT_APP_SOCKET_CURRENCY_UPDATE'], (data) => dispatch(updateCustomerRequestSuccessAction(data)));
     // on(process.env['REACT_APP_SOCKET_CURRENCY_DELETE'], (data) => dispatch(deleteCustomerRequestSuccessAction(data)));
+  },
+  async onUpdate({ dispatch }) {
+
+    await dispatch(getCustomers());
   },
   onUnmount({ dispatch }) {
 

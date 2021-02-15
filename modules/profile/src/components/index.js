@@ -25,10 +25,16 @@ import { resetStateAction } from '../ducks/slice';
 // };
 
 export default HOC({
-  onMount({ dispatch }) {
-    dispatch(getProfile());
+  async onMount({ dispatch }) {
+
+    await dispatch(getProfile());
+  },
+  async onUpdate({ dispatch }) {
+
+    await dispatch(getProfile());
   },
   onUnmount({ dispatch }) {
+
     dispatch(resetStateAction());
   },
 })(Component);

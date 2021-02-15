@@ -33,6 +33,11 @@ export default HOC({
     on(process.env['REACT_APP_SOCKET_UNIT_DELETE'], (data) => dispatch(deleteUnitRequestSuccessAction(data)));
 
   },
+  async onUpdate({ dispatch }) {
+
+    await dispatch(getItems());
+    await dispatch(getUnits());
+  },
   async onUnmount({ dispatch }) {
     await dispatch(resetStateAction());
 
