@@ -31,6 +31,10 @@ const productModifySlice = createSlice({
       state['inProcess'] = false;
     },
 
+    setProcessAction(state, { payload }) {
+      state['inProcess'] = payload;
+    },
+
     getBrandsRequestAction() {},
     getBrandsRequestFailAction() {},
     getBrandsRequestSuccessAction(state, { payload }) {
@@ -112,6 +116,8 @@ const productModifySlice = createSlice({
 
 export const {
   resetStateAction,
+
+  setProcessAction,
 
   getBrandsRequestAction,
   getBrandsRequestFailAction,

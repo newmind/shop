@@ -9,6 +9,8 @@ import { getBrands, getTypes, getCurrencies, getCategories, getAttributes, getPr
 import {
   resetStateAction,
 
+  setProcessAction,
+
   deleteImageRequestSuccessAction,
   updateProductRequestSuccessAction,
 } from '../ducks/slice';
@@ -19,11 +21,13 @@ export default HOC({
 
     document.title = `${process.env['REACT_APP_WEBSITE_NAME']} - Редактирование товара`;
 
+    dispatch(setProcessAction(true));
     await dispatch(getTypes());
     await dispatch(getBrands());
     await dispatch(getCategories());
     await dispatch(getCurrencies());
     await dispatch(getAttributes());
+    dispatch(setProcessAction(false));
 
     if (params['id']) {
       await dispatch(getProductById(params['id']));

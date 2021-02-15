@@ -25,6 +25,7 @@ function Currencies() {
       <PageControls>
         <div className={styles['controls']}>
           <Button
+            form={Button.FORM_CREATE}
             disabled={inProcess}
             // onClick={() => handleCreate()}
           >Добавить</Button>
