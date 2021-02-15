@@ -1,5 +1,4 @@
 
-import { Mode } from '@ui.packages/types';
 import { Row, Col, InputField, SelectField, Button } from '@ui.packages/kit';
 
 import React from 'react';
@@ -92,8 +91,7 @@ function Attributes({ fields, disabled }) {
       <Row>
         <Col className={styles['align-right']}>
           <Button
-            mode={Mode.PRIMARY}
-            form={Button.FORM_CONTEXT}
+            form={Button.FORM_CREATE}
             disabled={disabled}
             onClick={() => handleAddAttr()}
           >Добавить</Button>

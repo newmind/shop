@@ -23,11 +23,16 @@ const commentsSlice = createSlice({
       state['inProcess'] = false;
     },
 
-    getCommentsRequestAction() {},
-    getCommentsRequestFailAction() {},
+    getCommentsRequestAction(state) {
+      state['inProcess'] = true;
+    },
+    getCommentsRequestFailAction(state) {
+      state['inProcess'] = false;
+    },
     getCommentsRequestSuccessAction(state, { payload }) {
       state['items'] = payload['data'];
       state['meta'] = payload['meta'];
+      state['inProcess'] = false;
     },
 
     removeCommentRequestAction(state) {

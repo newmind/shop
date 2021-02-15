@@ -3,8 +3,6 @@ import request from '@ui.packages/request';
 import { pushNotification } from "@ui.packages/notifications";
 
 import {
-  inProcessAction,
-
   getProductsRequestAction,
   getProductsRequestFailAction,
   getProductsRequestSuccessAction,
@@ -14,10 +12,6 @@ import {
   getAmountRequestSuccessAction,
 } from './slice';
 
-
-export const inProcess = (state) => (dispatch) => {
-  dispatch(inProcessAction(state));
-};
 
 export const getProducts = (uuid) => async (dispatch) => {
   try {
@@ -35,6 +29,10 @@ export const getProducts = (uuid) => async (dispatch) => {
   }
   catch(error) {
     dispatch(getProductsRequestFailAction(error));
+    dispatch(pushNotification({
+      content: 'Ошибка при выполнении операции',
+      mode: 'danger',
+    }));
   }
 };
 
@@ -55,7 +53,7 @@ export const getAmount = (uuid) => async (dispatch) => {
   catch(error) {
     dispatch(getAmountRequestFailAction(error));
     dispatch(pushNotification({
-      title: 'Ошибка при выполнении операции',
+      content: 'Ошибка при выполнении операции',
       mode: 'danger',
     }));
   }

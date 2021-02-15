@@ -11,13 +11,14 @@ import Table from './Table';
 
 import styles from './default.module.scss';
 
-import { selectMeta } from '../ducks/slice';
+import { selectMeta, selectInProcess } from '../ducks/slice';
 
 
 function Products() {
   const location = useLocation();
   const navigate = useNavigate();
   const meta = useSelector(selectMeta);
+  const inProcess = useSelector(selectInProcess);
 
   const query = queryToObject(location['search']);
 
@@ -31,13 +32,13 @@ function Products() {
   }
 
   return (
-    <Page>
+    <Page inProcess={inProcess}>
       <PageControls>
         <div className={styles['controls']}>
           <Button
             form={Button.FORM_CREATE}
             onClick={() => handleAddProduct()}
-          >Добавить товар</Button>
+          >Добавить</Button>
         </div>
       </PageControls>
       <PageContent>

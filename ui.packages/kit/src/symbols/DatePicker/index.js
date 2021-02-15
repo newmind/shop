@@ -72,11 +72,26 @@ function DatePicker({ className, mode, disabled, value, minDate, maxDate, cleara
 
   useEffect(() => {
     function eventReset(event) {
-      const {current: selectElement} = selectRef;
-      const target = event.target;
-      if (selectElement && ! selectElement.contains(target)) {
-        isOpen && handleOnBlur();
+      event.stopPropagation();
+
+      if (isOpen) {
+        const { current: wrapperElement } = selectRef;
+        const portalElement = document.body; //document.querySelector('#selectOptionsPortal');
+        const { current: optionsElement } = optionsRef;
+
+        if (optionsElement && ! optionsElement.contains(event['target'])) {
+          eventReset();
+        }
+
+        if (portalElement && ! portalElement.contains(event['target']) && ! portalElement.contains(wrapperElement)) {
+          eventReset();
+        }
       }
+      // const {current: selectElement} = selectRef;
+      // const target = event.target;
+      // if (selectElement && ! selectElement.contains(target)) {
+      //   isOpen && handleOnBlur();
+      // }
     }
 
     function eventHandleResize() {
@@ -97,13 +112,14 @@ function DatePicker({ className, mode, disabled, value, minDate, maxDate, cleara
       document.querySelector('#scroller').addEventListener('scroll', eventHandleScrolling);
     }
     return () => {
+
       document.body.removeEventListener('click', eventReset);
       window.removeEventListener('resize', eventHandleResize);
       if (document.querySelector('#scroller')) {
         document.querySelector('#scroller').removeEventListener('scroll', eventHandleScrolling);
       }
     };
-  });
+  }, []);
 
   useLayoutEffect(() => {
     calculateDirection();

@@ -1,14 +1,19 @@
 
-import { Header } from '@ui.packages/kit';
+import { Header, Page, PageContent } from '@ui.packages/kit';
 
 import React from 'react';
+import { useSelector } from 'react-redux';
 
 import Table from './Table';
 
 import styles from './default.module.scss';
 
+import { selectInProcess } from '../ducks/slice';
+
 
 function Comments() {
+  const inProcess = useSelector(selectInProcess);
+
   // async _handleUpdate(formData) {
   //   const { updateComment, closeDialog } = this.props;
   //
@@ -24,18 +29,20 @@ function Comments() {
   // }
 
   return (
-    <section className={styles['wrapper']}>
-      <header className={styles['header']}>
-        <Header level={1}>Комментарии</Header>
-      </header>
-      <article className={styles['content']}>
-        <Table />
-      </article>
+    <Page inProcess={inProcess}>
+      <PageContent>
+        <header className={styles['header']}>
+          <Header level={1}>Комментарии</Header>
+        </header>
+        <div className={styles['content']}>
+          <Table />
+        </div>
+      </PageContent>
 
       {/*<Dialog title="Редактировать комментарий" name="comment-modify">*/}
         {/*<FormModify initialValues={comment} onSubmit={this._handleUpdate.bind(this)} />*/}
       {/*</Dialog>*/}
-    </section>
+    </Page>
   );
 }
 

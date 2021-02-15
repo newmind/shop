@@ -21,6 +21,7 @@ export default () => async (ctx) => {
   const result = await Attribute.findOne({
     attributes: ['id', 'value', 'type', 'description'],
     order: [['id', 'desc']],
+    where: { id },
     include: [
       {
         model: Unit,

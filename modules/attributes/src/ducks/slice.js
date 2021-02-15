@@ -60,7 +60,7 @@ const typesSlice = createSlice({
       });
     },
     deleteUnitRequestSuccessAction(state, { payload }) {
-      state['units'] = [...state['units']].filter((unit) => !~ payload.indexOf(unit['id']));
+      state['units'] = state['units'].filter((unit) => !~ payload.indexOf(unit['id']));
     },
 
     getItemsRequestAction() {},
@@ -76,7 +76,7 @@ const typesSlice = createSlice({
       state['inProcess'] = false;
     },
     createItemRequestSuccessAction(state, { payload }) {
-      if ( ! state['items'].some(item => item['id'] === payload['id'])) {
+      if ( ! state['items'].some((item) => item['id'] === payload['id'])) {
         state['items'] = [payload, ...state['items']];
       }
       state['inProcess'] = false;
@@ -89,9 +89,12 @@ const typesSlice = createSlice({
       state['inProcess'] = false;
     },
     updateItemRequestSuccessAction(state, { payload }) {
-      state['items'] = [...state['items']].map((item) => {
+      state['items'] = state['items'].map((item) => {
         if (item['id'] === payload['id']) {
-          return payload;
+          return {
+            ...item,
+            ...payload,
+          };
         }
         return item;
       });
@@ -101,7 +104,7 @@ const typesSlice = createSlice({
     deleteItemRequestAction() {},
     deleteItemRequestFailAction() {},
     deleteItemRequestSuccessAction(state, { payload }) {
-      state['items'] = [...state['items']].filter((item) => !~ payload.indexOf(item['id']));
+      state['items'] = state['items'].filter((item) => !~ payload.indexOf(item['id']));
     },
   },
 });

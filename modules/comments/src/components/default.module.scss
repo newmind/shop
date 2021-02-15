@@ -2,12 +2,6 @@
 @import "~@ui.packages/theme";
 
 
-.wrapper {
-
-  display: block;
-  padding: 40px 40px 180px;
-}
-
 .header {
 
   display: block;
@@ -18,17 +12,18 @@
   margin: 0 0 40px;
 }
 
-.block {
+
+.content {
 
   display: block;
-  background: $white;
-  border: 1px solid $pale-lilac;
   border-radius: 5px;
+  border: 1px solid $pale-lilac;
+  background: $white;
   padding: 30px;
+  margin: 6px 0 0;
 }
 
-.link {
+.controls {
 
-  font-size: 13px;
-  color: $primary;
+  text-align: right;
 }

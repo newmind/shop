@@ -11,6 +11,8 @@ import styles from './defaults.module.scss';
 
 import { getAmount, getProducts } from "../ducks/commands";
 import {
+  resetStateAction,
+
   restoreCartAction,
 
   closeCartAction,
@@ -23,10 +25,12 @@ import {
 function Cart() {
   const location = useLocation();
   const dispatch = useDispatch();
+
   const uuid = useSelector(selectUuid);
   const isOpen = useSelector(selectIsOpen);
 
   const cartRef = useRef(null);
+  const hasProductsInCart = !! uuid.length;
 
 
   useEffect(function init() {
@@ -38,26 +42,35 @@ function Cart() {
         isOpen && dispatch(closeCartAction());
       }
     }
+
     document.addEventListener('click', onClick, true);
     return () => {
       document.removeEventListener('click', onClick, true);
     };
-  });
+  }, []);
 
   useEffect(function restoreState() {
     dispatch(restoreCartAction());
   }, []);
 
-  useEffect(async function restoreState() {
+  useEffect(function() {
     if (isOpen) {
       if ( !! uuid.length) {
         const items = uuid.map(item => item[0]);
 
-        await dispatch(getProducts(items));
-        await dispatch(getAmount(uuid));
+        dispatch(getProducts(items));
+      }
+    }
+  }, [isOpen]);
+
+  useEffect(function() {
+    if (isOpen) {
+      if ( !! uuid.length) {
+        dispatch(getAmount(uuid));
       }
     }
   }, [isOpen, uuid]);
+
 
   if (/order/.test(location['pathname'])) {
     return null;
@@ -66,13 +79,12 @@ function Cart() {
   async function handleSwitchStateCaretList() {
     if (isOpen) {
       dispatch(closeCartAction());
+      dispatch(resetStateAction());
     }
     else {
       dispatch(openCartAction());
     }
   }
-
-  const hasProductsInCart = !! uuid.length;
 
   return (
     <div ref={cartRef} className={styles['cart']}  onMouseEnter={() => handleSwitchStateCaretList()} onMouseLeave={() => handleSwitchStateCaretList()}>

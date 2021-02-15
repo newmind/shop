@@ -1,5 +1,4 @@
 
-import { Mode } from "@ui.packages/types";
 import { Page, PageContent, PageControls, Header, Button, Paging } from "@ui.packages/kit";
 
 import React from 'react';
@@ -8,20 +7,22 @@ import { useSelector } from "react-redux";
 import Table from './Table';
 
 import styles from './default.module.scss';
-import { selectMeta } from "../ducks/slice";
+
+import { selectMeta, selectInProcess } from "../ducks/slice";
 
 
 function Operations() {
   const meta = useSelector(selectMeta);
+  const inProcess = useSelector(selectInProcess);
 
   return (
-    <Page>
+    <Page inProcess={inProcess}>
       <PageControls>
         <div className={styles['controls']}>
           <Button
-            mode={Mode.PRIMARY}
-            form={Button.FORM_CONTEXT}
-          >Добавить заказ</Button>
+            form={Button.FORM_CREATE}
+            disabled={inProcess}
+          >Добавить</Button>
         </div>
       </PageControls>
       <PageContent>

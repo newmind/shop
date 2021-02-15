@@ -2,7 +2,6 @@
 import {
   BadRequestError,
   NetworkError,
-  UnauthorizedError,
   NotfoundError,
   ValidationError
 } from '@packages/errors';
@@ -76,7 +75,8 @@ const request = async (options) => {
         if ( ! /\/sign-in/.test(window.location.href)) {
           window.location.href = process.env['PUBLIC_URL'] + '/sign-in';
         }
-        return Promise.reject(new UnauthorizedError(data));
+        return void 0;
+        // return Promise.reject(new UnauthorizedError(data));
       }
       else if (status === 404) {
         return Promise.reject(new NotfoundError(data));

@@ -16,7 +16,7 @@ function Dashboard({ value, minDate, maxDate, onChange }) {
   const current = value ? moment(value) : moment();
   const [year, setYear] = useState(current.year());
   const [month, setMonth] = useState(current.month());
-  const [date, setDate] = useState(value ? current.date() : null);
+  const [date] = useState(value ? current.date() : null);
 
   function handleChangeYear(year) {
     setYear(year);
@@ -45,7 +45,7 @@ function Dashboard({ value, minDate, maxDate, onChange }) {
   }
 
   function handleChangeDate(date) {
-    onChange(moment({ date, moment, year}));
+    onChange(moment({ date, month, year}));
   }
 
   const prevClassName = cn(styles['month__prev'], 'fas fa-caret-left');

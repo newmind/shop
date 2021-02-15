@@ -1,36 +1,35 @@
 
 // import { openDialog } from "@ui.packages/dialog";
-import { Header, Page, PageContent } from '@ui.packages/kit';
+import { Header, Button, Page, PageContent, PageControls } from '@ui.packages/kit';
 
 import React from 'react';
-// import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 
 import Table from './Table';
 
 import styles from './default.module.scss';
 
-// import { selectInProcess } from '../ducks/slice';
+import { selectInProcess } from '../ducks/slice';
 
 
 function Currencies() {
   // const dispatch = useDispatch();
-  // const inProcess = useSelector(selectInProcess);
+  const inProcess = useSelector(selectInProcess);
 
   // function handleCreate() {
   //   dispatch(openDialog('currency'));
   // }
 
   return (
-    <Page>
-      {/*<PageControls>*/}
-      {/*  <div className={styles['controls']}>*/}
-      {/*    <Button*/}
-      {/*      mode="success"*/}
-      {/*      disabled={inProcess}*/}
-      {/*      onClick={() => handleCreate()}*/}
-      {/*    >Добавить</Button>*/}
-      {/*  </div>*/}
-      {/*</PageControls>*/}
+    <Page inProcess={inProcess}>
+      <PageControls>
+        <div className={styles['controls']}>
+          <Button
+            disabled={inProcess}
+            // onClick={() => handleCreate()}
+          >Добавить</Button>
+        </div>
+      </PageControls>
       <PageContent>
         <section className={styles['wrapper']}>
           <div className={styles['header']}>

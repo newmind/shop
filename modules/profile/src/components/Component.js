@@ -1,5 +1,6 @@
 
-import { Button, Header } from '@ui.packages/kit';
+import { Mode } from '@ui.packages/types';
+import { Button, Header, Page, PageContent, PageControls } from '@ui.packages/kit';
 
 import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
@@ -29,27 +30,29 @@ function Profile() {
   }
 
   return (
-    <div className={styles['wrapper']}>
-      <div className={styles['header']}>
-        <Header level={1}>Профайл</Header>
-      </div>
-      <div className={styles['container']}>
-        <div className={styles['form']}>
+    <Page inProcess={inProcess}>
+      <PageControls>
+        <div className={styles['controls']}>
+          <Button
+            mode={Mode.SUCCESS}
+            disabled={ ! valid || pristine || inProcess}
+            onClick={() => handleSubmit()}
+          >Сохранить</Button>
+        </div>
+      </PageControls>
+      <PageContent>
+        <div className={styles['header']}>
+          <Header level={1}>Профайл</Header>
+        </div>
+        <div className={styles['container']}>
           <ProfileForm
             initialValues={profile}
             disabled={inProcess}
             onSubmit={(data) => handleSave(data)}
           />
         </div>
-        <div className={styles['controls']}>
-          <Button
-            mode="success"
-            disabled={ ! valid || pristine || inProcess}
-            onClick={() => handleSubmit()}
-          >Сохранить</Button>
-        </div>
-      </div>
-    </div>
+      </PageContent>
+    </Page>
   );
 }
 

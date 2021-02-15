@@ -8,8 +8,8 @@ const initialState = {
   items: [],
   amount: [],
   isOpen: false,
-  inProductProcess: false,
-  inAmountProcess: false,
+  inProductProcess: true,
+  inAmountProcess: true,
 };
 
 const REDUCER_NAME = 'cart';
@@ -21,12 +21,9 @@ export const slice = createSlice({
   reducers: {
     openCartAction(state) {
       state['isOpen'] = true;
-      state['inProcess'] = true;
     },
     closeCartAction(state) {
       state['isOpen'] = false;
-      state['items'] = [];
-      state['inProcess'] = true;
     },
 
     addProductToCartAction(state, { payload }) {
@@ -92,6 +89,9 @@ export const slice = createSlice({
 
     resetStateAction(state) {
       state['items'] = [];
+      state['amount'] = [];
+      state['inAmountProcess'] = false;
+      state['inProductProcess'] = false;
     },
 
     getProductsRequestAction(state) {

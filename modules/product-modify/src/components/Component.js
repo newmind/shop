@@ -12,7 +12,7 @@ import ModifyForm from './ModifyForm';
 
 import styles from './default.module.scss';
 
-import { selectProduct } from '../ducks/slice';
+import { selectProduct, selectInProcess } from '../ducks/slice';
 import { updateProductsById, createProduct, deleteImages } from '../ducks/commands';
 
 
@@ -23,6 +23,7 @@ function ProductModify() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const product = useSelector(selectProduct);
+  const inProcess = useSelector(selectInProcess);
   const valid = useSelector(isValid(FORM_NAME));
   const pristine = useSelector(isPristine(FORM_NAME));
 
@@ -50,18 +51,18 @@ function ProductModify() {
   }
 
   return (
-    <Page className={styles['wrapper']}>
+    <Page className={styles['wrapper']} inProcess={inProcess}>
       <PageControls>
         <div className={styles['controls']}>
           <Button
             form={Button.FORM_CONTEXT}
             mode={Mode.PRIMARY}
-            disabled={pristine}
+            disabled={pristine || inProcess}
             onClick={handleReset}
           >Отмена</Button>
           <Button
             type={Button.TYPE_BUTTON}
-            disabled={ ! valid || pristine}
+            disabled={ ! valid || pristine || inProcess}
             mode="success"
             onClick={handleSubmit}
           >Сохранить</Button>

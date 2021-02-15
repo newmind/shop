@@ -3,26 +3,30 @@ import { openDialog } from "@ui.packages/dialog";
 import { Header, Page, PageControls, PageContent, Button } from '@ui.packages/kit';
 
 import React from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 
 import Table from './Table';
 
 import styles from './default.module.scss';
 
+import { selectInProcess } from '../ducks/slice';
+
 
 function Units() {
   const dispatch = useDispatch();
+  const inProcess = useSelector(selectInProcess);
 
   function handleCreate() {
     dispatch(openDialog('unit'));
   }
 
   return (
-    <Page>
+    <Page inProcess={inProcess}>
       <PageControls>
         <div className={styles['controls']}>
           <Button
             form={Button.FORM_CREATE}
+            disabled={inProcess}
             onClick={() => handleCreate()}
           >Добавить</Button>
         </div>

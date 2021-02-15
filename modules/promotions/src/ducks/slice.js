@@ -21,10 +21,15 @@ const currenciesSlice = createSlice({
       state['inProcess'] = false;
     },
 
-    getPromotionsRequestAction() {},
-    getPromotionsRequestFailAction() {},
+    getPromotionsRequestAction(state) {
+      state['inProcess'] = true;
+    },
+    getPromotionsRequestFailAction(state) {
+      state['inProcess'] = false;
+    },
     getPromotionsRequestSuccessAction(state, { payload }) {
       state['items'] = payload;
+      state['inProcess'] = false;
     },
 
     createPromotionRequestAction(state) {
@@ -56,10 +61,15 @@ const currenciesSlice = createSlice({
       state['inProcess'] = false;
     },
 
-    deletePromotionRequestAction() {},
-    deletePromotionRequestFailAction() {},
+    deletePromotionRequestAction(state) {
+      state['inProcess'] = true;
+    },
+    deletePromotionRequestFailAction(state) {
+      state['inProcess'] = false;
+    },
     deletePromotionRequestSuccessAction(state, { payload }) {
       state['items'] = [...state['items']].filter((item) => !~ payload.indexOf(item['id']));
+      state['inProcess'] = false;
     },
   },
 });

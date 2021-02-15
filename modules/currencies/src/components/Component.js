@@ -21,7 +21,7 @@ function Currencies() {
   }
 
   return (
-    <Page>
+    <Page inProcess={inProcess}>
       <PageControls>
         <div className={styles['controls']}>
           <Button
