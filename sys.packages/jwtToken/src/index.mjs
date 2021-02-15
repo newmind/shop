@@ -95,7 +95,7 @@ export const middleware = (options) => async (ctx, next) => {
     logger.info('Проверка авторизованного токена');
     await checkCookie(options['checkUrl'], cookie);
 
-    logger.info('Декодирование авторизационного токена');
+    logger.info('Декодирование авторизационного токена: ' + cookie['token']);
     ctx.user = await decode(cookie['token'], options['secret']);
 
     await next();
