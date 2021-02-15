@@ -8,7 +8,8 @@ const initialState = {
   items: [],
   amount: [],
   isOpen: false,
-  inProcess: false,
+  inProductProcess: false,
+  inAmountProcess: false,
 };
 
 const REDUCER_NAME = 'cart';
@@ -18,10 +19,6 @@ export const slice = createSlice({
   name: REDUCER_NAME,
   initialState,
   reducers: {
-    inProcessAction(state, { payload }) {
-      state['inProcess'] = payload;
-    },
-
     openCartAction(state) {
       state['isOpen'] = true;
       state['inProcess'] = true;
@@ -97,24 +94,32 @@ export const slice = createSlice({
       state['items'] = [];
     },
 
-    getProductsRequestAction(state) {},
-    getProductsRequestFailAction(state) {},
+    getProductsRequestAction(state) {
+      state['inProductProcess'] = true;
+    },
+    getProductsRequestFailAction(state) {
+      state['inProductProcess'] = false;
+    },
     getProductsRequestSuccessAction(state, { payload }) {
       state['items'] = payload;
+      state['inProductProcess'] = false;
     },
 
-    getAmountRequestAction(state) {},
-    getAmountRequestFailAction(state) {},
+    getAmountRequestAction(state) {
+      state['inAmountProcess'] = true;
+    },
+    getAmountRequestFailAction(state) {
+      state['inAmountProcess'] = false;
+    },
     getAmountRequestSuccessAction(state, { payload }) {
       state['amount'] = payload;
+      state['inAmountProcess'] = false;
     },
   },
 });
 
 export const {
   resetStateAction,
-
-  inProcessAction,
 
   openCartAction,
   closeCartAction,
@@ -138,7 +143,8 @@ export const selectUuid = (state) => state[REDUCER_NAME]['uuid'];
 export const selectItems = (state) => state[REDUCER_NAME]['items'];
 export const selectAmount = (state) => state[REDUCER_NAME]['amount'];
 export const selectIsOpen = (state) => state[REDUCER_NAME]['isOpen'];
-export const selectInProcess = (state) => state[REDUCER_NAME]['inProcess'];
+export const selectInAmountProcess = (state) => state[REDUCER_NAME]['inAmountProcess'];
+export const selectInProductProcess = (state) => state[REDUCER_NAME]['inProductProcess'];
 
 export const name = slice['name'];
 export const reducer = slice['reducer'];

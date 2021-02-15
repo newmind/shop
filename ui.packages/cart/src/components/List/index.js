@@ -18,6 +18,8 @@ import {
 
   selectItems,
   selectAmount,
+  selectInAmountProcess,
+  selectInProductProcess,
 } from '../../ducks/slice';
 
 import styles from './defaults.module.scss';
@@ -28,6 +30,8 @@ function List() {
   const dispatch = useDispatch();
   const items = useSelector(selectItems);
   const amounts = useSelector(selectAmount);
+  const inAmountProcess = useSelector(selectInAmountProcess);
+  const inProductProcess = useSelector(selectInProductProcess);
 
   function handleRemoveProductFromCart(uuid) {
     dispatch(removeProductFromCartAction(uuid));
@@ -46,18 +50,22 @@ function List() {
   return (
     <div className={styles['wrapper']}>
       <div className={styles['content']}>
-        {items.map((item, index) => (
-          <Product
-            key={item['uuid'] + '_' + index}
-            {...item}
-            onRemove={handleRemoveProductFromCart}
-          />
-        ))}
+        {inProductProcess
+          ? <Text>Загрузка...</Text>
+          : items.map((item, index) => (
+            <Product
+              key={item['uuid'] + '_' + index}
+              {...item}
+              onRemove={handleRemoveProductFromCart}
+            />
+          ))
+        }
       </div>
       <div className={styles['info']}>
-        { !! amounts.length && (
-          <Text type={Text.TYPE_BODY}>На сумму: { amounts.map((amount) => numeral(amount[1]).format() + ' ' + amount[2])}</Text>
-        )}
+        {inAmountProcess
+          ? <Text>Расчитываем...</Text>
+          : <Text type={Text.TYPE_BODY}>На сумму: { amounts.map((amount) => numeral(amount[1]).format() + ' ' + amount[2])}</Text>
+        }
       </div>
       <div className={styles['controls']}>
         <Button form={Button.FORM_CONTEXT} onClick={() => handleResetCart()}>Очистить</Button>

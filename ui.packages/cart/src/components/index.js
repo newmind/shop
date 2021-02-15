@@ -6,11 +6,10 @@ import { useSelector, useDispatch } from 'react-redux';
 import Icon from './Icon';
 import List from './List';
 import Empty from './Empty';
-import Spinner from './Spinner';
 
 import styles from './defaults.module.scss';
 
-import { inProcess, getAmount, getProducts } from "../ducks/commands";
+import { getAmount, getProducts } from "../ducks/commands";
 import {
   restoreCartAction,
 
@@ -19,7 +18,6 @@ import {
 
   selectUuid,
   selectIsOpen,
-  selectInProcess,
 } from '../ducks/slice';
 
 function Cart() {
@@ -27,7 +25,6 @@ function Cart() {
   const dispatch = useDispatch();
   const uuid = useSelector(selectUuid);
   const isOpen = useSelector(selectIsOpen);
-  const isProcess = useSelector(selectInProcess);
 
   const cartRef = useRef(null);
 
@@ -56,10 +53,8 @@ function Cart() {
       if ( !! uuid.length) {
         const items = uuid.map(item => item[0]);
 
-        dispatch(inProcess(true));
         await dispatch(getProducts(items));
         await dispatch(getAmount(uuid));
-        dispatch(inProcess(false));
       }
     }
   }, [isOpen, uuid]);
@@ -85,15 +80,10 @@ function Cart() {
       {isOpen && (
         <div className={styles['wrapper']}>
           <div className={styles['container']}>
-            {isProcess
-              ? (
-                <Spinner />
-              )
-              : (
-                hasProductsInCart
-                  ? <List />
-                  : <Empty />
-              )}
+            {hasProductsInCart
+              ? <List />
+              : <Empty />
+            }
           </div>
         </div>
       )}
