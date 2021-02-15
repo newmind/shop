@@ -83,7 +83,7 @@ export const decode = (token, secret) => {
 
 export const sign = (data, secret) => {
   return jwt.sign(data, secret, {
-    algorithm:  "HS256"
+    algorithm:  "HS384"
   });
 }
 
