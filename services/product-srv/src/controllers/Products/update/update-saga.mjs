@@ -44,12 +44,14 @@ export default class UpdateSaga {
     return sagaBuilder
       .step('Сохранение изображений')
       .invoke(async (params) => {
+        console.log(fields)
         if ( !! Object.keys(files).length) {
           const imagesID = await saveImages(files);
           params.setImageIDs(imagesID);
-          await Gallery.bulkCreate(imagesID.map((item) => ({
+          await Gallery.bulkCreate(imagesID.map((item, index) => ({
             productUuid: uuid,
             uuid: item,
+            order: index,
           })));
         }
       })

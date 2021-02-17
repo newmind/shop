@@ -1,5 +1,5 @@
 
-import { Row, Col, InputField, SelectField, Button } from '@ui.packages/kit';
+import { Row, Col, InputField, SelectField, Button, Draggable } from '@ui.packages/kit';
 
 import React from 'react';
 import types from 'prop-types';
@@ -14,6 +14,7 @@ import { selectAttributes } from '../../ducks/slice';
 
 function AttributeField({ field, data, disabled, onRemove }) {
   const attributes = useSelector(selectAttributes);
+
   const attributeId = data ? data['id'] : null;
   const attribute = attributeId ? attributes.find((item) => item['id'] === attributeId) : null;
   const unit = attribute ? attribute['unit'] : null;
@@ -71,20 +72,28 @@ function Attributes({ fields, disabled }) {
     fields.remove(index)
   }
 
+  function handleChangeOrder(from, to) {
+    if (from !== null && to !== null) {
+      fields.move(from, to);
+    }
+  }
+
   return (
     <div className={styles['wrapper']}>
       { !! fields.length && (
         <Row>
           <div className={styles['attrs']}>
-            {fields.map((field, index) => (
-              <AttributeField
-                key={index}
-                field={field}
-                data={data['attributes'][index]}
-                disabled={disabled}
-                onRemove={() => handleRemoveAttr(index)}
-              />
-            ))}
+            <Draggable onChange={(from, to) => handleChangeOrder(from, to)}>
+              {fields.map((field, index) => (
+                <AttributeField
+                  key={index}
+                  field={field}
+                  data={data['attributes'][index]}
+                  disabled={disabled}
+                  onRemove={() => handleRemoveAttr(index)}
+                />
+              ))}
+            </Draggable>
           </div>
         </Row>
       )}

@@ -19,11 +19,12 @@ export default async function createProperties(properties) {
   });
 
   const attributes = JSON.parse(properties['attributes']);
-  const newAttributes = attributes.map((item) => {
+  const newAttributes = attributes.map((item, index) => {
     return {
       productUuid: uuid,
       attributeId: item['id'],
       value: item['value'],
+      order: index,
     }
   });
 

@@ -1,5 +1,5 @@
 
-import { Image } from '@ui.packages/kit';
+import {Image, Draggable, Button, arrayMove} from '@ui.packages/kit';
 
 import types from 'prop-types';
 import React from 'react';
@@ -8,7 +8,7 @@ import cn from 'classnames';
 import styles from './default.module.scss';
 
 
-function AddImageForm({ path, input, onDelete }) {
+function AddImageForm({ path, input, disabled, onDelete }) {
 
   function handleDelete(file) {
     if (file instanceof File) {
@@ -49,26 +49,35 @@ function AddImageForm({ path, input, onDelete }) {
     }
   }
 
+  function headerChange(from, to) {
+    const files = [...input['value'] || []];
+    input.onChange(arrayMove(files, from, to));
+  }
+
   return (
     <div className={styles['wrapper']}>
       <div className={styles['content']}>
-        <div className={styles['section']}>
-          <span className={styles['add-image']} onClick={() => handleAddImages()}>
-            <span className={cn('fas fa-plus', styles['add-image__icon'])}/>
-          </span>
-        </div>
-        {(input['value'] || []).map((externalId, key) => {
-          return (
-            <div className={styles['section']} key={key}>
-              <div className={cn(styles['image'], {
-                [styles['new']]: externalId.constructor === File,
-              })}>
-                <span className={cn(styles['remove-image'], 'fas fa-times')} onClick={() => handleDelete(externalId)} />
-                <Image src={normalizeURI(externalId)} />
+        <Draggable type={Draggable.TYPE_GRID} onChange={headerChange}>
+          {(input['value'] || []).map((externalId, key) => {
+            return (
+              <div className={styles['section']} key={key}>
+                <div className={cn(styles['image'], {
+                  [styles['new']]: externalId.constructor === File,
+                })}>
+                  <span className={cn(styles['remove-image'], 'fas fa-times')} onClick={() => handleDelete(externalId)} />
+                  <Image src={normalizeURI(externalId)} />
+                </div>
               </div>
-            </div>
-          );
-        })}
+            );
+          })}
+        </Draggable>
+      </div>
+      <div className={styles['controls']}>
+        <Button
+          form={Button.FORM_CREATE}
+          disabled={disabled}
+          onClick={() => handleAddImages()}
+        >Добавить</Button>
       </div>
     </div>
   );

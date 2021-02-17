@@ -84,6 +84,7 @@ export default () => async (ctx) => {
       ['updatedAt', 'desc'],
       ['gallery', 'order', 'desc'],
       ['comments', 'createdAt', 'desc'],
+      ['attributes', 'order', 'asc'],
     ],
     include: [
       {

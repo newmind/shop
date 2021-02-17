@@ -28,12 +28,18 @@
   }
 
   &__title,
-  &__value,
-  &__units {
+  &__value {
 
     display: flex;
     flex-direction: column;
     flex: 1 0;
+    margin: 0 10px 0 0;
+  }
+
+  &__units {
+
+    display: block;
+    width: 150px;
     margin: 0 10px 0 0;
   }
 

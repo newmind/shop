@@ -19,6 +19,7 @@ export { default as RadioBox, Radio } from './symbols/RadioBox';
 export { default as Paging } from './Paging';
 export { default as Actions } from './Actions';
 export { default as Gallery } from './Gallery';
+export { default as Draggable, arrayMove } from './Draggable';
 export { default as Breadcrumbs } from './Breadcrumbs';
 
 export { default as BaseField } from './fields/BaseField';

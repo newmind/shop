@@ -174,6 +174,7 @@ export const getProductById = (uuid) => async (dispatch) => {
     dispatch(getProductRequestSuccessAction(result['data']));
   }
   catch(error) {
+
     dispatch(getProductRequestFailAction(error));
     dispatch(pushNotification({
       mode: Mode.DANGER,
@@ -192,6 +193,9 @@ export const updateProductsById = (data) => async (dispatch) => {
 
     (data['gallery'] || []).forEach((file, index) => {
       if (file.constructor === File) {
+        formData.append(`file-${index}`, file);
+      }
+      else {
         formData.append(`file-${index}`, file);
       }
     });
