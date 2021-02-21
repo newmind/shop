@@ -16,7 +16,9 @@ import styles from './default.module.scss';
 function Application({ options }) {
   const isLoaded = useSelector(selectIsLoaded);
 
-  useGetProfile();
+  if (options['useSignIn']) {
+    useGetProfile();
+  }
 
   return (
     <section className={styles['application']}>
