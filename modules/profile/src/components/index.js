@@ -1,5 +1,8 @@
 
-import HOC from '@ui.packages/hoc';
+import { useMount, useUnmount, useUpdate } from '@ui.packages/hoc';
+
+import React from 'react';
+import { useDispatch } from 'react-redux';
 
 import Component from './Component';
 
@@ -7,34 +10,20 @@ import { getProfile } from '../ducks/commands';
 import { resetStateAction } from '../ducks/slice';
 
 
-// const mapStateToProps = state => {
-//   const Profile = state['profile'];
-//   return {
-//     profile: Profile['profile'],
-//     isValid: isValid('profile')(state),
-//     isPristine: isPristine('profile')(state),
-//   };
-// };
-//
-// const mapActionsToProps = (dispatch) => {
-//   return {
-//     submit: bindActionCreators(submit, dispatch),
-//     getProfile: bindActionCreators(getProfile, dispatch),
-//     saveProfile: bindActionCreators(saveProfile, dispatch),
-//   };
-// };
+export default function HOC() {
+  const dispatch = useDispatch();
 
-export default HOC({
-  async onMount({ dispatch }) {
-
+  useMount(async function() {
     await dispatch(getProfile());
-  },
-  async onUpdate({ dispatch }) {
+  });
 
+  useUpdate(async function() {
     await dispatch(getProfile());
-  },
-  onUnmount({ dispatch }) {
+  });
 
+  useUnmount(function() {
     dispatch(resetStateAction());
-  },
-})(Component);
+  });
+
+  return <Component />;
+}

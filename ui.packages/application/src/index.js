@@ -57,7 +57,6 @@ async function createRoutes(routes) {
 
 class App {
   constructor(options) {
-
     let socket;
 
     if (process.env['REACT_APP_SOCKET_HOST'] && process.env['REACT_APP_SOCKET_PATH']) {
@@ -112,4 +111,6 @@ class App {
 }
 
 export default App;
-export { default as ApplicationContext } from './contexts/ApplicationContext';
+export { default as Context } from './Context';
+export { signIn, signOut } from './ducks/commands';
+export { selectInProcess, selectProfile } from './ducks/slice';

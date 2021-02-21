@@ -1,18 +1,20 @@
 
-import { ApplicationContext } from '@ui.packages/application';
+import { signOut, selectProfile } from '@ui.packages/application';
 
-import React, { useContext } from 'react';
+import React from 'react';
 import { Link, useNavigate } from 'react-router-dom';
+import { useSelector, useDispatch } from 'react-redux';
 
 import styles from './default.module.scss';
 
 
 export default function Header() {
+  const dispatch = useDispatch();
   const navigate = useNavigate();
-  const { signOut, profile } = useContext(ApplicationContext);
+  const profile = useSelector(selectProfile);
 
-  function handleSignOut() {
-    const isSignOut = signOut(profile['id']);
+  async function handleSignOut() {
+    const isSignOut = await dispatch(signOut(profile['id']));
     if (isSignOut) {
       navigate(process.env['PUBLIC_URL'] + '/sign-in');
     }

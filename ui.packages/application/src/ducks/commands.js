@@ -4,29 +4,23 @@ import { joinToRoom, leaveFromRoom } from '@ui.packages/socket';
 import { pushNotification } from "@ui.packages/notifications";
 
 import {
-  changeStateAction,
+  signInRequestAction,
+  signInRequestFailAction,
+  signInRequestSuccessAction,
 
-  applicationAuthRequestAction,
-  applicationAuthRequestFailAction,
-  applicationAuthRequestSuccessAction,
+  getProfileRequestAction,
+  getProfileRequestFailAction,
+  getProfileRequestSuccessAction,
 
-  applicationGetProfileRequestAction,
-  applicationGetProfileRequestFailAction,
-  applicationGetProfileRequestSuccessAction,
-
-  applicationSignOutRequestAction,
-  applicationSignOutRequestFailAction,
-  applicationSignOutRequestSuccessAction,
+  signOutRequestAction,
+  signOutRequestFailAction,
+  signOutRequestSuccessAction,
 } from './slice';
 
 
-export const changeState = (state) => async (dispatch) => {
-  dispatch(changeStateAction(state));
-};
-
 export const getProfile = () => async (dispatch) => {
   try {
-    dispatch(applicationGetProfileRequestAction());
+    dispatch(getProfileRequestAction());
 
     const { data } = await request({
       url: '/profile',
@@ -34,22 +28,22 @@ export const getProfile = () => async (dispatch) => {
       data: {},
     });
 
-    dispatch(applicationGetProfileRequestSuccessAction(data));
+    dispatch(getProfileRequestSuccessAction(data));
     joinToRoom(data['id']);
 
-    return true;
+    return data;
   }
   catch(error) {
 
-    dispatch(applicationGetProfileRequestFailAction());
+    dispatch(getProfileRequestFailAction(error));
 
-    return false;
+    throw error;
   }
 };
 
 export const signIn = (formData) => async (dispatch) => {
   try {
-    dispatch(applicationAuthRequestAction());
+    dispatch(signInRequestAction());
 
     const result = await request({
       url: '/sign-in',
@@ -59,13 +53,15 @@ export const signIn = (formData) => async (dispatch) => {
       }
     });
 
-    dispatch(getProfile());
-    dispatch(applicationAuthRequestSuccessAction(result));
+    await dispatch(getProfile());
+
+    dispatch(signInRequestSuccessAction(result));
 
     return true;
   }
   catch(error) {
-console.log(123, error);
+    dispatch(signInRequestFailAction(error));
+
     const notification = {
       mode: '',
       title: '',
@@ -85,7 +81,6 @@ console.log(123, error);
     }
 
     dispatch(pushNotification(notification));
-    dispatch(applicationAuthRequestFailAction(error));
 
     return false;
   }
@@ -94,7 +89,7 @@ console.log(123, error);
 
 export const signOut = (userId) => async (dispatch) => {
   try {
-    dispatch(applicationSignOutRequestAction());
+    dispatch(signOutRequestAction());
 
     await request({
       url: '/sign-out',
@@ -102,13 +97,13 @@ export const signOut = (userId) => async (dispatch) => {
     });
 
     leaveFromRoom(userId);
-    dispatch(applicationSignOutRequestSuccessAction());
+    dispatch(signOutRequestSuccessAction());
 
     return true;
   }
   catch(error) {
 
-    dispatch(applicationSignOutRequestFailAction(error));
+    dispatch(signOutRequestFailAction(error));
 
     return false;
   }

@@ -2,80 +2,73 @@
 import { createSlice } from '@reduxjs/toolkit';
 
 
+const REDUCER_NAME = 'application';
+
 const initialState = {
   profile: null,
   isAuth: false,
-  isLoading: true,
+  isLoaded: false,
+  inProcess: false,
 };
 
 
 const applicationSlice = createSlice({
-  name: 'application',
+  name: REDUCER_NAME,
   initialState,
   reducers: {
-    applicationHasLoadedAction(state) {
-      state['isLoading'] = false;
+    isLoaded(state) {
+      state['isLoaded'] = true;
     },
 
-    changeStateAction(state, { payload }) {
-      state['isAuth'] = payload;
-    },
-
-    applicationAuthRequestAction(state) {
+    signInRequestAction(state) {
       state['inProcess'] = true;
     },
-    applicationAuthRequestFailAction(state) {
+    signInRequestFailAction(state) {
       state['inProcess'] = false;
     },
-    applicationAuthRequestSuccessAction(state, { payload }) {
+    signInRequestSuccessAction(state, { payload }) {
       state['inProcess'] = false;
       state['profile'] = payload;
     },
 
-    applicationGetProfileRequestAction(state) {
-      state['inProcess'] = true;
-    },
-    applicationGetProfileRequestFailAction(state) {
-      state['inProcess'] = false;
-    },
-    applicationGetProfileRequestSuccessAction(state, { payload }) {
-      state['inProcess'] = false;
+    getProfileRequestAction(state) {},
+    getProfileRequestFailAction(state) {},
+    getProfileRequestSuccessAction(state, { payload }) {
       state['profile'] = payload;
     },
 
-    applicationSignOutRequestAction(state) {
+    signOutRequestAction(state) {
       state['inProcess'] = false;
     },
-    applicationSignOutRequestFailAction(state) {
+    signOutRequestFailAction(state) {
       state['inProcess'] = false;
     },
-    applicationSignOutRequestSuccessAction(state) {
+    signOutRequestSuccessAction(state) {
       state['inProcess'] = false;
     },
   }
 });
 
 export const {
-  changeStateAction,
-  applicationHasLoadedAction,
+  isLoaded,
 
-  applicationAuthRequestAction,
-  applicationAuthRequestFailAction,
-  applicationAuthRequestSuccessAction,
+  signInRequestAction,
+  signInRequestFailAction,
+  signInRequestSuccessAction,
 
-  applicationGetProfileRequestAction,
-  applicationGetProfileRequestFailAction,
-  applicationGetProfileRequestSuccessAction,
+  getProfileRequestAction,
+  getProfileRequestFailAction,
+  getProfileRequestSuccessAction,
 
-  applicationSignOutRequestAction,
-  applicationSignOutRequestFailAction,
-  applicationSignOutRequestSuccessAction,
+  signOutRequestAction,
+  signOutRequestFailAction,
+  signOutRequestSuccessAction,
 } = applicationSlice['actions'];
 
-export const selectIsAuth = (state) => state['application']['isAuth'];
-export const selectProfile = (state) => state['application']['profile'];
-export const selectInProcess = (state) => state['application']['inProcess'];
-export const selectIsLoading = (state) => state['application']['isLoading'];
+export const selectIsAuth = (state) => state[REDUCER_NAME]['isAuth'];
+export const selectProfile = (state) => state[REDUCER_NAME]['profile'];
+export const selectIsLoaded = (state) => state[REDUCER_NAME]['isLoaded'];
+export const selectInProcess = (state) => state[REDUCER_NAME]['inProcess'];
 
 export const name = applicationSlice['name'];
 export const reducer = applicationSlice['reducer'];

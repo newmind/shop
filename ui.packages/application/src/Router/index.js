@@ -1,10 +1,10 @@
 
-import { Routes, Route } from 'react-router-dom';
 import React, { useContext } from 'react';
+import { Routes, Route } from 'react-router-dom';
 
 import Error from '../Error';
 
-import ApplicationContext from "../contexts/ApplicationContext";
+import ApplicationContext from "../Context";
 
 
 function checkNotFound(routes) {

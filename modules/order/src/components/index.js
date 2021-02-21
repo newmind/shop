@@ -1,5 +1,8 @@
 
-import HOC from "@ui.packages/hoc";
+import { useMount, useUnmount, useUpdate } from "@ui.packages/hoc";
+
+import React from 'react';
+import { useDispatch } from 'react-redux';
 
 import Component from './Component';
 
@@ -7,12 +10,11 @@ import { resetStateAction, restoreStateAction } from '../ducks/slice';
 import { getProducts, getAmount, getDeliveries, getPayments } from '../ducks/commands';
 
 
-export default HOC({
-  combineEvents: true,
-  onMount({ dispatch }) {
+export default function HOC() {
+  const dispatch = useDispatch();
 
+  useMount(async function() {
     document.title = `${process.env['REACT_APP_WEBSITE_NAME']} - Оформление заказа`;
-    document.querySelector('meta[name="description"]').setAttribute('content', '');
 
     dispatch(restoreStateAction());
 
@@ -20,15 +22,21 @@ export default HOC({
     const uuid = JSON.parse(cart) || [];
 
     if (uuid.length) {
-      dispatch(getProducts(uuid));
-      dispatch(getAmount(uuid));
+      await dispatch(getProducts(uuid));
+      await dispatch(getAmount(uuid));
 
-      dispatch(getPayments());
-      dispatch(getDeliveries());
+      await dispatch(getPayments());
+      await dispatch(getDeliveries());
     }
-  },
-  onUnmount({ dispatch }) {
+  });
 
+  useUpdate(async function() {
+
+  });
+
+  useUnmount(function() {
     dispatch(resetStateAction());
-  }
-})(Component);
+  });
+
+  return <Component />;
+}

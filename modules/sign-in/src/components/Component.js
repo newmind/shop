@@ -1,9 +1,9 @@
 
-import { ApplicationContext } from '@ui.packages/application';
+import { signIn } from '@ui.packages/application';
 
-import types from 'prop-types';
+import React from 'react';
+import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-import React, { useEffect, useContext } from 'react';
 
 import Form from './Form';
 
@@ -11,17 +11,11 @@ import styles from './default.module.scss';
 
 
 function SignIn() {
+  const dispatch = useDispatch();
   const navigate = useNavigate();
-  const { isAuth, signIn } = useContext(ApplicationContext);
-
-  useEffect(function init() {
-    if (isAuth) {
-      navigate(process.env['PUBLIC_URL'] + '/');
-    }
-  }, []);
 
   async function handleSignIn(data) {
-    const isSuccess = await signIn(data);
+    const isSuccess = await dispatch(signIn(data));
     if (isSuccess) {
       navigate(process.env['PUBLIC_URL'] + '/');
     }
@@ -33,16 +27,5 @@ function SignIn() {
     </div>
   );
 }
-
-SignIn.propTypes = {
-  isValid: types.bool,
-  isPristine: types.bool,
-  push: types.func,
-};
-
-SignIn.defaultProps = {
-  isValid: false,
-  isPristine: false,
-};
 
 export default SignIn;

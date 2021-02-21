@@ -1,5 +1,5 @@
 
-import { ApplicationContext } from '@ui.packages/application';
+import { Context } from '@ui.packages/application';
 
 import types from "prop-types";
 import React, { useContext } from 'react';
@@ -30,7 +30,7 @@ const useCompositeNavigate = (navigate) => {
 }
 
 export default function Composite({ children }) {
-  const { navigate } = useContext(ApplicationContext);
+  const { navigate } = useContext(Context);
   const newNavigate = useCompositeNavigate(navigate);
 
   return (

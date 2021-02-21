@@ -1,5 +1,5 @@
 
-import { ApplicationContext  } from "@ui.packages/application";
+import { Context  } from "@ui.packages/application";
 
 import React, { useContext } from 'react';
 import { Link, useLocation } from 'react-router-dom';
@@ -27,7 +27,7 @@ function HomeLink() {
 
 function Navigation() {
   const location = useLocation();
-  const { navigate } = useContext(ApplicationContext);
+  const { navigate } = useContext(Context);
 
   return (
     <nav role="navigation" className={styles['navigate']}>

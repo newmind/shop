@@ -13,9 +13,13 @@ export default () => async (ctx) => {
     data: formData,
   });
 
+  console.log(111, data);
+
   if ( ! data) {
     throw new UserNotFoundError();
   }
+
+  console.log(123)
 
   ctx.cookies.set(process.env['COOKIE_NAME'], encodeURIComponent(JSON.stringify(data)), {
     httpOnly: true,

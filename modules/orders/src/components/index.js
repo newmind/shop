@@ -1,5 +1,8 @@
 
-import HOC from '@ui.packages/hoc';
+import { useMount, useUnmount, useUpdate } from '@ui.packages/hoc';
+
+import React from 'react';
+import { useDispatch } from 'react-redux';
 
 import Component from './Component';
 
@@ -7,16 +10,23 @@ import { getOperations, getStatuses } from '../ducks/commands';
 import { resetStateAction } from '../ducks/slice';
 
 
-export default HOC({
-  combineEvents: true,
-  async onMount({ dispatch }) {
+export default function HOC() {
+  const dispatch = useDispatch();
 
-    dispatch(getStatuses());
-    dispatch(getOperations());
-  },
-  async onUnmount({ dispatch }) {
+  useMount(async function() {
+    document.title = `${process.env['REACT_APP_WEBSITE_NAME']} - Заказы`;
 
-    await dispatch(resetStateAction());
+    await dispatch(getStatuses());
+    await dispatch(getOperations());
+  });
 
-  }
-})(Component);
+  useUpdate(async function() {
+
+  });
+
+  useUnmount(function() {
+    dispatch(resetStateAction());
+  });
+
+  return <Component />;
+}

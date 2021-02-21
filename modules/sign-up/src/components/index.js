@@ -1,29 +1,26 @@
 
-import PageHOC from '@ui.packages/hocs';
+import { useMount, useUnmount, useUpdate } from '@ui.packages/hoc';
 
-import { bindActionCreators } from 'redux';
+import React from 'react';
+// import { useDispatch } from 'react-redux';
 
 import Component from './Component';
 
-import { pageInProcess, signUp } from '../ducks/commands';
 
+export default function HOC() {
+  // const dispatch = useDispatch();
 
-const mapStateToProps = () => ({});
-
-const mapActionsToProps = (dispatch) => bindActionCreators({
-  pageInProcess,
-  signUp,
-}, dispatch);
-
-
-export default PageHOC({
-  mapStateToProps,
-  mapActionsToProps,
-  onEnter: ({ pageInProcess }) => {
-
+  useMount(async function() {
     document.title = `${process.env['REACT_APP_WEBSITE_NAME']} - Регистрация личного кабинета`;
-    document.querySelector('meta[name="description"]').setAttribute('content', 'Регистрация нового пользователя');
+  });
 
-    pageInProcess(false);
-  },
-})(Component);
+  useUpdate(async function() {
+
+  });
+
+  useUnmount(function() {
+
+  });
+
+  return <Component />;
+}

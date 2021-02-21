@@ -1,30 +1,32 @@
 
-import { connect } from 'react-redux';
-import { bindActionCreators } from 'redux';
+import React from 'react';
+import { useSelector } from 'react-redux';
 
-import Component from './Component';
+import Router from '../Router';
+import Loading from '../Loading';
 
-import { signIn, signOut, getProfile, changeState } from '../ducks/commands';
+import { useGetProfile } from '../hooks';
+import ApplicationContext from "../Context";
+
+import { selectIsLoaded } from '../ducks/slice';
+
+import styles from './default.module.scss';
 
 
-function mapStateToProps(state) {
-  return {
-    isAuth: state['application']['isAuth'],
-    inProcess: state['application']['inProcess'],
-  };
+function Application({ options }) {
+  const isLoaded = useSelector(selectIsLoaded);
+
+  useGetProfile();
+
+  return (
+    <section className={styles['application']}>
+      <ApplicationContext.Provider value={{ ...options }}>
+        {isLoaded
+          ? <Router />
+          : <Loading />}
+      </ApplicationContext.Provider>
+    </section>
+  );
 }
 
-function mapActionsToProps(dispatch) {
-  return bindActionCreators({
-    signIn,
-    signOut,
-    getProfile,
-    changeState,
-  }, dispatch);
-}
-
-
-export default connect(
-  mapStateToProps,
-  mapActionsToProps,
-)(Component);
+export default Application;

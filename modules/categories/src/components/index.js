@@ -1,6 +1,9 @@
 
-import HOC from '@ui.packages/hoc';
 import { on, off } from '@ui.packages/socket';
+import { useMount, useUnmount, useUpdate } from '@ui.packages/hoc';
+
+import React from 'react';
+import { useDispatch } from 'react-redux';
 
 import Component from './Component';
 
@@ -14,26 +17,30 @@ import {
 } from '../ducks/slice';
 
 
-export default HOC({
-  async onMount({ dispatch }) {
+export default function HOC() {
+  const dispatch = useDispatch();
+
+  useMount(async function() {
+    document.title = `${process.env['REACT_APP_WEBSITE_NAME']} - Категория`;
 
     await dispatch(getCategories());
 
     on(process.env['REACT_APP_SOCKET_CATEGORY_CREATE'], (data) => dispatch(createCategoryRequestSuccessAction(data)));
     on(process.env['REACT_APP_SOCKET_CATEGORY_UPDATE'], (data) => dispatch(updateCategoryRequestSuccessAction(data)));
     on(process.env['REACT_APP_SOCKET_CATEGORY_DELETE'], (data) => dispatch(deleteCategoryRequestSuccessAction(data)));
+  });
 
-  },
-  async onUpdate({ dispatch }) {
-
+  useUpdate(async function() {
     await dispatch(getCategories());
-  },
-  async onUnmount({ dispatch }) {
+  });
 
-    await dispatch(resetStateAction());
+  useUnmount(function() {
+    dispatch(resetStateAction());
 
     off(process.env['REACT_APP_SOCKET_CATEGORY_CREATE']);
     off(process.env['REACT_APP_SOCKET_CATEGORY_UPDATE']);
     off(process.env['REACT_APP_SOCKET_CATEGORY_DELETE']);
-  }
-})(Component);
+  });
+
+  return <Component />;
+}

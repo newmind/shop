@@ -1,16 +1,26 @@
 
-import { connect } from 'react-redux';
+import { useMount, useUnmount, useUpdate } from '@ui.packages/hoc';
+
+import React from 'react';
+// import { useDispatch } from 'react-redux';
 
 import Component from './Component';
 
 
-const mapStateToProps = () => ({});
+export default function HOC() {
+  // const dispatch = useDispatch();
 
-const mapActionsToProps = () => ({
-});
+  useMount(async function() {
+    document.title = `${process.env['REACT_APP_WEBSITE_NAME']} - Описание`;
+  });
 
+  useUpdate(async function() {
 
-export default connect(
-  mapStateToProps,
-  mapActionsToProps,
-)(Component);
+  });
+
+  useUnmount(function() {
+
+  });
+
+  return <Component />;
+}

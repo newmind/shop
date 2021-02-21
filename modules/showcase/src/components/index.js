@@ -1,6 +1,10 @@
 
-import HOC from "@ui.packages/hoc";
 import { queryToObject } from "@ui.packages/utils";
+import { useMount, useUnmount, useUpdate } from "@ui.packages/hoc";
+
+import React from 'react';
+import { useDispatch } from 'react-redux';
+import { useLocation } from 'react-router-dom';
 
 import Component from './Component';
 
@@ -8,19 +12,27 @@ import { resetState } from '../ducks/slice';
 import { getProducts } from '../ducks/commands';
 
 
-export default HOC({
-  combineEvents: true,
-  onMount: ({ dispatch, location }) => {
+export default function HOC() {
+  const dispatch = useDispatch();
+  const location = useLocation();
 
+  useMount(async function() {
     document.title = `${process.env['REACT_APP_WEBSITE_NAME']} - Витрина`;
-    document.querySelector('meta[name="description"]').setAttribute('content', '');
 
     const query = queryToObject(location['search']);
 
-    dispatch(getProducts(query));
-  },
-  onUnmount: ({ dispatch }) => {
+    await dispatch(getProducts(query));
+  });
 
+  useUpdate(async function() {
+    const query = queryToObject(location['search']);
+
+    await dispatch(getProducts(query));
+  });
+
+  useUnmount(function() {
     dispatch(resetState());
-  }
-})(Component);
+  });
+
+  return <Component />;
+}

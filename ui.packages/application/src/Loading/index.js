@@ -7,7 +7,7 @@ import styles from './default.module.scss';
 export default function Loading() {
   return (
     <div className={styles['wrapper']}>
-      <p>Loading</p>
+      <p className={styles['message']}>Loading</p>
     </div>
   );
 }

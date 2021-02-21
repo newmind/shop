@@ -1,5 +1,8 @@
 
-import HOC from '@ui.packages/hoc';
+import { useMount, useUnmount, useUpdate } from '@ui.packages/hoc';
+
+import React from 'react';
+import { useDispatch } from 'react-redux';
 
 import Component from './Component';
 
@@ -7,17 +10,22 @@ import { getComments } from '../ducks/commands';
 import { resetStateAction } from '../ducks/slice';
 
 
-export default HOC({
-  async onMount({ dispatch }) {
+export default function HOC() {
+  const dispatch = useDispatch();
+
+  useMount(async function() {
+    document.title = `${process.env['REACT_APP_WEBSITE_NAME']} - Комментарии`;
 
     await dispatch(getComments());
-  },
-  async onUpdate({ dispatch }) {
+  });
 
+  useUpdate(async function() {
     await dispatch(getComments());
-  },
-  onUnmount({ dispatch }) {
+  });
 
+  useUnmount(function() {
     dispatch(resetStateAction());
-  }
-})(Component);
+  });
+
+  return <Component />;
+}

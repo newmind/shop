@@ -1,13 +1,20 @@
 
 import { Mode } from '@ui.packages/types';
+import { selectInProcess } from '@ui.packages/application';
 import { InputField, Header, Button } from '@ui.packages/kit'
 
 import React from 'react';
+import { useSelector } from 'react-redux';
+import { isValid, isPristine } from 'redux-form';
 
 import styles from "./default.module.scss";
 
 
 function Form({ handleSubmit }) {
+  const valid = useSelector(isValid('sign-in'));
+  const pristine = useSelector(isPristine('sign-in'));
+  const inProcess = useSelector(selectInProcess);
+
   return (
     <form className={styles['dialog']} onSubmit={handleSubmit}>
       <div className={styles['header']}>
@@ -25,7 +32,7 @@ function Form({ handleSubmit }) {
         <Button
           type={Button.TYPE_SUBMIT}
           mode={Mode.PRIMARY}
-          disabled={false}
+          disabled={ ! valid || pristine || inProcess}
         >Войти в кабинет</Button>
       </div>
     </form>

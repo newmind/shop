@@ -6,6 +6,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import Icon from './Icon';
 import List from './List';
 import Empty from './Empty';
+import Spinner from "./Spinner";
 
 import styles from './defaults.module.scss';
 
@@ -20,7 +21,10 @@ import {
 
   selectUuid,
   selectIsOpen,
+  selectInProductProcess,
+  selectInAmountProcess,
 } from '../ducks/slice';
+
 
 function Cart() {
   const location = useLocation();
@@ -28,26 +32,12 @@ function Cart() {
 
   const uuid = useSelector(selectUuid);
   const isOpen = useSelector(selectIsOpen);
+  const inAmountProcess = useSelector(selectInAmountProcess);
+  const inProductsProcess = useSelector(selectInProductProcess);
 
   const cartRef = useRef(null);
   const hasProductsInCart = !! uuid.length;
 
-
-  useEffect(function init() {
-    function onClick(event) {
-      const target = event.target;
-      const { current: cartElement } = cartRef;
-
-      if (cartElement && target && ! cartElement.contains(target)) {
-        isOpen && dispatch(closeCartAction());
-      }
-    }
-
-    document.addEventListener('click', onClick, true);
-    return () => {
-      document.removeEventListener('click', onClick, true);
-    };
-  }, []);
 
   useEffect(function restoreState() {
     dispatch(restoreCartAction());
@@ -87,15 +77,24 @@ function Cart() {
   }
 
   return (
-    <div ref={cartRef} className={styles['cart']}  onMouseEnter={() => handleSwitchStateCaretList()} onMouseLeave={() => handleSwitchStateCaretList()}>
+    <div
+      ref={cartRef}
+      className={styles['cart']}
+      onMouseEnter={() => handleSwitchStateCaretList()}
+      onMouseLeave={() => handleSwitchStateCaretList()}
+    >
       <Icon />
       {isOpen && (
         <div className={styles['wrapper']}>
           <div className={styles['container']}>
-            {hasProductsInCart
-              ? <List />
-              : <Empty />
-            }
+            {(inAmountProcess || inProductsProcess) && (
+              <Spinner />
+            )}
+            {( ! inAmountProcess && ! inProductsProcess) && (
+              hasProductsInCart
+                ? <List />
+                : <Empty />
+            )}
           </div>
         </div>
       )}

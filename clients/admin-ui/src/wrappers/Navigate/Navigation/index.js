@@ -1,5 +1,5 @@
 
-import { ApplicationContext  } from "@ui.packages/application";
+import { Context  } from "@ui.packages/application";
 
 import React, { useContext } from 'react';
 
@@ -9,7 +9,7 @@ import styles from './default.module.scss';
 
 
 export default function Navigation() {
-  const { navigate } = useContext(ApplicationContext);
+  const { navigate } = useContext(Context);
 
   return (
     <nav role="navigation" className={styles['navigate']}>
