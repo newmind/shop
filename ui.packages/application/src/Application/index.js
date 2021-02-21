@@ -1,6 +1,6 @@
 
 import React from 'react';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 
 import Router from '../Router';
 import Loading from '../Loading';
@@ -8,16 +8,20 @@ import Loading from '../Loading';
 import { useGetProfile } from '../hooks';
 import ApplicationContext from "../Context";
 
-import { selectIsLoaded } from '../ducks/slice';
+import { isLoadedAction, selectIsLoaded } from '../ducks/slice';
 
 import styles from './default.module.scss';
 
 
 function Application({ options }) {
+  const dispatch = useDispatch();
   const isLoaded = useSelector(selectIsLoaded);
 
   if (options['useSignIn']) {
     useGetProfile();
+  }
+  else {
+    dispatch(isLoadedAction());
   }
 
   return (

@@ -6,7 +6,7 @@ import { useDispatch } from 'react-redux';
 import { useNavigate, useMatch } from 'react-router-dom';
 
 import { getProfile } from '../ducks/commands';
-import { isLoaded } from "../ducks/slice";
+import { isLoadedAction } from "../ducks/slice";
 
 
 export default function() {
@@ -33,7 +33,7 @@ export default function() {
       }
     }
     finally {
-      dispatch(isLoaded());
+      dispatch(isLoadedAction());
     }
   }, []);
 

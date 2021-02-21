@@ -16,7 +16,7 @@ const applicationSlice = createSlice({
   name: REDUCER_NAME,
   initialState,
   reducers: {
-    isLoaded(state) {
+    isLoadedAction(state) {
       state['isLoaded'] = true;
     },
 
@@ -50,7 +50,7 @@ const applicationSlice = createSlice({
 });
 
 export const {
-  isLoaded,
+  isLoadedAction,
 
   signInRequestAction,
   signInRequestFailAction,
