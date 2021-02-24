@@ -57,5 +57,7 @@ echo '[--- Promotions ---]'
 cd ../promotions && npx yarn build
 echo '[--- Brands ---]'
 cd ../brands && npx yarn build
+echo '[--- Gallery ---]'
+cd ../gallery && npx yarn build
 
 exit 0
