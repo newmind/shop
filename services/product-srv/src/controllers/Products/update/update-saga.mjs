@@ -1,14 +1,10 @@
 
-import { models } from "@sys.packages/db";
 import { NetworkError } from "@packages/errors";
 import { sendEvent } from '@sys.packages/rabbit2';
-import { getFiles } from '@sys.packages/utils';
 
 import Sagas from 'node-sagas';
 
 import getProduct from './getProduct';
-import saveImages from './saveImages';
-import deleteImages from './deleteImages';
 import updateProperties from './updateProperties';
 
 
@@ -38,34 +34,12 @@ export default class UpdateSaga {
     const sagaBuilder = new Sagas.SagaBuilder();
 
     const { uuid } = ctx['params'];
-    const { files, fields } = await getFiles(ctx['req']);
-    const { Gallery } = models;
+    const body = ctx['request']['body'];
 
     return sagaBuilder
-      .step('Сохранение изображений')
-      .invoke(async (params) => {
-        console.log(fields)
-        if ( !! Object.keys(files).length) {
-          const imagesID = await saveImages(files);
-          params.setImageIDs(imagesID);
-          await Gallery.bulkCreate(imagesID.map((item, index) => ({
-            productUuid: uuid,
-            uuid: item,
-            order: index,
-          })));
-        }
-      })
-      .withCompensation(async (params) => {
-        const ids = params.getImageIDs();
-        if (ids) {
-          await deleteImages(ids);
-          await Gallery.destroy({ where: { uuid: ids }});
-        }
-      })
-
       .step('Update product properties')
       .invoke(async () => {
-        await updateProperties(uuid, fields);
+        await updateProperties(uuid, body);
       })
 
       .step('Get product')

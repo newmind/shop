@@ -4,13 +4,6 @@ import BusBoy from 'busboy';
 import crypto from "crypto";
 
 
-const extensions = {
-  'image/jpeg': 'jpg',
-  'image/bmp': 'bmp',
-  'image/png': 'png'
-};
-
-
 export const UUID = () => {
   let dt = new Date().getTime();
   return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, (c) => {
@@ -80,10 +73,7 @@ export const getFiles = async (req) => {
     const result = { files: {}, fields: {} };
     const bb = new BusBoy({ headers: req.headers });
 
-    bb.on('file', (fieldName, file, filename, encoding, mimeType) => {
-
-      const hashString = UUID();
-      const fileName = `${hashString}.${extensions[mimeType]}`;
+    bb.on('file', (fieldName, file, fileName, encoding, mimeType) => {
 
       result['files'][fieldName] = {
         fileName: fileName,

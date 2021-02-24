@@ -1,5 +1,5 @@
 
-import { Row, Col, InputField, SelectField, Button, Draggable } from '@ui.packages/kit';
+import { Row, Col, InputField, SelectField, Button, Draggable, CheckBoxField } from '@ui.packages/kit';
 
 import React from 'react';
 import types from 'prop-types';
@@ -27,6 +27,9 @@ function AttributeField({ field, data, disabled, onRemove }) {
 
   return (
     <div className={styles['attr']}>
+      <div className={styles['checkbox']}>
+        <CheckBoxField name={`${field}.use`} />
+      </div>
       <div className={styles['attr__title']}>
         <SelectField
           require

@@ -89,6 +89,14 @@ const routes = [
     ),
   },
   {
+    path: '/gallery',
+    wrapper: 'Navigate',
+    module: import(
+      /* webpackChunkName: "gallery" */
+      '@modules/gallery'
+    ),
+  },
+  {
     path: '/promotions',
     wrapper: 'Navigate',
     module: import(

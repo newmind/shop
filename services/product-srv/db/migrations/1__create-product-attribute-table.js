@@ -28,6 +28,11 @@ module.exports = {
           defaultValue: 1,
           allowNull: false,
         },
+        use: {
+          type: DataType.BOOLEAN,
+          defaultValue: false,
+          allowNull: false,
+        }
       }, {
         transaction
       });

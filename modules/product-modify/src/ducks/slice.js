@@ -9,8 +9,10 @@ const initialState = {
   attributes: [],
   units: [],
   currencies: [],
+  gallery: [],
   product: {},
   inProcess: false,
+  inGalleryProcess: false,
 };
 
 const REDUCER_NAME = 'product-modify';
@@ -111,6 +113,17 @@ const productModifySlice = createSlice({
         gallery: state['product']['gallery'].filter((item) => (payload['uuid'].indexOf(item) === -1)),
       };
     },
+
+    getGalleryRequestAction(state) {
+      state['inGalleryProcess'] = true;
+    },
+    getGalleryRequestFailAction(state) {
+      state['inGalleryProcess'] = false;
+    },
+    getGalleryRequestSuccessAction(state, { payload }) {
+      state['gallery'] = payload;
+      state['inGalleryProcess'] = false;
+    },
   },
 });
 
@@ -158,16 +171,22 @@ export const {
   deleteImageRequestAction,
   deleteImageRequestFailAction,
   deleteImageRequestSuccessAction,
+
+  getGalleryRequestAction,
+  getGalleryRequestFailAction,
+  getGalleryRequestSuccessAction,
 } = productModifySlice['actions'];
 
 export const selectTypes = (state) => state[REDUCER_NAME]['types'];
 export const selectUnits = (state) => state[REDUCER_NAME]['units'];
 export const selectBrands = (state) => state[REDUCER_NAME]['brands'];
+export const selectGallery = (state) => state[REDUCER_NAME]['gallery'];
 export const selectProduct = (state) => state[REDUCER_NAME]['product'];
 export const selectInProcess = (state) => state[REDUCER_NAME]['inProcess'];
 export const selectCategories = (state) => state[REDUCER_NAME]['categories'];
 export const selectCurrencies = (state) => state[REDUCER_NAME]['currencies'];
 export const selectAttributes = (state) => state[REDUCER_NAME]['attributes'];
+export const selectInGalleryProcess = (state) => state[REDUCER_NAME]['inGalleryProcess'];
 
 export const name = productModifySlice['name'];
 export const reducer = productModifySlice['reducer'];

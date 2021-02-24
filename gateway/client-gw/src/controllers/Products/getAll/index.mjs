@@ -32,6 +32,7 @@ export default () => async (ctx) => {
     method: 'get',
     url: process.env['PRODUCT_API_SRV'] + `/products`,
     params: {
+      use: true,
       take: Number(process.env['TAKE']),
       skip: (page > 0 ? page - 1 : 0) * Number(process.env['TAKE']),
       ...params,
@@ -40,7 +41,7 @@ export default () => async (ctx) => {
 
   ctx.body = {
     success: true,
-    data: products.map((product) => productBuilder(product)),
+    data: products.map((product) => productBuilder(product, true)),
     meta: meta,
     filter: {
       types: types.map((item) => ({ id: item['id'], value: item['value'], count: Number(item['count']) })),

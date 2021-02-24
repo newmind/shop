@@ -1,4 +1,6 @@
 
+import { UnauthorizedError } from '@packages/errors';
+
 import { Mode } from "@ui.packages/types";
 import request from '@ui.packages/request';
 import { pushNotification } from "@ui.packages/notifications";
@@ -26,8 +28,11 @@ export const getOperations = () => async (dispatch) => {
     dispatch(getItemsRequestSuccessAction(result));
   }
   catch (error) {
-
     dispatch(getItemsRequestFailAction(error));
+
+    if (error instanceof UnauthorizedError) {
+      return void 0;
+    }
     dispatch(pushNotification({
       title: 'Ошибка при запросе данных',
       connect: `${error['data']['message']} (${error['data']['code']})`,
@@ -49,8 +54,11 @@ export const getStatuses = () => async (dispatch) => {
     dispatch(getStatusesRequestSuccessAction(result['data']));
   }
   catch (error) {
-
     dispatch(getStatusesRequestFailAction(error));
+
+    if (error instanceof UnauthorizedError) {
+      return void 0;
+    }
     dispatch(pushNotification({
       title: 'Ошибка при запросе данных',
       connect: `${error['data']['message']} (${error['data']['code']})`,

@@ -1,4 +1,6 @@
 
+import { UnauthorizedError } from '@packages/errors';
+
 import request from '@ui.packages/request';
 
 import {
@@ -24,8 +26,11 @@ export const getComments = () => async (dispatch) => {
     dispatch(getCommentsRequestSuccessAction(result));
   }
   catch(error) {
-
     dispatch(getCommentsRequestFailAction(error));
+
+    if (error instanceof UnauthorizedError) {
+      return void 0;
+    }
   }
 };
 
@@ -80,7 +85,10 @@ export const deleteComments = (id) => async (dispatch) => {
     dispatch(removeCommentRequestSuccessAction(result['data']));
   }
   catch(error) {
-
     dispatch(removeCommentRequestFailAction(error));
+
+    if (error instanceof UnauthorizedError) {
+      return void 0;
+    }
   }
 };

@@ -1,4 +1,6 @@
 
+import { UnauthorizedError } from '@packages/errors';
+
 import request from '@ui.packages/request';
 import { closeDialog } from '@ui.packages/dialog';
 import { pushNotification } from '@ui.packages/notifications';
@@ -39,6 +41,10 @@ export const getUnits = () => async (dispatch) => {
   }
   catch(error) {
     dispatch(getUnitsRequestFailAction(error));
+
+    if (error instanceof UnauthorizedError) {
+      return void 0;
+    }
     dispatch(pushNotification({
       mode: 'danger',
       content: 'Ошибка получения списка "Размерности"'
@@ -59,6 +65,10 @@ export const getItems = () => async (dispatch) => {
   }
   catch(error) {
     dispatch(getItemsRequestFailAction(error));
+
+    if (error instanceof UnauthorizedError) {
+      return void 0;
+    }
     dispatch(pushNotification({
       mode: 'danger',
       title: 'Ошибка получения списка "Аттрибутов"'
@@ -90,6 +100,10 @@ export const createItem = (formData) => async (dispatch) => {
   }
   catch(error) {
     dispatch(createItemRequestFailAction(error));
+
+    if (error instanceof UnauthorizedError) {
+      return void 0;
+    }
     dispatch(pushNotification({
       mode: 'danger',
       title: 'Ошибка создания "Аттрибута"'
@@ -121,6 +135,10 @@ export const updateItem = (formData) => async (dispatch) => {
   }
   catch(error) {
     dispatch(updateItemRequestFailAction(error));
+
+    if (error instanceof UnauthorizedError) {
+      return void 0;
+    }
     dispatch(pushNotification({
       mode: 'danger',
       title: 'Ошибка обновления "Аттрибута"'
@@ -146,6 +164,10 @@ export const deleteItem = (ids) => async (dispatch) => {
   }
   catch(error) {
     dispatch(deleteItemRequestFailAction(error));
+
+    if (error instanceof UnauthorizedError) {
+      return void 0;
+    }
     dispatch(pushNotification({
       mode: 'danger',
       title: 'Ошибка удаления "Аттрибута"'

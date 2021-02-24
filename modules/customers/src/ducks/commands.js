@@ -1,4 +1,6 @@
 
+import { UnauthorizedError } from '@packages/errors';
+
 import request from '@ui.packages/request';
 import { closeDialog } from '@ui.packages/dialog';
 import { pushNotification } from '@ui.packages/notifications';
@@ -34,8 +36,11 @@ export const getCustomers = () => async (dispatch) => {
     dispatch(getCustomersRequestSuccessAction(result));
   }
   catch(error) {
-
     dispatch(getCustomersRequestFailAction(error));
+
+    if (error instanceof UnauthorizedError) {
+      return void 0;
+    }
     dispatch(pushNotification({
       autoClose: false,
       mode: 'danger',
@@ -63,6 +68,10 @@ export const createCustomer = (data) => async (dispatch) => {
   }
   catch(error) {
     dispatch(createCustomerRequestFailAction(error));
+
+    if (error instanceof UnauthorizedError) {
+      return void 0;
+    }
     dispatch(pushNotification({
       autoClose: false,
       mode: 'danger',
@@ -90,6 +99,10 @@ export const updateCustomer = (data) => async (dispatch) => {
   }
   catch(error) {
     dispatch(updateCustomerRequestFailAction(error));
+
+    if (error instanceof UnauthorizedError) {
+      return void 0;
+    }
     dispatch(pushNotification({
       autoClose: false,
       mode: 'danger',
@@ -116,6 +129,10 @@ export const deleteCustomers = (uuid) => async (dispatch) => {
   }
   catch(error) {
     dispatch(deleteCustomerRequestFailAction(error));
+
+    if (error instanceof UnauthorizedError) {
+      return void 0;
+    }
     dispatch(pushNotification({
       autoClose: false,
       mode: 'danger',

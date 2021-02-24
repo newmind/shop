@@ -15,19 +15,16 @@ const defaultOptions = {
   method: 'get',
   url: '/',
   responseType: 'json',
-  silent: false,
 };
 
-let dispatch = null;
 let hostApi = null;
+let dispatch = null;
 
 
 export const middleware = (options) => (store) => (next) => (action) => {
 
-  dispatch = store['dispatch'];
   hostApi = options['host'];
-
-  defaultOptions['silent'] = options['silent'] || false;
+  dispatch = store['dispatch'];
 
   return next(action);
 };
@@ -65,30 +62,33 @@ const request = async (options) => {
   }
   catch(error) {
 
+    if (axios.isCancel(error)) {
+      return { success: true, data: null };
+    }
+
     if (error['response']) {
-      const { status, data } = error['response'];
+      const {status, data} = error['response'];
 
       if (status === 400) {
         return Promise.reject(new BadRequestError(data));
-      }
-      else if (status === 401) {
+      } else if (status === 401) {
+        dispatch({type: 'redirect', payload: null});
         return Promise.reject(new UnauthorizedError(data));
-      }
-      else if (status === 404) {
+      } else if (status === 404) {
         return Promise.reject(new NotfoundError(data));
-      }
-      else if (status === 417) {
+      } else if (status === 417) {
         return Promise.reject(new ValidationError(data));
-      }
-      else {
+      } else {
         return Promise.reject(new NetworkError(data));
       }
-    }
-    else {
-
-      throw new NetworkError({ code: '1.0.0', message: 'Сервис временно не доступен' });
+    } else {
+      throw new NetworkError({code: '1.0.0', message: 'Сервис временно не доступен'});
     }
   }
 };
 
 export default request;
+
+export function createCancelToken() {
+  return axios.CancelToken.source();
+}

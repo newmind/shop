@@ -31,7 +31,7 @@ export default function HOC() {
   });
 
   useUpdate(async function() {
-
+    await dispatch(getPromotions());
   });
 
   useUnmount(function() {

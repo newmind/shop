@@ -16,6 +16,7 @@
     "@modules/showcase": "1.0.0",
     "@ui.packages/application": "1.0.0",
     "@ui.packages/cart": "1.0.0",
+    "@ui.packages/cart-widget": "1.0.0",
     "@ui.packages/dialog": "1.0.0",
     "@ui.packages/notifications": "1.0.0",
     "@ui.packages/request": "1.0.0",

@@ -1,4 +1,6 @@
 
+import { UnauthorizedError } from '@packages/errors';
+
 import request from '@ui.packages/request';
 import { closeDialog } from '@ui.packages/dialog';
 import { pushNotification } from '@ui.packages/notifications';
@@ -35,6 +37,10 @@ export const getCategories = () => async (dispatch) => {
   }
   catch(error) {
     dispatch(getCategoriesRequestFailAction(error));
+
+    if (error instanceof UnauthorizedError) {
+      return void 0;
+    }
     dispatch(pushNotification({
       mode: 'danger',
       title: 'Ошибка получения списка "Категория"'
@@ -61,6 +67,10 @@ export const createCategory = (formData) => async (dispatch) => {
   }
   catch(error) {
     dispatch(createCategoryRequestFailAction(error));
+
+    if (error instanceof UnauthorizedError) {
+      return void 0;
+    }
     dispatch(pushNotification({
       mode: 'danger',
       title: 'Ошибка создания "Категории"'
@@ -87,6 +97,10 @@ export const updateCategory = (formData) => async (dispatch) => {
   }
   catch(error) {
     dispatch(updateCategoryRequestFailAction(error));
+
+    if (error instanceof UnauthorizedError) {
+      return void 0;
+    }
     dispatch(pushNotification({
       mode: 'danger',
       title: 'Ошибка обновления "Категории"'
@@ -112,6 +126,10 @@ export const deleteCategory = (id) => async (dispatch) => {
   }
   catch(error) {
     dispatch(deleteCategoryRequestFailAction(error));
+
+    if (error instanceof UnauthorizedError) {
+      return void 0;
+    }
     dispatch(pushNotification({
       mode: 'danger',
       title: 'Ошибка удаления "Категории"'

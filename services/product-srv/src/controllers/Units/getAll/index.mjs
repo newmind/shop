@@ -7,7 +7,7 @@ export default () => async (ctx) => {
 
   const result = await Unit.findAll({
     attributes: ['id', 'value', 'description'],
-    order: [['id', 'desc']],
+    order: [['value', 'asc']],
   });
 
   ctx.body = {

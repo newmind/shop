@@ -1,7 +1,9 @@
 
+import { UnauthorizedError } from '@packages/errors';
+
 import { Mode } from '@ui.packages/types';
-import { uniqName } from '@ui.packages/utils';
 import request from '@ui.packages/request';
+import { uniqName } from '@ui.packages/utils';
 import { pushNotification } from '@ui.packages/notifications';
 
 import {
@@ -41,6 +43,10 @@ export const getPromotions = (params = {}) => async (dispatch) => {
   }
   catch(error) {
     dispatch(getPromotionsRequestFailAction());
+
+    if (error instanceof UnauthorizedError) {
+      return void 0;
+    }
     dispatch(pushNotification({
       title: 'Ошибка при запросе данных',
       connect: `${error['data']['message']} (${error['data']['code']})`,
@@ -70,6 +76,10 @@ export const setPromotions = (promotionUuid, productUuid) => async (dispatch) =>
   }
   catch(error) {
     dispatch(setPromotionRequestFailAction());
+
+    if (error instanceof UnauthorizedError) {
+      return void 0;
+    }
     dispatch(pushNotification({
       title: 'Ошибка при запросе данных',
       connect: `${error['data']['message']} (${error['data']['code']})`,
@@ -97,6 +107,10 @@ export const getProducts = (params = {}) => async (dispatch) => {
   }
   catch(error) {
     dispatch(getProductsRequestFailAction());
+
+    if (error instanceof UnauthorizedError) {
+      return void 0;
+    }
     dispatch(pushNotification({
       title: 'Ошибка при запросе данных',
       connect: `${error['data']['message']} (${error['data']['code']})`,
@@ -124,6 +138,10 @@ export const removeProductById = (uuid) => async dispatch => {
   }
   catch(error) {
     dispatch(removeProductRequestFailRequest(error));
+
+    if (error instanceof UnauthorizedError) {
+      return void 0;
+    }
     dispatch(pushNotification({
       title: 'Ошибка при удаленнии продукта',
       connect: `${error['data']['message']} (${error['data']['code']})`,
@@ -152,8 +170,11 @@ export const copyProductById = (uuid) => async dispatch => {
     }));
   }
   catch(error) {
-    console.log(error)
     dispatch(copyProductRequestFailRequest(error));
+
+    if (error instanceof UnauthorizedError) {
+      return void 0;
+    }
     dispatch(pushNotification({
       title: 'Ошибка при удаленнии продукта',
       connect: `${error['data']['message']} (${error['data']['code']})`,

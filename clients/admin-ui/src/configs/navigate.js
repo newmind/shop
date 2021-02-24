@@ -37,6 +37,11 @@ const navigate = [
     ],
   },
   {
+    title: "Галлерея",
+    path: '/gallery',
+    icon: 'far fa-images',
+  },
+  {
     title: "Скидки",
     path: '/promotions',
     icon: 'fas fa-percentage',

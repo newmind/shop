@@ -1,4 +1,6 @@
 
+import { UnauthorizedError } from '@packages/errors';
+
 import request from '@ui.packages/request';
 import { closeDialog } from '@ui.packages/dialog';
 import { pushNotification } from '@ui.packages/notifications';
@@ -35,6 +37,10 @@ export const getTypes = () => async (dispatch) => {
   }
   catch(error) {
     dispatch(getTypesRequestFailAction(error));
+
+    if (error instanceof UnauthorizedError) {
+      return void 0;
+    }
     dispatch(pushNotification({
       mode: 'danger',
       content: 'Ошибка при выполнении операции'
@@ -61,6 +67,10 @@ export const createType = (data) => async (dispatch) => {
   }
   catch(error) {
     dispatch(createTypeRequestFailAction(error));
+
+    if (error instanceof UnauthorizedError) {
+      return void 0;
+    }
     dispatch(pushNotification({
       mode: 'danger',
       title: 'Ошибка при выполнении операции'
@@ -87,6 +97,10 @@ export const updateType = (data) => async (dispatch) => {
   }
   catch(error) {
     dispatch(updateTypeRequestFailAction(error));
+
+    if (error instanceof UnauthorizedError) {
+      return void 0;
+    }
     dispatch(pushNotification({
       mode: 'danger',
       title: 'Ошибка при выполнении операции'
@@ -112,6 +126,10 @@ export const deleteTypes = (id) => async (dispatch) => {
   }
   catch(error) {
     dispatch(deleteTypeRequestFailAction(error));
+
+    if (error instanceof UnauthorizedError) {
+      return void 0;
+    }
     dispatch(pushNotification({
       mode: 'danger',
       title: 'Ошибка при выполнении операции'

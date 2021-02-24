@@ -14,6 +14,9 @@ const LANDSCAPE_DIRECTION = 'landscape';
 
 
 function getRation(el) {
+  if ( ! el) {
+    return 0;
+  }
   const RECT = el.getBoundingClientRect();
   return RECT['height'] / RECT['width'];
 }

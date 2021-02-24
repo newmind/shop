@@ -86,7 +86,6 @@ export const signIn = (formData) => async (dispatch) => {
   }
 };
 
-
 export const signOut = (userId) => async (dispatch) => {
   try {
     dispatch(signOutRequestAction());

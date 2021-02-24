@@ -1,4 +1,6 @@
 
+import { UnauthorizedError } from '@packages/errors';
+
 import { Mode } from '@ui.packages/types';
 import request from '@ui.packages/request';
 import { uniqName } from '@ui.packages/utils';
@@ -40,6 +42,10 @@ import {
   deleteImageRequestAction,
   deleteImageRequestFailAction,
   deleteImageRequestSuccessAction,
+
+  getGalleryRequestAction,
+  getGalleryRequestFailAction,
+  getGalleryRequestSuccessAction,
 } from './slice';
 
 
@@ -56,6 +62,10 @@ export const getBrands = () => async (dispatch) => {
   }
   catch(error) {
     dispatch(getBrandsRequestFailAction(error));
+
+    if (error instanceof UnauthorizedError) {
+      return void 0;
+    }
     dispatch(pushNotification({
       mode: Mode.DANGER,
       title: 'Ошибка при получании данный',
@@ -78,6 +88,10 @@ export const getTypes = () => async (dispatch) => {
   }
   catch(error) {
     dispatch(getTypesRequestFailAction(error));
+
+    if (error instanceof UnauthorizedError) {
+      return void 0;
+    }
     dispatch(pushNotification({
       mode: Mode.DANGER,
       title: 'Ошибка при получании данный Types',
@@ -103,6 +117,10 @@ export const getCategories = () => async (dispatch) => {
   }
   catch(error) {
     dispatch(getCategoriesRequestFailAction(error));
+
+    if (error instanceof UnauthorizedError) {
+      return void 0;
+    }
     dispatch(pushNotification({
       mode: Mode.DANGER,
       title: 'Ошибка при получании данный Categories',
@@ -124,8 +142,11 @@ export const getCurrencies = () => async (dispatch) => {
     dispatch(getCurrenciesRequestSuccessAction(result['data']));
   }
   catch(error) {
-    console.log(error)
     dispatch(getCurrenciesRequestFailAction(error));
+
+    if (error instanceof UnauthorizedError) {
+      return void 0;
+    }
     dispatch(pushNotification({
       mode: Mode.DANGER,
       title: 'Ошибка при получании данный Currencies',
@@ -148,6 +169,10 @@ export const getAttributes = () => async (dispatch) => {
   }
   catch(error) {
     dispatch(getAttributesRequestFailAction(error));
+
+    if (error instanceof UnauthorizedError) {
+      return void 0;
+    }
     dispatch(pushNotification({
       mode: Mode.DANGER,
       title: 'Ошибка при получании данный Attributes',
@@ -156,7 +181,6 @@ export const getAttributes = () => async (dispatch) => {
     }));
   }
 };
-
 
 export const getProductById = (uuid) => async (dispatch) => {
   try {
@@ -174,8 +198,11 @@ export const getProductById = (uuid) => async (dispatch) => {
     dispatch(getProductRequestSuccessAction(result['data']));
   }
   catch(error) {
-
     dispatch(getProductRequestFailAction(error));
+
+    if (error instanceof UnauthorizedError) {
+      return void 0;
+    }
     dispatch(pushNotification({
       mode: Mode.DANGER,
       title: 'Ошибка при получании данный продукта',
@@ -189,41 +216,18 @@ export const updateProductsById = (data) => async (dispatch) => {
   try {
     dispatch(updateProductRequestAction());
 
-    const formData = new FormData();
-
-    (data['gallery'] || []).forEach((file, index) => {
-      if (file.constructor === File) {
-        formData.append(`file-${index}`, file);
-      }
-      else {
-        formData.append(`file-${index}`, file);
-      }
-    });
-
-    formData.append('name', data['name']);
-    formData.append('brandId', data['brandId']);
-    formData.append('price', data['price']);
-    formData.append('currencyCode', data['currencyCode']);
-    formData.append('description', data['description']);
-
-    formData.append('fiscal', data['fiscal'] || null);
-
-    formData.append('types', JSON.stringify(data['types']));
-    formData.append('categories', JSON.stringify(data['categories']));
-    formData.append('attributes', JSON.stringify(data['attributes'].map((attr) => ({
-      id: attr['id'],
-      value: attr['value'],
-    })) || []));
-
-    await request({
+    const result = await request({
       method: 'put',
       url: `/products/${data['uuid']}`,
-      data: formData,
-    });
-
-    const result = await request({
-      method: 'get',
-      url: `/products/${data['uuid']}`
+      data: {
+        gallery: [],
+        ...data,
+        attributes: data['attributes'].map((attr) => ({
+          id: attr['id'],
+          value: attr['value'],
+          use: attr['use'],
+        })),
+      },
     });
 
     dispatch(updateProductRequestSuccessAction(result['data']));
@@ -234,6 +238,10 @@ export const updateProductsById = (data) => async (dispatch) => {
   }
   catch(error) {
     dispatch(updateProductRequestFailAction());
+
+    if (error instanceof UnauthorizedError) {
+      return void 0;
+    }
     dispatch(pushNotification({
       mode: Mode.DANGER,
       title: 'Ошибка при сохранении данных',
@@ -248,31 +256,16 @@ export const createProduct = (data) => async dispatch => {
     dispatch(createProductRequestAction());
 
     const uuid = uniqName();
-    const formData = new FormData();
-
-    (data['gallery'] || []).forEach((file, index) => {
-      if (file instanceof File) {
-        formData.append(`file-${index}`, file);
-      }
-    });
-
-    formData.append('uuid', uuid);
-    formData.append('name', data['name']);
-    formData.append('brandId', data['brandId']);
-    formData.append('price', data['price']);
-    formData.append('currencyCode', data['currencyCode']);
-    formData.append('description', data['description']);
-
-    formData.append('fiscal', data['fiscal'] || null);
-
-    formData.append('types', JSON.stringify(data['types'] || []));
-    formData.append('categories', JSON.stringify(data['categories'] || []));
-    formData.append('attributes', JSON.stringify(data['attributes'] || []));
 
     await request({
+      url: '/products',
       method: 'post',
-      url: `/products`,
-      data: formData,
+      data: {
+        uuid,
+        gallery: [],
+        attributes: [],
+        ...data,
+      },
     });
 
     dispatch(createProductRequestSuccessAction());
@@ -285,6 +278,10 @@ export const createProduct = (data) => async dispatch => {
   }
   catch(error) {
     dispatch(createProductRequestFailAction(error));
+
+    if (error instanceof UnauthorizedError) {
+      return void 0;
+    }
     dispatch(pushNotification({
       title: 'Ошибка при добавлении товара',
       content: error['message'],
@@ -313,8 +310,37 @@ export const deleteImages = (uuid) => async (dispatch) => {
   }
   catch(error) {
     dispatch(deleteImageRequestFailAction(error));
+
+    if (error instanceof UnauthorizedError) {
+      return void 0;
+    }
     dispatch(pushNotification({
       title: 'Ошибка удаления изображения',
+      content: error['message'],
+      type: Mode.DANGER,
+    }));
+  }
+};
+
+export const getGallery = () => async (dispatch) => {
+  try {
+    dispatch(getGalleryRequestAction());
+
+    const result = await request({
+      url: `/gallery`,
+      method: 'get',
+    });
+
+    dispatch(getGalleryRequestSuccessAction(result['data']));
+  }
+  catch(error) {
+    dispatch(getGalleryRequestFailAction(error));
+
+    if (error instanceof UnauthorizedError) {
+      return void 0;
+    }
+    dispatch(pushNotification({
+      title: 'Ошибка загрузки изображения',
       content: error['message'],
       type: Mode.DANGER,
     }));

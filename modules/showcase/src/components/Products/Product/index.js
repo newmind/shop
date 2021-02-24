@@ -1,7 +1,6 @@
 
 import numeral from '@packages/numeral';
 
-// import { nounDeclension } from "@ui.packages/utils";
 import { Gallery, Header, Text, Button, Link } from '@ui.packages/kit';
 import { removeProductFromCartAction, selectUuid } from '@ui.packages/cart';
 
@@ -9,11 +8,13 @@ import React from 'react';
 import types from 'prop-types';
 import { useSelector, useDispatch } from 'react-redux';
 
+import Attribute from "./Attribute";
+
 import cn from 'classnames';
 import styles from './default.module.scss';
 
 
-export default function Product({ uuid, price, prevPrice, currency, brand, name, gallery, onCart }) {
+export default function Product({ uuid, price, prevPrice, currency, brand, name, gallery, attributes, onCart }) {
   const dispatch = useDispatch();
 
   const removeFromCartClassName= cn(styles['remove'], 'far fa-trash-alt');
@@ -56,6 +57,9 @@ export default function Product({ uuid, price, prevPrice, currency, brand, name,
           <div className={styles['uuid']}>
             <Text type="uuid">Код: { uuid }</Text>
           </div>
+          <div className={styles['attrs']}>
+            {attributes.map((attr, index) => <Attribute key={index} {...attr} />)}
+          </div>
         </div>
       </div>
       <div className={styles['information']}>
@@ -74,7 +78,7 @@ export default function Product({ uuid, price, prevPrice, currency, brand, name,
         </div>
         {product && (
           <div className={styles['count']}>
-            <Text type={Text.TYPE_COMMENT}>{ product[1] } товар в корзине</Text>
+            <Text type={Text.TYPE_COMMENT}>товар уже в корзине</Text>
           </div>
         )}
       </div>

@@ -7,6 +7,7 @@
     "start": "react-scripts start"
   },
   "dependencies": {
+    "@modules/gallery": "1.0.0",
     "@modules/attributes": "1.0.0",
     "@modules/brands": "1.0.0",
     "@modules/categories": "1.0.0",

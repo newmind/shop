@@ -1,14 +1,17 @@
 
 import { Mode } from '@ui.packages/types';
+import { Dialog } from '@ui.packages/dialog';
 import { Button, Header, Page, PageContent, PageControls } from '@ui.packages/kit';
 
 import React from 'react';
 import types from 'prop-types';
+import { change } from 'redux-form';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { submit, reset, isPristine, isValid } from 'redux-form';
 
 import ModifyForm from './ModifyForm';
+import ImagesForm from "./ImagesForm";
 
 import styles from './default.module.scss';
 
@@ -80,6 +83,15 @@ function ProductModify() {
           />
         </article>
       </PageContent>
+
+      <Dialog name="add-images" title="Добавить изображения">
+        <ImagesForm
+          initialValues={{
+            gallery: product['gallery'] || [],
+          }}
+          onSubmit={(data) => dispatch(change('modify-product', 'gallery', data['gallery']))}
+        />
+      </Dialog>
     </Page>
   );
 }

@@ -75,14 +75,14 @@ export default () => async (ctx) => {
   }
 
   const result = await Product.findAndCountAll({
-    attributes: ['uuid', 'name', 'description', 'status', 'price', 'fiscal', 'updatedAt'],
+    attributes: ['uuid', 'name', 'description', 'status', 'price', 'fiscal', 'createdAt'],
     ...options,
     ...offset,
     distinct: true,
     where: { ...where },
     order: [
-      ['updatedAt', 'desc'],
-      ['gallery', 'order', 'desc'],
+      ['createdAt', 'desc'],
+      ['gallery', 'order', 'asc'],
       ['comments', 'createdAt', 'desc'],
       ['attributes', 'order', 'asc'],
     ],
@@ -133,7 +133,7 @@ export default () => async (ctx) => {
         model: ProductAttribute,
         required: false,
         as: 'attributes',
-        attributes: ['value', 'order'],
+        attributes: ['value', 'order', 'use'],
         include: [
           {
             model: Attribute,

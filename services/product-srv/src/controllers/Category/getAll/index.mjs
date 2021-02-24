@@ -11,13 +11,13 @@ export default () => async (ctx) => {
   if (all) {
     categories = await Category.findAll({
       attributes: ['id', 'value', 'description'],
-      order: [['id', 'desc']],
+      order: [['value', 'asc']],
     });
   }
   else {
     categories = await Category.findAll({
       attributes: ['id', 'value', 'description', 'parentId'],
-      order: [['id', 'desc']],
+      order: [['value', 'asc']],
       where: { parentId: null },
       include: [
         {

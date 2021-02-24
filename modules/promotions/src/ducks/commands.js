@@ -1,4 +1,6 @@
 
+import { UnauthorizedError } from '@packages/errors';
+
 import request from '@ui.packages/request';
 import { closeDialog } from '@ui.packages/dialog';
 import { pushNotification } from '@ui.packages/notifications';
@@ -34,8 +36,11 @@ export const getPromotions = () => async (dispatch) => {
     dispatch(getPromotionsRequestSuccessAction(data));
   }
   catch(error) {
-
     dispatch(getPromotionsRequestFailAction(error));
+
+    if (error instanceof UnauthorizedError) {
+      return void 0;
+    }
     dispatch(pushNotification({
       mode: 'danger',
       title: 'Ошибка при выполнении операции'
@@ -62,6 +67,10 @@ export const createPromotion = (formData) => async (dispatch) => {
   }
   catch(error) {
     dispatch(createPromotionRequestFailAction(error));
+
+    if (error instanceof UnauthorizedError) {
+      return void 0;
+    }
     dispatch(pushNotification({
       mode: 'danger',
       title: 'Ошибка выполнения операции'
@@ -88,6 +97,10 @@ export const updatePromotion = (formData) => async (dispatch) => {
   }
   catch(error) {
     dispatch(updatePromotionRequestFailAction(error));
+
+    if (error instanceof UnauthorizedError) {
+      return void 0;
+    }
     dispatch(pushNotification({
       mode: 'danger',
       title: 'Ошибка выполнения операции'
@@ -113,6 +126,10 @@ export const deletePromotions = (id) => async (dispatch) => {
   }
   catch(error) {
     dispatch(deletePromotionRequestFailAction(error));
+
+    if (error instanceof UnauthorizedError) {
+      return void 0;
+    }
     dispatch(pushNotification({
       mode: 'danger',
       title: 'Ошибка выполнения операции'

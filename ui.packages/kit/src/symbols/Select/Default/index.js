@@ -68,7 +68,6 @@ function Select({
 
   useEffect(function clickEvents() {
     function handleClick(event) {
-      event.preventDefault();
       event.stopPropagation();
 
       if (isOpen) {

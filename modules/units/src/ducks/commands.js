@@ -1,4 +1,6 @@
 
+import { UnauthorizedError } from '@packages/errors';
+
 import request from '@ui.packages/request';
 import { closeDialog } from '@ui.packages/dialog';
 import { pushNotification } from '@ui.packages/notifications';
@@ -35,6 +37,10 @@ export const getUnits = () => async (dispatch) => {
   }
   catch(error) {
     dispatch(getUnitsRequestFailAction(error));
+
+    if (error instanceof UnauthorizedError) {
+      return void 0;
+    }
     dispatch(pushNotification({
       mode: 'danger',
       content: 'Ошибка получения списка "Единица измерения"'
@@ -57,6 +63,10 @@ export const createUnit = (data) => async (dispatch) => {
   }
   catch(error) {
     dispatch(createUnitRequestFailAction(error));
+
+    if (error instanceof UnauthorizedError) {
+      return void 0;
+    }
   }
 };
 
@@ -75,6 +85,10 @@ export const updateUnit = (data) => async (dispatch) => {
   }
   catch(error) {
     dispatch(updateUnitRequestFailAction(error));
+
+    if (error instanceof UnauthorizedError) {
+      return void 0;
+    }
   }
 };
 
@@ -92,5 +106,9 @@ export const deleteUnit = (id) => async (dispatch) => {
   }
   catch(error) {
     dispatch(deleteUnitRequestFailAction(error));
+
+    if (error instanceof UnauthorizedError) {
+      return void 0;
+    }
   }
 };

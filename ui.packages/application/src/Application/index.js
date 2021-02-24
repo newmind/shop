@@ -5,8 +5,8 @@ import { useSelector, useDispatch } from 'react-redux';
 import Router from '../Router';
 import Loading from '../Loading';
 
-import { useGetProfile } from '../hooks';
 import ApplicationContext from "../Context";
+import { useGetProfile, useRedirect } from '../hooks';
 
 import { isLoadedAction, selectIsLoaded } from '../ducks/slice';
 
@@ -18,6 +18,7 @@ function Application({ options }) {
   const isLoaded = useSelector(selectIsLoaded);
 
   if (options['useSignIn']) {
+    useRedirect();
     useGetProfile();
   }
   else {

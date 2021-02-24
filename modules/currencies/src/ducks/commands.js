@@ -1,4 +1,6 @@
 
+import { UnauthorizedError } from '@packages/errors';
+
 import request from '@ui.packages/request';
 import { closeDialog } from '@ui.packages/dialog';
 import { pushNotification } from '@ui.packages/notifications';
@@ -34,8 +36,11 @@ export const getCurrencies = () => async (dispatch) => {
     dispatch(getCurrenciesRequestSuccessAction(data));
   }
   catch(error) {
-
     dispatch(getCurrenciesRequestFailAction(error));
+
+    if (error instanceof UnauthorizedError) {
+      return void 0;
+    }
     dispatch(pushNotification({
       mode: 'danger',
       title: 'Ошибка получения списка "Валюта"'
@@ -62,6 +67,10 @@ export const createCurrency = (data) => async (dispatch) => {
   }
   catch(error) {
     dispatch(createCurrencyRequestFailAction(error));
+
+    if (error instanceof UnauthorizedError) {
+      return void 0;
+    }
     dispatch(pushNotification({
       mode: 'danger',
       title: 'Ошибка создания "Валюты"'
@@ -88,6 +97,10 @@ export const updateCurrency = (data) => async (dispatch) => {
   }
   catch(error) {
     dispatch(updateCurrencyRequestFailAction(error));
+
+    if (error instanceof UnauthorizedError) {
+      return void 0;
+    }
     dispatch(pushNotification({
       mode: 'danger',
       content: 'Ошибка обновления "Валюты"'
@@ -113,6 +126,10 @@ export const deleteCurrencies = (id) => async (dispatch) => {
   }
   catch(error) {
     dispatch(deleteCurrencyRequestFailAction(error));
+
+    if (error instanceof UnauthorizedError) {
+      return void 0;
+    }
     dispatch(pushNotification({
       mode: 'danger',
       title: 'Ошибка удаления "Валюты"'

@@ -7,7 +7,7 @@ export default () => async (ctx) => {
 
   const result = await Attribute.findAll({
     attributes: ['id', 'value', 'type', 'description'],
-    order: [['id', 'desc']],
+    order: [['value', 'asc']],
     include: [
       {
         model: Unit,

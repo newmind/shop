@@ -1,5 +1,5 @@
 
-import { Cart } from '@ui.packages/cart';
+import { Widget } from "@ui.packages/cart-widget";
 
 import React from 'react';
 import { Link } from 'react-router-dom';
@@ -16,7 +16,7 @@ function Header() {
         </div>
       </div>
       <div className={styles['header__cart']}>
-        <Cart />
+        <Widget />
       </div>
     </div>
   );

@@ -1,5 +1,5 @@
 
-import { UnauthorizedError } from '@packages/errors';
+// import { UnauthorizedError } from '@packages/errors';
 
 import React, { useState, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
@@ -28,9 +28,9 @@ export default function() {
     }
     catch(error) {
 
-      if (error instanceof UnauthorizedError) {
-        navigate(process.env['PUBLIC_URL'] + '/sign-in');
-      }
+      // if (error instanceof UnauthorizedError) {
+      //   navigate(process.env['PUBLIC_URL'] + '/sign-in');
+      // }
     }
     finally {
       dispatch(isLoadedAction());

@@ -1,0 +1,30 @@
+
+@import "~@ui.packages/theme";
+
+
+.wrapper {
+
+  display: flex;
+  flex-direction: row;
+  flex: 1 0;
+
+  & + & {
+
+    margin: 4px 0 0;
+  }
+}
+
+.name {
+
+  display: flex;
+  flex-direction: column;
+  flex: 1 0;
+}
+
+.value {
+
+  display: block;
+  margin: 0 0 0 10px;
+  text-align: left;
+  width: 100px;
+}

@@ -11,6 +11,11 @@ module.exports = {
           index: true,
           unique: true,
         },
+        name: {
+          type: Sequelize.STRING(32),
+          allowNull: true,
+          unique: true,
+        },
         small: {
           type: Sequelize.BLOB,
         },
@@ -19,7 +24,15 @@ module.exports = {
         },
         large: {
           type: Sequelize.BLOB,
-        }
+        },
+        createdAt: {
+          type: Sequelize.DATE,
+          allowNull: false,
+        },
+        updatedAt: {
+          type: Sequelize.DATE,
+          allowNull: false,
+        },
       }, {
         transaction
       });

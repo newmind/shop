@@ -1,71 +1,44 @@
 
-import {Image, Draggable, Button, arrayMove} from '@ui.packages/kit';
+import { openDialog } from '@ui.packages/dialog';
+import { Image, Draggable, Button, arrayMove } from '@ui.packages/kit';
 
-import types from 'prop-types';
 import React from 'react';
+import { useDispatch } from 'react-redux';
 
 import cn from 'classnames';
 import styles from './default.module.scss';
 
 
-function AddImageForm({ path, input, disabled, onDelete }) {
+function AddImageForm({ input, disabled }) {
+  const dispatch = useDispatch();
 
-  function handleDelete(file) {
-    if (file instanceof File) {
-      const index = input['value'].indexOf(file);
-      if (index > -1) {
-        let files = [...(input['value'] || [])];
-        files.splice(index, 1);
-        input.onChange(files);
-      }
-    }
-    else {
-      onDelete(file);
-    }
+  function handleDelete(index) {
+    input.onChange([
+      ...input['value'].slice(0, index),
+      ...input['value'].slice(index + 1),
+    ]);
+  }
+
+  function handleOrderChange(from, to) {
+    input.onChange(arrayMove(input['value'], from, to));
   }
 
   function handleAddImages() {
-    const inputElement = document.createElement('input');
-
-    inputElement.classList.add(styles['input']);
-    inputElement.type = 'file';
-    inputElement.multiple = true;
-    inputElement.accept = '.jpg, .jpeg, .bmp, .png';
-
-    inputElement.onchange = () => {
-      let files = [...input['value'] || [], ...inputElement['files']];
-      input.onChange(files);
-      inputElement.remove();
-    };
-
-    inputElement.click();
-  }
-
-  function normalizeURI(src) {
-    if (src && src.constructor === File) {
-      return URL.createObjectURL(src);
-    } else {
-      return path + '/' + src + '?size=middle';
-    }
-  }
-
-  function headerChange(from, to) {
-    const files = [...input['value'] || []];
-    input.onChange(arrayMove(files, from, to));
+    dispatch(openDialog('add-images'));
   }
 
   return (
     <div className={styles['wrapper']}>
       <div className={styles['content']}>
-        <Draggable type={Draggable.TYPE_GRID} onChange={headerChange}>
-          {(input['value'] || []).map((externalId, key) => {
+        <Draggable type={Draggable.TYPE_GRID} onChange={handleOrderChange}>
+          {(input['value'] || []).map((image, index) => {
             return (
-              <div className={styles['section']} key={key}>
+              <div className={styles['section']} key={image['uuid']}>
                 <div className={cn(styles['image'], {
-                  [styles['new']]: externalId.constructor === File,
+                  [styles['new']]: !! image['new'],
                 })}>
-                  <span className={cn(styles['remove-image'], 'fas fa-times')} onClick={() => handleDelete(externalId)} />
-                  <Image src={normalizeURI(externalId)} />
+                  { ! disabled && <span className={cn(styles['remove-image'], 'fas fa-times')} onClick={() => handleDelete(index)} />}
+                  <Image src={`${process.env['REACT_APP_API_HOST']}/gallery/${image['uuid']}?size=small`} />
                 </div>
               </div>
             );
@@ -82,13 +55,5 @@ function AddImageForm({ path, input, disabled, onDelete }) {
     </div>
   );
 }
-
-AddImageForm.propTypes = {
-  path: types.string,
-};
-
-AddImageForm.defaultProps = {
-  path: '',
-};
 
 export default AddImageForm;

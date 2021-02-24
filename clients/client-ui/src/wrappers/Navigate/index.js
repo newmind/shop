@@ -1,5 +1,5 @@
 
-import React, { useEffect } from 'react';
+import React from 'react';
 
 import Header from './Header';
 import Footer from './Footer';
@@ -9,13 +9,6 @@ import styles from './default.module.scss';
 
 
 function NavigateModule({ children }) {
-  useEffect(function init() {
-    console.log('navigate wrapper mount');
-    return () => {
-      console.log('navigate wrapper unmount');
-    }
-  });
-
   return (
     <section id="scroller" className={styles['wrapper']}>
       <section className={styles['page']}>

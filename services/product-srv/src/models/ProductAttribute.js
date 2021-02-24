@@ -25,6 +25,11 @@ module.exports = (db, DataTypes) => {
       defaultValue: 1,
       allowNull: false,
     },
+    use: {
+      type: DataTypes.BOOLEAN,
+      defaultValue: false,
+      allowNull: false,
+    }
   }, {
     timestamps: false,
   });

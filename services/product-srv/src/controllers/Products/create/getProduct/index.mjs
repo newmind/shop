@@ -9,7 +9,7 @@ export default async function updateProperties(uuid) {
     where: { uuid },
     attributes: ['uuid', 'name', 'description', 'status', 'price', 'fiscal', 'updatedAt'],
     order: [
-      ['gallery', 'order', 'desc'],
+      ['gallery', 'order', 'asc'],
       ['attributes', 'order', 'asc'],
     ],
     include: [
@@ -53,7 +53,7 @@ export default async function updateProperties(uuid) {
         model: ProductAttribute,
         required: false,
         as: 'attributes',
-        attributes: ['value', 'order'],
+        attributes: ['value', 'order', 'use'],
         include: [
           {
             model: Attribute,

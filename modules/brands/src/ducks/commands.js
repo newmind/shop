@@ -1,4 +1,6 @@
 
+import { UnauthorizedError } from "@packages/errors";
+
 import request from '@ui.packages/request';
 import { closeDialog } from '@ui.packages/dialog';
 import { pushNotification } from '@ui.packages/notifications';
@@ -34,8 +36,11 @@ export const getBrands = () => async (dispatch) => {
     dispatch(getBrandsRequestSuccessAction(data));
   }
   catch(error) {
-
     dispatch(getBrandsRequestFailAction(error));
+
+    if (error instanceof UnauthorizedError) {
+      return void 0;
+    }
     dispatch(pushNotification({
       mode: 'danger',
       content: 'Ошибка получения списка "Валюта"'
@@ -62,6 +67,10 @@ export const createBrand = (data) => async (dispatch) => {
   }
   catch(error) {
     dispatch(createBrandRequestFailAction(error));
+
+    if (error instanceof UnauthorizedError) {
+      return void 0;
+    }
     dispatch(pushNotification({
       mode: 'danger',
       content: 'Ошибка создания "Валюты"'
@@ -88,6 +97,10 @@ export const updateBrand = (data) => async (dispatch) => {
   }
   catch(error) {
     dispatch(updateBrandRequestFailAction(error));
+
+    if (error instanceof UnauthorizedError) {
+      return void 0;
+    }
     dispatch(pushNotification({
       mode: 'danger',
       content: 'Ошибка обновления "Валюты"'
@@ -113,6 +126,10 @@ export const deleteBrands = (id) => async (dispatch) => {
   }
   catch(error) {
     dispatch(deleteBrandRequestFailAction(error));
+
+    if (error instanceof UnauthorizedError) {
+      return void 0;
+    }
     dispatch(pushNotification({
       mode: 'danger',
       content: 'Ошибка удаления "Валюты"'

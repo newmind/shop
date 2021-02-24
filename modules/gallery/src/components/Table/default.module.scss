@@ -1,0 +1,29 @@
+
+@import "~@ui.packages/theme";
+
+
+.content {
+
+  display: block;
+}
+
+.table {
+
+  display: block;
+}
+
+.controls {
+
+  display: block;
+  text-align: right;
+  margin: 20px 0 0;
+}
+
+.thumb {
+
+  display: flex;
+  flex-direction: column;
+  flex: 1 0;
+  width: 80px;
+  height: 60px;
+}

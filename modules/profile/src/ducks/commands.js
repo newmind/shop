@@ -1,4 +1,6 @@
 
+import { UnauthorizedError } from '@packages/errors';
+
 import request from '@ui.packages/request';
 
 import {
@@ -25,6 +27,10 @@ export const getProfile = () => async dispatch => {
   }
   catch(error) {
     dispatch(getProfileRequestFailAction(error));
+
+    if (error instanceof UnauthorizedError) {
+      return void 0;
+    }
   }
 };
 
@@ -42,5 +48,9 @@ export const updateProfile = (formData) => async dispatch => {
   }
   catch(error) {
     dispatch(updateProfileRequestFailAction(error));
+
+    if (error instanceof UnauthorizedError) {
+      return void 0;
+    }
   }
 };

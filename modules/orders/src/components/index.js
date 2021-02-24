@@ -21,7 +21,8 @@ export default function HOC() {
   });
 
   useUpdate(async function() {
-
+    await dispatch(getStatuses());
+    await dispatch(getOperations());
   });
 
   useUnmount(function() {

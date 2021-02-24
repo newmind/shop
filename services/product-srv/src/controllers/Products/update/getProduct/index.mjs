@@ -53,7 +53,7 @@ export default async function updateProperties(uuid) {
         model: ProductAttribute,
         required: false,
         as: 'attributes',
-        attributes: ['value', 'order'],
+        attributes: ['value', 'order', 'use'],
         include: [
           {
             model: Attribute,

@@ -1,25 +1,21 @@
 
 import request from "@sys.packages/request";
 
-import { getBuffer } from "@sys.packages/utils";
+import productBuilder from "./productBuilder.mjs";
 
 
 export default () => async (ctx) => {
   const { uuid } = ctx['params'];
-  const buffer = await getBuffer(ctx['req']);
+  const body = ctx['request']['body'];
 
-  await request({
-    method: 'put',
+  const result = await request({
     url: process.env['PRODUCT_API_SRV'] + '/products/' + uuid,
-    headers: {
-      'content-type': ctx['req']['headers']['content-type']
-    },
-    responseType: 'stream',
-    data: buffer,
+    method: 'put',
+    data: body,
   });
 
   ctx.body = {
     success: true,
-    data: null,
+    data: productBuilder(result['data']),
   };
 }

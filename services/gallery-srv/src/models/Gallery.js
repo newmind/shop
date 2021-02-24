@@ -8,6 +8,11 @@ module.exports = (db, DataType) => {
       index: true,
       unique: true,
     },
+    name: {
+      type: DataType.STRING(32),
+      allowNull: true,
+      unique: true,
+    },
     small: {
       type: DataType.BLOB,
     },
@@ -16,9 +21,9 @@ module.exports = (db, DataType) => {
     },
     large: {
       type: DataType.BLOB,
-    }
+    },
   }, {
-    timestamps: false,
+    timestamps: true,
   });
 
   Gallery.associate = ({}) => {};
