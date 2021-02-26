@@ -1,38 +1,34 @@
 
-import { nounDeclension } from '@ui.packages/utils';
+import { selectUuid, selectIsOpen } from '@ui.packages/cart-widget';
 
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 
-import {
-  selectUuid,
-  selectIsOpen,
-} from '../../ducks/slice';
-
-import cn from "classnames";
+import cn from 'classnames';
 import styles from "./defaults.module.scss";
 
 
 function Icon() {
+  const navigate = useNavigate();
+
+  const uuids = useSelector(selectUuid);
   const isOpen = useSelector(selectIsOpen);
-  const uuid = useSelector(selectUuid);
 
-  const classNameCartIcon = cn('fas fa-shopping-cart', styles['cart__icon']);
-  const classNameCartWrapper = cn(styles['cart__wrapper'], {
-    [styles['cart__wrapper--open']]: isOpen,
-  });
-
-  const hasItems = uuid.reduce((total, item) => total + item[1], 0);
+  function handleGoToOrder() {
+    if ( ! uuids.length) {
+      return void 0;
+    }
+    navigate(process.env['PUBLIC_URL'] + '/order');
+  }
 
   return (
-    <div className={classNameCartWrapper}>
-      <span className={classNameCartIcon} />
-      <span className={styles['cart__info']}>
-        <span className={styles['cart__count']}>
-          { !! hasItems ? `${hasItems} ${nounDeclension(hasItems, ['товар', 'товара', 'товаров'])}` : 'пусто'}
-        </span>
-      </span>
-    </div>
+    <span className={cn(styles['wrapper'], { [styles['is-open']]: isOpen })} onClick={handleGoToOrder}>
+      <span className={cn(styles['icon'], 'fas fa-shopping-cart')} />
+      { !! uuids.length && (
+        <span className={styles['has-inside']} />
+      )}
+    </span>
   );
 }
 

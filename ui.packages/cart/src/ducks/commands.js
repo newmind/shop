@@ -13,21 +13,23 @@ import {
 } from './slice';
 
 
-export const getProducts = (uuid) => async (dispatch) => {
+export const getProducts = (uuid, token) => async (dispatch) => {
   try {
     dispatch(getProductsRequestAction());
 
     const result = await request({
       url: '/products',
       method: 'get',
+      cancelToken: token['token'],
       params: {
         uuid,
       }
     });
 
-    dispatch(getProductsRequestSuccessAction(result['data']));
+    dispatch(getProductsRequestSuccessAction(result['data'] || []));
   }
   catch(error) {
+
     dispatch(getProductsRequestFailAction(error));
     dispatch(pushNotification({
       content: 'Ошибка при выполнении операции',
@@ -36,21 +38,23 @@ export const getProducts = (uuid) => async (dispatch) => {
   }
 };
 
-export const getAmount = (uuid) => async (dispatch) => {
+export const getAmount = (uuid, token) => async (dispatch) => {
   try {
     dispatch(getAmountRequestAction());
 
     const result = await request({
       url: '/products/amount',
       method: 'post',
+      cancelToken: token['token'],
       data: {
         uuid,
       },
     });
 
-    dispatch(getAmountRequestSuccessAction(result['data']));
+    dispatch(getAmountRequestSuccessAction(result['data'] || []));
   }
   catch(error) {
+
     dispatch(getAmountRequestFailAction(error));
     dispatch(pushNotification({
       content: 'Ошибка при выполнении операции',

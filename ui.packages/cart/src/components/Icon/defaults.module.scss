@@ -2,65 +2,38 @@
 @import "~@ui.packages/theme";
 
 
-.cart {
+.wrapper {
 
-  &__wrapper {
+  position: relative;
+  display: block;
+  background: rgba($white, .15);
+  border-radius: 5px;
+  padding: 10px;
+  cursor: pointer;
+  color: $blue-grey;
+  z-index: 20;
+  transition: color 200ms;
 
-    display: flex;
-    flex: 0 0 auto;
-    flex-direction: row;
-    align-items: center;
-    padding: 10px 15px;
-    border-radius: 3px;
-    cursor: pointer;
-    transition: background 400ms;
-
-    &--open,
-    &:hover {
-
-      background: $white
-    }
-  }
-
-  &__wrapper--open &__count,
-  &__wrapper:hover &__count,
-  &__wrapper--open &__amount,
-  &__wrapper:hover &__amount {
-
-    color: $coal-dark;
-  }
-
-  &__icon {
-
-    display: inline-block;
-    font-size: 16px;
-    color: $danger;
-    margin: 0 10px 0 0;
-  }
-
-  &__info {
-
-    display: inline-block;
-    vertical-align: center;
-  }
-
-  &__count {
-
-    display: inline-block;
+  &:hover,
+  &.is-open {
     color: $white;
-    font-family: inherit;
-    font-weight: 600;
-    font-size: 13px;
-    transition: color 400ms;
   }
+}
 
-  &__amount {
+.icon {
 
-    display: block;
-    color: $white;
-    font-family: inherit;
-    font-weight: 300;
-    font-size: 13px;
-    transition: color 400ms;
-  }
+  display: inline-block;
+  font-size: 20px;
+}
+
+.has-inside {
+
+  position: absolute;
+  top: 4px;
+  right: 4px;
+  display: block;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: $danger;
 }

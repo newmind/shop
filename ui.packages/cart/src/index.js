@@ -1,5 +1,5 @@
 
-export { default as Cart } from './components';
+export { default as Widget } from './components';
 
 export {
   name,
@@ -8,9 +8,6 @@ export {
   selectUuid,
   selectItems,
   selectIsOpen,
-
-  openCartAction,
-  closeCartAction,
 
   addProductToCartAction,
   removeProductFromCartAction,

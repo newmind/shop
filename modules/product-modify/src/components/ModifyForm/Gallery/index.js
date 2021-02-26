@@ -12,6 +12,7 @@ import styles from './default.module.scss';
 function AddImageForm({ input, disabled }) {
   const dispatch = useDispatch();
 
+
   function handleDelete(index) {
     input.onChange([
       ...input['value'].slice(0, index),
@@ -27,11 +28,15 @@ function AddImageForm({ input, disabled }) {
     dispatch(openDialog('add-images'));
   }
 
+  if ( ! input['value']) {
+    return null;
+  }
+
   return (
     <div className={styles['wrapper']}>
       <div className={styles['content']}>
         <Draggable type={Draggable.TYPE_GRID} onChange={handleOrderChange}>
-          {(input['value'] || []).map((image, index) => {
+          {input['value'].map((image, index) => {
             return (
               <div className={styles['section']} key={index}>
                 { ! disabled && <span className={cn(styles['remove-image'], 'fas fa-times')} onClick={() => handleDelete(index)} />}

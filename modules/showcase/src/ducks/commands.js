@@ -2,7 +2,7 @@
 import request from '@ui.packages/request';
 import { openDialog } from '@ui.packages/dialog';
 import { pushNotification } from '@ui.packages/notifications';
-import { addProductToCart as addProductToCartAction } from '@ui.packages/cart';
+import { addProductToCartAction } from '@ui.packages/cart-widget';
 
 import {
   getProductsAction,

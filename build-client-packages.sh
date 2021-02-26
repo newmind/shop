@@ -9,7 +9,7 @@ cd ./ui.packages || return
 echo '[--- Application ---]'
 cd  ./application && npx yarn build
 echo '[--- Cart ---]'
-cd ../cart2 && npx yarn build
+cd ../cart && npx yarn build
 echo '[--- Confirm Order ---]'
 cd ../confirm-order && npx yarn build
 echo '[--- Dialog ---]'

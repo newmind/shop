@@ -11,7 +11,7 @@
     "@packages/errors": "1.0.0",
     "@packages/moment": "1.0.0",
     "@packages/numeral": "1.0.0",
-    "@ui.packages/cart": "1.0.0",
+    "@ui.packages/cart-widget": "1.0.0",
     "@ui.packages/dialog": "1.0.0",
     "@ui.packages/hoc": "1.0.0",
     "@ui.packages/kit": "1.0.0",

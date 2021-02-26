@@ -17,4 +17,4 @@ FactoryDraggable.TYPE_LIST = 'list';
 FactoryDraggable.TYPE_GRID = 'grid';
 
 export default FactoryDraggable;
-export { arrayMove } from 'react-sortable-hoc';
+export { default as arrayMove } from 'array-move';

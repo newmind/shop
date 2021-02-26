@@ -1,8 +1,8 @@
 
 import { Paging } from "@ui.packages/kit";
 import { Mode } from '@ui.packages/types';
-import { addProductToCartAction } from '@ui.packages/cart';
 import { pushNotification } from '@ui.packages/notifications';
+import { addProductToCartAction } from '@ui.packages/cart-widget';
 
 import React from 'react';
 import types from 'prop-types';

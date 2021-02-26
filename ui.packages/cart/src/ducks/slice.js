@@ -19,11 +19,12 @@ export const slice = createSlice({
   name: REDUCER_NAME,
   initialState,
   reducers: {
-    openCartAction(state) {
-      state['isOpen'] = true;
-    },
-    closeCartAction(state) {
-      state['isOpen'] = false;
+    setStateAction(state, { payload }) {
+      state['isOpen'] = payload;
+      if ( ! payload) {
+        state['inAmountProcess'] = true;
+        state['inProductProcess'] = true;
+      }
     },
 
     addProductToCartAction(state, { payload }) {
@@ -83,6 +84,8 @@ export const slice = createSlice({
     },
     resetCartAction(state) {
       state['uuid'] = [];
+      state['items'] = [];
+      state['amount'] = [];
       localStorage.removeItem('cart');
       localStorage.setItem('cart', '[]');
     },
@@ -121,8 +124,7 @@ export const slice = createSlice({
 export const {
   resetStateAction,
 
-  openCartAction,
-  closeCartAction,
+  setStateAction,
 
   addProductToCartAction,
   removeProductFromCartAction,

@@ -3,7 +3,7 @@ import numeral from "@packages/numeral";
 
 import { nounDeclension } from "@ui.packages/utils";
 import { Button, Header, Text, Link } from "@ui.packages/kit";
-import { selectItems, addProductToCart, removeProductFromCart } from '@ui.packages/cart';
+import { selectItems, addProductToCartAction, removeProductFromCartAction } from '@ui.packages/cart-widget';
 
 import React from 'react';
 import types from 'prop-types';
@@ -23,11 +23,11 @@ export default function Information({ product }) {
   const removeFromCartClassName= cn(styles['remove'], 'far fa-trash-alt');
 
   function handleAddToCart() {
-    dispatch(addProductToCart(product));
+    dispatch(addProductToCartAction(product));
   }
 
   function handleRemoveFromCart(uuid) {
-    dispatch(removeProductFromCart(uuid));
+    dispatch(removeProductFromCartAction(uuid));
   }
 
   return (

@@ -3,7 +3,7 @@ import numeral from '@packages/numeral';
 
 import { nounDeclension } from '@ui.packages/utils';
 import { Gallery, Header, Text, Button, Link } from '@ui.packages/kit';
-import { removeProductFromCartAction, selectUuid } from '@ui.packages/cart';
+import { removeProductFromCartAction, selectUuid } from '@ui.packages/cart-widget';
 
 import React from 'react';
 import types from 'prop-types';

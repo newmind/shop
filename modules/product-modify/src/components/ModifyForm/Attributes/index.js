@@ -9,7 +9,7 @@ import { getFormValues } from 'redux-form';
 import cn from 'classnames';
 import styles from './default.module.scss';
 
-import { selectAttributes } from '../../ducks/slice';
+import { selectAttributes } from '../../../ducks/slice';
 
 
 function AttributeField({ field, data, disabled, onRemove }) {

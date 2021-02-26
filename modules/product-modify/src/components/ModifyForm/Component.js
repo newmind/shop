@@ -5,15 +5,15 @@ import React from 'react';
 import { useSelector } from 'react-redux';
 import { Field, FieldArray } from 'redux-form';
 
-import AddImageForm from '../AddImageForm';
-import AttrsForm from '../AttributesForm';
+import Gallery from './Gallery';
+import Attributes from './Attributes';
 
 import styles from './default.module.scss';
 
 import { selectBrands, selectTypes, selectCategories, selectCurrencies, selectInProcess } from '../../ducks/slice';
 
 
-function ModifyForm({ handleSubmit, onDelete }) {
+function ModifyForm({ handleSubmit }) {
   const types = useSelector(selectTypes);
   const brands = useSelector(selectBrands);
   const categories = useSelector(selectCategories);
@@ -22,12 +22,13 @@ function ModifyForm({ handleSubmit, onDelete }) {
 
   return (
     <form className={styles['wrapper']} onSubmit={handleSubmit}>
+
       <div className={styles['block']}>
         <div className={styles['header']}>
           <Header level={3}>Изображения</Header>
         </div>
         <div className={styles['content']}>
-          <Field name="gallery" path={`${process.env['REACT_APP_API_HOST']}/gallery`} component={AddImageForm} onDelete={onDelete} />
+          <Field name="gallery" component={Gallery} />
         </div>
       </div>
 
@@ -93,11 +94,7 @@ function ModifyForm({ handleSubmit, onDelete }) {
           <Header level={3}>Аттрибуты</Header>
         </div>
         <div className={styles['content']}>
-          <FieldArray
-            name="attributes"
-            disabled={inProcess}
-            component={AttrsForm}
-          />
+          <FieldArray name="attributes" component={Attributes} disabled={inProcess} />
         </div>
       </div>
 

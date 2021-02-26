@@ -2,8 +2,8 @@
 import { Image, Text } from "@ui.packages/kit";
 
 import React from 'react';
-import { getFormValues, change } from 'redux-form';
-import { useSelector, useDispatch } from 'react-redux';
+import { useSelector } from 'react-redux';
+import { getFormValues } from 'redux-form';
 
 import cn from 'classnames';
 import styles from './default.module.scss';
@@ -11,13 +11,11 @@ import styles from './default.module.scss';
 import { selectGallery } from '../../../ducks/slice';
 
 
-function ImagesForm() {
-  const dispatch = useDispatch();
-
+function ImagesForm({ onSelect, onChange }) {
   const gallery = useSelector(selectGallery);
   const formValues = useSelector(getFormValues('gallery'));
 
-  function handleAddImage(newImage) {
+  function getComposeArray(newImage) {
     let images = [...formValues['gallery']];
     const index = images.findIndex((image) => image['uuid'] === newImage['uuid'])
     if (index > -1) {
@@ -28,17 +26,25 @@ function ImagesForm() {
     }
     else {
       images.push({
-        ...newImage,
+        uuid: newImage['uuid'],
         new: true,
       });
     }
-    dispatch(change('gallery', 'gallery', images));
+    return images;
+  }
+
+  function handleSelectImage(newImage) {
+    onSelect(getComposeArray(newImage));
+  }
+
+  function handleChangeImage(newImage) {
+    onChange(getComposeArray(newImage));
   }
 
   return (
     <div className={styles['wrapper']}>
       {gallery.map((img) => (
-        <div className={styles['section']} key={img['uuid']} onClick={() => handleAddImage(img)}>
+        <div className={styles['section']} key={img['uuid']} onDoubleClick={() => handleChangeImage(img)} onClick={() => handleSelectImage(img)}>
           <div className={cn(styles['image'], {
             [styles['image--selected']]: formValues['gallery'].some((image) => image['uuid'] === img['uuid'])
           })}>

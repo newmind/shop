@@ -1,6 +1,6 @@
 
-import types from 'prop-types';
 import React from 'react';
+import types from 'prop-types';
 import { SortableContainer, SortableElement, SortableHandle } from 'react-sortable-hoc';
 
 import cn from 'classnames';
