@@ -6,10 +6,11 @@
 
   display: block;
   font-family: inherit;
-  font-weight: 300;
-  font-size: 11px;
-  letter-spacing: 1px;
-  color: $white;
+  font-weight: 600;
+  font-size: 12px;
+  line-height: 1.4;
+  letter-spacing: .5px;
+  color: $coal-dark;
   text-overflow: ellipsis;
   overflow: hidden;
 }

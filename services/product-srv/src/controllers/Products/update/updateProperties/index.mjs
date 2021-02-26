@@ -17,6 +17,8 @@ export default async function updateProperties(uuid, properties) {
     }
   });
 
+  console.log(newGallery)
+
   await Gallery.bulkCreate(newGallery, { transaction });
 
   await ProductAttribute.destroy({ where: { productUuid: uuid }}, { transaction });

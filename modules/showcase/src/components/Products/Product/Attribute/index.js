@@ -10,10 +10,10 @@ export default function Attribute({ name, value, unit }) {
   return (
     <div className={styles['wrapper']}>
       <span className={styles['name']}>
-        <Text type={Text.TYPE_BODY}>{ name }</Text>
+        <Text type={Text.TYPE_ATTRIBUTE}>{ name }</Text>
       </span>
       <span className={styles['value']}>
-        <Text>{ value }{ unit ? ' ' + unit : '' }</Text>
+        <Text type={Text.TYPE_ATTRIBUTE}>{ value }{ unit ? ' ' + unit : '' }</Text>
       </span>
     </div>
   );

@@ -1,5 +1,5 @@
 
-// import { on, off } from '@ui.packages/socket';
+import { on, off } from '@ui.packages/socket';
 import { useMount, useUnmount, useUpdate } from '@ui.packages/hoc';
 
 import React from 'react';
@@ -8,7 +8,13 @@ import { useDispatch } from 'react-redux';
 import Component from './Component';
 
 import { getGallery } from '../ducks/commands';
-import { resetStateAction } from '../ducks/slice';
+import {
+  resetStateAction,
+
+  createGalleryRequestSuccessAction,
+  updateGalleryRequestSuccessAction,
+  deleteGalleryRequestSuccessAction,
+} from '../ducks/slice';
 
 
 export default function HOC() {
@@ -19,9 +25,9 @@ export default function HOC() {
 
     await dispatch(getGallery());
 
-    // on(process.env['REACT_APP_SOCKET_TYPE_CREATE'], (data) => dispatch(createTypeRequestSuccessAction(data)));
-    // on(process.env['REACT_APP_SOCKET_TYPE_UPDATE'], (data) => dispatch(updateTypeRequestSuccessAction(data)));
-    // on(process.env['REACT_APP_SOCKET_TYPE_DELETE'], (data) => dispatch(deleteTypeRequestSuccessAction(data)));
+    on(process.env['REACT_APP_SOCKET_IMAGE_CREATE'], (data) => dispatch(createGalleryRequestSuccessAction(data)));
+    on(process.env['REACT_APP_SOCKET_IMAGE_UPDATE'], (data) => dispatch(updateGalleryRequestSuccessAction(data)));
+    on(process.env['REACT_APP_SOCKET_IMAGE_DELETE'], (data) => dispatch(deleteGalleryRequestSuccessAction(data)));
   });
 
   useUpdate(async function() {
@@ -31,9 +37,9 @@ export default function HOC() {
   useUnmount(function() {
     dispatch(resetStateAction());
 
-    // off(process.env['REACT_APP_SOCKET_TYPE_CREATE']);
-    // off(process.env['REACT_APP_SOCKET_TYPE_UPDATE']);
-    // off(process.env['REACT_APP_SOCKET_TYPE_DELETE']);
+    off(process.env['REACT_APP_SOCKET_TYPE_CREATE']);
+    off(process.env['REACT_APP_SOCKET_TYPE_UPDATE']);
+    off(process.env['REACT_APP_SOCKET_TYPE_DELETE']);
   });
 
   return <Component />;

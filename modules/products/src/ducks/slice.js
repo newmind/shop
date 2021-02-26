@@ -94,8 +94,18 @@ const slice = createSlice({
     },
     copyProductRequestSuccessAction(state, { payload }) {
       state['inProcess'] = false;
-      state['items'] = [payload, ...state['items']];
+      state['items'] = [payload, ...state['items'].slice(0, -1)];
+      state['meta'] = {
+        total: state['meta']['total'] + 1,
+      };
     },
+
+    removeImageAction(state, { payload }) {
+      state['items'] = state['items'].map((item) => ({
+        ...item,
+        gallery: item['gallery'].filter((img) => payload.some((uuid) => uuid !== img)),
+      }));
+    }
   }
 });
 
@@ -123,6 +133,8 @@ export const {
   copyProductRequestAction,
   copyProductRequestFailRequest,
   copyProductRequestSuccessAction,
+
+  removeImageAction,
 } = slice['actions'];
 
 export const selectMeta = (state) => state[REDUCER_NAME]['meta'];

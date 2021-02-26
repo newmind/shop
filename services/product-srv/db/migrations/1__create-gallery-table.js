@@ -6,12 +6,18 @@ module.exports = {
     try {
 
       await queryInterface.createTable('Galleries', {
+        id: {
+          type: DataType.INTEGER,
+          primaryKey: true,
+          autoIncrement: true,
+        },
         uuid: {
           type: DataType.STRING(64),
-          primaryKey: true,
+          allowNull: false,
         },
         productUuid: {
           type: DataType.STRING(9),
+          allowNull: false,
         },
         order: {
           type: DataType.INTEGER,

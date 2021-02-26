@@ -1,6 +1,7 @@
 
 import numeral from '@packages/numeral';
 
+import { nounDeclension } from '@ui.packages/utils';
 import { Gallery, Header, Text, Button, Link } from '@ui.packages/kit';
 import { removeProductFromCartAction, selectUuid } from '@ui.packages/cart';
 
@@ -70,7 +71,6 @@ export default function Product({ uuid, price, prevPrice, currency, brand, name,
           )}
         </div>
         <div className={styles['controls']}>
-          <Button form={Button.FORM_BAY} />
           <Button form={Button.FORM_CART} onClick={(event) => handleClickCart(event)} />
           { !! product && (
             <span className={removeFromCartClassName} onClick={(event) => handleRemoveFromCart(uuid, event)} />
@@ -78,7 +78,7 @@ export default function Product({ uuid, price, prevPrice, currency, brand, name,
         </div>
         {product && (
           <div className={styles['count']}>
-            <Text type={Text.TYPE_COMMENT}>товар уже в корзине</Text>
+            <Text type={Text.TYPE_COMMENT}>{ product[1] } { nounDeclension(product[1], ['товар', 'товара', 'товаров']) } уже в корзине</Text>
           </div>
         )}
       </div>

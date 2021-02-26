@@ -55,6 +55,10 @@ const typesSlice = createSlice({
       state['items'] = state['items'].filter((item) => ! payload['uuid'].some((uuid) => uuid === item['uuid']));
       state['inProcess'] = false;
     },
+
+    updateGalleryRequestAction(state) {},
+    updateGalleryRequestFailAction(state) {},
+    updateGalleryRequestSuccessAction(state, { payload }) {},
   },
 });
 
@@ -68,6 +72,10 @@ export const {
   createGalleryRequestAction,
   createGalleryRequestFailAction,
   createGalleryRequestSuccessAction,
+
+  updateGalleryRequestAction,
+  updateGalleryRequestFailAction,
+  updateGalleryRequestSuccessAction,
 
   deleteGalleryRequestAction,
   deleteGalleryRequestFailAction,

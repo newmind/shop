@@ -1,27 +1,82 @@
 
-import { bindActionCreators } from 'redux';
-import { connect } from 'react-redux';
+import { closeDialog, selectIsOpen, selectName, selectData } from '@ui.packages/dialog';
 
-import Component from './Component';
+import { Header } from '@ui.packages/kit';
 
-import { closeDialog } from '../ducks/commands';
+import types from 'prop-types';
+import ReactDOM from 'react-dom';
+import React, { useRef, useEffect } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+
+import cn from 'classnames';
+import styles from './defaults.module.scss';
 
 
-const mapStateToProps = state => {
-  return {
-    data: state['dialog']['data'],
-    isOpen: state['dialog']['isOpen'],
-    actionDialogName: state['dialog']['name'],
+function Dialog({ className, title, name, children, onClose }) {
+  const dispatch = useDispatch();
+
+  const wrapperRef = useRef(null);
+
+  const isOpen = useSelector(selectIsOpen);
+  const activeName = useSelector(selectName);
+  const data = useSelector(selectData);
+
+  useEffect(function() {
+    return () => {
+      dispatch(closeDialog());
+    }
+  }, [])
+
+  function handleCloseDialog() {
+    dispatch(closeDialog());
+    onClose && onClose(name);
   }
+
+  function handleOutClick(event) {
+    const { current: wrapperElement } = wrapperRef;
+
+    const target = event.target;
+
+    if (wrapperElement === target) {
+      handleCloseDialog();
+    }
+  }
+
+  const classNameCloseDialog = cn(styles['close'], 'fas fa-times');
+  const classNameDialog = cn(styles['dialog'], className);
+
+  return isOpen && (name === activeName) && ReactDOM.createPortal((
+    <div ref={wrapperRef} className={styles['wrapper']} onClick={handleOutClick}>
+      <div className={classNameDialog}>
+        <span className={classNameCloseDialog} onClick={handleCloseDialog} />
+        {title && (
+          <div className={styles['header']}>
+            <Header level={3}>{ title }</Header>
+          </div>
+        )}
+        <div className={styles['content']}>
+          { React.cloneElement(children, { data }) }
+        </div>
+      </div>
+    </div>
+  ), document.querySelector('#dialog'));
+}
+
+Dialog.propTypes = {
+  className: types.string,
+  isOpen: types.bool,
+  title: types.string,
+  name: types.string,
+  actionDialogName: types.string,
+  closeDialog: types.func,
+  onClose: types.func,
 };
 
-const mapActionsToProps = (dispatch) => {
-  return {
-    closeDialog: bindActionCreators(closeDialog, dispatch),
-  };
+Dialog.defaultProps = {
+  className: null,
+  isOpen: false,
+  title: null,
+  name: null,
 };
 
-export default connect(
-  mapStateToProps,
-  mapActionsToProps,
-)(Component);
+export default Dialog;

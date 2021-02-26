@@ -1,7 +1,7 @@
 
 import { tabsReducer } from '@ui.packages/tabs';
 import Application from '@ui.packages/application';
-import { dialogReducer } from '@ui.packages/dialog';
+import { reducer as dialogReducer } from '@ui.packages/dialog';
 import { notificationReducer } from '@ui.packages/notifications';
 
 import { reducer as formReducer } from 'redux-form';

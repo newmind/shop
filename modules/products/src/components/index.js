@@ -13,6 +13,7 @@ import { getProducts, getPromotions } from '../ducks/commands';
 import {
   resetState,
   updateProductsRequestSuccessAction,
+  removeImageAction,
 } from '../ducks/slice';
 
 
@@ -31,6 +32,8 @@ export default function HOC() {
     on(process.env['REACT_APP_SOCKET_PRODUCT_CREATE'], () => {});
     on(process.env['REACT_APP_SOCKET_PRODUCT_UPDATE'], (data) => dispatch(updateProductsRequestSuccessAction(data)));
     on(process.env['REACT_APP_SOCKET_PRODUCT_DELETE'], () => {});
+
+    on(process.env['REACT_APP_SOCKET_IMAGE_DELETE'], (data) => dispatch(removeImageAction(data)));
   });
 
   useUpdate(async function() {
@@ -44,6 +47,8 @@ export default function HOC() {
     off(process.env['REACT_APP_SOCKET_PRODUCT_CREATE']);
     off(process.env['REACT_APP_SOCKET_PRODUCT_UPDATE']);
     off(process.env['REACT_APP_SOCKET_PRODUCT_DELETE']);
+
+    off(process.env['REACT_APP_SOCKET_IMAGE_DELETE']);
   });
 
   return <Component />;

@@ -1,6 +1,6 @@
 
 import { Mode } from '@ui.packages/types';
-import { Dialog } from '@ui.packages/dialog';
+import { Dialog, closeDialog } from '@ui.packages/dialog';
 import { Button, Header, Page, PageContent, PageControls } from '@ui.packages/kit';
 
 import React from 'react';
@@ -8,7 +8,7 @@ import types from 'prop-types';
 import { change } from 'redux-form';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { submit, reset, isPristine, isValid } from 'redux-form';
+import { submit, reset, getFormValues, isPristine, isValid } from 'redux-form';
 
 import ModifyForm from './ModifyForm';
 import ImagesForm from "./ImagesForm";
@@ -27,6 +27,7 @@ function ProductModify() {
   const navigate = useNavigate();
   const product = useSelector(selectProduct);
   const inProcess = useSelector(selectInProcess);
+  const values = useSelector(getFormValues(FORM_NAME));
   const valid = useSelector(isValid(FORM_NAME));
   const pristine = useSelector(isPristine(FORM_NAME));
 
@@ -51,6 +52,12 @@ function ProductModify() {
 
   function handleReset() {
     dispatch(reset(FORM_NAME));
+  }
+
+  async function handleSubmitImages(data) {
+    console.log(data['gallery'])
+    await dispatch(change('modify-product', 'gallery', data['gallery']));
+    await dispatch(closeDialog());
   }
 
   return (
@@ -86,10 +93,8 @@ function ProductModify() {
 
       <Dialog name="add-images" title="Добавить изображения">
         <ImagesForm
-          initialValues={{
-            gallery: product['gallery'] || [],
-          }}
-          onSubmit={(data) => dispatch(change('modify-product', 'gallery', data['gallery']))}
+          initialValues={{ gallery: values && values['gallery'] || [] }}
+          onSubmit={(data) => handleSubmitImages(data)}
         />
       </Dialog>
     </Page>

@@ -14,7 +14,6 @@ module.exports = {
         name: {
           type: Sequelize.STRING(32),
           allowNull: true,
-          unique: true,
         },
         small: {
           type: Sequelize.BLOB,

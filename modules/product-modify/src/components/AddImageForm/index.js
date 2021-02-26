@@ -33,11 +33,11 @@ function AddImageForm({ input, disabled }) {
         <Draggable type={Draggable.TYPE_GRID} onChange={handleOrderChange}>
           {(input['value'] || []).map((image, index) => {
             return (
-              <div className={styles['section']} key={image['uuid']}>
+              <div className={styles['section']} key={index}>
+                { ! disabled && <span className={cn(styles['remove-image'], 'fas fa-times')} onClick={() => handleDelete(index)} />}
                 <div className={cn(styles['image'], {
                   [styles['new']]: !! image['new'],
                 })}>
-                  { ! disabled && <span className={cn(styles['remove-image'], 'fas fa-times')} onClick={() => handleDelete(index)} />}
                   <Image src={`${process.env['REACT_APP_API_HOST']}/gallery/${image['uuid']}?size=small`} />
                 </div>
               </div>

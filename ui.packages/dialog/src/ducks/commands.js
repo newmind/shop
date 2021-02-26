@@ -1,12 +1,9 @@
 
-import {
-  openDialogAction,
-  closeDialogAction,
-} from './actions';
+import { openDialogAction, closeDialogAction } from './slice';
 
 
-export const openDialog = (dialogName, data) => (dispatch) => {
-  dispatch(openDialogAction(dialogName, data));
+export const openDialog = (name, data) => (dispatch) => {
+  dispatch(openDialogAction({ name, data }));
 };
 
 export const closeDialog = (dialogName) => (dispatch) => {

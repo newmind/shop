@@ -6,7 +6,6 @@ import { sendEvent } from '@sys.packages/rabbit2';
 import Sagas from 'node-sagas';
 
 import getProduct from './getProduct';
-import copyImages from './copyImages';
 import createProperties from './createProperties';
 
 
@@ -37,13 +36,12 @@ export default class CopySaga {
 
     const { uuid } = ctx['params'];
     const { uuid: newUuid } = ctx['request']['body'];
-    const { Gallery, Product } = models;
+    const { Product } = models;
 
     return sagaBuilder
       .step('Get Product')
       .invoke(async (params) => {
         const product = await getProduct(uuid);
-        console.log(product)
         params.setProduct(product);
       })
 
@@ -51,17 +49,6 @@ export default class CopySaga {
       .invoke(async (props) => {
         const { price, name, description, status, fiscal, currency } = props.getProduct();
         await Product.create({ uuid: newUuid, price, name, description, status, fiscal, currencyCode: currency['code'] });
-      })
-
-      .step('Copy images product')
-      .invoke(async (props) => {
-        const { gallery } = props.getProduct();
-        const images = await copyImages(gallery);
-        await Gallery.bulkCreate(images.map((img) => ({
-          uuid: img['uuid'],
-          productUuid: newUuid,
-          order: img['order']
-        })));
       })
 
       .step('Create attributes')

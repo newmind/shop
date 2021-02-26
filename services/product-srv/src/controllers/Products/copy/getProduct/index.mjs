@@ -9,7 +9,7 @@ export default async function updateProperties(uuid) {
     where: { uuid },
     attributes: ['uuid', 'name', 'description', 'status', 'price', 'fiscal', 'updatedAt'],
     order: [
-      ['gallery', 'order', 'desc'],
+      ['gallery', 'order', 'asc'],
       ['attributes', 'order', 'asc'],
     ],
     include: [
@@ -28,7 +28,7 @@ export default async function updateProperties(uuid) {
         as: 'types',
         attributes: ['id', 'value'],
         through: {
-          attributes: ['order'],
+          attributes: [],
           order: [['order', 'asc']],
           as: 'type',
         },
@@ -38,7 +38,7 @@ export default async function updateProperties(uuid) {
         as: 'categories',
         attributes: ['id', 'value'],
         through: {
-          attributes: ['order'],
+          attributes: [],
           order: [['order', 'asc']],
           as: 'category',
         },
@@ -53,7 +53,7 @@ export default async function updateProperties(uuid) {
         model: ProductAttribute,
         required: false,
         as: 'attributes',
-        attributes: ['value', 'order'],
+        attributes: ['value', 'order', 'use'],
         include: [
           {
             model: Attribute,
@@ -73,7 +73,7 @@ export default async function updateProperties(uuid) {
       {
         model: Gallery,
         as: 'gallery',
-        attributes: ['uuid', 'order'],
+        attributes: ['uuid'],
       },
     ],
   });

@@ -11,7 +11,6 @@ module.exports = (db, DataType) => {
     name: {
       type: DataType.STRING(32),
       allowNull: true,
-      unique: true,
     },
     small: {
       type: DataType.BLOB,
