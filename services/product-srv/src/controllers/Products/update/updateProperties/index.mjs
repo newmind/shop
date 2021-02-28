@@ -7,53 +7,76 @@ export default async function updateProperties(uuid, properties) {
 
   const transaction = await sequelize.transaction();
 
-  await Gallery.destroy({ where: { productUuid: uuid }}, { transaction });
+  if (properties['gallery'] && !! properties['gallery'].length) {
+    await Gallery.destroy({ where: { productUuid: uuid }}, { transaction });
 
-  const newGallery = properties['gallery'].map((item, index) => {
-    return {
-      uuid: item['uuid'],
-      productUuid: uuid,
-      order: index,
-    }
-  });
+    const newGallery = properties['gallery'].map((item, index) => {
+      return {
+        uuid: item['uuid'],
+        productUuid: uuid,
+        order: index,
+      }
+    });
+    await Gallery.bulkCreate(newGallery, { transaction });
+  }
 
-  console.log(newGallery)
+  if (properties['attributes'] && !! properties['attributes'].length) {
+    await ProductAttribute.destroy({ where: { productUuid: uuid }}, { transaction });
 
-  await Gallery.bulkCreate(newGallery, { transaction });
+    const newAttributes = properties['attributes'].map((item, index) => {
+      return {
+        productUuid: uuid,
+        attributeId: item['id'],
+        value: item['value'],
+        use: item['use'],
+        order: index,
+      }
+    });
+    await ProductAttribute.bulkCreate(newAttributes, { transaction });
+  }
 
-  await ProductAttribute.destroy({ where: { productUuid: uuid }}, { transaction });
+  if (properties['brandId']) {
+    await ProductBrand.destroy({ where: { productUuid: uuid }}, { transaction });
+    await ProductBrand.create({ productUuid: uuid, brandId: properties['brandId'] }, { transaction })
+  }
 
-  const newAttributes = properties['attributes'].map((item, index) => {
-    return {
-      productUuid: uuid,
-      attributeId: item['id'],
-      value: item['value'],
-      use: item['use'],
-      order: index,
-    }
-  });
+  if (properties['types'] && !! properties['types'].length) {
+    await ProductType.destroy({ where: { productUuid: uuid }}, { transaction });
+    await ProductType.bulkCreate(properties['types'].map((item) => ({ productUuid: uuid, typeId: item })), { transaction })
+  }
 
-  await ProductAttribute.bulkCreate(newAttributes, { transaction });
+  if (properties['categories'] && !! properties['categories'].length) {
+    await ProductCategory.destroy({ where: { productUuid: uuid }}, { transaction });
+    await ProductCategory.bulkCreate(properties['categories'].map((item) => ({ productUuid: uuid, categoryId: item })), { transaction })
+  }
 
-  await ProductBrand.destroy({ where: { productUuid: uuid }}, { transaction });
-  await ProductBrand.create({ productUuid: uuid, brandId: properties['brandId'] }, { transaction })
+  const product = {};
 
-  await ProductType.destroy({ where: { productUuid: uuid }}, { transaction });
-  await ProductType.bulkCreate(properties['types'].map((item) => ({ productUuid: uuid, typeId: item })), { transaction })
+  if (properties['name']) {
+    product['name'] = properties['name'];
+  }
 
-  await ProductCategory.destroy({ where: { productUuid: uuid }}, { transaction });
-  await ProductCategory.bulkCreate(properties['categories'].map((item) => ({ productUuid: uuid, categoryId: item })), { transaction })
+  if (properties['price']) {
+    product['price'] = Number(properties['price']);
+  }
 
-  await Product.update({
-    name: properties['name'],
-    price: properties['price'],
-    currencyCode: properties['currencyCode'],
-    description: properties['description'],
-    fiscal: properties['fiscal'],
-  }, {
-    where: { uuid },
-    transaction,
-  });
+  if (properties['currencyCode']) {
+    product['currencyCode'] = properties['currencyCode'];
+  }
+
+  if (properties['description']) {
+    product['description'] = properties['description'];
+  }
+
+  if (properties['fiscal']) {
+    product['fiscal'] = properties['fiscal'];
+  }
+
+  if ('isView' in properties) {
+    product['isView'] = properties['isView'];
+  }
+
+  await Product.update(product, { where: { uuid }, transaction });
 
   await transaction.commit();
 }

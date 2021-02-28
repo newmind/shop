@@ -63,13 +63,8 @@ AttributeField.defaultProps = {
   field: '',
 };
 
-
-function Attributes({ fields, disabled }) {
+function AttributeList({ fields, disabled }) {
   const data = useSelector(getFormValues('modify-product'));
-
-  function handleAddAttr() {
-    fields.push({});
-  }
 
   function handleRemoveAttr(index) {
     fields.remove(index)
@@ -81,25 +76,38 @@ function Attributes({ fields, disabled }) {
     }
   }
 
+  if ( ! fields.length) {
+    return null;
+  }
+
+  return (
+    <Row>
+      <div className={styles['attrs']}>
+        <Draggable onChange={(from, to) => handleChangeOrder(from, to)}>
+          {fields.map((field, index) => (
+            <AttributeField
+              key={index}
+              field={field}
+              data={data['attributes'][index]}
+              disabled={disabled}
+              onRemove={() => handleRemoveAttr(index)}
+            />
+          ))}
+        </Draggable>
+      </div>
+    </Row>
+  );
+}
+
+function Attributes({ fields, disabled }) {
+
+  function handleAddAttr() {
+    fields.push({});
+  }
+
   return (
     <div className={styles['wrapper']}>
-      { !! fields.length && (
-        <Row>
-          <div className={styles['attrs']}>
-            <Draggable onChange={(from, to) => handleChangeOrder(from, to)}>
-              {fields.map((field, index) => (
-                <AttributeField
-                  key={index}
-                  field={field}
-                  data={data['attributes'][index]}
-                  disabled={disabled}
-                  onRemove={() => handleRemoveAttr(index)}
-                />
-              ))}
-            </Draggable>
-          </div>
-        </Row>
-      )}
+      <AttributeList disabled={disabled} fields={fields} />
       <Row>
         <Col className={styles['align-right']}>
           <Button

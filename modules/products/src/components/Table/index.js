@@ -2,10 +2,10 @@
 import numeral from '@packages/numeral';
 
 import { Mode } from '@ui.packages/types';
-import { Confirm, openDialog, closeDialog } from "@ui.packages/dialog";
-import { nounDeclension } from '@ui.packages/utils';
 import { Column, Table } from "@ui.packages/table";
-import { Actions, Gallery, Header } from "@ui.packages/kit";
+import { nounDeclension } from '@ui.packages/utils';
+import { Actions, Gallery, Header, CheckBox } from "@ui.packages/kit";
+import { Confirm, openDialog, closeDialog } from "@ui.packages/dialog";
 
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
@@ -14,7 +14,8 @@ import { useSelector, useDispatch } from 'react-redux';
 import styles from "./default.module.scss";
 
 import { selectInProcess, selectMeta, selectItems } from '../../ducks/slice';
-import { copyProductById, removeProductById } from '../../ducks/commands';
+import { copyProductById, removeProductById, updateProductById } from '../../ducks/commands';
+
 
 function List() {
   const navigate = useNavigate();
@@ -62,6 +63,10 @@ function List() {
 
     setProductId(null);
     dispatch(closeDialog('copy-confirm'));
+  }
+
+  function handleUpdate(uuid, isView) {
+    dispatch(updateProductById(uuid, isView));
   }
 
   return (
@@ -128,6 +133,12 @@ function List() {
               </ul>
             );
           }}
+        </Column>
+        <Column
+          title="Видим"
+          width="50"
+        >
+          {({ uuid, isView }) => <CheckBox value={isView} disabled={inProcess} onChange={(value) => handleUpdate(uuid, value)} />}
         </Column>
         <Column
           align="right"

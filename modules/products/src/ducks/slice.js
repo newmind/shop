@@ -31,25 +31,6 @@ const slice = createSlice({
       state['promotions'] = payload;
     },
 
-    setPromotionRequestAction(state) {
-      state['inProcess'] = true;
-    },
-    setPromotionRequestFailAction(state) {
-      state['inProcess'] = false;
-    },
-    setPromotionRequestSuccessAction(state, { payload }) {
-      state['inProcess'] = false;
-      state['items'] = [...state['items']].map((item) => {
-        if (item['uuid'] === payload['uuid']) {
-          return {
-            ...item,
-            ...payload,
-          };
-        }
-        return item;
-      });
-    },
-
     getProductsRequestAction(state) {
       state['inProcess'] = true;
     },
@@ -63,6 +44,12 @@ const slice = createSlice({
       state['inProcess'] = false;
     },
 
+    updateProductsRequestAction(state) {
+      state['inProcess'] = true;
+    },
+    updateProductsRequestFailAction(state) {
+      state['inProcess'] = false;
+    },
     updateProductsRequestSuccessAction(state, { payload }) {
       state['items'] = state['items'].map((item) => {
         if (item['uuid'] === payload['uuid']) {
@@ -73,6 +60,7 @@ const slice = createSlice({
         }
         return item;
       });
+      state['inProcess'] = false;
     },
 
     removeProductRequestAction(state) {
@@ -124,6 +112,8 @@ export const {
   getProductsRequestFailAction,
   getProductsRequestSuccessAction,
 
+  updateProductsRequestAction,
+  updateProductsRequestFailAction,
   updateProductsRequestSuccessAction,
 
   removeProductRequestAction,

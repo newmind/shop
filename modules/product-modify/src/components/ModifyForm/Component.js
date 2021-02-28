@@ -1,5 +1,5 @@
 
-import { Row, Col, InputField, TextareaField, SelectField, ListField, Header } from '@ui.packages/kit';
+import { Row, Col, CheckBoxField, InputField, TextareaField, SelectField, ListField, Header } from '@ui.packages/kit';
 
 import React from 'react';
 import { useSelector } from 'react-redux';
@@ -39,6 +39,11 @@ function ModifyForm({ handleSubmit }) {
         <div className={styles['content']}>
           <Row>
             <Col>
+              <CheckBoxField name="isView" label="отображать в каталоге" />
+            </Col>
+          </Row>
+          <Row>
+            <Col>
               <InputField name="uuid" label="Номер товара (генерируется автоматически)" disabled />
             </Col>
             <Col>
@@ -60,7 +65,6 @@ function ModifyForm({ handleSubmit }) {
               <ListField
                 name="categories"
                 label="Категория"
-                type={SelectField.TYPE_MULTISELECT}
                 options={categories}
                 optionKey="id"
                 optionValue="value"

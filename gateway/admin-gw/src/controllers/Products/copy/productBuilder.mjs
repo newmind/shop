@@ -11,14 +11,16 @@ export default function productBuilder(data) {
     price: Number(data['price']),
     promotions: data['promotions'],
     currency: data['currency'] ? data['currency']['value'] : null,
-    status: Number(data['status']),
-    gallery: data['gallery'].map((img) => img['uuid']),
+    gallery: data['gallery'],
     comments: data['comments'],
+    isView: data['isView'],
     updatedAt: data['updatedAt'],
-    attributes: data['attributes'].map((item) => ({
-      name: item['attribute']['value'],
-      value: item['value'],
-      unit: item['attribute']['unit'] ? item['attribute']['unit']['value'] : null,
-    })),
+    attributes: data['attributes'].map((item) => {
+      return {
+        name: item['attribute']['value'],
+        value: item['value'],
+        unit: item['attribute']['unit'] ? item['attribute']['unit']['value'] : null,
+      }
+    }),
   };
 }

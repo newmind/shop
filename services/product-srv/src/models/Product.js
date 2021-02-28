@@ -35,7 +35,7 @@ module.exports = (db, DataType) => {
       type: DataType.STRING(1024),
       allowNull: true,
     },
-    status: {
+    isView: {
       type: DataType.INTEGER,
       defaultValue: 1,
       index: true,

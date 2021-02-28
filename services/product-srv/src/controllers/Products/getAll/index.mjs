@@ -15,7 +15,6 @@ export default () => async (ctx) => {
   const { Product, Currency, Attribute, Category, Brand, Type, ProductAttribute, Unit, Gallery, Comment } = models;
   const {
     fiscal = null,
-    status = null,
     limit = null,
     skip = null,
     take = null,
@@ -25,10 +24,11 @@ export default () => async (ctx) => {
     amountFrom = null,
     amountTo = null,
     typeId = null,
+    isView = null,
   } = ctx['request']['query'];
 
-  if (status) {
-    where['status'] = status;
+  if (isView !== null) {
+    where['isView'] = isView;
   }
 
   if (fiscal) {
@@ -75,7 +75,7 @@ export default () => async (ctx) => {
   }
 
   const result = await Product.findAndCountAll({
-    attributes: ['uuid', 'name', 'description', 'status', 'price', 'fiscal', 'createdAt'],
+    attributes: ['uuid', 'name', 'description', 'price', 'fiscal', 'isView', 'createdAt'],
     ...options,
     ...offset,
     distinct: true,

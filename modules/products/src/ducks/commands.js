@@ -11,10 +11,6 @@ import {
   getPromotionsRequestFailAction,
   getPromotionsRequestSuccessAction,
 
-  setPromotionRequestAction,
-  setPromotionRequestFailAction,
-  setPromotionRequestSuccessAction,
-
   getProductsRequestAction,
   getProductsRequestFailAction,
   getProductsRequestSuccessAction,
@@ -26,6 +22,10 @@ import {
   copyProductRequestAction,
   copyProductRequestFailRequest,
   copyProductRequestSuccessAction,
+
+  updateProductsRequestAction,
+  updateProductsRequestFailAction,
+  updateProductsRequestSuccessAction,
 } from './slice';
 
 
@@ -43,39 +43,6 @@ export const getPromotions = (params = {}) => async (dispatch) => {
   }
   catch(error) {
     dispatch(getPromotionsRequestFailAction());
-
-    if (error instanceof UnauthorizedError) {
-      return void 0;
-    }
-    dispatch(pushNotification({
-      title: 'Ошибка при запросе данных',
-      connect: `${error['data']['message']} (${error['data']['code']})`,
-      mode: Mode.DANGER,
-      autoClose: false,
-    }));
-  }
-};
-
-export const setPromotions = (promotionUuid, productUuid) => async (dispatch) => {
-  try {
-    dispatch(setPromotionRequestAction());
-
-    const { data } = await request({
-      url: '/products/' + productUuid + '/promotion',
-      method: 'post',
-      data: {
-        promotionUuid,
-      },
-    });
-
-    dispatch(setPromotionRequestSuccessAction(data));
-    dispatch(pushNotification({
-      title: 'Изменения сохранены',
-      mode: Mode.SUCCESS,
-    }));
-  }
-  catch(error) {
-    dispatch(setPromotionRequestFailAction());
 
     if (error instanceof UnauthorizedError) {
       return void 0;
@@ -120,7 +87,7 @@ export const getProducts = (params = {}) => async (dispatch) => {
   }
 };
 
-export const removeProductById = (uuid) => async dispatch => {
+export const removeProductById = (uuid) => async (dispatch) => {
   try {
     dispatch(removeProductRequestAction());
 
@@ -151,7 +118,7 @@ export const removeProductById = (uuid) => async dispatch => {
   }
 };
 
-export const copyProductById = (uuid) => async dispatch => {
+export const copyProductById = (uuid) => async (dispatch) => {
   try {
     dispatch(copyProductRequestAction());
 
@@ -178,6 +145,38 @@ export const copyProductById = (uuid) => async dispatch => {
     dispatch(pushNotification({
       title: 'Ошибка при удаленнии продукта',
       connect: `${error['data']['message']} (${error['data']['code']})`,
+      mode: Mode.DANGER,
+      autoClose: false,
+    }));
+  }
+};
+
+export const updateProductById = (uuid, isView) => async (dispatch) => {
+  try {
+    dispatch(updateProductsRequestAction());
+
+    const result = await request({
+      method: 'put',
+      url: `/products/${uuid}`,
+      data: {
+        isView,
+      },
+    });
+
+    dispatch(updateProductsRequestSuccessAction(result['data']));
+    dispatch(pushNotification({
+      title: 'Операция выполнена успешно',
+      mode: Mode.SUCCESS,
+    }));
+  }
+  catch(error) {
+    dispatch(updateProductsRequestFailAction(error));
+
+    if (error instanceof UnauthorizedError) {
+      return void 0;
+    }
+    dispatch(pushNotification({
+      title: 'Ошибка при выполнении операции',
       mode: Mode.DANGER,
       autoClose: false,
     }));

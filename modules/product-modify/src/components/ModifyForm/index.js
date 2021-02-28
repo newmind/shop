@@ -7,8 +7,8 @@ import Component from './Component';
 const validate = (values) => {
   let errors = {};
 
-  if ( ! values['brand']) {
-    errors['brand'] = 'Неоходимо заполнить';
+  if ( ! values['brandId']) {
+    errors['brandId'] = 'Неоходимо заполнить';
   }
 
   if ( ! values['name']) {
@@ -19,15 +19,15 @@ const validate = (values) => {
     errors['description'] = 'Неоходимо заполнить';
   }
 
-  if ( ! values['amount']) {
-    errors['amount'] = 'Неоходимо заполнить';
+  if ( ! values['price']) {
+    errors['price'] = 'Неоходимо заполнить';
   }
-  else if ( ! /^\d+(.\d{1,2})?$/.test(values['amount'])) {
-    errors['amount'] = 'Неверный формат';
+  else if ( ! /^\d+(.\d{1,2})?$/.test(values['price'])) {
+    errors['price'] = 'Неверный формат';
   }
 
-  if ( ! values['currencyId']) {
-    errors['currencyId'] = 'Неоходимо заполнить';
+  if ( ! values['currencyCode']) {
+    errors['currencyCode'] = 'Неоходимо заполнить';
   }
 
   const attrsErrors = [];

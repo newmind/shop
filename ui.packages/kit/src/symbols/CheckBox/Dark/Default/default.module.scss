@@ -51,6 +51,7 @@
   outline: none;
   padding: 0 0 0 2px;
   box-sizing: border-box;
+  text-align: center;
   vertical-align: middle;
   transition: background 200ms, border 200ms;
 
@@ -62,7 +63,7 @@
 
     display: none;
     font-size: 11px;
-    padding: 4px 0 0 2px;
+    padding: 4px 0 0;
   }
 
   &--checked &__marker {

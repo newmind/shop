@@ -36,10 +36,10 @@ module.exports = {
           type: DataType.STRING(1024),
           allowNull: true,
         },
-        status: {
-          type: DataType.INTEGER,
-          defaultValue: 1,
+        isView: {
+          type: DataType.BOOL,
           index: true,
+          allowNull: false,
         },
         createdAt: {
           type: DataType.DATE,

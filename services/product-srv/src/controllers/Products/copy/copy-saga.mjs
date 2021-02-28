@@ -47,8 +47,8 @@ export default class CopySaga {
 
       .step('Copy product')
       .invoke(async (props) => {
-        const { price, name, description, status, fiscal, currency } = props.getProduct();
-        await Product.create({ uuid: newUuid, price, name, description, status, fiscal, currencyCode: currency['code'] });
+        const { price, name, description, isView, fiscal, currency } = props.getProduct();
+        await Product.create({ uuid: newUuid, price, name, description, isView, fiscal, currencyCode: currency['code'] });
       })
 
       .step('Create attributes')

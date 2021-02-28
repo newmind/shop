@@ -11,9 +11,9 @@ export default function productBuilder(data) {
     price: Number(data['price']),
     promotions: data['promotions'],
     currency: data['currency'] ? data['currency']['value'] : null,
-    status: Number(data['status']),
     gallery: data['gallery'],
     comments: data['comments'],
+    isView: data['isView'],
     updatedAt: data['updatedAt'],
     attributes: data['attributes'].map((item) => {
       return {
