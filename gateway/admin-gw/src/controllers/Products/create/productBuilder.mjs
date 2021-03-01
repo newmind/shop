@@ -3,24 +3,39 @@ export default function productBuilder(data) {
   return {
     uuid: data['uuid'],
     fiscal: data['fiscal'],
-    brand: !! data['brands'].length ? data['brands'][0]['value'] : null,
     name: data['name'],
-    types: data['types'],
-    categories: data['categories'],
+    brand: !! data['brands'].length
+      ? ({
+        id: data['brands'][0]['id'],
+        name: data['brands'][0]['value'],
+      })
+      : null,
+    types: data['types'].map((item) => ({
+      id: item['id'],
+      name: item['value'],
+    })),
+    categories: data['categories'].map((item) => ({
+      id: item['id'],
+      name: item['value'],
+    })),
     description: data['description'],
     price: Number(data['price']),
     promotions: data['promotions'],
-    currency: data['currency'] ? data['currency']['value'] : null,
+    currency: data['currency']
+      ? ({
+        code: data['currency']['code'],
+        name: data['currency']['value'],
+      })
+      : null,
     gallery: data['gallery'],
     comments: data['comments'],
     isView: data['isView'],
     updatedAt: data['updatedAt'],
-    attributes: data['attributes'].map((item) => {
-      return {
-        name: item['attribute']['value'],
-        value: item['value'],
-        unit: item['attribute']['unit'] ? item['attribute']['unit']['value'] : null,
-      }
-    }),
+    attributes: data['attributes'].map((item) => ({
+      id: item['attribute']['id'],
+      name: item['attribute']['value'],
+      value: item['value'],
+      unit: item['attribute']['unit'] ? item['attribute']['unit']['value'] : null,
+    })),
   };
 }

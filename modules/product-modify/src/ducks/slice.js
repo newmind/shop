@@ -76,7 +76,13 @@ const productModifySlice = createSlice({
     getProductRequestAction() {},
     getProductRequestFailAction() {},
     getProductRequestSuccessAction(state, { payload }) {
-      state['product'] = payload;
+      state['product'] = {
+        ...payload,
+        brandId: payload['brand'] ? payload['brand']['id'] : null,
+        types: payload['types'].map((item) => item['id']),
+        categories: payload['categories'].map((item) => item['id']),
+        currencyCode: payload['currency']['code'],
+      };
     },
 
     updateProductRequestAction(state) {
@@ -87,7 +93,13 @@ const productModifySlice = createSlice({
     },
     updateProductRequestSuccessAction(state, { payload }) {
       state['inProcess'] = false;
-      state['product'] = payload;
+      state['product'] = {
+        ...payload,
+        brandId: payload['brand'] ? payload['brand']['id'] : null,
+        types: payload['types'].map((item) => item['id']),
+        categories: payload['categories'].map((item) => item['id']),
+        currencyCode: payload['currency']['code'],
+      };
     },
 
     createProductRequestAction(state) {

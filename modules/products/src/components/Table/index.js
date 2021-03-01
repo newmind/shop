@@ -91,9 +91,9 @@ function List() {
               <div className={styles['description']}>
                 {uuid && <div className={styles['description__item']}><b className={styles['description__label']}>{ uuid }</b></div>}
                 {fiscal && <div className={styles['description__item']}><b className={styles['description__label']}>{ fiscal }</b></div>}
-                {brand && <div className={styles['description__item']}><b className={styles['description__label']}>Бренд:</b> { brand }</div>}
+                {brand && <div className={styles['description__item']}><b className={styles['description__label']}>Бренд:</b> { brand['name'] }</div>}
                 {name && <div className={styles['description__item']}><b className={styles['description__label']}>Название:</b> { name }</div>}
-                {price && <div className={styles['description__item']}><b className={styles['description__label']}>Цена:</b> { numeral(price).format() } { currency }</div>}
+                {price && <div className={styles['description__item']}><b className={styles['description__label']}>Цена:</b> { numeral(price).format() } { currency['name'] }</div>}
                 {description && <div className={styles['description__item']}><b className={styles['description__label']}>Описание:</b> { description }</div>}
               </div>
             )
@@ -106,8 +106,8 @@ function List() {
           {({ types, categories }) => {
             return (
               <div className={styles['description']}>
-                { !! types.length && <div className={styles['description__item']}><b className={styles['description__label']}>Тип:</b> { types.map((type, index) => <span key={index} className={styles['item']}>{ type['value'] }</span>) }</div>}
-                { !! categories.length && <div className={styles['description__item']}><b className={styles['description__label']}>Категория:</b> { categories.map((category, index) => <span key={index} className={styles['item']}>{ category['value'] }</span>) }</div>}
+                { !! types.length && <div className={styles['description__item']}><b className={styles['description__label']}>Тип:</b> { types.map((type, index) => <span key={index} className={styles['item']}>{ type['name'] }</span>) }</div>}
+                { !! categories.length && <div className={styles['description__item']}><b className={styles['description__label']}>Категория:</b> { categories.map((category, index) => <span key={index} className={styles['item']}>{ category['name'] }</span>) }</div>}
                 {/*{ !! promotions.length && <div className={styles['description__item']}><b className={styles['description__label']}>Скидки:</b> { promotions.map((promo, index) => <span key={index} className={styles['item']}>{ promo['name'] } ({promo['percent']} %)</span>) }</div>}*/}
               </div>
             );

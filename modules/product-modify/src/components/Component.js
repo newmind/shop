@@ -57,8 +57,6 @@ function ProductModify() {
     await dispatch(closeDialog());
   }
 
-  console.log(valid, pristine, inProcess)
-
   return (
     <Page className={styles['wrapper']} inProcess={inProcess}>
       <PageControls>

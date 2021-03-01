@@ -198,6 +198,7 @@ export const getProductById = (uuid) => async (dispatch) => {
     dispatch(getProductRequestSuccessAction(result['data']));
   }
   catch(error) {
+    console.log(error)
     dispatch(getProductRequestFailAction(error));
 
     if (error instanceof UnauthorizedError) {

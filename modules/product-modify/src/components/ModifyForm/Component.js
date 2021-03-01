@@ -74,7 +74,16 @@ function ModifyForm({ handleSubmit }) {
           </Row>
           <Row>
             <Col>
-              <SelectField require name="brandId" label="Бренд" options={brands} disabled={inProcess} />
+              <SelectField
+                require
+                simple
+                name="brandId"
+                label="Бренд"
+                options={brands}
+                optionKey="id"
+                optionValue="value"
+                disabled={inProcess}
+              />
             </Col>
             <Col>
               <InputField require name="name" label="Назвние" disabled={inProcess} />
