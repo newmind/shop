@@ -18,13 +18,13 @@ function NavigateModule({ children }) {
               <Header />
             </div>
           </header>
-          <div className={styles['navigate']}>
+          <menu className={styles['navigate']}>
             <div className={styles['center']}>
               <div className={styles['menu']}>
                 <Navigation />
               </div>
             </div>
-          </div>
+          </menu>
         </aside>
         <section className={styles['content']}>
           { children }

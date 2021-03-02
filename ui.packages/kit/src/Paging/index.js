@@ -47,10 +47,12 @@ export default function Paging({ total, skip, disabled, onChange }) {
 
   return (
     <div className={styles['wrapper']}>
-      <div className={styles['controls']}>
-        <Back type="prev" disabled={disabled || page === 1} onClick={() => handleClick(1)} />
-        <Forward type="prev" disabled={disabled || page === 1} onClick={() => handlePrevClick()} />
-      </div>
+      {(page !== 1) && (
+        <div className={styles['controls']}>
+          <Back type="prev" disabled={disabled} onClick={() => handleClick(1)} />
+          <Forward type="prev" disabled={disabled} onClick={() => handlePrevClick()} />
+        </div>
+      )}
       <div className={styles['numbers']}>
         {Array(pages).fill(1).map((number, index) => (
           <Page
@@ -61,10 +63,12 @@ export default function Paging({ total, skip, disabled, onChange }) {
           >{ index + 1 }</Page>
         ))}
       </div>
-      <div className={styles['controls']}>
-        <Forward type="next" disabled={disabled || page === pages} onClick={() => handleNextClick()} />
-        <Back type="next" disabled={disabled || page === pages} onClick={() => handleClick(pages)} />
-      </div>
+      {(page !== pages) && (
+        <div className={styles['controls']}>
+          <Forward type="next" disabled={disabled} onClick={() => handleNextClick()} />
+          <Back type="next" disabled={disabled} onClick={() => handleClick(pages)} />
+        </div>
+      )}
     </div>
   );
 }

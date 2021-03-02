@@ -7,7 +7,12 @@
   display: flex;
   flex: 1 0;
   flex-direction: column;
-  background: $coal-dark url("./noise.png");
+  background-image: url("./noise.png"), linear-gradient(180deg, rgba($coal-dark, .5) 0, $coal-dark 400px), url("./background.jpg");
+  background-color: $coal-dark;
+  background-repeat: repeat, no-repeat, repeat-x;
+  background-position: top center;
+  background-size: auto, contain, auto;
+  background-attachment: fixed, fixed, fixed;
   overflow: auto;
 }
 
@@ -50,7 +55,7 @@
 .header {
 
   display: block;
-  background: $coal-dark;
+  background: rgba($coal-dark, .9);
 }
 
 .page {
@@ -70,6 +75,7 @@
 .navigate {
 
   display: block;
+  background: rgba($coal-dark, .6);
   border-top: 1px solid rgba($gray, .2);
   border-bottom: 1px solid rgba($gray, .2);
 }

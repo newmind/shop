@@ -12,7 +12,7 @@ async function getProductByUUID(uuid) {
     url: process.env['PRODUCT_API_SRV'] + '/products',
     params: {
       uuid,
-      status: 1,
+      isView: true,
     }
   });
 

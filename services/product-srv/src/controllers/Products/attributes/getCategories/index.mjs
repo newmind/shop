@@ -4,9 +4,14 @@ import { models, sequelize } from '@sys.packages/db';
 
 export default () => async (ctx) => {
   const where = {};
+  const productWhere = {};
 
   const { Product, Category, Type } = models;
-  const { typeId = null } = ctx['request']['query'];
+  const { typeId = null, isView = null } = ctx['request']['query'];
+
+  if (isView !== null) {
+    productWhere['isView'] = isView;
+  }
 
   if (typeId) {
     where['typeId'] = typeId;
@@ -23,6 +28,7 @@ export default () => async (ctx) => {
       {
         model: Product,
         required: true,
+        where: { ...productWhere },
         as: 'products',
         attributes: [],
         through: { attributes: [] },

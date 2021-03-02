@@ -10,22 +10,34 @@ export default () => async (ctx) => {
   const { data: types } = await request({
     url: process.env['PRODUCT_API_SRV'] + `/products/types`,
     method: 'get',
-    params: ctx['request']['query'],
+    params: {
+      isView: true,
+      ...params,
+    },
   });
   const { data: categories } = await request({
     url: process.env['PRODUCT_API_SRV'] + `/products/categories`,
     method: 'get',
-    params: ctx['request']['query'],
+    params: {
+      isView: true,
+      ...params,
+    },
   });
   const { data: brands } = await request({
     url: process.env['PRODUCT_API_SRV'] + `/products/brands`,
     method: 'get',
-    params: ctx['request']['query'],
+    params: {
+      isView: true,
+      ...params,
+    },
   });
   const { data: attributes } = await request({
     url: process.env['PRODUCT_API_SRV'] + `/products/attributes`,
     method: 'get',
-    params: ctx['request']['query'],
+    params: {
+      isView: true,
+      ...params,
+    },
   });
 
   let { data: products, meta } = await request({
@@ -33,6 +45,7 @@ export default () => async (ctx) => {
     url: process.env['PRODUCT_API_SRV'] + `/products`,
     params: {
       use: true,
+      isView: true,
       take: Number(process.env['TAKE']),
       skip: (page > 0 ? page - 1 : 0) * Number(process.env['TAKE']),
       ...params,

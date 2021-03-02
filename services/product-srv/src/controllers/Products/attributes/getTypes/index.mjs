@@ -3,7 +3,14 @@ import { models, sequelize } from '@sys.packages/db';
 
 
 export default () => async (ctx) => {
+  const productWhere = {};
+
   const { Product, Type } = models;
+  const { isView = null } = ctx['request']['query'];
+
+  if (isView !== null) {
+    productWhere['isView'] = isView;
+  }
 
   const result = await Type.findAll({
     distinct: true,
@@ -13,6 +20,7 @@ export default () => async (ctx) => {
     include: [
       {
         model: Product,
+        where: { ...productWhere },
         as: 'products',
         attributes: [],
         through: { attributes: [] },

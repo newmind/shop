@@ -5,12 +5,12 @@
 .wrapper {
 
   display: inline-block;
-  border: 1px solid $pale-lilac;
-  background: $white;
+  border: 1px solid transparent;
+  background: transparent;
   border-radius: 5px;
   color: $blue-grey;
-  padding: 4px 0;
-  width: 30px;
+  padding: 10px 0;
+  width: 36px;
   height: 16px;
   transition: color 200ms, border 200ms, background-color 200ms;
   overflow: hidden;
@@ -18,8 +18,7 @@
 
   &:hover {
 
-    border-color: $coal-dark;
-    color: $coal-dark;
+    color: $white;
   }
 
   & + * {
@@ -38,8 +37,6 @@
 .disabled,
 .disabled:hover {
 
-  color: $pale-lilac;
-  border-color: $pale-lilac;
-  background: $pale-grey;
+  color: $blue-grey;
   cursor: default;
 }

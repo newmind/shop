@@ -64,21 +64,21 @@ export default function Product({ uuid, price, prevPrice, currency, brand, name,
         </div>
       </div>
       <div className={styles['information']}>
-        <div className={styles['amount']}>
-          <Text type={Text.TYPE_AMOUNT}>{ numeral(price).format() } { currency }</Text>
-          {prevPrice && (
-            <Text className={styles['prev-amount']} type={Text.TYPE_BODY}>{ numeral(prevPrice).format() } { currency }</Text>
-          )}
+        <div className={styles['container']}>
+          <div className={styles['amount']}>
+            <Text type={Text.TYPE_AMOUNT}>{ numeral(price).format() } { currency }</Text>
+            {prevPrice && (
+              <Text className={styles['prev-amount']} type={Text.TYPE_BODY}>{ numeral(prevPrice).format() } { currency }</Text>
+            )}
+          </div>
+          <div className={styles['controls']}>
+            <Button form={Button.FORM_CART} onClick={(event) => handleClickCart(event)} />
+          </div>
         </div>
-        <div className={styles['controls']}>
-          <Button form={Button.FORM_CART} onClick={(event) => handleClickCart(event)} />
-          { !! product && (
-            <span className={removeFromCartClassName} onClick={(event) => handleRemoveFromCart(uuid, event)} />
-          )}
-        </div>
-        {product && (
+        { !! product && (
           <div className={styles['count']}>
             <Text type={Text.TYPE_COMMENT}>{ product[1] } { nounDeclension(product[1], ['товар', 'товара', 'товаров']) } уже в корзине</Text>
+            <span className={removeFromCartClassName} onClick={(event) => handleRemoveFromCart(uuid, event)} />
           </div>
         )}
       </div>
