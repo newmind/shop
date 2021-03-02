@@ -91,6 +91,7 @@ export default function Image({ className, src, size, isResize }) {
 
   function handleLoaded() {
     calculateProportions();
+    setError(false);
     setLoadingState(false);
   }
 
@@ -99,38 +100,25 @@ export default function Image({ className, src, size, isResize }) {
   }
 
   useEffect(() => {
-    const { current: imageElement } = imageRef;
-
     if (isResize) {
       window.addEventListener('resize', handleResize);
     }
-
-    if (imageElement) {
-      imageElement.addEventListener('load', handleLoaded);
-      imageElement.addEventListener('error', handleError);
-    }
-
     return () => {
       if (isResize) {
         window.removeEventListener('resize', handleResize);
-      }
-      if (imageElement) {
-        imageElement.removeEventListener('load', handleLoaded);
-        imageElement.removeEventListener('error', handleError);
       }
     };
   }, [src, size]);
 
   const wrapperClassName = cn(styles['wrapper'], className);
-  const imageClassName = cn(styles['image'], {
-    [styles['image--visible']]: ! isLoadingState,
-  });
 
   return (
     <div className={wrapperClassName}>
-      <div ref={wrapperRef} className={imageClassName}>
-        {src && <img ref={imageRef} src={src} alt="" />}
-      </div>
+      {src && (
+        <div ref={wrapperRef} className={styles['image']}>
+          <img ref={imageRef} src={src} alt="" onLoad={() => handleLoaded()} onError={() => handleError()} />
+        </div>
+      )}
       {src && isLoadingState && (
         <div className={styles['loading']}>
           <span className={cn(styles['icon'], styles['animation'], 'fas fa-circle-notch')} />

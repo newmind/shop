@@ -12,4 +12,9 @@ export default async function() {
     cb(true);
   });
 
+  await bindToExchange(process.env['QUEUE_IMAGE_UPDATE'] + '_' + salt, process.env['EXCHANGE_IMAGE_UPDATE'], (data, cb) => {
+    const result = JSON.parse(data);
+    emit(process.env['SOCKET_IMAGE_UPDATE'], result);
+    cb(true);
+  });
 }

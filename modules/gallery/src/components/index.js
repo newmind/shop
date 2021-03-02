@@ -27,7 +27,7 @@ export default function HOC() {
 
     on(process.env['REACT_APP_SOCKET_IMAGE_CREATE'], (data) => dispatch(createGalleryRequestSuccessAction(data)));
     on(process.env['REACT_APP_SOCKET_IMAGE_UPDATE'], (data) => dispatch(updateGalleryRequestSuccessAction(data)));
-    on(process.env['REACT_APP_SOCKET_IMAGE_DELETE'], (data) => dispatch(deleteGalleryRequestSuccessAction(data)));
+    on(process.env['REACT_APP_SOCKET_IMAGE_DELETE'], (data) => dispatch(deleteGalleryRequestSuccessAction({ uuid: data })));
   });
 
   useUpdate(async function() {

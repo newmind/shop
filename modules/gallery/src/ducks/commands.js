@@ -14,6 +14,10 @@ import {
   createGalleryRequestFailAction,
   createGalleryRequestSuccessAction,
 
+  updateGalleryRequestAction,
+  updateGalleryRequestFailAction,
+  updateGalleryRequestSuccessAction,
+
   deleteGalleryRequestAction,
   deleteGalleryRequestFailAction,
   deleteGalleryRequestSuccessAction,
@@ -63,6 +67,34 @@ export const createGallery = (files) => async (dispatch) => {
   }
   catch(error) {
     dispatch(createGalleryRequestFailAction(error));
+
+    if (error instanceof UnauthorizedError) {
+      return void 0;
+    }
+    dispatch(pushNotification({
+      mode: 'danger',
+      content: 'Ошибка при выполнении операции'
+    }));
+  }
+}
+
+export const updateGallery = (data) => async (dispatch) => {
+  try {
+    dispatch(updateGalleryRequestAction());
+
+    const result = await request({
+      url: process.env['PUBLIC_URL'] + '/gallery/' + data['uuid'],
+      method: 'put',
+      data: {
+        name: data['name'],
+      },
+    });
+
+    dispatch(closeDialog('modify'));
+    dispatch(updateGalleryRequestSuccessAction(result['data']));
+  }
+  catch(error) {
+    dispatch(updateGalleryRequestFailAction(error));
 
     if (error instanceof UnauthorizedError) {
       return void 0;

@@ -7,11 +7,12 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import Table from './Table';
 import FormCreate from './FormCreate';
+import FormModify from './FormModify';
 
 import styles from './default.module.scss';
 
 import { selectInProcess } from '../ducks/slice';
-import { createGallery } from '../ducks/commands';
+import { createGallery, updateGallery } from '../ducks/commands';
 
 
 function Gallery() {
@@ -24,6 +25,10 @@ function Gallery() {
 
   function handleSubmit(formData) {
     dispatch(createGallery(formData['files']));
+  }
+
+  function handleUpdateSubmit(formData) {
+    dispatch(updateGallery(formData));
   }
 
   return (
@@ -47,6 +52,10 @@ function Gallery() {
           </article>
         </section>
       </PageContent>
+
+      <Dialog name="modify" title="Изменить название">
+        <FormModify onSubmit={(data) => handleUpdateSubmit(data)} />
+      </Dialog>
 
       <Dialog name="create" title="Загрузить изображение">
         <FormCreate onSubmit={(data) => handleSubmit(data)} />

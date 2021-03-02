@@ -61,11 +61,6 @@ const navigate = [
     path: '/customers',
     icon: 'fas fa-users',
   },
-  {
-    title: "Профайл",
-    path: '/profile',
-    icon: 'far fa-user-circle',
-  },
 ];
 
 export default navigate;

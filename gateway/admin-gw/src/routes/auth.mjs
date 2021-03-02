@@ -15,7 +15,7 @@ import { getAllAttributes, createAttribute, deleteAttributes, updateAttribute } 
 import { getProducts, getProduct,  createProduct, updateProduct, copyProduct } from '../controllers/Products';
 import { getAllPromotions, deletePromotions, updatePromotion, createPromotion } from '../controllers/Promotion';
 
-import { getImages, getImage, createImages, deleteImages } from '../controllers/Gallery';
+import { getImages, getImage, createImage, updateImage, deleteImages } from '../controllers/Gallery';
 import { getComments, createComment, updateComment, deleteComments } from '../controllers/Comments';
 
 import { getAllStatuses } from '../controllers/Statuses';
@@ -78,7 +78,8 @@ export default (router) => {
 
   router.get('/gallery', getImages());
   router.get('/gallery/:id', getImage());
-  router.post('/gallery', createImages());
+  router.post('/gallery', createImage());
+  router.put('/gallery/:uuid', updateImage());
   router.delete('/gallery', deleteImages());
 
   router.post('/sign-out', signOut());

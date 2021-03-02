@@ -1,6 +1,6 @@
 
-import PropTypes from 'prop-types';
-import React from 'react';
+import types from 'prop-types';
+import React, { useMemo } from 'react';
 
 import cn from 'classnames';
 import styles from './default.module.scss';
@@ -23,23 +23,16 @@ function Column({ align, alias, empty, transform, _model, children }) {
           if (children) {
             return React.cloneElement(children, model);
           }
-          else {
-            return null;
-          }
         }
         else {
           if (children) {
             return React.cloneElement(children, { value: model });
           }
-          else {
-            return model;
-          }
         }
       }
     }
-    else {
-      return null;
-    }
+
+    return null;
   }
 
   const contentClassName = cn(styles['content'], {
@@ -47,24 +40,26 @@ function Column({ align, alias, empty, transform, _model, children }) {
     [styles['content--right']]: align === 'right',
   });
 
+  const child = useMemo(() => renderData(), [_model]);
+
   return (
     <td className={styles['col']}>
       <span className={contentClassName}>
-        { renderData() }
+        { child }
       </span>
     </td>
   );
 }
 
 Column.propTypes = {
-  alias: PropTypes.string,
-  title: PropTypes.string,
-  width: PropTypes.string,
-  align: PropTypes.oneOf(['left', 'center', 'right']),
-  empty: PropTypes.any,
-  children: PropTypes.any,
-  _model: PropTypes.object,
-  transform: PropTypes.func,
+  alias: types.string,
+  title: types.string,
+  width: types.string,
+  align: types.oneOf(['left', 'center', 'right']),
+  empty: types.any,
+  children: types.any,
+  _model: types.object,
+  transform: types.func,
 };
 
 Column.defaultProps = {

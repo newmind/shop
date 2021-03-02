@@ -1,6 +1,6 @@
 
-import React from 'react';
 import types from 'prop-types';
+import React, { useMemo } from 'react';
 
 import styles from './default.module.scss';
 
@@ -8,7 +8,7 @@ import styles from './default.module.scss';
 function Row({ useSub, subTemplate, children, data }) {
   const count = React.Children.count(children);
 
-  return (
+  return useMemo(() => (
     <tbody className={styles['row']}>
       <tr className={styles['line']}>
         {React.Children.map(children, (child) => {
@@ -25,7 +25,7 @@ function Row({ useSub, subTemplate, children, data }) {
         </tr>
       )}
     </tbody>
-  );
+  ), [ data ]);
 }
 
 Row.propTypes = {

@@ -1,6 +1,6 @@
 
 import { Mode } from '@ui.packages/types';
-import { Row, Col, Button, InputField, TextareaField } from '@ui.packages/kit';
+import { Row, Col, Button, InputField } from '@ui.packages/kit';
 
 import React from 'react';
 
@@ -14,18 +14,9 @@ export default ({ handleSubmit, valid, pristine }) => {
         <Row>
           <Col>
             <InputField
-              name="value"
-              label="Значение"
+              name="name"
+              label="Название"
               maxLength={255}
-            />
-          </Col>
-        </Row>
-        <Row>
-          <Col>
-            <TextareaField
-              name="description"
-              label="Описание"
-              maxLength={2024}
             />
           </Col>
         </Row>

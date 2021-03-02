@@ -41,7 +41,9 @@ const typesSlice = createSlice({
       state['inCreateProcess'] = false;
     },
     createGalleryRequestSuccessAction(state, { payload }) {
-      state['items'] = [...payload, ...state['items']];
+      if ( ! state['items'].some((item) => item['uuid'] === payload['uuid'])) {
+        state['items'] = [...payload, ...state['items']];
+      }
       state['inCreateProcess'] = false;
     },
 
@@ -56,9 +58,24 @@ const typesSlice = createSlice({
       state['inProcess'] = false;
     },
 
-    updateGalleryRequestAction(state) {},
-    updateGalleryRequestFailAction(state) {},
-    updateGalleryRequestSuccessAction(state, { payload }) {},
+    updateGalleryRequestAction(state) {
+      state['inProcess'] = true;
+    },
+    updateGalleryRequestFailAction(state) {
+      state['inProcess'] = false;
+    },
+    updateGalleryRequestSuccessAction(state, { payload }) {
+      state['items'] = state['items'].map((item) => {
+        if (item['uuid'] === payload['uuid']) {
+          return {
+            ...item,
+            ...payload,
+          };
+        }
+        return item;
+      });
+      state['inProcess'] = false;
+    },
   },
 });
 

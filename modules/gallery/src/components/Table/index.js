@@ -1,11 +1,12 @@
 
 import { Table, Column } from '@ui.packages/table';
 import { Actions, Text, Image } from '@ui.packages/kit';
-import { Confirm, openDialog, closeDialog } from '@ui.packages/dialog';
+import { Confirm, Dialog, openDialog, closeDialog } from '@ui.packages/dialog';
 
 import React, { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 
+import cn from 'classnames';
 import styles from './default.module.scss';
 
 import { selectItems } from '../../ducks/slice';
@@ -25,6 +26,10 @@ function Types() {
   function handleResetDeletedItem() {
     setItemId(null);
     dispatch(closeDialog('confirm'));
+  }
+
+  function handleNameEdit(data) {
+    dispatch(openDialog('modify', data));
   }
 
   function handleDelete(uuid) {
@@ -50,11 +55,17 @@ function Types() {
           </Column>
           <Column
             title="Название"
-            alias="name"
             align="left"
             width="200"
           >
-            {(value) => <Text type={Text.TYPE_COMMENT}>{ value || '---' }</Text>}
+            {(value) => (
+              <div className={styles['name']} onClick={() => handleNameEdit(value)}>
+                <div className={styles['text']}>
+                  <Text type={Text.TYPE_COMMENT}>{ value['name'] || '---' }</Text>
+                </div>
+                <span className={cn(styles['icon'], 'far fa-edit')} />
+              </div>
+            )}
           </Column>
           <Column
             title="UUID"
@@ -71,6 +82,10 @@ function Types() {
           </Column>
         </Table>
       </div>
+
+      <Dialog name="name-modify">
+
+      </Dialog>
 
       <Confirm
         message="Вы уверены, что хотите удалить изображение?"

@@ -8,8 +8,8 @@ import Component from './Component';
 const validate = (values) => {
   const errors = {};
 
-  if ( ! values['value']) {
-    errors['value'] = 'Необходимо заполнить';
+  if ( ! values['name']) {
+    errors['name'] = 'Необходимо заполнить';
   }
 
   return errors;
@@ -22,7 +22,7 @@ const mapStateToProps = (state, props) => {
 };
 
 export default connect(mapStateToProps)(reduxForm({
-  form: 'types-modify',
+  form: 'image-modify',
   validate,
   enableReinitialize: true,
 })(Component));
