@@ -1,11 +1,12 @@
 
-import { CheckBox } from '@ui.packages/kit';
 import { queryToObject, objectToQuery, nounDeclension } from "@ui.packages/utils";
 
 import React from 'react';
 import types from 'prop-types';
 import { useSelector } from 'react-redux';
 import { useLocation, useNavigate } from 'react-router-dom';
+
+import Block from './Block';
 
 import { selectTypes, selectBrands, selectCategories, selectMeta } from '../../ducks/slice';
 
@@ -107,75 +108,24 @@ function Products() {
           </div>
         )}
       </div>
-      <div className={styles['block']}>
-        <div className={styles['header']}>
-          Тип
-        </div>
-        <div className={styles['content']}>
-          {types.map((item) => (
-            <div key={item['id']} className={styles['item']}>
-              <div className={styles['item__value']}>
-                <CheckBox
-                  className={styles['check-box']}
-                  label={item['value']}
-                  disabled={ ! item['count']}
-                  value={ !!~ (typeId || []).indexOf(item['id'])}
-                  onChange={() => handleChangeTypes(item['id'])}
-                />
-              </div>
-              <div className={styles['item__count']}>
-                { item['count'] }
-              </div>
-            </div>
-          ))}
-        </div>
-      </div>
-      <div className={styles['block']}>
-        <div className={styles['header']}>
-          Категория
-        </div>
-        <div className={styles['content']}>
-          {categories.map((item) => (
-            <div key={item['id']} className={styles['item']}>
-              <div className={styles['item__value']}>
-                <CheckBox
-                  className={styles['check-box']}
-                  label={item['value']}
-                  disabled={ ! item['count']}
-                  value={ !!~ (categoryId || []).indexOf(item['id'])}
-                  onChange={() => handleChangeCategories(item['id'])}
-                />
-              </div>
-              <div className={styles['item__count']}>
-                { item['count'] }
-              </div>
-            </div>
-          ))}
-        </div>
-      </div>
-      <div className={styles['block']}>
-        <div className={styles['header']}>
-          Производитель
-        </div>
-        <div className={styles['content']}>
-          {brands.map((item) => (
-            <div key={item['id']} className={styles['item']}>
-              <div className={styles['item__value']}>
-                <CheckBox
-                  className={styles['check-box']}
-                  label={item['value']}
-                  disabled={ ! item['count']}
-                  value={ !!~ (brandId || []).indexOf(item['id'])}
-                  onChange={() => handleChangeBrands(item['id'])}
-                />
-              </div>
-              <div className={styles['item__count']}>
-                { item['count'] }
-              </div>
-            </div>
-          ))}
-        </div>
-      </div>
+      <Block
+        title="Тип"
+        items={types}
+        values={typeId}
+        onChange={(id) => handleChangeTypes(id)}
+      />
+      <Block
+        title="Категория"
+        items={categories}
+        values={categoryId}
+        onChange={(id) => handleChangeCategories(id)}
+      />
+      <Block
+        title="Производитель"
+        items={brands}
+        values={brandId}
+        onChange={(id) => handleChangeBrands(id)}
+      />
     </div>
   );
 }

@@ -2,60 +2,18 @@
 @import "~@ui.packages/theme";
 
 
-.wrapper {
-
-  display: block;
-}
-
-.count {
-
-  display: flex;
-  flex-direction: row;
-  flex: 1 0;
-  align-items: center;
-  margin-bottom: 8px;
-}
-
-.value {
-
-  display: flex;
-  flex-direction: column;
-  flex: 1 0;
-  background: rgba($primary, .6);
-  font-size: 16px;
-  color: $white;
-  padding: 15px;
-  border-radius: 5px;
-}
-
-.control {
-
-  display: block;
-  margin: 0 0 0 6px;
-}
-
-.icon {
-
-  display: block;
-  padding: 8px 12px;
-  font-size: 20px;
-  color: rgba($danger, .8);
-  border-radius: 5px;
-  cursor: pointer;
-  transition: color 200ms;
-
-  &:hover {
-
-    color: $danger;
-  }
-}
-
 .block {
 
   display: block;
   border-radius: 3px;
   overflow: hidden;
   background: rgba($white, .15);
+  border: 1px solid rgba($white, .02);
+  transition: border-color 200ms;
+
+  &--has-selected {
+    border-color: rgba($white, .4);
+  }
 
   & + & {
 
@@ -65,13 +23,30 @@
 
 .header {
 
-  display: block;
+  display: flex;
+  flex-direction: row;
+  flex: 1 0;
+  padding: 15px;
+  cursor: pointer;
+}
+
+.title {
+
+  display: flex;
+  flex-direction: column;
+  flex: 1 0;
   font-size: 12px;
   font-weight: 700;
   color: $white;
-  padding: 15px;
   letter-spacing: 1px;
   text-transform: uppercase;
+}
+
+.icon {
+
+  display: block;
+  font-size: 10px;
+  color: $blue-grey;
 }
 
 .content {
@@ -88,10 +63,16 @@
   padding: 0 15px;
   color: $pale-lilac;
   align-items: center;
+  transition: opacity 200ms;
 
   & + & {
 
     margin: 12px 0 0;
+  }
+
+  &--disabled {
+
+    opacity: .3;
   }
 
   &__value {

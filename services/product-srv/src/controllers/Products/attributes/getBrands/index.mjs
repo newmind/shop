@@ -29,7 +29,7 @@ export default () => async (ctx) => {
     include: [
       {
         model: Product,
-        required: true,
+        required: false,
         as: 'products',
         where: { ...productWhere },
         attributes: [],

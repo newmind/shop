@@ -3,13 +3,22 @@ import { models, sequelize } from '@sys.packages/db';
 
 
 export default () => async (ctx) => {
+  const where = {};
   const productWhere = {};
 
-  const { Product, Type } = models;
-  const { isView = null } = ctx['request']['query'];
+  const { Product, Type, Category, Brand } = models;
+  const { isView = null, categoryId = null, brandId } = ctx['request']['query'];
 
   if (isView !== null) {
     productWhere['isView'] = isView;
+  }
+
+  if (categoryId) {
+    where['categoryId'] = categoryId;
+  }
+
+  if (brandId) {
+    where['brandId'] = brandId;
   }
 
   const result = await Type.findAll({
@@ -20,10 +29,29 @@ export default () => async (ctx) => {
     include: [
       {
         model: Product,
+        required: false,
         where: { ...productWhere },
         as: 'products',
         attributes: [],
         through: { attributes: [] },
+        include: [
+          {
+            model: Category,
+            required: !! where['categoryId'],
+            as: 'categories',
+            where: { id: where['categoryId'] || [] },
+            attributes: [],
+            through: { attributes: [] },
+          },
+          {
+            model: Brand,
+            required: !! where['brandId'],
+            as: 'brands',
+            where: { id: where['brandId'] || [] },
+            attributes: [],
+            through: { attributes: [] },
+          },
+        ]
       }
     ],
   });
