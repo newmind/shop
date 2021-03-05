@@ -5,13 +5,12 @@
 .wrapper {
 
   position: absolute;
-  top: 0;
+  top: 100%;
   right: 0;
   display: block;
   width: 650px;
+  padding: 8px 0 0;
   z-index: 10;
-  padding: 50px 0 0;
-  cursor: pointer;
 }
 
 .content {
@@ -22,7 +21,6 @@
   padding: 30px;
   box-shadow: -5px 8px 15px 0px rgba($coal-dark, .4);
   overflow: auto;
-  cursor: default;
 }
 
 .info {

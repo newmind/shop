@@ -35,6 +35,7 @@
 .uuid {
 
   display: block;
+  margin: 15px 0 0;
 }
 
 .brand {
@@ -45,12 +46,23 @@
 .name {
 
   display: block;
-  margin: 8px 0 0;
+  margin: 10px 0 0;
 }
 
 .amount {
 
-  display: block;
+  display: flex;
+  flex: 0 0;
+  flex-direction: row;
+  align-items: baseline;
+}
+
+.prev-amount {
+
+  color: $danger;
+  text-decoration: line-through;
+  margin: 0 0 0 10px;
+  opacity: .6;
 }
 
 .controls {

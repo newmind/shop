@@ -5,12 +5,15 @@
 .wrapper {
 
   position: relative;
-  display: block;
+  display: flex;
+  flex-direction: row;
+  flex: 1 0;
   background: rgba($white, .15);
   border-radius: 5px;
   padding: 10px;
-  cursor: pointer;
   color: $blue-grey;
+  align-items: center;
+  cursor: pointer;
   z-index: 20;
   transition: color 200ms;
 
@@ -26,14 +29,20 @@
   font-size: 20px;
 }
 
+.arrow {
+
+  font-size: 10px;
+  margin: 0 0 0 10px;
+}
+
 .has-inside {
 
   position: absolute;
-  top: 4px;
-  right: 4px;
+  top: 5px;
+  right: 25px;
   display: block;
   width: 10px;
   height: 10px;
   border-radius: 50%;
-  background: $danger;
+  background: rgba($danger, .6);
 }

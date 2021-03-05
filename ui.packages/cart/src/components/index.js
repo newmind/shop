@@ -1,15 +1,13 @@
 
-import { restoreCartAction } from '@ui.packages/cart-widget';
+import { restoreCartAction, selectIsOpen } from '@ui.packages/cart-widget';
 
-import { useDispatch } from "react-redux";
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
+import { useDispatch, useSelector } from "react-redux";
 
 import Icon from './Icon';
 import Content from './Content';
 
 import styles from './defaults.module.scss';
-
-import { setStateAction } from '../ducks/slice';
 
 
 function Widget() {
@@ -18,36 +16,16 @@ function Widget() {
   }
 
   const dispatch = useDispatch();
+  const isOpen = useSelector(selectIsOpen);
 
-  const [isFocus, setFocus] = useState(false);
-  const [isInit, setInit] = useState(false);
-
-  function handleMouseOver() {
-    setFocus(true);
-  }
-
-  function handleMouseLeave() {
-    setFocus(false);
-  }
-
-  useEffect(async function loadData() {
-    if (isInit) {
-      dispatch(setStateAction(isFocus));
-    }
-    else {
-      dispatch(restoreCartAction());
-      setInit(true);
-    }
-  }, [isFocus]);
+  useEffect(function loadData() {
+    dispatch(restoreCartAction());
+  }, []);
 
   return (
-    <div
-      className={styles['wrapper']}
-      onMouseEnter={handleMouseOver}
-      onMouseLeave={handleMouseLeave}
-    >
+    <div className={styles['wrapper']}>
       <Icon />
-      <Content />
+      {isOpen && <Content />}
     </div>
   );
 }

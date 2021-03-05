@@ -4,6 +4,7 @@ import request from "@sys.packages/request";
 
 
 export default () => async (ctx) => {
+  let sorting = ['price', 'desc'];
   let where = {};
   let whereForTypes = {};
   let whereForCategories = {};
@@ -25,7 +26,14 @@ export default () => async (ctx) => {
     amountTo = null,
     typeId = null,
     isView = null,
+    sort = '',
   } = ctx['request']['query'];
+
+  if (sort) {
+    const item = sort.split(':');
+    sorting[0] = item[0];
+    sorting[1] = item[1];
+  }
 
   if (isView !== null) {
     where['isView'] = isView;
@@ -81,10 +89,10 @@ export default () => async (ctx) => {
     distinct: true,
     where: { ...where },
     order: [
-      ['createdAt', 'desc'],
       ['gallery', 'order', 'asc'],
       ['comments', 'createdAt', 'desc'],
       ['attributes', 'order', 'asc'],
+      sorting,
     ],
     include: [
       {

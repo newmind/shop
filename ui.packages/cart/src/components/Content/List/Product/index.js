@@ -1,23 +1,22 @@
 
 import numeral from "@packages/numeral";
-
-import { Gallery, Header, Text, Link } from "@ui.packages/kit";
+import { Gallery, Header, Text, Count } from "@ui.packages/kit";
+import { selectUuid, selectInProcess, plusQuantityAction, minusQuantityAction, closeCartAction } from '@ui.packages/cart-widget';
 
 import React from 'react';
 import types from "prop-types";
-import { useDispatch, useSelector } from 'react-redux';
-
-import { closeCartAction } from '../../../../ducks/slice';
+import { useNavigate } from 'react-router-dom';
+import { useSelector, useDispatch } from 'react-redux';
 
 import cn from "classnames";
 import styles from "./defaults.module.scss";
 
-import { selectUuid } from '../../../../ducks/slice';
-
 
 function Product({ uuid, gallery, brand, name, price, currency, onRemove }) {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const uuids = useSelector(selectUuid);
+  const inProcess = useSelector(selectInProcess);
   const classNameRemoveProduct = cn(styles['remove'], 'far fa-trash-alt');
 
   const product = uuids.find(item => item[0] === uuid);
@@ -26,30 +25,59 @@ function Product({ uuid, gallery, brand, name, price, currency, onRemove }) {
     return null;
   }
 
+  function handleTo() {
+    navigate(process.env['PUBLIC_URL'] + `/products/${uuid}`);
+    dispatch(closeCartAction());
+  }
+
+  function handleRemove(event) {
+    event.stopPropagation();
+    onRemove(uuid);
+  }
+
+  function handlePlus() {
+    dispatch(plusQuantityAction(uuid));
+  }
+
+  function handleMinus() {
+    dispatch(minusQuantityAction(uuid));
+  }
+
   return (
-    <div className={styles['item']}>
-      <div className={styles['item__promo']}>
-        <Gallery items={gallery} isList={false} size="small" path={`${process.env['REACT_APP_API_HOST']}/gallery`} />
-      </div>
-      <div className={styles['item__description']}>
-        <div className={styles['item__names']}>
+    <div className={styles['wrapper']}>
+      <div className={styles['product']} onClick={() => handleTo()}>
+        <div className={styles['promo']}>
+          <Gallery items={gallery} isList={false} size="small" path={`${process.env['REACT_APP_API_HOST']}/gallery`} />
+        </div>
+        <div className={styles['description']}>
           <span className={styles['brand']}>
-            <Header level={4}>
-              <Link href={process.env['PUBLIC_URL'] + `/products/${uuid}`} onClick={() => dispatch(closeCartAction())}>
-                { brand }
-              </Link>
-            </Header>
+            <Header level={4}>{ name }</Header>
           </span>
           <div className={styles['name']}>
-            <Text type={Text.TYPE_COMMENT}>{ name }</Text>
+            <Text type={Text.TYPE_COMMENT}>{ brand }</Text>
+          </div>
+          <div className={styles['uuid']}>
+            <Text type={Text.TYPE_UUID}>Код: { uuid }</Text>
           </div>
         </div>
-        <div className={styles['item__count']}>
-          <p className={styles['item__amount']}>{ product[1] } x { numeral(price).format() } { currency }</p>
-        </div>
       </div>
-      <div className={styles['item__controls']}>
-        <span className={classNameRemoveProduct} onClick={() => onRemove(uuid)} />
+      <div className={styles['controls']}>
+        <div className={styles['quantity']}>
+          <div className={styles['price']}>
+            <span className={styles['count']}>
+              <Count number={product[1]} disabled={inProcess} onPlus={handlePlus} onMinus={handleMinus} />
+            </span>
+            <span className={styles['number']}>
+              <Text>x { numeral(price).format() } { currency }</Text>
+            </span>
+          </div>
+          <div className={styles['full-price']}>
+            <Text type={Text.TYPE_COMMENT}>= { numeral(price * product[1]).format() } { currency }</Text>
+          </div>
+        </div>
+        <div className={styles['control']}>
+          <span className={classNameRemoveProduct} onClick={(event) => handleRemove(event)} />
+        </div>
       </div>
     </div>
   );

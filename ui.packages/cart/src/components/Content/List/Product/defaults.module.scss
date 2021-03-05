@@ -2,12 +2,13 @@
 @import "~@ui.packages/theme";
 
 
-.item {
+.wrapper {
 
   display: flex;
-  flex: 1 0;
   flex-direction: row;
+  flex: 1 0;
   align-items: center;
+  text-decoration: none;
 
   & + & {
 
@@ -15,46 +16,32 @@
     border-top: 1px solid $pale-lilac;
     padding: 15px 0 0;
   }
+}
 
-  &__promo {
+.product {
 
-    display: flex;
-    width: 80px;
-    height: 60px;
-  }
+  display: flex;
+  flex-direction: row;
+  flex: 1 0;
+  cursor: pointer;
+  overflow: auto;
+}
 
-  &__description {
+.promo {
 
-    display: flex;
-    flex: 1 0;
-    flex-direction: row;
-    padding: 0 20px 0 20px;
-    align-items: center;
-  }
+  display: flex;
+  width: 80px;
+  height: 80px;
+}
 
-  &__names {
+.description {
 
-    display: flex;
-    flex: 1 0;
-    flex-direction: column;
-    width: 260px;
-    margin: 0 20px 0 0;
-  }
-
-  &__count {
-
-    display: block;
-  }
-
-  &__amount {
-
-    display: block;
-    text-align: right;
-    font-family: inherit;
-    font-weight: 300;
-    font-size: 13px;
-    color: $coal-dark;
-  }
+  display: flex;
+  flex-direction: column;
+  flex: 1 0;
+  margin: 0 0 0 20px;
+  justify-content: center;
+  overflow: auto;
 }
 
 .brand {
@@ -65,19 +52,69 @@
 .name {
 
   display: block;
-  margin: 5px 0 0;
-  white-space: nowrap;
-  text-overflow: ellipsis;
-  overflow: hidden;
+  margin: 4px 0 0;
+}
+
+.uuid {
+
+  display: block;
+  margin: 8px 0 0;
+}
+
+.controls {
+
+  display: flex;
+  flex-direction: row;
+  flex: 0 0 auto;
+  align-items: center;
+  width: 230px;
+}
+
+.quantity {
+
+  display: flex;
+  flex-direction: column;
+  flex: 1 0;
+}
+
+.price {
+
+  display: block;
+  text-align: right;
+}
+
+.count,
+.number {
+
+  display: inline-block;
+  vertical-align: bottom;
+}
+
+.full-price {
+
+  display: block;
+  text-align: right;
+  margin: 4px 0 0;
+}
+
+.number {
+
+  margin: 0 0 0 8px;
+}
+
+.control {
+
+  display: block;
+  margin: 0 0 0 20px;
 }
 
 .remove {
 
+  display: inline-block;
   font-size: 14px;
   color: $gray;
   cursor: pointer;
   transition: color 200ms;
-  padding: 0 15px 0 0;
 
   &:hover {
 

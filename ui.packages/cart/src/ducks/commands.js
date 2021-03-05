@@ -3,59 +3,32 @@ import request from '@ui.packages/request';
 import { pushNotification } from "@ui.packages/notifications";
 
 import {
-  getProductsRequestAction,
-  getProductsRequestFailAction,
-  getProductsRequestSuccessAction,
-
-  getAmountRequestAction,
-  getAmountRequestFailAction,
-  getAmountRequestSuccessAction,
+  getCartRequestAction,
+  getCartRequestFailAction,
+  getCartRequestSuccessAction,
 } from './slice';
 
 
-export const getProducts = (uuid, token) => async (dispatch) => {
+export const getCart = (uuid, token) => async (dispatch) => {
   try {
-    dispatch(getProductsRequestAction());
+    dispatch(getCartRequestAction());
 
     const result = await request({
-      url: '/products',
-      method: 'get',
-      cancelToken: token['token'],
-      params: {
-        uuid,
-      }
-    });
-
-    dispatch(getProductsRequestSuccessAction(result['data'] || []));
-  }
-  catch(error) {
-
-    dispatch(getProductsRequestFailAction(error));
-    dispatch(pushNotification({
-      content: 'Ошибка при выполнении операции',
-      mode: 'danger',
-    }));
-  }
-};
-
-export const getAmount = (uuid, token) => async (dispatch) => {
-  try {
-    dispatch(getAmountRequestAction());
-
-    const result = await request({
-      url: '/products/amount',
+      url: '/cart',
       method: 'post',
       cancelToken: token['token'],
       data: {
         uuid,
-      },
+      }
     });
 
-    dispatch(getAmountRequestSuccessAction(result['data'] || []));
+    if (result['data']) {
+      dispatch(getCartRequestSuccessAction(result['data']));
+    }
   }
   catch(error) {
 
-    dispatch(getAmountRequestFailAction(error));
+    dispatch(getCartRequestFailAction(error));
     dispatch(pushNotification({
       content: 'Ошибка при выполнении операции',
       mode: 'danger',

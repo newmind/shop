@@ -5,7 +5,6 @@ import { pushNotification } from '@ui.packages/notifications';
 import { addProductToCartAction } from '@ui.packages/cart-widget';
 
 import React from 'react';
-import types from 'prop-types';
 import { useDispatch, useSelector } from 'react-redux';
 
 import Empty from './Empty';
@@ -37,9 +36,6 @@ function Products() {
 
   return (
     <div className={styles['wrapper']}>
-      <div className={styles['controls']}>
-
-      </div>
       <div className={styles['content']}>
         { ! meta['total'] && (
           <Empty />
@@ -54,7 +50,7 @@ function Products() {
           </div>
         ))}
       </div>
-      { !! meta['total'] && (
+      {(meta['total'] > 12) && (
         <div className={styles['paging']}>
           <Paging total={meta['total']} skip={12} disabled={inProcess} />
         </div>
@@ -62,16 +58,5 @@ function Products() {
     </div>
   );
 }
-
-Products.propTypes = {
-  items: types.array,
-  meta: types.object,
-  onAddToCart: types.func,
-};
-
-Products.defaultProps = {
-  items: [],
-  meta: {},
-};
 
 export default Products;

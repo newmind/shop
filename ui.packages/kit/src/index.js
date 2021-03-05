@@ -3,6 +3,7 @@ export { default as List } from './symbols/List';
 export { default as Range } from './symbols/Range';
 export { default as Input } from './symbols/Input';
 export { default as Image } from './symbols/Image';
+export { default as Count } from './symbols/Count';
 export { default as Avatar } from './symbols/Avatar';
 export { default as Amount } from './symbols/Amount';
 export { default as Button } from './symbols/Button';

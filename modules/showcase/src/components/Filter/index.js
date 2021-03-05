@@ -2,7 +2,6 @@
 import { queryToObject, objectToQuery, nounDeclension } from "@ui.packages/utils";
 
 import React from 'react';
-import types from 'prop-types';
 import { useSelector } from 'react-redux';
 import { useLocation, useNavigate } from 'react-router-dom';
 
@@ -14,7 +13,7 @@ import cn from 'classnames';
 import styles from "./default.module.scss";
 
 
-function Products() {
+function Filter() {
   const location = useLocation();
   const navigate = useNavigate();
   const query = queryToObject(location['search']);
@@ -130,15 +129,4 @@ function Products() {
   );
 }
 
-Products.propTypes = {
-  items: types.array,
-  meta: types.object,
-  onAddToCart: types.func,
-};
-
-Products.defaultProps = {
-  items: [],
-  meta: {},
-};
-
-export default Products;
+export default Filter;

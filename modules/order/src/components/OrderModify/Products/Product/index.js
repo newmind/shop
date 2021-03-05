@@ -1,21 +1,21 @@
 
 import numeral from '@packages/numeral';
-
-import { Gallery, Header, Text, Link } from '@ui.packages/kit';
+import { Gallery, Header, Text, Link, Count } from '@ui.packages/kit';
+import { selectUuid, selectInProcess, removeProductFromCartAction, plusQuantityAction, minusQuantityAction } from '@ui.packages/cart-widget';
 
 import React from 'react';
 import types from 'prop-types';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 
 import cn from 'classnames';
 import styles from './default.module.scss';
 
-import { selectUuid } from '../../../../ducks/slice';
 
-
-export default function Product({ uuid, price, currency, brand, name, gallery, onDelete }) {
+export default function Product({ uuid, price, currency, brand, name, gallery }) {
+  const dispatch = useDispatch();
   const uuids = useSelector(selectUuid);
-  const product = uuids.find(item => item[0] === uuid);
+  const inProcess = useSelector(selectInProcess);
+  const product = uuids.find((item) => item[0] === uuid);
 
   const removeFromCartClassName= cn(styles['remove'], 'far fa-trash-alt');
 
@@ -23,7 +23,15 @@ export default function Product({ uuid, price, currency, brand, name, gallery, o
     event.preventDefault();
     event.stopPropagation();
 
-    onDelete();
+    dispatch(removeProductFromCartAction());
+  }
+
+  function handlePlus() {
+    dispatch(plusQuantityAction(uuid));
+  }
+
+  function handleMinus() {
+    dispatch(minusQuantityAction(uuid));
   }
 
   if ( ! product) {
@@ -49,7 +57,9 @@ export default function Product({ uuid, price, currency, brand, name, gallery, o
           </div>
         </div>
         <div className={styles['amount']}>
+          <Count number={product[1]} disabled={inProcess} onPlus={() => handlePlus()} onMinus={() => handleMinus()} />
           <Text type={Text.TYPE_AMOUNT}>{ product[1] } x { numeral(price).format() } { currency }</Text>
+          <Text type={Text.TYPE_COMMENT}>{ numeral(price * product[1]).format() } { currency }</Text>
         </div>
       </div>
     </Link>

@@ -65,4 +65,5 @@ const validate = () => {
 export default reduxForm({
   form: 'order',
   validate,
+  enableReinitialize: true,
 })(Component);

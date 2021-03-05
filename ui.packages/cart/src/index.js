@@ -7,7 +7,17 @@ export {
 
   selectUuid,
   selectItems,
+  selectAmount,
   selectIsOpen,
+  selectInProcess,
+
+  resetStateAction,
+
+  openCartAction,
+  closeCartAction,
+
+  plusQuantityAction,
+  minusQuantityAction,
 
   addProductToCartAction,
   removeProductFromCartAction,
@@ -15,3 +25,5 @@ export {
   resetCartAction,
   restoreCartAction,
 } from './ducks/slice';
+
+export { getCart } from './ducks/commands';

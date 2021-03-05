@@ -5,6 +5,7 @@ import React from 'react';
 
 import FastView from "./FastView";
 import Filter from './Filter';
+import Controls from "./Controls";
 import Products from './Products';
 
 import styles from './default.module.scss';
@@ -17,6 +18,9 @@ export default function Showcase() {
         <Filter />
       </aside>
       <section className={styles['content']}>
+        <div className={styles['controls']}>
+          <Controls />
+        </div>
         <Products />
       </section>
 

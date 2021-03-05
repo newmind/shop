@@ -1,21 +1,20 @@
 
 import { createCancelToken } from '@ui.packages/request';
-
-import React, { useState, useEffect } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
-
-import List from './List';
-import Empty from './Empty';
-import Spinner from './Spinner';
-
 import {
+  closeCartAction,
+
   selectUuid,
   selectIsOpen,
-  selectInAmountProcess,
-  selectInProductProcess,
-} from '../../ducks/slice';
+  selectInProcess,
 
-import { getAmount, getProducts } from '../../ducks/commands';
+  getCart,
+} from '@ui.packages/cart-widget';
+
+import { useSelector, useDispatch } from 'react-redux';
+import React, { useState, useEffect, useRef } from 'react';
+
+import List from './List';
+import Spinner from './Spinner';
 
 import styles from './defaults.module.scss';
 
@@ -23,44 +22,61 @@ import styles from './defaults.module.scss';
 function Content() {
   const dispatch = useDispatch();
 
-  const uuids = useSelector(selectUuid);
-  const isOpen = useSelector(selectIsOpen);
-  const inGetAmountProcess = useSelector(selectInAmountProcess);
-  const inGetProductsProcess = useSelector(selectInProductProcess);
-
   const [isInit, setInit] = useState(false);
 
+  const wrapperRef = useRef(null);
+  const uuids = useSelector(selectUuid);
+  const isOpen = useSelector(selectIsOpen);
+  const inProcess = useSelector(selectInProcess);
+
+
   useEffect(function() {
-    if ( ! uuids.length) {
-      return void 0;
-    }
-
-    const amountsToken = createCancelToken();
-    const productsToken = createCancelToken();
-
-    if (isInit && isOpen) {
-      dispatch(getAmount(uuids, amountsToken));
-      dispatch(getProducts(uuids, productsToken));
-    }
-    else {
-      setInit(true);
-    }
-    return () => {
-      if (isInit && isOpen) {
-        amountsToken.cancel();
-        productsToken.cancel();
+    function handleClose(event) {
+      const { current: wrapperElement } = wrapperRef;
+      const target = event['target'];
+      if (wrapperElement && target) {
+        if ( ! wrapperElement.contains(target)) {
+          dispatch(closeCartAction());
+        }
       }
     }
+    document.querySelector('#scroller').addEventListener('scroll', handleClose)
+    document.addEventListener('click', handleClose);
+    return () => {
+      document.querySelector('#scroller').removeEventListener('scroll', handleClose);
+      document.removeEventListener('click', handleClose);
+    };
+  }, []);
+
+  useEffect(function() {
+    const token = createCancelToken();
+    (async () => {
+      await dispatch(getCart(uuids, token));
+      setInit(true);
+    })();
+
+    return () => {
+      token.cancel();
+      setInit(false);
+    };
   }, [isOpen]);
 
-  return isOpen && (
-    <div className={styles['wrapper']}>
+  useEffect(function() {
+    if (isInit) {
+      const token = createCancelToken();
+      dispatch(getCart(uuids, token));
+      return () => {
+        token.cancel();
+      };
+    }
+  }, [uuids]);
+
+  return (
+    <div ref={wrapperRef} className={styles['wrapper']}>
       <div className={styles['content']}>
-        { ! uuids.length
-          ? <Empty />
-          : (inGetAmountProcess || inGetProductsProcess)
-            ? <Spinner />
-            : <List />}
+        {( ! isInit && inProcess)
+          ? <Spinner />
+          : <List />}
       </div>
     </div>
   );

@@ -23,17 +23,11 @@ export default function Product({ uuid, price, prevPrice, currency, brand, name,
   const cart = useSelector(selectUuid);
   const product = cart.find((item) => (item[0] === uuid));
 
-  function handleRemoveFromCart(uuid, event) {
-    event.preventDefault();
-    event.stopPropagation();
-
+  function handleRemoveFromCart(uuid) {
     dispatch(removeProductFromCartAction(uuid));
   }
 
-  function handleClickCart(event) {
-    event.preventDefault();
-    event.stopPropagation();
-
+  function handleClickCart() {
     onCart && onCart();
   }
 
@@ -43,26 +37,28 @@ export default function Product({ uuid, price, prevPrice, currency, brand, name,
   // }
 
   return (
-    <Link className={styles['wrapper']} href={`/products/${uuid}`}>
-      <div className={styles['gallery']}>
-        <Gallery items={gallery} isList={false} size="middle" path={`${process.env['REACT_APP_API_HOST']}/gallery`} />
-      </div>
-      <div className={styles['common']}>
-        <div className={styles['description']}>
-          <div className={styles['name']}>
-            <Header level={3}>{ name }</Header>
-          </div>
-          <div className={styles['brand']}>
-            <Text type={Text.TYPE_COMMENT}>{ brand }</Text>
-          </div>
-          <div className={styles['uuid']}>
-            <Text type="uuid">Код: { uuid }</Text>
-          </div>
-          <div className={styles['attrs']}>
-            {attributes.map((attr, index) => <Attribute key={index} {...attr} />)}
+    <div className={styles['wrapper']}>
+      <Link className={styles['product']} href={`/products/${uuid}`}>
+        <div className={styles['gallery']}>
+          <Gallery items={gallery} isList={false} size="middle" path={`${process.env['REACT_APP_API_HOST']}/gallery`} />
+        </div>
+        <div className={styles['common']}>
+          <div className={styles['description']}>
+            <div className={styles['name']}>
+              <Header level={3}>{ name }</Header>
+            </div>
+            <div className={styles['brand']}>
+              <Text type={Text.TYPE_COMMENT}>{ brand }</Text>
+            </div>
+            <div className={styles['uuid']}>
+              <Text type="uuid">Код: { uuid }</Text>
+            </div>
+            <div className={styles['attrs']}>
+              {attributes.map((attr, index) => <Attribute key={index} {...attr} />)}
+            </div>
           </div>
         </div>
-      </div>
+      </Link>
       <div className={styles['information']}>
         <div className={styles['container']}>
           <div className={styles['amount']}>
@@ -82,7 +78,7 @@ export default function Product({ uuid, price, prevPrice, currency, brand, name,
           </div>
         )}
       </div>
-    </Link>
+    </div>
   );
 }
 

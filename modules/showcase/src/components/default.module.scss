@@ -17,6 +17,14 @@
   width: 280px;
 }
 
+.controls {
+
+  display: block;
+  background: rgba($white, .15);
+  padding: 20px 20px 16px;
+  border-radius: 3px;
+}
+
 .content {
 
   display: flex;
@@ -25,10 +33,10 @@
   margin: 0 0 0 20px;
 }
 
-.controls {
-
-  display: block;
-  background: rgba($white, .15);
-  padding: 20px;
-  border-radius: 3px;
-}
+//.controls {
+//
+//  display: block;
+//  background: rgba($white, .15);
+//  padding: 20px;
+//  border-radius: 3px;
+//}

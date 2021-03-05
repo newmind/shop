@@ -13,7 +13,7 @@ import cn from "classnames";
 import styles from './default.module.scss';
 
 
-function Product({ uuid, brand, name, price, currency }) {
+function Product({ uuid, brand, name, price, prevPrice, currency }) {
   const dispatch = useDispatch();
   const cart = useSelector(selectUuid);
 
@@ -46,6 +46,9 @@ function Product({ uuid, brand, name, price, currency }) {
       <div className={styles['right']}>
         <div className={styles['amount']}>
           <Text type={Text.TYPE_AMOUNT}>{ numeral(price).format() } { currency }</Text>
+          {prevPrice && (
+            <Text className={styles['prev-amount']} type={Text.TYPE_BODY}>{ numeral(prevPrice).format() } { currency }</Text>
+          )}
         </div>
         <div className={styles['controls']}>
           <div className={styles['buttons']}>
