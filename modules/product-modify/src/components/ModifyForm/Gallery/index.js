@@ -28,28 +28,26 @@ function AddImageForm({ input, disabled }) {
     dispatch(openDialog('add-images'));
   }
 
-  if ( ! input['value']) {
-    return null;
-  }
-
   return (
     <div className={styles['wrapper']}>
-      <div className={styles['content']}>
-        <Draggable type={Draggable.TYPE_GRID} onChange={handleOrderChange}>
-          {input['value'].map((image, index) => {
-            return (
-              <div className={styles['section']} key={index}>
-                { ! disabled && <span className={cn(styles['remove-image'], 'fas fa-times')} onClick={() => handleDelete(index)} />}
-                <div className={cn(styles['image'], {
-                  [styles['new']]: !! image['new'],
-                })}>
-                  <Image src={`${process.env['REACT_APP_API_HOST']}/gallery/${image['uuid']}?size=small`} />
+      {input['value'] && (
+        <div className={styles['content']}>
+          <Draggable type={Draggable.TYPE_GRID} onChange={handleOrderChange}>
+            {input['value'].map((image, index) => {
+              return (
+                <div className={styles['section']} key={index}>
+                  { ! disabled && <span className={cn(styles['remove-image'], 'fas fa-times')} onClick={() => handleDelete(index)} />}
+                  <div className={cn(styles['image'], {
+                    [styles['new']]: !! image['new'],
+                  })}>
+                    <Image src={`${process.env['REACT_APP_API_HOST']}/gallery/${image['uuid']}?size=small`} />
+                  </div>
                 </div>
-              </div>
-            );
-          })}
-        </Draggable>
-      </div>
+              );
+            })}
+          </Draggable>
+        </div>
+      )}
       <div className={styles['controls']}>
         <Button
           form={Button.FORM_CREATE}
