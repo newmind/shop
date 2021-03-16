@@ -1,14 +1,13 @@
 
 import { sign } from '@sys.packages/jwt';
 import {genHash256, token} from '@sys.packages/utils';
-import { models, sequelize, Sequelize } from '@sys.packages/db';
+import { models, Sequelize } from '@sys.packages/db';
 
 const { UniqueConstraintError } = Sequelize;
 
 
 export default () => async (ctx) => {
-  const { Passport, User } = models;
-  const transaction = await sequelize.transaction();
+  const { User } = models;
 
   try {
     const formData = ctx.request['body'];
@@ -19,20 +18,6 @@ export default () => async (ctx) => {
       login: formData['login'],
       password: hashPassword,
     }, { transaction });
-
-    await Passport.create({
-      userId: user['id'],
-      role: 'customer',
-      name: formData['name'],
-      surname: formData['surname'],
-      birthday: formData['birthday'],
-      email: formData['login'],
-      phone: formData['phone'],
-      patronymic: formData['patronymic'],
-      sex: formData['sex'],
-    }, { transaction });
-
-    await transaction.commit();
 
     const today = new Date();
     const expirationTime = parseInt((today.getTime() / 1000) + Number(process.env['JWT_EXP']), 10);
@@ -55,8 +40,6 @@ export default () => async (ctx) => {
     };
   }
   catch (error) {
-
-    await transaction.rollback();
 
     if (error instanceof UniqueConstraintError) {
       ctx.status = 400;

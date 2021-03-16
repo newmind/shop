@@ -129,11 +129,11 @@ const routes = [
     ),
   },
   {
-    path: '/profile',
+    path: '/settings',
     wrapper: 'Navigate',
     module: import(
-      /* webpackChunkName: "profile" */
-      '@modules/profile'
+      /* webpackChunkName: "settings" */
+      '@modules/settings'
     ),
   },
   {

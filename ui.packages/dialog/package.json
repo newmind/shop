@@ -8,22 +8,22 @@
     "start:dev": "cross-env NODE_ENV=development babel ./src --out-dir ./lib --copy-files --watch"
   },
   "dependencies": {
+    "@reduxjs/toolkit": "1.5.0",
     "@ui.packages/kit": "1.0.0",
     "@ui.packages/theme": "1.0.0",
     "@ui.packages/types": "1.0.0",
-    "@reduxjs/toolkit": "1.5.0",
     "classnames": "2.2.6",
     "prop-types": "15.7.2",
     "react": "17.0.1",
-    "react-redux": "7.2.2",
     "react-dom": "17.0.1",
+    "react-redux": "7.2.2",
     "redux": "4.0.5"
   },
   "devDependencies": {
-    "@babel/cli": "7.12.13",
-    "@babel/core": "7.12.13",
+    "@babel/cli": "7.13.10",
+    "@babel/core": "7.13.10",
     "cross-env": "7.0.3",
-    "resolve": "1.19.0"
+    "resolve": "1.20.0"
   },
   "babel": {
     "presets": [

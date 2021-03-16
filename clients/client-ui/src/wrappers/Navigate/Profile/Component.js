@@ -30,7 +30,7 @@ export default ({ isAuth, profile, onSignIn, onSignOut }) => {
 
   return (
     <div className={styles['profile']}>
-      <Link className={styles['name']} to={process.env['PUBLIC_URL'] + '/profile'}>{ profile['name'] } { profile['surname'] }</Link>
+      <Link className={styles['name']} to={process.env['PUBLIC_URL'] + '/settings'}>{ profile['name'] } { profile['surname'] }</Link>
       <div className={styles['exit']}>
         <span className={cn(styles['exit__icon'], 'fas fa-sign-out-alt')} onClick={onSignOut} />
       </div>

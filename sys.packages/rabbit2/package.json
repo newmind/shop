@@ -6,6 +6,6 @@
     "@packages/errors": "1.0.0",
     "@sys.packages/logger": "1.0.0",
     "@sys.packages/utils": "1.0.0",
-    "amqplib": "0.6.0"
+    "amqplib": "0.7.1"
   }
 }

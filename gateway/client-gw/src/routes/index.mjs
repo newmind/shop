@@ -19,7 +19,7 @@ import { getCart } from '../controllers/cart';
 
 export default (router) => {
 
-  router.get('/profile', getProfile());
+  router.get('/settings', getProfile());
   router.post('/sign-up', signUp());
   router.post('/sign-in', signIn());
   router.post('/sign-out', signOut());

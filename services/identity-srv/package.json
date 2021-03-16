@@ -12,12 +12,12 @@
   },
   "dependencies": {
     "@packages/errors": "1.0.0",
-    "@sys.packages/jwt": "1.0.0",
     "@sys.packages/db": "1.0.0",
+    "@sys.packages/jwt": "1.0.0",
     "@sys.packages/logger": "1.0.0",
+    "@sys.packages/rabbit2": "1.0.0",
     "@sys.packages/server": "1.0.0",
     "@sys.packages/utils": "1.0.0",
-    "@sys.packages/rabbit2": "1.0.0",
     "dotenv": "8.2.0",
     "koa": "2.13.1",
     "koa-bodyparser": "4.3.0",
@@ -25,11 +25,11 @@
     "koa-router": "10.0.0",
     "pg": "8.5.1",
     "pg-hstore": "2.3.3",
-    "sequelize": "5.22.3"
+    "sequelize": "5.22.4"
   },
   "devDependencies": {
     "cross-env": "7.0.3",
     "nodemon": "2.0.7",
-    "sequelize-cli": "5.5.1"
+    "sequelize-cli": "6.2.0"
   }
 }

@@ -48,7 +48,7 @@ cd ../product-modify && npx yarn build
 echo '[--- Products ---]'
 cd ../products && npx yarn build
 echo '[--- Profile ---]'
-cd ../profile && npx yarn build
+cd ../settings && npx yarn build
 echo '[--- Sign In ---]'
 cd ../sign-in && npx yarn build
 echo '[--- Customers ---]'

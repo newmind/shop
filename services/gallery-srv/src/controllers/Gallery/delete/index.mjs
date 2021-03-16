@@ -1,6 +1,6 @@
 
-import { sendCommand } from '@sys.packages/rabbit2';
 import { models } from '@sys.packages/db';
+import { sendCommand } from '@sys.packages/rabbit2';
 
 
 export default () => async (ctx) => {

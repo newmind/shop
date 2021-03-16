@@ -54,7 +54,14 @@ const applicationSlice = createSlice({
     },
     signOutRequestSuccessAction(state) {
       state['inProcess'] = false;
+      state['profile'] = null;
     },
+
+    updateCustomerAction(state, { payload }) {
+      if (state['profile'] && state['profile']['user']['id'] === payload['id']) {
+        state['profile']['user'] = payload;
+      }
+    }
   },
   extraReducers(build) {
     build
@@ -80,6 +87,8 @@ export const {
   signOutRequestAction,
   signOutRequestFailAction,
   signOutRequestSuccessAction,
+
+  updateCustomerAction,
 } = applicationSlice['actions'];
 
 export const selectIsAuth = (state) => state[REDUCER_NAME]['isAuth'];

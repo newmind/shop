@@ -40,7 +40,7 @@ export const getComments = () => async (dispatch) => {
 //
 //     const result = await request({
 //       url: '/comments',
-//       method: 'getAll',
+//       method: 'get',
 //       params: { id },
 //     });
 //

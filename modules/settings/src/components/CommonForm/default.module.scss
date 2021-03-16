@@ -1,0 +1,27 @@
+
+@import "~@ui.packages/theme";
+
+
+.wrapper {
+
+  display: block;
+}
+
+.content {
+
+  display: block;
+}
+
+.controls {
+
+  display: block;
+  text-align: right;
+  margin: 20px 0 0;
+}
+
+.role {
+
+  display: block;
+  margin: 28px 0 0;
+  color: $success;
+}

@@ -7,18 +7,18 @@
     "start": "react-scripts start"
   },
   "dependencies": {
-    "@modules/gallery": "1.0.0",
     "@modules/attributes": "1.0.0",
     "@modules/brands": "1.0.0",
     "@modules/categories": "1.0.0",
     "@modules/comments": "1.0.0",
     "@modules/currencies": "1.0.0",
     "@modules/customers": "1.0.0",
+    "@modules/gallery": "1.0.0",
     "@modules/not-found": "1.0.0",
     "@modules/orders": "1.0.0",
     "@modules/product-modify": "1.0.0",
     "@modules/products": "1.0.0",
-    "@modules/profile": "1.0.0",
+    "@modules/settings": "1.0.0",
     "@modules/promotions": "1.0.0",
     "@modules/sign-in": "1.0.0",
     "@modules/types": "1.0.0",
@@ -26,16 +26,16 @@
     "@ui.packages/application": "1.0.0",
     "@ui.packages/dialog": "1.0.0",
     "@ui.packages/notifications": "1.0.0",
+    "classnames": "2.2.6",
     "prop-types": "15.7.2",
     "react": "17.0.1",
     "react-redux": "7.2.2",
     "react-router-dom": "6.0.0-beta.0",
-    "redux": "4.0.5",
-    "classnames": "2.2.6"
+    "redux": "4.0.5"
   },
   "devDependencies": {
-    "react-scripts": "4.0.2",
-    "sass": "1.32.7"
+    "react-scripts": "4.0.3",
+    "sass": "1.32.8"
   },
   "browserslist": [
     ">0.2%",

@@ -18,7 +18,7 @@ export const getCookie = async (ctx, name) => {
 
   if ( ! cookie) {
     logger.info('Пользовательские cookie не найдены');
-    throw new UnauthorizedError({ code: '2.2.2', message: 'User not authorize' });
+    throw new UnauthorizedError({ code: '2.2.2', message: 'settings not authorize' });
   }
 
   logger.info('Раскодирование cookie');
@@ -29,7 +29,7 @@ export const getCookie = async (ctx, name) => {
   if ( ! data['token'] || ! data['refreshToken']) {
     logger.info('Неверный формат объекта cookie');
     resetCookie(ctx, name);
-    throw new UnauthorizedError({ code: '2.2.2', message: 'User not authorize' });
+    throw new UnauthorizedError({ code: '2.2.2', message: 'settings not authorize' });
   }
 
   return data;

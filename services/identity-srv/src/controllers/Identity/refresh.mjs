@@ -6,11 +6,11 @@
 
 
 export default () => async (ctx) => {
-  // const { User } = models;
+  // const { settings } = models;
   // const { token: accessToken } = ctx['request']['body'];
   //
   // const userFromToken = await decode(accessToken);
-  // const user = await User.findOne({ where: { id: userFromToken['id'] }});
+  // const user = await settings.findOne({ where: { id: userFromToken['id'] }});
   //
   // if ( ! user) {
   //   throw new UnauthorizedError('Пользователь не прошел верификацию');
@@ -21,7 +21,7 @@ export default () => async (ctx) => {
   // const expirationTime = parseInt((today.getTime() / 1000) + Number(process.env['JWT_EXP']), 10);
   // const newRefreshToken = token(process.env['JWT_SECRET']).digest('hex');
   //
-  // // await User.update({ refreshToken }, { where: { id: userFromToken['id'], refreshToken: newRefreshToken }});
+  // // await settings.update({ refreshToken }, { where: { id: userFromToken['id'], refreshToken: newRefreshToken }});
   //
   // const payload = {
   //   ...userFromToken,

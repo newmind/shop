@@ -7,9 +7,8 @@ export default async function updateProperties(uuid, properties) {
 
   const transaction = await sequelize.transaction();
 
+  await Gallery.destroy({ where: { productUuid: uuid }}, { transaction });
   if (properties['gallery'] && !! properties['gallery'].length) {
-    await Gallery.destroy({ where: { productUuid: uuid }}, { transaction });
-
     const newGallery = properties['gallery'].map((item, index) => {
       return {
         uuid: item['uuid'],
@@ -20,9 +19,8 @@ export default async function updateProperties(uuid, properties) {
     await Gallery.bulkCreate(newGallery, { transaction });
   }
 
+  await ProductAttribute.destroy({ where: { productUuid: uuid }}, { transaction });
   if (properties['attributes'] && !! properties['attributes'].length) {
-    await ProductAttribute.destroy({ where: { productUuid: uuid }}, { transaction });
-
     const newAttributes = properties['attributes'].map((item, index) => {
       return {
         productUuid: uuid,
@@ -35,18 +33,18 @@ export default async function updateProperties(uuid, properties) {
     await ProductAttribute.bulkCreate(newAttributes, { transaction });
   }
 
+  await ProductBrand.destroy({ where: { productUuid: uuid }}, { transaction });
   if (properties['brandId']) {
-    await ProductBrand.destroy({ where: { productUuid: uuid }}, { transaction });
     await ProductBrand.create({ productUuid: uuid, brandId: properties['brandId'] }, { transaction })
   }
 
+  await ProductType.destroy({ where: { productUuid: uuid }}, { transaction });
   if (properties['types'] && !! properties['types'].length) {
-    await ProductType.destroy({ where: { productUuid: uuid }}, { transaction });
     await ProductType.bulkCreate(properties['types'].map((item) => ({ productUuid: uuid, typeId: item })), { transaction })
   }
 
+  await ProductCategory.destroy({ where: { productUuid: uuid }}, { transaction });
   if (properties['categories'] && !! properties['categories'].length) {
-    await ProductCategory.destroy({ where: { productUuid: uuid }}, { transaction });
     await ProductCategory.bulkCreate(properties['categories'].map((item) => ({ productUuid: uuid, categoryId: item })), { transaction })
   }
 

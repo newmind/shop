@@ -1,5 +1,7 @@
 
-import React from 'react';
+import { on, off } from '@ui.packages/socket';
+
+import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 
 import Router from '../Router';
@@ -8,7 +10,7 @@ import Loading from '../Loading';
 import ApplicationContext from "../Context";
 import { useGetProfile, useRedirect } from '../hooks';
 
-import { isLoadedAction, selectIsLoaded } from '../ducks/slice';
+import { isLoadedAction, selectIsLoaded, updateCustomerAction } from '../ducks/slice';
 
 import styles from './default.module.scss';
 
@@ -24,6 +26,15 @@ function Application({ options }) {
   else {
     dispatch(isLoadedAction());
   }
+
+  useEffect(function() {
+    on(process.env['REACT_APP_SOCKET_CUSTOMER_UPDATE'], function(data) {
+      dispatch(updateCustomerAction(data));
+    });
+    return () => {
+      off(process.env['REACT_APP_SOCKET_CUSTOMER_UPDATE']);
+    };
+  }, []);
 
   return (
     <section className={styles['application']}>

@@ -21,8 +21,8 @@ module.exports = (db, DataType) => {
       allowNull: false,
     },
     gender: {
-      type: DataType.STRING(16),
-      allowNull: true,
+      type: DataType.ENUM,
+      values: ['male', 'female'],
     },
     age: {
       type: DataType.INTEGER,
@@ -31,16 +31,22 @@ module.exports = (db, DataType) => {
     birthday: {
       type: DataType.DATE,
       allowNull: true,
-    }
-  }, {
-    timestamps: false,
+    },
+    isSystem: {
+      type: DataType.BOOLEAN,
+    },
   });
 
-  Client.associate = ({ Address }) => {
+  Client.associate = ({ Address, Meta }) => {
 
     Client.hasOne(Address, {
       foreignKey: 'clientId',
       as: 'address',
+    });
+
+    Client.hasOne(Meta, {
+      foreignKey: 'clientId',
+      as: 'meta',
     });
   };
 

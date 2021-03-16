@@ -1,7 +1,8 @@
 
-import { signIn } from '../controllers/User';
+import { signIn } from '../controllers/identity';
 
 
 export default (router) => {
+
   router.post('/sign-in', signIn());
 };

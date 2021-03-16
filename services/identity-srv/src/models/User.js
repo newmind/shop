@@ -18,11 +18,18 @@ module.exports = (db, DataType) => {
     },
   });
 
-  User.associate = ({ Passport }) => {
+  User.associate = ({ Role, UserCustomer, UserRole }) => {
 
-    Passport.belongsTo(User, {
+    User.hasOne(UserCustomer, {
       foreignKey: 'userId',
-      as: 'user',
+      as: 'customer',
+    });
+
+    User.belongsToMany(Role, {
+      through: UserRole,
+      foreignKey: 'userId',
+      otherKey: 'roleId',
+      as: 'role',
     });
   };
 

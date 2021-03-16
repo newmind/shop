@@ -1,0 +1,35 @@
+
+@import "~@ui.packages/theme";
+
+.wrapper {
+
+  display: block;
+}
+
+.controls {
+
+  display: block;
+  text-align: right;
+}
+
+.header {
+
+  display: block;
+  margin: 0 0 40px;
+}
+
+.container {
+
+  display: block;
+  border: 1px solid $pale-lilac;
+  border-radius: 5px;
+  padding: 40px 50px;
+  background: $white;
+  width: 900px;
+  box-sizing: border-box;
+
+  & + & {
+
+    margin: 60px 0 0;
+  }
+}

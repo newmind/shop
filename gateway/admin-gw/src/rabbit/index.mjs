@@ -10,6 +10,7 @@ import currency from './currency';
 import promotion from './promotion';
 import brands from './brands';
 import gallery from './gallery';
+import customer from './customer';
 
 
 export default async function rabbitInit() {
@@ -25,4 +26,5 @@ export default async function rabbitInit() {
   await promotion();
   await brands();
   await gallery();
+  await customer();
 }

@@ -1,7 +1,5 @@
 
-import { signOut, get as getUser, update as updateUser } from '../controllers/User';
-
-import { getAllCustomers } from '../controllers/Customer';
+import { getAllCustomers, updateCustomers } from '../controllers/Customer';
 
 import { getAll as getOperations, getById as getOperationById, create as createOperation, updateById as updateOperationById } from '../controllers/Orders';
 
@@ -19,6 +17,10 @@ import { getImages, getImage, createImage, updateImage, deleteImages } from '../
 import { getComments, createComment, updateComment, deleteComments } from '../controllers/Comments';
 
 import { getAllStatuses } from '../controllers/Statuses';
+
+import { signOut } from '../controllers/identity';
+import { getSettings } from '../controllers/settings';
+import { getProfile, updateProfile } from '../controllers/profile';
 
 
 export default (router) => {
@@ -83,8 +85,12 @@ export default (router) => {
   router.delete('/gallery', deleteImages());
 
   router.post('/sign-out', signOut());
-  router.get('/profile', getUser());
-  router.put('/profile', updateUser());
+
+  router.get('/profile', getProfile());
+  router.put('/profile/:id', updateProfile());
 
   router.get('/customers', getAllCustomers());
+  router.put('/customers/:id', updateCustomers());
+
+  router.get('/settings', getSettings());
 };

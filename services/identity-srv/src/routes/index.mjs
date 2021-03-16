@@ -1,10 +1,8 @@
 
-import Identity from './identity.mjs';
-import Passport from './passport.mjs';
+import identity from './identity.mjs';
 
 
 export default (router) => {
 
-  Identity(router);
-  Passport(router);
+  identity(router);
 };
