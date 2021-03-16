@@ -1,21 +1,13 @@
 
+import {Mode} from "@ui.packages/types";
+import { Row, Col, InputField, SelectField, DatePickerField, Button } from '@ui.packages/kit';
+
 import React from 'react';
 
-import {Row, Col, InputField, SelectField, DatePickerField, Button} from '@ui.packages/kit';
-
 import styles from './default.module.scss';
-import {Mode} from "@ui.packages/types";
-import {useSelector} from "react-redux";
-import {getFormValues} from "redux-form";
 
 
 function FormModify({ disabled, handleSubmit, valid, pristine }) {
-  const values = useSelector(getFormValues('customer-settings'));
-
-  if ( ! values) {
-    return null;
-  }
-
   return (
     <form className={styles['wrapper']} onSubmit={handleSubmit}>
       <div className={styles['content']}>
