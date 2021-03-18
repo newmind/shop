@@ -6,27 +6,31 @@
 
   display: flex;
   flex-direction: row;
-  width: 800px;
+  width: 500px;
   margin: 0 auto;
 }
 
-.left,
-.right {
-
-  display: block;
-  box-sizing: border-box;
-  width: 400px;
-}
+//.left,
+//.right {
+//
+//  display: block;
+//  box-sizing: border-box;
+//  width: 400px;
+//}
 
 .left {
 
+  display: flex;
+  flex-direction: column;
+  flex: 1 0;
   text-align: right;
   padding: 0 20px 0 0;
 }
 
 .right {
 
-  text-align: left;
+  display: block;
+  text-align: right;
   padding: 0 0 0 20px;
   border-left: 1px solid $pale-lilac;
 }
@@ -80,7 +84,6 @@
 
   display: inline-block;
   font-size: 16px;
-  padding: 10px;
   margin: 0 0 0 10px;
   color: $gray;
   vertical-align: middle;
@@ -96,7 +99,7 @@
 .cart {
 
   display: block;
-  padding: 20px 0 0;
+  padding: 10px 0 0;
   font-family: inherit;
   font-weight: 300;
   font-size: 12px;

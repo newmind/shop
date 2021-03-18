@@ -1,5 +1,7 @@
 
-import { models, sequelize, Sequelize } from '@sys.packages/db';
+import { models, Sequelize } from '@sys.packages/db';
+
+import promotionBuilder from "./promotionBuilder.mjs";
 
 
 export default () => async (ctx) => {
@@ -13,7 +15,8 @@ export default () => async (ctx) => {
   }
 
   const result = await Promotion.findAll({
-    attributes: ['id', 'percent', 'dateFrom', 'dateTo' , [sequelize.col('products.productUuid'), 'productUuid']],
+    group: ['Promotion.id', 'products.id'],
+    attributes: ['id', 'name', 'description', 'percent', 'dateFrom', 'dateTo'],
     where: {
       dateFrom: {
         [Sequelize.Op.lte]: new Date(),
@@ -26,14 +29,14 @@ export default () => async (ctx) => {
       {
         model: ProductPromotion,
         as: 'products',
-        where,
-        attributes: [],
+        where: { ...where },
+        attributes: ['productUuid'],
       }
     ],
   });
 
   ctx.body = {
     success: true,
-    data: result.map((product) => product.toJSON()),
+    data: result.map((product) => promotionBuilder(product.toJSON())),
   };
 };

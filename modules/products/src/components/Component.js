@@ -52,9 +52,11 @@ function Products() {
         <div className={styles['table']}>
           <Table />
         </div>
-        <div className={styles['paging']}>
-          <Paging total={meta['total']} skip={12} />
-        </div>
+        {meta['total'] > 12 && (
+          <div className={styles['paging']}>
+            <Paging total={meta['total']} skip={12} />
+          </div>
+        )}
       </PageContent>
     </Page>
   );

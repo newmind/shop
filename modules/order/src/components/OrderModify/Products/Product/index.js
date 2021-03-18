@@ -1,7 +1,14 @@
 
 import numeral from '@packages/numeral';
 import { Gallery, Header, Text, Link, Count } from '@ui.packages/kit';
-import { selectUuid, selectInProcess, removeProductFromCartAction, plusQuantityAction, minusQuantityAction } from '@ui.packages/cart-widget';
+import {
+  selectUuid,
+  selectInProcess,
+  removeProductFromCartAction,
+  plusQuantityAction,
+  minusQuantityAction,
+  selectAmount
+} from '@ui.packages/cart-widget';
 
 import React from 'react';
 import types from 'prop-types';
@@ -11,9 +18,10 @@ import cn from 'classnames';
 import styles from './default.module.scss';
 
 
-export default function Product({ uuid, price, currency, brand, name, gallery }) {
+export default function Product({ uuid, price, brand, name, gallery, promotion }) {
   const dispatch = useDispatch();
   const uuids = useSelector(selectUuid);
+  const amounts = useSelector(selectAmount);
   const inProcess = useSelector(selectInProcess);
   const product = uuids.find((item) => item[0] === uuid);
 
@@ -23,7 +31,7 @@ export default function Product({ uuid, price, currency, brand, name, gallery })
     event.preventDefault();
     event.stopPropagation();
 
-    dispatch(removeProductFromCartAction());
+    dispatch(removeProductFromCartAction(uuid));
   }
 
   function handlePlus() {
@@ -41,6 +49,9 @@ export default function Product({ uuid, price, currency, brand, name, gallery })
   return (
     <Link className={styles['wrapper']} href={`/products/${uuid}`}>
       <span className={removeFromCartClassName} onClick={(event) => handleRemoveFromCart(event)} />
+      {promotion && (
+        <span className={styles['discount']}>{ promotion['percent'] }%</span>
+      )}
       <div className={styles['gallery']}>
         <Gallery items={gallery} isList={false} size="middle" path={`${process.env['REACT_APP_API_HOST']}/gallery`} />
       </div>
@@ -53,13 +64,21 @@ export default function Product({ uuid, price, currency, brand, name, gallery })
             <Text type={Text.TYPE_COMMENT}>{ brand }</Text>
           </div>
           <div className={styles['uuid']}>
-            <Text type="uuid">{ uuid }</Text>
+            <Text type="uuid">Код: { uuid }</Text>
           </div>
         </div>
         <div className={styles['amount']}>
-          <Count number={product[1]} disabled={inProcess} onPlus={() => handlePlus()} onMinus={() => handleMinus()} />
-          <Text type={Text.TYPE_AMOUNT}>{ product[1] } x { numeral(price).format() } { currency }</Text>
-          <Text type={Text.TYPE_COMMENT}>{ numeral(price * product[1]).format() } { currency }</Text>
+          <div className={styles['price']}>
+            <span className={styles['count']}>
+              <Count number={product[1]} disabled={inProcess} onPlus={handlePlus} onMinus={handleMinus} />
+            </span>
+            <span className={styles['number']}>
+              <Text type={Text.TYPE_AMOUNT}>x { numeral(price).format() } { amounts.map((amount) => amount[2]) }</Text>
+            </span>
+          </div>
+          <div className={styles['full-price']}>
+            <Text type={Text.TYPE_COMMENT}>= { numeral(price * product[1]).format() } { amounts.map((amount) => amount[2]) }</Text>
+          </div>
         </div>
       </div>
     </Link>

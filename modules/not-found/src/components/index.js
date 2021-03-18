@@ -1,25 +1,19 @@
 
-import { Link } from 'react-router-dom';
-import React, { useEffect } from 'react';
+import { useMount, useUnmount } from '@ui.packages/hoc';
 
-import styles from './default.module.scss';
+import React from 'react';
+
+import Component from './Component';
 
 
-function NotFound() {
-  useEffect(function init() {
+export default function HOC() {
+  useMount(function() {
     document.title = `${process.env['REACT_APP_WEBSITE_NAME']} - Страница не найдена`;
-  }, []);
+  });
 
-  return (
-    <div className="page">
-      <div className={styles['wrapper']}>
-        <span className={styles['code']}>404</span>
-        <p className={styles['message']}>Страница не существует</p>
-        <p className={styles['description']}>Перейти в раздел <Link className={styles['link']} to={process.env['PUBLIC_URL'] + '/products'}>выбора товаров</Link></p>
-        <p className={styles['description']}>или <Link className={styles['link']} to={process.env['PUBLIC_URL'] + '/produce'}>напишите нам</Link> об ошибке</p>
-      </div>
-    </div>
-  );
-}
+  useUnmount(function() {
 
-export default NotFound;
+  });
+
+  return <Component />;
+};

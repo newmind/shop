@@ -1,15 +1,20 @@
 
-import React, { PureComponent } from 'react';
+import { Header, Text } from '@ui.packages/kit';
+
+import React from 'react';
+
+import styles from './defaul.module.scss';
 
 
-class Component extends PureComponent {
-  render() {
-    return (
-      <div className="page">
-        <p>Компоненты</p>
+function About() {
+  return (
+    <div className={styles['wrapper']}>
+      <div className={styles['content']}>
+        <Header theme="light">О нас</Header>
+        <Text theme="light">Тут скоро будет новый раздел</Text>
       </div>
-    );
-  }
+    </div>
+  );
 }
 
-export default Component;
+export default About;

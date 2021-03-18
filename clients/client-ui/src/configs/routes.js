@@ -35,9 +35,22 @@ const routes = [
     ),
   },
   {
+    path: '/about',
+    wrapper: 'Navigate',
+    module: import(
+      /* webpackPreload: true */
+      /* webpackChunkName: "about" */
+      '@modules/about'
+    ),
+  },
+  {
     path: '*',
-    wrapper: 'Empty',
-    module: import('@modules/not-found'),
+    wrapper: 'Navigate',
+    module: import(
+      /* webpackPreload: true */
+      /* webpackChunkName: "not-found" */
+      '@modules/not-found'
+    ),
   }
 ];
 

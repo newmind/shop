@@ -70,6 +70,8 @@
 .aside {
 
   display: block;
+  backdrop-filter: blur(2px);
+  z-index: 20;
 }
 
 .navigate {

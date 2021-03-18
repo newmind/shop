@@ -15,7 +15,7 @@ import cn from 'classnames';
 import styles from './default.module.scss';
 
 
-export default function Product({ uuid, price, prevPrice, currency, brand, name, gallery, attributes, onCart }) {
+export default function Product({ uuid, price, prevPrice, currency, brand, name, gallery, attributes, promotion, onCart }) {
   const dispatch = useDispatch();
 
   const removeFromCartClassName= cn(styles['remove'], 'far fa-trash-alt');
@@ -39,6 +39,9 @@ export default function Product({ uuid, price, prevPrice, currency, brand, name,
   return (
     <div className={styles['wrapper']}>
       <Link className={styles['product']} href={`/products/${uuid}`}>
+        {promotion && (
+          <span className={styles['discount']}>{ promotion['percent'] }%</span>
+        )}
         <div className={styles['gallery']}>
           <Gallery items={gallery} isList={false} size="middle" path={`${process.env['REACT_APP_API_HOST']}/gallery`} />
         </div>
@@ -67,6 +70,11 @@ export default function Product({ uuid, price, prevPrice, currency, brand, name,
               <Text className={styles['prev-amount']} type={Text.TYPE_BODY}>{ numeral(prevPrice).format() } { currency }</Text>
             )}
           </div>
+          {promotion && (
+            <div className={styles['promotion']}>
+              <Text className={styles['nowrap']} type={Text.TYPE_BODY}>Акция: { promotion['name'] }</Text>
+            </div>
+          )}
           <div className={styles['controls']}>
             <Button form={Button.FORM_CART} onClick={(event) => handleClickCart(event)} />
           </div>

@@ -1,13 +1,12 @@
 
 import numeral from "@packages/numeral";
 import { Mode, Size } from '@ui.packages/types';
-import { createCancelToken } from '@ui.packages/request';
+import { selectAmount } from '@ui.packages/cart-widget';
 import { Button, Header, Text, Link } from "@ui.packages/kit";
-import { selectAmount, selectUuid, selectItems, getCart } from '@ui.packages/cart-widget';
 
-import React, { useEffect } from 'react';
+import React from 'react';
 import { FieldArray } from "redux-form";
-import { useSelector, useDispatch } from 'react-redux';
+import { useSelector } from 'react-redux';
 
 import Products from './Products';
 import Details from './Details';
@@ -16,17 +15,7 @@ import styles from "./default.module.scss";
 
 
 function OrderModify({ handleSubmit }) {
-  const dispatch = useDispatch();
-  const uuid = useSelector(selectUuid);
   const amounts = useSelector(selectAmount);
-
-  useEffect(function() {
-    const token = createCancelToken();
-    dispatch(getCart(uuid, token));
-    return () => {
-      token.cancel();
-    };
-  }, []);
 
   return (
     <div className={styles['wrapper']}>

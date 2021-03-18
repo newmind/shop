@@ -1,7 +1,6 @@
 
 import numeral from '@packages/numeral';
 
-import { nounDeclension } from "@ui.packages/utils";
 import { Header, Text, Button, Link } from '@ui.packages/kit';
 import { addProductToCartAction, removeProductFromCartAction, selectUuid } from '@ui.packages/cart-widget';
 
@@ -52,20 +51,14 @@ function Product({ uuid, brand, name, price, prevPrice, currency }) {
         </div>
         <div className={styles['controls']}>
           <div className={styles['buttons']}>
-            <Button form={Button.FORM_BAY} onClick={() => handleAddToCart()} />
             <Button form={Button.FORM_CART} onClick={() => handleAddToCart()} />
-            { !! product && (
-              <span className={removeFromCartClassName} onClick={() => handleRemoveFromCart()} />
-            )}
           </div>
           { !! product && (
             <div className={styles['cart']}>
-              <>
-                {nounDeclension(product[1], ['Добавлен', 'Добавлено', 'Добавлено'])}&nbsp;
-                {product[1]}&nbsp;
-                {nounDeclension(product[1], ['товар', 'товара', 'товаров'])}.&nbsp;
-                <Link className={styles['to-order']} href={'/order'}>Перейти к оформлению заказа</Link>
-              </>
+              <Link className={styles['to-order']} href={'/order'}>{product[1]} в карзине</Link>
+              { !! product && (
+                <span className={removeFromCartClassName} onClick={() => handleRemoveFromCart()} />
+              )}
             </div>
           )}
         </div>

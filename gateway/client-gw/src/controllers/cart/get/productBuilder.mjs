@@ -5,6 +5,7 @@ export default function productBuilder(data) {
     brand: !! data['brands'].length ? data['brands'][0]['value'] : null,
     name: data['name'],
     price: data['price'],
+    promotion: data['promotion'],
     gallery: data['gallery'].map((item) => item['uuid']),
   };
 }

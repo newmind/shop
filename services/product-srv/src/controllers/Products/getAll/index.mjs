@@ -1,6 +1,8 @@
 
-import { models, Sequelize } from '@sys.packages/db';
 import request from "@sys.packages/request";
+import { models, Sequelize } from '@sys.packages/db';
+
+import promotionBuilder from "./promotionBuilder.mjs";
 
 
 export default () => async (ctx) => {
@@ -185,15 +187,19 @@ export default () => async (ctx) => {
     });
 
     products = products.map((product) => {
-      const promotion = promotions.find((promotion) => promotion['productUuid'] === product['uuid']);
+      const promotion = promotions.find((promotion) => !!~ promotion['products'].indexOf(product['uuid']));
       if (promotion) {
         return {
           ...product,
+          promotion: promotionBuilder(promotion),
           prevPrice: product['price'],
           price: product['price'] - Math.floor(product['price'] * promotion['percent'] / 100),
         };
       }
-      return product;
+      return {
+        ...product,
+        promotion: null,
+      };
     });
   }
 

@@ -12,10 +12,10 @@ const navigate = [
     title: 'О нас',
     path: '/about',
   },
-  {
-    title: "Ваши предложения",
-    path: '/proposal',
-  },
+  // {
+  //   title: "Ваши предложения",
+  //   path: '/proposal',
+  // },
 ];
 
 export default navigate;

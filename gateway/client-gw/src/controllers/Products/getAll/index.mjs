@@ -52,6 +52,8 @@ export default () => async (ctx) => {
     },
   });
 
+  console.log(products)
+
   ctx.body = {
     success: true,
     data: products.map((product) => productBuilder(product, true)),

@@ -1,7 +1,14 @@
 
 import numeral from "@packages/numeral";
 import { Gallery, Header, Text, Count } from "@ui.packages/kit";
-import { selectUuid, selectInProcess, plusQuantityAction, minusQuantityAction, closeCartAction } from '@ui.packages/cart-widget';
+import {
+  selectUuid,
+  selectInProcess,
+  plusQuantityAction,
+  minusQuantityAction,
+  closeCartAction,
+  selectAmount
+} from '@ui.packages/cart-widget';
 
 import React from 'react';
 import types from "prop-types";
@@ -12,10 +19,11 @@ import cn from "classnames";
 import styles from "./defaults.module.scss";
 
 
-function Product({ uuid, gallery, brand, name, price, currency, onRemove }) {
+function Product({ uuid, gallery, brand, name, price, onRemove }) {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const uuids = useSelector(selectUuid);
+  const amounts = useSelector(selectAmount);
   const inProcess = useSelector(selectInProcess);
   const classNameRemoveProduct = cn(styles['remove'], 'far fa-trash-alt');
 
@@ -68,11 +76,11 @@ function Product({ uuid, gallery, brand, name, price, currency, onRemove }) {
               <Count number={product[1]} disabled={inProcess} onPlus={handlePlus} onMinus={handleMinus} />
             </span>
             <span className={styles['number']}>
-              <Text>x { numeral(price).format() } { currency }</Text>
+              <Text>x { numeral(price).format() } { amounts.map((amount) => amount[2]) }</Text>
             </span>
           </div>
           <div className={styles['full-price']}>
-            <Text type={Text.TYPE_COMMENT}>= { numeral(price * product[1]).format() } { currency }</Text>
+            <Text type={Text.TYPE_COMMENT}>= { numeral(price * product[1]).format() } { amounts.map((amount) => amount[2]) }</Text>
           </div>
         </div>
         <div className={styles['control']}>

@@ -23,8 +23,6 @@ export default () => async (ctx) => {
     }
   });
 
-  await new Promise(res => setTimeout(res, 2000))
-
   ctx.body = {
     success: true,
     data: {

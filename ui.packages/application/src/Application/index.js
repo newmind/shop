@@ -27,14 +27,16 @@ function Application({ options }) {
     dispatch(isLoadedAction());
   }
 
-  useEffect(function() {
-    on(process.env['REACT_APP_SOCKET_CUSTOMER_UPDATE'], function(data) {
-      dispatch(updateCustomerAction(data));
-    });
-    return () => {
-      off(process.env['REACT_APP_SOCKET_CUSTOMER_UPDATE']);
-    };
-  }, []);
+  if (options['useSignIn']) {
+    useEffect(function () {
+      on(process.env['REACT_APP_SOCKET_CUSTOMER_UPDATE'], function(data) {
+        dispatch(updateCustomerAction(data));
+      });
+      return () => {
+        off(process.env['REACT_APP_SOCKET_CUSTOMER_UPDATE']);
+      };
+    }, []);
+  }
 
   return (
     <section className={styles['application']}>

@@ -64,7 +64,12 @@ function Content() {
   useEffect(function() {
     if (isInit) {
       const token = createCancelToken();
-      dispatch(getCart(uuids, token));
+      if ( !! uuids.length) {
+        dispatch(getCart(uuids, token));
+      }
+      else {
+        dispatch(closeCartAction());
+      }
       return () => {
         token.cancel();
       };

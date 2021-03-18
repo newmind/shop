@@ -12,6 +12,7 @@ export default function productBuilder(data, filterAttributes) {
     type: data['type'],
     currency: data['currency']['value'],
     comments: data['comments'],
+    promotion: data['promotion'],
     gallery: data['gallery'].map((item) => item['uuid']),
     attributes: filterAttributes
       ? data['attributes'].filter((item) => item['use']).map((item) => {
