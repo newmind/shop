@@ -20,6 +20,7 @@
 
 .product {
 
+  position: relative;
   display: flex;
   flex-direction: row;
   flex: 1 0;
@@ -32,6 +33,7 @@
   display: flex;
   width: 80px;
   height: 80px;
+  z-index: 10;
 }
 
 .description {
@@ -120,4 +122,22 @@
 
     color: $danger;
   }
+}
+
+.discount {
+
+  position: absolute;
+  top: 0;
+  left: 60px;
+  display: block;
+  background: $information;
+  border-radius: 50%;
+  font-size: 10px;
+  font-weight: 700;
+  color: $coal-dark;
+  width: 30px;
+  padding: 10px 0;
+  text-align: center;
+  transform: rotateZ(345deg);
+  z-index: 20;
 }

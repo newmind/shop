@@ -19,7 +19,7 @@ import cn from "classnames";
 import styles from "./defaults.module.scss";
 
 
-function Product({ uuid, gallery, brand, name, price, onRemove }) {
+function Product({ uuid, gallery, brand, name, price, promotion, onRemove }) {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const uuids = useSelector(selectUuid);
@@ -54,6 +54,9 @@ function Product({ uuid, gallery, brand, name, price, onRemove }) {
   return (
     <div className={styles['wrapper']}>
       <div className={styles['product']} onClick={() => handleTo()}>
+        {promotion && (
+          <span className={styles['discount']}>{ promotion['percent'] }%</span>
+        )}
         <div className={styles['promo']}>
           <Gallery items={gallery} isList={false} size="small" path={`${process.env['REACT_APP_API_HOST']}/gallery`} />
         </div>
