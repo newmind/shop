@@ -72,7 +72,7 @@ export default function Product({ uuid, price, prevPrice, currency, brand, name,
           </div>
           {promotion && (
             <div className={styles['promotion']}>
-              <Text className={styles['nowrap']} type={Text.TYPE_BODY}>Акция: { promotion['name'] }</Text>
+              <Text className={styles['nowrap']} type={Text.TYPE_BODY}>{ promotion['name'] }</Text>
             </div>
           )}
           <div className={styles['controls']}>

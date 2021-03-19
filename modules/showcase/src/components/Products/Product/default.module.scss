@@ -171,5 +171,20 @@
 }
 
 .nowrap {
+
   white-space: nowrap;
+  color: $success;
+  padding: 0 0 0 10px;
+
+  &::before {
+
+    display: inline-block;
+    content: '';
+    width: 6px;
+    height: 6px;
+    background: $success;
+    border-radius: 50%;
+    vertical-align: middle;
+    margin: 0 10px 3px 0;
+  }
 }
