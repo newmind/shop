@@ -1,8 +1,8 @@
 
-import { RadioBoxField, Radio } from "@ui.packages/kit";
+import { RadioBoxField, Radio, Text } from "@ui.packages/kit";
 
 import React from 'react';
-import { connect, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { getFormValues } from 'redux-form';
 
 import cn from 'classnames';
@@ -33,27 +33,31 @@ function Block({ children, selected, disabled, onClick }) {
 
 function Pay() {
   const payments = useSelector(selectPayments);
+  const formValues = useSelector(getFormValues('order'));
 
   return (
-    <RadioBoxField name="payment" defaultValue="post">
-      {payments.map((payment, index) => (
-        <Radio key={index} name={payment['code']}>
-          <Block>
-            <span className={styles['block__caption']}>{ payment['name'] }</span>
-          </Block>
-        </Radio>
-      ))}
-    </RadioBoxField>
+    <div className={styles['wrapper']}>
+      <div className={styles['controls']}>
+        <RadioBoxField className={styles['radio']} name="payment" defaultValue="post">
+          {payments.map((payment, index) => (
+            <Radio key={index} name={payment['code']}>
+              <Block>
+                <span className={styles['block__caption']}>{ payment['name'] }</span>
+              </Block>
+            </Radio>
+          ))}
+        </RadioBoxField>
+      </div>
+      <div className={styles['content']}>
+        {(formValues['payment'] === 'delivery') && (
+          <Text>Выбирая этот способ оплаты, вы можите оплатить товар при получении, как наличными так и банковской картой</Text>
+        )}
+        {(formValues['payment'] === 'online') && (
+          <Text>Выбирая этот способ, вы можите оплатить товар заранее используя платежную систему pikassa</Text>
+        )}
+      </div>
+    </div>
   );
 }
 
-
-const mapStateToProps = (state) => {
-  return {
-    formValues: getFormValues('order')(state),
-  };
-};
-
-export default connect(
-  mapStateToProps,
-)(Pay);
+export default Pay;

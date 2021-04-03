@@ -1,5 +1,5 @@
 
-import { Container, Col, InputField, MaskInputField, Row } from "@ui.packages/kit";
+import { Container, Col, InputField, MaskInputField, Row, Text } from "@ui.packages/kit";
 
 import React from 'react';
 
@@ -29,6 +29,12 @@ function Customer() {
             </Col>
             <Col />
           </Row>
+        </Col>
+      </Row>
+      <Row>
+        <Col>
+          <Text type={Text.TYPE_COMMENT}>* номер телефона необхадим для обратной связи оператора по уточнению деталей</Text>
+          <Text type={Text.TYPE_COMMENT}>* на электронную почту мы высылаем чек и информацию о заказе</Text>
         </Col>
       </Row>
     </Container>

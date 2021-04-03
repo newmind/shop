@@ -12,7 +12,8 @@ export default () => async (ctx) => {
     patronymic: data['patronymic'],
     surname: data['surname'],
     email: data['email'],
-    phone: data['phone'].replace('+', ''),
+    phone: data['phone'],
+    isSystem: false,
   }, {
     transaction,
   });

@@ -70,33 +70,31 @@ export default function Suggest({ label, name, change, ...props }) {
   return (
     <div className={styles['wrapper']}>
       <div className={styles['search']}>
-        <div className={styles['search']}>
-          <input id="input" className={styles['input']} />
-          <span className={cn(styles['icon'], 'fas fa-search-location')} />
+        <input id="input" className={styles['input']} />
+        <span className={cn(styles['icon'], 'fas fa-search-location')} />
+      </div>
+      <div className={styles['row']}>
+        <div className={styles['col']}>
+          <Field require label="Индекс" {...postalCode} />
+        </div>
+        <div className={styles['col']}>
+          <Field require label="Страна" {...country} />
         </div>
       </div>
       <div className={styles['row']}>
         <div className={styles['col']}>
-          <Field label="Индекс" {...postalCode} />
+          <Field require label="Область" {...province} />
         </div>
         <div className={styles['col']}>
-          <Field label="Страна" {...country} />
-        </div>
-      </div>
-      <div className={styles['row']}>
-        <div className={styles['col']}>
-          <Field label="Область" {...province} />
-        </div>
-        <div className={styles['col']}>
-          <Field label="Населенный пункт" {...locality} />
+          <Field require label="Населенный пункт" {...locality} />
         </div>
       </div>
       <div className={styles['row']}>
         <div className={styles['col']}>
-          <Field label="Улица" {...street} />
+          <Field require label="Улица" {...street} />
         </div>
         <div className={styles['col']}>
-          <Field label="Дом" {...house} />
+          <Field require label="Дом" {...house} />
         </div>
       </div>
       <div className={styles['row']}>

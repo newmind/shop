@@ -7,6 +7,9 @@ export default () => async (ctx) => {
   const result = await request({
     url: process.env['OPERATION_API_SRV'] + '/operations/deliveries',
     method: 'get',
+    params: {
+      isUse: true,
+    }
   });
 
   console.log(result)

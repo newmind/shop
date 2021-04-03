@@ -1,20 +1,19 @@
 
 import logger from '@sys.packages/logger';
 import { Server } from '@sys.packages/server';
-import { connectToRabbit, queueToExchange } from '@sys.packages/rabbit';
+import { connection as connectToRabbit } from '@sys.packages/rabbit2';
 
 import path from 'path';
 import nunjucks from 'nunjucks';
 
-import routes from './routes/index.mjs';
-import { orderCreated } from './actions/order/index.mjs';
+import routes from './routes';
+import rabbit from './rabbit';
 
 
 (async () => {
   try {
     await connectToRabbit(process.env['RABBIT_CONNECTION_HOST']);
-
-    await queueToExchange(process.env['RABBIT_OPERATION_SRV_QUEUE_ORDER_CREATED'], process.env['RABBIT_OPERATION_SRV_EXCHANGE_ORDER_CREATED'], orderCreated());
+    await rabbit();
 
     nunjucks.configure(path.resolve(process.cwd(), 'src/templates'), {
       autoescape: true,

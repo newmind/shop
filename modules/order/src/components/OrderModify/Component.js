@@ -5,7 +5,7 @@ import { selectAmount } from '@ui.packages/cart-widget';
 import { Button, Header, Text, Link } from "@ui.packages/kit";
 
 import React from 'react';
-import { FieldArray } from "redux-form";
+import { FieldArray, isValid, isPristine } from "redux-form";
 import { useSelector } from 'react-redux';
 
 import Products from './Products';
@@ -13,9 +13,14 @@ import Details from './Details';
 
 import styles from "./default.module.scss";
 
+import { selectInProcess } from '../../ducks/slice';
+
 
 function OrderModify({ handleSubmit }) {
   const amounts = useSelector(selectAmount);
+  const inProcess = useSelector(selectInProcess);
+  const valid = useSelector(isValid('order'));
+  const pristine = useSelector(isPristine('order'));
 
   return (
     <div className={styles['wrapper']}>
@@ -47,6 +52,7 @@ function OrderModify({ handleSubmit }) {
                 type={Button.TYPE_SUBMIT}
                 mode={Mode.SUCCESS}
                 size={Size.LARGE}
+                disabled={inProcess || ! valid || pristine}
               >Оформить заказ на сумму { amounts.map((amount) => numeral(amount[1]).format() + ' ' + amount[2])}</Button>
             )}
           </div>

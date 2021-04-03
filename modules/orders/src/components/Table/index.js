@@ -51,6 +51,18 @@ function List() {
           )}
         </Column>
         <Column
+          title="Детали"
+          align="left"
+        >
+          {(value) => (
+            <div>
+              <Text>{ value['customer']['name'] }</Text>
+              <Text><b>Доставка:</b> { value['delivery'] }</Text>
+              <Text><b>Оплата:</b> { value['payment'] }</Text>
+            </div>
+          )}
+        </Column>
+        <Column
           title="Статус"
           width="160"
         >{() => (

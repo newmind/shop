@@ -9,16 +9,19 @@ module.exports = {
             code: 'post',
             name: 'Почтой',
             description: '',
+            isUse: true,
           },
           {
             code: 'pickup',
             name: 'Самовывоз',
             description: '',
+            isUse: true,
           },
           {
             code: 'delivery',
             name: 'Курьером',
             description: '',
+            isUse: true,
           },
         ],
         {

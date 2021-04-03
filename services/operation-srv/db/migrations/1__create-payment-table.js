@@ -23,7 +23,10 @@ module.exports = {
         description: {
           type: DataType.STRING(1024),
           defaultValue: ''
-        }
+        },
+        isUse: {
+          type: DataType.BOOLEAN,
+        },
       }, {
         transaction
       });

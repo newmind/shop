@@ -7,6 +7,9 @@ export default () => async (ctx) => {
   const result = await request({
     url: process.env['OPERATION_API_SRV'] + '/operations/payments',
     method: 'get',
+    params: {
+      isUse: true,
+    },
   });
 
   ctx.body = {

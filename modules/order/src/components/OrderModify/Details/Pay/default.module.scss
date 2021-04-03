@@ -2,11 +2,17 @@
 @import "~@ui.packages/theme";
 
 
+.radio {
+
+  display: block;
+}
+
 .block {
 
   display: inline-flex;
   flex-direction: column;
-  width: 170px;
+  flex: 1 0;
+  width: 100%;
   height: 70px;
   background: $gray;
   color: $white;
@@ -19,7 +25,7 @@
 
   & + & {
 
-    margin: 0 0 0 20px;
+    margin: 20px 0 0;
   }
 
   &--selected {
@@ -46,4 +52,29 @@
   background: $pale-grey;
   color: $pale-lilac;
   cursor: default;
+}
+
+.wrapper {
+
+  display: flex;
+  flex-direction: row;
+  flex: 1 0;
+  overflow: auto;
+}
+
+.controls {
+
+  display: block;
+  width: 300px;
+}
+
+.content {
+
+  display: flex;
+  flex-direction: column;
+  flex: 1 0;
+  margin: 0 0 0 40px;
+  padding: 0 0 0 40px;
+  border-left: 1px solid $pale-lilac;
+  overflow: hidden;
 }

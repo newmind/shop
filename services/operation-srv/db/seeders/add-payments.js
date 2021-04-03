@@ -9,16 +9,19 @@ module.exports = {
             code: 'cash',
             name: 'Наличными',
             description: '',
+            isUse: true,
           },
           {
             code: 'online',
             name: 'Онлайн оплата',
             description: '',
+            isUse: true,
           },
           {
             code: 'card',
             name: 'При получении',
             description: '',
+            isUse: true,
           },
         ],
         {

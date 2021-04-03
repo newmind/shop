@@ -51,7 +51,7 @@ function Order() {
               initialValues={{
                 items,
                 delivery: 'post',
-                payment: 'cash',
+                payment: 'online',
               }}
               onSubmit={handleSendOrderData}
             />

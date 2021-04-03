@@ -20,6 +20,19 @@
   transition: color 200ms;
 }
 
+.require {
+  &:after {
+    display: inline-block;
+    content: '*';
+    color: $danger;
+    margin: 0 0 0 2px;
+  }
+}
+
+.disabled .label {
+  color: $danger;
+}
+
 .content {
 
   position: relative;
@@ -38,7 +51,7 @@
     font-family: inherit;
     font-weight: 300;
     font-size: 11px;
-    color: $warning;
+    color: $danger;
     letter-spacing: .5px;
   }
 }

@@ -17,29 +17,56 @@ function getAddress(value) {
   if (value['postcode']) {
     address += value['postcode'];
   }
+  else {
+    address += '---';
+  }
   if (value['country']) {
     address += ', ' + value['country'];
+  }
+  else {
+    address += ', ' + '---';
   }
   if (value['region']) {
     address += ', ' + value['region'];
   }
+  else {
+    address += ', ' + '---';
+  }
   if (value['district']) {
     address += ', ' + value['district'];
+  }
+  else {
+    address += ', ' + '---';
   }
   if (value['locality']) {
     address += ', ' + value['locality'];
   }
+  else {
+    address += ', ' + '---';
+  }
   if (value['street']) {
     address += ', ' + value['street'];
+  }
+  else {
+    address += ', ' + '---';
   }
   if (value['home']) {
     address += ', д.' + value['home'];
   }
+  else {
+    address += ', ' + '---';
+  }
   if (value['float']) {
     address += ', эт.' + value['float'];
   }
+  else {
+    address += ', ' + '---';
+  }
   if (value['flat']) {
     address += ', кв.' + value['flat'];
+  }
+  else {
+    address += ', ' + '---';
   }
   return address;
 }
@@ -82,16 +109,9 @@ function List() {
       <div className={styles['table']}>
         <Table columns={items}>
           <Column
-            title="#"
-            alias="id"
-            width="20"
-            align="right"
-          >
-            {(value) => <Text type={Text.TYPE_COMMENT}>{ value }</Text>}
-          </Column>
-          <Column
             title="Имя"
             align="left"
+            width="250"
           >
             {(value) => <Text type={Text.TYPE_BODY}>{ value['surname'] } { value['name'] } { value['patronymic'] }</Text>}
           </Column>

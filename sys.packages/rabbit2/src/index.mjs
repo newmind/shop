@@ -21,7 +21,7 @@ export async function connection(host) {
 }
 
 export async function sendCommand(queue, message, params) {
-  await createQueue(rabbitChannel, queue, message, params);
+  return await createQueue(rabbitChannel, queue, message, params);
 }
 
 export async function consumer(queue, options, callback) {

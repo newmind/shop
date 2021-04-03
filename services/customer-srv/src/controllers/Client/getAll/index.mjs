@@ -4,9 +4,17 @@ import { models } from '@sys.packages/db';
 
 export default () => async (ctx) => {
   const where = {};
+  let offset = {};
+  let options = {};
 
   const { Client, Address, Meta } = models;
-  const { id, isSystem } = ctx['request']['query'];
+  const {
+    id = null,
+    isSystem = null,
+    limit = null,
+    skip = null,
+    take = null,
+  } = ctx['request']['query'];
 
   if (id) {
     where['id'] = id;
@@ -16,8 +24,19 @@ export default () => async (ctx) => {
     where['isSystem'] = isSystem;
   }
 
+  if (limit) {
+    options['limit'] = Number(limit);
+  }
+
+  if (skip && take) {
+    offset['offset'] = Number(skip);
+    offset['limit'] = Number(take);
+  }
+
   const result = await Client.findAndCountAll({
     where: { ...where, },
+    ...options,
+    ...offset,
     distinct: true,
     order: [['id', 'desc']],
     attributes: ['id', 'name', 'patronymic', 'surname', 'gender', 'age', 'birthday'],

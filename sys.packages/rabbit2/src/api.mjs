@@ -70,7 +70,7 @@ export async function createQueue(channel, queue, message, options) {
                   return reject(new NetworkError({ code: '10.2.2', message: error['message'] }));
                 }
                 logger.info(`RabbitMQ: Получено подтверждение по очереди "${queue}" "${message['content'].toString()}"`);
-                resolve(message);
+                resolve(message.content.toString());
               });
             }
           }, { noAck: true });

@@ -6,6 +6,6 @@
     "@packages/errors": "1.0.0",
     "@sys.packages/logger": "1.0.0",
     "axios": "0.21.1",
-    "qs": "6.9.6"
+    "qs": "6.10.1"
   }
 }

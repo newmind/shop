@@ -1,6 +1,6 @@
 
 // import { openDialog } from "@ui.packages/dialog";
-import { Header, Button, Page, PageContent, PageControls } from '@ui.packages/kit';
+import {Header, Button, Page, PageContent, PageControls, Paging} from '@ui.packages/kit';
 
 import React from 'react';
 import { useSelector } from 'react-redux';
@@ -9,12 +9,13 @@ import Table from './Table';
 
 import styles from './default.module.scss';
 
-import { selectInProcess } from '../ducks/slice';
+import { selectInProcess, selectMeta } from '../ducks/slice';
 
 
 function Currencies() {
   // const dispatch = useDispatch();
   const inProcess = useSelector(selectInProcess);
+  const meta = useSelector(selectMeta);
 
   // function handleCreate() {
   //   dispatch(openDialog('currency'));
@@ -40,6 +41,11 @@ function Currencies() {
             <Table />
           </article>
         </section>
+        {meta['total'] > 12 && (
+          <div className={styles['paging']}>
+            <Paging total={meta['total']} skip={12} />
+          </div>
+        )}
       </PageContent>
     </Page>
   );

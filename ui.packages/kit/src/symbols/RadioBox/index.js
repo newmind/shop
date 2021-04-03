@@ -4,10 +4,11 @@ import React from 'react';
 
 import Context from './context';
 
+import cn from 'classnames';
 import styles from './default.module.scss';
 
 
-function RadioBox({ children, value, onChange }) {
+function RadioBox({ className, children, value, onChange }) {
 
   function handleClick(value) {
     onChange && onChange(value);
@@ -15,7 +16,7 @@ function RadioBox({ children, value, onChange }) {
 
   return (
     <Context.Provider value={{ value, onChange: handleClick }}>
-      <div className={styles['container']}>
+      <div className={cn(styles['container'], className)}>
         {React.Children.map(children, (child, key) => {
           return child && React.cloneElement(child, { key, value });
         })}

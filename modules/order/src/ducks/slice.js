@@ -120,6 +120,7 @@ export const selectItems = (state) => state[REDUCER_NAME]['items'];
 export const selectPayments = (state) => state[REDUCER_NAME]['payments'];
 export const selectDeliveries = (state) => state[REDUCER_NAME]['deliveries'];
 export const selectAmount = (state) => state[REDUCER_NAME]['amount'];
+export const selectInProcess = (state) => state[REDUCER_NAME]['inProcess'];
 
 export const name = slice['name'];
 export const reducer = slice['reducer'];

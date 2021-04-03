@@ -15,6 +15,7 @@ import {
   // updateCustomerRequestSuccessAction,
   // deleteCustomerRequestSuccessAction,
 } from '../ducks/slice';
+import {queryToObject} from "@ui.packages/utils";
 
 
 export default function HOC() {
@@ -23,7 +24,8 @@ export default function HOC() {
   useMount(async function() {
     document.title = `${process.env['REACT_APP_WEBSITE_NAME']} - Клиенты`;
 
-    await dispatch(getCustomers());
+    const query = queryToObject(location['search']);
+    await dispatch(getCustomers(query));
 
     // on(process.env['REACT_APP_SOCKET_CURRENCY_CREATE'], (data) => dispatch(createCustomerRequestSuccessAction(data)));
     // on(process.env['REACT_APP_SOCKET_CURRENCY_UPDATE'], (data) => dispatch(updateCustomerRequestSuccessAction(data)));
@@ -31,7 +33,8 @@ export default function HOC() {
   });
 
   useUpdate(async function() {
-    await dispatch(getCustomers());
+    const query = queryToObject(location['search']);
+    await dispatch(getCustomers(query));
   });
 
   useUnmount(function() {
