@@ -26,5 +26,8 @@
   ],
   "scripts": {
     "build:packages": "sh ./build-client-packages.sh && sh ./build-admin-packages.sh"
+  },
+  "engines": {
+    "node": "^15"
   }
 }
