@@ -1,6 +1,5 @@
 
-import { Suggest } from '@ui.packages/yandex-map';
-import { RadioBoxField, Radio } from "@ui.packages/kit";
+import { RadioBoxField, Radio, DaDataField } from "@ui.packages/kit";
 
 import React from 'react';
 import { useSelector } from 'react-redux';
@@ -41,10 +40,7 @@ function Delivery() {
         </RadioBoxField>
       </div>
       <div className={styles['content']}>
-        <Suggest
-          name="address"
-          label="Адрес доставки"
-        />
+        <DaDataField label="Адрес" name="address" />
       </div>
     </div>
   );

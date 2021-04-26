@@ -8,8 +8,6 @@
     "start:dev": "cross-env NODE_ENV=development babel ./src --out-dir ./lib --copy-files --watch"
   },
   "dependencies": {
-    "@packages/errors": "1.0.0",
-    "@packages/moment": "1.0.0",
     "@packages/numeral": "1.0.0",
     "@reduxjs/toolkit": "1.5.0",
     "@ui.packages/cart-widget": "1.0.0",
@@ -21,7 +19,6 @@
     "@ui.packages/theme": "1.0.0",
     "@ui.packages/types": "1.0.0",
     "@ui.packages/utils": "1.0.0",
-    "@ui.packages/yandex-map": "1.0.0",
     "classnames": "2.3.1",
     "prop-types": "15.7.2",
     "react": "17.0.2",

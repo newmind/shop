@@ -7,14 +7,14 @@ import { orderCreated } from '../../actions/order';
 
 export default async function() {
 
-  await consumer(process.env['QUEUE_ORDER_CREATED'], { reply: true },async(message, cb) => {
+  await consumer(process.env['QUEUE_ORDER_CREATED'],async(message, cb) => {
     try {
       await orderCreated(JSON.parse(message));
-      cb(true, JSON.stringify({ success: true }));
+      cb(true);
     }
     catch(error) {
       logger['error'](error['message']);
-      cb(true, JSON.stringify({ success: false }));
+      cb(true);
     }
   });
 }

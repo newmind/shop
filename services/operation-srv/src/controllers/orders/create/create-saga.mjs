@@ -93,11 +93,11 @@ export default class CreateSaga {
       .step('Send event')
       .invoke(async (params) => {
         const order = params.getOrder();
-        const result = await sendCommand(process.env['QUEUE_ORDER_CREATED'], JSON.stringify(order), { reply: true });
-        const data = JSON.parse(result);
-        if ( ! data['success']) {
-          throw Error('no send');
-        }
+        await sendCommand(process.env['QUEUE_ORDER_CREATED'], JSON.stringify(order));
+        // const data = JSON.parse(result);
+        // if ( ! data['success']) {
+        //   throw Error('no send');
+        // }
       })
 
       .build();

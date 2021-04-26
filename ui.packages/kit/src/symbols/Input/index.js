@@ -2,7 +2,7 @@
 import { Mode } from '@ui.packages/types';
 
 import types from 'prop-types';
-import React, { useState } from 'react';
+import React, { useState, forwardRef } from 'react';
 
 import cn from 'classnames';
 import styles from './default.module.scss';
@@ -12,7 +12,7 @@ const TYPE_TEXT = 'text';
 const TYPE_PASSWORD = 'password';
 
 
-function Input({ mode, className, disabled, onBlur, onFocus, ...props }) {
+const Input = forwardRef(({ mode, className, disabled, onBlur, onFocus, ...props}, ref) => {
   const [isFocus, setFocus] = useState(false);
 
   function handleFocus(event) {
@@ -52,6 +52,7 @@ function Input({ mode, className, disabled, onBlur, onFocus, ...props }) {
   return (
     <div className={classNameInputContainer}>
       <input
+        ref={ref}
         className={styles['input']}
         disabled={disabled}
         {...props}
@@ -60,7 +61,7 @@ function Input({ mode, className, disabled, onBlur, onFocus, ...props }) {
       />
     </div>
   );
-}
+});
 
 Input.propTypes = {
   className: types.string,

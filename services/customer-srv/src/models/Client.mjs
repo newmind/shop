@@ -45,12 +45,7 @@ export default function (sequelize, DataType) {
     modelName: 'Client',
   });
 
-  Client.associate = ({ Address, Meta }) => {
-
-    Client.hasOne(Address, {
-      foreignKey: 'clientId',
-      as: 'address',
-    });
+  Client.associate = ({ Meta }) => {
 
     Client.hasOne(Meta, {
       foreignKey: 'clientId',

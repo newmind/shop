@@ -3,7 +3,7 @@ import { models, sequelize } from '@sys.packages/db';
 
 export default () => async (ctx) => {
   const data = ctx['request']['body'];
-  const { Client, Address } = models;
+  const { Client, Meta } = models;
 
   const transaction = await sequelize.transaction();
 
@@ -18,9 +18,11 @@ export default () => async (ctx) => {
     transaction,
   });
 
-  await Address.create({
+  await Meta.create({
     clientId: id,
-    ...data['address'],
+    phone: data['phone'],
+    email: data['email'],
+    address: data['address'],
   }, {
     transaction,
   });
@@ -34,10 +36,10 @@ export default () => async (ctx) => {
     attributes: ['id', 'name', 'patronymic', 'surname', 'gender', 'age', 'birthday'],
     include: [
       {
-        model: Address,
+        model: Meta,
         required: true,
-        as: 'address',
-        attributes: ['postalCode', 'country', 'province', 'locality', 'street', 'house', 'entrance', 'floor', 'flat']
+        as: 'meta',
+        attributes: ['email', 'phone', 'address']
       },
     ]
   });

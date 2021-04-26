@@ -18,38 +18,6 @@ function getCustomerName(data) {
   return name.trim();
 }
 
-function getCustomerAddress(data) {
-  let address = '';
-  if (data['postalCode']) {
-    address += data['postalCode'];
-  }
-  if (data['country']) {
-    address += ', ' + data['country'];
-  }
-  if (data['province']) {
-    address += ', ' + data['province'];
-  }
-  if (data['locality']) {
-    address += ', ' + data['locality'];
-  }
-  if (data['street']) {
-    address += ', ' + data['street'];
-  }
-  if (data['house']) {
-    address += ', д.' + data['house'];
-  }
-  if (data['entrance']) {
-    address += ', пд.' + data['entrance'];
-  }
-  if (data['floor']) {
-    address += ', эт.' + data['floor'];
-  }
-  if (data['flat']) {
-    address += ', кв.' + data['flat'];
-  }
-  return address.trim();
-}
-
 export default () => async (ctx) => {
   const { externalId } = ctx['params'];
 
@@ -71,7 +39,7 @@ export default () => async (ctx) => {
     url: process.env['CUSTOMER_API_SRV'] + '/customers',
     method: 'get',
     params: {
-      id: order['orderId'],
+      id: order['customerId'],
     }
   });
 
@@ -107,7 +75,7 @@ export default () => async (ctx) => {
     data: {
       customer: {
         name: getCustomerName(customer),
-        address: getCustomerAddress(customer['address']),
+        address: customer['meta']['address'],
       },
       products: productsMapper,
       externalId: order['externalId'],

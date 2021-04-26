@@ -21,6 +21,10 @@ export default function(sequelize, DataType) {
       type: DataType.STRING(14),
       allowNull: true,
     },
+    address: {
+      type: DataType.STRING(255),
+      allowNull: true,
+    },
   }, {
     sequelize,
     modelName: 'Meta',

@@ -7,7 +7,7 @@ export default () => async (ctx) => {
   let offset = {};
   let options = {};
 
-  const { Client, Address, Meta } = models;
+  const { Client, Meta } = models;
   const {
     id = null,
     isSystem = null,
@@ -42,16 +42,10 @@ export default () => async (ctx) => {
     attributes: ['id', 'name', 'patronymic', 'surname', 'gender', 'age', 'birthday'],
     include: [
       {
-        model: Address,
-        required: false,
-        as: 'address',
-        attributes: ['postalCode', 'country', 'province', 'locality', 'street', 'house', 'entrance', 'floor', 'flat']
-      },
-      {
         model: Meta,
         required: false,
         as: 'meta',
-        attributes: ['email', 'phone']
+        attributes: ['email', 'phone', 'address']
       },
     ]
   });
