@@ -8,6 +8,7 @@ export { default as Avatar } from './symbols/Avatar';
 export { default as DaData } from './symbols/DaData';
 export { default as Amount } from './symbols/Amount';
 export { default as Button } from './symbols/Button';
+export { default as Status } from './symbols/Status';
 export { default as Select } from './symbols/Select';
 export { default as Spinner } from './symbols/Spinner';
 export { default as Textarea } from './symbols/Textarea';

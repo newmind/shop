@@ -12,13 +12,15 @@ function OrderDetails() {
   return (
     <section className={styles['wrapper']}>
       <div className={styles['section']}>
-        <Status />
-      </div>
-      <div className={styles['section']}>
-        <Information />
-      </div>
-      <div className={styles['section']}>
         <Products />
+      </div>
+      <div className={styles['details']}>
+        <div className={styles['information']}>
+          <Information />
+        </div>
+        <div className={styles['status']}>
+          <Status />
+        </div>
       </div>
     </section>
   );

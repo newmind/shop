@@ -23,7 +23,7 @@ function Information() {
       <div className={styles['content']}>
         <div className={styles['line']}>
           <div className={styles['title']}>
-            <Header level={3}>Номер заказа:</Header>
+            <Text type={'body'}>Номер заказа:</Text>
           </div>
           <div className={styles['value']}>
             <Text>{ order['externalId'] }</Text>
@@ -31,7 +31,7 @@ function Information() {
         </div>
         <div className={styles['line']}>
           <div className={styles['title']}>
-            <Header level={3}>Получатель:</Header>
+            <Text type={'body'}>Получатель:</Text>
           </div>
           <div className={styles['value']}>
             <Text>{ order['customer'] && order['customer']['name'] }</Text>
@@ -39,7 +39,7 @@ function Information() {
         </div>
         <div className={styles['line']}>
           <div className={styles['title']}>
-            <Header level={3}>Способ доставки:</Header>
+            <Text type={'body'}>Способ доставки:</Text>
           </div>
           <div className={styles['value']}>
             <Text>{ order['delivery'] }</Text>
@@ -47,7 +47,7 @@ function Information() {
         </div>
         <div className={styles['line']}>
           <div className={styles['title']}>
-            <Header level={3}>Адрес доставки:</Header>
+            <Text type={'body'}>Адрес доставки:</Text>
           </div>
           <div className={styles['value']}>
             <Text>{ order['customer'] && order['customer']['address'] }</Text>
@@ -55,7 +55,7 @@ function Information() {
         </div>
         <div className={styles['line']}>
           <div className={styles['title']}>
-            <Header level={3}>Дата оформления:</Header>
+            <Text type={'body'}>Дата оформления:</Text>
           </div>
           <div className={styles['value']}>
             <Text>{ moment(order['createdAt']).format('LLLL') }</Text>
@@ -63,7 +63,7 @@ function Information() {
         </div>
         <div className={styles['line']}>
           <div className={styles['title']}>
-            <Header level={3}>Сумма заказа:</Header>
+            <Text type={'body'}>Сумма заказа:</Text>
           </div>
           <div className={styles['value']}>
             <Text type={Text.TYPE_AMOUNT}>{ numeral(order['price']).format() } { order['currency'] }</Text>

@@ -1,6 +1,6 @@
 
+import { UUID } from "@ui.packages/utils";
 import { createSlice } from '@reduxjs/toolkit';
-import {UUID} from "@ui.packages/utils";
 
 
 const initialState = {

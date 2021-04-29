@@ -13,6 +13,8 @@ export default () => async (ctx) => {
 
   ctx.body = {
     success: true,
-    data: result['data'],
+    data: {
+      externalId: result['data']['externalId'],
+    },
   };
 }

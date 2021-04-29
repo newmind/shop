@@ -30,6 +30,9 @@ export default function Product({ uuid, price, currency, brands, name, count, ga
         <div className={styles['amount']}>
           <Text type={Text.TYPE_AMOUNT}>{ count } x { numeral(price).format() } { currency }</Text>
         </div>
+        <div className={styles['full-price']}>
+          <Text type={Text.TYPE_COMMENT}>= { numeral(price * count).format() } { currency}</Text>
+        </div>
       </div>
     </Link>
   );

@@ -252,3 +252,10 @@
   cursor: pointer;
   transition: color 200ms, background 200ms, border 200ms;
 }
+
+.full-price {
+
+  display: block;
+  text-align: right;
+  margin: 8px 0 0;
+}

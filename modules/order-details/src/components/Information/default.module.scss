@@ -16,32 +16,36 @@
 
 .content {
 
-  display: block;
+  display: flex;
+  flex-direction: column;
+  flex: 1 0;
   border-radius: 5px;
   background: $whitesmoke;
-  padding: 40px 40px 80px;
+  padding: 35px 40px 40px;
 }
 
 .line {
 
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
+  flex: 1 0;
+  justify-content: flex-start;
+  align-items: flex-end;
 
   & + & {
 
-    margin: 30px 0 0;
+    margin: 24px 0 0;
   }
 }
 
 .title {
 
   display: block;
+  width: 130px;
 }
 
 .value {
 
   display: block;
-  margin: 15px 0 0;
-  padding: 0 0 15px 15px;
-  border-bottom: 1px solid $pale-lilac;
+  margin: 0 0 0 16px;
 }
