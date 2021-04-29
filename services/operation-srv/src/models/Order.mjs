@@ -49,7 +49,13 @@ export default function(sequelize, DataType) {
     modelName: 'Order',
   });
 
-  Order.associate = ({ Product, Payment, Delivery, Status, Currency }) => {
+  Order.associate = ({ Product, Payment, Delivery, Status, Currency, OnlinePayment }) => {
+
+    Order.belongsTo(OnlinePayment, {
+      foreignKey: 'externalId',
+      sourceKey: 'orderId',
+      as: 'onlinePayment',
+    });
 
     Order.hasMany(Product, {
       foreignKey: 'orderId',

@@ -12,9 +12,12 @@ import getPrice from './product/price';
 import getOrder from './order/get';
 import createOrder from './order/create';
 import deleteOrder from './order/delete';
+import updateOrder from './order/update';
 
 import createProducts from './product/create';
 import deleteProducts from './product/delete';
+
+import createPikassaOperation from './pikassa/create';
 
 
 export default class CreateSaga {
@@ -47,10 +50,11 @@ export default class CreateSaga {
       .step('Create customer')
       .invoke(async (params) => {
         const result = await createCustomer(body);
-        params.setCustomerId(result['id']);
+        params.setCustomer(result);
       })
       .withCompensation(async (params) => {
-        await deleteCustomer(params.getCustomerId());
+        const customer = params.getCustomer();
+        await deleteCustomer(customer['id']);
       })
 
       .step('Get price')
@@ -65,7 +69,8 @@ export default class CreateSaga {
       .step('Create order')
       .invoke(async (params) => {
         const price = params.getPrices();
-        const result = await createOrder(params.getCustomerId(), {
+        const customer = params.getCustomer();
+        const result = await createOrder(customer['id'], {
           ...body,
           price: price[1],
           currencyCode: price[0],
@@ -90,14 +95,40 @@ export default class CreateSaga {
         params.setOrder(result);
       })
 
+      .step('Create online pay')
+      .invoke(async (params) => {
+        const order = params.getOrder();
+        const customer = params.getCustomer();
+
+        const result = await createPikassaOperation({
+          externalId: order['externalId'],
+          amount: order['price'],
+          currency: order['currency']['code'],
+          description: 'Order',
+          phone: customer['meta']['phone'],
+          email: customer['meta']['email'],
+          name: customer['name'],
+          surname: customer['surname'],
+          address: customer['meta']['address'],
+        });
+        params.setPikassa(result);
+      })
+
+      .step('Update online payment')
+      .invoke(async (params) => {
+        const order = params.getOrder();
+        if (order['payment']['code'] === 'online') {
+          const pikassa = params.getPikassa();
+          await updateOrder(pikassa['externalId'], { paymentUUID: pikassa['uuid'], paymentLink: pikassa['paymentLink'] });
+        }
+      })
+
       .step('Send event')
       .invoke(async (params) => {
         const order = params.getOrder();
-        await sendCommand(process.env['QUEUE_ORDER_CREATED'], JSON.stringify(order));
-        // const data = JSON.parse(result);
-        // if ( ! data['success']) {
-        //   throw Error('no send');
-        // }
+        const customer = params.getCustomer();
+        const pikassa = params.getPikassa();
+        await sendCommand(process.env['QUEUE_ORDER_CREATED'], JSON.stringify({...order, ...customer, ...pikassa }));
       })
 
       .build();

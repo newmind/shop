@@ -5,7 +5,8 @@ import nunjucks from 'nunjucks';
 import nodeMailer from 'nodemailer';
 
 
-export default async () => {
+export default async (data) => {
+  console.log(data)
   const transporter = nodeMailer.createTransport({
     host: process.env['EMAIL_HOST'],
     port: process.env['EMAIL_PORT'],
@@ -18,12 +19,13 @@ export default async () => {
   });
 
   const html = nunjucks.render('order/created/index.html', {
-    username: 'James'
+    username: 'James',
+    ...data,
   });
 
   const info = await transporter.sendMail({
     from: "glassshoprobot@gmail.com",
-    to: 'pyatakov.viktor@gmail.com',
+    to: data['meta']['email'],
     subject: 'Новый заказ',
     html,
     attachments: [],

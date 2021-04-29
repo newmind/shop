@@ -4,30 +4,29 @@ import request from "@sys.packages/request";
 import { createHash } from 'crypto';
 
 
-export default async function(data) {
+export default () => async (ctx) => {
+  const { body } = ctx['request'];
 
-  const body = {
-    externalId: data['externalId'],
-    amount: data['amount'],
-    currency: data['amount'],
-    description: data['description'],
-    customerPhone: data['phone'],
-    customerEmail: data['email'],
+  const requestBody = {
+    externalId: body['externalId'],
+    amount: body['amount'],
+    currency: body['currency'],
+    description: body['description'],
+    customerPhone: body['phone'],
+    customerEmail: body['email'],
     customData: {
-      name: data['name'],
-      surname: data['surname'],
-      address: data['address'].replace(/[,]/g, ''),
+      name: body['name'],
+      surname: body['surname'],
+      address: body['address'].replace(/[,]/g, ''),
     },
-    successUrl: `https://магазиночков.рф/order/${data['externalId']}`,
-    failUrl: "https://магазиночков.рф/order",
-    deliveryMethod: "EMAIL",
+    deliveryMethod: "URL",
   };
 
-  const bodyWithSalt = JSON.stringify(body) + process.env['PIKASSA_SECRET_KEY'];
+  const bodyWithSalt = JSON.stringify(requestBody) + process.env['PIKASSA_SECRET_KEY'];
   const hash = createHash('md5').update(bodyWithSalt).digest();
   const sign = hash.toString('base64');
 
-  return await request({
+  ctx.body = await request({
     url: process.env['PIKASSA_API_URL'] + '/invoices',
     method: 'post',
     headers: {
@@ -35,6 +34,6 @@ export default async function(data) {
       'X-Api-Key': process.env['PIKASSA_API_KEY'],
       'Content-Type': 'application/json; charset=utf-8',
     },
-    data: body,
+    data: requestBody,
   });
 }

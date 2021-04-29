@@ -34,6 +34,9 @@ function Status() {
         {order['status'] && (
           <Text type={Text.TYPE_BODY}>{ status[order['status']['code']] }</Text>
         )}
+        {order['onlinePayment'] && order['status']['code'] < 200 && (
+          <a href={order['onlinePayment']['paymentLink']} target="_blank" rel="noopener noreferrer">Оплатить</a>
+        )}
       </div>
     </div>
   );

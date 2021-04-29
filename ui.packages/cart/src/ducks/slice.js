@@ -37,6 +37,7 @@ export const slice = createSlice({
       if (index > -1) {
         state['uuid'][index][1] += 1;
       }
+      window.localStorage.setItem('cart', JSON.stringify(state['uuid']));
     },
     minusQuantityAction(state, { payload }) {
       const index = state['uuid'].findIndex((item) => item[0] === payload);
@@ -45,6 +46,7 @@ export const slice = createSlice({
           state['uuid'][index][1] -= 1;
         }
       }
+      window.localStorage.setItem('cart', JSON.stringify(state['uuid']));
     },
 
     addProductToCartAction(state, { payload }) {

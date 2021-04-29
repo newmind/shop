@@ -1,38 +1,38 @@
 
 module.exports = {
-  async up(queryInterface, DataTypes) {
+  async up(queryInterface, DataType) {
     const transaction = await queryInterface.sequelize.transaction();
 
     try {
 
-      await queryInterface.createTable('Promotions', {
+      await queryInterface.createTable('OnlinePayments', {
         id: {
-          type: DataTypes.INTEGER,
+          type: DataType.INTEGER,
           autoIncrement: true,
+          unique: true,
+        },
+        orderId: {
+          type: DataType.UUID,
           primaryKey: true,
+          unique: true,
+        },
+        paymentUUID: {
+          type: DataType.UUID,
+          allowNull: false,
+          unique: true,
+        },
+        paymentLink: {
+          type: DataType.STRING,
           allowNull: false,
         },
-        name: {
-          type: DataTypes.STRING(255),
+        createdAt: {
+          type: DataType.DATE,
           allowNull: false,
         },
-        description: {
-          type: DataTypes.STRING(1024),
-          allowNull: true,
-        },
-        percent: {
-          type: DataTypes.INTEGER,
+        updatedAt: {
+          type: DataType.DATE,
           allowNull: false,
-          defaultValue: 0,
-        },
-        dateFrom: {
-          type: DataTypes.DATE,
-          allowNull: false,
-        },
-        dateTo: {
-          type: DataTypes.DATE,
-          allowNull: false,
-        },
+        }
       }, {
         transaction
       });

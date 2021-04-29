@@ -84,6 +84,7 @@ export default () => async (ctx) => {
       payment: order['payment']['name'],
       price: order['price'],
       status: order['status'],
+      onlinePayment: order['onlinePayment'],
       createdAt: order['createdAt'],
       updatedAt: order['updatedAt'],
     },

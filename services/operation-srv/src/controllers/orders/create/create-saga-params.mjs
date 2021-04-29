@@ -1,16 +1,25 @@
 
 export default class CreateSagaParams {
-  _customerId = null;
+  _customer = null;
   _prices = null;
   _orderId = null;
   _order = null;
+  _pikassa = null;
 
-  setCustomerId(id) {
-    this._customerId = id;
+  setPikassa(data) {
+    this._pikassa = data;
   }
 
-  getCustomerId() {
-    return this._customerId;
+  getPikassa() {
+    return this._pikassa;
+  }
+
+  setCustomer(customer) {
+    this._customer = customer;
+  }
+
+  getCustomer() {
+    return this._customer;
   }
 
   setPrices(prices) {

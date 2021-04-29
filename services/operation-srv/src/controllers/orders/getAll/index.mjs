@@ -5,7 +5,7 @@ import { models } from '@sys.packages/db';
 export default () => async (ctx) => {
   const where = {};
 
-  const { Order, Currency, Payment, Delivery, Product, Status } = models;
+  const { Order, Currency, Payment, Delivery, Product, Status, OnlinePayment } = models;
   const { externalId } = ctx['request']['query'];
 
 
@@ -19,6 +19,12 @@ export default () => async (ctx) => {
     order: [['createdAt', 'desc']],
     attributes: ['externalId', 'customerId', 'price', 'createdAt', 'updatedAt'],
     include: [
+      {
+        model: OnlinePayment,
+        required: false,
+        as: 'onlinePayment',
+        attributes: ['paymentLink'],
+      },
       {
         model: Currency,
         required: true,

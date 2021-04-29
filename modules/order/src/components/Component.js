@@ -1,5 +1,5 @@
 
-import {selectUuid, selectItems, getCart} from '@ui.packages/cart-widget';
+import { selectUuid, selectItems, getCart, resetCartAction } from '@ui.packages/cart-widget';
 
 import React, { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
@@ -38,6 +38,7 @@ function Order() {
     }));
 
     if (result) {
+      dispatch(resetCartAction());
       navigate(process.env['PUBLIC_URL'] + '/order/' + result['externalId']);
     }
   }

@@ -71,6 +71,19 @@ services:
       - db
       - rabbit
 
+  pikassa_srv:
+    container_name: pikassa_srv
+    build:
+      context: ./
+      dockerfile: Dockerfile.pikassa-srv
+    restart: always
+    depends_on:
+      - db
+      - rabbit
+    links:
+      - db
+      - rabbit
+
   operation_srv:
     container_name: operation_srv
     build:
@@ -83,6 +96,7 @@ services:
       - mail_srv
       - customer_srv
       - promotion_srv
+      - pikassa_srv
     links:
       - db
       - rabbit

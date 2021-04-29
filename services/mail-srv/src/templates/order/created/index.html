@@ -2,11 +2,16 @@
 <html lang="ru">
 <head>
   <meta charset="UTF-8">
+  <title>Оформлен заказ</title>
 </head>
 <body>
-  <div style="background: red">
-    <h3>Новый заказ</h3>
-    <p>Пример письма</p>
+  <div style="width: 100%">
+    <div style="width: 400px; margin: 0 auto; background: red; padding: 20px;">
+      <h3>{{ name }}, Вы сделали заказ в интернет магазине</h3>
+      <p>Номер заказа: {{ externalId }}</p>
+      <p>Для отслеживание статуса заказа, перейдите по ссылке <a href="https://магазиночков.рф/order/{{ externalId }}" rel="noreferrer noopener">Отслеживать</a></p>
+      <a href="{{ paymentLink }}" rel="noreferrer noopener">Оплатить</a>
+    </div>
   </div>
 </body>
 </html>

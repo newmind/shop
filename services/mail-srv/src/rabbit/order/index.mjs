@@ -14,7 +14,7 @@ export default async function() {
     }
     catch(error) {
       logger['error'](error['message']);
-      cb(true);
+      cb(false);
     }
   });
 }

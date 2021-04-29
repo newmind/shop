@@ -3,12 +3,18 @@ import { models } from '@sys.packages/db';
 
 
 export default async function(orderId) {
-  const { Order, Currency, Payment, Delivery, Product, Status } = models;
+  const { Order, Currency, Payment, Delivery, Product, Status, OnlinePayment } = models;
 
   const result = await Order.findOne({
     where: { id: orderId },
     attributes: ['externalId', 'customerId', 'price', 'createdAt', 'updatedAt'],
     include: [
+      {
+        model: OnlinePayment,
+        required: false,
+        as: 'onlinePayment',
+        attributes: ['paymentLink'],
+      },
       {
         model: Currency,
         required: true,

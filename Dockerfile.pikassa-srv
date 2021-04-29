@@ -1,0 +1,25 @@
+
+# BUILD APP
+FROM node:15-alpine
+
+RUN npm config set package-lock false
+#RUN npm i yarn -g --yes
+
+WORKDIR /app
+
+COPY ./services/pikassa-srv/db                   ./services/pikassa-srv/db
+COPY ./services/pikassa-srv/src                  ./services/pikassa-srv/src
+COPY ./services/pikassa-srv/.env.production      ./services/pikassa-srv
+COPY ./services/pikassa-srv/package.json         ./services/pikassa-srv
+COPY ./services/pikassa-srv/.sequelizerc         ./services/pikassa-srv
+COPY ./sys.packages                              ./sys.packages
+COPY ./packages                                  ./packages
+COPY ./package.json                              ./
+COPY ./lerna.json                                ./
+COPY ./yarn.lock                                 ./
+
+RUN yarn
+
+WORKDIR /app/services/pikassa-srv
+
+ENTRYPOINT ["yarn", "run", "start"]
