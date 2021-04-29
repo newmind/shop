@@ -16,8 +16,9 @@ export const notificationSlice = createSlice({
       state['items'] = state['items'].filter(item => item['uuid'] !== payload);
     },
     pushNotification(state, { payload }) {
-      payload['uuid'] = UUID();
-      state['items'] = [payload, ...state['items']];
+      const item = { ... payload };
+      item['uuid'] = UUID();
+      state['items'] = [item, ...state['items']];
     },
     cleanNotifications(state) {
       state['items'] = [];
