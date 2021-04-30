@@ -31,7 +31,7 @@ export default async (data) => {
     attachments: [
       {
         filename: data['preview'],
-        path: 'https://магазиночков.рф/gallery/',
+        path: 'https://магазиночков.рф/gallery/' + data['preview'],
         cid: 'preview',
       }
     ],
