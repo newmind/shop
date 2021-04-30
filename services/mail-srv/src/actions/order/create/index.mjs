@@ -32,7 +32,6 @@ export default async (data) => {
       {
         filename: data['preview'],
         path: 'https://магазиночков.рф/gallery/' + data['preview'],
-        cid: 'preview',
       }
     ],
   });

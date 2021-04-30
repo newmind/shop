@@ -12,7 +12,7 @@
       <div>
         <p>Выбранные товары</p>
         {% for item in products %}
-        <div><img src="cid:preview" alt="preview"/>"{{ item.brand }}" {{ item.name }}, {{ item.count }} x {{ item.price }} {{ item.currency.value }}</div>
+        <div><img src="{{ preview }}" alt="preview"/>"{{ item.brand }}" {{ item.name }}, {{ item.count }} x {{ item.price }} {{ item.currency.value }}</div>
         {% endfor %}
       </div>
       <p>Для отслеживание статуса заказа, перейдите по ссылке <a href="https://магазиночков.рф/order/{{ externalId }}" rel="noreferrer noopener">Отслеживать</a></p>
