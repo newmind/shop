@@ -28,7 +28,13 @@ export default async (data) => {
     to: data['meta']['email'],
     subject: 'Новый заказ',
     html,
-    attachments: [],
+    attachments: [
+      {
+        filename: data['preview'],
+        path: 'https://магазиночков.рф/gallery/',
+        cid: 'preview',
+      }
+    ],
   });
 
   logger['info'](info);

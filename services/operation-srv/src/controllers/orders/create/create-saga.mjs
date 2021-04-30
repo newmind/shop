@@ -8,6 +8,7 @@ import createCustomer from './customer/create';
 import deleteCustomer from './customer/delete';
 
 import getPrice from './product/price';
+import getProducts from './product/get';
 
 import getOrder from './order/get';
 import createOrder from './order/create';
@@ -123,11 +124,28 @@ export default class CreateSaga {
         }
       })
 
+      .step('Get products')
+      .invoke(async function(params) {
+        const order = params.getOrder();
+        const result = await getProducts(order['products'].map(item => item['uuid']));
+        params.setProducts(result);
+      })
+
       .step('Send event')
       .invoke(async (params) => {
         const order = params.getOrder();
         const customer = params.getCustomer();
         const pikassa = params.getPikassa();
+        const products = params.getProducts();
+
+        order['products'] = order['products'].map((product) => {
+          const item = products.find((item) => item['uuid'] === product['uuid']);
+          return {
+            ...product,
+            ...item,
+          };
+        });
+
         await sendCommand(process.env['QUEUE_ORDER_CREATED'], JSON.stringify({...order, ...customer, ...pikassa }));
       })
 

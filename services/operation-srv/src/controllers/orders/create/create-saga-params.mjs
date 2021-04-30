@@ -5,6 +5,15 @@ export default class CreateSagaParams {
   _orderId = null;
   _order = null;
   _pikassa = null;
+  _products = [];
+
+  getProducts() {
+    return this._products;
+  }
+
+  setProducts(products) {
+    this._products = products;
+  }
 
   setPikassa(data) {
     this._pikassa = data;
