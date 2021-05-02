@@ -4,9 +4,10 @@ import logger from '@sys.packages/logger';
 import nunjucks from 'nunjucks';
 import nodeMailer from 'nodemailer';
 
+import builderData from './builds/data.mjs';
+
 
 export default async (data) => {
-  console.log(data)
   const transporter = nodeMailer.createTransport({
     host: process.env['EMAIL_HOST'],
     port: process.env['EMAIL_PORT'],
@@ -18,10 +19,7 @@ export default async (data) => {
     }
   });
 
-  const html = nunjucks.render('order/created/index.html', {
-    username: 'James',
-    ...data,
-  });
+  const html = nunjucks.render('order/created/index.html', builderData(data));
 
   const info = await transporter.sendMail({
     from: "glassshoprobot@gmail.com",
