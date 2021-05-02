@@ -26,14 +26,12 @@ export default async (data) => {
   const info = await transporter.sendMail({
     from: "glassshoprobot@gmail.com",
     to: data['meta']['email'],
-    subject: 'Новый заказ',
+    subject: 'Заказ в интернет магазине',
     html,
-    attachments: [
-      {
-        filename: data['preview'],
-        path: 'https://магазиночков.рф/gallery/' + data['preview'],
-      }
-    ],
+    attachments: data['products'].map((product) => ({
+      path: product['preview'],
+      cid: product['uuid'],
+    })),
   });
 
   logger['info'](info);

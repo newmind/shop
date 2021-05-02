@@ -1,5 +1,6 @@
 
 import { createCancelToken } from '@ui.packages/request';
+import { openDialog, closeDialog, Confirm } from '@ui.packages/dialog';
 import {
   closeCartAction,
 
@@ -8,6 +9,9 @@ import {
   selectInProcess,
 
   getCart,
+
+  resetCartAction,
+  removeProductFromCartAction,
 } from '@ui.packages/cart-widget';
 
 import { useSelector, useDispatch } from 'react-redux';
@@ -22,31 +26,38 @@ import styles from './defaults.module.scss';
 function Content() {
   const dispatch = useDispatch();
 
-  const [isInit, setInit] = useState(false);
-
   const wrapperRef = useRef(null);
+
+  const [isInit, setInit] = useState(false);
+  const [isDialog, setDialog] = useState(false);
+  const [removedUuid, setRemovedUuid] = useState(null);
+
   const uuids = useSelector(selectUuid);
   const isOpen = useSelector(selectIsOpen);
   const inProcess = useSelector(selectInProcess);
 
 
-  useEffect(function() {
-    function handleClose(event) {
-      const { current: wrapperElement } = wrapperRef;
-      const target = event['target'];
-      if (wrapperElement && target) {
-        if ( ! wrapperElement.contains(target)) {
-          dispatch(closeCartAction());
-        }
+  function handleClose(event) {
+    if (isDialog) {
+      return;
+    }
+    const { current: wrapperElement } = wrapperRef;
+    const target = event['target'];
+    if (wrapperElement && target) {
+      if ( ! wrapperElement.contains(target)) {
+        dispatch(closeCartAction());
       }
     }
+  }
+
+  useEffect(function() {
     document.querySelector('#scroller').addEventListener('scroll', handleClose)
     document.addEventListener('click', handleClose);
     return () => {
       document.querySelector('#scroller').removeEventListener('scroll', handleClose);
       document.removeEventListener('click', handleClose);
     };
-  }, []);
+  }, [isDialog]);
 
   useEffect(function() {
     const token = createCancelToken();
@@ -76,13 +87,68 @@ function Content() {
     }
   }, [uuids]);
 
+  function handleConfirmRemove() {
+    setDialog(false);
+    setRemovedUuid(null);
+    dispatch(closeDialog('remove-from-cart'));
+    dispatch(removeProductFromCartAction(removedUuid));
+  }
+
+  function handleRemoveProductFromCart(uuid) {
+    setRemovedUuid(uuid);
+    setDialog(true);
+    dispatch(openDialog('remove-from-cart'));
+  }
+
+  function handleCancelRemove() {
+    setDialog(false);
+    setRemovedUuid(null);
+    dispatch(closeDialog('remove-from-cart'));
+  }
+
+  function handleResetCart() {
+    setDialog(true);
+    dispatch(openDialog('reset-from-cart'));
+  }
+
+  function handleConfirmReset() {
+    setDialog(false);
+    dispatch(resetCartAction());
+    dispatch(closeCartAction());
+    dispatch(closeDialog('reset-from-cart'));
+  }
+
+  function handleCancelReset() {
+    setDialog(false);
+    dispatch(closeDialog('reset-from-cart'));
+  }
+
   return (
     <div ref={wrapperRef} className={styles['wrapper']}>
       <div className={styles['content']}>
         {( ! isInit && inProcess)
           ? <Spinner />
-          : <List />}
+          : (
+            <List
+              onReset={() => handleResetCart()}
+              onRemove={(uuid) => handleRemoveProductFromCart(uuid)}
+            />
+          )}
       </div>
+
+      <Confirm
+        name={'remove-from-cart'}
+        message={'Вы точно хотите удалить товар из карзины?'}
+        onConfirm={() => handleConfirmRemove()}
+        onCancel={() => handleCancelRemove()}
+      />
+
+      <Confirm
+        name={'reset-from-cart'}
+        message={'Вы точно хотите очистить карзину?'}
+        onConfirm={() => handleConfirmReset()}
+        onCancel={() => handleCancelReset()}
+      />
     </div>
   );
 }

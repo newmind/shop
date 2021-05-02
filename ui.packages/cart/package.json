@@ -10,6 +10,7 @@
   "dependencies": {
     "@reduxjs/toolkit": "1.5.0",
     "@ui.packages/kit": "1.0.0",
+    "@ui.packages/dialog": "1.0.0",
     "@ui.packages/request": "1.0.0",
     "@ui.packages/socket": "1.0.0",
     "@ui.packages/theme": "1.0.0",

@@ -6,16 +6,17 @@
 </head>
 <body>
   <div style="width: 100%">
-    <div style="width: 400px; margin: 0 auto; background: white; border: 1px solid #ccc; border-radius: 5px; padding: 20px;">
+    <div style="width: 600px; margin: 0 auto; background: white; border: 1px solid #ccc; border-radius: 5px; padding: 20px;">
       <h3>{{ name }}, Вы сделали заказ в интернет магазине</h3>
       <p>Номер заказа: {{ externalId }}</p>
       <div>
         <p>Выбранные товары</p>
         {% for item in products %}
-        <div><img src="{{ preview }}" alt="preview"/>"{{ item.brand }}" {{ item.name }}, {{ item.count }} x {{ item.price }} {{ item.currency.value }}</div>
+        <div><img style="display: inline-block;" width="64" src="cid:{{ item.uuid }}" alt="preview"/>"{{ item.brand }}" {{ item.name }}, {{ item.count }} x {{ item.price }} {{ item.currency.value }} = {{ item.finalPrice}} {{ item.currency.value }}</div>
         {% endfor %}
       </div>
-      <p>Для отслеживание статуса заказа, перейдите по ссылке <a href="https://магазиночков.рф/order/{{ externalId }}" rel="noreferrer noopener">Отслеживать</a></p>
+      <p>Для отслеживания статуса заказа, перейдите по ссылке <a href="https://магазиночков.рф/order/{{ externalId }}" rel="noreferrer noopener">Отслеживать</a></p>
+      <p></p>
       <a href="{{ paymentLink }}" rel="noreferrer noopener">Оплатить</a>
     </div>
   </div>

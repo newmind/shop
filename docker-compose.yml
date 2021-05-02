@@ -97,6 +97,7 @@ services:
       - customer_srv
       - promotion_srv
       - pikassa_srv
+      - gallery_srv
     links:
       - db
       - rabbit

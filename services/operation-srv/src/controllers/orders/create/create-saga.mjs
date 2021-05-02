@@ -7,6 +7,8 @@ import Sagas from 'node-sagas';
 import createCustomer from './customer/create';
 import deleteCustomer from './customer/delete';
 
+import getImage from './gallery/get';
+
 import getPrice from './product/price';
 import getProducts from './product/get';
 
@@ -143,8 +145,18 @@ export default class CreateSaga {
           return {
             ...product,
             ...item,
+            finalPrice: product['count'] * product['price'],
           };
         });
+
+        for (let index in order['products']) {
+          if (order['products'].hasOwnProperty(index)) {
+            const product = order['products'][index];
+            if (product['preview']) {
+              order['products'][index]['preview'] = await getImage(product['preview']);
+            }
+          }
+        }
 
         await sendCommand(process.env['QUEUE_ORDER_CREATED'], JSON.stringify({...order, ...customer, ...pikassa }));
       })

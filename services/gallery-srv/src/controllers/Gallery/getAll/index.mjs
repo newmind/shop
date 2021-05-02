@@ -10,7 +10,6 @@ export default () => async (ctx) => {
       ['createdAt', 'desc'],
     ],
     attributes: ['uuid', 'name', 'createdAt'],
-
   });
 
   ctx.status = 200;

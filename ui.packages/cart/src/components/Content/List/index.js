@@ -4,10 +4,8 @@ import { Mode } from '@ui.packages/types';
 import { Button, Text } from '@ui.packages/kit';
 import {
   resetStateAction,
-  resetCartAction,
 
   closeCartAction,
-  removeProductFromCartAction,
 
   selectItems,
   selectAmount,
@@ -23,7 +21,7 @@ import Product from './Product';
 import styles from './defaults.module.scss';
 
 
-function List() {
+function List({ onRemove, onReset }) {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const items = useSelector(selectItems);
@@ -33,15 +31,6 @@ function List() {
   useEffect(function() {
     return () => dispatch(resetStateAction());
   }, []);
-
-  function handleRemoveProductFromCart(uuid) {
-    dispatch(removeProductFromCartAction(uuid));
-  }
-
-  function handleResetCart() {
-    dispatch(resetCartAction());
-    dispatch(closeCartAction());
-  }
 
   function handleGoToCart() {
     dispatch(closeCartAction());
@@ -56,7 +45,7 @@ function List() {
             <Product
               key={item['uuid'] + '_' + index}
               {...item}
-              onRemove={handleRemoveProductFromCart}
+              onRemove={onRemove}
             />
           ))}
         </div>
@@ -69,7 +58,7 @@ function List() {
           <Button
             form={Button.FORM_CONTEXT}
             disabled={inProcess}
-            onClick={() => handleResetCart()}
+            onClick={() => onReset()}
           >Очистить</Button>
           <Button
             mode={Mode.SUCCESS}

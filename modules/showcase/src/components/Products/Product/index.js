@@ -2,11 +2,12 @@
 import numeral from '@packages/numeral';
 
 import { nounDeclension } from '@ui.packages/utils';
+import {closeDialog, Confirm, openDialog} from "@ui.packages/dialog";
 import { Gallery, Header, Text, Button, Link } from '@ui.packages/kit';
 import { removeProductFromCartAction, selectUuid } from '@ui.packages/cart-widget';
 
-import React from 'react';
 import types from 'prop-types';
+import React, { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 
 import Attribute from "./Attribute";
@@ -17,18 +18,31 @@ import styles from './default.module.scss';
 
 export default function Product({ uuid, price, prevPrice, currency, brand, name, gallery, attributes, promotion, onCart }) {
   const dispatch = useDispatch();
+  const [removedUuid, setRemovedUuid] = useState(null);
 
   const removeFromCartClassName= cn(styles['remove'], 'far fa-trash-alt');
 
   const cart = useSelector(selectUuid);
   const product = cart.find((item) => (item[0] === uuid));
 
-  function handleRemoveFromCart(uuid) {
-    dispatch(removeProductFromCartAction(uuid));
-  }
-
   function handleClickCart() {
     onCart && onCart();
+  }
+
+  function handleConfirmRemove() {
+    setRemovedUuid(null);
+    dispatch(closeDialog('remove-from-cart-showcase' + uuid));
+    dispatch(removeProductFromCartAction(removedUuid));
+  }
+
+  function handleRemoveProductFromCart(uuid) {
+    setRemovedUuid(uuid);
+    dispatch(openDialog('remove-from-cart-showcase' + uuid));
+  }
+
+  function handleCancelRemove() {
+    setRemovedUuid(null);
+    dispatch(closeDialog('remove-from-cart-showcase' + uuid));
   }
 
   // function handleClickFastView(event) {
@@ -82,10 +96,17 @@ export default function Product({ uuid, price, prevPrice, currency, brand, name,
         { !! product && (
           <div className={styles['count']}>
             <Text type={Text.TYPE_COMMENT}>{ product[1] } { nounDeclension(product[1], ['товар', 'товара', 'товаров']) } уже в корзине</Text>
-            <span className={removeFromCartClassName} onClick={(event) => handleRemoveFromCart(uuid, event)} />
+            <span className={removeFromCartClassName} onClick={() => handleRemoveProductFromCart(uuid)} />
           </div>
         )}
       </div>
+
+      <Confirm
+        name={'remove-from-cart-showcase' + uuid}
+        message={'Вы точно хотите удалить товар из карзины?'}
+        onConfirm={() => handleConfirmRemove()}
+        onCancel={() => handleCancelRemove()}
+      />
     </div>
   );
 }
