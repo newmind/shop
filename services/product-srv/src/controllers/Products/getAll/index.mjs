@@ -65,11 +65,13 @@ export default () => async (ctx) => {
     where['price'] = {
       [Op.gte]: Number(amountFrom)
     };
-  } else if (amountTo && ! amountFrom) {
+  }
+  else if (amountTo && ! amountFrom) {
     where['price'] = {
       [Op.lte]: Number(amountTo)
     };
-  } else if (amountFrom && amountTo) {
+  }
+  else if (amountFrom && amountTo) {
     where['price'] = {
       [Op.between]: [Number(amountFrom), Number(amountTo)]
     };
@@ -91,10 +93,10 @@ export default () => async (ctx) => {
     distinct: true,
     where: { ...where },
     order: [
+      sorting,
       ['gallery', 'order', 'asc'],
       ['comments', 'createdAt', 'desc'],
       ['attributes', 'order', 'asc'],
-      sorting,
     ],
     include: [
       {
