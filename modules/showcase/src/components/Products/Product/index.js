@@ -102,7 +102,7 @@ export default function Product({ uuid, price, prevPrice, currency, brand, name,
       </div>
 
       <Confirm
-        name={'remove-from-cart-showcase' + uuid}
+        name={'remove-from-cart-order' + uuid}
         message={'Вы точно хотите удалить товар из карзины?'}
         onConfirm={() => handleConfirmRemove()}
         onCancel={() => handleCancelRemove()}
