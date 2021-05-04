@@ -1,0 +1,47 @@
+
+@import "~@ui.packages/theme";
+
+
+.wrapper {
+
+  display: block;
+}
+
+.header {
+
+  display: block;
+}
+
+.content {
+
+  display: block;
+  margin: 16px 0 0 0;
+}
+
+.links {
+
+  display: block;
+}
+
+.item {
+
+  display: block;
+
+  & + & {
+
+    margin: 8px 0 0;
+  }
+}
+
+.link {
+
+  display: inline-block;
+  font-size: 14px;
+  color: $white;
+  text-decoration: none;
+
+  &:hover {
+
+    text-decoration: underline;
+  }
+}

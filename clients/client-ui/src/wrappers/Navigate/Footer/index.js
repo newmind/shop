@@ -1,7 +1,12 @@
 
-import { Header, Text } from '@ui.packages/kit';
+import { Logotype } from '@ui.packages/kit';
 
 import React from 'react';
+
+import Pay from "./Pay";
+import Social from "./Social";
+import Phones from "./Phones";
+import Company from "./Company";
 
 import styles from './default.module.scss';
 
@@ -9,31 +14,20 @@ import styles from './default.module.scss';
 function Footer() {
   return (
     <div className={styles['footer']}>
-      <div className={styles['row']}>
-        <div className={styles['col']}>
-          <div className={styles['header']}>
-            <Header level={5} theme={'light'}>КОНТАКТЫ</Header>
-          </div>
-          <div className={styles['content']}>
-            <Text theme={'light'}>г. Москва, пос. Московский, кв-л 32, влад. 17А стр. 1</Text>
-          </div>
-        </div>
-        <div className={styles['col']}>
-          <div className={styles['header']}>
-            <Header level={3} theme={'light'}>ПОМОЩЬ И ПОДДЕРЖКА</Header>
-          </div>
-          <div className={styles['content']}>
-
-          </div>
-        </div>
-        <div className={styles['col']}>
-          <div className={styles['header']}>
-            <Header level={3} theme={'light'}>МЫ В СОЦИАЛЬНЫХ СЕТЯХ</Header>
-          </div>
-          <div className={styles['content']}>
-
-          </div>
-        </div>
+      <div className={styles['logotype']}>
+        <Logotype />
+      </div>
+      <div className={styles['company']}>
+        <Company />
+      </div>
+      <div className={styles['pay']}>
+        <Pay />
+      </div>
+      <div className={styles['contacts']}>
+        <Phones />
+      </div>
+      <div className={styles['social']}>
+        <Social />
       </div>
     </div>
   );

@@ -53,3 +53,5 @@ export { default as Link } from './symbols/Link';
 export { default as Page } from './Page';
 export { default as PageContent } from './Page/Content';
 export { default as PageControls } from './Page/Controls';
+
+export { default as Logotype } from './Logotype';

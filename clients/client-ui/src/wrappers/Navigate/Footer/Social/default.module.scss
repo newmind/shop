@@ -1,0 +1,39 @@
+
+@import "~@ui.packages/theme";
+
+
+.wrapper {
+
+  display: block;
+}
+
+.header {
+
+  display: block;
+}
+
+.content {
+
+  display: block;
+  margin: 16px 0 0 0;
+}
+
+.items {
+
+  display: flex;
+  flex-direction: row;
+  flex: 0 0;
+  margin: 0 0 16px;
+}
+
+.item {
+
+  display: block;
+  font-size: 36px;
+  color: $white;
+
+  & + & {
+
+    margin: 0 0 0 10px;
+  }
+}

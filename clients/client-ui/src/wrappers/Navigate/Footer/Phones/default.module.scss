@@ -1,0 +1,45 @@
+
+@import "~@ui.packages/theme";
+
+
+.wrapper {
+
+  display: block;
+}
+
+.header {
+
+  display: block;
+}
+
+.content {
+
+  display: block;
+  margin: 16px 0 0 0;
+}
+
+.items {
+
+  display: block;
+}
+
+.item {
+
+  display: block;
+
+  & + & {
+
+    margin: 16px 0 0;
+  }
+}
+
+.label {
+
+  display: block;
+}
+
+.value {
+
+  display: block;
+  margin: 6px 0 0;
+}
