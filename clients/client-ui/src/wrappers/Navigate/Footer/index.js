@@ -1,8 +1,7 @@
 
-import { Text } from '@ui.packages/kit';
+import { Header, Text } from '@ui.packages/kit';
 
 import React from 'react';
-import { Link } from 'react-router-dom';
 
 import styles from './default.module.scss';
 
@@ -12,7 +11,28 @@ function Footer() {
     <div className={styles['footer']}>
       <div className={styles['row']}>
         <div className={styles['col']}>
-          <Text theme="light" className={styles['paragraph']}>© <Link className={styles['link']} to={process.env['PUBLIC_URL'] + '/'}>{process.env['REACT_APP_WEBSITE_NAME']}</Link> 2020. Все права защищены.</Text>
+          <div className={styles['header']}>
+            <Header level={5} theme={'light'}>КОНТАКТЫ</Header>
+          </div>
+          <div className={styles['content']}>
+            <Text theme={'light'}>г. Москва, пос. Московский, кв-л 32, влад. 17А стр. 1</Text>
+          </div>
+        </div>
+        <div className={styles['col']}>
+          <div className={styles['header']}>
+            <Header level={3} theme={'light'}>ПОМОЩЬ И ПОДДЕРЖКА</Header>
+          </div>
+          <div className={styles['content']}>
+
+          </div>
+        </div>
+        <div className={styles['col']}>
+          <div className={styles['header']}>
+            <Header level={3} theme={'light'}>МЫ В СОЦИАЛЬНЫХ СЕТЯХ</Header>
+          </div>
+          <div className={styles['content']}>
+
+          </div>
         </div>
       </div>
     </div>
