@@ -1,6 +1,6 @@
 
 # BUILD APP
-FROM node:15-alpine
+FROM node:15-alpine3.10
 
 RUN npm config set package-lock false
 #RUN npm i yarn -g --yes
