@@ -10,8 +10,6 @@ echo '[--- Application ---]'
 cd  ./application && npx yarn build
 echo '[--- Cart ---]'
 cd ../cart && npx yarn build
-echo '[--- Confirm Order ---]'
-cd ../confirm-order && npx yarn build
 echo '[--- Dialog ---]'
 cd ../dialog && npx yarn build
 echo '[--- Notifications ---]'
