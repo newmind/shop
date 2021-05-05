@@ -48,7 +48,7 @@ export default function Product({ uuid, name, brand, gallery, price, prevPrice, 
       <div className={styles['controls']}>
         <div className={styles['prices']}>
           {prevPrice && (
-            <Text>{ numeral(prevPrice).format() } { currency }</Text>
+            <Text className={styles['prev-price']}>{ numeral(prevPrice).format() } { currency }</Text>
           )}
           <Text type={Text.TYPE_AMOUNT}>{ numeral(price).format() } { currency }</Text>
         </div>

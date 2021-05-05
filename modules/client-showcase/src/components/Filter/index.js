@@ -64,6 +64,7 @@ function Filter() {
     else {
       brands.push(id);
     }
+    delete query['page'];
     navigate(objectToQuery({ ...query, brandId: brands }));
   }
 
@@ -76,6 +77,7 @@ function Filter() {
     else {
       types.push(id);
     }
+    delete query['page'];
     navigate(objectToQuery({ ...query, typeId: types }));
   }
 
@@ -88,6 +90,7 @@ function Filter() {
     else {
       categories.push(id);
     }
+    delete query['page'];
     navigate(objectToQuery({ ...query, categoryId: categories }));
   }
 
@@ -95,13 +98,16 @@ function Filter() {
     navigate(objectToQuery({}));
   }
 
+  const filterQuery = { ...query };
+  delete filterQuery['page'];
+
   return (
     <div className={styles['wrapper']}>
       <div className={styles['count']}>
         <div className={styles['value']}>
           Найдено { meta['total'] } {nounDeclension(meta['total'], ['товар', 'товара', 'товаров'])}
         </div>
-        { !! Object.keys(query).length && (
+        { !! Object.keys(filterQuery).length && (
           <div className={styles['control']}>
             <span className={cn(styles['icon'], 'fas fa-times')} onClick={() => handleFilterReset()} />
           </div>
