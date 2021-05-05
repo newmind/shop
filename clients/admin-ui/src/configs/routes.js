@@ -5,23 +5,23 @@ const routes = [
     wrapper: 'Navigate',
     module: import(
       /* webpackChunkName: "products" */
-      '@modules/products'
+      '@modules/admin-products'
     ),
   },
   {
     path: '/products/create',
     wrapper: 'Navigate',
     module: import(
-      /* webpackChunkName: "product-modify" */
-      '@modules/product-modify'
+      /* webpackChunkName: "client-product-modify" */
+      '@modules/admin-product-modify'
     ),
   },
   {
     path: '/products/:id',
     wrapper: 'Navigate',
     module: import(
-      /* webpackChunkName: "product-modify" */
-      '@modules/product-modify'
+      /* webpackChunkName: "client-product-modify" */
+      '@modules/admin-product-modify'
     ),
   },
   {
@@ -29,7 +29,7 @@ const routes = [
     wrapper: 'Navigate',
     module: import(
       /* webpackChunkName: "orders" */
-      '@modules/orders'
+      '@modules/admin-orders'
     ),
   },
   {
@@ -37,7 +37,7 @@ const routes = [
     wrapper: 'Navigate',
     module: import(
       /* webpackChunkName: "comments" */
-      '@modules/comments'
+      '@modules/admin-comments'
     ),
   },
   {
@@ -45,7 +45,7 @@ const routes = [
     wrapper: 'Composite',
     module: import(
       /* webpackChunkName: "brands" */
-      '@modules/brands'
+      '@modules/admin-brands'
     ),
   },
   {
@@ -53,7 +53,7 @@ const routes = [
     wrapper: 'Composite',
     module: import(
       /* webpackChunkName: "types" */
-      '@modules/types'
+      '@modules/admin-types'
     ),
   },
   {
@@ -61,7 +61,7 @@ const routes = [
     wrapper: 'Composite',
     module: import(
       /* webpackChunkName: "categories" */
-      '@modules/categories'
+      '@modules/admin-categories'
     ),
   },
   {
@@ -69,7 +69,7 @@ const routes = [
     wrapper: 'Composite',
     module: import(
       /* webpackChunkName: "attributes" */
-      '@modules/attributes'
+      '@modules/admin-attributes'
     ),
   },
   {
@@ -77,7 +77,7 @@ const routes = [
     wrapper: 'Composite',
     module: import(
       /* webpackChunkName: "units" */
-      '@modules/units'
+      '@modules/admin-units'
     ),
   },
   {
@@ -85,7 +85,7 @@ const routes = [
     wrapper: 'Composite',
     module: import(
       /* webpackChunkName: "currencies" */
-      '@modules/currencies'
+      '@modules/admin-currencies'
     ),
   },
   {
@@ -93,7 +93,7 @@ const routes = [
     wrapper: 'Navigate',
     module: import(
       /* webpackChunkName: "gallery" */
-      '@modules/gallery'
+      '@modules/admin-gallery'
     ),
   },
   {
@@ -101,7 +101,7 @@ const routes = [
     wrapper: 'Navigate',
     module: import(
       /* webpackChunkName: "promotions" */
-      '@modules/promotions'
+      '@modules/admin-promotions'
     ),
   },
   {
@@ -109,7 +109,7 @@ const routes = [
     wrapper: 'Navigate',
     module: import(
       /* webpackChunkName: "customers" */
-      '@modules/customers'
+      '@modules/admin-customers'
     ),
   },
   // // {
@@ -117,7 +117,7 @@ const routes = [
   // //   wrapper: 'Navigate',
   // //   module: import(
   // //     /* webpackChunkName: "currency" */
-  // //     '@modules/currencies'
+  // //     '@modules/admin-currencies'
   // //   ),
   // // },
   {
@@ -125,7 +125,7 @@ const routes = [
     wrapper: 'Empty',
     module: import(
       /* webpackChunkName: "sign-in" */
-      '@modules/sign-in'
+      '@modules/admin-sign-in'
     ),
   },
   {
@@ -133,15 +133,15 @@ const routes = [
     wrapper: 'Navigate',
     module: import(
       /* webpackChunkName: "settings" */
-      '@modules/settings'
+      '@modules/admin-settings'
     ),
   },
   {
     path: '*',
     wrapper: 'Empty',
     module: import(
-      /* webpackChunkName: "not-found" */
-      '@modules/not-found'
+      /* webpackChunkName: "client-not-found" */
+      '@modules/admin-not-found'
     ),
   }
 ];

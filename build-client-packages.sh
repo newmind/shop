@@ -32,21 +32,21 @@ echo '------------------------------------'
 cd ../../modules || return
 
 echo '[--- Main ---]'
-cd  ./main && npx yarn build
+cd  ./client-main && npx yarn build
 echo '[--- Order Details ---]'
-cd ../order-details && npx yarn build
+cd ../client-order-details && npx yarn build
 echo '[--- Not Found ---]'
-cd ../not-found && npx yarn build
+cd ../client-not-found && npx yarn build
 echo '[--- Showcase ---]'
-cd ../showcase && npx yarn build
+cd ../client-showcase && npx yarn build
 echo '[--- Contacts ---]'
 cd ../client-contacts && npx yarn build
 echo '[--- Product ---]'
-cd ../product && npx yarn build
+cd ../client-product && npx yarn build
 echo '[--- Order ---]'
-cd ../order && npx yarn build
+cd ../client-order && npx yarn build
 echo '[--- About ---]'
-cd ../about && npx yarn build
+cd ../client-about && npx yarn build
 echo '[--- Delivery ---]'
 cd ../client-delivery && npx yarn build
 echo '[--- Payment ---]'
@@ -54,6 +54,6 @@ cd ../client-payment && npx yarn build
 echo '[--- Refund ---]'
 cd ../client-refund && npx yarn build
 echo '[--- Sign Up ---]'
-cd ../sign-up && npx yarn build
+cd ../client-sign-up && npx yarn build
 
 exit 0

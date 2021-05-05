@@ -28,36 +28,36 @@ echo '-----------------------------------------'
 cd ../../modules || return
 
 echo '[--- Comments ---]'
-cd  ./comments && npx yarn build
+cd  ./admin-comments && npx yarn build
 echo '[--- Types ---]'
-cd ../types && npx yarn build
+cd ../admin-types && npx yarn build
 echo '[--- Categories ---]'
-cd ../categories && npx yarn build
+cd ../admin-categories && npx yarn build
 echo '[--- Units ---]'
-cd ../units && npx yarn build
+cd ../admin-units && npx yarn build
 echo '[--- Currencies ---]'
-cd ../currencies && npx yarn build
+cd ../admin-currencies && npx yarn build
 echo '[--- Attributes ---]'
-cd ../attributes && npx yarn build
+cd ../admin-attributes && npx yarn build
 echo '[--- Not Found ---]'
-cd ../not-found && npx yarn build
+cd ../admin-not-found && npx yarn build
 echo '[--- Orders ---]'
-cd ../orders && npx yarn build
+cd ../admin-orders && npx yarn build
 echo '[--- Product Modify ---]'
-cd ../product-modify && npx yarn build
+cd ../admin-product-modify && npx yarn build
 echo '[--- Products ---]'
-cd ../products && npx yarn build
+cd ../admin-products && npx yarn build
 echo '[--- Profile ---]'
-cd ../settings && npx yarn build
+cd ../admin-settings && npx yarn build
 echo '[--- Sign In ---]'
-cd ../sign-in && npx yarn build
+cd ../admin-sign-in && npx yarn build
 echo '[--- Customers ---]'
-cd ../customers && npx yarn build
+cd ../admin-customers && npx yarn build
 echo '[--- Promotions ---]'
-cd ../promotions && npx yarn build
+cd ../admin-promotions && npx yarn build
 echo '[--- Brands ---]'
-cd ../brands && npx yarn build
+cd ../admin-brands && npx yarn build
 echo '[--- Gallery ---]'
-cd ../gallery && npx yarn build
+cd ../admin-gallery && npx yarn build
 
 exit 0

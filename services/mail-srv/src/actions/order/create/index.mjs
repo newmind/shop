@@ -19,7 +19,7 @@ export default async (data) => {
     }
   });
 
-  const html = nunjucks.render('order/created/index.html', builderData(data));
+  const html = nunjucks.render('client-order/created/index.html', builderData(data));
 
   const info = await transporter.sendMail({
     from: "glassshoprobot@gmail.com",

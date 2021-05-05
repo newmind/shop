@@ -6,24 +6,24 @@ const navigate = [
   },
   {
     title: 'Информация для вас',
-    path: '/about',
+    path: '/client-about',
     navigate: [
       {
         title: 'О компании',
-        path: '/about',
+        path: '/client-about',
       },
       null,
       {
         title: 'Дотавка',
-        path: '/about/delivery',
+        path: '/client-about/delivery',
       },
       {
         title: 'Оплата',
-        path: '/about/payment',
+        path: '/client-about/payment',
       },
       {
         title: 'Правила возврата',
-        path: '/about/refund',
+        path: '/client-about/refund',
       },
     ]
   },

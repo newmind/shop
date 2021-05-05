@@ -69,7 +69,7 @@ export default class CreateSaga {
         params.setPrices(null);
       })
 
-      .step('Create order')
+      .step('Create client-order')
       .invoke(async (params) => {
         const price = params.getPrices();
         const customer = params.getCustomer();
@@ -92,7 +92,7 @@ export default class CreateSaga {
         await deleteProducts(params.getOrderId());
       })
 
-      .step('Get order')
+      .step('Get client-order')
       .invoke(async (params) => {
         const result = await getOrder(params.getOrderId());
         params.setOrder(result);

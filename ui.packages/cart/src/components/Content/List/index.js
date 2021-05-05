@@ -34,7 +34,7 @@ function List({ onRemove, onReset }) {
 
   function handleGoToCart() {
     dispatch(closeCartAction());
-    navigate(process.env['PUBLIC_URL'] + '/order');
+    navigate(process.env['PUBLIC_URL'] + '/client-order');
   }
 
   return (

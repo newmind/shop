@@ -17,7 +17,7 @@ export default () => async () => {
     }
   });
 
-  const html = nunjucks.render('order/created/index.html', {
+  const html = nunjucks.render('client-order/created/index.html', {
     username: 'James'
   });
 

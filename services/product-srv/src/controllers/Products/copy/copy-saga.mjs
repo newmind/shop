@@ -45,7 +45,7 @@ export default class CopySaga {
         params.setProduct(product);
       })
 
-      .step('Copy product')
+      .step('Copy client-product')
       .invoke(async (props) => {
         const { price, name, description, isView, fiscal, currency } = props.getProduct();
         await Product.create({ uuid: newUuid, price, name, description, isView, fiscal, currencyCode: currency['code'] });
@@ -57,7 +57,7 @@ export default class CopySaga {
         await createProperties(newUuid, product);
       })
 
-      .step('Get product')
+      .step('Get client-product')
       .invoke(async (params) => {
         const product = await getProduct(newUuid);
         params.setProduct(product)

@@ -36,7 +36,7 @@ export default class CreateSaga {
     const body = this.ctx['request']['body'];
 
     return sagaBuilder
-      .step('Create product properties')
+      .step('Create client-product properties')
       .invoke(async (params) => {
         const uuid = await createProperties(body);
         params.setProductUUID(uuid);
@@ -46,7 +46,7 @@ export default class CreateSaga {
         await deleteProduct(uuid);
       })
 
-      .step('Get product')
+      .step('Get client-product')
       .invoke(async (params) => {
         const uuid = params.getProductUUID();
         const product = await getProduct(uuid);

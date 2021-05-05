@@ -3,17 +3,17 @@ const routes = [
   {
     path: '/',
     wrapper: 'Navigate',
-    module: import('@modules/main-page'),
+    module: import('@modules/client-main'),
   },
   {
     path: '/products',
     wrapper: 'Navigate',
-    module: import('@modules/showcase'),
+    module: import('@modules/client-showcase'),
   },
   {
     path: '/products/:id',
     wrapper: 'Navigate',
-    module: import('@modules/product'),
+    module: import('@modules/client-product'),
   },
   {
     path: '/contacts',
@@ -21,30 +21,30 @@ const routes = [
     module: import('@modules/client-contacts'),
   },
   {
-    path: '/order',
+    path: '/client-order',
     wrapper: 'Navigate',
-    module: import('@modules/order'),
+    module: import('@modules/client-order'),
   },
   {
-    path: '/order/:id',
+    path: '/client-order/:id',
     wrapper: 'Navigate',
     module: import(
       /* webpackPreload: true */
-      /* webpackChunkName: "order-details" */
-      '@modules/order-details'
+      /* webpackChunkName: "client-order-details" */
+      '@modules/client-order-details'
     ),
   },
   {
-    path: '/about',
+    path: '/client-about',
     wrapper: 'Composite',
     module: import(
       /* webpackPreload: true */
-      /* webpackChunkName: "about" */
-      '@modules/about'
+      /* webpackChunkName: "client-about" */
+      '@modules/client-about'
     ),
   },
   {
-    path: '/about/delivery',
+    path: '/client-about/delivery',
     wrapper: 'Composite',
     module: import(
       /* webpackPreload: true */
@@ -53,7 +53,7 @@ const routes = [
     ),
   },
   {
-    path: '/about/payment',
+    path: '/client-about/payment',
     wrapper: 'Composite',
     module: import(
       /* webpackPreload: true */
@@ -62,7 +62,7 @@ const routes = [
     ),
   },
   {
-    path: '/about/refund',
+    path: '/client-about/refund',
     wrapper: 'Composite',
     module: import(
       /* webpackPreload: true */
@@ -75,8 +75,8 @@ const routes = [
     wrapper: 'Navigate',
     module: import(
       /* webpackPreload: true */
-      /* webpackChunkName: "not-found" */
-      '@modules/not-found'
+      /* webpackChunkName: "client-not-found" */
+      '@modules/client-not-found'
     ),
   }
 ];

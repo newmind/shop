@@ -19,13 +19,13 @@ function Company() {
             <Link className={styles['link']} to={process.env['PUBLIC_URL'] + '/'}>Главная</Link>
           </li>
           <li className={styles['item']}>
-            <Link className={styles['link']} to={process.env['PUBLIC_URL'] + '/about/payment'}>Оплата</Link>
+            <Link className={styles['link']} to={process.env['PUBLIC_URL'] + '/client-about/payment'}>Оплата</Link>
           </li>
           <li className={styles['item']}>
-            <Link className={styles['link']} to={process.env['PUBLIC_URL'] + '/about/delivery'}>Доставка</Link>
+            <Link className={styles['link']} to={process.env['PUBLIC_URL'] + '/client-about/delivery'}>Доставка</Link>
           </li>
           <li className={styles['item']}>
-            <Link className={styles['link']} to={process.env['PUBLIC_URL'] + '/about/refund'}>Возврат</Link>
+            <Link className={styles['link']} to={process.env['PUBLIC_URL'] + '/client-about/refund'}>Возврат</Link>
           </li>
           <li className={styles['item']}>
             <Link className={styles['link']} to={process.env['PUBLIC_URL'] + '/contacts'}>Контакты</Link>

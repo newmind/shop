@@ -37,12 +37,12 @@ export default class UpdateSaga {
     const body = ctx['request']['body'];
 
     return sagaBuilder
-      .step('Update product properties')
+      .step('Update client-product properties')
       .invoke(async () => {
         await updateProperties(uuid, body);
       })
 
-      .step('Get product')
+      .step('Get client-product')
       .invoke(async (params) => {
         const product = await getProduct(uuid);
         params.setProduct(product)
