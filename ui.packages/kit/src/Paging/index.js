@@ -16,7 +16,7 @@ export default function Paging({ total, skip, disabled, onChange }) {
 
   const query = new URLSearchParams(location['search']);
   const page = Number(query.get('page')) || 1;
-  const pages = Number(Math.round(total / skip).toFixed(0));
+  const pages = Number(Math.ceil(total / skip).toFixed(0));
 
   function handleClick(number) {
     query.delete('page');
