@@ -1,4 +1,6 @@
 
+import { Text } from '@ui.packages/kit';
+
 import React from 'react';
 import { useSelector } from 'react-redux';
 
@@ -15,8 +17,13 @@ export default function Main() {
   return (
     <section className={styles['wrapper']}>
       <div className={styles['content']}>
-        <div className={styles['promotions']}>
+        <div className={styles['promo']}>
+          <div className={styles['gallery']}>
 
+          </div>
+          <div className={styles['promotions']}>
+            <Text type={Text.TYPE_BODY} theme={'light'}>Тут будет информация о<br/>скидках или распродажах</Text>
+          </div>
         </div>
         <div className={styles['products']}>
           {types.map((item) => <Types key={item['id']} {...item} />)}
