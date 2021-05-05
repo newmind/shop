@@ -1,4 +1,6 @@
 
+import { getMain } from '../controllers/main';
+
 import { getImageByFileName } from '../controllers/Gallery';
 
 import { create as createOperation, get as getOperationById } from '../controllers/Orders';
@@ -18,6 +20,8 @@ import { getCart } from '../controllers/cart';
 
 
 export default (router) => {
+
+  router.get('/main', getMain());
 
   router.get('/settings', getProfile());
   router.post('/sign-up', signUp());

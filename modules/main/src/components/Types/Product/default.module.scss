@@ -1,0 +1,104 @@
+
+@import "~@ui.packages/theme";
+
+
+.wrapper {
+
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  flex: 1 0;
+  background: $white;
+  padding: 20px 15px;
+  border-radius: 3px;
+  text-decoration: none;
+}
+
+.wrapper:hover .gallery {
+
+  transform: scale(.95);
+}
+
+.wrapper:hover .cart {
+
+  opacity: 1;
+}
+
+.gallery {
+
+  display: flex;
+  width: 160px;
+  height: 160px;
+  margin: 0 auto;
+  transition: transform 200ms;
+}
+
+.information {
+
+  display: block;
+  text-align: center;
+  margin: 15px 0 0;
+}
+
+.name {
+
+  display: block;
+}
+
+.brand {
+
+  display: block;
+  margin: 5px 0 0;
+}
+
+.controls {
+
+  display: flex;
+  flex-direction: row;
+  flex: 1 0;
+  margin: 30px 0 0;
+}
+
+.prices {
+
+  display: flex;
+  flex-direction: column;
+  flex: 1 0;
+  height: 36px;
+  justify-content: flex-end;
+}
+
+.process {
+
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  flex: 0 0;
+  justify-content: flex-end;
+}
+
+.cart {
+
+  display: inline-block;
+  font-size: 24px;
+  color: $primary;
+  opacity: .5;
+  z-index: 10;
+  transition: opacity 200ms, color 200ms;
+
+  &--no-empty {
+
+    color: $success;
+  }
+}
+
+.count {
+
+  position: absolute;
+  top: 17px;
+  left: 13px;
+  font-size: 9px;
+  font-weight: 700;
+  color: $white;
+  z-index: 20;
+}

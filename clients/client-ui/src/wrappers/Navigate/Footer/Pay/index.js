@@ -21,7 +21,10 @@ function Pay() {
             <i className='fab fa-cc-mastercard' />
           </li>
           <li className={styles['item']}>
-            <i className='fab fa-cc-mastercard' />
+            <i className='fab fa-apple-pay' />
+          </li>
+          <li className={styles['item']}>
+            <i className='fab fa-google-pay' />
           </li>
         </ul>
         <Text theme={'light'} type={Text.TYPE_COMMENT}>Прием платежей производится через сервис <a className={styles['link']} href={'https://pikassa.io'}>Pikassa</a></Text>

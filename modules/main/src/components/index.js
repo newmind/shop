@@ -6,7 +6,7 @@ import { useDispatch } from 'react-redux';
 
 import Component from './Component';
 
-import { getTypes, getCategories } from '../ducks/commands';
+import { getTypes } from '../ducks/commands';
 
 
 export default function HOC() {
@@ -16,7 +16,6 @@ export default function HOC() {
     document.title = `${process.env['REACT_APP_WEBSITE_NAME']} - Главная страница`;
 
     await dispatch(getTypes());
-    await dispatch(getCategories());
   });
 
   useUpdate(async function() {

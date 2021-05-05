@@ -4,27 +4,24 @@ import { createSlice } from '@reduxjs/toolkit';
 
 const initialState = {
   types: [],
-  categories: [],
 };
 
+const REDUCER_NAME = 'main';
 
 export const mainSlice = createSlice({
-  name: 'main',
+  name: REDUCER_NAME,
   initialState,
   reducers: {
-    getTypesAction(state, { payload }) {
-      state['types'] = payload;
-    },
-    getCategoriesAction(state, { payload }) {
-      state['categories'] = payload;
+    getMainAction(state, { payload }) {
+
+      state['types'] = payload['types'];
     },
   },
 });
 
-export const { getTypesAction, getCategoriesAction } = mainSlice['actions'];
+export const { getMainAction } = mainSlice['actions'];
 
-export const selectTypes = (state) => state['main']['items'];
-export const selectCategories = (state) => state['main']['categories'];
+export const selectTypes = (state) => state[REDUCER_NAME]['types'];
 
 export const name = mainSlice['name'];
 export const reducer = mainSlice['reducer'];
