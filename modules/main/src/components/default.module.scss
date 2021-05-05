@@ -39,7 +39,8 @@
   flex-direction: column;
   flex: 0 0 auto;
   margin: 0 0 0 20px;
-  background: $coal-dark;
+  background: rgba($coal-dark, .6);
+  backdrop-filter: blur(2px);
   width: 500px;
   border-radius: 3px;
   justify-content: center;
