@@ -16,9 +16,9 @@ const routes = [
     module: import('@modules/product'),
   },
   {
-    path: '/produce',
+    path: '/contacts',
     wrapper: 'Navigate',
-    module: import('@modules/produce'),
+    module: import('@modules/client-contacts'),
   },
   {
     path: '/order',
@@ -36,11 +36,38 @@ const routes = [
   },
   {
     path: '/about',
-    wrapper: 'Navigate',
+    wrapper: 'Composite',
     module: import(
       /* webpackPreload: true */
       /* webpackChunkName: "about" */
       '@modules/about'
+    ),
+  },
+  {
+    path: '/about/delivery',
+    wrapper: 'Composite',
+    module: import(
+      /* webpackPreload: true */
+      /* webpackChunkName: "delivery" */
+      '@modules/client-delivery'
+    ),
+  },
+  {
+    path: '/about/payment',
+    wrapper: 'Composite',
+    module: import(
+      /* webpackPreload: true */
+      /* webpackChunkName: "payment" */
+      '@modules/client-payment'
+    ),
+  },
+  {
+    path: '/about/refund',
+    wrapper: 'Composite',
+    module: import(
+      /* webpackPreload: true */
+      /* webpackChunkName: "refund" */
+      '@modules/client-refund'
     ),
   },
   {

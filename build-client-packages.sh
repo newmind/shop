@@ -41,14 +41,20 @@ echo '[--- Not Found ---]'
 cd ../not-found && npx yarn build
 echo '[--- Showcase ---]'
 cd ../showcase && npx yarn build
-echo '[--- Produce ---]'
-cd ../produce && npx yarn build
+echo '[--- Contacts ---]'
+cd ../client-contacts && npx yarn build
 echo '[--- Product ---]'
 cd ../product && npx yarn build
 echo '[--- Order ---]'
 cd ../order && npx yarn build
 echo '[--- About ---]'
 cd ../about && npx yarn build
+echo '[--- Delivery ---]'
+cd ../client-delivery && npx yarn build
+echo '[--- Payment ---]'
+cd ../client-payment && npx yarn build
+echo '[--- Refund ---]'
+cd ../client-refund && npx yarn build
 echo '[--- Sign Up ---]'
 cd ../sign-up && npx yarn build
 

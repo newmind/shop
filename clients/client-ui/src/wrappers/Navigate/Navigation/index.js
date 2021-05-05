@@ -39,10 +39,13 @@ function Navigation() {
         let mainPath = location['pathname'];
 
         if ('navigate' in item) {
-          hasPath = item['navigate'].some(item => {
-            const regExp = new RegExp(item['path']);
-            match = regExp.test(mainPath);
-            return match;
+          hasPath = item['navigate'].some((item) => {
+            if (item) {
+              const regExp = new RegExp(item['path']);
+              match = regExp.test(mainPath);
+              return match;
+            }
+            return false;
           });
         }
 

@@ -12,7 +12,7 @@ function NotFound() {
         <span className={styles['code']}>404</span>
         <p className={styles['message']}>Страница не существует</p>
         <p className={styles['description']}>Перейти в раздел <Link className={styles['link']} to={process.env['PUBLIC_URL'] + '/products'}>выбора товаров</Link></p>
-        <p className={styles['description']}>или <Link className={styles['link']} to={process.env['PUBLIC_URL'] + '/produce'}>напишите нам</Link> об ошибке</p>
+        <p className={styles['description']}>или <Link className={styles['link']} to={process.env['PUBLIC_URL'] + '/client-contacts'}>напишите нам</Link> об ошибке</p>
       </div>
     </div>
   );

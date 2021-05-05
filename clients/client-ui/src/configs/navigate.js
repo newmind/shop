@@ -6,16 +6,31 @@ const navigate = [
   },
   {
     title: 'Информация для вас',
-    path: '/produce',
+    path: '/about',
+    navigate: [
+      {
+        title: 'О компании',
+        path: '/about',
+      },
+      null,
+      {
+        title: 'Дотавка',
+        path: '/about/delivery',
+      },
+      {
+        title: 'Оплата',
+        path: '/about/payment',
+      },
+      {
+        title: 'Правила возврата',
+        path: '/about/refund',
+      },
+    ]
   },
   {
-    title: 'О нас',
-    path: '/about',
+    title: 'Контакты',
+    path: '/contacts',
   },
-  // {
-  //   title: "Ваши предложения",
-  //   path: '/proposal',
-  // },
 ];
 
 export default navigate;
