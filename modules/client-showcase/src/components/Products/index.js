@@ -29,7 +29,7 @@ function Products() {
   function handleAddToCart(product) {
     dispatch(addProductToCartAction(product['uuid']));
     dispatch(pushNotification({
-      title: 'Товар добавлен в карзину',
+      title: `Товар "${ product['name'] }" добавлен в карзину`,
       mode: Mode.SUCCESS,
     }));
   }

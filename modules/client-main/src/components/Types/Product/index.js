@@ -24,7 +24,7 @@ export default function Product({ uuid, name, brand, gallery, price, prevPrice, 
 
     dispatch(addProductToCartAction(uuid));
     dispatch(pushNotification({
-      title: 'Товар добавлен в карзину',
+      title: `Товар "${ name }" добавлен в карзину`,
       mode: Mode.SUCCESS,
     }));
   }
