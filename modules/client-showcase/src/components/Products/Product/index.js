@@ -65,7 +65,7 @@ export default function Product({ uuid, price, prevPrice, currency, brand, name,
               <Header level={3}>{ name }</Header>
             </div>
             <div className={styles['brand']}>
-              <Text type={Text.TYPE_COMMENT}>{ brand }</Text>
+              <Text type={Text.TYPE_COMMENT}>{ brand['value'] }</Text>
             </div>
             <div className={styles['uuid']}>
               <Text type="uuid">Код: { uuid }</Text>
@@ -120,7 +120,7 @@ Product.propTypes = {
   cart: types.array,
   gallery: types.array,
   amount: types.number,
-  brand: types.string,
+  brand: types.object,
   name: types.string,
 
   onView: types.func,
@@ -134,6 +134,6 @@ Product.defaultProps = {
   cart: [],
   gallery: [],
   amount: 0.00,
-  brand: 'None',
+  brand: null,
   name: 'None',
 };

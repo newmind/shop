@@ -5,14 +5,14 @@ import moment from '@packages/moment';
 export default function productBuilder(data, filterAttributes) {
   return {
     uuid: data['uuid'],
-    brand: !! data['brands'].length ? data['brands'][0]['value'] : null,
+    brand: !! data['brands'].length ? data['brands'][0] : null,
     name: data['name'],
     price: data['price'],
     prevPrice: data['prevPrice'] || null,
     description: data['description'],
     params: data['params'],
-    category: data['category'],
-    type: data['type'],
+    category: !! data['categories'].length ? data['categories'][0] : null,
+    type: !! data['types'].length ? data['types'][0] : null,
     currency: data['currency']['value'],
     comments: data['comments'],
     promotions: data['promotions'].filter((promo) => moment().isBetween(promo['dateFrom'], promo['dateTo'], undefined, '[]')),

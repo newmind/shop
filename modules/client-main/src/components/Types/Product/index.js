@@ -13,7 +13,7 @@ import cn from 'classnames';
 import styles from './default.module.scss';
 
 
-export default function Product({ uuid, name, brand, gallery, price, prevPrice, currency, promotion } ) {
+export default function Product({ uuid, name, brand, gallery, price, prevPrice, currency, promotions } ) {
   const dispatch = useDispatch();
   const cart = useSelector(selectUuid);
   const product = cart.find((item) => (item[0] === uuid));
@@ -31,8 +31,8 @@ export default function Product({ uuid, name, brand, gallery, price, prevPrice, 
 
   return (
     <Link to={process.env['PUBLIC_URL'] + '/products/' + uuid} className={styles['wrapper']}>
-      {promotion && (
-        <span className={styles['discount']}>{ promotion['percent'] }%</span>
+      { !! promotions.length && (
+        <span className={styles['discount']}>{ promotions.reduce((acc, a) => acc + a['percent'], 0) }%</span>
       )}
       <div className={styles['gallery']}>
         <Gallery items={gallery} isList={false} size="middle" path={`${process.env['REACT_APP_API_HOST']}/gallery`} />
@@ -42,7 +42,7 @@ export default function Product({ uuid, name, brand, gallery, price, prevPrice, 
           <Header level={4}>{ name }</Header>
         </div>
         <div className={styles['brand']}>
-          <Text type={Text.TYPE_COMMENT}>{ brand }</Text>
+          <Text type={Text.TYPE_COMMENT}>{ brand['value'] }</Text>
         </div>
       </div>
       <div className={styles['controls']}>

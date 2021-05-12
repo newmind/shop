@@ -35,7 +35,7 @@ function Product({ uuid, brand, name, price, prevPrice, currency }) {
         </div>
         {name && (
           <div className={styles['name']}>
-            <Text type={Text.TYPE_COMMENT}>{ brand }</Text>
+            <Text type={Text.TYPE_COMMENT}>{ brand['value'] }</Text>
           </div>
         )}
         <div className={styles['uuid']}>
@@ -72,7 +72,7 @@ Product.propTypes = {
   price: types.number,
   saleAmount: types.number,
   currency: types.string,
-  brand: types.string,
+  brand: types.object,
   name: types.string,
 };
 
@@ -85,7 +85,7 @@ Product.defaultProps = {
   currency: {
     value: '',
   },
-  brand: 'None',
+  brand: null,
   name: 'None',
 };
 
