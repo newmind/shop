@@ -19,7 +19,7 @@ import styles from './default.module.scss';
 import {closeDialog, Confirm, openDialog} from "@ui.packages/dialog";
 
 
-export default function Product({ uuid, price, brand, name, gallery, promotion }) {
+export default function Product({ uuid, price, brand, name, gallery }) {
   const dispatch = useDispatch();
   const uuids = useSelector(selectUuid);
   const amounts = useSelector(selectAmount);
@@ -64,9 +64,6 @@ export default function Product({ uuid, price, brand, name, gallery, promotion }
     <div>
       <Link className={styles['wrapper']} href={`/products/${uuid}`}>
         <span className={removeFromCartClassName} onClick={(event) => handleRemoveProductFromCart(event)} />
-        {promotion && (
-          <span className={styles['discount']}>{ promotion['percent'] }%</span>
-        )}
         <div className={styles['gallery']}>
           <Gallery items={gallery} isList={false} size="middle" path={`${process.env['REACT_APP_API_HOST']}/gallery`} />
         </div>
@@ -116,7 +113,6 @@ Product.propTypes = {
   price: types.number,
   brand: types.string,
   name: types.string,
-
   onView: types.func,
   onCart: types.func,
 };
@@ -128,7 +124,6 @@ Product.defaultProps = {
   price: 0.00,
   brand: 'None',
   name: 'None',
-
   onView: null,
   onCart: null,
 };

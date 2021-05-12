@@ -1,4 +1,7 @@
 
+import moment from '@packages/moment';
+
+
 export default function productBuilder(data, filterAttributes) {
   return {
     uuid: data['uuid'],
@@ -12,7 +15,7 @@ export default function productBuilder(data, filterAttributes) {
     type: data['type'],
     currency: data['currency']['value'],
     comments: data['comments'],
-    promotion: data['promotion'],
+    promotions: data['promotions'].filter((promo) => moment().isBetween(promo['dateFrom'], promo['dateTo'], undefined, '[]')),
     gallery: data['gallery'].map((item) => item['uuid']),
     attributes: filterAttributes
       ? data['attributes'].filter((item) => item['use']).map((item) => {

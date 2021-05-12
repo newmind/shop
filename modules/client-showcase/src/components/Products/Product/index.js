@@ -16,7 +16,7 @@ import cn from 'classnames';
 import styles from './default.module.scss';
 
 
-export default function Product({ uuid, price, prevPrice, currency, brand, name, gallery, attributes, promotion, onCart }) {
+export default function Product({ uuid, price, prevPrice, currency, brand, name, gallery, attributes, promotions, onCart }) {
   const dispatch = useDispatch();
   const [removedUuid, setRemovedUuid] = useState(null);
 
@@ -53,8 +53,8 @@ export default function Product({ uuid, price, prevPrice, currency, brand, name,
   return (
     <div className={styles['wrapper']}>
       <Link className={styles['product']} href={`/products/${uuid}`}>
-        {promotion && (
-          <span className={styles['discount']}>{ promotion['percent'] }%</span>
+        { !! promotions.length && (
+          <span className={styles['discount']}>{ promotions.reduce((acc, a) => acc + a['percent'], 0) }%</span>
         )}
         <div className={styles['gallery']}>
           <Gallery items={gallery} isList={false} size="middle" path={`${process.env['REACT_APP_API_HOST']}/gallery`} />
@@ -84,9 +84,11 @@ export default function Product({ uuid, price, prevPrice, currency, brand, name,
               <Text className={styles['prev-amount']} type={Text.TYPE_BODY}>{ numeral(prevPrice).format() } { currency }</Text>
             )}
           </div>
-          {promotion && (
+          { !! promotions.length && (
             <div className={styles['promotion']}>
-              <Text className={styles['nowrap']} type={Text.TYPE_BODY}>{ promotion['name'] }</Text>
+              {promotions.map((promotion) => (
+                <Text key={promotion['id']} className={styles['nowrap']} type={Text.TYPE_BODY}>{ promotion['name'] }</Text>
+              ))}
             </div>
           )}
           <div className={styles['controls']}>
