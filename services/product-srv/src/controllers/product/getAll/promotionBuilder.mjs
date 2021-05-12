@@ -5,5 +5,7 @@ export default function(data) {
     name: data['name'],
     description: data['description'],
     percent: data['percent'],
+    dateFrom: data['dateFrom'],
+    dateTo: data['dateTo'],
   };
 }
