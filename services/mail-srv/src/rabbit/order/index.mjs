@@ -1,6 +1,6 @@
 
 import logger from '@sys.packages/logger';
-import { consumer } from '@sys.packages/rabbit2';
+import { consumer } from '@sys.packages/rabbit';
 
 import { orderCreated } from '../../actions/order';
 

@@ -8,7 +8,7 @@ import { useParams } from 'react-router-dom';
 
 import Component from './Component';
 
-import { getBrands, getTypes, getCurrencies, getCategories, getAttributes, getProductById } from '../ducks/commands';
+import { getBrands, getTypes, getCurrencies, getCategories, getAttributes, getPromotions, getProductById } from '../ducks/commands';
 
 import {
   resetStateAction,
@@ -33,6 +33,7 @@ export default function HOC() {
     await dispatch(getCategories());
     await dispatch(getCurrencies());
     await dispatch(getAttributes());
+    await dispatch(getPromotions());
     dispatch(setProcessAction(false));
 
     if (params['id']) {

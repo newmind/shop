@@ -44,7 +44,7 @@ function Products() {
       </PageControls>
       <PageContent>
         <div className={styles['header']}>
-          <Header level={1}>Каталог</Header>
+          <Header level={1}>Каталог товаров</Header>
         </div>
         <div className={styles['filter']}>
           <Filter initialValues={query} onSubmit={handleFilterSubmit} />

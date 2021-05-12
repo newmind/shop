@@ -1,7 +1,7 @@
 
 import logger from '@sys.packages/logger';
 import { Server } from '@sys.packages/server';
-import { connection as connectToRabbit } from '@sys.packages/rabbit2';
+import { connection as connectToRabbit } from '@sys.packages/rabbit';
 
 import path from 'path';
 import nunjucks from 'nunjucks';

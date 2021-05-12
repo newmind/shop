@@ -2,7 +2,7 @@
 import logger from '@sys.packages/logger';
 import { Server } from '@sys.packages/server';
 import connectToDatabase from '@sys.packages/db';
-import { connection as rabbitConnection } from "@sys.packages/rabbit2";
+import { connection as rabbitConnection } from "@sys.packages/rabbit";
 
 import routes from './routes';
 

@@ -1,7 +1,7 @@
 
-import { consumer } from '@sys.packages/rabbit2';
+import { consumer } from '@sys.packages/rabbit';
 
-import { deleteImages } from '../../controllers/Gallery';
+import { deleteImages } from '../../controllers/gallery';
 
 
 export default async function() {

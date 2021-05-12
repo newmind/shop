@@ -151,13 +151,13 @@ export const copyProductById = (uuid) => async (dispatch) => {
   }
 };
 
-export const updateProductById = (uuid, isView) => async (dispatch) => {
+export const updateStatusProductById = (uuid, isView) => async (dispatch) => {
   try {
     dispatch(updateProductsRequestAction());
 
     const result = await request({
+      url: `/products/${uuid}/status`,
       method: 'put',
-      url: `/products/${uuid}`,
       data: {
         isView,
       },

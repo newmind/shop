@@ -1,22 +1,22 @@
 
-import { getAllCustomers, updateCustomers } from '../controllers/Customer';
+import { getAllCustomers, updateCustomers } from '../controllers/customer';
 
-import { getAll as getOperations, getById as getOperationById, create as createOperation, updateById as updateOperationById } from '../controllers/Orders';
+import { getAll as getOperations, getById as getOperationById, create as createOperation, updateById as updateOperationById } from '../controllers/order';
 
-import { getAllBrands, createBrand, updateBrand, deleteBrands } from '../controllers/Brand';
-import { getAllTypes, createType, updateType, deleteType } from '../controllers/Types';
-import { getAllUnits, createUnit, updateUnit, deleteUnits } from '../controllers/Units';
-import { getAllCategories, createCategory, updateCategory, deleteCategories } from '../controllers/Category';
-import { getAllCurrencies, createCurrency, updateCurrency, deleteCurrencies } from '../controllers/Currency';
-import { getAllAttributes, createAttribute, deleteAttributes, updateAttribute } from '../controllers/Attribute';
+import { getAllBrands, createBrand, updateBrand, deleteBrands } from '../controllers/brand';
+import { getAllTypes, createType, updateType, deleteType } from '../controllers/type';
+import { getAllUnits, createUnit, updateUnit, deleteUnits } from '../controllers/unit';
+import { getAllCategories, createCategory, updateCategory, deleteCategories } from '../controllers/category';
+import { getAllCurrencies, createCurrency, updateCurrency, deleteCurrencies } from '../controllers/currency';
+import { getAllAttributes, createAttribute, deleteAttributes, updateAttribute } from '../controllers/attribute';
 
-import { getProducts, getProduct,  createProduct, updateProduct, copyProduct } from '../controllers/Products';
-import { getAllPromotions, deletePromotions, updatePromotion, createPromotion } from '../controllers/Promotion';
+import { getProducts, getProduct,  createProduct, updateProduct, copyProduct, updateStatusProduct } from '../controllers/product';
+import { getAllPromotions, deletePromotions, updatePromotion, createPromotion } from '../controllers/promotion';
 
-import { getImages, getImage, createImage, updateImage, deleteImages } from '../controllers/Gallery';
-import { getComments, createComment, updateComment, deleteComments } from '../controllers/Comments';
+import { getImages, getImage, createImage, updateImage, deleteImages } from '../controllers/gallery';
+import { getComments, createComment, updateComment, deleteComments } from '../controllers/comment';
 
-import { getAllStatuses } from '../controllers/Statuses';
+import { getAllStatuses } from '../controllers/status';
 
 import { signOut } from '../controllers/identity';
 import { getSettings } from '../controllers/settings';
@@ -67,6 +67,7 @@ export default (router) => {
   router.post('/products', createProduct());
   router.put('/products/:uuid', updateProduct());
   router.post('/products/:uuid/copy', copyProduct());
+  router.put('/products/:uuid/status', updateStatusProduct());
 
   router.get('/operations', getOperations());
   router.get('/operations/:operationId', getOperationById());

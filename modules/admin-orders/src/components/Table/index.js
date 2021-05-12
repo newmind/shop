@@ -1,8 +1,9 @@
 
 import numeral from '@packages/numeral';
 
-import { Actions, Select, Header, Text } from '@ui.packages/kit';
 import { Table, Column } from '@ui.packages/table';
+import { nounDeclension } from '@ui.packages/utils';
+import { Actions, Select, Header, Text } from '@ui.packages/kit';
 
 import React from 'react';
 import { useSelector } from 'react-redux';
@@ -26,7 +27,7 @@ function List() {
   return (
     <div className={styles['block']}>
       <div className={styles['header']}>
-        <Header level={4}>Найдено { meta['total'] } заказов</Header>
+        <Header level={4}>Найдено { meta['total'] } { nounDeclension(meta['total'], ['заказ', 'заказа', 'заказов'])}</Header>
       </div>
       <Table columns={items}>
         <Column
@@ -45,8 +46,7 @@ function List() {
           {(value) => (
             <div>
               <Text>{ value['customer']['name'] }</Text>
-              <Text><b>Доставка:</b> { value['delivery'] }</Text>
-              <Text><b>Оплата:</b> { value['payment'] }</Text>
+              <Text><b>Адрес:</b> { value['delivery'] }</Text>
             </div>
           )}
         </Column>

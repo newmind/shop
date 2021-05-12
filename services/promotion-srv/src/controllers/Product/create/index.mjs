@@ -3,17 +3,28 @@ import { models } from '@sys.packages/db';
 
 
 export default () => async (ctx) => {
-  const { Promotion } = models;
-  const formData = ctx['request']['body'];
+  const { ProductPromotion } = models;
+  const body = ctx['request']['body'];
 
-  const { id } = await Promotion.create(formData);
+  const formData = [];
+  for (let index in body['promotions']) {
+    if (body['promotions'].hasOwnProperty(index)) {
+      const promotionId = body['promotions'][index];
+      formData.push({
+        promotionId: promotionId,
+        productUuid: body['productUuid'],
+      });
+    }
+  }
 
-  const result = await Promotion.findOne({
-    where: { id },
+  await ProductPromotion.bulkCreate(formData);
+
+  const result = await ProductPromotion.findAll({
+    where: { productUuid: body['productUuid'] },
   });
 
   ctx.body = {
     success: true,
-    data: result.toJSON(),
+    data: result.map((item) => item.toJSON()),
   };
 };

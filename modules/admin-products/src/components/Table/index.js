@@ -4,17 +4,20 @@ import numeral from '@packages/numeral';
 import { Mode } from '@ui.packages/types';
 import { Column, Table } from "@ui.packages/table";
 import { nounDeclension } from '@ui.packages/utils';
-import { Actions, Gallery, Header, CheckBox } from "@ui.packages/kit";
+import { Actions, Gallery, Header, CheckBox, Text } from "@ui.packages/kit";
 import { Confirm, openDialog, closeDialog } from "@ui.packages/dialog";
 
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 
+import Types from './Types';
+import Categories from './Categories';
+
 import styles from "./default.module.scss";
 
 import { selectInProcess, selectMeta, selectItems } from '../../ducks/slice';
-import { copyProductById, removeProductById, updateProductById } from '../../ducks/commands';
+import { copyProductById, removeProductById, updateStatusProductById } from '../../ducks/commands';
 
 
 function List() {
@@ -66,7 +69,7 @@ function List() {
   }
 
   function handleUpdate(uuid, isView) {
-    dispatch(updateProductById(uuid, isView));
+    dispatch(updateStatusProductById(uuid, isView));
   }
 
   return (
@@ -78,59 +81,72 @@ function List() {
         <Column
           title="Фото"
           alias="gallery"
-          width="140"
+          width={140}
         >
           {(items) => <Gallery className={styles['image']} valueKey="uuid" size="small"  items={items} path={`${process.env['REACT_APP_API_HOST']}/gallery`} />}
         </Column>
         <Column
           title="Основные"
           align="left"
+          width={250}
         >
-          {({ uuid, fiscal, name, brand, description, price, currency }) => {
+          {({ uuid, fiscal, name, brand, price, prevPrice, currency }) => {
             return (
-              <div className={styles['description']}>
-                {uuid && <div className={styles['description__item']}><b className={styles['description__label']}>{ uuid }</b></div>}
-                {fiscal && <div className={styles['description__item']}><b className={styles['description__label']}>{ fiscal }</b></div>}
-                {brand && <div className={styles['description__item']}><b className={styles['description__label']}>Бренд:</b> { brand['name'] }</div>}
-                {name && <div className={styles['description__item']}><b className={styles['description__label']}>Название:</b> { name }</div>}
-                {price && <div className={styles['description__item']}><b className={styles['description__label']}>Цена:</b> { numeral(price).format() } { currency['name'] }</div>}
-                {description && <div className={styles['description__item']}><b className={styles['description__label']}>Описание:</b> { description }</div>}
+              <div className={styles['common']}>
+                <div className={styles['number']}>
+                  <Text type={Text.TYPE_BODY}>{ uuid }</Text>
+                  {fiscal && (
+                    <Text type={Text.TYPE_COMMENT}>&nbsp;[{ fiscal }]</Text>
+                  )}
+                </div>
+                <div className={styles['information']}>
+                  {name && (
+                    <Header level={4}>{ name }</Header>
+                  )}
+                  {brand && (
+                    <Text>{ brand['name'] }</Text>
+                  )}
+                </div>
+
+                {prevPrice && (
+                  <div className={styles['price']}>
+                    <div className={styles['description__item']}>
+                      <Text type={Text.TYPE_AMOUNT}>{ numeral(prevPrice).format() } { currency['name'] }</Text>
+                    </div>
+                    <div className={styles['description__item']}>
+                      <Text className={styles['prev-price']} type={Text.TYPE_BODY}><i className="fas fa-arrow-down" /> { numeral(prevPrice - price).format() } { currency['name'] }</Text>
+                    </div>
+                    <div className={styles['description__item']}>
+                      <Text type={Text.TYPE_COMMENT}>= { numeral(price).format() } { currency['name'] }</Text>
+                    </div>
+                  </div>
+                )}
+                { ! prevPrice && (
+                  <div className={styles['price']}>
+                    <div className={styles['description__item']}>
+                      <Text type={Text.TYPE_AMOUNT}>{ numeral(price).format() } { currency['name'] }</Text>
+                    </div>
+                  </div>
+                )}
               </div>
             )
           }}
         </Column>
         <Column
-          title="Основные"
+          title="Описание"
           align="left"
         >
-          {({ types, categories }) => {
+          {({ types, categories, promotions }) => {
             return (
               <div className={styles['description']}>
-                { !! types.length && <div className={styles['description__item']}><b className={styles['description__label']}>Тип:</b> { types.map((type, index) => <span key={index} className={styles['item']}>{ type['name'] }</span>) }</div>}
-                { !! categories.length && <div className={styles['description__item']}><b className={styles['description__label']}>Категория:</b> { categories.map((category, index) => <span key={index} className={styles['item']}>{ category['name'] }</span>) }</div>}
-                {/*{ !! promotions.length && <div className={styles['description__item']}><b className={styles['description__label']}>Скидки:</b> { promotions.map((promo, index) => <span key={index} className={styles['item']}>{ promo['name'] } ({promo['percent']} %)</span>) }</div>}*/}
+                { !! types.length && (
+                  <Types items={types} />
+                )}
+                { !! categories.length && (
+                  <Categories items={categories} />
+                )}
+                { !! promotions.length && <div className={styles['description__item']}><b className={styles['description__label']}>Скидки:</b> { promotions.map((promo, index) => <span key={index} className={styles['item']}>{ promo['name'] } ({promo['percent']} %)</span>) }</div>}
               </div>
-            );
-          }}
-        </Column>
-        <Column
-          title="Аттрибуты"
-          alias="attributes"
-          align="left"
-          width="200"
-        >
-          {(attrs) => {
-            return (
-              <ul className={styles['attributes']}>
-                { ! attrs.length && <li className={styles['attributes__item']}>Нет данных</li>}
-                {attrs.map((attr, index) => (
-                  <li key={index} className={styles['attributes__item']}>
-                    <span className={styles['attributes__name']}>{ attr['name'] }:</span>
-                    <span className={styles['attributes__value']}>{ attr['value'] }</span>
-                    {attr['unit'] && <span className={styles['attributes__unit']}>{ attr['unit'] }</span>}
-                  </li>
-                ))}
-              </ul>
             );
           }}
         </Column>

@@ -1,6 +1,6 @@
 
 import { NetworkError } from '@packages/errors';
-import { sendCommand } from '@sys.packages/rabbit2';
+import { sendCommand } from '@sys.packages/rabbit';
 
 import Sagas from 'node-sagas';
 

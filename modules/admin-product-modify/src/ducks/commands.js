@@ -46,6 +46,10 @@ import {
   getGalleryRequestAction,
   getGalleryRequestFailAction,
   getGalleryRequestSuccessAction,
+
+  getPromotionsRequestAction,
+  getPromotionsRequestFailAction,
+  getPromotionsRequestSuccessAction,
 } from './slice';
 
 
@@ -342,6 +346,31 @@ export const getGallery = () => async (dispatch) => {
     }
     dispatch(pushNotification({
       title: 'Ошибка загрузки изображения',
+      content: error['message'],
+      type: Mode.DANGER,
+    }));
+  }
+};
+
+export const getPromotions = () => async (dispatch) => {
+  try {
+    dispatch(getPromotionsRequestAction());
+
+    const result = await request({
+      url: `/promotions`,
+      method: 'get',
+    });
+
+    dispatch(getPromotionsRequestSuccessAction(result['data']));
+  }
+  catch(error) {
+    dispatch(getPromotionsRequestFailAction(error));
+
+    if (error instanceof UnauthorizedError) {
+      return void 0;
+    }
+    dispatch(pushNotification({
+      title: 'Ошибка загрузки скидок',
       content: error['message'],
       type: Mode.DANGER,
     }));

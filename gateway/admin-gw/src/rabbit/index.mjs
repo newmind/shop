@@ -1,5 +1,5 @@
 
-import { connection } from "@sys.packages/rabbit2";
+import { connection } from "@sys.packages/rabbit";
 
 import attributes from './attributes';
 import categories from './categories';

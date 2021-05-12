@@ -10,7 +10,7 @@ import Attributes from './Attributes';
 
 import styles from './default.module.scss';
 
-import { selectBrands, selectTypes, selectCategories, selectCurrencies, selectInProcess } from '../../ducks/slice';
+import { selectBrands, selectTypes, selectCategories, selectCurrencies, selectInProcess, selectPromotions } from '../../ducks/slice';
 
 
 function ModifyForm({ handleSubmit }) {
@@ -18,6 +18,7 @@ function ModifyForm({ handleSubmit }) {
   const brands = useSelector(selectBrands);
   const categories = useSelector(selectCategories);
   const currencies = useSelector(selectCurrencies);
+  const promotions = useSelector(selectPromotions);
   const inProcess = useSelector(selectInProcess);
 
   return (
@@ -108,6 +109,26 @@ function ModifyForm({ handleSubmit }) {
         </div>
         <div className={styles['content']}>
           <FieldArray name="attributes" component={Attributes} disabled={inProcess} />
+        </div>
+      </div>
+
+      <div className={styles['block']}>
+        <div className={styles['header']}>
+          <Header level={3}>План скидок</Header>
+        </div>
+        <div className={styles['content']}>
+          <Row>
+            <Col>
+              <ListField
+                name="promotions"
+                label="Тип"
+                options={promotions}
+                optionKey="id"
+                optionValue="name"
+                disabled={inProcess}
+              />
+            </Col>
+          </Row>
         </div>
       </div>
 

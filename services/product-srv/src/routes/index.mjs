@@ -1,15 +1,15 @@
 
-import { getAllBrands, createBrand, updateBrand, deleteBrand } from '../controllers/Brands';
-import { getAllTypes, createType, updateType, deleteType } from '../controllers/Types';
-import { getAllUnits, createUnit, updateUnit, deleteUnits } from '../controllers/Units';
-import { getAllCategories, createCategory, updateCategory, deleteCategories } from '../controllers/Category';
-import { getAllCurrencies, createCurrency, updateCurrency, deleteCurrencies } from '../controllers/Currency';
-import { getAllAttributes, deleteAttributes, updateAttribute, createAttribute } from '../controllers/Attributes';
+import { getAllBrands, createBrand, updateBrand, deleteBrand } from '../controllers/brand';
+import { getAllTypes, createType, updateType, deleteType } from '../controllers/type';
+import { getAllUnits, createUnit, updateUnit, deleteUnits } from '../controllers/unit';
+import { getAllCategories, createCategory, updateCategory, deleteCategories } from '../controllers/category';
+import { getAllCurrencies, createCurrency, updateCurrency, deleteCurrencies } from '../controllers/currency';
+import { getAllAttributes, deleteAttributes, updateAttribute, createAttribute } from '../controllers/attribute';
 
-import { getProducts, createProduct, deleteProductById, updateProductById } from '../controllers/Products';
-import { getTypesCount, getBrandsCount, getCategoriesCount,getAttributesCount, copyProductById } from '../controllers/Products';
+import { getProducts, createProduct, deleteProductById, updateProductById, updateProperty } from '../controllers/product';
+import { getTypesCount, getBrandsCount, getCategoriesCount,getAttributesCount, copyProductById } from '../controllers/product';
 
-import { getAllComments, deleteComments, createComment, updateComment } from '../controllers/Comments';
+import { getAllComments, deleteComments, createComment, updateComment } from '../controllers/comment';
 
 
 export default (router) => {
@@ -54,6 +54,7 @@ export default (router) => {
   router.put('/v1/api/products/:uuid', updateProductById());
   router.delete('/v1/api/products', deleteProductById());
   router.post('/v1/api/products/:uuid/copy', copyProductById());
+  router.put('/v1/api/products/:uuid/properties', updateProperty());
 
   router.get('/v1/api/comments', getAllComments());
   router.post('/v1/api/comments', createComment());

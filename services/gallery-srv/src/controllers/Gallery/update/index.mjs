@@ -1,6 +1,6 @@
 
 import { models } from '@sys.packages/db';
-import { sendEvent } from "@sys.packages/rabbit2";
+import { sendEvent } from "@sys.packages/rabbit";
 
 
 

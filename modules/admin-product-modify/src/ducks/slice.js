@@ -10,6 +10,7 @@ const initialState = {
   units: [],
   currencies: [],
   gallery: [],
+  promotions: [],
   product: {},
   inProcess: false,
   inGalleryProcess: false,
@@ -136,6 +137,17 @@ const productModifySlice = createSlice({
       state['gallery'] = payload;
       state['inGalleryProcess'] = false;
     },
+
+    getPromotionsRequestAction(state) {
+      state['inProcess'] = true;
+    },
+    getPromotionsRequestFailAction(state) {
+      state['inProcess'] = false;
+    },
+    getPromotionsRequestSuccessAction(state, { payload }) {
+      state['promotions'] = payload;
+      state['inProcess'] = false;
+    },
   },
 });
 
@@ -187,6 +199,10 @@ export const {
   getGalleryRequestAction,
   getGalleryRequestFailAction,
   getGalleryRequestSuccessAction,
+
+  getPromotionsRequestAction,
+  getPromotionsRequestFailAction,
+  getPromotionsRequestSuccessAction,
 } = productModifySlice['actions'];
 
 export const selectTypes = (state) => state[REDUCER_NAME]['types'];
@@ -198,6 +214,7 @@ export const selectInProcess = (state) => state[REDUCER_NAME]['inProcess'];
 export const selectCategories = (state) => state[REDUCER_NAME]['categories'];
 export const selectCurrencies = (state) => state[REDUCER_NAME]['currencies'];
 export const selectAttributes = (state) => state[REDUCER_NAME]['attributes'];
+export const selectPromotions = (state) => state[REDUCER_NAME]['promotions'];
 export const selectInGalleryProcess = (state) => state[REDUCER_NAME]['inGalleryProcess'];
 
 export const name = productModifySlice['name'];

@@ -1,6 +1,6 @@
 
 import { emit } from '@sys.packages/socket.io';
-import { bindToExchange } from '@sys.packages/rabbit2';
+import { bindToExchange } from '@sys.packages/rabbit';
 
 import productBuilder from "./productBuilder.mjs";
 

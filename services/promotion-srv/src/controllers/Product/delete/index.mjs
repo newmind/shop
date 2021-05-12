@@ -3,15 +3,24 @@ import { models } from '@sys.packages/db';
 
 
 export default () => async (ctx) => {
-  const { Promotion } = models;
-  const { id } = ctx['request']['body'];
+  const where = {};
+  const { ProductPromotion } = models;
+  const { id, productUuid } = ctx['request']['body'];
 
-  await Promotion.destroy({
-    where: { id },
+  if (id) {
+    where['id'] = id;
+  }
+
+  if (productUuid) {
+    where['productUuid'] = productUuid;
+  }
+
+  await ProductPromotion.destroy({
+    where,
   });
 
   ctx.body = {
     success: true,
-    data: id,
+    data: id || productUuid,
   };
 };

@@ -22,7 +22,7 @@ export default function HOC() {
   const location = useLocation();
 
   useMount(async function() {
-    document.title = `${process.env['REACT_APP_WEBSITE_NAME']} - Товары`;
+    document.title = `${process.env['REACT_APP_WEBSITE_NAME']} - Каталог товаров`;
 
     const query = queryToObject(location['search']);
 

@@ -1,5 +1,5 @@
 
-import { consumer } from '@sys.packages/rabbit2';
+import { consumer } from '@sys.packages/rabbit';
 
 import { createCurrency, updateCurrency, deleteCurrency } from '../../actions/currency';
 

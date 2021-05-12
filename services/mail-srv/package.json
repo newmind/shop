@@ -10,7 +10,7 @@
     "@packages/errors": "1.0.0",
     "@packages/numeral": "1.0.0",
     "@sys.packages/logger": "1.0.0",
-    "@sys.packages/rabbit2": "1.0.0",
+    "@sys.packages/rabbit": "1.0.0",
     "@sys.packages/server": "1.0.0",
     "dotenv": "8.5.1",
     "nodemailer": "6.6.0",
