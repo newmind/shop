@@ -1,18 +1,18 @@
 
 import { getMain } from '../controllers/main';
 
-import { getImageByFileName } from '../controllers/Gallery';
+import { getImageByFileName } from '../controllers/gallery';
 
-import { create as createOperation, get as getOperationById } from '../controllers/Orders';
+import { create as createOperation, get as getOperationById } from '../controllers/orders';
 
-import { getProducts, getProductById, getProductsAmount } from '../controllers/Products';
+import { getProducts, getProductById, getProductsAmount } from '../controllers/products';
 
-import { createComment } from '../controllers/Comments';
+import { createComment } from '../controllers/comments';
 
-import { getAllTypes } from '../controllers/Type';
-import { getAllCategories } from '../controllers/Category';
+import { getAllTypes } from '../controllers/type';
+import { getAllCategories } from '../controllers/category';
 
-import { getProfile, signUp, signIn, signOut } from '../controllers/Profile';
+import { getProfile, signUp, signIn, signOut } from '../controllers/profile';
 
 import { getAllPayments } from '../controllers/payment';
 import { getAllDeliveries } from '../controllers/delivery';

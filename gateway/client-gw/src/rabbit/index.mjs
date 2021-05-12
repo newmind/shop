@@ -1,9 +1,9 @@
 
 import { connection, bindToExchange } from "@sys.packages/rabbit";
 
-import {updateForm} from "../actions/forms/index.mjs";
-import {updateType} from "../actions/types/index.mjs";
-import {createComment, deleteComment, updateComment} from "../actions/comments/index.mjs";
+import {updateForm} from "../actions/forms";
+import {updateType} from "../actions/types";
+import {createComment, deleteComment, updateComment} from "../actions/comments";
 
 
 export default async function(io) {
