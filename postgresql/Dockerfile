@@ -5,7 +5,7 @@
 FROM ubuntu:18.04
 
 RUN apt-get update && \
-    apt install postgresql postgresql-contrib
+    apt-get install postgresql postgresql-contrib --yes
 
 # Add the PostgreSQL PGP key to verify their Debian packages.
 # It should be the same key as https://www.postgresql.org/media/keys/ACCC4CF8.asc
