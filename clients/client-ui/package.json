@@ -7,16 +7,16 @@
     "build": "react-scripts build"
   },
   "dependencies": {
+    "@modules/client-about": "1.0.0",
+    "@modules/client-contacts": "1.0.0",
+    "@modules/client-delivery": "1.0.0",
     "@modules/client-main": "1.0.0",
     "@modules/client-not-found": "1.0.0",
-    "@modules/client-about": "1.0.0",
     "@modules/client-order": "1.0.0",
-    "@modules/client-delivery": "1.0.0",
-    "@modules/client-payment": "1.0.0",
-    "@modules/client-refund": "1.0.0",
     "@modules/client-order-details": "1.0.0",
-    "@modules/client-contacts": "1.0.0",
+    "@modules/client-payment": "1.0.0",
     "@modules/client-product": "1.0.0",
+    "@modules/client-refund": "1.0.0",
     "@modules/client-showcase": "1.0.0",
     "@ui.packages/application": "1.0.0",
     "@ui.packages/cart-widget": "1.0.0",
@@ -33,7 +33,7 @@
   },
   "devDependencies": {
     "react-scripts": "4.0.3",
-    "sass": "1.32.12"
+    "sass": "1.32.13"
   },
   "eslintConfig": {
     "extends": "react-app"

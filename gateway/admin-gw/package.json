@@ -17,7 +17,7 @@
     "@sys.packages/utils": "1.0.0",
     "axios": "0.21.1",
     "busboy": "0.3.1",
-    "dotenv": "8.5.1",
+    "dotenv": "9.0.2",
     "koa-cookie": "1.0.0"
   },
   "devDependencies": {
