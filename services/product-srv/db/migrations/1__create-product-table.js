@@ -4,14 +4,13 @@ module.exports = {
     const transaction = await queryInterface.sequelize.transaction();
 
     try {
-
       await queryInterface.createTable('Products', {
         uuid: {
           type: DataType.STRING(9),
           primaryKey: true,
           allowNull: false,
           index: true,
-          unique: 'compositeIndex',
+          unique: true,
         },
         fiscal: {
           type: DataType.STRING(255),
@@ -37,7 +36,7 @@ module.exports = {
           allowNull: true,
         },
         isView: {
-          type: DataType.BOOL,
+          type: DataType.BOOLEAN,
           index: true,
           allowNull: false,
         },
