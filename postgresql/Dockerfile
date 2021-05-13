@@ -17,20 +17,11 @@ FROM ubuntu:16.04
 #  them by prefixing each apt-get statement with DEBIAN_FRONTEND=noninteractive
 #RUN apt-get update && apt-get install -y python-software-properties software-properties-common postgresql-9.3 postgresql-client-9.3 postgresql-contrib-9.3
 
-# Create the file repository configuration:
-RUN echo "deb http://apt.postgresql.org/pub/repos/apt buster-pgdg main" > /etc/apt/sources.list.d/pgdg.list
-
-# Import the repository signing key:
-RUN wget --quiet -O - https://www.postgresql.org/media/keys/ACCC4CF8.asc | sudo apt-key add -
-
-# Update the package lists:
+RUN apt-get install curl ca-certificates gnupg
+RUN curl https://www.postgresql.org/media/keys/ACCC4CF8.asc | sudo apt-key add -
+RUN deb http://apt.postgresql.org/pub/repos/apt buster-pgdg main
 RUN apt-get update
-
-# Install the latest version of PostgreSQL.
-# If you want a specific version, use 'postgresql-12' or similar instead of 'postgresql':
-RUN apt-get -y install postgresql
-
-
+RUN apt-get install postgresql-11
 # Note: The official Debian and Ubuntu images automatically ``apt-get clean``
 # after each ``apt-get``
 
