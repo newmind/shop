@@ -4,12 +4,12 @@ import { Row, Col, InputField, SelectField, Button, Draggable, CheckBoxField } f
 import React from 'react';
 import types from 'prop-types';
 import { useSelector } from 'react-redux';
-import { getFormValues } from 'redux-form';
+import { getFormValues, FieldArray } from 'redux-form';
 
 import cn from 'classnames';
 import styles from './default.module.scss';
 
-import { selectAttributes } from '../../../ducks/slice';
+import { selectAttributes } from '../../../../ducks/slice';
 
 
 function AttributeField({ field, data, disabled, onRemove }) {
@@ -99,7 +99,7 @@ function AttributeList({ fields, disabled }) {
   );
 }
 
-function Attributes({ fields, disabled }) {
+function AttributesField({ fields, disabled }) {
 
   function handleAddAttr() {
     fields.push({});
@@ -114,21 +114,21 @@ function Attributes({ fields, disabled }) {
             form={Button.FORM_CREATE}
             disabled={disabled}
             onClick={() => handleAddAttr()}
-          >Добавить</Button>
+          >Добавить аттрибут</Button>
         </Col>
       </Row>
     </div>
   );
 }
 
-Attributes.propTypes = {
+AttributesField.propTypes = {
   path: types.string,
   units: types.array,
 };
 
-Attributes.defaultProps = {
+AttributesField.defaultProps = {
   path: '',
   units: [],
 };
 
-export default Attributes;
+export default AttributesField;

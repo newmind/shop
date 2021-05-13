@@ -6,7 +6,7 @@ import { useSelector } from 'react-redux';
 import { Field, FieldArray } from 'redux-form';
 
 import Gallery from './Gallery';
-import Attributes from './Attributes';
+import CharacteristicsField from './Characteristics';
 
 import styles from './default.module.scss';
 
@@ -105,10 +105,10 @@ function ModifyForm({ handleSubmit }) {
 
       <div className={styles['block']}>
         <div className={styles['header']}>
-          <Header level={3}>Аттрибуты</Header>
+          <Header level={3}>Характеристика</Header>
         </div>
         <div className={styles['content']}>
-          <FieldArray name="attributes" component={Attributes} disabled={inProcess} />
+          <FieldArray name="characteristics" component={CharacteristicsField} disabled={inProcess} />
         </div>
       </div>
 

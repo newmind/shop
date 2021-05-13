@@ -1,0 +1,55 @@
+
+@import "~@ui.packages/theme";
+
+
+.wrapper {
+
+  display: block;
+}
+
+.characteristics {
+
+  display: block;
+}
+
+.characteristic {
+
+  display: block;
+  padding: 0 0 30px;
+  margin: 0 0 30px;
+  border-bottom: 1px solid $pale-lilac;
+}
+
+.name {
+
+  display: flex;
+  flex-direction: row;
+  flex: 1 0;
+  align-items: flex-end;
+}
+
+.remove {
+
+  display: block;
+  margin: 0 0 13px 20px;
+}
+
+.icon {
+
+  font-size: 14px;
+  color: $danger;
+  cursor: pointer;
+}
+
+.attributes {
+
+  display: block;
+  margin: 20px 0 0 20px;
+}
+
+.controls {
+
+  display: block;
+  text-align: right;
+}
+
