@@ -17,7 +17,7 @@ FROM ubuntu:16.04
 #  them by prefixing each apt-get statement with DEBIAN_FRONTEND=noninteractive
 #RUN apt-get update && apt-get install -y python-software-properties software-properties-common postgresql-9.3 postgresql-client-9.3 postgresql-contrib-9.3
 
-RUN apt-get update && apt-get install curl ca-certificates gnupg
+RUN apt-get update && apt-get install ca-certificates gnupg
 RUN curl https://www.postgresql.org/media/keys/ACCC4CF8.asc | sudo apt-key add -
 RUN deb http://apt.postgresql.org/pub/repos/apt buster-pgdg main
 RUN apt-get update
