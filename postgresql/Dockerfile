@@ -2,7 +2,10 @@
 # example Dockerfile for https://docs.docker.com/engine/examples/postgresql_service/
 #
 
-FROM ubuntu:16.04
+FROM ubuntu:18.04
+
+RUN apt-get update && \
+    apt install postgresql postgresql-contrib
 
 # Add the PostgreSQL PGP key to verify their Debian packages.
 # It should be the same key as https://www.postgresql.org/media/keys/ACCC4CF8.asc
@@ -17,11 +20,11 @@ FROM ubuntu:16.04
 #  them by prefixing each apt-get statement with DEBIAN_FRONTEND=noninteractive
 #RUN apt-get update && apt-get install -y python-software-properties software-properties-common postgresql-9.3 postgresql-client-9.3 postgresql-contrib-9.3
 
-RUN apt-get update && apt-get install ca-certificates gnupg
-RUN curl https://www.postgresql.org/media/keys/ACCC4CF8.asc | sudo apt-key add -
-RUN deb http://apt.postgresql.org/pub/repos/apt buster-pgdg main
-RUN apt-get update
-RUN apt-get install postgresql-11
+#RUN apt-get update && apt-get install ca-certificates gnupg
+#RUN curl https://www.postgresql.org/media/keys/ACCC4CF8.asc | sudo apt-key add -
+#RUN deb http://apt.postgresql.org/pub/repos/apt buster-pgdg main
+#RUN apt-get update
+#RUN apt-get install postgresql-11
 # Note: The official Debian and Ubuntu images automatically ``apt-get clean``
 # after each ``apt-get``
 
@@ -32,7 +35,7 @@ USER postgres
 # then create a database `docker` owned by the ``docker`` role.
 # Note: here we use ``&&\`` to run commands one after the other - the ``\``
 #       allows the RUN command to span multiple lines.
-RUN    /etc/init.d/postgresql start &&\
+RUN /etc/init.d/postgresql start &&\
     psql --command "CREATE USER admin WITH SUPERUSER PASSWORD '1Ctdfcnjgjkm';" &&\
     createdb -O admin product_srv &&\
     createdb -O admin identity_srv &&\
