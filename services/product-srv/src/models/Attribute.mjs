@@ -36,12 +36,12 @@ export default function(sequelize, DataType) {
     timestamps: false,
   });
 
-  Attribute.associate = ({ Unit, ProductAttribute }) => {
+  Attribute.associate = ({ Unit, CharacteristicAttribute }) => {
 
-    Attribute.hasOne(ProductAttribute, {
+    Attribute.hasOne(CharacteristicAttribute, {
       foreignKey: 'attributeId',
-      as: 'product_attribute',
-    })
+      as: 'characteristic_attribute',
+    });
 
     Attribute.belongsTo(Unit, {
       as: 'unit'

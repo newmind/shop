@@ -17,7 +17,7 @@ export default () => async (ctx) => {
   let options = {};
 
   const { Op } = Sequelize;
-  const { Product, Currency, Attribute, Category, Brand, Type, ProductAttribute, Unit, Gallery, Comment } = models;
+  const { Product, Currency, Attribute, Category, Brand, Type, Characteristic, CharacteristicAttribute, Unit, Gallery, Comment } = models;
   const {
     fiscal = null,
     limit = null,
@@ -98,7 +98,7 @@ export default () => async (ctx) => {
       sorting,
       ['gallery', 'order', 'asc'],
       ['comments', 'createdAt', 'desc'],
-      ['attributes', 'order', 'asc'],
+      ['characteristics', 'order', 'asc'],
     ],
     include: [
       {
@@ -144,24 +144,32 @@ export default () => async (ctx) => {
         attributes: ['code', 'value']
       },
       {
-        model: ProductAttribute,
+        model: Characteristic,
         required: false,
-        as: 'attributes',
-        attributes: ['value', 'order', 'use'],
+        as: 'characteristics',
+        attributes: ['id', 'name', 'order'],
         include: [
           {
-            model: Attribute,
-            attributes: ['id', 'value'],
-            as: 'attribute',
+            model: CharacteristicAttribute,
+            required: false,
+            as: 'attributes',
+            attributes: ['value', 'order', 'use'],
             include: [
               {
-                model: Unit,
-                required: false,
-                as: 'unit',
-                attributes: ['value']
+                model: Attribute,
+                attributes: ['id', 'value'],
+                as: 'attribute',
+                include: [
+                  {
+                    model: Unit,
+                    required: false,
+                    as: 'unit',
+                    attributes: ['value']
+                  }
+                ]
               }
             ]
-          }
+          },
         ]
       },
       {

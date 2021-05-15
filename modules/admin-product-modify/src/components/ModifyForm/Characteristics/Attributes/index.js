@@ -4,7 +4,6 @@ import { Row, Col, InputField, SelectField, Button, Draggable, CheckBoxField } f
 import React from 'react';
 import types from 'prop-types';
 import { useSelector } from 'react-redux';
-import { getFormValues, FieldArray } from 'redux-form';
 
 import cn from 'classnames';
 import styles from './default.module.scss';
@@ -64,7 +63,6 @@ AttributeField.defaultProps = {
 };
 
 function AttributeList({ fields, disabled }) {
-  const data = useSelector(getFormValues('modify-client-product'));
 
   function handleRemoveAttr(index) {
     fields.remove(index)
@@ -84,15 +82,17 @@ function AttributeList({ fields, disabled }) {
     <Row>
       <div className={styles['attrs']}>
         <Draggable onChange={(from, to) => handleChangeOrder(from, to)}>
-          {fields.map((field, index) => (
-            <AttributeField
-              key={index}
-              field={field}
-              data={data['attributes'][index]}
-              disabled={disabled}
-              onRemove={() => handleRemoveAttr(index)}
-            />
-          ))}
+          {fields.map((field, index) => {
+            return (
+              <AttributeField
+                key={index}
+                field={field}
+                data={fields.get(index)}
+                disabled={disabled}
+                onRemove={() => handleRemoveAttr(index)}
+              />
+            )
+          })}
         </Draggable>
       </div>
     </Row>

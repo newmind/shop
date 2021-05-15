@@ -5,17 +5,17 @@ import { Sequelize } from '@sys.packages/db';
 export default function (sequelize, DataTypes) {
   const { Model } = Sequelize;
 
-  class ProductAttribute extends Model {}
+  class CharacteristicAttribute extends Model {}
 
-  ProductAttribute.init({
+  CharacteristicAttribute.init({
     id: {
       type: DataTypes.INTEGER,
       primaryKey: true,
       unique: true,
       autoIncrement: true,
     },
-    productUuid: {
-      type: DataTypes.STRING(9),
+    characteristicId: {
+      type: DataTypes.INTEGER,
       allowNull: false,
     },
     attributeId: {
@@ -38,22 +38,22 @@ export default function (sequelize, DataTypes) {
     }
   }, {
     sequelize,
-    modelName: 'ProductAttribute',
+    modelName: 'CharacteristicAttribute',
     timestamps: false,
   });
 
-  ProductAttribute.associate = ({ Attribute, Product }) => {
+  CharacteristicAttribute.associate = ({ Characteristic, Attribute }) => {
 
-    ProductAttribute.belongsTo(Product, {
+    CharacteristicAttribute.belongsTo(Characteristic, {
       foreignKey: 'productUuid',
       as: 'product',
     });
 
-    ProductAttribute.belongsTo(Attribute, {
+    CharacteristicAttribute.belongsTo(Attribute, {
       foreignKey: 'attributeId',
       as: 'attribute',
     });
   };
 
-  return ProductAttribute;
+  return CharacteristicAttribute;
 };

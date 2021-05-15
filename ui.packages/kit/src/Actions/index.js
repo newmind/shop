@@ -6,7 +6,7 @@ import cn from 'classnames';
 import styles from './default.module.scss';
 
 
-const Actions = ({ disabled, onEdit, onDelete, onCopy }) => {
+function Actions({ disabled, onEdit, onDelete, onCopy }) {
   return (
     <div className={styles['block']}>
       {onEdit && <span className={cn(styles['action'], styles['action--edit'], 'fas fa-edit', { [styles['disabled']]: disabled })} onClick={ ! disabled ? onEdit : undefined} />}
@@ -14,7 +14,7 @@ const Actions = ({ disabled, onEdit, onDelete, onCopy }) => {
       {onDelete && <span className={cn(styles['action'], styles['action--delete'], 'far fa-trash-alt', { [styles['disabled']]: disabled })} onClick={ ! disabled ? onDelete : undefined} />}
     </div>
   );
-};
+}
 
 Actions.propTypes = {
   disabled: types.bool,

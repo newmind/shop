@@ -1,5 +1,6 @@
 
 export default function productBuilder(data) {
+  console.log(data)
   return {
     uuid: data['uuid'],
     fiscal: data['fiscal'],
@@ -31,12 +32,19 @@ export default function productBuilder(data) {
     comments: data['comments'],
     isView: data['isView'],
     updatedAt: data['updatedAt'],
-    attributes: data['attributes'].map((item) => ({
-      id: item['attribute']['id'],
-      use: item['use'],
-      name: item['attribute']['value'],
-      value: item['value'],
-      unit: item['attribute']['unit'] ? item['attribute']['unit']['value'] : null,
-    })),
+    characteristics: data['characteristics'].map((characteristic) => {
+      return {
+        id: characteristic['id'],
+        name: characteristic['name'],
+        order: characteristic['order'],
+        attributes: characteristic['attributes'].map((item) => ({
+          id: item['attribute']['id'],
+          use: item['use'],
+          name: item['attribute']['value'],
+          value: item['value'],
+          unit: item['attribute']['unit'] ? item['attribute']['unit']['value'] : null,
+        })),
+      };
+    }),
   };
 }

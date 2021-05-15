@@ -1,0 +1,32 @@
+
+@import "~@ui.packages/theme";
+
+
+.characteristics {
+
+  display: block;
+  margin: 40px 0 0;
+}
+
+.characteristic {
+
+  display: block;
+
+  & + & {
+
+    margin: 30px 0 0;
+  }
+}
+
+.title {
+
+  display: block;
+  padding: 0 0 3px;
+  border-bottom: 1px solid $blue-grey;
+}
+
+.attributes {
+
+  display: block;
+  margin: 20px 0 0;
+}

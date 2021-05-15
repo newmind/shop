@@ -1,12 +1,12 @@
 
-import { Gallery, Breadcrumbs } from '@ui.packages/kit';
+import { Gallery, Breadcrumbs, Text } from '@ui.packages/kit';
 
 import React from 'react';
 import { useSelector } from 'react-redux';
 
 import Information from './Information';
 import Comments from './Comments';
-import Attributes from './Attributes';
+import Characteristics from './Characteristics';
 
 import styles from './default.module.scss';
 
@@ -52,7 +52,10 @@ function Product() {
       <div className={styles['aside']} />
       <div className={styles['content']}>
         <div className={styles['col']}>
-          <Attributes />
+          <div className={styles['description']}>
+            <Text type={Text.TYPE_COMMENT}>{ product['description'] }</Text>
+          </div>
+          <Characteristics />
         </div>
         <div className={styles['col']}>
           <Comments comments={product['comments']} />

@@ -16,7 +16,7 @@ import cn from 'classnames';
 import styles from './default.module.scss';
 
 
-export default function Product({ uuid, price, prevPrice, currency, brand, name, gallery, attributes, promotions, onCart }) {
+export default function Product({ uuid, price, prevPrice, currency, brand, name, gallery, characteristics, promotions, onCart }) {
   const dispatch = useDispatch();
   const [removedUuid, setRemovedUuid] = useState(null);
 
@@ -45,11 +45,6 @@ export default function Product({ uuid, price, prevPrice, currency, brand, name,
     dispatch(closeDialog('remove-from-cart-client-showcase' + uuid));
   }
 
-  // function handleClickFastView(event) {
-  //   event.preventDefault();
-  //   onView && onView();
-  // }
-
   return (
     <div className={styles['wrapper']}>
       <Link className={styles['product']} href={`/products/${uuid}`}>
@@ -71,7 +66,8 @@ export default function Product({ uuid, price, prevPrice, currency, brand, name,
               <Text type="uuid">Код: { uuid }</Text>
             </div>
             <div className={styles['attrs']}>
-              {attributes.map((attr, index) => <Attribute key={index} {...attr} />)}
+              {/*{attributes.map((attr, index) => <Attribute key={index} {...attr} />)}*/}
+              {characteristics.map((char) => char['attributes'].map((attr, index) => <Attribute key={index} {...attr} />))}
             </div>
           </div>
         </div>

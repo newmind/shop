@@ -51,11 +51,11 @@ export default function(sequelize, DataType) {
     modelName: 'Product'
   });
 
-  Product.associate = function({ Brand, Gallery, Category, Type, Promotion, ProductBrand, ProductPromotion, ProductType, ProductCategory, ProductAttribute, Currency, Comment }) {
+  Product.associate = function({ Brand, Gallery, Category, Type, Promotion, ProductBrand, ProductPromotion, ProductType, ProductCategory, Characteristic, Currency, Comment }) {
 
-    Product.hasMany(ProductAttribute, {
+    Product.hasMany(Characteristic, {
       foreignKey: 'productUuid',
-      as: 'attributes',
+      as: 'characteristics',
     });
 
     Product.belongsTo(Currency, {
