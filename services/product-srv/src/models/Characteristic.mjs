@@ -14,6 +14,10 @@ export default function(sequelize, DataType) {
       primaryKey: true,
       unique: true,
     },
+    productUuid: {
+      type: DataType.STRING(9),
+      allowNull: false,
+    },
     name: {
       type: DataType.STRING(256),
       allowNull: false,

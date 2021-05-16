@@ -1,4 +1,5 @@
 
+import { Mode } from '@ui.packages/types';
 import { Row, Col, InputField, SelectField, Button, Draggable, CheckBoxField } from '@ui.packages/kit';
 
 import React from 'react';
@@ -111,7 +112,8 @@ function AttributesField({ fields, disabled }) {
       <Row>
         <Col className={styles['align-right']}>
           <Button
-            form={Button.FORM_CREATE}
+            form={Button.FORM_CONTEXT}
+            mode={Mode.PRIMARY}
             disabled={disabled}
             onClick={() => handleAddAttr()}
           >Добавить аттрибут</Button>

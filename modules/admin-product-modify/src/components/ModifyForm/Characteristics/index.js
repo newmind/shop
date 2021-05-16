@@ -12,7 +12,7 @@ import styles from './default.module.scss';
 
 function CharacteristicsField({ fields }) {
   function handleAdd() {
-    fields.push({});
+    fields.push({ attributes: [], });
   }
 
   function handleRemove(index) {
@@ -41,7 +41,6 @@ function CharacteristicsField({ fields }) {
       <div className={styles['controls']}>
         <Button form={Button.FORM_CREATE} onClick={() => handleAdd()}>Дбавить характеристику</Button>
       </div>
-
     </div>
   );
 }

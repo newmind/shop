@@ -227,10 +227,13 @@ export const updateProductsById = (data) => async (dispatch) => {
       data: {
         gallery: [],
         ...data,
-        attributes: data['attributes'].map((attr) => ({
-          id: attr['id'],
-          value: attr['value'],
-          use: attr['use'],
+        characteristics: data['characteristics'].map((char) => ({
+          ...char,
+          attributes: char['attributes'].map((attr) => ({
+            id: attr['id'],
+            value: attr['value'],
+            use: attr['use'],
+          })),
         })),
       },
     });
@@ -242,6 +245,7 @@ export const updateProductsById = (data) => async (dispatch) => {
     }));
   }
   catch(error) {
+    console.log(error)
     dispatch(updateProductRequestFailAction());
 
     if (error instanceof UnauthorizedError) {
@@ -268,7 +272,7 @@ export const createProduct = (data) => async dispatch => {
       data: {
         uuid,
         gallery: [],
-        attributes: [],
+        characteristics: [],
         ...data,
       },
     });

@@ -45,8 +45,8 @@ export default function (sequelize, DataTypes) {
   CharacteristicAttribute.associate = ({ Characteristic, Attribute }) => {
 
     CharacteristicAttribute.belongsTo(Characteristic, {
-      foreignKey: 'productUuid',
-      as: 'product',
+      foreignKey: 'characteristicId',
+      as: 'characteristic',
     });
 
     CharacteristicAttribute.belongsTo(Attribute, {

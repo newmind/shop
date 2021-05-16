@@ -30,22 +30,36 @@ const validate = (values) => {
     errors['currencyCode'] = 'Неоходимо заполнить';
   }
 
-  const attrsErrors = [];
-  (values['attributes'] || []).forEach((item, index) => {
-    const attrErrors = {};
+  const charsErrors = [];
+  (values['characteristics'] || []).forEach((char, index) => {
+    const charErrors = {};
 
-    if ( ! item['id']) {
-      attrErrors['id'] = 'Неоходимо выбрать';
-      attrsErrors[index] = attrErrors;
+    if ( ! char['name']) {
+      charErrors['name'] = 'Неоходимо выбрать';
+      charsErrors[index] = charErrors;
     }
-    if ( ! item['value']) {
-      attrErrors['value'] = 'Неоходимо заполнить';
-      attrsErrors[index] = attrErrors;
+
+    if (char['attributes'] && !! char['attributes'].length) {
+      const attrsErrors = [];
+      (char['attributes'] || []).forEach((item, index) => {
+        const attrErrors = {};
+
+        if ( ! item['id']) {
+          attrErrors['id'] = 'Неоходимо выбрать';
+          attrsErrors[index] = attrErrors;
+        }
+        if ( ! item['value']) {
+          attrErrors['value'] = 'Неоходимо заполнить';
+          attrsErrors[index] = attrErrors;
+        }
+      });
+      charErrors['attributes'] = attrsErrors;
+      charsErrors[index] = charErrors;
     }
   });
 
-  if (attrsErrors.length) {
-    errors['attributes'] = attrsErrors;
+  if ( !! charsErrors.length) {
+    errors['characteristics'] = charsErrors;
   }
 
   return errors;

@@ -15,10 +15,13 @@ export default function productBuilder(data) {
     gallery: data['gallery'].map((img) => img['uuid']),
     comments: data['comments'],
     updatedAt: data['updatedAt'],
-    attributes: data['attributes'].map((item) => ({
-      name: item['value'],
-      value: item['attribute']['value'],
-      unit: item['unit'] ? item['unit']['value'] : null,
+    characteristics: data['characteristics'].map((characteristic) => ({
+      ...characteristic,
+      attributes: characteristic['attributes'].map((item) => ({
+        name: item['value'],
+        value: item['attribute']['value'],
+        unit: item['unit'] ? item['unit']['value'] : null,
+      })),
     })),
   };
 }

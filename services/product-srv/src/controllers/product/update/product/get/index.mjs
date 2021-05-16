@@ -4,14 +4,14 @@ import request from "@sys.packages/request";
 
 
 export default async function updateProperties(uuid) {
-  const { Product, Attribute, Unit, Gallery, Currency, Category, Type, Brand, ProductAttribute } = models;
+  const { Product, Attribute, Unit, Gallery, Currency, Category, Type, Brand, Characteristic, CharacteristicAttribute } = models;
 
   const result = await Product.findOne({
     where: { uuid },
     attributes: ['uuid', 'name', 'description', 'isView', 'price', 'fiscal', 'updatedAt'],
     order: [
-      ['gallery', 'order', 'asc'],
-      ['attributes', 'order', 'asc'],
+      // ['gallery', 'order', 'asc'],
+      // ['characteristics', 'order', 'asc'],
     ],
     include: [
       {
@@ -51,24 +51,32 @@ export default async function updateProperties(uuid) {
         attributes: ['code', 'value']
       },
       {
-        model: ProductAttribute,
+        model: Characteristic,
         required: false,
-        as: 'attributes',
-        attributes: ['value', 'order', 'use'],
+        as: 'characteristics',
+        attributes: ['id', 'name', 'order'],
         include: [
           {
-            model: Attribute,
-            attributes: ['id', 'value'],
-            as: 'attribute',
+            model: CharacteristicAttribute,
+            required: false,
+            as: 'attributes',
+            attributes: ['value', 'order', 'use'],
             include: [
               {
-                model: Unit,
-                required: false,
-                as: 'unit',
-                attributes: ['value']
+                model: Attribute,
+                attributes: ['id', 'value'],
+                as: 'attribute',
+                include: [
+                  {
+                    model: Unit,
+                    required: false,
+                    as: 'unit',
+                    attributes: ['value']
+                  }
+                ]
               }
             ]
-          }
+          },
         ]
       },
       {

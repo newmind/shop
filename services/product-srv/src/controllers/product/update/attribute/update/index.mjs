@@ -2,34 +2,64 @@
 import { sequelize, models } from '@sys.packages/db';
 
 
-export default async function updateProperties(uuid, attributes) {
-  const { ProductAttribute } = models;
+export default async function updateProperties(uuid, characteristics) {
+  const { Characteristic, CharacteristicAttribute } = models;
 
   const transaction = await sequelize.transaction();
 
-  const result = await ProductAttribute.findAll({
-    where: { productUuid: uuid },
+  const result = await Characteristic.findAll({
+    where: {productUuid: uuid},
+    include: [
+      {
+        model: CharacteristicAttribute,
+        required: false,
+        as: 'attributes',
+        attributes: ['value', 'order', 'use'],
+      },
+    ],
     transaction,
   });
 
-  await ProductAttribute.destroy({
-    where: { productUuid: uuid },
+  await Characteristic.destroy({
+    where: {productUuid: uuid},
   }, {
     transaction,
   });
 
-  if (attributes && !! attributes.length) {
+  if (characteristics && !! characteristics.length) {
 
-    const newAttributes = attributes.map((item, index) => {
-      return {
-        productUuid: uuid,
-        attributeId: item['id'],
-        value: item['value'],
-        use: item['use'],
-        order: index,
+    for (let index in characteristics) {
+      if (characteristics.hasOwnProperty(index)) {
+        const characteristic = characteristics[index];
+
+        const { id } = await Characteristic.create({
+          name: characteristic['name'],
+          productUuid: uuid,
+          order: index,
+        }, {
+          transaction,
+        });
+
+        await CharacteristicAttribute.destroy({
+          where: { characteristicId: id },
+          transaction,
+        });
+
+        const newAttributes = characteristic['attributes'].map((item, index) => {
+          return {
+            characteristicId: id,
+            attributeId: item['id'],
+            value: item['value'],
+            use: item['use'],
+            order: index,
+          }
+        });
+
+        await CharacteristicAttribute.bulkCreate(newAttributes, {
+          transaction,
+        });
       }
-    });
-    await ProductAttribute.bulkCreate(newAttributes, { transaction });
+    }
   }
 
   await transaction.commit();

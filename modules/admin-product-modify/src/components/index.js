@@ -16,7 +16,6 @@ import {
   setProcessAction,
 
   deleteImageRequestSuccessAction,
-  updateProductRequestSuccessAction,
 } from '../ducks/slice';
 
 
@@ -41,7 +40,6 @@ export default function HOC() {
     }
 
     on(process.env['REACT_APP_SOCKET_IMAGE_DELETE'], (uuid) => dispatch(deleteImageRequestSuccessAction({ uuid })));
-    on(process.env['REACT_APP_SOCKET_PRODUCT_UPDATE'], (data) => dispatch(updateProductRequestSuccessAction(data)));
   });
 
   useUpdate(async function() {
@@ -52,7 +50,6 @@ export default function HOC() {
     dispatch(resetStateAction());
 
     off(process.env['REACT_APP_SOCKET_IMAGE_DELETE']);
-    off(process.env['REACT_APP_SOCKET_PRODUCT_UPDATE']);
   });
 
   return <Component />;

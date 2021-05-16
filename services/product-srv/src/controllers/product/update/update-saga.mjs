@@ -1,5 +1,7 @@
 
 import { NetworkError } from "@packages/errors";
+
+import logger from '@sys.packages/logger';
 import { sendEvent } from '@sys.packages/rabbit';
 
 import Sagas from 'node-sagas';
@@ -58,76 +60,91 @@ export default class UpdateSaga {
     return sagaBuilder
       .step('Update gallery')
       .invoke(async (params) => {
+        logger.info('Update gallery');
         const gallery = await updateGallery(uuid, body['gallery']);
         params.setGallery(gallery);
       })
       .withCompensation(async (params) => {
+        logger.info('Restore update gallery');
         const gallery = params.getGallery();
-        await restoreGallery(gallery);
+        await restoreGallery(uuid, gallery);
       })
 
       .step('Update attribute')
       .invoke(async (params) => {
-        const attributes = await updateAttribute(uuid, body['attributes']);
+        logger.info('Update attributes');
+        const attributes = await updateAttribute(uuid, body['characteristics']);
         params.setAttributes(uuid, attributes);
       })
       .withCompensation(async (params) => {
+        logger.info('Restore update attributes');
         const attributes = params.getAttributes();
         await restoreAttributes(uuid, attributes);
       })
 
       .step('Update brand')
       .invoke(async (params) => {
+        logger.info('Update brand');
         const result = await updateBrand(uuid, body['brandId']);
         params.setBrand(result);
       })
       .withCompensation(async (params) => {
+        logger.info('Restore update brand');
         const brandId = params.getBrand();
         await restoreBrand(uuid, brandId);
       })
 
       .step('Update types')
       .invoke(async (params) => {
+        logger.info('Update types');
         const result = await updateTypes(uuid, body['types']);
         params.setTypes(result);
       })
       .withCompensation(async (params) => {
+        logger.info('Restore update types');
         const types = params.getTypes();
         await restoreTypes(uuid, types);
       })
 
       .step('Update categories')
       .invoke(async (params) => {
+        logger.info('Update categories');
         const categories = await updateCategory(uuid, body['categories']);
         params.setCategories(categories);
       })
       .withCompensation(async (params) => {
+        logger.info('Restore update categories');
         const categories = params.getCategories();
         await restoreCategory(uuid, categories);
       })
 
       .step('Update product')
       .invoke(async (params) => {
+        logger.info('Update product');
         const product = await updateProduct(uuid, body);
         params.setProduct(product);
       })
       .withCompensation(async (params) => {
+        logger.info('Restore update product');
         const product = params.getProduct();
         await restoreProduct(uuid, product);
       })
 
       .step('Update promotion')
       .invoke(async (params) => {
+        logger.info('Update promotions');
         const promotions = await updatePromotion(uuid, body['promotions']);
         params.setPromotions(promotions)
       })
       .withCompensation(async (params) => {
+        logger.info('Restore update promotions');
         const promotions = params.getPromotions();
         await restorePromotion(uuid, promotions);
       })
 
       .step('Get product')
       .invoke(async (params) => {
+        logger.info('Get product');
         const product = await getProduct(uuid);
         params.setProduct(product)
       })
