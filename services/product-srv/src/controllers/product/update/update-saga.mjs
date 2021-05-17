@@ -132,14 +132,18 @@ export default class UpdateSaga {
 
       .step('Update promotion')
       .invoke(async (params) => {
-        logger.info('Update promotions');
-        const promotions = await updatePromotion(uuid, body['promotions']);
-        params.setPromotions(promotions)
+        if (body['promotions']) {
+          logger.info('Update promotions');
+          const promotions = await updatePromotion(uuid, body['promotions']);
+          params.setPromotions(promotions);
+        }
       })
       .withCompensation(async (params) => {
         logger.info('Restore update promotions');
         const promotions = params.getPromotions();
-        await restorePromotion(uuid, promotions);
+        if (promotions) {
+          await restorePromotion(uuid, promotions);
+        }
       })
 
       .step('Get product')
