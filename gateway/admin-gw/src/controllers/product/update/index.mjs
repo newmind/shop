@@ -1,7 +1,7 @@
 
 import request from "@sys.packages/request";
 
-import productBuilder from "./productBuilder.mjs";
+import productBuilder from "../_bilders/productBuilder.mjs";
 
 
 export default () => async (ctx) => {

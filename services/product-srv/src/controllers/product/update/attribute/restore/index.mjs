@@ -8,12 +8,15 @@ export default async function updateProperties(uuid, characteristics) {
   const transaction = await sequelize.transaction();
 
   await Characteristic.destroy({
-    where: { productUuid: uuid }
-  }, {
+    where: {
+      productUuid: uuid,
+    },
     transaction,
   });
 
   if (characteristics && !! characteristics.length) {
+
+    console.log(123, characteristics)
 
     await Characteristic.bulkCreate(characteristics.map((item) => ({
       name: item['name'],

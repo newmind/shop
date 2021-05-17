@@ -53,8 +53,10 @@ function ModifyForm({ handleSubmit }) {
           </Row>
           <Row>
             <Col>
-              <ListField
-                name="types"
+              <SelectField
+                require
+                simple
+                name="type"
                 label="Тип"
                 options={types}
                 optionKey="id"
@@ -63,8 +65,10 @@ function ModifyForm({ handleSubmit }) {
               />
             </Col>
             <Col>
-              <ListField
-                name="categories"
+              <SelectField
+                require
+                simple
+                name="category"
                 label="Категория"
                 options={categories}
                 optionKey="id"
@@ -78,7 +82,7 @@ function ModifyForm({ handleSubmit }) {
               <SelectField
                 require
                 simple
-                name="brandId"
+                name="brand"
                 label="Бренд"
                 options={brands}
                 optionKey="id"

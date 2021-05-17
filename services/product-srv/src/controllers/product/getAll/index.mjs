@@ -99,6 +99,7 @@ export default () => async (ctx) => {
       ['gallery', 'order', 'asc'],
       ['comments', 'createdAt', 'desc'],
       ['characteristics', 'order', 'asc'],
+      ['characteristics', 'attributes', 'order', 'asc'],
     ],
     include: [
       {

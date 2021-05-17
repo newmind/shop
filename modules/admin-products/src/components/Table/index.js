@@ -136,14 +136,14 @@ function List() {
           title="Описание"
           align="left"
         >
-          {({ types, categories, promotions }) => {
+          {({ type, category, promotions }) => {
             return (
               <div className={styles['description']}>
-                { !! types.length && (
-                  <Types items={types} />
+                { !! type && (
+                  <Types type={type} />
                 )}
-                { !! categories.length && (
-                  <Categories items={categories} />
+                { !! category && (
+                  <Categories category={category} />
                 )}
                 { !! promotions.length && <div className={styles['description__item']}><b className={styles['description__label']}>Скидки:</b> { promotions.map((promo, index) => <span key={index} className={styles['item']}>{ promo['name'] } ({promo['percent']} %)</span>) }</div>}
               </div>

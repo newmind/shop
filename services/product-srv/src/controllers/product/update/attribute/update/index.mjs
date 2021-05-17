@@ -21,8 +21,9 @@ export default async function updateProperties(uuid, characteristics) {
   });
 
   await Characteristic.destroy({
-    where: {productUuid: uuid},
-  }, {
+    where: {
+      productUuid: uuid,
+    },
     transaction,
   });
 

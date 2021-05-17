@@ -7,7 +7,7 @@ import { useSelector } from 'react-redux';
 
 import styles from './default.module.scss';
 
-import { selectFilter, selectInProcess } from '../../ducks/slice';
+import { selectFilter, selectInProcess } from '../../../ducks/slice';
 
 
 export default function Filter({ handleSubmit, submit }) {
@@ -33,6 +33,7 @@ export default function Filter({ handleSubmit, submit }) {
         </Col>
         <Col>
           <SelectField
+            simple
             placeholder="Тип"
             name="typeId"
             options={types}
@@ -43,6 +44,7 @@ export default function Filter({ handleSubmit, submit }) {
       <Row>
         <Col>
           <SelectField
+            simple
             placeholder="Бренд"
             name="brandId"
             options={brands}
@@ -51,6 +53,7 @@ export default function Filter({ handleSubmit, submit }) {
         </Col>
         <Col>
           <SelectField
+            simple
             placeholder="Категория"
             name="categoryId"
             options={categories}

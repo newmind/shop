@@ -10,8 +10,9 @@ export default async function updateProperties(uuid) {
     where: { uuid },
     attributes: ['uuid', 'name', 'description', 'isView', 'price', 'fiscal', 'updatedAt'],
     order: [
-      // ['gallery', 'order', 'asc'],
-      // ['characteristics', 'order', 'asc'],
+      ['gallery', 'order', 'asc'],
+      ['characteristics', 'order', 'asc'],
+      ['characteristics', 'attributes', 'order', 'asc'],
     ],
     include: [
       {

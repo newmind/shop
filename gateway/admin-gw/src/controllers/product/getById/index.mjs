@@ -3,7 +3,7 @@ import { NotfoundError } from '@packages/errors';
 
 import request from '@sys.packages/request';
 
-import productBuilder from './productBuilder.mjs';
+import productBuilder from '../_bilders/productBuilder.mjs';
 
 
 async function getProductById(uuid) {

@@ -1,5 +1,7 @@
 
 import { NetworkError } from '@packages/errors';
+
+import logger from '@sys.packages/logger';
 import { sendEvent } from '@sys.packages/rabbit';
 
 import Sagas from 'node-sagas';
@@ -56,10 +58,12 @@ export default class CreateSaga {
     return sagaBuilder
       .step('Create product')
       .invoke(async (params) => {
+        logger.info('Create product');
         const uuid = await createProduct(body);
         params.setProductUUID(uuid);
       })
       .withCompensation(async (params) => {
+        logger.info('Restore product');
         const uuid = params.getProductUUID();
         await restoreProduct(uuid);
       })
@@ -77,7 +81,7 @@ export default class CreateSaga {
       .step('Create attributes')
       .invoke(async (params) => {
         const productUuid = params.getProductUUID();
-        await createAttribute(productUuid, body['attributes']);
+        await createAttribute(productUuid, body['characteristics']);
       })
       .withCompensation(async (params) => {
         const uuid = params.getProductUUID();
@@ -87,7 +91,7 @@ export default class CreateSaga {
       .step('Create brand')
       .invoke(async (params) => {
         const productUuid = params.getProductUUID();
-        await createBrand(productUuid, body['brandId']);
+        await createBrand(productUuid, body['brand']);
       })
       .withCompensation(async (params) => {
         const uuid = params.getProductUUID();
@@ -97,7 +101,7 @@ export default class CreateSaga {
       .step('Create types')
       .invoke(async (params) => {
         const productUuid = params.getProductUUID();
-        await createTypes(productUuid, body['types']);
+        await createTypes(productUuid, body['type']);
       })
       .withCompensation(async (params) => {
         const uuid = params.getProductUUID();
@@ -107,7 +111,7 @@ export default class CreateSaga {
       .step('Create category')
       .invoke(async (params) => {
         const productUuid = params.getProductUUID();
-        await createCategory(productUuid, body['categories']);
+        await createCategory(productUuid, body['category']);
       })
       .withCompensation(async (params) => {
         const uuid = params.getProductUUID();
@@ -124,7 +128,7 @@ export default class CreateSaga {
         await restorePromotion(uuid);
       })
 
-      .step('Get client-product')
+      .step('Get product')
       .invoke(async (params) => {
         const uuid = params.getProductUUID();
         const product = await getProduct(uuid);

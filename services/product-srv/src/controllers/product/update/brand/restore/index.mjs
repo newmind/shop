@@ -2,21 +2,22 @@
 import { sequelize, models } from '@sys.packages/db';
 
 
-export default async function updateProperties(uuid, brandId) {
+export default async function restoreBrand(uuid, brand) {
   const { ProductBrand } = models;
 
   const transaction = await sequelize.transaction();
 
   await ProductBrand.destroy({
-    where: { productUuid: uuid, brandId }
-  }, {
+    where: {
+      productUuid: uuid,
+    },
     transaction,
   });
 
-  if (brandId) {
+  if (brand) {
     await ProductBrand.create({
       productUuid: uuid,
-      brandId: brandId,
+      brandId: brand['id'],
     }, {
       transaction,
     });

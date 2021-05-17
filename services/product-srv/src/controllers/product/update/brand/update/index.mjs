@@ -13,21 +13,20 @@ export default async function updateProperties(uuid, brandId) {
   });
 
   await ProductBrand.destroy({
-    where: { productUuid: uuid }
+    where: {
+      productUuid: uuid,
+    },
+    transaction,
+  });
+
+  await ProductBrand.create({
+    productUuid: uuid,
+    brandId,
   }, {
     transaction,
   });
 
-  if (brandId) {
-    await ProductBrand.create({
-      productUuid: uuid,
-      brandId: brandId,
-    }, {
-      transaction,
-    });
-  }
-
   await transaction.commit();
 
-  return result.toJSON();
+  return result ? result.toJSON() : null;
 }

@@ -1,9 +1,26 @@
 
-import { reduxForm } from 'redux-form';
+import { queryToObject, objectToQuery } from "@ui.packages/utils";
 
-import Component from './Component';
+import React from 'react';
+import { useNavigate } from 'react-router-dom';
+
+import Form from './Form';
 
 
-export default reduxForm({
-  form: 'products-filter',
-})(Component);
+function Filter() {
+  const query = queryToObject(location['search']);
+  const navigate = useNavigate();
+
+  function handleSubmit(data) {
+    navigate(objectToQuery(data));
+  }
+
+  return (
+    <Form
+      initialValues={query}
+      onSubmit={handleSubmit}
+    />
+  );
+}
+
+export default Filter;

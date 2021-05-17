@@ -10,17 +10,21 @@ export default function productBuilder(data) {
         name: data['brands'][0]['value'],
       })
       : null,
-    types: data['types'].map((item) => ({
-      id: item['id'],
-      name: item['value'],
-    })),
-    categories: data['categories'].map((item) => ({
-      id: item['id'],
-      name: item['value'],
-    })),
+    type: !! data['types'].length
+      ? ({
+        id: data['types'][0]['id'],
+        name: data['types'][0]['value'],
+      })
+      : null,
+    category: !! data['categories'].length
+      ? ({
+        id: data['categories'][0]['id'],
+        name: data['categories'][0]['value'],
+      })
+      : null,
     description: data['description'],
-    price: Number(data['prevPrice'] || data['price']),
-    promotions: data['promotions'].map((promotion) => promotion['id']),
+    price: Number(data['price']),
+    promotions: data['promotions'],
     currency: data['currency']
       ? ({
         code: data['currency']['code'],

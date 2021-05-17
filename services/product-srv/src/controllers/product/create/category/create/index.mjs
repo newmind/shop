@@ -2,14 +2,11 @@
 import { models } from '@sys.packages/db';
 
 
-export default async function updateProperties(uuid, categories) {
+export default async function updateProperties(uuid, categoryId) {
   const { ProductCategory } = models;
 
-  if (categories && !! categories.length) {
-
-    await ProductCategory.bulkCreate(categories.map((item) => ({
-      productUuid: uuid,
-      categoryId: item,
-    })));
-  }
+  await ProductCategory.create({
+    productUuid: uuid,
+    categoryId,
+  });
 }

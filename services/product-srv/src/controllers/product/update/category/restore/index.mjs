@@ -2,22 +2,23 @@
 import { sequelize, models } from '@sys.packages/db';
 
 
-export default async function updateProperties(uuid, categories) {
+export default async function restoreCategory(uuid, category) {
   const { ProductCategory } = models;
 
   const transaction = await sequelize.transaction();
 
   await ProductCategory.destroy({
-    where: { productUuid: uuid }
-  }, {
+    where: {
+      productUuid: uuid,
+    },
     transaction,
   });
 
-  if (categories && !! categories.length) {
-    await ProductCategory.bulkCreate(categories.map((item) => ({
+  if (category) {
+    await ProductCategory.create({
       productUuid: uuid,
-      categoryId: item,
-    })), {
+      categoryId: category['id'],
+    }, {
       transaction,
     });
   }

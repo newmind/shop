@@ -79,10 +79,10 @@ const productModifySlice = createSlice({
     getProductRequestSuccessAction(state, { payload }) {
       state['product'] = {
         ...payload,
-        brandId: payload['brand'] ? payload['brand']['id'] : null,
-        types: payload['types'].map((item) => item['id']),
-        categories: payload['categories'].map((item) => item['id']),
-        currencyCode: payload['currency']['code'],
+        type: payload['type'] ? payload['type']['id'] : null,
+        category: payload['category'] ? payload['category']['id'] : null,
+        brand: payload['brand'] ? payload['brand']['id'] : null,
+        currencyCode: payload['currency'] ? payload['currency']['code'] : null,
       };
     },
 
@@ -96,10 +96,10 @@ const productModifySlice = createSlice({
       state['inProcess'] = false;
       state['product'] = {
         ...payload,
-        brandId: payload['brand'] ? payload['brand']['id'] : null,
-        types: payload['types'].map((item) => item['id']),
-        categories: payload['categories'].map((item) => item['id']),
-        currencyCode: payload['currency']['code'],
+        type: payload['type'] ? payload['type']['id'] : null,
+        category: payload['category'] ? payload['category']['id'] : null,
+        brand: payload['brand'] ? payload['brand']['id'] : null,
+        currencyCode: payload['currency'] ? payload['currency']['code'] : null,
       };
     },
 

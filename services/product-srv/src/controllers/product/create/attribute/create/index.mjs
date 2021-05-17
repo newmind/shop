@@ -1,19 +1,42 @@
 
-import { models } from '@sys.packages/db';
+import { sequelize, models } from '@sys.packages/db';
 
 
-export default async function updateProperties(uuid, attributes) {
-  const { ProductAttribute } = models;
+export default async function updateProperties(uuid, characteristics) {
+  const { Characteristic, CharacteristicAttribute } = models;
 
-  if (attributes && !! attributes.length) {
+  const transaction = await sequelize.transaction();
 
-    const newAttributes = attributes.map((item, index) => ({
-      productUuid: uuid,
-      attributeId: item['id'],
-      value: item['value'],
-      use: item['use'],
-      order: index,
-    }));
-    await ProductAttribute.bulkCreate(newAttributes);
+  if (characteristics && !! characteristics.length) {
+
+    for (let index in characteristics) {
+      if (characteristics.hasOwnProperty(index)) {
+        const characteristic = characteristics[index];
+
+        const { id } = await Characteristic.create({
+          name: characteristic['name'],
+          productUuid: uuid,
+          order: index,
+        }, {
+          transaction,
+        });
+
+        const newAttributes = characteristic['attributes'].map((item, index) => {
+          return {
+            characteristicId: id,
+            attributeId: item['id'],
+            value: item['value'],
+            use: item['use'],
+            order: index,
+          }
+        });
+
+        await CharacteristicAttribute.bulkCreate(newAttributes, {
+          transaction,
+        });
+      }
+    }
   }
+
+  await transaction.commit();
 }

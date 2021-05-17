@@ -74,7 +74,7 @@ export default class UpdateSaga {
       .invoke(async (params) => {
         logger.info('Update attributes');
         const attributes = await updateAttribute(uuid, body['characteristics']);
-        params.setAttributes(uuid, attributes);
+        params.setAttributes(attributes);
       })
       .withCompensation(async (params) => {
         logger.info('Restore update attributes');
@@ -85,35 +85,35 @@ export default class UpdateSaga {
       .step('Update brand')
       .invoke(async (params) => {
         logger.info('Update brand');
-        const result = await updateBrand(uuid, body['brandId']);
-        params.setBrand(result);
+        const brand = await updateBrand(uuid, body['brand']);
+        params.setBrand(brand);
       })
       .withCompensation(async (params) => {
         logger.info('Restore update brand');
-        const brandId = params.getBrand();
-        await restoreBrand(uuid, brandId);
+        const brand = params.getBrand();
+        await restoreBrand(uuid, brand);
       })
 
-      .step('Update types')
+      .step('Update type')
       .invoke(async (params) => {
-        logger.info('Update types');
-        const result = await updateTypes(uuid, body['types']);
+        logger.info('Update type');
+        const result = await updateTypes(uuid, body['type']);
         params.setTypes(result);
       })
       .withCompensation(async (params) => {
-        logger.info('Restore update types');
-        const types = params.getTypes();
-        await restoreTypes(uuid, types);
+        logger.info('Restore update type');
+        const type = params.getTypes();
+        await restoreTypes(uuid, type);
       })
 
-      .step('Update categories')
+      .step('Update category')
       .invoke(async (params) => {
-        logger.info('Update categories');
-        const categories = await updateCategory(uuid, body['categories']);
-        params.setCategories(categories);
+        logger.info('Update category');
+        const category = await updateCategory(uuid, body['category']);
+        params.setCategories(category);
       })
       .withCompensation(async (params) => {
-        logger.info('Restore update categories');
+        logger.info('Restore update category');
         const categories = params.getCategories();
         await restoreCategory(uuid, categories);
       })
