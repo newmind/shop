@@ -16,7 +16,7 @@ export default ({ handleSubmit, valid, pristine }) => {
             <InputField
               name="value"
               label="Значение"
-              maxLength={8}
+              maxLength={255}
             />
           </Col>
         </Row>
