@@ -12,6 +12,9 @@ import restoreGallery from './gallery/restore';
 import createAttribute from './attribute/create';
 import restoreAttributes from './attribute/restore';
 
+import createOption from './option/create';
+import restoreOption from './option/restore';
+
 import createBrand from './brand/create';
 import restoreBrand from './brand/restore';
 
@@ -86,6 +89,16 @@ export default class CreateSaga {
       .withCompensation(async (params) => {
         const uuid = params.getProductUUID();
         await restoreAttributes(uuid);
+      })
+
+      .step('Create options')
+      .invoke(async (params) => {
+        const productUuid = params.getProductUUID();
+        await createOption(productUuid, body['options']);
+      })
+      .withCompensation(async (params) => {
+        const uuid = params.getProductUUID();
+        await restoreOption(uuid);
       })
 
       .step('Create brand')
