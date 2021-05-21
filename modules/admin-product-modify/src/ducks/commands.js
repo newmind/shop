@@ -77,6 +77,8 @@ export const getBrands = () => async (dispatch) => {
       autoClose: false,
     }));
   }
+
+  return null;
 };
 
 export const getTypes = () => async (dispatch) => {
@@ -103,6 +105,8 @@ export const getTypes = () => async (dispatch) => {
       autoClose: false,
     }));
   }
+
+  return null;
 };
 
 export const getCategories = () => async (dispatch) => {
@@ -132,6 +136,8 @@ export const getCategories = () => async (dispatch) => {
       autoClose: false,
     }));
   }
+
+  return null;
 };
 
 export const getCurrencies = () => async (dispatch) => {
@@ -158,6 +164,8 @@ export const getCurrencies = () => async (dispatch) => {
       autoClose: false,
     }));
   }
+
+  return null;
 };
 
 export const getAttributes = () => async (dispatch) => {
@@ -184,6 +192,8 @@ export const getAttributes = () => async (dispatch) => {
       autoClose: false,
     }));
   }
+
+  return null;
 };
 
 export const getProductById = (uuid) => async (dispatch) => {
@@ -202,7 +212,6 @@ export const getProductById = (uuid) => async (dispatch) => {
     dispatch(getProductRequestSuccessAction(result['data']));
   }
   catch(error) {
-    console.log(error)
     dispatch(getProductRequestFailAction(error));
 
     if (error instanceof UnauthorizedError) {
@@ -215,6 +224,8 @@ export const getProductById = (uuid) => async (dispatch) => {
       autoClose: false,
     }));
   }
+
+  return null;
 };
 
 export const updateProductsById = (data) => async (dispatch) => {
@@ -258,6 +269,8 @@ export const updateProductsById = (data) => async (dispatch) => {
       autoClose: false,
     }));
   }
+
+  return null;
 };
 
 export const createProduct = (data) => async dispatch => {
@@ -354,6 +367,8 @@ export const getGallery = () => async (dispatch) => {
       type: Mode.DANGER,
     }));
   }
+
+  return null;
 };
 
 export const getPromotions = () => async (dispatch) => {
@@ -379,4 +394,6 @@ export const getPromotions = () => async (dispatch) => {
       type: Mode.DANGER,
     }));
   }
+
+  return null;
 };
