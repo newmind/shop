@@ -10,7 +10,7 @@ import { getAllCategories, createCategory, updateCategory, deleteCategories } fr
 import { getAllCurrencies, createCurrency, updateCurrency, deleteCurrencies } from '../controllers/currency';
 import { getAllAttributes, createAttribute, deleteAttributes, updateAttribute } from '../controllers/attribute';
 
-import { getProducts, getProduct,  createProduct, updateProduct, copyProduct, updateStatusProduct } from '../controllers/product';
+import { getProducts, getProduct,  createProduct, updateProduct, copyProduct, updateStatusProduct, deleteProducts } from '../controllers/product';
 import { getAllPromotions, deletePromotions, updatePromotion, createPromotion } from '../controllers/promotion';
 
 import { getImages, getImage, createImage, updateImage, deleteImages } from '../controllers/gallery';
@@ -65,6 +65,7 @@ export default (router) => {
   router.get('/products', getProducts());
   router.get('/products/:uuid', getProduct());
   router.post('/products', createProduct());
+  router.delete('/products', deleteProducts());
   router.put('/products/:uuid', updateProduct());
   router.post('/products/:uuid/copy', copyProduct());
   router.put('/products/:uuid/status', updateStatusProduct());

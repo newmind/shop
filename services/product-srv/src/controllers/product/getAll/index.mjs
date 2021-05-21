@@ -97,6 +97,7 @@ export default () => async (ctx) => {
     order: [
       sorting,
       ['gallery', 'order', 'asc'],
+      ['options', 'order', 'asc'],
       ['comments', 'createdAt', 'desc'],
       ['characteristics', 'order', 'asc'],
       ['characteristics', 'attributes', 'order', 'asc'],

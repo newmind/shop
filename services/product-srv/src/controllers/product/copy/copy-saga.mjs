@@ -1,12 +1,32 @@
 
-import { models } from "@sys.packages/db";
+import logger from "@sys.packages/logger";
+import { uniqName } from '@sys.packages/utils';
 import { NetworkError } from '@packages/errors';
 import { sendEvent } from '@sys.packages/rabbit';
 
 import Sagas from 'node-sagas';
 
-import getProduct from './getProduct';
-import createProperties from './createProperties';
+import createGallery from './gallery/create';
+import restoreGallery from './gallery/restore';
+
+import createAttribute from './attribute/create';
+import restoreAttributes from './attribute/restore';
+
+import createOption from './option/create';
+import restoreOption from './option/restore';
+
+import createBrand from './brand/create';
+import restoreBrand from './brand/restore';
+
+import createTypes from './types/create';
+import restoreTypes from './types/restore';
+
+import createCategory from './category/create';
+import restoreCategory from './category/restore';
+
+import getProduct from './product/get';
+import createProduct from './product/create';
+import restoreProduct from './product/restore';
 
 
 export default class CopySaga {
@@ -34,31 +54,97 @@ export default class CopySaga {
   async getCopyProductSagaDefinition(ctx) {
     const sagaBuilder = new Sagas.SagaBuilder();
 
+    const newUuid = uniqName();
     const { uuid } = ctx['params'];
-    const { uuid: newUuid } = ctx['request']['body'];
-    const { Product } = models;
 
     return sagaBuilder
-      .step('Get Product')
+      .step('Get product')
       .invoke(async (params) => {
+        logger.info('Get product');
         const product = await getProduct(uuid);
         params.setProduct(product);
       })
 
-      .step('Copy client-product')
-      .invoke(async (props) => {
-        const { price, name, description, isView, fiscal, currency } = props.getProduct();
-        await Product.create({ uuid: newUuid, price, name, description, isView, fiscal, currencyCode: currency['code'] });
-      })
-
-      .step('Create attributes')
-      .invoke(async (props) => {
-        const product = props.getProduct();
-        await createProperties(newUuid, product);
-      })
-
-      .step('Get client-product')
+      .step('Copy product')
       .invoke(async (params) => {
+        logger.info('Copy product');
+        const product = params.getProduct();
+        await createProduct(newUuid, product);
+      })
+      .withCompensation(async () => {
+        logger.info('Destroy product');
+        await restoreProduct(newUuid);
+      })
+
+      .step('Copy gallery')
+      .invoke(async (params) => {
+        logger.info('Copy gallery');
+        const product = params.getProduct();
+        await createGallery(newUuid, product['gallery']);
+      })
+      .withCompensation(async () => {
+        logger.info('Destroy gallery');
+        await restoreGallery(newUuid);
+      })
+
+      .step('Copy attribute')
+      .invoke(async (params) => {
+        logger.info('Copy attributes');
+        const product = params.getProduct();
+        await createAttribute(newUuid, product['characteristics']);
+      })
+      .withCompensation(async () => {
+        logger.info('Destroy attributes');
+        await restoreAttributes(newUuid);
+      })
+
+      .step('Copy options')
+      .invoke(async (params) => {
+        logger.info('Copy options');
+        const product = params.getProduct();
+        await createOption(newUuid, product['options']);
+      })
+      .withCompensation(async () => {
+        logger.info('Destroy options');
+        await restoreOption(newUuid);
+      })
+
+      .step('Copy brand')
+      .invoke(async (params) => {
+        logger.info('Copy brand');
+        const product = params.getProduct();
+        await createBrand(newUuid, product['brands'][0]);
+      })
+      .withCompensation(async () => {
+        logger.info('Destroy brand');
+        await restoreBrand(newUuid);
+      })
+
+      .step('Copy type')
+      .invoke(async (params) => {
+        logger.info('Update type');
+        const product = params.getProduct();
+        await createTypes(newUuid, product['types'][0]);
+      })
+      .withCompensation(async () => {
+        logger.info('Destroy type');
+        await restoreTypes(newUuid);
+      })
+
+      .step('Copy category')
+      .invoke(async (params) => {
+        logger.info('Copy categories');
+        const product = params.getProduct();
+        await createCategory(newUuid, product['categories'][0]);
+      })
+      .withCompensation(async () => {
+        logger.info('Destroy category');
+        await restoreCategory(newUuid);
+      })
+
+      .step('Get product')
+      .invoke(async (params) => {
+        logger.info('Get product');
         const product = await getProduct(newUuid);
         params.setProduct(product)
       })

@@ -37,6 +37,7 @@ function Products() {
         <div className={styles['controls']}>
           <Button
             form={Button.FORM_CREATE}
+            mode={Button.MODE_SUCCESS}
             disabled={inProcess}
             onClick={() => handleAddProduct()}
           >Добавить</Button>

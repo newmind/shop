@@ -32,7 +32,7 @@ import createPromotion from './promotion/create';
 import restorePromotion from './promotion/restore';
 
 
-export default class CreateSaga {
+export default class CopySaga {
   ctx = null;
 
   constructor(ctx) {

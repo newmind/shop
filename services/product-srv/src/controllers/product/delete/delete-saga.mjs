@@ -4,8 +4,29 @@ import { sendEvent } from '@sys.packages/rabbit';
 
 import Sagas from 'node-sagas';
 
-import deleteImages from './deleteImages';
-import deleteProperties from './deleteProperties';
+import destroyGallery from './gallery/destroy';
+// import restoreGallery from './gallery/restore';
+
+import destroyAttribute from './attribute/destroy';
+// import restoreAttributes from './attribute/restore';
+
+import destroyOption from './option/destroy';
+// import restoreOption from './option/restore';
+
+import destroyBrand from './brand/destroy';
+// import restoreBrand from './brand/restore';
+
+import destroyTypes from './types/destroy';
+// import restoreTypes from './types/restore';
+
+import destroyCategory from './category/destroy';
+// import restoreCategory from './category/restore';
+
+import destroyProduct from './product/destroy';
+// import restoreProduct from './product/restore';
+
+import destroyPromotion from './promotion/destroy';
+// import restorePromotion from './promotion/restore';
 
 
 export default class DeleteSaga {
@@ -36,16 +57,46 @@ export default class DeleteSaga {
     const { uuid } = ctx['request']['body'];
 
     return sagaBuilder
-      .step('Удаление изображений')
+      .step('Destroy gallery')
       .invoke(async () => {
-        await deleteImages(uuid);
+        await destroyGallery(uuid);
       })
 
-      .step('Удаление товара')
-      .invoke(async (params) => {
-        await deleteProperties(uuid);
-        params.setProductUuid(uuid);
+      .step('Destroy attributes')
+      .invoke(async () => {
+        await destroyAttribute(uuid);
       })
+
+      .step('Destroy brand')
+      .invoke(async () => {
+        await destroyBrand(uuid);
+      })
+
+      .step('Destroy category')
+      .invoke(async () => {
+        await destroyCategory(uuid);
+      })
+
+      .step('Destroy option')
+      .invoke(async () => {
+        await destroyOption(uuid);
+      })
+
+      .step('Destroy product')
+      .invoke(async () => {
+        await destroyProduct(uuid);
+      })
+
+      .step('Destroy types')
+      .invoke(async () => {
+        await destroyTypes(uuid);
+      })
+
+      .step('Destroy promotions')
+      .invoke(async () => {
+        await destroyPromotion(uuid);
+      })
+
 
       .step('Send event')
       .invoke(async () => {
