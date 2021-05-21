@@ -21,6 +21,7 @@ function Operations() {
         <div className={styles['controls']}>
           <Button
             form={Button.FORM_CREATE}
+            mode={Button.MODE_SUCCESS}
             disabled={inProcess}
           >Добавить</Button>
         </div>
