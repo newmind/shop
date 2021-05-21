@@ -39,7 +39,12 @@ function CharacteristicsField({ fields }) {
         ))}
       </div>
       <div className={styles['controls']}>
-        <Button form={Button.FORM_CREATE} onClick={() => handleAdd()}>Дбавить характеристику</Button>
+        <Button
+          form={Button.FORM_CREATE}
+          mode={Button.MODE_PRIMARY}
+          size={Button.SIZE_SMALL}
+          onClick={() => handleAdd()}
+        >Дбавить характеристику</Button>
       </div>
     </div>
   );

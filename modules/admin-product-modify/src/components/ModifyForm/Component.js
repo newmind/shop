@@ -1,4 +1,5 @@
 
+// import { TabContainer, Tabs, Tab } from '@ui.packages/tabs'
 import { Row, Col, CheckBoxField, InputField, TextareaField, SelectField, ListField, Header } from '@ui.packages/kit';
 
 import React from 'react';
@@ -6,6 +7,7 @@ import { useSelector } from 'react-redux';
 import { Field, FieldArray } from 'redux-form';
 
 import Gallery from './Gallery';
+import OptionsField from './Options';
 import CharacteristicsField from './Characteristics';
 
 import styles from './default.module.scss';
@@ -96,6 +98,25 @@ function ModifyForm({ handleSubmit }) {
           </Row>
           <Row>
             <Col>
+              <InputField require name="price" label="Цена" disabled={inProcess} />
+            </Col>
+            <Col>
+              <SelectField
+                require
+                simple
+                name="currencyCode"
+                label="Валюта"
+                options={currencies}
+                optionKey="code"
+                optionValue="value"
+                disabled={inProcess}
+              />
+            </Col>
+            <Col />
+            <Col />
+          </Row>
+          <Row>
+            <Col>
               <TextareaField
                 require
                 name="description"
@@ -118,6 +139,15 @@ function ModifyForm({ handleSubmit }) {
 
       <div className={styles['block']}>
         <div className={styles['header']}>
+          <Header level={3}>Комплектация</Header>
+        </div>
+        <div className={styles['content']}>
+          <FieldArray name="options" component={OptionsField} disabled={inProcess} />
+        </div>
+      </div>
+
+      <div className={styles['block']}>
+        <div className={styles['header']}>
           <Header level={3}>План скидок</Header>
         </div>
         <div className={styles['content']}>
@@ -132,32 +162,6 @@ function ModifyForm({ handleSubmit }) {
                 disabled={inProcess}
               />
             </Col>
-          </Row>
-        </div>
-      </div>
-
-      <div className={styles['block']}>
-        <div className={styles['header']}>
-          <Header level={3}>Стоимость</Header>
-        </div>
-        <div className={styles['content']}>
-          <Row>
-            <Col>
-              <InputField require name="price" label="Цена" disabled={inProcess} />
-            </Col>
-            <Col>
-              <SelectField
-                require
-                simple
-                name="currencyCode"
-                label="Валюта"
-                options={currencies}
-                optionKey="code"
-                optionValue="value"
-                disabled={inProcess}
-              />
-            </Col>
-            <Col />
           </Row>
         </div>
       </div>

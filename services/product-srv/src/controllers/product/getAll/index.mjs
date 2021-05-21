@@ -17,7 +17,7 @@ export default () => async (ctx) => {
   let options = {};
 
   const { Op } = Sequelize;
-  const { Product, Currency, Attribute, Category, Brand, Type, Characteristic, CharacteristicAttribute, Unit, Gallery, Comment } = models;
+  const { Product, Currency, Attribute, Category, Brand, Type, Characteristic, CharacteristicAttribute, Unit, Gallery, Comment, ProductOption } = models;
   const {
     fiscal = null,
     limit = null,
@@ -177,6 +177,10 @@ export default () => async (ctx) => {
         model: Gallery,
         as: 'gallery',
         attributes: ['uuid'],
+      },
+      {
+        model: ProductOption,
+        as: 'options',
       },
       {
         model: Comment,

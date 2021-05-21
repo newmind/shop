@@ -12,6 +12,9 @@ import restoreGallery from './gallery/restore';
 import updateAttribute from './attribute/update';
 import restoreAttributes from './attribute/restore';
 
+import updateOption from './option/update';
+import restoreOption from './option/restore';
+
 import updateBrand from './brand/update';
 import restoreBrand from './brand/restore';
 
@@ -80,6 +83,18 @@ export default class UpdateSaga {
         logger.info('Restore update attributes');
         const attributes = params.getAttributes();
         await restoreAttributes(uuid, attributes);
+      })
+
+      .step('Update options')
+      .invoke(async (params) => {
+        logger.info('Update options');
+        const options = await updateOption(uuid, body['options']);
+        params.setOptions(options);
+      })
+      .withCompensation(async (params) => {
+        logger.info('Restore update options');
+        const options = params.getOptions();
+        await restoreOption(uuid, options);
       })
 
       .step('Update brand')

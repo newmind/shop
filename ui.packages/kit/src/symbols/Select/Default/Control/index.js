@@ -1,4 +1,6 @@
 
+import { Mode } from "@ui.packages/types";
+
 import types from 'prop-types';
 import React, { useState, useContext } from 'react';
 
@@ -18,7 +20,7 @@ function Control({
   onReset
 }) {
   const [isHover, setHover] = useState(false);
-  const { inProcess, isOpen, isDisabled, selectedObject, options, selectedValue, OptionTemplate, onTransformSelectedValue, transformValue } = useContext(Context);
+  const { inProcess, isOpen, isDisabled, selectedObject, options, mode, selectedValue, OptionTemplate, onTransformSelectedValue, transformValue } = useContext(Context);
 
   function handleSelectClick(event) {
     event.preventDefault();
@@ -40,6 +42,12 @@ function Control({
   const selectClassName = cn(styles['select'], {
     [styles['select--hover']]: isHover || isOpen,
     [styles['select--disabled']]: isDisabled,
+  }, {
+    [styles['mode--info']]: mode === Mode.INFO,
+    [styles['mode--danger']]: mode === Mode.DANGER,
+    [styles['mode--primary']]: mode === Mode.PRIMARY,
+    [styles['mode--success']]: mode === Mode.SUCCESS,
+    [styles['mode--warning']]: mode === Mode.WARNING,
   });
 
   const textColorClassName = cn(styles['text'], {

@@ -7,6 +7,15 @@ export default class UpdateSagaParams {
   _types = null;
   _categories = null;
   _promotions = null;
+  _options = null;
+
+  setOptions(promotions) {
+    this._options = promotions;
+  }
+
+  getOptions() {
+    return this._options;
+  }
 
   setPromotions(promotions) {
     this._promotions = promotions;

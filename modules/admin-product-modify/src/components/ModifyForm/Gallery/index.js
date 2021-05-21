@@ -51,6 +51,8 @@ function AddImageForm({ input, disabled }) {
       <div className={styles['controls']}>
         <Button
           form={Button.FORM_CREATE}
+          mode={Button.MODE_PRIMARY}
+          size={Button.SIZE_SMALL}
           disabled={disabled}
           onClick={() => handleAddImages()}
         >Добавить</Button>

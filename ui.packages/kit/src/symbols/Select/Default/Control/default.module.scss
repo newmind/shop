@@ -80,3 +80,43 @@
   flex: 0 0;
   margin: 0 7px 0 0;
 }
+
+.mode {
+  &--info,
+  &--info:hover {
+
+    border-color: $information;
+  }
+
+  &--primary,
+  &--primary:hover {
+
+    border-color: $primary;
+  }
+
+  &--success,
+  &--success:hover {
+
+    border-color: $success;
+  }
+
+  &--warning,
+  &--warning:hover {
+
+    border-color: $warning;
+  }
+
+  &--danger,
+  &--danger:hover {
+
+    border-color: $danger;
+  }
+
+  &--disabled {
+
+    background: $pale-grey;
+    border-color: $pale-lilac;
+    color: $gray;
+  }
+}
+

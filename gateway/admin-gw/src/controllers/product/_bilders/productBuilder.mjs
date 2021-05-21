@@ -35,6 +35,12 @@ export default function productBuilder(data) {
     comments: data['comments'],
     isView: data['isView'],
     updatedAt: data['updatedAt'],
+    options: data['options'].map((option) => ({
+      id: option['id'],
+      name: option['name'],
+      vendor: option['vendor'],
+      isTarget: option['isTarget'],
+    })),
     characteristics: data['characteristics'].map((characteristic) => ({
       ...characteristic,
       attributes: characteristic['attributes'].map((item) => ({

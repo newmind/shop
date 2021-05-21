@@ -58,8 +58,22 @@ const validate = (values) => {
     }
   });
 
+  const optionsErrors = [];
+  (values['options'] || []).forEach((option, index) => {
+    const optionErrors = {};
+
+    if ( ! option['name']) {
+      optionErrors['name'] = 'Неоходимо заполнить';
+      optionsErrors[index] = optionErrors;
+    }
+  });
+
   if ( !! charsErrors.length) {
     errors['characteristics'] = charsErrors;
+  }
+
+  if ( !! optionsErrors.length) {
+    errors['options'] = optionsErrors;
   }
 
   return errors;

@@ -4,13 +4,14 @@ import request from "@sys.packages/request";
 
 
 export default async function updateProperties(uuid) {
-  const { Product, Attribute, Unit, Gallery, Currency, Category, Type, Brand, Characteristic, CharacteristicAttribute } = models;
+  const { Product, Attribute, Unit, Gallery, Currency, Category, Type, Brand, Characteristic, CharacteristicAttribute, ProductOption } = models;
 
   const result = await Product.findOne({
     where: { uuid },
     attributes: ['uuid', 'name', 'description', 'isView', 'price', 'fiscal', 'updatedAt'],
     order: [
       ['gallery', 'order', 'asc'],
+      ['options', 'order', 'asc'],
       ['characteristics', 'order', 'asc'],
       ['characteristics', 'attributes', 'order', 'asc'],
     ],
@@ -84,6 +85,10 @@ export default async function updateProperties(uuid) {
         model: Gallery,
         as: 'gallery',
         attributes: ['uuid'],
+      },
+      {
+        model: ProductOption,
+        as: 'options',
       },
     ],
   });

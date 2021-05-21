@@ -47,6 +47,7 @@ function Select({
   disabled,
   options,
   value,
+  mode,
   placeholder,
   optionKey,
   optionValue,
@@ -70,29 +71,38 @@ function Select({
     function handleClick(event) {
       event.stopPropagation();
 
-      if (isOpen) {
-        const { current: wrapperElement } = wrapperRef;
-        const portalElement = document.querySelector('#selectOptionsPortal');
-        const { current: optionsElement } = optionsRef;
-
-        if (optionsElement && ! optionsElement.contains(event['target'])) {
-          handleClose();
-        }
-
-        if (portalElement && ! portalElement.contains(event['target']) && ! portalElement.contains(wrapperElement)) {
-          handleClose();
-        }
+      if ( ! isOpen) {
+        return null;
       }
+
+      const { current: wrapperElement } = wrapperRef;
+      const portalElement = document.querySelector('#selectOptionsPortal');
+      const { current: optionsElement } = optionsRef;
+
+      if (optionsElement && ! optionsElement.contains(event['target'])) {
+        handleClose();
+      }
+
+      if (portalElement && ! portalElement.contains(event['target']) && ! portalElement.contains(wrapperElement)) {
+        handleClose();
+      }
+    }
+
+    function handleScroll() {
+      if ( ! isOpen) {
+        return;
+      }
+      handleClose();
     }
 
     document.addEventListener('click', handleClick);
     if (document.querySelector('#scroller')) {
-      document.querySelector('#scroller').addEventListener('scroll', handleClose);
+      document.querySelector('#scroller').addEventListener('scroll', handleScroll);
     }
     return function() {
       document.removeEventListener('click', handleClick);
       if (document.querySelector('#scroller')) {
-        document.querySelector('#scroller').removeEventListener('scroll', handleClose);
+        document.querySelector('#scroller').removeEventListener('scroll', handleScroll);
       }
     };
   });
@@ -142,6 +152,7 @@ function Select({
     <Context.Provider value={{
       simple,
       value,
+      mode,
       isOpen,
       isDisabled: disabled || inProcess,
       selectedValue,

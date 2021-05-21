@@ -1,4 +1,5 @@
 
+import { Tabs, Tab, TabContainer} from '@ui.packages/tabs';
 import { Gallery, Breadcrumbs, Text } from '@ui.packages/kit';
 
 import React from 'react';
@@ -49,18 +50,32 @@ function Product() {
           <Information {...product} />
         </div>
       </div>
-      <div className={styles['aside']} />
-      <div className={styles['content']}>
-        <div className={styles['col']}>
-          <div className={styles['description']}>
-            <Text type={Text.TYPE_COMMENT}>{ product['description'] }</Text>
+      <Tabs name={'product'} defaultTab={'description'}>
+        <div className={styles['aside']}>
+          <div className={styles['content']}>
+            <div className={styles['tabs']}>
+              <Tab name={'description'}>Описание</Tab>
+              <Tab name={'characteristics'}>Характеристика</Tab>
+              <Tab name={'comments'}>Отзывы</Tab>
+            </div>
           </div>
-          <Characteristics />
         </div>
-        <div className={styles['col']}>
-          <Comments comments={product['comments']} />
+        <div className={styles['description']}>
+          <div className={styles['content']}>
+            <TabContainer to={'description'}>
+              <div className={styles['container']}>
+                <Text type={Text.TYPE_COMMENT}>{ product['description'] }</Text>
+              </div>
+            </TabContainer>
+            <TabContainer to={'characteristics'}>
+              <Characteristics />
+            </TabContainer>
+            <TabContainer to={'comments'}>
+              <Comments comments={product['comments']} />
+            </TabContainer>
+          </div>
         </div>
-      </div>
+      </Tabs>
     </article>
   );
 }

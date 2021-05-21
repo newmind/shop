@@ -5,10 +5,10 @@
 .tab {
 
   display: inline-block;
-  padding: 15px 24px;
+  padding: 10px 24px;
   cursor: pointer;
   color: $white;
-  border-radius: 5px;
+  border-radius: 4px;
   transition: background 200ms, color 200ms, border 200ms;
 
   & + & {

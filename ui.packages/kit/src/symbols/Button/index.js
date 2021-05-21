@@ -29,6 +29,16 @@ function ButtonFactory({ form, children, ...props }) {
 ButtonFactory.TYPE_BUTTON = 'button';
 ButtonFactory.TYPE_SUBMIT = 'submit';
 
+ButtonFactory.SIZE_LARGE = Size.LARGE;
+ButtonFactory.SIZE_SMALL = Size.SMALL;
+
+ButtonFactory.MODE_DEFAULT = Mode.DEFAULT;
+ButtonFactory.MODE_SUCCESS = Mode.SUCCESS;
+ButtonFactory.MODE_PRIMARY = Mode.PRIMARY;
+ButtonFactory.MODE_INFO = Mode.INFO;
+ButtonFactory.MODE_WARNING = Mode.WARNING;
+ButtonFactory.MODE_DANGER = Mode.DANGER;
+
 ButtonFactory.FORM_BAY = 'bay';
 ButtonFactory.FORM_CART = 'cart';
 ButtonFactory.FORM_LINK = 'link';

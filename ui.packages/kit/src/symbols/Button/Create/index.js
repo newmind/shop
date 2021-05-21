@@ -1,5 +1,5 @@
 
-import { Size } from '@ui.packages/types';
+import { Mode, Size } from '@ui.packages/types';
 
 import React from 'react';
 import types from 'prop-types';
@@ -8,8 +8,14 @@ import cn from 'classnames';
 import styles from './default.module.scss';
 
 
-function CreateButton({ className, children, disabled, size, onClick }) {
+function CreateButton({ className, mode, children, disabled, size, onClick }) {
   const classNameButton = cn(styles['button'], className, {
+    [styles['mode--info']]: mode === Mode.INFO,
+    [styles['mode--danger']]: mode === Mode.DANGER,
+    [styles['mode--primary']]: mode === Mode.PRIMARY,
+    [styles['mode--success']]: mode === Mode.SUCCESS,
+    [styles['mode--warning']]: mode === Mode.WARNING,
+  }, {
     [styles['disabled']]: disabled,
     [styles['size--small']]: size === Size.SMALL,
     [styles['size--large']]: size === Size.LARGE,
