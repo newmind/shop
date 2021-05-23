@@ -69,9 +69,8 @@ const slice = createSlice({
     removeProductRequestFailRequest(state) {
       state['inProcess'] = false;
     },
-    removeProductRequestSuccessAction(state, { payload }) {
+    removeProductRequestSuccessAction(state) {
       state['inProcess'] = false;
-      state['items'] = [...state['items']].filter((item) => (payload.indexOf(item['uuid']) === -1));
     },
 
     copyProductRequestAction(state) {

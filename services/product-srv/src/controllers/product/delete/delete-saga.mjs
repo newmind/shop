@@ -28,6 +28,9 @@ import destroyProduct from './product/destroy';
 import destroyPromotion from './promotion/destroy';
 // import restorePromotion from './promotion/restore';
 
+import destroyComment from './comments/destroy';
+// import restorePromotion from './promotion/restore';
+
 
 export default class DeleteSaga {
   ctx = null;
@@ -62,6 +65,11 @@ export default class DeleteSaga {
         await destroyGallery(uuid);
       })
 
+      .step('Destroy comments')
+      .invoke(async () => {
+        await destroyComment(uuid);
+      })
+
       .step('Destroy attributes')
       .invoke(async () => {
         await destroyAttribute(uuid);
@@ -82,11 +90,6 @@ export default class DeleteSaga {
         await destroyOption(uuid);
       })
 
-      .step('Destroy product')
-      .invoke(async () => {
-        await destroyProduct(uuid);
-      })
-
       .step('Destroy types')
       .invoke(async () => {
         await destroyTypes(uuid);
@@ -97,6 +100,10 @@ export default class DeleteSaga {
         await destroyPromotion(uuid);
       })
 
+      .step('Destroy product')
+      .invoke(async () => {
+        await destroyProduct(uuid);
+      })
 
       .step('Send event')
       .invoke(async () => {

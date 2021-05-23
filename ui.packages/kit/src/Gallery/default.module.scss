@@ -1,7 +1,8 @@
 
 @import "~@ui.packages/theme";
 
-.gallery {
+
+.wrapper {
 
   position: relative;
   display: flex;
@@ -10,114 +11,88 @@
   height: 100%;
   flex: 1 1;
   box-sizing: border-box;
+}
 
-  &__next {
+.content {
 
-    position: absolute;
-    top: 0;
-    right: 0;
-    bottom: 0;
-    display: flex;
-    width: 20%;
-    z-index: 30;
-    cursor: pointer;
-    align-items: center;
-    justify-content: flex-end;
-    padding: 0 20px 0 0;
-  }
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  display: flex;
+  flex-direction: row;
+  z-index: 10;
+}
 
-  &__next:hover &__icon {
-    color: $gray;
-  }
+.arrows {
 
-  &__prev {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  display: flex;
+  flex-direction: row;
+  flex: 1 0;
+  z-index: 20;
+}
 
-    position: absolute;
-    top: 0;
-    left: 0;
-    bottom: 0;
-    display: flex;
-    width: 20%;
-    z-index: 30;
-    cursor: pointer;
-    align-items: center;
-    padding: 0 0 0 20px;
-  }
+.prev,
+.next {
 
-  &__prev:hover &__icon {
+  display: flex;
+  flex-direction: column;
+  flex: 1 0;
+  width: 50%;
+  cursor: pointer;
+  align-items: flex-start;
+  justify-content: center;
+  text-shadow: 3px 0 $white, 0 3px $white, 0 -3px $white, -3px 0 $white;
+}
 
-    color: $gray;
-  }
+.next {
 
-  &__icon {
+  align-items: flex-end;
+}
 
-    display: inline-block;
-    font-size: 24px;
-    color: $pale-lilac;
-    transition: color 400ms;
-  }
+.prev:hover,
+.next:hover {
 
-  &__content {
+  .icon {
 
-    position: relative;
-    display: flex;
-    flex: 1 0 auto;
-    flex-direction: column;
-    z-index: 20;
-  }
-
-  &__count {
-
-    position: absolute;
-    bottom: 4px;
-    left: 50%;
-    display: inline-block;
-    background: $whitesmoke;
-    padding: 2px 2px 3px;
-    width: 50px;
-    text-align: center;
-    border-radius: 4px;
-    margin: 0 0 0 -24px;
-    color: #222;
-    z-index: 30;
-  }
-
-  &__numbers {
-
-    font-family: inherit;
-    font-weight: 700;
-    font-size: 11px;
+    transform: scale(1.2);
   }
 }
 
-.image {
+.icon {
 
-  position: relative;
-  display: flex;
-  flex: 1 1 auto;
-  flex-direction: column;
-  overflow: hidden;
+  display: inline-block;
+  font-size: 32px;
+  color: $coal-dark;
+  transition: transform 400ms;
+}
 
-  &__loading {
+.count {
 
-    display: flex;
-    flex: 1 0 auto;
-    flex-direction: column;
-    background: $whitesmoke;
-    color: $coal-dark;
-    font-family: inherit;
-    font-weight: 300;
-    font-size: 13px;
-    z-index: 20;
-    justify-content: center;
-    text-align: center;
-  }
+  position: absolute;
+  bottom: 4px;
+  left: 50%;
+  display: inline-block;
+  background: $coal-dark;
+  padding: 4px 9px 5px;
+  width: 50px;
+  text-align: center;
+  border-radius: 4px;
+  margin: 0 0 0 -34px;
+  z-index: 30;
+  box-shadow: 0 0 0 3px $white;
+}
 
-  &__element {
+.number {
 
-    position: absolute;
-    display: block;
-    border: none;
-    z-index: 10;
-  }
+  font-family: inherit;
+  font-weight: 700;
+  font-size: 14px;
+  color: $white;
 }

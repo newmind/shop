@@ -1,8 +1,12 @@
 
-import { Row, Col, InputField, Button, Draggable, CheckBoxField } from '@ui.packages/kit';
+import { selectInProcess } from '@modules/admin-product-modify';
+
+import {Row, Col, InputField, Button, Draggable, CheckBoxField, Header} from '@ui.packages/kit';
 
 import React from 'react';
 import types from 'prop-types';
+import { FieldArray } from "redux-form";
+import { useSelector } from "react-redux";
 
 import cn from 'classnames';
 import styles from './default.module.scss';
@@ -122,4 +126,20 @@ OptionsField.defaultProps = {
   disabled: false,
 };
 
-export default OptionsField;
+
+function Options() {
+  const inProcess = useSelector(selectInProcess);
+
+  return (
+    <div className={styles['block']}>
+      <div className={styles['header']}>
+        <Header level={3}>Комплектация</Header>
+      </div>
+      <div className={styles['content']}>
+        <FieldArray name="options" component={OptionsField} disabled={inProcess} />
+      </div>
+    </div>
+  );
+}
+
+export default Options;

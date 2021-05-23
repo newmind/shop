@@ -40,6 +40,8 @@ export const getPromotions = (params = {}) => async (dispatch) => {
     });
 
     dispatch(getPromotionsRequestSuccessAction(data));
+
+    return true;
   }
   catch(error) {
     dispatch(getPromotionsRequestFailAction());
@@ -53,6 +55,8 @@ export const getPromotions = (params = {}) => async (dispatch) => {
       mode: Mode.DANGER,
       autoClose: false,
     }));
+
+    return false;
   }
 };
 
@@ -71,6 +75,8 @@ export const getProducts = (params = {}) => async (dispatch) => {
     if (document.querySelector('#scroller')) {
       document.querySelector('#scroller').scroll(0, 0);
     }
+
+    return true;
   }
   catch(error) {
     dispatch(getProductsRequestFailAction());
@@ -84,20 +90,30 @@ export const getProducts = (params = {}) => async (dispatch) => {
       mode: Mode.DANGER,
       autoClose: false,
     }));
+
+    return false;
   }
 };
 
-export const removeProductById = (uuid) => async (dispatch) => {
+export const removeProductById = (uuid, params) => async (dispatch) => {
   try {
     dispatch(removeProductRequestAction());
 
-    const result = await request({
+    await request({
       method: 'delete',
       url: `/products`,
       data: { uuid },
     });
 
-    dispatch(removeProductRequestSuccessAction(result['data']));
+    const result = await request({
+      url: '/products',
+      method: 'get',
+      params,
+    });
+
+    dispatch(getProductsRequestSuccessAction(result));
+    dispatch(removeProductRequestSuccessAction());
+
     dispatch(pushNotification({
       title: 'Продукт удален',
       mode: Mode.SUCCESS,

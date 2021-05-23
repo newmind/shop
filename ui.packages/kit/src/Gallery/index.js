@@ -41,29 +41,30 @@ function Gallery({ index, items, path, valueKey, className, isList, size }) {
 
   const src = getFileName();
   const hasCount = hasCountItems(items);
-  const classNameGalleryWrapper = cn(className, styles['gallery']);
-  const classNamePrevItem = cn(styles['gallery__icon'], 'fa fa-chevron-left');
-  const classNameNextItem = cn(styles['gallery__icon'], 'fa fa-chevron-right');
+  const classNameGalleryWrapper = cn(className, styles['wrapper']);
+  const classNamePrevItem = cn(styles['icon'], 'fa fa-chevron-left');
+  const classNameNextItem = cn(styles['icon'], 'fa fa-chevron-right');
 
   return (
     <div className={classNameGalleryWrapper}>
-      {isList && hasCount && (
-        <span className={styles['gallery__prev']} onClick={handlePrevClick}>
-          <span className={classNamePrevItem} />
-        </span>
-      )}
-      <div className={styles['gallery__content']}>
+      <div className={styles['content']}>
         <Image size="cover" src={src} />
-        {isList && hasCount && (
-          <div className={styles['gallery__count']}>
-            <span className={styles['gallery__numbers']}>{activeIndex + 1} из {items.length}</span>
-          </div>
-        )}
+
       </div>
       {isList && hasCount && (
-        <span className={styles['gallery__next']} onClick={handleNextClick}>
-          <span className={classNameNextItem} />
-        </span>
+        <div className={styles['arrows']}>
+          <span className={styles['prev']} onClick={handlePrevClick}>
+            <span className={classNamePrevItem} />
+          </span>
+          <span className={styles['next']} onClick={handleNextClick}>
+            <span className={classNameNextItem} />
+          </span>
+          {hasCount && (
+            <div className={styles['count']}>
+              <span className={styles['number']}>{activeIndex + 1} из {items.length}</span>
+            </div>
+          )}
+        </div>
       )}
     </div>
   );

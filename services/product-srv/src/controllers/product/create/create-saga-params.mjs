@@ -1,6 +1,7 @@
 
 export default class CreateSagaParams {
   _product = null;
+  _productUuid = null;
   _gallery = null;
   _attributes = null;
   _brandId = null;
@@ -71,5 +72,13 @@ export default class CreateSagaParams {
 
   setProduct(product) {
     this._product = product;
+  }
+
+  getProductUUID() {
+    return this._productUuid;
+  }
+
+  setProductUUID(product) {
+    this._productUuid = product;
   }
 }

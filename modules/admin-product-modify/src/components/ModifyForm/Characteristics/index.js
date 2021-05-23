@@ -1,8 +1,11 @@
 
-import { InputField, Button } from '@ui.packages/kit';
+import { selectInProcess } from '@modules/admin-product-modify';
+
+import { InputField, Button, Header } from '@ui.packages/kit';
 
 import React from 'react';
 import { FieldArray } from 'redux-form';
+import { useSelector } from 'react-redux';
 
 import AttributesField from "./Attributes";
 
@@ -50,4 +53,19 @@ function CharacteristicsField({ fields }) {
   );
 }
 
-export default CharacteristicsField;
+function Characteristics() {
+  const inProcess = useSelector(selectInProcess);
+
+  return (
+    <div className={styles['block']}>
+      <div className={styles['header']}>
+        <Header level={3}>Характеристика</Header>
+      </div>
+      <div className={styles['content']}>
+        <FieldArray name="characteristics" component={CharacteristicsField} disabled={inProcess} />
+      </div>
+    </div>
+  );
+}
+
+export default Characteristics;

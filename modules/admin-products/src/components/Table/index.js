@@ -3,12 +3,12 @@ import numeral from '@packages/numeral';
 
 import { Mode } from '@ui.packages/types';
 import { Column, Table } from "@ui.packages/table";
-import { nounDeclension } from '@ui.packages/utils';
-import { Actions, Gallery, Header, CheckBox, Text } from "@ui.packages/kit";
+import { nounDeclension, queryToObject } from '@ui.packages/utils';
 import { Confirm, openDialog, closeDialog } from "@ui.packages/dialog";
+import { Actions, Image, Header, CheckBox, Text } from "@ui.packages/kit";
 
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 
 import Types from './Types';
@@ -21,8 +21,10 @@ import { copyProductById, removeProductById, updateStatusProductById } from '../
 
 
 function List() {
-  const navigate = useNavigate();
   const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const location = useLocation();
+
   const meta = useSelector(selectMeta);
   const items = useSelector(selectItems);
   const inProcess = useSelector(selectInProcess);
@@ -45,7 +47,9 @@ function List() {
   }
 
   async function handleConfirmRemove() {
-    await dispatch(removeProductById([productId]));
+    const query = queryToObject(location['search']);
+
+    await dispatch(removeProductById([productId], query));
 
     setProductId(null);
     dispatch(closeDialog('remove-confirm'));
@@ -83,7 +87,7 @@ function List() {
           alias="gallery"
           width={140}
         >
-          {(items) => <Gallery className={styles['image']} valueKey="uuid" size="small"  items={items} path={`${process.env['REACT_APP_API_HOST']}/gallery`} />}
+          {(items) => items[0] && <Image className={styles['image']} src={`${process.env['REACT_APP_API_HOST']}/gallery/${items[0]['uuid']}`} />}
         </Column>
         <Column
           title="Основные"

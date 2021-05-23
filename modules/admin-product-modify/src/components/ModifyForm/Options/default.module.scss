@@ -5,6 +5,37 @@
 .wrapper {
 
   display: block;
+
+  & + & {
+
+    margin: 10px 0 0;
+  }
+}
+
+.block {
+
+  display: block;
+
+  & + & {
+
+    margin: 50px 0 0;
+  }
+}
+
+.header {
+
+  display: block;
+  padding: 0 0 0 20px;
+}
+
+.content {
+
+  display: block;
+  margin: 10px 0 0;
+  border: 1px solid $pale-lilac;
+  background: $white;
+  border-radius: 5px;
+  padding: 40px 50px;
 }
 
 .attrs {

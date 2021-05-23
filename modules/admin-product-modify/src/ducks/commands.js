@@ -63,6 +63,8 @@ export const getBrands = () => async (dispatch) => {
     });
 
     dispatch(getBrandsRequestSuccessAction(data));
+
+    return true;
   }
   catch(error) {
     dispatch(getBrandsRequestFailAction(error));
@@ -76,9 +78,9 @@ export const getBrands = () => async (dispatch) => {
       content: `${error['data']['message']} (${error['data']['code']})`,
       autoClose: false,
     }));
-  }
 
-  return null;
+    return false;
+  }
 };
 
 export const getTypes = () => async (dispatch) => {
@@ -91,6 +93,8 @@ export const getTypes = () => async (dispatch) => {
     });
 
     dispatch(getTypesRequestSuccessAction(data));
+
+    return true;
   }
   catch(error) {
     dispatch(getTypesRequestFailAction(error));
@@ -104,16 +108,16 @@ export const getTypes = () => async (dispatch) => {
       content: `${error['data']['message']} (${error['data']['code']})`,
       autoClose: false,
     }));
-  }
 
-  return null;
+    return false;
+  }
 };
 
 export const getCategories = () => async (dispatch) => {
   try {
     dispatch(getCategoriesRequestAction());
 
-    const result = await request({
+    const { data } = await request({
       method: 'get',
       url: '/categories',
       params: {
@@ -121,7 +125,9 @@ export const getCategories = () => async (dispatch) => {
       }
     });
 
-    dispatch(getCategoriesRequestSuccessAction(result['data']));
+    dispatch(getCategoriesRequestSuccessAction(data));
+
+    return true;
   }
   catch(error) {
     dispatch(getCategoriesRequestFailAction(error));
@@ -135,9 +141,9 @@ export const getCategories = () => async (dispatch) => {
       content: `${error['data']['message']} (${error['data']['code']})`,
       autoClose: false,
     }));
-  }
 
-  return null;
+    return false;
+  }
 };
 
 export const getCurrencies = () => async (dispatch) => {
@@ -150,6 +156,8 @@ export const getCurrencies = () => async (dispatch) => {
     });
 
     dispatch(getCurrenciesRequestSuccessAction(result['data']));
+
+    return true;
   }
   catch(error) {
     dispatch(getCurrenciesRequestFailAction(error));
@@ -163,9 +171,9 @@ export const getCurrencies = () => async (dispatch) => {
       content: `${error['data']['message']} (${error['data']['code']})`,
       autoClose: false,
     }));
-  }
 
-  return null;
+    return false;
+  }
 };
 
 export const getAttributes = () => async (dispatch) => {
@@ -178,6 +186,8 @@ export const getAttributes = () => async (dispatch) => {
     });
 
     dispatch(getAttributesRequestSuccessAction(result['data']));
+
+    return true;
   }
   catch(error) {
     dispatch(getAttributesRequestFailAction(error));
@@ -191,9 +201,9 @@ export const getAttributes = () => async (dispatch) => {
       content: `${error['data']['message']} (${error['data']['code']})`,
       autoClose: false,
     }));
-  }
 
-  return null;
+    return false;
+  }
 };
 
 export const getProductById = (uuid) => async (dispatch) => {
@@ -210,6 +220,8 @@ export const getProductById = (uuid) => async (dispatch) => {
     });
 
     dispatch(getProductRequestSuccessAction(result['data']));
+
+    return true;
   }
   catch(error) {
     dispatch(getProductRequestFailAction(error));
@@ -223,9 +235,9 @@ export const getProductById = (uuid) => async (dispatch) => {
       content: `${error['data']['message']} (${error['data']['code']})`,
       autoClose: false,
     }));
-  }
 
-  return null;
+    return false;
+  }
 };
 
 export const updateProductsById = (data) => async (dispatch) => {
@@ -269,8 +281,6 @@ export const updateProductsById = (data) => async (dispatch) => {
       autoClose: false,
     }));
   }
-
-  return null;
 };
 
 export const createProduct = (data) => async dispatch => {
@@ -318,13 +328,13 @@ export const deleteImages = (uuid) => async (dispatch) => {
   try {
     dispatch(deleteImageRequestAction());
 
-    const result = await request({
+    const { data } = await request({
       url: `/gallery`,
       method: 'delete',
       data: { uuid },
     });
 
-    dispatch(deleteImageRequestSuccessAction(result['data']));
+    dispatch(deleteImageRequestSuccessAction(data));
     dispatch(pushNotification({
       title: 'Изображения успешно удалено',
       type: Mode.SUCCESS,
@@ -348,12 +358,14 @@ export const getGallery = () => async (dispatch) => {
   try {
     dispatch(getGalleryRequestAction());
 
-    const result = await request({
+    const { data } = await request({
       url: `/gallery`,
       method: 'get',
     });
 
-    dispatch(getGalleryRequestSuccessAction(result['data']));
+    dispatch(getGalleryRequestSuccessAction(data));
+
+    return true;
   }
   catch(error) {
     dispatch(getGalleryRequestFailAction(error));
@@ -366,21 +378,23 @@ export const getGallery = () => async (dispatch) => {
       content: error['message'],
       type: Mode.DANGER,
     }));
-  }
 
-  return null;
+    return false;
+  }
 };
 
 export const getPromotions = () => async (dispatch) => {
   try {
     dispatch(getPromotionsRequestAction());
 
-    const result = await request({
+    const { data } = await request({
       url: `/promotions`,
       method: 'get',
     });
 
-    dispatch(getPromotionsRequestSuccessAction(result['data']));
+    dispatch(getPromotionsRequestSuccessAction(data));
+
+    return true;
   }
   catch(error) {
     dispatch(getPromotionsRequestFailAction(error));
@@ -393,7 +407,7 @@ export const getPromotions = () => async (dispatch) => {
       content: error['message'],
       type: Mode.DANGER,
     }));
-  }
 
-  return null;
+    return false;
+  }
 };

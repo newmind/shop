@@ -8,11 +8,11 @@ import cn from 'classnames';
 import styles from "./defaults.module.scss";
 
 
-function Tab({ name, setActiveTab, tabs, caption, count, children }) {
+function Tab({ name, setActiveTab, tabs, caption, count, children, Component }) {
   const { tabsName, onChange } = useContext(Context);
 
   function handleSetActiveTab() {
-    onChange(name);
+    onChange && onChange(name);
     setActiveTab(tabsName, name)
   }
 
@@ -20,6 +20,15 @@ function Tab({ name, setActiveTab, tabs, caption, count, children }) {
   const classNameTab = cn(styles['tab'], {
     [styles['tab--active']]: (activeTab === name),
   });
+
+
+  if (Component) {
+    return (
+      <Component onClick={handleSetActiveTab} isActive={activeTab === name}>
+        {children || caption}
+      </Component>
+    );
+  }
 
   return (
     <span className={classNameTab} onClick={handleSetActiveTab}>
@@ -33,6 +42,7 @@ function Tab({ name, setActiveTab, tabs, caption, count, children }) {
 
 Tab.propTypes = {
   caption: types.string,
+  Component: types.any,
   name: types.string,
   count: types.number,
   tabs: types.object.isRequired,
@@ -41,6 +51,7 @@ Tab.propTypes = {
 
 Tab.defaultProps = {
   caption: 'No caption',
+  Component: null,
   name: '',
   count: null,
   tabs: {},
