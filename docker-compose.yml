@@ -6,6 +6,11 @@ services:
     container_name: postgre_sql
     build: ./postgresql
     restart: always
+    logging:
+      driver: "json-file"
+      options:
+        max-file: "5"
+        max-size: 10m
     ports:
       - 50004:5432
 
@@ -13,6 +18,11 @@ services:
     container_name: rabbit_mq
     build: ./rabbit
     restart: always
+    logging:
+      driver: "json-file"
+      options:
+        max-file: "5"
+        max-size: 10m
     ports:
       - 50002:15672
 
@@ -22,6 +32,11 @@ services:
       context: ./
       dockerfile: Dockerfile.mail-srv
     restart: always
+    logging:
+      driver: "json-file"
+      options:
+        max-file: "5"
+        max-size: 10m
 
   identity_srv:
     container_name: identity_srv
@@ -29,6 +44,11 @@ services:
       context: ./
       dockerfile: Dockerfile.identity-srv
     restart: always
+    logging:
+      driver: "json-file"
+      options:
+        max-file: "5"
+        max-size: 10m
     depends_on:
       - db
       - mail_srv
@@ -42,6 +62,11 @@ services:
       context: ./
       dockerfile: Dockerfile.customer-srv
     restart: always
+    logging:
+      driver: "json-file"
+      options:
+        max-file: "5"
+        max-size: 10m
     depends_on:
       - db
     links:
@@ -53,6 +78,11 @@ services:
       context: ./
       dockerfile: Dockerfile.gallery-srv
     restart: always
+    logging:
+      driver: "json-file"
+      options:
+        max-file: "5"
+        max-size: 10m
     depends_on:
       - db
     links:
@@ -64,6 +94,11 @@ services:
       context: ./
       dockerfile: Dockerfile.promotion-srv
     restart: always
+    logging:
+      driver: "json-file"
+      options:
+        max-file: "5"
+        max-size: 10m
     depends_on:
       - db
       - rabbit
@@ -77,6 +112,11 @@ services:
       context: ./
       dockerfile: Dockerfile.pikassa-srv
     restart: always
+    logging:
+      driver: "json-file"
+      options:
+        max-file: "5"
+        max-size: 10m
     depends_on:
       - db
       - rabbit
@@ -90,6 +130,11 @@ services:
       context: ./
       dockerfile: Dockerfile.operation-srv
     restart: always
+    logging:
+      driver: "json-file"
+      options:
+        max-file: "5"
+        max-size: 10m
     depends_on:
       - db
       - rabbit
@@ -111,6 +156,11 @@ services:
       context: ./
       dockerfile: Dockerfile.product-srv
     restart: always
+    logging:
+      driver: "json-file"
+      options:
+        max-file: "5"
+        max-size: 10m
     depends_on:
       - db
       - rabbit
@@ -131,6 +181,11 @@ services:
       context: ./
       dockerfile: Dockerfile.admin-gw
     restart: always
+    logging:
+      driver: "json-file"
+      options:
+        max-file: "5"
+        max-size: 10m
     depends_on:
       - rabbit
       - product_srv
@@ -155,6 +210,11 @@ services:
       context: ./
       dockerfile: Dockerfile.client-gw
     restart: always
+    logging:
+      driver: "json-file"
+      options:
+        max-file: "5"
+        max-size: 10m
     depends_on:
       - rabbit
       - product_srv
@@ -177,6 +237,11 @@ services:
       context: ./
       dockerfile: Dockerfile.admin-ui
     restart: always
+    logging:
+      driver: "json-file"
+      options:
+        max-file: "5"
+        max-size: 10m
     depends_on:
       - admin_gw
     links:
@@ -193,6 +258,11 @@ services:
       context: ./
       dockerfile: Dockerfile.client-ui
     restart: always
+    logging:
+      driver: "json-file"
+      options:
+        max-file: "5"
+        max-size: 10m
     depends_on:
       - client_gw
     links:
@@ -208,6 +278,11 @@ services:
     container_name: certbot
     image: certbot/certbot
     restart: unless-stopped
+    logging:
+      driver: "json-file"
+      options:
+        max-file: "5"
+        max-size: 10m
     volumes:
       - ./data/certbot/conf:/etc/letsencrypt:rw
       - ./data/certbot/www:/var/www/certbot:rw
@@ -218,6 +293,11 @@ services:
     container_name: proxy
     build: ./nginx
     restart: unless-stopped
+    logging:
+      driver: "json-file"
+      options:
+        max-file: "5"
+        max-size: 10m
     depends_on:
       - admin_ui
       - client_ui
