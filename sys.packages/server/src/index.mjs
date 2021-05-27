@@ -9,6 +9,7 @@ import Koa from 'koa';
 import http from "http";
 import Router from 'koa-router';
 import cookie from 'koa-cookie';
+import userAgent from 'koa2-useragent';
 import bodyParser from 'koa-bodyparser';
 
 import CORS from "./cors.mjs";
@@ -47,6 +48,9 @@ export class Server {
 
     this._koa = new Koa();
 
+    this._koa.proxy = true;
+
+    this._koa.use(userAgent());
     this._koa.use(loggerRequests);
 
     this._koa.use(bodyParser({
@@ -74,7 +78,8 @@ export class Server {
       this._koa.use(middleware({
         cookieName: this._options.cookie.name,
         secret: this._options.cookie.secret,
-        checkUrl: this._options.cookie.endpoint,
+        checkUrl: this._options.cookie.checkUrl,
+        refreshUrl: this._options.cookie.refreshUrl,
       }));
 
       this._createRouters(this._options.authRoutes);
@@ -98,7 +103,7 @@ export class Server {
       await createSocket(this._server, { path: this._options.socket.path });
     }
 
-    this._server.listen(this._options.server.port, () => {
+    this._server.listen(this._options.server.port, '0.0.0.0', () => {
       logger['info']('Server started on port ' + this._options.server.port);
     });
   }

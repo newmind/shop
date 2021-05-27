@@ -1,30 +1,37 @@
 
 module.exports = {
-  async up(queryInterface, Sequelize) {
+  async up(queryInterface, DataType) {
     const transaction = await queryInterface.sequelize.transaction();
     try {
 
       await queryInterface.createTable('RefreshTokens', {
         id: {
-          type: Sequelize.INTEGER,
+          type: DataType.INTEGER,
           primaryKey: true,
           autoIncrement: true,
           index: true,
         },
-        token: {
-          type: Sequelize.STRING(255),
-          index: true,
+        userId: {
+          type: DataType.INTEGER,
+        },
+        refreshToken: {
+          type: DataType.STRING(255),
+        },
+        userAgent: {
+          type: DataType.STRING(255),
         },
         ip: {
-          type: Sequelize.STRING(11),
-          index: true,
+          type: DataType.STRING(15),
+        },
+        expiresIn: {
+          type: DataType.BIGINT,
         },
         createdAt: {
-          type: Sequelize.DATE,
+          type: DataType.DATE,
         },
         updatedAt: {
-          type: Sequelize.DATE,
-        }
+          type: DataType.DATE,
+        },
       });
 
       await transaction.commit();

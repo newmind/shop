@@ -1,29 +1,30 @@
 
 module.exports = {
-  async up(queryInterface, Sequelize) {
+  async up(queryInterface, DataType) {
     const transaction = await queryInterface.sequelize.transaction();
     try {
 
       await queryInterface.createTable('Users', {
         id: {
-          type: Sequelize.INTEGER,
+          type: DataType.INTEGER,
           primaryKey: true,
           autoIncrement: true,
           index: true,
         },
         login: {
-          type: Sequelize.STRING(125),
+          type: DataType.STRING(125),
           index: true,
+          unique: true,
         },
         password: {
-          type: Sequelize.STRING(255),
+          type: DataType.STRING(255),
         },
         createdAt: {
-          type: Sequelize.DATE,
+          type: DataType.DATE,
         },
         updatedAt: {
-          type: Sequelize.DATE,
-        }
+          type: DataType.DATE,
+        },
       });
 
       await transaction.commit();

@@ -4,8 +4,8 @@
     "port": 5432,
     "host": "localhost",
     "database": "promotion_srv",
-    "username": "postgres",
-    "password": "postgres",
+    "username": "admin",
+    "password": "1Ctdfcnjgjkm",
     "dialect": "postgres"
   },
   "production": {

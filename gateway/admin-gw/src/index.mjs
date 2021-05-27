@@ -16,7 +16,8 @@ import rabbit from './rabbit';
       cookie: {
         secret: process.env['JWT_SECRET'],
         name: process.env['COOKIE_NAME'],
-        endpoint: process.env['IDENTITY_API_SRV'] + '/check',
+        checkUrl: process.env['IDENTITY_API_SRV'] + '/check',
+        refreshUrl: process.env['IDENTITY_API_SRV'] + '/refresh',
       },
       server: {
         port: process.env['PORT'],

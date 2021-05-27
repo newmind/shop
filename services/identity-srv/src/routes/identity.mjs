@@ -1,5 +1,5 @@
 
-import { connect, check, getAll, update } from '../controllers/Identity';
+import { connect, check, getAll, update, refresh } from '../controllers/Identity';
 
 
 export default (router) => {
@@ -9,7 +9,6 @@ export default (router) => {
     .put('/v1/api/users/:id', update())
 
     .post('/v1/api/check', check())
-    // .post('/v1/api/refresh', refresh())
+    .post('/v1/api/refresh', refresh())
     .post('/v1/api/connect', connect());
-    // .post('/v1/api/sign-up', signUp());
 }

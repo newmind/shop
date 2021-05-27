@@ -28,5 +28,15 @@ export default function (sequelize, DataType) {
     timestamps: false,
   });
 
+  Role.associate = ({ User, UserRole }) => {
+
+    Role.belongsToMany(User, {
+      through: UserRole,
+      foreignKey: 'roleId',
+      otherKey: 'userId',
+      as: 'user',
+    });
+  };
+
   return Role;
 };

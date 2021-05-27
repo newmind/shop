@@ -10,6 +10,7 @@ export default () => async (ctx) => {
   const { data } = await request({
     method: 'post',
     url: process.env['IDENTITY_API_SRV'] + '/connect',
+    headers: { 'User-Agent': ctx.headers['user-agent'] },
     data: formData,
   });
 
@@ -21,7 +22,6 @@ export default () => async (ctx) => {
     httpOnly: true,
   });
 
-  ctx.status = 200;
   ctx.body = {
     success: true,
     data: null,

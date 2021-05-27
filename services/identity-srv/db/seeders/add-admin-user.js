@@ -16,6 +16,26 @@ module.exports = {
           transaction
         });
 
+      await queryInterface.bulkInsert('Roles', [
+        {
+          code: 'admin',
+          name: 'Администратор'
+        },
+      ],
+      {
+        transaction,
+      });
+
+      await queryInterface.bulkInsert('UserCustomers', [
+        {
+          customerId: 1,
+          userId: 1,
+        },
+      ],
+      {
+        transaction,
+      });
+
       await transaction.commit();
 
     } catch (err) {

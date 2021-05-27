@@ -1,14 +1,15 @@
 
+import { NetworkError, UnauthorizedError } from '@packages/errors';
+
 import logger from "@sys.packages/logger";
 import request from "@sys.packages/request";
-import { UnauthorizedError } from '@packages/errors';
 
 import jwt from 'jsonwebtoken';
 
 export const { TokenExpiredError, JsonWebTokenError } = jwt;
 
 
-function resetCookie(ctx, name) {
+export function resetCookie(ctx, name) {
   ctx.cookies.set(name, null, { httpOnly: true });
 }
 
@@ -26,7 +27,7 @@ export const getCookie = async (ctx, name) => {
 
   logger.info('Cookie: ' + JSON.stringify(data));
 
-  if ( ! data['token'] || ! data['refreshToken']) {
+  if ( ! data['accessToken'] || ! data['refreshToken']) {
     logger.info('Неверный формат объекта cookie');
     resetCookie(ctx, name);
     throw new UnauthorizedError({ code: '2.2.2', message: 'settings not authorize' });
@@ -43,34 +44,30 @@ export const checkCookie = async (url, data) => {
   });
 
   return {
-    status: 200,
+    success: true,
     data: result['data'],
   };
 };
 
-// const refreshToken = async (cookie, { serviceUrl }) => {
-//   try {
-//     const { data } = await request({
-//       url: `${serviceUrl}/refresh`,
-//       method: 'post',
-//       data: cookie,
-//     });
-//
-//     return {
-//       status: 200,
-//       data: data['data'],
-//     };
-//
-//   } catch(error) {
-//
-//     return {
-//       status: 500,
-//       data: null,
-//     };
-//   }
-// };
+const refreshToken = async (url, data, ctx) => {
+  const result = await request({
+    url,
+    method: 'post',
+    headers: ctx['headers'],
+    data,
+  });
 
-export const decode = (token, secret) => {
+  return {
+    success: true,
+    data: result['data'],
+  };
+};
+
+export const decode = (token) => {
+  return jwt.decode(token, { complete: true });
+}
+
+export const verify = (token, secret) => {
   return new Promise((resolve, reject) => {
     jwt.verify(token, secret, (err, decoded) => {
       if (err) {
@@ -89,23 +86,33 @@ export const sign = (data, secret) => {
 
 
 export const middleware = (options) => async (ctx, next) => {
+  logger.info('Получение данных cookie');
+  const cookie = await getCookie(ctx, options['cookieName']);
+
   try {
-    logger.info('Получение данных cookie');
-    const cookie = await getCookie(ctx, options['cookieName']);
     logger.info('Проверка авторизованного токена');
     await checkCookie(options['checkUrl'], cookie);
 
-    logger.info('Декодирование авторизационного токена: ' + cookie['token']);
-    ctx.user = await decode(cookie['token'], options['secret']);
+    logger.info('Декодирование авторизационного токена: ' + cookie['accessToken']);
+    ctx.user = await verify(cookie['accessToken'], options['secret']);
 
     await next();
   }
   catch (error) {
 
-    logger.error(error);
-
     if (error instanceof UnauthorizedError) {
       resetCookie(ctx, options['cookieName']);
+      throw new UnauthorizedError({ code: '2.2.2', message: 'settings not authorize' });
+    }
+
+    if (error instanceof NetworkError) {
+      const { data } = await refreshToken(options['refreshUrl'], cookie, ctx);
+
+      ctx.cookies.set(options['cookieName'], encodeURIComponent(JSON.stringify(data)), {
+        httpOnly: true,
+      });
+
+      return await next();
     }
 
     throw error;

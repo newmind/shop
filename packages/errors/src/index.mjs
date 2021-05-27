@@ -148,6 +148,18 @@ export class SyntaxError extends BaseError {
   }
 }
 
+export class ExpiredError extends BaseError {
+  constructor(data = 'Время токена истекло') {
+    super(500, data);
+
+    this.name = 'ExpiredError';
+
+    if ('captureStackTrace' in Error) {
+      Error.captureStackTrace(this, ExpiredError);
+    }
+  }
+}
+
 
 
 
