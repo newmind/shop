@@ -2,7 +2,7 @@
 import { NotfoundError } from '@packages/errors';
 
 import { sign } from '@sys.packages/jwt';
-import { models } from '@sys.packages/db';
+import { models, sequelize } from '@sys.packages/db';
 import { genHash256, token } from '@sys.packages/utils';
 
 
@@ -10,12 +10,15 @@ export default () => async (ctx) => {
   const { User, RefreshToken } = models;
   const { login, password } = ctx['request']['body'];
 
+  const transaction = await sequelize.transaction();
+
   const hashPassword = genHash256(password, process.env['PASSWORD_SALT']);
   const user = await User.findOne({
     where: {
       login,
       password: hashPassword
     },
+    transaction,
   });
 
   if ( ! user) {
@@ -25,7 +28,7 @@ export default () => async (ctx) => {
   // создаем токен для обновления
   const today = Date.now();
   const expirationTime = Number(today + Number(process.env['JWT_EXP'] * 60 * 1000));
-  const expirationFullTime = Number(today + Number(process.env['JWT_EXP_END'] * 60 * 60 * 1000));
+  const expirationFullTime = Number(today + Number(process.env['JWT_EXP_END'] * 24 * 60 * 1000));
   const refreshToken = token(today + process.env['JWT_SECRET']).digest('hex');
 
   const currentIP = ctx['ips'].length > 0 ? ctx['ips'][ctx['ips'].length - 1] : ctx['ip'];
@@ -34,6 +37,7 @@ export default () => async (ctx) => {
     where: {
       userId: user['id'],
     },
+    transaction,
   });
   await RefreshToken.create({
     userId: user['id'],
@@ -41,7 +45,11 @@ export default () => async (ctx) => {
     userAgent: ctx['userAgent']['source'],
     ip: currentIP,
     expiresIn: expirationFullTime,
+  }, {
+    transaction,
   });
+
+  await transaction.commit();
 
   // организуем авторизационный объект
   const payload = {

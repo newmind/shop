@@ -1,7 +1,7 @@
 
 import { UnauthorizedError } from '@packages/errors';
 
-import { models } from '@sys.packages/db';
+import { models, sequelize } from '@sys.packages/db';
 import { decode, sign } from '@sys.packages/jwt';
 import { token } from "@sys.packages/utils";
 
@@ -11,12 +11,14 @@ export default () => async (ctx) => {
   const { accessToken, refreshToken } = ctx['request']['body'];
 
   const { payload } = decode(accessToken);
+  const transaction = await sequelize.transaction();
 
   const result = await RefreshToken.findOne({
     where: {
       userId: payload['id'],
       refreshToken,
     },
+    transaction,
   });
 
   if ( ! result) {
@@ -35,8 +37,8 @@ export default () => async (ctx) => {
     throw new UnauthorizedError('Пользователь не авторизован');
   }
 
-  if (today >= data['expiresIn']) {
-    throw new UnauthorizedError('Пользователь не авторизован');
+  if (Number(today) >= Number(data['expiresIn'])) {
+    throw new UnauthorizedError('Пользователь не авторизован. Токен отозван');
   }
 
   // обновляем токен
@@ -52,8 +54,11 @@ export default () => async (ctx) => {
     where: {
       userId: data['userId'],
       refreshToken,
-    }
+    },
+    transaction,
   });
+
+  await transaction.commit();
 
   const newPayload = {
     ...payload,
