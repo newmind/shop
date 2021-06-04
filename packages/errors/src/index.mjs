@@ -150,7 +150,7 @@ export class SyntaxError extends BaseError {
 
 export class ExpiredError extends BaseError {
   constructor(data = 'Время токена истекло') {
-    super(500, data);
+    super(419, data);
 
     this.name = 'ExpiredError';
 

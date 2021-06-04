@@ -8,7 +8,7 @@ export default () => async (ctx) => {
   const { id } = ctx['user'] || {};
 
   if ( ! id) {
-    throw new UnauthorizedError({ code: '401', message: 'settings не найден' });
+    throw new UnauthorizedError({ code: '401', message: 'id не найден' });
   }
 
   const { data: users } = await axios({
@@ -20,7 +20,7 @@ export default () => async (ctx) => {
   });
 
   if ( ! users.length) {
-    throw new NotfoundError({ code: '401', message: 'settings не найден' });
+    throw new NotfoundError({ code: '401', message: 'user не найден' });
   }
 
   const { data: customers } = await axios({

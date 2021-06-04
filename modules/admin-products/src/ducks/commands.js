@@ -29,37 +29,6 @@ import {
 } from './slice';
 
 
-export const getPromotions = (params = {}) => async (dispatch) => {
-  try {
-    dispatch(getPromotionsRequestAction());
-
-    const { data } = await request({
-      url: '/promotions',
-      method: 'get',
-      params,
-    });
-
-    dispatch(getPromotionsRequestSuccessAction(data));
-
-    return true;
-  }
-  catch(error) {
-    dispatch(getPromotionsRequestFailAction());
-
-    if (error instanceof UnauthorizedError) {
-      return void 0;
-    }
-    dispatch(pushNotification({
-      title: 'Ошибка при запросе данных',
-      connect: `${error['data']['message']} (${error['data']['code']})`,
-      mode: Mode.DANGER,
-      autoClose: false,
-    }));
-
-    return false;
-  }
-};
-
 export const getProducts = (params = {}) => async (dispatch) => {
   try {
     dispatch(getProductsRequestAction());
@@ -196,5 +165,36 @@ export const updateStatusProductById = (uuid, isView) => async (dispatch) => {
       mode: Mode.DANGER,
       autoClose: false,
     }));
+  }
+};
+
+export const getPromotions = (params = {}) => async (dispatch) => {
+  try {
+    dispatch(getPromotionsRequestAction());
+
+    const { data } = await request({
+      url: '/promotions',
+      method: 'get',
+      params,
+    });
+
+    dispatch(getPromotionsRequestSuccessAction(data));
+
+    return true;
+  }
+  catch(error) {
+    dispatch(getPromotionsRequestFailAction());
+
+    if (error instanceof UnauthorizedError) {
+      return void 0;
+    }
+    dispatch(pushNotification({
+      title: 'Ошибка при запросе данных',
+      connect: `${error['data']['message']} (${error['data']['code']})`,
+      mode: Mode.DANGER,
+      autoClose: false,
+    }));
+
+    return false;
   }
 };

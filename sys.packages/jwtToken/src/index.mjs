@@ -1,5 +1,5 @@
 
-import { NetworkError, UnauthorizedError } from '@packages/errors';
+import { ExpiredError, UnauthorizedError } from '@packages/errors';
 
 import logger from "@sys.packages/logger";
 import request from "@sys.packages/request";
@@ -53,7 +53,9 @@ const refreshToken = async (url, data, ctx) => {
   const result = await request({
     url,
     method: 'post',
-    headers: ctx['headers'],
+    headers: {
+      'User-Agent': ctx['request']['header']['user-agent'],
+    },
     data,
   });
 
@@ -102,10 +104,11 @@ export const middleware = (options) => async (ctx, next) => {
 
     if (error instanceof UnauthorizedError) {
       resetCookie(ctx, options['cookieName']);
-      throw new UnauthorizedError({ code: '2.2.2', message: 'settings not authorize' });
+
+      throw new UnauthorizedError({ code: '2.2.2', message: 'not authorize' });
     }
 
-    if (error instanceof NetworkError) {
+    if (error instanceof ExpiredError) {
       const { data } = await refreshToken(options['refreshUrl'], cookie, ctx);
 
       ctx.cookies.set(options['cookieName'], encodeURIComponent(JSON.stringify(data)), {

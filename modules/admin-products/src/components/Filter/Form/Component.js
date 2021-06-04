@@ -1,4 +1,6 @@
 
+import { selectFilter, selectInProcess } from '@modules/admin-products';
+
 import { Mode } from '@ui.packages/types';
 import { Row, Col, InputField, SelectField, Button } from '@ui.packages/kit';
 
@@ -7,10 +9,8 @@ import { useSelector } from 'react-redux';
 
 import styles from './default.module.scss';
 
-import { selectFilter, selectInProcess } from '../../../ducks/slice';
 
-
-export default function Filter({ handleSubmit, submit }) {
+export default function Filter({ handleSubmit }) {
   const { types, brands, categories } = useSelector(selectFilter);
   const inProcess = useSelector(selectInProcess);
 
@@ -64,7 +64,6 @@ export default function Filter({ handleSubmit, submit }) {
           <Button
             type={Button.TYPE_SUBMIT}
             mode={Mode.PRIMARY}
-            onClick={submit}
             disabled={inProcess}
           >Применить</Button>
         </Col>

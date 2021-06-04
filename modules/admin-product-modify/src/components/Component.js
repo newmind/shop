@@ -1,5 +1,7 @@
 
-import { Mode } from '@ui.packages/types';
+import { selectProduct, selectInProcess } from '@modules/admin-product-modify';
+import { updateProductsById, createProduct } from '@modules/admin-product-modify';
+
 import { Dialog, closeDialog } from '@ui.packages/dialog';
 import { Button, Header, Page, PageContent, PageControls } from '@ui.packages/kit';
 
@@ -14,11 +16,8 @@ import ImagesForm from "./ImagesForm";
 
 import styles from './default.module.scss';
 
-import { selectProduct, selectInProcess } from '../ducks/slice';
-import { updateProductsById, createProduct } from '../ducks/commands';
 
-
-const FORM_NAME = 'modify-client-product';
+const FORM_NAME = 'product-modify';
 
 
 function ProductModify() {
@@ -53,7 +52,7 @@ function ProductModify() {
   }
 
   async function handleSubmitImages(data) {
-    await dispatch(change('modify-client-product', 'gallery', data['gallery']));
+    await dispatch(change('product-modify', 'gallery', data['gallery']));
     await dispatch(closeDialog());
   }
 
@@ -63,7 +62,7 @@ function ProductModify() {
         <div className={styles['controls']}>
           <Button
             form={Button.FORM_CONTEXT}
-            mode={Mode.PRIMARY}
+            mode={Button.MODE_PRIMARY}
             disabled={pristine || inProcess}
             onClick={handleReset}
           >Отмена</Button>
@@ -89,7 +88,7 @@ function ProductModify() {
 
       <Dialog name="add-images" title="Добавить изображения">
         <ImagesForm
-          initialValues={{ gallery: values && values['gallery'] || [] }}
+          initialValues={{ gallery: values ? values['gallery'] : [] }}
           onSubmit={(data) => handleSubmitImages(data)}
         />
       </Dialog>

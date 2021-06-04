@@ -2,6 +2,7 @@
 import { UnauthorizedError } from '@packages/errors';
 
 import request from '@ui.packages/request';
+import { pushNotification } from "@ui.packages/notifications";
 
 import {
   getCommentsRequestAction,
@@ -31,6 +32,10 @@ export const getComments = () => async (dispatch) => {
     if (error instanceof UnauthorizedError) {
       return void 0;
     }
+    dispatch(pushNotification({
+      mode: 'danger',
+      title: 'Ошибка при выполнении операции',
+    }));
   }
 };
 
@@ -90,5 +95,9 @@ export const deleteComments = (id) => async (dispatch) => {
     if (error instanceof UnauthorizedError) {
       return void 0;
     }
+    dispatch(pushNotification({
+      mode: 'danger',
+      title: 'Ошибка при выполнении операции',
+    }));
   }
 };

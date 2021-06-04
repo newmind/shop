@@ -1,4 +1,7 @@
 
+import { getProducts, getPromotions } from '@modules/admin-products';
+import { resetState, updateProductsRequestSuccessAction, removeImageAction } from '@modules/admin-products';
+
 import { on, off } from '@ui.packages/socket';
 import { queryToObject } from "@ui.packages/utils";
 import { useMount, useUnmount, useUpdate } from '@ui.packages/hoc';
@@ -9,12 +12,6 @@ import { useLocation } from 'react-router-dom';
 
 import Component from './Component';
 
-import { getProducts, getPromotions } from '../ducks/commands';
-import {
-  resetState,
-  updateProductsRequestSuccessAction,
-  removeImageAction,
-} from '../ducks/slice';
 
 
 export default function HOC() {

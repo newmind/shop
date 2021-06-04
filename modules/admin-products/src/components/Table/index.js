@@ -1,4 +1,7 @@
 
+import { selectInProcess, selectMeta, selectItems } from '@modules/admin-products';
+import { copyProductById, removeProductById, updateStatusProductById } from '@modules/admin-products';
+
 import numeral from '@packages/numeral';
 
 import { Mode } from '@ui.packages/types';
@@ -15,9 +18,6 @@ import Types from './Types';
 import Categories from './Categories';
 
 import styles from "./default.module.scss";
-
-import { selectInProcess, selectMeta, selectItems } from '../../ducks/slice';
-import { copyProductById, removeProductById, updateStatusProductById } from '../../ducks/commands';
 
 
 function List() {
@@ -87,7 +87,10 @@ function List() {
           alias="gallery"
           width={140}
         >
-          {(items) => items[0] && <Image className={styles['image']} src={`${process.env['REACT_APP_API_HOST']}/gallery/${items[0]['uuid']}`} />}
+          {(items) => items[0]
+            ? <Image className={styles['image']} src={`${process.env['REACT_APP_API_HOST']}/gallery/${items[0]['uuid']}`} />
+            : <span className={styles['not-image']}><i className="far fa-images" /></span>
+          }
         </Column>
         <Column
           title="Основные"
@@ -137,7 +140,6 @@ function List() {
           }}
         </Column>
         <Column
-          title="Описание"
           align="left"
         >
           {({ type, category, promotions }) => {

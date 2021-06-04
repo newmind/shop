@@ -64,7 +64,7 @@ function Product() {
           <div className={styles['content']}>
             <TabContainer to={'description'}>
               <div className={styles['container']}>
-                <Text type={Text.TYPE_COMMENT}>{ product['description'] }</Text>
+                <Text theme={'light'}>{ product['description'] }</Text>
               </div>
             </TabContainer>
             <TabContainer to={'characteristics'}>

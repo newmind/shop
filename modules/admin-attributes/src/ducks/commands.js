@@ -47,7 +47,7 @@ export const getUnits = () => async (dispatch) => {
     }
     dispatch(pushNotification({
       mode: 'danger',
-      content: 'Ошибка получения списка "Размерности"'
+      title: 'Ошибка при выполнении операции',
     }));
   }
 };
@@ -71,7 +71,7 @@ export const getItems = () => async (dispatch) => {
     }
     dispatch(pushNotification({
       mode: 'danger',
-      title: 'Ошибка получения списка "Аттрибутов"'
+      title: 'Ошибка при выполнении операции',
     }));
   }
 };
@@ -95,7 +95,7 @@ export const createItem = (formData) => async (dispatch) => {
     dispatch(closeDialog('attribute'));
     dispatch(pushNotification({
       mode: 'success',
-      title: 'Аттрибут успешно добавлен'
+      title: 'Операция выполнена успешно',
     }));
   }
   catch(error) {
@@ -106,7 +106,7 @@ export const createItem = (formData) => async (dispatch) => {
     }
     dispatch(pushNotification({
       mode: 'danger',
-      title: 'Ошибка создания "Аттрибута"'
+      title: 'Ошибка при выполнении операции',
     }));
   }
 };
@@ -130,7 +130,7 @@ export const updateItem = (formData) => async (dispatch) => {
     dispatch(closeDialog('attribute'));
     dispatch(pushNotification({
       mode: 'success',
-      title: 'Аттрибут успешно обновлен'
+      title: 'Операция выполнена успешно',
     }));
   }
   catch(error) {
@@ -141,7 +141,7 @@ export const updateItem = (formData) => async (dispatch) => {
     }
     dispatch(pushNotification({
       mode: 'danger',
-      title: 'Ошибка обновления "Аттрибута"'
+      title: 'Ошибка при выполнении операции',
     }));
   }
 };
@@ -159,7 +159,7 @@ export const deleteItem = (ids) => async (dispatch) => {
     dispatch(deleteItemRequestSuccessAction(ids));
     dispatch(pushNotification({
       mode: 'success',
-      title: 'Аттрибут успешно удален'
+      title: 'Операция выполнена успешно',
     }));
   }
   catch(error) {
@@ -170,7 +170,7 @@ export const deleteItem = (ids) => async (dispatch) => {
     }
     dispatch(pushNotification({
       mode: 'danger',
-      title: 'Ошибка удаления "Аттрибута"'
+      title: 'Ошибка при выполнении операции',
     }));
   }
 };

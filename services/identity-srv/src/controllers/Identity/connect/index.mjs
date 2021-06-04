@@ -39,6 +39,7 @@ export default () => async (ctx) => {
     },
     transaction,
   });
+
   await RefreshToken.create({
     userId: user['id'],
     refreshToken: refreshToken,

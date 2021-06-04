@@ -81,7 +81,7 @@ const validate = (values) => {
 
 
 export default reduxForm({
-  form: 'modify-client-product',
+  form: 'product-modify',
   enableReinitialize: true,
   validate,
 })(Component);

@@ -43,7 +43,7 @@ export const getBrands = () => async (dispatch) => {
     }
     dispatch(pushNotification({
       mode: 'danger',
-      content: 'Ошибка получения списка "Валюта"'
+      title: 'Ошибка при выполнении операции',
     }));
   }
 };
@@ -62,7 +62,7 @@ export const createBrand = (data) => async (dispatch) => {
     dispatch(closeDialog('currency'));
     dispatch(pushNotification({
       mode: 'success',
-      content: 'Операция выполнена успешно'
+      title: 'Операция выполнена успешно',
     }));
   }
   catch(error) {
@@ -73,7 +73,7 @@ export const createBrand = (data) => async (dispatch) => {
     }
     dispatch(pushNotification({
       mode: 'danger',
-      content: 'Ошибка создания "Валюты"'
+      title: 'Ошибка при выполнении операции',
     }));
   }
 };
@@ -92,7 +92,7 @@ export const updateBrand = (data) => async (dispatch) => {
     dispatch(closeDialog('currency'));
     dispatch(pushNotification({
       mode: 'success',
-      content: 'Операция выполнена успешно'
+      title: 'Операция выполнена успешно',
     }));
   }
   catch(error) {
@@ -103,7 +103,7 @@ export const updateBrand = (data) => async (dispatch) => {
     }
     dispatch(pushNotification({
       mode: 'danger',
-      content: 'Ошибка обновления "Валюты"'
+      title: 'Ошибка при выполнении операции',
     }));
   }
 };
@@ -121,7 +121,7 @@ export const deleteBrands = (id) => async (dispatch) => {
     dispatch(deleteBrandRequestSuccessAction(data));
     dispatch(pushNotification({
       mode: 'success',
-      content: 'Операция выполнена успешно'
+      title: 'Операция выполнена успешно',
     }));
   }
   catch(error) {
@@ -132,7 +132,7 @@ export const deleteBrands = (id) => async (dispatch) => {
     }
     dispatch(pushNotification({
       mode: 'danger',
-      content: 'Ошибка удаления "Валюты"'
+      title: 'Ошибка при выполнении операции',
     }));
   }
 };

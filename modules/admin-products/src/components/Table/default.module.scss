@@ -52,6 +52,22 @@
   white-space: nowrap;
 }
 
+.not-image {
+
+  display: flex;
+  flex-direction: column;
+  flex: 1 0;
+  width: 140px;
+  height: 140px;
+  font-size: 28px;
+  color: $pale-lilac;
+  background: $pale-grey;
+  justify-content: center;
+  align-items: center;
+  border: 1px solid $pale-lilac;
+  border-radius: 4px;
+}
+
 
 
 

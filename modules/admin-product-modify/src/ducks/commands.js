@@ -11,13 +11,25 @@ import {
   getBrandsRequestFailAction,
   getBrandsRequestSuccessAction,
 
+  createBrandRequestAction,
+  createBrandRequestFailAction,
+  createBrandRequestSuccessAction,
+
   getTypesRequestAction,
   getTypesRequestFailAction,
   getTypesRequestSuccessAction,
 
+  createTypesRequestAction,
+  createTypesRequestFailAction,
+  createTypesRequestSuccessAction,
+
   getCategoriesRequestAction,
   getCategoriesRequestFailAction,
   getCategoriesRequestSuccessAction,
+
+  createCategoryRequestAction,
+  createCategoryRequestFailAction,
+  createCategoryRequestSuccessAction,
 
   getCurrenciesRequestAction,
   getCurrenciesRequestFailAction,
@@ -51,6 +63,12 @@ import {
   getPromotionsRequestFailAction,
   getPromotionsRequestSuccessAction,
 } from './slice';
+import {
+  createGalleryRequestAction,
+  createGalleryRequestFailAction,
+  createGalleryRequestSuccessAction
+} from "@modules/admin-gallery/src/ducks/slice";
+import {closeDialog} from "@ui.packages/dialog";
 
 
 export const getBrands = () => async (dispatch) => {
@@ -80,6 +98,37 @@ export const getBrands = () => async (dispatch) => {
     }));
 
     return false;
+  }
+};
+
+export const createBrand = (formData) => async (dispatch) => {
+  try {
+    dispatch(createBrandRequestAction());
+
+    const { data } = await request({
+      url: '/brands',
+      method: 'post',
+      data: formData,
+    });
+
+    dispatch(createBrandRequestSuccessAction(data));
+
+    return data['id'];
+  }
+  catch(error) {
+    dispatch(createBrandRequestFailAction(error));
+
+    if (error instanceof UnauthorizedError) {
+      return void 0;
+    }
+    dispatch(pushNotification({
+      mode: Mode.DANGER,
+      title: 'Ошибка выполнения операции',
+      content: `${error['data']['message']} (${error['data']['code']})`,
+      autoClose: false,
+    }));
+
+    return null;
   }
 };
 
@@ -113,6 +162,37 @@ export const getTypes = () => async (dispatch) => {
   }
 };
 
+export const createType = (formData) => async (dispatch) => {
+  try {
+    dispatch(createTypesRequestAction());
+
+    const { data } = await request({
+      url: '/types',
+      method: 'post',
+      data: formData,
+    });
+
+    dispatch(createTypesRequestSuccessAction(data));
+
+    return data['id'];
+  }
+  catch(error) {
+    dispatch(createTypesRequestFailAction(error));
+
+    if (error instanceof UnauthorizedError) {
+      return void 0;
+    }
+    dispatch(pushNotification({
+      mode: Mode.DANGER,
+      title: 'Ошибка выполнения операции',
+      content: `${error['data']['message']} (${error['data']['code']})`,
+      autoClose: false,
+    }));
+
+    return null;
+  }
+};
+
 export const getCategories = () => async (dispatch) => {
   try {
     dispatch(getCategoriesRequestAction());
@@ -143,6 +223,37 @@ export const getCategories = () => async (dispatch) => {
     }));
 
     return false;
+  }
+};
+
+export const createCategory = (formData) => async (dispatch) => {
+  try {
+    dispatch(createCategoryRequestAction());
+
+    const { data } = await request({
+      url: '/categories',
+      method: 'post',
+      data: formData,
+    });
+
+    dispatch(createCategoryRequestSuccessAction(data));
+
+    return data['id'];
+  }
+  catch(error) {
+    dispatch(createCategoryRequestFailAction(error));
+
+    if (error instanceof UnauthorizedError) {
+      return void 0;
+    }
+    dispatch(pushNotification({
+      mode: Mode.DANGER,
+      title: 'Ошибка выполнения операции',
+      content: `${error['data']['message']} (${error['data']['code']})`,
+      autoClose: false,
+    }));
+
+    return null;
   }
 };
 
@@ -268,7 +379,6 @@ export const updateProductsById = (data) => async (dispatch) => {
     }));
   }
   catch(error) {
-    console.log(error)
     dispatch(updateProductRequestFailAction());
 
     if (error instanceof UnauthorizedError) {
@@ -382,6 +492,41 @@ export const getGallery = () => async (dispatch) => {
     return false;
   }
 };
+
+export const createGallery = (files) => async (dispatch) => {
+  try {
+    dispatch(createGalleryRequestAction());
+
+    const formData = new FormData();
+
+    files.forEach((file, index) => formData.append('file-' + index, file));
+
+    const { data } = await request({
+      url: process.env['PUBLIC_URL'] + '/gallery',
+      method: 'post',
+      data: formData,
+    });
+
+    dispatch(closeDialog('create-gallery'));
+    dispatch(createGalleryRequestSuccessAction(data));
+
+    return data;
+  }
+  catch(error) {
+
+    dispatch(createGalleryRequestFailAction(error));
+
+    if (error instanceof UnauthorizedError) {
+      return void 0;
+    }
+    dispatch(pushNotification({
+      mode: 'danger',
+      content: 'Ошибка при выполнении операции'
+    }));
+
+    return null;
+  }
+}
 
 export const getPromotions = () => async (dispatch) => {
   try {

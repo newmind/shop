@@ -1,18 +1,21 @@
 
-import { openDialog } from '@ui.packages/dialog';
-import {Image, Draggable, Button, arrayMove, Header} from '@ui.packages/kit';
+import { createGallery } from '@modules/admin-product-modify';
+
+import { Dialog, openDialog } from '@ui.packages/dialog';
+import { Image, Draggable, Button, arrayMove, Header, Text } from '@ui.packages/kit';
 
 import React from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { Field, getFormValues, change } from "redux-form";
+
+import LoadingForm from './LoadFofm';
 
 import cn from 'classnames';
 import styles from './default.module.scss';
-import {Field} from "redux-form";
 
 
 function AddImageForm({ input, disabled }) {
   const dispatch = useDispatch();
-
 
   function handleDelete(index) {
     input.onChange([
@@ -29,38 +32,67 @@ function AddImageForm({ input, disabled }) {
     dispatch(openDialog('add-images'));
   }
 
+  function handleLoadingImages() {
+    dispatch(openDialog('create-gallery'));
+  }
+
   return (
     <div className={styles['wrapper']}>
-      {input['value'] && (
-        <Draggable type={Draggable.TYPE_GRID} onChange={handleOrderChange}>
-          {input['value'].map((image, index) => {
-            return (
-              <div className={styles['section']} key={index}>
-                { ! disabled && <span className={cn(styles['remove-image'], 'fas fa-times')} onClick={() => handleDelete(index)} />}
-                <div className={cn(styles['image'], {
-                  [styles['new']]: !! image['new'],
-                })}>
-                  <Image src={`${process.env['REACT_APP_API_HOST']}/gallery/${image['uuid']}?size=small`} />
-                </div>
-              </div>
-            );
-          })}
-        </Draggable>
-      )}
       <div className={styles['controls']}>
+        <Button
+          form={Button.FORM_UPLOAD}
+          mode={Button.MODE_SUCCESS}
+          onClick={() => handleLoadingImages()}
+        >Загрузить</Button>
         <Button
           form={Button.FORM_CREATE}
           mode={Button.MODE_PRIMARY}
           size={Button.SIZE_SMALL}
           disabled={disabled}
           onClick={() => handleAddImages()}
-        >Добавить</Button>
+        >Добавить из галлереи</Button>
+      </div>
+      <div className={styles['images']}>
+        { !! input['value'].length
+          ? (
+            <Draggable type={Draggable.TYPE_GRID} onChange={handleOrderChange}>
+              {input['value'].map((image, index) => {
+                return (
+                  <div className={styles['section']} key={index}>
+                    { ! disabled && <span className={cn(styles['remove-image'], 'fas fa-times')} onClick={() => handleDelete(index)} />}
+                    <div className={cn(styles['image'], {
+                      [styles['new']]: !! image['new'],
+                    })}>
+                      <Image src={`${process.env['REACT_APP_API_HOST']}/gallery/${image['uuid']}?size=small`} />
+                    </div>
+                  </div>
+                );
+              })}
+            </Draggable>
+          )
+          : (
+            <Text type={Text.TYPE_BODY}>Нет изображений</Text>
+          )}
       </div>
     </div>
   );
 }
 
 function Gallery() {
+  const dispatch = useDispatch();
+  const formData = useSelector(getFormValues('product-modify'));
+
+  async function handleCreate({ files }) {
+    const result = await dispatch(createGallery(files));
+
+    if (result) {
+      dispatch(change('product-modify', 'gallery', [...(formData['gallery'] || []), ...result.map(item => ({
+        uuid: item['uuid'],
+        new: true,
+      }))]));
+    }
+  }
+
   return (
     <div className={styles['block']}>
       <div className={styles['header']}>
@@ -69,6 +101,10 @@ function Gallery() {
       <div className={styles['content']}>
         <Field name="gallery" component={AddImageForm} />
       </div>
+
+      <Dialog name={'create-gallery'}>
+        <LoadingForm onSubmit={(data) => handleCreate(data)}/>
+      </Dialog>
     </div>
   );
 }

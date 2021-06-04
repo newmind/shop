@@ -8,6 +8,7 @@ import Bay from './Bay';
 import Cart from './Cart';
 import Link from './Link';
 import Create from './Create';
+import Upload from './Upload';
 import Default from './Default';
 import Context from "./Context";
 import Outline from './Outline';
@@ -19,6 +20,7 @@ function ButtonFactory({ form, children, ...props }) {
     case ButtonFactory.FORM_CONTEXT: return <Context {...props}>{ children }</Context>;
     case ButtonFactory.FORM_OUTLINE: return <Outline {...props}>{ children }</Outline>;
     case ButtonFactory.FORM_CREATE: return <Create {...props}>{ children }</Create>;
+    case ButtonFactory.FORM_UPLOAD: return <Upload {...props}>{ children }</Upload>;
     case ButtonFactory.FORM_CART: return <Cart {...props}>{ children }</Cart>;
     case ButtonFactory.FORM_LINK: return <Link {...props}>{ children }</Link>;
     case ButtonFactory.FORM_BAY: return <Bay {...props}>{ children }</Bay>;
@@ -43,6 +45,7 @@ ButtonFactory.FORM_BAY = 'bay';
 ButtonFactory.FORM_CART = 'cart';
 ButtonFactory.FORM_LINK = 'link';
 ButtonFactory.FORM_CREATE = 'create';
+ButtonFactory.FORM_UPLOAD = 'upload';
 ButtonFactory.FORM_DEFAULT = 'default';
 ButtonFactory.FORM_CONTEXT = 'context';
 ButtonFactory.FORM_OUTLINE = 'outline';
@@ -58,7 +61,8 @@ ButtonFactory.propTypes = {
     ButtonFactory.FORM_OUTLINE,
     ButtonFactory.FORM_CART,
     ButtonFactory.FORM_BAY,
-    ButtonFactory.FORM_LINK
+    ButtonFactory.FORM_LINK,
+    ButtonFactory.FORM_UPLOAD,
   ]),
   mode: types.oneOf([Mode.DEFAULT, Mode.INFO, Mode.PRIMARY, Mode.DANGER, Mode.WARNING, Mode.SUCCESS]),
   size: types.oneOf([Size.SMALL, Size.MEDIUM, Size.LARGE]),

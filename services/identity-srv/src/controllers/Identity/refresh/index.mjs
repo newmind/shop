@@ -1,7 +1,7 @@
 
-import { UnauthorizedError } from '@packages/errors';
+import {BadRequestError, UnauthorizedError} from '@packages/errors';
 
-import { models, sequelize } from '@sys.packages/db';
+import { models } from '@sys.packages/db';
 import { decode, sign } from '@sys.packages/jwt';
 import { token } from "@sys.packages/utils";
 
@@ -10,15 +10,17 @@ export default () => async (ctx) => {
   const { RefreshToken } = models;
   const { accessToken, refreshToken } = ctx['request']['body'];
 
+  if ( ! accessToken || ! refreshToken) {
+    throw new BadRequestError('Отсутствует токен авторизации');
+  }
+
   const { payload } = decode(accessToken);
-  const transaction = await sequelize.transaction();
 
   const result = await RefreshToken.findOne({
     where: {
       userId: payload['id'],
       refreshToken,
     },
-    transaction,
   });
 
   if ( ! result) {
@@ -30,11 +32,11 @@ export default () => async (ctx) => {
   const data = result.toJSON();
 
   if (data['ip'] !== currentIP) {
-    throw new UnauthorizedError('Пользователь не авторизован');
+    throw new UnauthorizedError('Конфликт IP адреса');
   }
 
   if (data['userAgent'] !== ctx['userAgent']['source']) {
-    throw new UnauthorizedError('Пользователь не авторизован');
+    throw new UnauthorizedError('Конфликт user agent');
   }
 
   if (Number(today) >= Number(data['expiresIn'])) {
@@ -43,22 +45,17 @@ export default () => async (ctx) => {
 
   // обновляем токен
   const expirationTime = Number(today + Number(process.env['JWT_EXP'] * 60 * 1000));
+  const expirationFullTime = Number(today + Number(process.env['JWT_EXP_END'] * 24 * 60 * 1000));
   const newRefreshToken = token(today + process.env['JWT_SECRET']).digest('hex');
 
   await RefreshToken.update({
-    userId: data['userId'],
     refreshToken: newRefreshToken,
-    userAgent: ctx['userAgent']['source'],
-    ip: currentIP,
+    expiresIn: expirationFullTime,
   }, {
     where: {
       userId: data['userId'],
-      refreshToken,
     },
-    transaction,
   });
-
-  await transaction.commit();
 
   const newPayload = {
     ...payload,
@@ -69,6 +66,8 @@ export default () => async (ctx) => {
     algorithm:  "HS256"
   });
 
+
+  ctx.status = 200;
   ctx.body = {
     success: true,
     data: {

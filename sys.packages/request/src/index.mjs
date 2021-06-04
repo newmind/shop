@@ -1,6 +1,7 @@
 
 import logger from '@sys.packages/logger';
 import {
+  ExpiredError,
   NetworkError,
   NotfoundError,
   BadRequestError,
@@ -92,6 +93,9 @@ const errorLogger = (error) => {
     }
     else if (response['status'] === 417) {
       return Promise.reject(new ValidationError(response['data']));
+    }
+    else if (response['status'] === 419) {
+      return Promise.reject(new ExpiredError(response['data']));
     }
     else if (response['status'] === 503) {
       return Promise.reject(new UnavailableError(response['data']));

@@ -13,5 +13,14 @@ export {
   selectGallery,
   selectProduct,
   selectUnits,
-  selectInGalleryProcess,
+  selectInCreateProcess,
 } from './ducks/slice';
+
+export {
+  createType,
+  createBrand,
+  createCategory,
+  createGallery,
+  createProduct,
+  updateProductsById,
+} from './ducks/commands';

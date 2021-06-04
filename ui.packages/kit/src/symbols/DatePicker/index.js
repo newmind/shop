@@ -73,19 +73,22 @@ function DatePicker({ className, mode, disabled, value, minDate, maxDate, cleara
   useEffect(() => {
     function eventReset(event) {
       event.stopPropagation();
-
+console.log(23123, isOpen)
       if (isOpen) {
         const { current: wrapperElement } = selectRef;
         const portalElement = document.body; //document.querySelector('#selectOptionsPortal');
         const { current: optionsElement } = optionsRef;
 
         if (optionsElement && ! optionsElement.contains(event['target'])) {
-          eventReset();
+          // eventReset();
+          eventHandleResize();
+          console.log(123)
         }
 
-        if (portalElement && ! portalElement.contains(event['target']) && ! portalElement.contains(wrapperElement)) {
-          eventReset();
-        }
+        // if (portalElement && ! portalElement.contains(event['target']) && ! portalElement.contains(wrapperElement)) {
+        //   // eventReset();
+        //   eventHandleResize();
+        // }
       }
       // const {current: selectElement} = selectRef;
       // const target = event.target;
@@ -106,14 +109,14 @@ function DatePicker({ className, mode, disabled, value, minDate, maxDate, cleara
       }
     }
 
-    document.body.addEventListener('click', eventReset);
+    document.addEventListener('click', eventReset);
     window.addEventListener('resize', eventHandleResize);
     if (document.querySelector('#scroller')) {
       document.querySelector('#scroller').addEventListener('scroll', eventHandleScrolling);
     }
     return () => {
 
-      document.body.removeEventListener('click', eventReset);
+      document.removeEventListener('click', eventReset);
       window.removeEventListener('resize', eventHandleResize);
       if (document.querySelector('#scroller')) {
         document.querySelector('#scroller').removeEventListener('scroll', eventHandleScrolling);

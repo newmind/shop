@@ -12,6 +12,7 @@ function Filter() {
   const navigate = useNavigate();
 
   function handleSubmit(data) {
+    data['page'] = 1;
     navigate(objectToQuery(data));
   }
 

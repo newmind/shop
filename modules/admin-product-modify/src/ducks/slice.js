@@ -13,10 +13,10 @@ const initialState = {
   promotions: [],
   product: {},
   inProcess: false,
-  inGalleryProcess: false,
+  inCreateProcess: false,
 };
 
-const REDUCER_NAME = 'client-product-modify';
+const REDUCER_NAME = 'product-modify';
 
 
 const productModifySlice = createSlice({
@@ -32,6 +32,7 @@ const productModifySlice = createSlice({
       state['attributes'] = [];
       state['product'] = {};
       state['inProcess'] = false;
+      state['inFormProcess'] = false;
     },
 
     setProcessAction(state, { payload }) {
@@ -44,10 +45,38 @@ const productModifySlice = createSlice({
       state['brands'] = payload;
     },
 
+    createBrandRequestAction(state) {
+      state['inCreateProcess'] = true;
+    },
+    createBrandRequestFailAction(state) {
+      state['inCreateProcess'] = false;
+    },
+    createBrandRequestSuccessAction(state, { payload }) {
+      state['inCreateProcess'] = false;
+      state['brands'] = [
+        payload,
+        ...state['brands'],
+      ];
+    },
+
     getTypesRequestAction() {},
     getTypesRequestFailAction() {},
     getTypesRequestSuccessAction(state, { payload }) {
       state['types'] = payload;
+    },
+
+    createTypesRequestAction(state) {
+      state['inCreateProcess'] = true;
+    },
+    createTypesRequestFailAction(state) {
+      state['inCreateProcess'] = false;
+    },
+    createTypesRequestSuccessAction(state, { payload }) {
+      state['inCreateProcess'] = false;
+      state['types'] = [
+          payload,
+          ...state['types'],
+      ];
     },
 
     getUnitsRequestAction() {},
@@ -60,6 +89,20 @@ const productModifySlice = createSlice({
     getCategoriesRequestFailAction() {},
     getCategoriesRequestSuccessAction(state, { payload }) {
       state['categories'] = payload;
+    },
+
+    createCategoryRequestAction(state) {
+      state['inCreateProcess'] = true;
+    },
+    createCategoryRequestFailAction(state) {
+      state['inCreateProcess'] = false;
+    },
+    createCategoryRequestSuccessAction(state, { payload }) {
+      state['inCreateProcess'] = false;
+      state['categories'] = [
+        payload,
+        ...state['categories'],
+      ];
     },
 
     getAttributesRequestAction() {},
@@ -127,15 +170,23 @@ const productModifySlice = createSlice({
       };
     },
 
-    getGalleryRequestAction(state) {
-      state['inGalleryProcess'] = true;
-    },
-    getGalleryRequestFailAction(state) {
-      state['inGalleryProcess'] = false;
-    },
+    getGalleryRequestAction(state) {},
+    getGalleryRequestFailAction(state) {},
     getGalleryRequestSuccessAction(state, { payload }) {
       state['gallery'] = payload;
-      state['inGalleryProcess'] = false;
+    },
+
+    createGalleryRequestAction(state) {
+      state['inCreateProcess'] = true;
+    },
+    createGalleryRequestFailAction(state) {
+      state['inCreateProcess'] = false;
+    },
+    createGalleryRequestSuccessAction(state, { payload }) {
+      if ( ! state['gallery'].some((item) => item['uuid'] === payload['uuid'])) {
+        state['gallery'] = [...payload, ...state['gallery']];
+      }
+      state['inCreateProcess'] = false;
     },
 
     getPromotionsRequestAction(state) {
@@ -160,9 +211,17 @@ export const {
   getBrandsRequestFailAction,
   getBrandsRequestSuccessAction,
 
+  createBrandRequestAction,
+  createBrandRequestFailAction,
+  createBrandRequestSuccessAction,
+
   getCategoriesRequestAction,
   getCategoriesRequestFailAction,
   getCategoriesRequestSuccessAction,
+
+  createCategoryRequestAction,
+  createCategoryRequestFailAction,
+  createCategoryRequestSuccessAction,
 
   getCurrenciesRequestAction,
   getCurrenciesRequestFailAction,
@@ -179,6 +238,10 @@ export const {
   getTypesRequestAction,
   getTypesRequestFailAction,
   getTypesRequestSuccessAction,
+
+  createTypesRequestAction,
+  createTypesRequestFailAction,
+  createTypesRequestSuccessAction,
 
   getAttributesRequestAction,
   getAttributesRequestFailAction,
@@ -200,6 +263,10 @@ export const {
   getGalleryRequestFailAction,
   getGalleryRequestSuccessAction,
 
+  createGalleryRequestAction,
+  createGalleryRequestFailAction,
+  createGalleryRequestSuccessAction,
+
   getPromotionsRequestAction,
   getPromotionsRequestFailAction,
   getPromotionsRequestSuccessAction,
@@ -215,7 +282,7 @@ export const selectCategories = (state) => state[REDUCER_NAME]['categories'];
 export const selectCurrencies = (state) => state[REDUCER_NAME]['currencies'];
 export const selectAttributes = (state) => state[REDUCER_NAME]['attributes'];
 export const selectPromotions = (state) => state[REDUCER_NAME]['promotions'];
-export const selectInGalleryProcess = (state) => state[REDUCER_NAME]['inGalleryProcess'];
+export const selectInCreateProcess = (state) => state[REDUCER_NAME]['inCreateProcess'];
 
 export const name = productModifySlice['name'];
 export const reducer = productModifySlice['reducer'];

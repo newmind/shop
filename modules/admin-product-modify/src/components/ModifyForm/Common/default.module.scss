@@ -2,14 +2,9 @@
 @import "~@ui.packages/theme";
 
 
-.block {
+.wrapper {
 
   display: block;
-
-  & + & {
-
-    margin: 50px 0 0;
-  }
 }
 
 .header {
@@ -26,4 +21,43 @@
   background: $white;
   border-radius: 5px;
   padding: 40px 50px;
+}
+
+.link {
+
+  display: inline-flex;
+  flex-direction: column;
+  font-size: 20px;
+  color: $primary;
+  cursor: pointer;
+  opacity: .4;
+  transition: opacity 200ms;
+
+  &:hover {
+
+    opacity: 1;
+  }
+}
+
+.block {
+
+  display: flex;
+  flex-direction: row;
+  flex: 1 0;
+  align-items: flex-end;
+  overflow: auto;
+}
+
+.value {
+
+  display: flex;
+  flex-direction: column;
+  flex: 1 0;
+  overflow: auto;
+}
+
+.controls {
+
+  display: block;
+  margin: 0 0 10px 14px;
 }
