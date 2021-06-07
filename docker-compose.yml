@@ -13,10 +13,10 @@ services:
       - "587:587"
       - "993:993"
     volumes:
-      - maildata:/var/mail
-      - mailstate:/var/mail-state
-      - maillogs:/var/log/mail
-      - ./config/:/tmp/docker-mailserver/
+      - ./maildata:/var/mail
+      - ./mailstate:/var/mail-state
+      - ./maillogs:/var/log/mail
+      - ./mailconfig/:/tmp/docker-mailserver/
     environment:
       - ENABLE_SPAMASSASSIN=1
       - SPAMASSASSIN_SPAM_TO_INBOX=1
