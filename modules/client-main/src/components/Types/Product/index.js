@@ -1,32 +1,41 @@
 
-import { Mode } from "@ui.packages/types";
 import numeral from '@packages/numeral';
+import { openDialog } from "@ui.packages/dialog";
 import { Gallery, Text, Header } from '@ui.packages/kit';
-import { pushNotification } from "@ui.packages/notifications";
 import { addProductToCartAction, selectUuid } from '@ui.packages/cart-widget';
 
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 
 import cn from 'classnames';
 import styles from './default.module.scss';
+import {pushNotification} from "@ui.packages/notifications";
+import {Mode} from "@ui.packages/types";
 
 
-export default function Product({ uuid, name, brand, gallery, price, prevPrice, currency, promotions } ) {
+export default function Product({ uuid, name, brand, gallery, price, prevPrice, currency, promotions, options }) {
   const dispatch = useDispatch();
-  const cart = useSelector(selectUuid);
-  const product = cart.find((item) => (item[0] === uuid));
 
-  function handleAddToCart(event) {
+  const cart = useSelector(selectUuid);
+
+  const products = cart.filter((item) => item[0] === uuid);
+  const count = products.reduce((acc, item) => acc + item[1], 0);
+
+  function handleToCart(event) {
     event.preventDefault();
     event.stopPropagation();
 
-    dispatch(addProductToCartAction(uuid));
-    dispatch(pushNotification({
-      title: `Товар "${ name }" добавлен в карзину`,
-      mode: Mode.SUCCESS,
-    }));
+    if (options.length > 1) {
+      dispatch(openDialog('fast-view', { uuid }));
+    }
+    else {
+      dispatch(addProductToCartAction({ uuid, options: options[0] }));
+      dispatch(pushNotification({
+        title: `Товар "${ name }" добавлен в корзину`,
+        mode: Mode.SUCCESS,
+      }));
+    }
   }
 
   return (
@@ -52,11 +61,11 @@ export default function Product({ uuid, name, brand, gallery, price, prevPrice, 
           )}
           <Text type={Text.TYPE_AMOUNT}>{ numeral(price).format() } { currency }</Text>
         </div>
-        <div className={styles['process']} onClick={(event) => handleAddToCart(event)}>
-          {product && (
-            <span className={styles['count']}>{ product[1] }</span>
+        <div className={styles['process']} onClick={(event) => handleToCart(event)}>
+          { !! count && (
+            <span className={styles['count']}>{ count }</span>
           )}
-          <span className={cn(styles['cart'], "fas fa-shopping-cart", { [styles['cart--no-empty']]: !! product })} />
+          <span className={cn(styles['cart'], "fas fa-shopping-cart", { [styles['cart--no-empty']]: !! count })} />
         </div>
       </div>
     </Link>

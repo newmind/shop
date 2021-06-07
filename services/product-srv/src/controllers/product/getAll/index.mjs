@@ -13,6 +13,7 @@ export default () => async (ctx) => {
   let whereForTypes = {};
   let whereForCategories = {};
   let whereForBrands = {};
+  let whereForOptions = {};
   let offset = {};
   let options = {};
 
@@ -31,6 +32,7 @@ export default () => async (ctx) => {
     typeId = null,
     isView = null,
     sort = '',
+    vendor = null,
   } = ctx['request']['query'];
 
   if (sort) {
@@ -41,6 +43,10 @@ export default () => async (ctx) => {
 
   if (isView !== null) {
     where['isView'] = isView;
+  }
+
+  if (vendor) {
+    whereForOptions['vendor'] = vendor;
   }
 
   if (fiscal) {
@@ -88,110 +94,243 @@ export default () => async (ctx) => {
     offset['limit'] = Number(take);
   }
 
-  const result = await Product.findAndCountAll({
-    attributes: ['uuid', 'name', 'description', 'price', 'fiscal', 'isView', 'createdAt'],
-    ...options,
-    ...offset,
-    distinct: true,
-    where: { ...where },
-    order: [
-      sorting,
-      ['gallery', 'order', 'asc'],
-      ['options', 'order', 'asc'],
-      ['comments', 'createdAt', 'desc'],
-      ['characteristics', 'order', 'asc'],
-      ['characteristics', 'attributes', 'order', 'asc'],
-    ],
-    include: [
-      {
-        model: Brand,
-        required: !! whereForBrands['id'],
-        as: 'brands',
-        where: { ...whereForBrands },
-        attributes: ['id', 'value'],
-        through: {
-          attributes: [],
-          order: [['order', 'asc']],
-          as: 'brand',
-        },
-      },
-      {
-        model: Type,
-        required: !! whereForTypes['id'],
-        as: 'types',
-        where: { ...whereForTypes },
-        attributes: ['id', 'value'],
-        through: {
-          attributes: [],
-          order: [['order', 'asc']],
-          as: 'type',
-        },
-      },
-      {
-        model: Category,
-        required: !! whereForCategories['id'],
-        as: 'categories',
-        where: { ...whereForCategories },
-        attributes: ['id', 'value'],
-        through: {
-          attributes: [],
-          order: [['order', 'asc']],
-          as: 'category',
-        },
-      },
-      {
-        model: Currency,
-        required: false,
-        as: 'currency',
-        attributes: ['code', 'value']
-      },
-      {
-        model: Characteristic,
-        required: false,
-        as: 'characteristics',
-        attributes: ['id', 'name', 'order'],
-        include: [
-          {
-            model: CharacteristicAttribute,
-            required: false,
-            as: 'attributes',
-            attributes: ['value', 'order', 'use'],
-            include: [
-              {
-                model: Attribute,
-                attributes: ['id', 'value'],
-                as: 'attribute',
-                include: [
-                  {
-                    model: Unit,
-                    required: false,
-                    as: 'unit',
-                    attributes: ['value']
-                  }
-                ]
-              }
-            ]
-          },
-        ]
-      },
-      {
-        model: Gallery,
-        as: 'gallery',
-        attributes: ['uuid'],
-      },
-      {
-        model: ProductOption,
-        as: 'options',
-      },
-      {
-        model: Comment,
-        as: 'comments',
-        attributes: ['id', 'evaluation', 'person', 'comment', 'createdAt'],
-      }
-    ],
-  });
+  let result;
 
-  let products = result['rows'].map((product) => product.toJSON());
+  if ( !! Object.keys(whereForOptions).length) {
+    result = await ProductOption.findAndCountAll({
+      ...options,
+      ...offset,
+      distinct: true,
+      where: { ...whereForOptions, },
+      order: [
+        ['order', 'asc'],
+        ['product', 'gallery', 'order', 'asc'],
+        ['product', 'options', 'order', 'asc'],
+        ['product', 'comments', 'createdAt', 'desc'],
+        ['product', 'characteristics', 'order', 'asc'],
+        ['product', 'characteristics', 'attributes', 'order', 'asc'],
+      ],
+      include: [
+        {
+          model: Product,
+          as: 'product',
+          where: { ...where },
+          attributes: ['uuid', 'name', 'description', 'price', 'fiscal', 'isView', 'createdAt'],
+          order: [
+            sorting,
+          ],
+          include: [
+            {
+              model: Brand,
+              required: !! whereForBrands['id'],
+              as: 'brands',
+              where: { ...whereForBrands },
+              attributes: ['id', 'value'],
+              through: {
+                attributes: [],
+                order: [['order', 'asc']],
+                as: 'brand',
+              },
+            },
+            {
+              model: Type,
+              required: !! whereForTypes['id'],
+              as: 'types',
+              where: { ...whereForTypes },
+              attributes: ['id', 'value'],
+              through: {
+                attributes: [],
+                order: [['order', 'asc']],
+                as: 'type',
+              },
+            },
+            {
+              model: Category,
+              required: !! whereForCategories['id'],
+              as: 'categories',
+              where: { ...whereForCategories },
+              attributes: ['id', 'value'],
+              through: {
+                attributes: [],
+                order: [['order', 'asc']],
+                as: 'category',
+              },
+            },
+            {
+              model: Currency,
+              required: false,
+              as: 'currency',
+              attributes: ['code', 'value']
+            },
+            {
+              model: Characteristic,
+              required: false,
+              as: 'characteristics',
+              attributes: ['id', 'name', 'order'],
+              include: [
+                {
+                  model: CharacteristicAttribute,
+                  required: false,
+                  as: 'attributes',
+                  attributes: ['value', 'order', 'use'],
+                  include: [
+                    {
+                      model: Attribute,
+                      attributes: ['id', 'value'],
+                      as: 'attribute',
+                      include: [
+                        {
+                          model: Unit,
+                          required: false,
+                          as: 'unit',
+                          attributes: ['value']
+                        }
+                      ]
+                    }
+                  ]
+                },
+              ]
+            },
+            {
+              model: Gallery,
+              as: 'gallery',
+              attributes: ['uuid'],
+            },
+            {
+              model: ProductOption,
+              as: 'options',
+            },
+            {
+              model: Comment,
+              as: 'comments',
+              attributes: ['id', 'evaluation', 'person', 'comment', 'createdAt'],
+            }
+          ],
+        },
+      ]
+    });
+  }
+  else {
+    result = await Product.findAndCountAll({
+      attributes: ['uuid', 'name', 'description', 'price', 'fiscal', 'isView', 'createdAt'],
+      ...options,
+      ...offset,
+      distinct: true,
+      where: { ...where },
+      order: [
+        sorting,
+        ['options', 'order', 'asc'],
+        ['gallery', 'order', 'asc'],
+        ['options', 'order', 'asc'],
+        ['comments', 'createdAt', 'desc'],
+        ['characteristics', 'order', 'asc'],
+        ['characteristics', 'attributes', 'order', 'asc'],
+      ],
+      include: [
+        {
+          model: Brand,
+          required: !! whereForBrands['id'],
+          as: 'brands',
+          where: { ...whereForBrands },
+          attributes: ['id', 'value'],
+          through: {
+            attributes: [],
+            order: [['order', 'asc']],
+            as: 'brand',
+          },
+        },
+        {
+          model: Type,
+          required: !! whereForTypes['id'],
+          as: 'types',
+          where: { ...whereForTypes },
+          attributes: ['id', 'value'],
+          through: {
+            attributes: [],
+            order: [['order', 'asc']],
+            as: 'type',
+          },
+        },
+        {
+          model: Category,
+          required: !! whereForCategories['id'],
+          as: 'categories',
+          where: { ...whereForCategories },
+          attributes: ['id', 'value'],
+          through: {
+            attributes: [],
+            order: [['order', 'asc']],
+            as: 'category',
+          },
+        },
+        {
+          model: Currency,
+          required: false,
+          as: 'currency',
+          attributes: ['code', 'value']
+        },
+        {
+          model: Characteristic,
+          required: false,
+          as: 'characteristics',
+          attributes: ['id', 'name', 'order'],
+          include: [
+            {
+              model: CharacteristicAttribute,
+              required: false,
+              as: 'attributes',
+              attributes: ['value', 'order', 'use'],
+              include: [
+                {
+                  model: Attribute,
+                  attributes: ['id', 'value'],
+                  as: 'attribute',
+                  include: [
+                    {
+                      model: Unit,
+                      required: false,
+                      as: 'unit',
+                      attributes: ['value']
+                    }
+                  ]
+                }
+              ]
+            },
+          ]
+        },
+        {
+          model: Gallery,
+          as: 'gallery',
+          attributes: ['uuid'],
+        },
+        {
+          model: ProductOption,
+          as: 'options',
+        },
+        {
+          model: Comment,
+          as: 'comments',
+          attributes: ['id', 'evaluation', 'person', 'comment', 'createdAt'],
+        }
+      ],
+    });
+  }
+
+  let products;
+
+  if ( !! Object.keys(whereForOptions).length) {
+    products = result['rows'].map((option) => {
+      const json = option.toJSON();
+      const optionThere = { ...json };
+      delete optionThere['product'];
+      json['product']['options'] = [optionThere];
+      return json['product'];
+    });
+  }
+  else {
+    products = result['rows'].map((product) => product.toJSON());
+  }
+
   const productUuids = products.map((product) => product['uuid']);
 
   if ( !! productUuids.length) {

@@ -3,10 +3,10 @@ import { Dialog } from '@ui.packages/dialog';
 
 import React from 'react';
 
-import FastView from "./FastView";
 import Filter from './Filter';
 import Controls from "./Controls";
 import Products from './Products';
+import ProductOptionsForm from "./ProductOptionsForm";
 
 import styles from './default.module.scss';
 
@@ -24,8 +24,8 @@ export default function Showcase() {
         <Products />
       </section>
 
-      <Dialog name="fast-view-product">
-        <FastView />
+      <Dialog name="fast-view">
+        <ProductOptionsForm />
       </Dialog>
     </section>
   );

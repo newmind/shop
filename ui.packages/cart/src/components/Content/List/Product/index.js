@@ -19,7 +19,7 @@ import cn from "classnames";
 import styles from "./defaults.module.scss";
 
 
-function Product({ uuid, gallery, brand, name, price, onRemove }) {
+function Product({ uuid, gallery, brand, name, price, option, onRemove }) {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const uuids = useSelector(selectUuid);
@@ -27,7 +27,7 @@ function Product({ uuid, gallery, brand, name, price, onRemove }) {
   const inProcess = useSelector(selectInProcess);
   const classNameRemoveProduct = cn(styles['remove'], 'far fa-trash-alt');
 
-  const product = uuids.find(item => item[0] === uuid);
+  const product = uuids.find(item => item[0] === uuid && item[2]['vendor'] === option['vendor']);
 
   if ( ! product) {
     return null;
@@ -40,15 +40,15 @@ function Product({ uuid, gallery, brand, name, price, onRemove }) {
 
   function handleRemove(event) {
     event.stopPropagation();
-    onRemove(uuid);
+    onRemove({ uuid, options: option });
   }
 
   function handlePlus() {
-    dispatch(plusQuantityAction(uuid));
+    dispatch(plusQuantityAction({ uuid, options: option }));
   }
 
   function handleMinus() {
-    dispatch(minusQuantityAction(uuid));
+    dispatch(minusQuantityAction({ uuid, options: option }));
   }
 
   return (
@@ -65,7 +65,10 @@ function Product({ uuid, gallery, brand, name, price, onRemove }) {
             <Text type={Text.TYPE_COMMENT}>{ brand }</Text>
           </div>
           <div className={styles['uuid']}>
-            <Text type={Text.TYPE_UUID}>Код: { uuid }</Text>
+            <Text type={Text.TYPE_UUID}>Комплектация: { option['name'] }</Text>
+          </div>
+          <div className={styles['uuid']}>
+            <Text type={Text.TYPE_UUID}>Артикул: { option['vendor'] }</Text>
           </div>
         </div>
       </div>

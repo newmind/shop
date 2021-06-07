@@ -4,42 +4,63 @@
 
 .wrapper {
 
+  display: flex;
+  flex-direction: column;
+  flex: 1 0;
+}
+
+.content {
+
   display: block;
-  border-radius: 15px;
-  border: 1px solid $pale-lilac;
-  padding: 30px;
-  height: 100%;
-  margin: 0 0 0 30px;
-  box-sizing: border-box;
+  text-align: left;
+}
+
+.link {
+
+  color: $coal-dark;
 }
 
 .uuid {
 
   display: block;
-  margin: 0 0 16px;
-}
-
-.brand {
-
-  display: block;
+  margin: 20px 0 0;
 }
 
 .name {
 
   display: block;
-  margin: 8px 0 0;
+}
+
+.brand {
+
+  display: block;
+  margin: 6px 0 0;
 }
 
 .amount {
 
   display: block;
-  margin: 25px 0 0;
+  margin: 40px 0 0;
+}
+
+.prev-amount {
+
+  color: $danger;
+  text-decoration: line-through;
+  margin: 0 0 0 10px;
+  opacity: .6;
+}
+
+.options {
+
+  display: block;
+  margin: 30px 0 0;
 }
 
 .controls {
 
   display: block;
-  margin: 16px 0 0;
+  margin: 30px 0 0;
 }
 
 .buttons {
@@ -51,7 +72,6 @@
 
   display: inline-block;
   font-size: 16px;
-  padding: 10px;
   margin: 0 0 0 10px;
   color: $gray;
   vertical-align: middle;
@@ -67,28 +87,9 @@
 .cart {
 
   display: block;
-  padding: 10px 0 10px 2px;
+  padding: 10px 0 0;
   font-family: inherit;
   font-weight: 300;
   font-size: 12px;
-  height: 12px;
   color: $blue-grey;
-}
-
-.description {
-
-  display: block;
-  border-top: 1px solid $pale-lilac;
-  padding: 25px 0 0;
-}
-
-.header {
-
-  display: block;
-}
-
-.content {
-
-  display: block;
-  margin: 12px 0 0;
 }

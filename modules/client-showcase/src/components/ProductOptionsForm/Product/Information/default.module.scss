@@ -1,0 +1,95 @@
+
+@import "~@ui.packages/theme";
+
+
+.wrapper {
+
+  display: flex;
+  flex-direction: column;
+  flex: 1 0;
+}
+
+.content {
+
+  display: block;
+  text-align: left;
+}
+
+.link {
+
+  color: $coal-dark;
+}
+
+.uuid {
+
+  display: block;
+  margin: 20px 0 0;
+}
+
+.name {
+
+  display: block;
+}
+
+.brand {
+
+  display: block;
+  margin: 6px 0 0;
+}
+
+.amount {
+
+  display: block;
+  margin: 40px 0 0;
+}
+
+.prev-amount {
+
+  color: $danger;
+  text-decoration: line-through;
+  margin: 0 0 0 10px;
+  opacity: .6;
+}
+
+.options {
+
+  display: block;
+  margin: 30px 0 0;
+}
+
+.controls {
+
+  display: block;
+  margin: 30px 0 0;
+}
+
+.buttons {
+
+  display: block;
+}
+
+.remove {
+
+  display: inline-block;
+  font-size: 16px;
+  margin: 0 0 0 10px;
+  color: $gray;
+  vertical-align: middle;
+  cursor: pointer;
+  transition: color 200ms;
+
+  &:hover {
+
+    color: $danger;
+  }
+}
+
+.cart {
+
+  display: block;
+  padding: 10px 0 0;
+  font-family: inherit;
+  font-weight: 300;
+  font-size: 12px;
+  color: $blue-grey;
+}

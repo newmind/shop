@@ -5,60 +5,40 @@
 .wrapper {
 
   display: flex;
-  flex-direction: row;
-  width: 500px;
-  margin: 0 auto;
-}
-
-//.left,
-//.right {
-//
-//  display: block;
-//  box-sizing: border-box;
-//  width: 400px;
-//}
-
-.left {
-
-  display: flex;
   flex-direction: column;
   flex: 1 0;
-  text-align: right;
-  padding: 0 20px 0 0;
 }
 
-.right {
+.content {
 
   display: block;
-  text-align: right;
-  padding: 0 0 0 20px;
-  border-left: 1px solid $pale-lilac;
+  text-align: left;
 }
-
 
 .uuid {
 
   display: block;
-  margin: 15px 0 0;
-}
-
-.brand {
-
-  display: block;
+  margin: 20px 0 0;
+  padding: 15px 25px 15px 0;
+  border-top: 1px solid $pale-lilac;
+  border-bottom: 1px solid $pale-lilac;
 }
 
 .name {
 
   display: block;
-  margin: 10px 0 0;
+}
+
+.brand {
+
+  display: block;
+  margin: 6px 0 0;
 }
 
 .amount {
 
-  display: flex;
-  flex: 0 0;
-  flex-direction: row;
-  align-items: baseline;
+  display: block;
+  margin: 40px 0 0;
 }
 
 .prev-amount {
@@ -69,10 +49,16 @@
   opacity: .6;
 }
 
+.options {
+
+  display: block;
+  margin: 30px 0 0;
+}
+
 .controls {
 
   display: block;
-  margin: 16px 0 0;
+  margin: 15px 0 0;
 }
 
 .buttons {
@@ -104,22 +90,4 @@
   font-weight: 300;
   font-size: 12px;
   color: $blue-grey;
-}
-
-.description {
-
-  display: block;
-  border-top: 1px solid $pale-lilac;
-  padding: 25px 0 0;
-}
-
-.header {
-
-  display: block;
-}
-
-.content {
-
-  display: block;
-  margin: 12px 0 0;
 }

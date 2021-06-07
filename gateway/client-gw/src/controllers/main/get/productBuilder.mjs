@@ -16,6 +16,7 @@ export default function productBuilder(data, filterAttributes) {
     type: data['type'],
     currency: data['currency']['value'],
     comments: data['comments'],
+    options: data['options'],
     promotions: data['promotions'].filter((promo) => moment().isBetween(promo['dateFrom'], promo['dateTo'], undefined, '[]')),
     gallery: data['gallery'].map((item) => item['uuid']),
     characteristics: data['characteristics'].map((characteristic) => ({

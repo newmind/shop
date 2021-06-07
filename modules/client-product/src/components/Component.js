@@ -43,11 +43,13 @@ function Product() {
             }
           ]} />
         </div>
-        <div className={styles['gallery']}>
-          <Gallery items={product['gallery']} path={`${process.env['REACT_APP_API_HOST']}/gallery`} />
-        </div>
-        <div className={styles['information']}>
-          <Information {...product} />
+        <div className={styles['product']}>
+          <div className={styles['gallery']}>
+            <Gallery items={product['gallery']} path={`${process.env['REACT_APP_API_HOST']}/gallery`} />
+          </div>
+          <div className={styles['information']}>
+            <Information {...product} />
+          </div>
         </div>
       </div>
       <Tabs name={'product'} defaultTab={'description'}>

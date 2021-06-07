@@ -10,7 +10,7 @@ import {
   selectAmount
 } from '@ui.packages/cart-widget';
 
-import React, {useState} from 'react';
+import React from 'react';
 import types from 'prop-types';
 import { useSelector, useDispatch } from 'react-redux';
 
@@ -19,41 +19,38 @@ import styles from './default.module.scss';
 import {closeDialog, Confirm, openDialog} from "@ui.packages/dialog";
 
 
-export default function Product({ uuid, price, brand, name, gallery }) {
+export default function Product({ uuid, price, brand, name, gallery, option }) {
   const dispatch = useDispatch();
   const uuids = useSelector(selectUuid);
   const amounts = useSelector(selectAmount);
   const inProcess = useSelector(selectInProcess);
-  const product = uuids.find((item) => item[0] === uuid);
-  const [removedUuid, setRemovedUuid] = useState(null);
+
+  const product = uuids.find(item => item[0] === uuid && item[2]['vendor'] === option['vendor']);
 
   const removeFromCartClassName= cn(styles['remove'], 'far fa-trash-alt');
 
   function handlePlus() {
-    dispatch(plusQuantityAction(uuid));
+    dispatch(plusQuantityAction({ uuid, options: option }));
   }
 
   function handleMinus() {
-    dispatch(minusQuantityAction(uuid));
+    dispatch(minusQuantityAction({ uuid, options: option }));
   }
 
   function handleConfirmRemove() {
-    setRemovedUuid(null);
-    dispatch(closeDialog('remove-from-cart-client-order' + uuid));
-    dispatch(removeProductFromCartAction(removedUuid));
+    dispatch(closeDialog('remove-from-cart-client-order' + option['vendor']));
+    dispatch(removeProductFromCartAction({ uuid, options: option }));
   }
 
   function handleRemoveProductFromCart(event) {
     event.preventDefault();
     event.stopPropagation();
 
-    setRemovedUuid(uuid);
-    dispatch(openDialog('remove-from-cart-client-order' + uuid));
+    dispatch(openDialog('remove-from-cart-client-order' + option['vendor']));
   }
 
   function handleCancelRemove() {
-    setRemovedUuid(null);
-    dispatch(closeDialog('remove-from-cart-client-order' + uuid));
+    dispatch(closeDialog('remove-from-cart-client-order' + option['vendor']));
   }
 
   if ( ! product) {
@@ -75,8 +72,11 @@ export default function Product({ uuid, price, brand, name, gallery }) {
             <div className={styles['brand']}>
               <Text type={Text.TYPE_COMMENT}>{ brand }</Text>
             </div>
+            <div className={styles['option']}>
+              <Text type={Text.TYPE_UUID}>Комплектация: { option['name'] }</Text>
+            </div>
             <div className={styles['uuid']}>
-              <Text type="uuid">Код: { uuid }</Text>
+              <Text type="uuid">Артикул: { option['vendor'] }</Text>
             </div>
           </div>
           <div className={styles['amount']}>
@@ -96,13 +96,12 @@ export default function Product({ uuid, price, brand, name, gallery }) {
       </Link>
 
       <Confirm
-        name={'remove-from-cart-client-order' + uuid}
-        message={'Вы точно хотите удалить товар из карзины?'}
+        name={'remove-from-cart-client-order' + option['vendor']}
+        message={'Вы точно хотите удалить товар из корзины?'}
         onConfirm={() => handleConfirmRemove()}
         onCancel={() => handleCancelRemove()}
       />
     </div>
-
   );
 }
 

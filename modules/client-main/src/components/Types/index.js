@@ -9,7 +9,7 @@ import styles from './default.module.scss';
 
 
 function Types({ id, value, products }) {
-  return (
+    return (
     <div className={styles['wrapper']}>
       <div className={styles['label']}>
         <div className={styles['value']}>

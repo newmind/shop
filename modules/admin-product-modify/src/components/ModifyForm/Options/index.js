@@ -23,7 +23,7 @@ function OptionField({ field, disabled, onRemove }) {
   return (
     <div className={styles['attr']}>
       <div className={styles['checkbox']}>
-        <CheckBoxField name={`${field}.use`} />
+        <CheckBoxField name={`${field}.isTarget`} />
       </div>
       <div className={styles['attr__title']}>
         <InputField
@@ -35,6 +35,7 @@ function OptionField({ field, disabled, onRemove }) {
       </div>
       <div className={styles['attr__value']}>
         <InputField
+          require
           label="Артикул"
           name={`${field}.vendor`}
           disabled={disabled}

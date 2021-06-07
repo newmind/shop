@@ -1,28 +1,17 @@
 
 import request from '@ui.packages/request';
-import { openDialog } from '@ui.packages/dialog';
 import { pushNotification } from '@ui.packages/notifications';
-import { addProductToCartAction } from '@ui.packages/cart-widget';
 
 import {
   getProductsAction,
   getProductsFailAction,
   getProductsSuccessAction,
+
+  getProductRequestAction,
+  getProductRequestFailAction,
+  getProductRequestSuccessAction,
 } from './slice';
 
-
-export const addProductToCart = (product) => (dispatch) => {
-  product['recipe'] = {};
-  dispatch(addProductToCartAction(product));
-  dispatch(pushNotification({
-    title: `Товар ${product['uuid']} "${product['brand']}" добавлен в карзину`,
-    mode: 'success',
-  }));
-};
-
-export const fastViewProduct = (product) => (dispatch) => {
-  dispatch(openDialog('fast-view-client-product', product));
-};
 
 export const getProducts = (params = {}) => async (dispatch) => {
   try {
@@ -34,7 +23,7 @@ export const getProducts = (params = {}) => async (dispatch) => {
     });
 
     dispatch(getProductsSuccessAction(result));
-    //
+
     // if (document.querySelector('#scroller')) {
     //   document.querySelector('#scroller').scroll(0, 0);
     // }
@@ -42,5 +31,26 @@ export const getProducts = (params = {}) => async (dispatch) => {
   catch(error) {
 
     dispatch(getProductsFailAction(error));
+  }
+};
+
+export const getProduct = (uuid) => async (dispatch) => {
+  try {
+    dispatch(getProductRequestAction());
+
+    const result = await request({
+      method: 'get',
+      url: `/products/${uuid}`
+    });
+
+    dispatch(getProductRequestSuccessAction(result['data']));
+  }
+  catch(error) {
+    dispatch(getProductRequestFailAction(error));
+
+    dispatch(pushNotification({
+      title: 'Ошибка при выполнении операции',
+      mode: 'danger',
+    }));
   }
 };

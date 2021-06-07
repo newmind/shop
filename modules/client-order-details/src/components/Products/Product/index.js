@@ -9,7 +9,7 @@ import types from 'prop-types';
 import styles from './default.module.scss';
 
 
-export default function Product({ uuid, price, currency, brands, name, count, gallery }) {
+export default function Product({ uuid, price, currency, brands, name, count, gallery, option }) {
   return (
     <Link className={styles['wrapper']} href={`/products/${uuid}`}>
       <div className={styles['gallery']}>
@@ -24,7 +24,10 @@ export default function Product({ uuid, price, currency, brands, name, count, ga
             <Text type={Text.TYPE_COMMENT}>{ brands.map((brand) => brand) }</Text>
           </div>
           <div className={styles['uuid']}>
-            <Text type="uuid">{ uuid }</Text>
+            <Text type="uuid">Комплектация: { option['name'] }</Text>
+          </div>
+          <div className={styles['uuid']}>
+            <Text type="uuid">Артикул: { option['vendor'] }</Text>
           </div>
         </div>
         <div className={styles['amount']}>

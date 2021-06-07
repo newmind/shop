@@ -66,6 +66,11 @@ const validate = (values) => {
       optionErrors['name'] = 'Неоходимо заполнить';
       optionsErrors[index] = optionErrors;
     }
+
+    if ( ! option['vendor']) {
+      optionErrors['vendor'] = 'Неоходимо заполнить';
+      optionsErrors[index] = optionErrors;
+    }
   });
 
   if ( !! charsErrors.length) {

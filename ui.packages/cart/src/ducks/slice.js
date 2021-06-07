@@ -33,14 +33,28 @@ export const slice = createSlice({
     },
 
     plusQuantityAction(state, { payload }) {
-      const index = state['uuid'].findIndex((item) => item[0] === payload);
+      const index = state['uuid'].findIndex((item) => {
+        if (item[0] === payload['uuid']) {
+          if (item[2] && item[2]['id'] === payload['options']['id']) {
+            return true;
+          }
+        }
+        return false;
+      });
       if (index > -1) {
         state['uuid'][index][1] += 1;
       }
       window.localStorage.setItem('cart', JSON.stringify(state['uuid']));
     },
     minusQuantityAction(state, { payload }) {
-      const index = state['uuid'].findIndex((item) => item[0] === payload);
+      const index = state['uuid'].findIndex((item) => {
+        if (item[0] === payload['uuid']) {
+          if (item[2] && item[2]['id'] === payload['options']['id']) {
+            return true;
+          }
+        }
+        return false;
+      });
       if (index > -1) {
         if (state['uuid'][index][1] > 1) {
           state['uuid'][index][1] -= 1;
@@ -51,10 +65,21 @@ export const slice = createSlice({
 
     addProductToCartAction(state, { payload }) {
       let newItems;
-      if (state['uuid'].some(item => item[0] === payload)) {
+      const hasItem = state['uuid'].some((item) => {
+        if (item[0] === payload['uuid']) {
+          if (item[2] && item[2]['vendor'] === payload['options']['vendor']) {
+            return true;
+          }
+        }
+        return false;
+      });
+
+      if (hasItem) {
         newItems = state['uuid'].map(item => {
-          if (item[0] === payload) {
-            return [item[0], ++item[1]];
+          if (item[0] === payload['uuid']) {
+            if (item[2] && item[2]['id'] === payload['options']['id']) {
+              return [item[0], ++item[1], item[2]];
+            }
           }
           return item;
         });
@@ -62,18 +87,19 @@ export const slice = createSlice({
       else {
         newItems = [
           ...state['uuid'],
-          [payload, 1],
+          [payload['uuid'], 1, payload['options']],
         ];
       }
       state['uuid'] = newItems;
       window.localStorage.setItem('cart', JSON.stringify(newItems));
     },
     removeProductFromCartAction(state, { payload }) {
-      const index = state['uuid'].findIndex((item) => item[0] === payload);
-      state['uuid'] = [
-        ...state['uuid'].slice(0, index),
-        ...state['uuid'].slice(index + 1),
-      ];
+      if (payload['options']) {
+        state['uuid'] = state['uuid'].filter((item) => item[2]['vendor'] !== payload['options']['vendor']);
+      }
+      else {
+        state['uuid'] = state['uuid'].filter((item) => item[0] !== payload['uuid']);
+      }
       window.localStorage.setItem('cart', JSON.stringify(state['uuid']));
     },
 

@@ -1,0 +1,28 @@
+
+@import "~@ui.packages/theme";
+
+
+.wrapper {
+
+  display: flex;
+  flex-direction: row;
+  flex: 1 0;
+}
+
+.gallery {
+
+  display: block;
+  width: 320px;
+  height: 320px;
+  padding: 0 30px;
+}
+
+.information {
+
+  display: flex;
+  flex-direction: column;
+  flex: 1 0;
+  min-width: 280px;
+  min-height: 326px;
+  margin: 0 0 0 40px;
+}

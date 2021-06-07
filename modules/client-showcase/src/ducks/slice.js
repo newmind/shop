@@ -8,6 +8,7 @@ const initialState = {
   brands: [],
   categories: [],
   meta: {},
+  product: null,
   inProcess: false,
   isInitialize: false,
 };
@@ -28,6 +29,11 @@ export const slice = createSlice({
       state['isInitialize'] = false;
       state['inProcess'] = false;
     },
+
+    resetProductAction(state) {
+      state['product'] = null;
+    },
+
     getProductsAction: (state) => {
       state['inProcess'] = true;
     },
@@ -42,21 +48,39 @@ export const slice = createSlice({
       state['categories'] = payload['filter']['categories'];
       state['isInitialize'] = true;
       state['inProcess'] = false;
-    }
+    },
+
+    getProductRequestAction(state) {
+      state['inProcess'] = true;
+    },
+    getProductRequestFailAction(state) {
+      state['inProcess'] = false;
+    },
+    getProductRequestSuccessAction(state, { payload }) {
+      state['inProcess'] = false;
+      state['product'] = payload;
+    },
   },
 });
 
 export const {
   resetState,
 
+  resetProductAction,
+
   getProductsAction,
   getProductsFailAction,
-  getProductsSuccessAction
+  getProductsSuccessAction,
+
+  getProductRequestAction,
+  getProductRequestFailAction,
+  getProductRequestSuccessAction,
 } = slice['actions'];
 
 export const selectItems = (state) => state[REDUCER_NAME]['items'];
 export const selectTypes = (state) => state[REDUCER_NAME]['types'];
 export const selectBrands = (state) => state[REDUCER_NAME]['brands'];
+export const selectProduct = (state) => state[REDUCER_NAME]['product'];
 export const selectCategories = (state) => state[REDUCER_NAME]['categories'];
 export const selectMeta = (state) => state[REDUCER_NAME]['meta'];
 export const selectInProcess = (state) => state[REDUCER_NAME]['inProcess'];

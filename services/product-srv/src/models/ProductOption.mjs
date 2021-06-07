@@ -46,7 +46,7 @@ export default function (sequelize, DataTypes) {
 
     ProductOption.belongsTo(Product, {
       foreignKey: 'productUuid',
-      as: 'options',
+      as: 'product',
     });
   };
 

@@ -1,5 +1,6 @@
 
 import { Text } from '@ui.packages/kit';
+import { Dialog } from "@ui.packages/dialog";
 
 import React from 'react';
 import { useSelector } from 'react-redux';
@@ -7,6 +8,7 @@ import { useSelector } from 'react-redux';
 import { selectTypes } from '../ducks/slice';
 
 import Types from "./Types";
+import ProductOptionsForm from './ProductOptionsForm';
 
 import styles from './default.module.scss';
 
@@ -29,6 +31,10 @@ export default function Main() {
           {types.map((item) => <Types key={item['id']} {...item} />)}
         </div>
       </div>
+
+      <Dialog name={'fast-view'}>
+        <ProductOptionsForm />
+      </Dialog>
     </section>
   );
 }

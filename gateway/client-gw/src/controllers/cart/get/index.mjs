@@ -11,7 +11,7 @@ export default () => async (ctx) => {
     url: process.env['PRODUCT_API_SRV'] + '/products',
     method: 'get',
     params: {
-      uuid: uuid.map(item => item[0]),
+      vendor: uuid.map(item => item[2]['vendor']),
     }
   });
 

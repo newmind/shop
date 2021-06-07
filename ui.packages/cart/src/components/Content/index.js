@@ -94,8 +94,8 @@ function Content() {
     dispatch(removeProductFromCartAction(removedUuid));
   }
 
-  function handleRemoveProductFromCart(uuid) {
-    setRemovedUuid(uuid);
+  function handleRemoveProductFromCart(payload) {
+    setRemovedUuid(payload);
     setDialog(true);
     dispatch(openDialog('remove-from-cart'));
   }
@@ -131,21 +131,21 @@ function Content() {
           : (
             <List
               onReset={() => handleResetCart()}
-              onRemove={(uuid) => handleRemoveProductFromCart(uuid)}
+              onRemove={(payload) => handleRemoveProductFromCart(payload)}
             />
           )}
       </div>
 
       <Confirm
         name={'remove-from-cart'}
-        message={'Вы точно хотите удалить товар из карзины?'}
+        message={'Вы точно хотите удалить товар из корзины?'}
         onConfirm={() => handleConfirmRemove()}
         onCancel={() => handleCancelRemove()}
       />
 
       <Confirm
         name={'reset-from-cart'}
-        message={'Вы точно хотите очистить карзину?'}
+        message={'Вы точно хотите очистить корзину?'}
         onConfirm={() => handleConfirmReset()}
         onCancel={() => handleCancelReset()}
       />

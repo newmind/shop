@@ -11,7 +11,14 @@ const initialState = {
   currencies: [],
   gallery: [],
   promotions: [],
-  product: {},
+  product: {
+    options: [
+      {
+        name: 'Базовая',
+        isTarget: true,
+      }
+    ],
+  },
   inProcess: false,
   inCreateProcess: false,
 };

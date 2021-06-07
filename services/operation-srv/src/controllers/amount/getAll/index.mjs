@@ -27,14 +27,14 @@ export default () => async (ctx) => {
     url: process.env['PRODUCT_API_SRV'] + '/products',
     method: 'get',
     params: {
-      uuid: uuid.map(item => item[0]),
+      vendor: uuid.map((item) => item[2]['vendor']),
     },
   });
 
   for (let index in products) {
     if (products.hasOwnProperty(index)) {
       const product = products[index];
-      const count = uuid.find(item => item[0] === product['uuid'])[1];
+      const count = uuid.find(item => item[0] === product['uuid'] && item[2]['vendor'] === product['options'][0]['vendor'])[1];
 
       amounts[product['currency']['code']] = {
         ...amounts[product['currency']['code']],

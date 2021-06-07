@@ -2,7 +2,13 @@
 import request from "@ui.packages/request";
 import { pushNotification } from '@ui.packages/notifications';
 
-import { getMainAction } from './slice';
+import {
+  getMainAction,
+
+  getProductRequestAction,
+  getProductRequestFailAction,
+  getProductRequestSuccessAction,
+} from './slice';
 
 
 export const getTypes = () => async (dispatch) => {
@@ -22,3 +28,23 @@ export const getTypes = () => async (dispatch) => {
   }
 };
 
+export const getProduct = (uuid) => async (dispatch) => {
+  try {
+    dispatch(getProductRequestAction());
+
+    const result = await request({
+      method: 'get',
+      url: `/products/${uuid}`
+    });
+
+    dispatch(getProductRequestSuccessAction(result['data']));
+  }
+  catch(error) {
+    dispatch(getProductRequestFailAction(error));
+
+    dispatch(pushNotification({
+      title: 'Ошибка при выполнении операции',
+      mode: 'danger',
+    }));
+  }
+};
