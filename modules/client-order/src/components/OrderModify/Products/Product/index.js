@@ -1,6 +1,7 @@
 
 import numeral from '@packages/numeral';
 import { Gallery, Header, Text, Link, Count } from '@ui.packages/kit';
+import { closeDialog, Confirm, openDialog } from "@ui.packages/dialog";
 import {
   selectUuid,
   selectInProcess,
@@ -16,7 +17,6 @@ import { useSelector, useDispatch } from 'react-redux';
 
 import cn from 'classnames';
 import styles from './default.module.scss';
-import {closeDialog, Confirm, openDialog} from "@ui.packages/dialog";
 
 
 export default function Product({ uuid, price, brand, name, gallery, option }) {
