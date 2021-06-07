@@ -25,7 +25,7 @@ export default async function(orderId) {
         model: Product,
         required: true,
         as: 'products',
-        attributes: ['uuid', 'fiscal', 'price', 'count'],
+        attributes: ['uuid', 'price', 'count', 'optionName', 'optionVendor'],
         include: [
           {
             model: Currency,

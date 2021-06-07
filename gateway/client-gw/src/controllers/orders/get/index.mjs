@@ -62,11 +62,13 @@ export default () => async (ctx) => {
     return {
       uuid: item['uuid'],
       name: item['name'],
-      brands: item['brands'].map((item) => item['value']),
+      brand: item['brands'].map((item) => item['value'])[0],
       gallery: item['gallery'].map((item) => item['uuid']),
       price: product['price'],
       currency: product['currency']['value'],
       count: product['count'],
+      optionName: product['optionName'],
+      optionVendor: product['optionVendor'],
     }
   });
 

@@ -23,11 +23,6 @@ export default function(sequelize, DataType) {
       allowNull: false,
       index: true,
     },
-    fiscal: {
-      type: DataType.STRING(255),
-      allowNull: true,
-      index: true,
-    },
     price: {
       type: DataType.DECIMAL(10, 2),
       allowNull: false,
@@ -42,6 +37,14 @@ export default function(sequelize, DataType) {
     },
     count: {
       type: DataType.INTEGER,
+      allowNull: false,
+    },
+    optionName: {
+      type: DataType.STRING(64),
+      allowNull: false,
+    },
+    optionVendor: {
+      type: DataType.STRING(64),
       allowNull: false,
     },
   }, {

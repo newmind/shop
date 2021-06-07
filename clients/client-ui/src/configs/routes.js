@@ -21,12 +21,12 @@ const routes = [
     module: import('@modules/client-contacts'),
   },
   {
-    path: '/client-order',
+    path: '/order',
     wrapper: 'Navigate',
     module: import('@modules/client-order'),
   },
   {
-    path: '/client-order/:id',
+    path: '/order/:id',
     wrapper: 'Navigate',
     module: import(
       /* webpackPreload: true */

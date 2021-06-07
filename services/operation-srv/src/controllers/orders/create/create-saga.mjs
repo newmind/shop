@@ -1,4 +1,5 @@
 
+import logger from '@sys.packages/logger';
 import { NetworkError } from '@packages/errors';
 import { sendCommand } from '@sys.packages/rabbit';
 
@@ -58,6 +59,7 @@ export default class CreateSaga {
       .withCompensation(async (params) => {
         const customer = params.getCustomer();
         await deleteCustomer(customer['id']);
+        logger.error('Error create customer');
       })
 
       .step('Get price')
@@ -67,9 +69,10 @@ export default class CreateSaga {
       })
       .withCompensation((params) => {
         params.setPrices(null);
+        logger.error('Error get price');
       })
 
-      .step('Create client-order')
+      .step('Create order')
       .invoke(async (params) => {
         const price = params.getPrices();
         const customer = params.getCustomer();
@@ -82,6 +85,7 @@ export default class CreateSaga {
       })
       .withCompensation(async (params) => {
         await deleteOrder(params.getOrderId());
+        logger.error('Error create order');
       })
 
       .step('Create products')
@@ -90,12 +94,16 @@ export default class CreateSaga {
       })
       .withCompensation(async (params) => {
         await deleteProducts(params.getOrderId());
+        logger.error('Error create product');
       })
 
-      .step('Get client-order')
+      .step('Get order')
       .invoke(async (params) => {
         const result = await getOrder(params.getOrderId());
         params.setOrder(result);
+      })
+      .withCompensation(() => {
+        logger.error('Error get order');
       })
 
       .step('Create online pay')
@@ -116,6 +124,9 @@ export default class CreateSaga {
         });
         params.setPikassa(result);
       })
+      .withCompensation(() => {
+        logger.error('Error create online pay');
+      })
 
       .step('Update online payment')
       .invoke(async (params) => {
@@ -125,12 +136,18 @@ export default class CreateSaga {
           await updateOrder(pikassa['externalId'], { paymentUUID: pikassa['uuid'], paymentLink: pikassa['paymentLink'] });
         }
       })
+      .withCompensation(() => {
+        logger.error('Error update online payment');
+      })
 
       .step('Get products')
       .invoke(async function(params) {
         const order = params.getOrder();
         const result = await getProducts(order['products'].map(item => item['uuid']));
         params.setProducts(result);
+      })
+      .withCompensation(() => {
+        logger.error('Error get products');
       })
 
       .step('Send event')

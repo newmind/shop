@@ -39,7 +39,7 @@ function Order() {
 
     if (result) {
       dispatch(resetCartAction());
-      navigate(process.env['PUBLIC_URL'] + '/client-order/' + result['externalId']);
+      navigate(process.env['PUBLIC_URL'] + '/order/' + result['externalId']);
     }
   }
 

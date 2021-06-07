@@ -21,14 +21,13 @@ module.exports = {
           allowNull: false,
           index: true,
         },
-        fiscal: {
-          type: DataType.STRING(255),
-          allowNull: true,
-          index: true,
-        },
         price: {
           type: DataType.DECIMAL(10, 2),
           allowNull: false,
+          defaultValue: 0,
+          get() {
+            return Number(this.getDataValue('price'))
+          },
         },
         currencyCode: {
           type: DataType.STRING(8),
@@ -36,6 +35,14 @@ module.exports = {
         },
         count: {
           type: DataType.INTEGER,
+          allowNull: false,
+        },
+        optionName: {
+          type: DataType.STRING(64),
+          allowNull: false,
+        },
+        optionVendor: {
+          type: DataType.STRING(64),
           allowNull: false,
         },
         createdAt: {

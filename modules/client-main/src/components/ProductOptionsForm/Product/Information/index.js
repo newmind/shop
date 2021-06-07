@@ -70,7 +70,7 @@ function Product({ uuid, brand, name, price, prevPrice, currency, options }) {
           </div>
           { !! count && (
             <div className={styles['cart']}>
-              <Link className={styles['to-client-order']} href={'/client-order'}>{ count } в корзине</Link>
+              <Link className={styles['to-client-order']} href={'/order'}>{ count } в корзине</Link>
             </div>
           )}
         </div>

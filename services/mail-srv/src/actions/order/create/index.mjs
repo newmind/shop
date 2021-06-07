@@ -8,9 +8,13 @@ import builderData from './builds/data.mjs';
 
 
 export default async (data) => {
+
+  console.log(process.env)
+
   const transporter = nodeMailer.createTransport({
     host: process.env['EMAIL_HOST'],
-    port: process.env['EMAIL_PORT'],
+    port: Number(process.env['EMAIL_PORT']),
+    secure: true,
     ssl: true,
     tls: false,
     auth: {
@@ -22,9 +26,9 @@ export default async (data) => {
   const html = nunjucks.render('order/created/index.html', builderData(data));
 
   const info = await transporter.sendMail({
-    from: "glassshoprobot@gmail.com",
+    from: process.env['EMAIL_HOST'],
     to: data['meta']['email'],
-    subject: 'Заказ в интернет магазине',
+    subject: 'Заказ',
     html,
     attachments: data['products'].map((product) => ({
       path: product['preview'],
