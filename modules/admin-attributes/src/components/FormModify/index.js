@@ -1,27 +1,31 @@
 
-import { connect } from 'react-redux';
-import { reduxForm } from 'redux-form';
+import { getItem, selectItem, selectInFormProcess, resetItemAction } from '@modules/admin-attributes';
 
-import Component from './Component';
+import { useMount, useUnmount } from '@ui.packages/hoc';
+
+import React from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+
+import Form from './Form';
+import Spinner from './Spinner';
 
 
-const validate = (values) => {
-  const errors = {};
+export default function({ data }) {
+  const dispatch = useDispatch();
+  const item = useSelector(selectItem);
+  const inFormProcess = useSelector(selectInFormProcess);
 
-  if ( ! values['value']) {
-    errors['value'] = 'Необходимо заполнить';
-  }
+  useMount(async () => {
+    if (data && data['id']) {
+      await dispatch(getItem(data['id']));
+    }
+  });
 
-  return errors;
-};
+  useUnmount(() => {
+    dispatch(resetItemAction());
+  });
 
-const mapStateToProps = (state, props) => {
-  return {
-    initialValues: props['data'],
-  }
-};
-
-export default connect(mapStateToProps)(reduxForm({
-  form: 'attr-modify',
-  validate,
-})(Component));
+  return inFormProcess
+    ? <Spinner />
+    : <Form initialValues={item} />;
+}

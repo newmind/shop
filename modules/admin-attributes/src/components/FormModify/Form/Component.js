@@ -1,4 +1,6 @@
 
+import { selectUnits } from '@modules/admin-attributes';
+
 import { Mode } from '@ui.packages/types';
 import { Row, Col, Button, InputField, TextareaField, SelectField } from '@ui.packages/kit';
 
@@ -7,14 +9,13 @@ import { useSelector } from 'react-redux';
 
 import styles from './default.module.scss';
 
-import { selectUnits } from '../../ducks/slice';
-
 
 const types = [
   { id: 'string', value: 'Текстовый' },
   { id: 'number', value: 'Числовой' },
   { id: 'bool', value: 'Булевый' },
 ];
+
 
 export default ({ handleSubmit, valid, pristine }) => {
   const units = useSelector(selectUnits);
@@ -35,6 +36,7 @@ export default ({ handleSubmit, valid, pristine }) => {
         <Row>
           <Col>
             <SelectField
+              require
               name="type"
               label="Тип поля"
               options={types}

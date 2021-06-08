@@ -2,54 +2,6 @@
 version: "3.7"
 services:
 
-  mailserver:
-    image: docker.io/mailserver/docker-mailserver:latest
-    hostname: mail
-    domainname: example.com
-    container_name: mailserver
-    ports:
-      - "25:25"
-      - "143:143"
-      - "587:587"
-      - "993:993"
-    volumes:
-      - ./maildata:/var/mail
-      - ./mailstate:/var/mail-state
-      - ./maillogs:/var/log/mail
-      - ./mailconfig/:/tmp/docker-mailserver/
-    environment:
-      - ENABLE_SPAMASSASSIN=1
-      - SPAMASSASSIN_SPAM_TO_INBOX=1
-      - ENABLE_CLAMAV=1
-      - ENABLE_FAIL2BAN=1
-      - ENABLE_POSTGREY=1
-      - ONE_DIR=1
-      - DMS_DEBUG=0
-      - ENABLE_LDAP=1
-      - LDAP_SERVER_HOST=ldap # your ldap container/IP/ServerName
-      - LDAP_SEARCH_BASE=ou=people,dc=localhost,dc=localdomain
-      - LDAP_BIND_DN=cn=admin,dc=localhost,dc=localdomain
-      - LDAP_BIND_PW=admin
-      - LDAP_QUERY_FILTER_USER=(&(mail=%s)(mailEnabled=TRUE))
-      - LDAP_QUERY_FILTER_GROUP=(&(mailGroupMember=%s)(mailEnabled=TRUE))
-      - LDAP_QUERY_FILTER_ALIAS=(|(&(mailAlias=%s)(objectClass=PostfixBookMailForward))(&(mailAlias=%s)(objectClass=PostfixBookMailAccount)(mailEnabled=TRUE)))
-      - LDAP_QUERY_FILTER_DOMAIN=(|(&(mail=*@%s)(objectClass=PostfixBookMailAccount)(mailEnabled=TRUE))(&(mailGroupMember=*@%s)(objectClass=PostfixBookMailAccount)(mailEnabled=TRUE))(&(mailalias=*@%s)(objectClass=PostfixBookMailForward)))
-      - DOVECOT_PASS_FILTER=(&(objectClass=PostfixBookMailAccount)(uniqueIdentifier=%n))
-      - DOVECOT_USER_FILTER=(&(objectClass=PostfixBookMailAccount)(uniqueIdentifier=%n))
-      - ENABLE_SASLAUTHD=1
-      - SASLAUTHD_MECHANISMS=ldap
-      - SASLAUTHD_LDAP_SERVER=ldap
-      - SASLAUTHD_LDAP_BIND_DN=cn=admin,dc=localhost,dc=localdomain
-      - SASLAUTHD_LDAP_PASSWORD=admin
-      - SASLAUTHD_LDAP_SEARCH_BASE=ou=people,dc=localhost,dc=localdomain
-      - SASLAUTHD_LDAP_FILTER=(&(objectClass=PostfixBookMailAccount)(uniqueIdentifier=%U))
-      - POSTMASTER_ADDRESS=postmaster@localhost.localdomain
-      - POSTFIX_MESSAGE_SIZE_LIMIT=100000000
-    cap_add:
-      - NET_ADMIN
-      - SYS_PTRACE
-    restart: always
-
   db:
     container_name: postgre_sql
     build: ./postgresql
@@ -61,6 +13,7 @@ services:
         max-size: 10m
     ports:
       - 50004:5432
+
 
   rabbit:
     container_name: rabbit_mq
@@ -74,6 +27,7 @@ services:
     ports:
       - 50002:15672
 
+
   mail_srv:
     container_name: mail_srv
     build:
@@ -85,10 +39,7 @@ services:
       options:
         max-file: "5"
         max-size: 10m
-    depends_on:
-      - mailserver
-    links:
-      - mailserver
+
 
   identity_srv:
     container_name: identity_srv
@@ -108,6 +59,7 @@ services:
       - db
       - mail_srv
 
+
   customer_srv:
     container_name: customer_srv
     build:
@@ -124,6 +76,7 @@ services:
     links:
       - db
 
+
   gallery_srv:
     container_name: gallery_srv
     build:
@@ -139,6 +92,7 @@ services:
       - db
     links:
       - db
+
 
   promotion_srv:
     container_name: promotion_srv
@@ -158,6 +112,7 @@ services:
       - db
       - rabbit
 
+
   pikassa_srv:
     container_name: pikassa_srv
     build:
@@ -175,6 +130,7 @@ services:
     links:
       - db
       - rabbit
+
 
   operation_srv:
     container_name: operation_srv
@@ -201,6 +157,7 @@ services:
       - mail_srv
       - customer_srv
       - product_srv
+
 
   product_srv:
     container_name: product_srv

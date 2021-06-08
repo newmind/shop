@@ -46,15 +46,13 @@ function Product({ uuid, brand, name, price, prevPrice, currency, options }) {
         <div className={styles['uuid']}>
           <Text type={Text.TYPE_UUID}>Артикул: { uuid }</Text>
         </div>
-        {(options.length > 1) && (
-          <div className={styles['options']}>
-            <Options
-              value={optionDetail ? optionDetail['id'] : null}
-              items={options}
-              onChange={(i) => setOptionDetail(i)}
-            />
-          </div>
-        )}
+        <div className={styles['options']}>
+          <Options
+            value={optionDetail ? optionDetail['id'] : null}
+            items={options}
+            onChange={(i) => setOptionDetail(i)}
+          />
+        </div>
         <div className={styles['amount']}>
         <Header type={Text.TYPE_AMOUNT}>{ numeral(price).format() } { currency }</Header>
           {prevPrice && (

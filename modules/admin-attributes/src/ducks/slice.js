@@ -3,10 +3,12 @@ import { createSlice } from '@reduxjs/toolkit';
 
 
 const initialState = {
+  item: null,
   items: [],
   units: [],
   error: null,
   inProcess: false,
+  inFormProcess: false,
 };
 
 const REDUCER_NAME = 'attributes';
@@ -17,10 +19,15 @@ const typesSlice = createSlice({
   initialState,
   reducers: {
     resetStateAction(state) {
+      state['item'] = null;
       state['items'] = [];
       state['units'] = [];
       state['error'] = null;
       state['inProcess'] = false;
+    },
+
+    resetItemAction(state) {
+      state['item'] = null;
     },
 
     getUnitsRequestAction() {},
@@ -66,12 +73,19 @@ const typesSlice = createSlice({
       state['units'] = state['units'].filter((unit) => !~ payload.indexOf(unit['id']));
     },
 
-    getItemsRequestAction(state) {
-      state['inProcess'] = true;
+    getItemRequestAction(state) {
+      state['inFormProcess'] = true;
     },
-    getItemsRequestFailAction(state) {
-      state['inProcess'] = false;
+    getItemRequestFailAction(state) {
+      state['inFormProcess'] = false;
     },
+    getItemRequestSuccessAction(state, { payload }) {
+      state['item'] = payload;
+      state['inFormProcess'] = false;
+    },
+
+    getItemsRequestAction(state) {},
+    getItemsRequestFailAction(state) {},
     getItemsRequestSuccessAction(state, { payload }) {
       state['items'] = payload;
     },
@@ -119,6 +133,8 @@ const typesSlice = createSlice({
 export const {
   resetStateAction,
 
+  resetItemAction,
+
   getUnitsRequestAction,
   getUnitsRequestFailAction,
   getUnitsRequestSuccessAction,
@@ -126,6 +142,10 @@ export const {
   createUnitRequestSuccessAction,
   updateUnitRequestSuccessAction,
   deleteUnitRequestSuccessAction,
+
+  getItemRequestAction,
+  getItemRequestFailAction,
+  getItemRequestSuccessAction,
 
   getItemsRequestAction,
   getItemsRequestFailAction,
@@ -144,9 +164,11 @@ export const {
   deleteItemRequestSuccessAction,
 } = typesSlice['actions'];
 
+export const selectItem = (state) => state[REDUCER_NAME]['item'];
 export const selectItems = (state) => state[REDUCER_NAME]['items'];
 export const selectUnits = (state) => state[REDUCER_NAME]['units'];
 export const selectInProcess = (state) => state[REDUCER_NAME]['inProcess'];
+export const selectInFormProcess = (state) => state[REDUCER_NAME]['inFormProcess'];
 
 export const name = typesSlice['name'];
 export const reducer = typesSlice['reducer'];

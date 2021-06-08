@@ -27,6 +27,10 @@ function Product() {
         <div className={styles['breadcrumbs']}>
           <Breadcrumbs items={[
             {
+              href: process.env['PUBLIC_URL'] + '/products',
+              title: 'Каталог',
+            },
+            {
               href: process.env['PUBLIC_URL'] + '/products?typeId=' + product['type']['id'],
               title: product['type']['value'],
             },

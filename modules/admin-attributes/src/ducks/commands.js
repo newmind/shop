@@ -10,6 +10,10 @@ import {
   getUnitsRequestFailAction,
   getUnitsRequestSuccessAction,
 
+  getItemRequestAction,
+  getItemRequestFailAction,
+  getItemRequestSuccessAction,
+
   getItemsRequestAction,
   getItemsRequestFailAction,
   getItemsRequestSuccessAction,
@@ -65,6 +69,39 @@ export const getItems = () => async (dispatch) => {
   }
   catch(error) {
     dispatch(getItemsRequestFailAction(error));
+
+    if (error instanceof UnauthorizedError) {
+      return void 0;
+    }
+    dispatch(pushNotification({
+      mode: 'danger',
+      title: 'Ошибка при выполнении операции',
+    }));
+  }
+};
+
+export const getItem = (id) => async (dispatch) => {
+  try {
+    dispatch(getItemRequestAction());
+
+    const { data } = await request({
+      url: '/attributes',
+      method: 'get',
+      params: { id },
+    });
+
+    const item = {
+      id: data[0]['id'],
+      value: data[0]['value'],
+      type: data[0]['type'],
+      unitId: data[0]['unit'] ? data[0]['unit']['id'] : null,
+      description: data[0]['description'],
+    };
+
+    dispatch(getItemRequestSuccessAction(item));
+  }
+  catch(error) {
+    dispatch(getItemRequestFailAction(error));
 
     if (error instanceof UnauthorizedError) {
       return void 0;
