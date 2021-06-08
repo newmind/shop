@@ -23,10 +23,11 @@ export default async (data) => {
   const html = nunjucks.render('order/created/index.html', builderData(data));
 
   const info = await transporter.sendMail({
-    from: process.env['EMAIL_HOST'],
+    from: "1krug.com " + process.env['EMAIL_USER'],
     to: data['meta']['email'],
-    subject: 'Заказ',
+    subject: 'Заказ на 1krug.com',
     html,
+    date: new Date(),
     attachments: data['products'].map((product) => ({
       path: product['preview'],
       cid: product['uuid'],
