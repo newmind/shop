@@ -1,5 +1,5 @@
 
-import { getItem, selectItem, selectInFormProcess, resetItemAction } from '@modules/admin-attributes';
+import { getItem, selectItem, selectInFormProcess, resetItemAction, createItem, updateItem } from '@modules/admin-attributes';
 
 import { useMount, useUnmount } from '@ui.packages/hoc';
 
@@ -25,7 +25,21 @@ export default function({ data }) {
     dispatch(resetItemAction());
   });
 
+  function submitModify(data) {
+    if ('id' in data) {
+      dispatch(updateItem(data));
+    }
+    else {
+      dispatch(createItem(data));
+    }
+  }
+
   return inFormProcess
     ? <Spinner />
-    : <Form initialValues={item} />;
+    : (
+      <Form
+        initialValues={item}
+        onSubmit={(data) => submitModify(data)}
+      />
+    );
 }

@@ -1,11 +1,12 @@
 
-import { openDialog } from "@ui.packages/dialog";
+import { Dialog, openDialog } from "@ui.packages/dialog";
 import { Header, Page, PageControls, PageContent, Button } from '@ui.packages/kit';
 
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 import Table from './Table';
+import FormModify from "./FormModify";
 
 import styles from './default.module.scss';
 
@@ -40,6 +41,11 @@ function Attributes() {
           <article className={styles['content']}>
             <Table />
           </article>
+
+          <Dialog name={'attribute'} title={'Аттрибут товара'}>
+            <FormModify />
+          </Dialog>
+
         </section>
       </PageContent>
     </Page>

@@ -1,17 +1,15 @@
 
+import { deleteItem, selectItems } from '@modules/admin-attributes';
+
 import { Table, Column } from '@ui.packages/table';
 import { Actions, Text } from '@ui.packages/kit';
-import { Dialog, Confirm, openDialog, closeDialog } from '@ui.packages/dialog';
+import { Confirm, openDialog, closeDialog } from '@ui.packages/dialog';
 
 import React, { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 
-import FormModify from '../FormModify';
-
 import styles from './default.module.scss';
 
-import { selectItems } from '../../ducks/slice';
-import { createItem, updateItem, deleteItem } from '../../ducks/commands';
 
 
 function Types() {
@@ -36,15 +34,6 @@ function Types() {
   function handleDelete(id) {
     dispatch(deleteItem([ id ]));
     dispatch(closeDialog('confirm'));
-  }
-
-  function submitModify(data) {
-    if ('id' in data) {
-      dispatch(updateItem(data));
-    }
-    else {
-      dispatch(createItem(data));
-    }
   }
 
   return (
@@ -93,10 +82,6 @@ function Types() {
           </Column>
         </Table>
       </div>
-
-      <Dialog title="Аттрибут продукта" name="attribute">
-        <FormModify onSubmit={(data) => submitModify(data)} />
-      </Dialog>
 
       <Confirm
         message="Вы уверены, что хотите удалить Аттрибут продукта?"

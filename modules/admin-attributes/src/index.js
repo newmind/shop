@@ -20,4 +20,5 @@ export {
   getUnits,
   createItem,
   updateItem,
+  deleteItem,
 } from './ducks/commands';
