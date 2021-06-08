@@ -9,12 +9,9 @@ import builderData from './builds/data.mjs';
 
 export default async (data) => {
 
-  console.log(process.env)
-
   const transporter = nodeMailer.createTransport({
     host: process.env['EMAIL_HOST'],
     port: Number(process.env['EMAIL_PORT']),
-    secure: true,
     ssl: true,
     tls: false,
     auth: {
