@@ -8,10 +8,10 @@ import cn from "classnames";
 import styles from "./default.module.scss";
 
 
-const PRIMARY_MODE = 'primary';
 const INFO_MODE = 'info';
-const WARNING_MODE = 'warning';
 const DANGER_MODE = 'danger';
+const PRIMARY_MODE = 'primary';
+const WARNING_MODE = 'warning';
 const SUCCESS_MODE = 'success';
 
 

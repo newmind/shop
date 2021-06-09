@@ -15,7 +15,7 @@
           <div><img style="display: inline-block;" width="124" src="cid:{{ item.uuid }}" alt="preview"/>"{{ item.brand }}" {{ item.name }}, {{ item.count }} x {{ item.price }} {{ item.currency }} = {{ item.finalPrice}} {{ item.currency }}</div>
         {% endfor %}
       </div>
-      <p>Для отслеживания статуса заказа, перейдите по ссылке <a href="https://магазиночков.рф/order/{{ externalId }}" rel="noreferrer noopener">Отслеживать</a></p>
+      <p>Для отслеживания статуса заказа, перейдите по ссылке <a href="https://{{ domain }}/order/{{ externalId }}" rel="noreferrer noopener">Отслеживать</a></p>
       <p>Сумма заказа: {{ price }} {{ currency }}</p>
       <a href="{{ paymentLink }}" rel="noreferrer noopener">Оплатить</a>
     </div>

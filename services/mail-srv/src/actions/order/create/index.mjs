@@ -20,7 +20,10 @@ export default async (data) => {
     }
   });
 
-  const html = nunjucks.render('order/created/index.html', builderData(data));
+  const html = nunjucks.render('order/created/index.html', builderData({
+    ...data,
+    domain: process.env['DOMAIN'],
+  }));
 
   const info = await transporter.sendMail({
     from: "1krug.com " + process.env['EMAIL_USER'],
