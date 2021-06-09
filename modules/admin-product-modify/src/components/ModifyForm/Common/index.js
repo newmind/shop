@@ -59,7 +59,8 @@ function Common() {
   }
 
   async function handleCreateBrand(data) {
-    const brandId = await dispatch(createBrand(data))
+    const brandId = await dispatch(createBrand(data));
+
     dispatch(change('product-modify', 'brand', brandId));
     dispatch(closeDialog('new-brand'));
   }
@@ -79,9 +80,7 @@ function Common() {
           <Col>
             <InputField name="uuid" label="Номер товара (генерируется автоматически)" disabled />
           </Col>
-          <Col>
-            <InputField name="fiscal" label="Фискальный номер" disabled={inProcess} />
-          </Col>
+          <Col />
         </Row>
         <Row>
           <Col>

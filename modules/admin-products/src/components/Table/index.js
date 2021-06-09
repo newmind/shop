@@ -97,14 +97,11 @@ function List() {
           align="left"
           width={250}
         >
-          {({ uuid, fiscal, name, brand, price, prevPrice, currency }) => {
+          {({ uuid, name, brand, price, prevPrice, currency }) => {
             return (
               <div className={styles['common']}>
                 <div className={styles['number']}>
                   <Text type={Text.TYPE_BODY}>{ uuid }</Text>
-                  {fiscal && (
-                    <Text type={Text.TYPE_COMMENT}>&nbsp;[{ fiscal }]</Text>
-                  )}
                 </div>
                 <div className={styles['information']}>
                   {name && (

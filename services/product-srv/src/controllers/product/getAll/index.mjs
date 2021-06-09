@@ -20,7 +20,6 @@ export default () => async (ctx) => {
   const { Op } = Sequelize;
   const { Product, Currency, Attribute, Category, Brand, Type, Characteristic, CharacteristicAttribute, Unit, Gallery, Comment, ProductOption } = models;
   const {
-    fiscal = null,
     limit = null,
     skip = null,
     take = null,
@@ -47,10 +46,6 @@ export default () => async (ctx) => {
 
   if (vendor) {
     whereForOptions['vendor'] = vendor;
-  }
-
-  if (fiscal) {
-    where['fiscal'] = fiscal;
   }
 
   if (uuid) {
@@ -115,7 +110,7 @@ export default () => async (ctx) => {
           model: Product,
           as: 'product',
           where: { ...where },
-          attributes: ['uuid', 'name', 'description', 'price', 'fiscal', 'isView', 'createdAt'],
+          attributes: ['uuid', 'name', 'description', 'price', 'isView', 'createdAt'],
           order: [
             sorting,
           ],
@@ -212,7 +207,7 @@ export default () => async (ctx) => {
   }
   else {
     result = await Product.findAndCountAll({
-      attributes: ['uuid', 'name', 'description', 'price', 'fiscal', 'isView', 'createdAt'],
+      attributes: ['uuid', 'name', 'description', 'price', 'isView', 'createdAt'],
       ...options,
       ...offset,
       distinct: true,

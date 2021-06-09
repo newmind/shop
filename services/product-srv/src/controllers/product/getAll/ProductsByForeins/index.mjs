@@ -6,7 +6,7 @@ export default async function(options) {
   const { Product, Currency, Attribute, Category, Brand, Type, Characteristic, CharacteristicAttribute, Unit, Gallery, Comment, ProductOption } = models;
 
   return await Product.findAndCountAll({
-    attributes: ['uuid', 'name', 'description', 'price', 'fiscal', 'isView', 'createdAt'],
+    attributes: ['uuid', 'name', 'description', 'price', 'isView', 'createdAt'],
     ...options,
     ...offset,
     distinct: true,

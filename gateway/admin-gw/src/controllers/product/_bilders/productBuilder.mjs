@@ -2,7 +2,6 @@
 export default function productBuilder(data) {
   return {
     uuid: data['uuid'],
-    fiscal: data['fiscal'],
     name: data['name'],
     brand: !! data['brands'].length
       ? ({

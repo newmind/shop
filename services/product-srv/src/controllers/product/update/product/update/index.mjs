@@ -30,10 +30,6 @@ export default async function updateProperties(uuid, properties) {
     product['description'] = properties['description'];
   }
 
-  if (properties['fiscal']) {
-    product['fiscal'] = properties['fiscal'];
-  }
-
   if ('isView' in properties) {
     product['isView'] = properties['isView'];
   }

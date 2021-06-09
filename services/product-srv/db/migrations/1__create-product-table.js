@@ -12,11 +12,6 @@ module.exports = {
           index: true,
           unique: true,
         },
-        fiscal: {
-          type: DataType.STRING(255),
-          allowNull: true,
-          index: true,
-        },
         name: {
           type: DataType.STRING(255),
           allowNull: true,

@@ -8,17 +8,15 @@ import cn from 'classnames';
 import styles from './default.module.scss';
 
 
-function Checkbox({ className, disabled, mode, value, label, isFixed, onChange }) {
+export default function Checkbox({ className, disabled, mode, value, label, onFocus, onChange, onBlur }) {
   function handleClick() {
     if (disabled) {
       return void 0;
     }
 
-    if (isFixed && value) {
-      value = false;
-    }
-
+    onFocus && onFocus();
     onChange && onChange( ! value);
+    onBlur && onBlur();
   }
 
   const wrapperClassName = cn(styles['wrapper'], {
@@ -63,5 +61,3 @@ Checkbox.defaultProps = {
   value: false,
   label: null,
 };
-
-export default Checkbox;

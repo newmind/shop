@@ -15,11 +15,6 @@ export default function(sequelize, DataType) {
       index: true,
       unique: 'compositeIndex',
     },
-    fiscal: {
-      type: DataType.STRING(255),
-      allowNull: true,
-      index: true,
-    },
     name: {
       type: DataType.STRING(255),
       allowNull: true,

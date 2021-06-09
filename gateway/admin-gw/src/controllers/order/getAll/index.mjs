@@ -56,7 +56,6 @@ export default () => async (ctx) => {
         price: order['price'],
         products: order['products'].map((product) => ({
           uuid: product['uuid'],
-          fiscal: product['fiscal'],
           price: product['price'],
           currency: product['currency']['value'],
           count: product['count'],

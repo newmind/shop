@@ -1,21 +1,30 @@
 
 import { selectInProcess } from '@modules/admin-product-modify';
 
-import {Row, Col, InputField, Button, Draggable, CheckBoxField, Header} from '@ui.packages/kit';
+import { Row, Col, InputField, Button, Draggable, CheckBoxField, Header } from '@ui.packages/kit';
 
 import React from 'react';
 import types from 'prop-types';
-import { FieldArray } from "redux-form";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
+import { FieldArray, getFormValues, change } from "redux-form";
 
 import cn from 'classnames';
 import styles from './default.module.scss';
 
 
 function OptionField({ field, disabled, onRemove }) {
+  const dispatch = useDispatch();
+  const values = useSelector(getFormValues('product-modify'));
 
   function handleRemove() {
     onRemove && onRemove();
+  }
+
+  function handleChangeTarget() {
+    for (let index in values['options']) {
+      dispatch(change('product-modify', 'options[' + index + '].isTarget', false));
+    }
+    dispatch(change('product-modify', `${field}.isTarget`, true));
   }
 
   const classNameRemoveAttr = cn(styles['attr__remove'], 'far fa-trash-alt');
@@ -23,7 +32,7 @@ function OptionField({ field, disabled, onRemove }) {
   return (
     <div className={styles['attr']}>
       <div className={styles['checkbox']}>
-        <CheckBoxField name={`${field}.isTarget`} />
+        <CheckBoxField isFixed name={`${field}.isTarget`} onChange={(value) => handleChangeTarget(value)} />
       </div>
       <div className={styles['attr__title']}>
         <InputField
