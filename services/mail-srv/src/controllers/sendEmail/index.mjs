@@ -1,17 +1,14 @@
 
-import logger from '@sys.packages/logger';
+import logger from "@sys.packages/logger";
 
-import nunjucks from 'nunjucks';
 import nodeMailer from 'nodemailer';
+import nunjucks from "nunjucks";
 
-import builderData from './builds/data.mjs';
 
-
-export default async (data) => {
-
+export default () => async () => {
   const transporter = nodeMailer.createTransport({
     host: process.env['EMAIL_HOST'],
-    port: Number(process.env['EMAIL_PORT']),
+    port: process.env['EMAIL_PORT'],
     ssl: true,
     tls: false,
     auth: {
@@ -20,21 +17,16 @@ export default async (data) => {
     }
   });
 
-  const html = nunjucks.render('order/created/index.html', builderData({
-    ...data,
-    domain: process.env['DOMAIN'],
-  }));
+  const html = nunjucks.render('order/created/index.html', {
+    username: 'James'
+  });
 
   const info = await transporter.sendMail({
-    from: "1krug.com " + process.env['EMAIL_USER'],
-    to: data['meta']['email'],
-    subject: 'Заказ на 1krug.com',
+    from: "glassshoprobot@gmail.com",
+    to: 'pyatakov.viktor@gmail.com',
+    subject: 'Новый заказ',
     html,
-    date: new Date(),
-    attachments: data['products'].map((product) => ({
-      path: product['preview'],
-      cid: product['uuid'],
-    })),
+    attachments: [],
   });
 
   logger['info'](info);
