@@ -21,8 +21,8 @@ export default async (data) => {
   });
 
   const html = nunjucks.render('order/created/index.html', builderData({
-    ...data,
     domain: process.env['DOMAIN'],
+    ...data,
   }));
 
   const info = await transporter.sendMail({

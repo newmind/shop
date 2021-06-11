@@ -20,6 +20,11 @@ import styles from './default.module.scss';
 const FORM_NAME = 'product-modify';
 
 
+const defaultProduct = {
+  options: [{ name: 'Базовая', isTarget: true }],
+};
+
+
 function ProductModify() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -80,7 +85,7 @@ function ProductModify() {
         </header>
         <article className={styles['content']}>
           <ModifyForm
-            initialValues={product}
+            initialValues={{ ...defaultProduct, ...product }}
             onSubmit={handleSubmitProduct}
           />
         </article>
