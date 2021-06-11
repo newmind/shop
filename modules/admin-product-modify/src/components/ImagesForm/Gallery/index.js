@@ -16,7 +16,7 @@ function ImagesForm({ onSelect, onChange }) {
   const formValues = useSelector(getFormValues('gallery'));
 
   function getComposeArray(newImage) {
-    let images = [...formValues['gallery']];
+    let images = [...(formValues['gallery'] || [])];
     const index = images.findIndex((image) => image['uuid'] === newImage['uuid'])
     if (index > -1) {
       images = [
@@ -46,7 +46,7 @@ function ImagesForm({ onSelect, onChange }) {
       {gallery.map((img) => (
         <div className={styles['section']} key={img['uuid']} onDoubleClick={() => handleChangeImage(img)} onClick={() => handleSelectImage(img)}>
           <div className={cn(styles['image'], {
-            [styles['image--selected']]: formValues['gallery'].some((image) => image['uuid'] === img['uuid'])
+            [styles['image--selected']]: (formValues['gallery'] || []).some((image) => image['uuid'] === img['uuid'])
           })}>
             <Image src={`${process.env['REACT_APP_API_HOST']}/gallery/${img['uuid']}?size=small`} />
           </div>

@@ -18,5 +18,6 @@ function validate(values) {
 
 export default reduxForm({
   form: 'gallery',
+  enableReinitialize: true,
   validate,
 })(Component);
