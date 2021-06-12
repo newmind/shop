@@ -2,23 +2,58 @@
 <html lang="ru">
 <head>
   <meta charset="UTF-8">
-  <title>Оформлен заказ</title>
+  <title>Заказ</title>
 </head>
 <body>
-  <div style="width: 100%">
-    <div style="width: 600px; margin: 0 auto; background: white; border: 1px solid #ccc; border-radius: 5px; padding: 20px;">
-      <h3>{{ name }}, Вы сделали заказ в интернет магазине</h3>
-      <p>Номер заказа: {{ externalId }}</p>
-      <div>
-        <p>Выбранные товары</p>
-        {% for item in products %}
-          <div><img style="display: inline-block;" width="124" src="cid:{{ item.uuid }}" alt="preview"/>"{{ item.brand }}" {{ item.name }}, {{ item.count }} x {{ item.price }} {{ item.currency }} = {{ item.finalPrice}} {{ item.currency }}</div>
-        {% endfor %}
-      </div>
-      <p>Для отслеживания статуса заказа, перейдите по ссылке <a href="https://1krug.com/order/{{ externalId }}" rel="noreferrer noopener">Отслеживать</a></p>
-      <p>Сумма заказа: {{ price }} {{ currency }}</p>
-      <a href="{{ paymentLink }}" rel="noreferrer noopener">Оплатить</a>
-    </div>
+<div style="display: block; width: 100%; height: 100%; padding: 30px; background: #ebedf1; box-sizing: border-box; font-family: 'TrebuchetMS', 'Tahoma', 'Geneva', sans-serif;">
+  <div style="max-width: 600px; width: 100%; background: #ffffff; margin: 0 auto; padding: 40px; box-sizing: border-box;">
+    <table border="0" cellspacing="0" cellpadding="0" style="width: 100%; margin: 0; padding: 0;">
+      <tr>
+        <td>
+          <h1 style="display: block; font-size: 20px; color: #354052; margin: 0; padding: 0;">Виктор, ваш заказ на <a style="color: inherit;" href="https://1krug.com" target="_blank">1krug.com</a></h1>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <h2 style="display: block; font-size: 16px; color: #354052; margin: 60px 0 0; padding: 0; letter-spacing: .5px;">Номер: <a style="color: #077dee;" href="https://1krug.com/order/{{ externalId }}" target="_blank">{{ externalId }}</a></h2>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <h2 style="display: block; font-size: 16px; color: #354052; margin: 40px 0 0; padding: 0; letter-spacing: .5px;">Товары:</h2>
+
+          {% for item in products %}
+            <table border="0" cellspacing="0" cellpadding="0" style="width: 100%; margin: 20px 0 0; padding: 0;">
+              <tr>
+                <td width="124">
+                  <img border="0" width="124" height="124" alt="" src="cid:{{ item.uuid }}" />
+                </td>
+                <td valign="middle">
+                  <p style="color: #354052; margin: 0 0 0 20px; padding: 0; font-size: 16px;font-weight: 700; white-space: break-spaces;">{{ item.name }}</p>
+                  <p style="color: #92929d; margin: 8px 0 0 20px; padding: 0; font-size: 13px;">{{ item.brand }}</p>
+                  <p style="color: #92929d; margin: 16px 0 0 20px; padding: 0; font-size: 12px; letter-spacing: 1px;">Ком-я: {{ item.optionName }}</p>
+                </td>
+                <td width="160" valign="middle">
+                  <p style="color: #000000; text-align: right; margin: 0; padding: 0; font-size: 16px; font-weight: 400;">{{ item.count }} x {{ item.price }} {{ item.currency }}</p>
+                  <p style="color: #92929d; text-align: right; margin: 8px 0 0; padding: 0; font-size: 15px;">= {{ item.finalPrice}} {{ item.currency }}</p>
+                </td>
+              </tr>
+            </table>
+          {% endfor %}
+
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <div style="margin: 40px 0; text-align: center;">
+            <a style="display: inline-block; color: #ffffff; background: #1bb934; border-radius: 4px; text-decoration: none; padding: 10px 20px;" href="{{ paymentLink }}" target="_blank">оплатить заказ</a>
+          </div>
+        </td>
+      </tr>
+    </table>
   </div>
+
+</div>
+
 </body>
 </html>
