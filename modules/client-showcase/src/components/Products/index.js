@@ -1,4 +1,6 @@
 
+import { selectItems, selectMeta, selectInProcess } from '@modules/client-showcase';
+
 import { Paging } from "@ui.packages/kit";
 
 import React from 'react';
@@ -6,8 +8,6 @@ import { useSelector } from 'react-redux';
 
 import Empty from './Empty';
 import Product from './Product';
-
-import { selectItems, selectMeta, selectInProcess } from '../../ducks/slice';
 
 import styles from "./default.module.scss";
 
