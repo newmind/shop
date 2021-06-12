@@ -10,12 +10,12 @@
     <table border="0" cellspacing="0" cellpadding="0" style="width: 100%; margin: 0; padding: 0;">
       <tr>
         <td>
-          <h1 style="display: block; font-size: 20px; color: #354052; margin: 0; padding: 0;">Виктор, ваш заказ на <a style="color: inherit;" href="https://1krug.com" target="_blank">1krug.com</a></h1>
+          <h1 style="display: block; font-size: 20px; color: #354052; margin: 0; padding: 0;">Виктор, ваш заказ на <a style="color: inherit;" href="https://{{ domain }}" target="_blank">1krug.com</a></h1>
         </td>
       </tr>
       <tr>
         <td>
-          <h2 style="display: block; font-size: 16px; color: #354052; margin: 60px 0 0; padding: 0; letter-spacing: .5px;">Номер: <a style="color: #077dee;" href="https://1krug.com/order/{{ externalId }}" target="_blank">{{ externalId }}</a></h2>
+          <h2 style="display: block; font-size: 16px; color: #354052; margin: 60px 0 0; padding: 0; letter-spacing: .5px;">Номер: <a style="color: #077dee;" href="https://{{ domain }}/order/{{ externalId }}" target="_blank">{{ externalId }}</a></h2>
         </td>
       </tr>
       <tr>
@@ -23,7 +23,7 @@
           <h2 style="display: block; font-size: 16px; color: #354052; margin: 40px 0 0; padding: 0; letter-spacing: .5px;">Товары:</h2>
 
           {% for item in products %}
-            <table border="0" cellspacing="0" cellpadding="0" style="width: 100%; margin: 20px 0 0; padding: 0;">
+            <table border="0" cellspacing="0" cellpadding="0" style="width: 100%; margin: 20px 0 0; padding: 0; border-bottom: 1px solid #e2e2ea;">
               <tr>
                 <td width="124">
                   <img border="0" width="124" height="124" alt="" src="cid:{{ item.uuid }}" />
@@ -31,7 +31,7 @@
                 <td valign="middle">
                   <p style="color: #354052; margin: 0 0 0 20px; padding: 0; font-size: 16px;font-weight: 700; white-space: break-spaces;">{{ item.name }}</p>
                   <p style="color: #92929d; margin: 8px 0 0 20px; padding: 0; font-size: 13px;">{{ item.brand }}</p>
-                  <p style="color: #92929d; margin: 16px 0 0 20px; padding: 0; font-size: 12px; letter-spacing: 1px;">Ком-я: {{ item.optionName }}</p>
+                  <p style="color: #92929d; margin: 16px 0 0 20px; padding: 0; font-size: 12px; letter-spacing: 1px;">Ком-я: {{ item.optionName }} ({{ item.optionVendor }})</p>
                 </td>
                 <td width="160" valign="middle">
                   <p style="color: #000000; text-align: right; margin: 0; padding: 0; font-size: 16px; font-weight: 400;">{{ item.count }} x {{ item.price }} {{ item.currency }}</p>
@@ -41,12 +41,19 @@
             </table>
           {% endfor %}
 
+          <table border="0" cellspacing="0" cellpadding="0" style="width: 100%; margin: 0; padding: 0;">
+            <tr>
+              <td style="background: #f5f7fb;">
+                <p style="padding: 30px 20px; margin: 0; font-size: 14px; text-align: right;">Сумма: {{ price }} {{ currency }}</p>
+              </td>
+            </tr>
+          </table>
         </td>
       </tr>
       <tr>
         <td>
           <div style="margin: 40px 0; text-align: center;">
-            <a style="display: inline-block; color: #ffffff; background: #1bb934; border-radius: 4px; text-decoration: none; padding: 10px 20px;" href="{{ paymentLink }}" target="_blank">оплатить заказ</a>
+            <a style="display: inline-block; color: #ffffff; background: #1bb934; border-radius: 4px; text-decoration: none; padding: 15px 40px; font-size: 18px;" href="{{ paymentLink }}" target="_blank">оплатить заказ</a>
           </div>
         </td>
       </tr>

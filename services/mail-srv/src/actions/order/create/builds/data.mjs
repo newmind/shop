@@ -4,6 +4,7 @@ import numeral from '@packages/numeral';
 
 export default function(data) {
   return {
+    domain: data['domain'],
     externalId: data['externalId'],
     price: numeral(data['price']).format(),
     currency: data['currency']['value'],
@@ -20,6 +21,8 @@ export default function(data) {
       name: product['name'],
       brand: product['brand'],
       preview: product['preview'],
+      optionName: product['optionName'],
+      optionVendor: product['optionVendor'],
     })),
   };
 }

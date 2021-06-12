@@ -8,7 +8,7 @@ import builderData from './builds/data.mjs';
 
 
 export default async (data) => {
-
+console.log(data)
   const transporter = nodeMailer.createTransport({
     host: process.env['EMAIL_HOST'],
     port: Number(process.env['EMAIL_PORT']),
