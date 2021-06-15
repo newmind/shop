@@ -6,6 +6,7 @@ import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 
 import Product from "./Product";
+import Spinner from "./Spinner";
 
 import styles from './default.module.scss';
 
@@ -27,7 +28,7 @@ export default function ProductOptionsForm({ data }) {
   return (
     <div className={styles['wrapper']}>
       {(inProcess || ! product)
-        ? <p>loading...</p>
+        ? <Spinner />
         : <Product />}
     </div>
   );

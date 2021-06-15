@@ -130,6 +130,8 @@ services:
     links:
       - db
       - rabbit
+    ports:
+    - 15051:8080
 
 
   operation_srv:

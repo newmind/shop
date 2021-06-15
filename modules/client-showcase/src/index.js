@@ -15,6 +15,7 @@ export {
   selectBrands,
   selectProduct,
   selectCategories,
+  selectInViewProcess,
 } from './ducks/slice';
 
 export {

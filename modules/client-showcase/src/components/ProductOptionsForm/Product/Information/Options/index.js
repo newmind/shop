@@ -4,7 +4,7 @@ import { Text, Radio, RadioBox } from '@ui.packages/kit';
 
 import React from 'react';
 import types from 'prop-types';
-import { useSelector } from "react-redux";
+import {useSelector} from "react-redux";
 
 import cn from 'classnames';
 import styles from './default.module.scss';

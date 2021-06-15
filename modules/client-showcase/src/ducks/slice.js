@@ -10,6 +10,7 @@ const initialState = {
   meta: {},
   product: null,
   inProcess: false,
+  inViewProcess: false,
   isInitialize: false,
 };
 
@@ -51,13 +52,13 @@ export const slice = createSlice({
     },
 
     getProductRequestAction(state) {
-      state['inProcess'] = true;
+      state['inViewProcess'] = true;
     },
     getProductRequestFailAction(state) {
-      state['inProcess'] = false;
+      state['inViewProcess'] = false;
     },
     getProductRequestSuccessAction(state, { payload }) {
-      state['inProcess'] = false;
+      state['inViewProcess'] = false;
       state['product'] = payload;
     },
   },
@@ -84,6 +85,7 @@ export const selectProduct = (state) => state[REDUCER_NAME]['product'];
 export const selectCategories = (state) => state[REDUCER_NAME]['categories'];
 export const selectMeta = (state) => state[REDUCER_NAME]['meta'];
 export const selectInProcess = (state) => state[REDUCER_NAME]['inProcess'];
+export const selectInViewProcess = (state) => state[REDUCER_NAME]['inViewProcess'];
 
 export const name = slice['name'];
 export const reducer = slice['reducer'];
