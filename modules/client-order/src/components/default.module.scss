@@ -11,38 +11,9 @@
 .content {
 
   display: block;
-  width: 1200px;
+  max-width: 1280px;
+  width: 100%;
   margin: 0 auto;
-  padding: 50px 0 180px;
-}
-
-.breadcrumbs {
-
-  display: block;
-  box-shadow: 0 1px 20px 0 rgba($coal-dark, .08);
-
-  &__content {
-
-    display: block;
-    width: 1024px;
-    margin: 0 auto;
-    padding: 20px 0;
-  }
-}
-
-.controls {
-
-  display: block;
-  margin: 40px 0 0;
-  text-align: right;
-}
-
-.message {
-
-  display: block;
-  font-family: inherit;
-  font-weight: 300;
-  font-size: 14px;
-  color: $coal-dark;
-  margin: 0 0 20px;
+  padding: 50px 40px 180px;
+  box-sizing: border-box;
 }

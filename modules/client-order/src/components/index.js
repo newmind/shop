@@ -22,9 +22,7 @@ export default function HOC() {
     await dispatch(getDeliveries());
   });
 
-  useUpdate(async function() {
-
-  });
+  useUpdate(async function() {});
 
   useUnmount(function() {
     dispatch(resetStateAction());

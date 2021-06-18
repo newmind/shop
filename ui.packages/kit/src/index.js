@@ -10,6 +10,7 @@ export { default as Amount } from './symbols/Amount';
 export { default as Button } from './symbols/Button';
 export { default as Status } from './symbols/Status';
 export { default as Select } from './symbols/Select';
+export { default as Search } from './symbols/Search';
 export { default as Spinner } from './symbols/Spinner';
 export { default as Textarea } from './symbols/Textarea';
 export { default as CheckBox } from './symbols/CheckBox';

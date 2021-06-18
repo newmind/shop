@@ -1,7 +1,9 @@
 
 import numeral from '@packages/numeral';
+import { Mode } from "@ui.packages/types";
 
 import { Header, Text, Button, Link } from '@ui.packages/kit';
+import { pushNotification } from '@ui.packages/notifications';
 import { addProductToCartAction, removeProductFromCartAction, selectUuid } from '@ui.packages/cart-widget';
 
 import types from 'prop-types';
@@ -21,6 +23,10 @@ function Product({ uuid, brand, name, price, prevPrice, currency, options }) {
 
   function handleAddToCart() {
     dispatch(addProductToCartAction({ uuid, options: optionDetail }));
+    dispatch(pushNotification({
+      title: `Товар "${ name }" добавлен в корзину`,
+      mode: Mode.SUCCESS,
+    }));
   }
 
   function handleRemoveFromCart() {

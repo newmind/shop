@@ -9,19 +9,27 @@
   flex-direction: row;
   color: $white;
   align-items: center;
+}
 
-  &__title {
+.title {
 
-    display: flex;
-    flex: 1 0 auto;
-    padding: 20px 0;
-    flex-direction: column;
-  }
+  display: flex;
+  flex: 1 0 auto;
+  padding: 20px 0;
+  flex-direction: column;
+}
 
-  &__cart {
+.search {
 
-    display: block;
-  }
+  display: flex;
+  flex-direction: column;
+  flex: 1 0;
+  margin: 0 40px;
+}
+
+.cart {
+
+  display: block;
 }
 
 .container {

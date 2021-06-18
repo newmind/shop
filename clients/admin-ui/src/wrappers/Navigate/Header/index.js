@@ -12,7 +12,7 @@ export default function Header() {
     <div className={styles['header']}>
       <div className={styles['header__title']}>
         <div className={styles['container']}>
-          <Link className={styles['logotype']} to={'/'}><i className="fas fa-hands" />&nbsp;&nbsp;&nbsp;Ваш магазин</Link>
+          <Link className={styles['logotype']} to={'/'}><i className="fas fa-circle-notch" />&nbsp;&nbsp;&nbsp;Первый круг</Link>
         </div>
       </div>
       <div className={styles['controls']}>

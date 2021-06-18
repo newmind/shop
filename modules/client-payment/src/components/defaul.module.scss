@@ -13,3 +13,18 @@
   display: block;
   padding: 60px 0 180px;
 }
+
+.header {
+
+  display: block;
+  margin: 0 0 30px;
+}
+
+.line {
+
+  display: block;
+
+  & + & {
+    margin: 20px 0 0;
+  }
+}
