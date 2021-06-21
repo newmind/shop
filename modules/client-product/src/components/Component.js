@@ -1,12 +1,13 @@
 
+import Editor from '@ui.packages/editor';
+import { Gallery, Breadcrumbs } from '@ui.packages/kit';
 import { Tabs, Tab, TabContainer} from '@ui.packages/tabs';
-import { Gallery, Breadcrumbs, Text } from '@ui.packages/kit';
 
 import React from 'react';
 import { useSelector } from 'react-redux';
 
-import Information from './Information';
 import Comments from './Comments';
+import Information from './Information';
 import Characteristics from './Characteristics';
 
 import styles from './default.module.scss';
@@ -70,7 +71,11 @@ function Product() {
           <div className={styles['content']}>
             <TabContainer to={'description'}>
               <div className={styles['container']}>
-                <Text theme={'light'}>{ product['description'] }</Text>
+                <Editor
+                  readOnly
+                  className={styles['editor-content']}
+                  value={product['description']}
+                />
               </div>
             </TabContainer>
             <TabContainer to={'characteristics'}>

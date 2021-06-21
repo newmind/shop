@@ -1,4 +1,5 @@
 
+import types from 'prop-types';
 import { unemojify } from "node-emoji";
 import draftToHtml from "draftjs-to-html";
 import { Editor } from "react-draft-wysiwyg";
@@ -10,16 +11,20 @@ import Blocks from './Blocks';
 import Styles from './Styles';
 import TextAlign from './TextAlign';
 
-import "react-draft-wysiwyg/dist/react-draft-wysiwyg.css";
+import cn from 'classnames';
 import styles from './defaults.module.scss';
 
 
-function EditorHTML({ value, onChange }) {
+function EditorHTML({ className, readOnly, value, onChange }) {
   const [isFirst, setFirst] = useState(false);
   const [editorState, setEditorState] = useState(EditorState.createEmpty());
 
   useEffect(() => {
     if (isFirst) {
+      return void 0;
+    }
+
+    if ( ! onChange) {
       return void 0;
     }
 
@@ -50,13 +55,14 @@ function EditorHTML({ value, onChange }) {
 
   return (
     <Editor
+      readOnly={readOnly}
       editorState={editorState}
-      wrapperClassName={styles['wrapper']}
-      toolbarClassName={styles['toolbar']}
-      editorClassName={styles['content']}
+      wrapperClassName={cn(styles['wrapper'], { [styles['wrapper--readonly']]: readOnly })}
+      toolbarClassName={cn(styles['toolbar'], { [styles['toolbar--readonly']]: readOnly })}
+      editorClassName={cn(styles['content'], className, { [styles['content--readonly']]: readOnly })}
       onEditorStateChange={onEditorStateChange}
       toolbar={{
-        options: ['inline', 'blockType', 'list', 'textAlign'], // 'link', 'image', 'history'],
+        options: readOnly ? [] : ['inline', 'blockType', 'list', 'textAlign'], // 'link', 'image', 'history'],
         blockType: { component: Blocks },
         inline: { component: Styles },
         list: { component: List },
@@ -64,6 +70,19 @@ function EditorHTML({ value, onChange }) {
       }}
     />
   );
+}
+
+EditorHTML.propTypes = {
+  readOnly: types.bool,
+  className: types.string,
+  value: types.string,
+  onChange: types.func,
+};
+
+EditorHTML.defaultProps = {
+  readOnly: false,
+  className: null,
+  value: '',
 }
 
 export default EditorHTML;

@@ -9,6 +9,7 @@
   },
   "dependencies": {
     "@ui.packages/kit": "1.0.0",
+    "prop-types": "15.7.2",
     "classnames": "2.3.1",
     "draft-js": "0.11.7",
     "draftjs-to-html": "0.9.1",
