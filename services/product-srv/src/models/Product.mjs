@@ -33,7 +33,7 @@ export default function(sequelize, DataType) {
       allowNull: false,
     },
     description: {
-      type: DataType.STRING(1024),
+      type: DataType.STRING,
       allowNull: true,
     },
     isView: {

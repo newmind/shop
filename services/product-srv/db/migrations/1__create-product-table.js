@@ -27,7 +27,7 @@ module.exports = {
           allowNull: false,
         },
         description: {
-          type: DataType.STRING(1024),
+          type: DataType.STRING,
           allowNull: true,
         },
         isView: {

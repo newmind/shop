@@ -31,6 +31,7 @@ export { default as ListField } from './fields/ListField';
 export { default as FileField } from './fields/FileField';
 export { default as RangeField } from './fields/RangeField';
 export { default as InputField } from './fields/InputField';
+export { default as EditorField } from './fields/EditorField';
 export { default as DaDataField } from './fields/DaDataField';
 export { default as AvatarField } from './fields/AvatarField';
 export { default as AmountField } from './fields/AmountField';

@@ -12,15 +12,15 @@ import {
 } from "@modules/admin-product-modify";
 
 import { Dialog, openDialog, closeDialog } from '@ui.packages/dialog';
-import { CheckBoxField, Col, Header, InputField, Row, SelectField, TextareaField } from "@ui.packages/kit";
+import { CheckBoxField, Col, Header, InputField, Row, SelectField, EditorField } from "@ui.packages/kit";
 
 import React from 'react';
 import { change } from 'redux-form';
 import { useSelector, useDispatch } from "react-redux";
 
 import TypeFormModify from './TypeFormModify';
-import CategoryFormModify from './CategoryFormModify';
 import BrandFormModify from './BrandFormModify';
+import CategoryFormModify from './CategoryFormModify';
 
 import styles from './default.module.scss';
 
@@ -165,9 +165,19 @@ function Common() {
           <Col />
           <Col />
         </Row>
+        {/*<Row>*/}
+        {/*  <Col>*/}
+        {/*    <TextareaField*/}
+        {/*      require*/}
+        {/*      name="description"*/}
+        {/*      label="Описание"*/}
+        {/*      disabled={inProcess}*/}
+        {/*    />*/}
+        {/*  </Col>*/}
+        {/*</Row>*/}
         <Row>
           <Col>
-            <TextareaField
+            <EditorField
               require
               name="description"
               label="Описание"

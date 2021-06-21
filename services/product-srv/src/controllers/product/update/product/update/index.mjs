@@ -5,41 +5,49 @@ import { sequelize, models } from '@sys.packages/db';
 export default async function updateProperties(uuid, properties) {
   const { Product } = models;
 
-  const transaction = await sequelize.transaction();
+  try {
 
-  const result = await Product.findOne({
-    where: { uuid },
-    transaction,
-  });
+    const transaction = await sequelize.transaction();
 
-  const product = {};
+    const result = await Product.findOne({
+      where: {uuid},
+      transaction,
+    });
 
-  if (properties['name']) {
-    product['name'] = properties['name'];
+    const product = {};
+
+    if (properties['name']) {
+      product['name'] = properties['name'];
+    }
+
+    if (properties['price']) {
+      product['price'] = Number(properties['price']);
+    }
+
+    if (properties['currencyCode']) {
+      product['currencyCode'] = properties['currencyCode'];
+    }
+
+    if (properties['description']) {
+      product['description'] = properties['description'];
+    }
+
+    if ('isView' in properties) {
+      product['isView'] = properties['isView'];
+    }
+
+    await Product.update(product, {
+      where: {uuid},
+      transaction,
+    });
+
+    await transaction.commit();
+
+    return result.toJSON();
   }
+  catch (e) {
+    console.log(e)
 
-  if (properties['price']) {
-    product['price'] = Number(properties['price']);
+    throw e;
   }
-
-  if (properties['currencyCode']) {
-    product['currencyCode'] = properties['currencyCode'];
-  }
-
-  if (properties['description']) {
-    product['description'] = properties['description'];
-  }
-
-  if ('isView' in properties) {
-    product['isView'] = properties['isView'];
-  }
-
-  await Product.update(product, {
-    where: { uuid },
-    transaction,
-  });
-
-  await transaction.commit();
-
-  return result.toJSON();
 }

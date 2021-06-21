@@ -8,7 +8,7 @@ import styles from './default.module.scss';
 export default function Logotype() {
   return (
     <div className={styles['wrapper']}>
-      <Link className={styles['logotype']} to={'/'}><i className="fas fa-hands" />&nbsp;&nbsp;&nbsp;{process.env['REACT_APP_WEBSITE_NAME']}</Link>
+      <Link className={styles['logotype']} to={'/'}><i className="fas fa-circle-notch" />&nbsp;&nbsp;{process.env['REACT_APP_WEBSITE_NAME']}</Link>
     </div>
   )
 }
