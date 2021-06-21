@@ -75,6 +75,7 @@ function Product() {
                   readOnly
                   className={styles['editor-content']}
                   value={product['description']}
+                  onChange={() => {}}
                 />
               </div>
             </TabContainer>
