@@ -15,11 +15,13 @@ function Header() {
           <Logotype />
         </div>
       </div>
-      <div className={styles['search']}>
-        <Search />
-      </div>
-      <div className={styles['cart']}>
-        <Widget />
+      <div className={styles['controls']}>
+        <div className={styles['search']}>
+          <Search />
+        </div>
+        <div className={styles['cart']}>
+          <Widget />
+        </div>
       </div>
     </div>
   );

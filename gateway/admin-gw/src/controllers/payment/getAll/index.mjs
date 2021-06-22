@@ -1,19 +1,16 @@
 
-import request from '@sys.packages/request';
+import request from "@sys.packages/request";
 
 
 export default () => async (ctx) => {
 
-  const result = await request({
+  const { data } = await request({
     url: process.env['OPERATION_API_SRV'] + '/payments',
     method: 'get',
-    params: {
-      isUse: true,
-    },
   });
 
   ctx.body = {
     success: true,
-    data: result['data'],
+    data,
   };
 }

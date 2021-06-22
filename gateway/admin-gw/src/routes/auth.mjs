@@ -6,6 +6,7 @@ import { getAll as getOperations, getById as getOperationById, create as createO
 import { getAllBrands, createBrand, updateBrand, deleteBrands } from '../controllers/brand';
 import { getAllTypes, createType, updateType, deleteType } from '../controllers/type';
 import { getAllUnits, createUnit, updateUnit, deleteUnits } from '../controllers/unit';
+import { getAllPayments, updatePayment } from '../controllers/payment';
 import { getAllCategories, createCategory, updateCategory, deleteCategories } from '../controllers/category';
 import { getAllCurrencies, createCurrency, updateCurrency, deleteCurrencies } from '../controllers/currency';
 import { getAllAttributes, createAttribute, deleteAttributes, updateAttribute } from '../controllers/attribute';
@@ -36,6 +37,9 @@ export default (router) => {
   router.post('/types', createType());
   router.put('/types/:id', updateType());
   router.delete('/types', deleteType());
+
+  router.get('/payments', getAllPayments());
+  router.put('/payments/:code', updatePayment());
 
   router.get('/promotions', getAllPromotions());
   router.post('/promotions', createPromotion());

@@ -30,6 +30,9 @@ export default function(sequelize, DataType) {
     isUse: {
       type: DataType.BOOLEAN,
     },
+    order: {
+      type: DataType.INTEGER,
+    },
   }, {
     sequelize,
     modelName: 'Payment',

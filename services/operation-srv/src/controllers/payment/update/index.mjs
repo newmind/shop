@@ -3,26 +3,24 @@ import { models } from '@sys.packages/db';
 
 
 export default () => async (ctx) => {
-  const where = {};
   const { Payment } = models;
-  const { isUse } = ctx['query'];
+  const { code } = ctx['params'];
+  const data = ctx['request']['body'];
 
-  if (isUse) {
-    where['isUse'] = isUse;
-  }
+  await Payment.update(data, { where: { code }});
 
-  const result = await Payment.findAll({
+  const result = await Payment.findOne({
     order: [
       ['order', 'asc']
     ],
+    where: { code },
     attributes: ['code', 'name', 'description', 'isUse'],
-    where: { ...where },
   });
 
-  const payments = result.map((item) => item.toJSON());
+  const payment = result.toJSON();
 
   ctx.body = {
     success: true,
-    data: payments,
+    data: payment,
   };
 };

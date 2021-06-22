@@ -52,6 +52,25 @@ const navigate = [
     icon: 'far fa-comments',
   },
   {
+    title: "Магазин",
+    path: '/shop/payments',
+    icon: 'fas fa-tag',
+    navigate: [
+      {
+        title: 'Способы оплаты',
+        path: '/shop/payments',
+      },
+      {
+        title: 'Способы доставки',
+        path: '/shop/delivery',
+      },
+      {
+        title: 'Точки выдачи',
+        path: '/shop/pick-up',
+      },
+    ],
+  },
+  {
     title: "Заказы",
     path: '/orders',
     icon: 'fas fa-search',

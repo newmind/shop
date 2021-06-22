@@ -15,8 +15,6 @@ const LIST_STYLES = [
 
 
 function Styles({ currentState, onChange }) {
-  console.log(currentState)
-
   return (
     <div className={styles['wrapper']}>
       {LIST_STYLES.map((type) => (

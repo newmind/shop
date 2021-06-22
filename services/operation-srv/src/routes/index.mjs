@@ -1,6 +1,6 @@
 
 import { getAllStatuses } from '../controllers/status';
-import { getAllPayments } from '../controllers/payment';
+import { getAllPayments, updatePayment } from '../controllers/payment';
 import { getAllDeliveries } from '../controllers/delivery';
 
 import { getAllOrders, createOrder, updateOrder } from '../controllers/orders';
@@ -12,9 +12,10 @@ export default (router) => {
 
   router.post('/v1/api/amounts', getAllAmounts());
 
-  router.get('/v1/api/operations/deliveries', getAllDeliveries());
+  router.get('/v1/api/deliveries', getAllDeliveries());
 
-  router.get('/v1/api/operations/payments', getAllPayments());
+  router.get('/v1/api/payments', getAllPayments());
+  router.put('/v1/api/payments/:code', updatePayment());
 
   router.get('/v1/api/operations/statuses', getAllStatuses());
 

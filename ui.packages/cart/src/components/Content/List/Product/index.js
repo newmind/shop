@@ -44,10 +44,12 @@ function Product({ uuid, gallery, brand, name, price, option, onRemove }) {
   }
 
   function handlePlus() {
+    console.log(123)
     dispatch(plusQuantityAction({ uuid, options: option }));
   }
 
   function handleMinus() {
+    console.log(567)
     dispatch(minusQuantityAction({ uuid, options: option }));
   }
 

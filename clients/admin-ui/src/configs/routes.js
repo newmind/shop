@@ -112,14 +112,14 @@ const routes = [
       '@modules/admin-customers'
     ),
   },
-  // // {
-  // //   path: '/currency',
-  // //   wrapper: 'Navigate',
-  // //   module: import(
-  // //     /* webpackChunkName: "currency" */
-  // //     '@modules/admin-currencies'
-  // //   ),
-  // // },
+  {
+    path: '/shop/payments',
+    wrapper: 'Composite',
+    module: import(
+      /* webpackChunkName: "payments" */
+      '@modules/admin-payments'
+    ),
+  },
   {
     path: '/sign-in',
     wrapper: 'Empty',
@@ -143,7 +143,7 @@ const routes = [
       /* webpackChunkName: "client-not-found" */
       '@modules/admin-not-found'
     ),
-  }
+  },
 ];
 
 export default routes;
