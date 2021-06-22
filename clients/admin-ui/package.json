@@ -8,6 +8,7 @@
   },
   "dependencies": {
     "@modules/admin-payments": "1.0.0",
+    "@modules/admin-delivery": "1.0.0",
     "@modules/admin-attributes": "1.0.0",
     "@modules/admin-brands": "1.0.0",
     "@modules/admin-categories": "1.0.0",

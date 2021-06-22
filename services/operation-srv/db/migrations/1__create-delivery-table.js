@@ -27,6 +27,9 @@ module.exports = {
         isUse: {
           type: DataType.BOOLEAN,
         },
+        order: {
+          type: DataType.INTEGER,
+        },
       }, {
         transaction
       });

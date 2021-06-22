@@ -121,6 +121,14 @@ const routes = [
     ),
   },
   {
+    path: '/shop/delivery',
+    wrapper: 'Composite',
+    module: import(
+      /* webpackChunkName: "delivery" */
+      '@modules/admin-delivery'
+    ),
+  },
+  {
     path: '/sign-in',
     wrapper: 'Empty',
     module: import(

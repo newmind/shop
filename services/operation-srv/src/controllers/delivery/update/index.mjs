@@ -3,26 +3,24 @@ import { models } from '@sys.packages/db';
 
 
 export default () => async (ctx) => {
-  const where = {};
   const { Delivery } = models;
-  const { isUse } = ctx['query'];
+  const { code } = ctx['params'];
+  const data = ctx['request']['body'];
 
-  if (isUse) {
-    where['isUse'] = isUse;
-  }
+  await Delivery.update(data, { where: { code }});
 
-  const result = await Delivery.findAll({
+  const result = await Delivery.findOne({
     order: [
       ['order', 'asc']
     ],
+    where: { code },
     attributes: ['code', 'name', 'description', 'isUse'],
-    where: { ...where },
   });
 
-  const deliveries = result.map((item) => item.toJSON());
+  const delivery = result.toJSON();
 
   ctx.body = {
     success: true,
-    data: deliveries,
+    data: delivery,
   };
 };
