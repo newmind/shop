@@ -1,7 +1,7 @@
 
 import request from "@ui.packages/request";
-import { joinToRoom, leaveFromRoom } from '@ui.packages/socket';
 import { pushNotification } from "@ui.packages/notifications";
+import { joinToRoom, leaveFromRoom } from '@ui.packages/socket';
 
 import {
   signInRequestAction,

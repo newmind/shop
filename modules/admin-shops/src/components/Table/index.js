@@ -1,25 +1,30 @@
 
+import { selectItems, deleteShop } from '@modules/admin-shops';
+
+import { Actions, Text } from '@ui.packages/kit';
 import { Table, Column } from '@ui.packages/table';
-import { Actions, Text, Image } from '@ui.packages/kit';
-import { Confirm, Dialog, openDialog, closeDialog } from '@ui.packages/dialog';
+import { Confirm, openDialog, closeDialog } from '@ui.packages/dialog';
 
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 
-import cn from 'classnames';
 import styles from './default.module.scss';
 
-import { selectItems } from '../../ducks/slice';
-import { deleteGallery } from '../../ducks/commands';
 
-
-function Types() {
+function ShopsList() {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
+
   const items = useSelector(selectItems);
   const [itemId, setItemId] = useState(null);
 
-  function handleSetDeletedItem(id) {
-    setItemId(id);
+  function handleEdit(uuid) {
+    navigate(process.env['PUBLIC_URL'] + '/shops/' + uuid);
+  }
+
+  function handleSetDeletedItem(uuid) {
+    setItemId(uuid);
     dispatch(openDialog('confirm'));
   }
 
@@ -28,12 +33,9 @@ function Types() {
     dispatch(closeDialog('confirm'));
   }
 
-  function handleNameEdit(data) {
-    dispatch(openDialog('modify', data));
-  }
-
   function handleDelete(uuid) {
-    dispatch(deleteGallery([ uuid ]));
+    setItemId(null);
+    dispatch(deleteShop(uuid));
     dispatch(closeDialog('confirm'));
   }
 
@@ -42,53 +44,44 @@ function Types() {
       <div className={styles['table']}>
         <Table columns={items}>
           <Column
-            title="Изображение"
-            alias="uuid"
-            width="200"
-            align="left"
+            title={'Магазин'}
+            alias={'name'}
+            width={200}
+            align={'left'}
           >
-            {(value) => (
-              <div className={styles['thumb']}>
-                <Image src={`${process.env['REACT_APP_API_HOST']}/gallery/${value}?size=small`} />
-              </div>
-            )}
+            {(value) => <Text type={Text.TYPE_BODY}>{ value }</Text>}
           </Column>
           <Column
-            title="Название"
-            align="left"
-            width="200"
+            title={'Адрес'}
+            alias={'address'}
+            width={200}
+            align={'left'}
           >
-            {(value) => (
-              <div className={styles['name']} onClick={() => handleNameEdit(value)}>
-                <div className={styles['text']}>
-                  <Text type={Text.TYPE_COMMENT}>{ value['name'] || '---' }</Text>
-                </div>
-                <span className={cn(styles['icon'], 'far fa-edit')} />
-              </div>
-            )}
+            {(value) => <Text>{ value }</Text>}
           </Column>
           <Column
-            title="UUID"
-            alias="uuid"
-            align="left"
+            title={'Описание'}
+            alias={'description'}
+            align={'left'}
           >
             {(value) => <Text type={Text.TYPE_COMMENT}>{ value }</Text>}
           </Column>
           <Column
-            align="right"
-            width="45"
+            align={'right'}
+            width={45}
           >
-            {(value) => <Actions onDelete={() => handleSetDeletedItem(value['uuid'])} />}
+            {(value) => (
+              <Actions
+                onEdit={() => handleEdit(value['uuid'])}
+                onDelete={() => handleSetDeletedItem(value['uuid'])}
+              />
+            )}
           </Column>
         </Table>
       </div>
 
-      <Dialog name="name-modify">
-
-      </Dialog>
-
       <Confirm
-        message="Вы уверены, что хотите удалить изображение?"
+        message="Вы уверены, что хотите удалить Магазин?"
         onConfirm={() => handleDelete(itemId)}
         onCancel={() => handleResetDeletedItem()}
       />
@@ -96,8 +89,8 @@ function Types() {
   );
 }
 
-Types.propTypes = {};
+ShopsList.propTypes = {};
 
-Types.defaultProps = {};
+ShopsList.defaultProps = {};
 
-export default Types;
+export default ShopsList;

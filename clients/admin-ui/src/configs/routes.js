@@ -4,6 +4,30 @@ const routes = [
     path: '/',
     wrapper: 'Navigate',
     module: import(
+      /* webpackChunkName: "shops" */
+      '@modules/admin-shops'
+      ),
+  },
+  {
+    path: '/shops/create',
+    wrapper: 'Navigate',
+    module: import(
+      /* webpackChunkName: "shop" */
+      '@modules/admin-shop'
+    ),
+  },
+  {
+    path: '/shops/:uuid',
+    wrapper: 'Navigate',
+    module: import(
+      /* webpackChunkName: "shop" */
+      '@modules/admin-shop'
+    ),
+  },
+  {
+    path: '/products',
+    wrapper: 'Navigate',
+    module: import(
       /* webpackChunkName: "products" */
       '@modules/admin-products'
     ),
@@ -110,22 +134,6 @@ const routes = [
     module: import(
       /* webpackChunkName: "customers" */
       '@modules/admin-customers'
-    ),
-  },
-  {
-    path: '/shop/payments',
-    wrapper: 'Composite',
-    module: import(
-      /* webpackChunkName: "payments" */
-      '@modules/admin-payments'
-    ),
-  },
-  {
-    path: '/shop/delivery',
-    wrapper: 'Composite',
-    module: import(
-      /* webpackChunkName: "delivery" */
-      '@modules/admin-delivery'
     ),
   },
   {

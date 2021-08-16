@@ -21,6 +21,18 @@ function Dialog({ className, title, name, children, onClose }) {
   const activeName = useSelector(selectName);
   const data = useSelector(selectData);
 
+  useEffect(() => {
+    function handleKeyPress(event) {
+      if (event['keyCode'] === 27) {
+        dispatch(closeDialog());
+      }
+    }
+    document.body.addEventListener('keyup', handleKeyPress);
+    return () => {
+      document.body.removeEventListener('keyup', handleKeyPress);
+    };
+  }, []);
+
   useEffect(function() {
     return () => {
       dispatch(closeDialog());

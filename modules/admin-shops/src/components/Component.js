@@ -1,34 +1,24 @@
 
-import { Dialog, openDialog } from "@ui.packages/dialog";
+import { selectInProcess } from '@modules/admin-shops';
+
 import { Button, Header, Page, PageContent, PageControls } from '@ui.packages/kit';
 
 import React from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 
 import Table from './Table';
-import FormCreate from './FormCreate';
-import FormModify from './FormModify';
 
 import styles from './default.module.scss';
 
-import { selectInProcess } from '../ducks/slice';
-import { createGallery, updateGallery } from '../ducks/commands';
 
+function Shops() {
+  const navigate = useNavigate();
 
-function Gallery() {
-  const dispatch = useDispatch();
   const inProcess = useSelector(selectInProcess);
 
   function handleCreate() {
-    dispatch(openDialog('create'));
-  }
-
-  function handleSubmit(formData) {
-    dispatch(createGallery(formData['files']));
-  }
-
-  function handleUpdateSubmit(formData) {
-    dispatch(updateGallery(formData));
+    navigate(process.env['PUBLIC_URL'] + '/shops/create');
   }
 
   return (
@@ -40,29 +30,25 @@ function Gallery() {
             mode={Button.MODE_SUCCESS}
             disabled={inProcess}
             onClick={() => handleCreate()}
-          >Загрузить</Button>
+          >Добавить</Button>
         </div>
       </PageControls>
       <PageContent>
         <section className={styles['wrapper']}>
           <div className={styles['header']}>
-            <Header level={1}>Галерея</Header>
+            <Header level={1}>Магазины</Header>
           </div>
           <article className={styles['content']}>
             <Table />
           </article>
         </section>
       </PageContent>
-
-      <Dialog name="modify" title="Изменить название">
-        <FormModify onSubmit={(data) => handleUpdateSubmit(data)} />
-      </Dialog>
-
-      <Dialog name="create" title="Загрузить изображение">
-        <FormCreate onSubmit={(data) => handleSubmit(data)} />
-      </Dialog>
     </Page>
   );
 }
 
-export default Gallery;
+Shops.propTypes = {};
+
+Shops.defaultProps = {};
+
+export default Shops;

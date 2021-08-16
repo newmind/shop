@@ -9,18 +9,18 @@
   },
   "dependencies": {
     "@ui.packages/kit": "1.0.0",
-    "prop-types": "15.7.2",
     "classnames": "2.3.1",
     "draft-js": "0.11.7",
     "draftjs-to-html": "0.9.1",
-    "react-draft-wysiwyg": "1.14.7",
-    "node-emoji": "1.10.0",
+    "node-emoji": "1.11.0",
+    "prop-types": "15.7.2",
     "react": "17.0.2",
+    "react-draft-wysiwyg": "1.14.7",
     "react-router-dom": "6.0.0-beta.0"
   },
   "devDependencies": {
-    "@babel/cli": "7.13.16",
-    "@babel/core": "7.14.2",
+    "@babel/cli": "7.14.8",
+    "@babel/core": "7.15.0",
     "cross-env": "7.0.3",
     "resolve": "1.20.0"
   },

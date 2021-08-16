@@ -1,8 +1,12 @@
 
+import logger from '@sys.packages/logger';
+
+
 const defaultOptions = {
   allowMethods: ['GET', 'PUT', 'POST', 'PATCH', 'DELETE', 'HEAD', 'OPTIONS'],
   allowedOrigins: [],
 };
+
 
 export default (options) => async (ctx, next) => {
   options = {
@@ -19,6 +23,8 @@ export default (options) => async (ctx, next) => {
     origin = options['origin'] || ctx.get('Origin') || '*';
   }
 
+  logger.info('[OPTIONS]');
+
   if ( ! origin) {
     return await next();
   }
@@ -28,6 +34,9 @@ export default (options) => async (ctx, next) => {
   }
 
   if (ctx.method === 'OPTIONS') {
+
+    logger.info('[OPTIONS]');
+
     if ( ! ctx.get('Access-Control-Request-Method')) {
       return await next();
     }

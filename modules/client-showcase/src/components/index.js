@@ -20,13 +20,11 @@ export default function HOC() {
     document.title = `${process.env['REACT_APP_WEBSITE_NAME']} - Витрина`;
 
     const query = queryToObject(location['search']);
-
     await dispatch(getProducts(query));
   });
 
   useUpdate(async function() {
     const query = queryToObject(location['search']);
-
     await dispatch(getProducts(query));
   });
 

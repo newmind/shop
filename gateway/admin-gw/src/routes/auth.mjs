@@ -17,6 +17,7 @@ import { getAllPromotions, deletePromotions, updatePromotion, createPromotion } 
 
 import { getImages, getImage, createImage, updateImage, deleteImages } from '../controllers/gallery';
 import { getComments, createComment, updateComment, deleteComments } from '../controllers/comment';
+import { getShops, createShop, updateShop, deleteShops } from '../controllers/shop';
 
 import { getAllStatuses } from '../controllers/status';
 
@@ -28,6 +29,11 @@ import { getProfile, updateProfile } from '../controllers/profile';
 export default (router) => {
 
   router.get('/statuses', getAllStatuses());
+
+  router.get('/shops', getShops());
+  router.post('/shops', createShop());
+  router.put('/shops/:id', updateShop());
+  router.delete('/shops', deleteShops());
 
   router.get('/brands', getAllBrands());
   router.post('/brands', createBrand());

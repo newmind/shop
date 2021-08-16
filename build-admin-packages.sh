@@ -61,9 +61,9 @@ echo '[--- Brands ---]'
 cd ../admin-brands && npx yarn build
 echo '[--- Gallery ---]'
 cd ../admin-gallery && npx yarn build
-echo '[--- Payments ---]'
-cd ../admin-payments && npx yarn build
-echo '[--- Delivery ---]'
-cd ../admin-delivery && npx yarn build
+echo '[--- Shops ---]'
+cd ../admin-shops && npx yarn build
+echo '[--- Shop ---]'
+cd ../admin-shop && npx yarn build
 
 exit 0

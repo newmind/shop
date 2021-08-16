@@ -43,11 +43,11 @@ export default function productBuilder(data) {
     characteristics: data['characteristics'].map((characteristic) => ({
       ...characteristic,
       attributes: characteristic['attributes'].map((item) => ({
-        id: item['attribute']['id'],
+        id: item['attribute'] ? item['attribute']['id'] : null,
         use: item['use'],
-        name: item['attribute']['value'],
+        name: item['attribute'] ? item['attribute']['value'] : null,
         value: item['value'],
-        unit: item['attribute']['unit'] ? item['attribute']['unit']['value'] : null,
+        unit: item['attribute'] ? (item['attribute']['unit'] ? item['attribute']['unit']['value'] : null) : null,
       })),
     })),
   };

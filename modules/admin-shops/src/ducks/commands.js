@@ -6,127 +6,68 @@ import { closeDialog } from '@ui.packages/dialog';
 import { pushNotification } from '@ui.packages/notifications';
 
 import {
-  getGalleryRequestAction,
-  getGalleryRequestFailAction,
-  getGalleryRequestSuccessAction,
+  getShopsRequestAction,
+  getShopsRequestFailAction,
+  getShopsRequestSuccessAction,
 
-  createGalleryRequestAction,
-  createGalleryRequestFailAction,
-  createGalleryRequestSuccessAction,
-
-  updateGalleryRequestAction,
-  updateGalleryRequestFailAction,
-  updateGalleryRequestSuccessAction,
-
-  deleteGalleryRequestAction,
-  deleteGalleryRequestFailAction,
-  deleteGalleryRequestSuccessAction,
+  deleteShopsRequestAction,
+  deleteShopsRequestFailAction,
+  deleteShopsRequestSuccessAction,
 } from './slice';
 
 
-export const getGallery = () => async (dispatch) => {
+export const getShops = () => async (dispatch) => {
   try {
-    dispatch(getGalleryRequestAction());
+    dispatch(getShopsRequestAction());
 
-    const result = await request({
-      url: '/gallery',
+    const { data } = await request({
+      url: '/shops',
       method: 'get',
     });
 
-    dispatch(getGalleryRequestSuccessAction(result));
+    dispatch(getShopsRequestSuccessAction(data));
   }
   catch(error) {
-    dispatch(getGalleryRequestFailAction(error));
+    dispatch(getShopsRequestFailAction(error));
 
     if (error instanceof UnauthorizedError) {
       return void 0;
     }
     dispatch(pushNotification({
       mode: 'danger',
-      content: 'Ошибка при выполнении операции'
+      title: 'Ошибка при выполнении операции'
     }));
   }
 };
 
-export const createGallery = (files) => async (dispatch) => {
+export const deleteShop = (uuid) => async (dispatch) => {
   try {
-    dispatch(createGalleryRequestAction());
-
-    const formData = new FormData();
-
-    files.forEach((file, index) => formData.append('file-' + index, file));
+    dispatch(deleteShopsRequestAction());
 
     const result = await request({
-      url: process.env['PUBLIC_URL'] + '/gallery',
-      method: 'post',
-      data: formData,
-    });
-
-    dispatch(closeDialog('create'));
-    dispatch(createGalleryRequestSuccessAction(result['data']));
-  }
-  catch(error) {
-    dispatch(createGalleryRequestFailAction(error));
-
-    if (error instanceof UnauthorizedError) {
-      return void 0;
-    }
-    dispatch(pushNotification({
-      mode: 'danger',
-      content: 'Ошибка при выполнении операции'
-    }));
-  }
-}
-
-export const updateGallery = (data) => async (dispatch) => {
-  try {
-    dispatch(updateGalleryRequestAction());
-
-    const result = await request({
-      url: process.env['PUBLIC_URL'] + '/gallery/' + data['uuid'],
-      method: 'put',
+      url: '/shops',
+      method: 'delete',
       data: {
-        name: data['name'],
+        uuid: [uuid],
       },
     });
 
-    dispatch(closeDialog('modify'));
-    dispatch(updateGalleryRequestSuccessAction(result['data']));
+    dispatch(deleteShopsRequestSuccessAction(result['data']));
+    dispatch(closeDialog());
+    dispatch(pushNotification({
+      mode: 'success',
+      title: 'Операция выполнена успешно'
+    }));
   }
   catch(error) {
-    dispatch(updateGalleryRequestFailAction(error));
+    dispatch(deleteShopsRequestFailAction(error));
 
     if (error instanceof UnauthorizedError) {
       return void 0;
     }
     dispatch(pushNotification({
       mode: 'danger',
-      content: 'Ошибка при выполнении операции'
+      title: 'Ошибка при выполнении операции'
     }));
   }
-}
-
-export const deleteGallery = (uuid) => async (dispatch) => {
-  try {
-    dispatch(deleteGalleryRequestAction());
-
-    const result = await request({
-      url: process.env['PUBLIC_URL'] + '/gallery',
-      method: 'delete',
-      data: { uuid },
-    });
-
-    dispatch(deleteGalleryRequestSuccessAction(result['data']));
-  }
-  catch(error) {
-    dispatch(deleteGalleryRequestFailAction(error));
-
-    if (error instanceof UnauthorizedError) {
-      return void 0;
-    }
-    dispatch(pushNotification({
-      mode: 'danger',
-      content: 'Ошибка при выполнении операции'
-    }));
-  }
-}
+};

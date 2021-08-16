@@ -1,9 +1,9 @@
 
+import { tabsReducer } from '@ui.packages/tabs';
 import Application from '@ui.packages/application';
 import { reducer as dialogReducer } from '@ui.packages/dialog';
-import { reducer as cartReducer } from '@ui.packages/cart-widget';
-import { tabsReducer } from '@ui.packages/tabs';
 import { notificationReducer } from '@ui.packages/notifications';
+import { reducer as cartReducer } from '@ui.packages/cart-widget';
 
 import { reducer as formReducer } from 'redux-form';
 

@@ -113,6 +113,25 @@ services:
       - rabbit
 
 
+  shop_srv:
+    container_name: shop_srv
+    build:
+      context: ./
+      dockerfile: Dockerfile.shop-srv
+    restart: always
+    logging:
+      driver: "json-file"
+      options:
+        max-file: "5"
+        max-size: 10m
+    depends_on:
+      - db
+      - rabbit
+    links:
+      - db
+      - rabbit
+
+
   pikassa_srv:
     container_name: pikassa_srv
     build:
@@ -176,12 +195,14 @@ services:
       - db
       - rabbit
       - mail_srv
+      - shop_srv
       - gallery_srv
       - promotion_srv
     links:
       - db
       - rabbit
       - mail_srv
+      - shop_srv
       - gallery_srv
       - promotion_srv
 
@@ -199,6 +220,7 @@ services:
         max-size: 10m
     depends_on:
       - rabbit
+      - shop_srv
       - product_srv
       - gallery_srv
       - identity_srv
@@ -207,6 +229,7 @@ services:
       - promotion_srv
     links:
       - rabbit
+      - shop_srv
       - product_srv
       - gallery_srv
       - identity_srv
@@ -228,6 +251,7 @@ services:
         max-size: 10m
     depends_on:
       - rabbit
+      - shop_srv
       - product_srv
       - gallery_srv
       - identity_srv
@@ -235,6 +259,7 @@ services:
       - promotion_srv
     links:
       - rabbit
+      - shop_srv
       - product_srv
       - gallery_srv
       - identity_srv

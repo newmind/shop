@@ -7,7 +7,7 @@ import React from 'react';
 import thunk from 'redux-thunk';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
-import { BrowserRouter } from 'react-router-dom';
+import { BrowserRouter, StaticRouter } from 'react-router-dom';
 
 import Application from './Application';
 import { reducer as applicationReducer } from './ducks/slice';
@@ -107,6 +107,30 @@ class App {
     , this.options['portal']);
 
     worker.unregister();
+  }
+
+  async render() {
+    const routes = await createRoutes(this.options['routes']);
+    const reducers = await createReducers(this.options['routes']);
+
+    this.store = initStore({
+      ...reducers,
+      ...this.options['reducers'],
+    }, this.options['middleware']);
+
+    return function App() {
+      return (
+        <Provider store={this.store}>
+          <StaticRouter>
+            <Application options={{
+              ...this.options,
+              routes
+            }} />
+          </StaticRouter>
+          <Notifications />
+        </Provider>
+      );
+    }
   }
 }
 

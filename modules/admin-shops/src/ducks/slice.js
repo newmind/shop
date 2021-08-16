@@ -4,15 +4,14 @@ import { createSlice } from '@reduxjs/toolkit';
 
 const initialState = {
   items: [],
-  meta: {},
+  error: null,
   inProcess: false,
-  inCreateProcess: false,
 };
 
-const REDUCER_NAME = 'gallery';
+const REDUCER_NAME = 'shops';
 
 
-const typesSlice = createSlice({
+const slice = createSlice({
   name: REDUCER_NAME,
   initialState,
   reducers: {
@@ -22,58 +21,25 @@ const typesSlice = createSlice({
       state['inProcess'] = false;
     },
 
-    getGalleryRequestAction(state) {
+    getShopsRequestAction(state) {
       state['inProcess'] = true;
     },
-    getGalleryRequestFailAction(state) {
+    getShopsRequestFailAction(state) {
       state['inProcess'] = false;
     },
-    getGalleryRequestSuccessAction(state, { payload }) {
-      state['items'] = payload['data'];
-      state['meta'] = payload['meta'];
+    getShopsRequestSuccessAction(state, { payload }) {
+      state['items'] = payload;
       state['inProcess'] = false;
     },
 
-    createGalleryRequestAction(state) {
-      state['inCreateProcess'] = true;
-    },
-    createGalleryRequestFailAction(state) {
-      state['inCreateProcess'] = false;
-    },
-    createGalleryRequestSuccessAction(state, { payload }) {
-      if ( ! state['items'].some((item) => item['uuid'] === payload['uuid'])) {
-        state['items'] = [...payload, ...state['items']];
-      }
-      state['inCreateProcess'] = false;
-    },
-
-    deleteGalleryRequestAction(state) {
+    deleteShopsRequestAction(state) {
       state['inProcess'] = true;
     },
-    deleteGalleryRequestFailAction(state) {
+    deleteShopsRequestFailAction(state) {
       state['inProcess'] = false;
     },
-    deleteGalleryRequestSuccessAction(state, { payload }) {
-      state['items'] = state['items'].filter((item) => ! payload['uuid'].some((uuid) => uuid === item['uuid']));
-      state['inProcess'] = false;
-    },
-
-    updateGalleryRequestAction(state) {
-      state['inProcess'] = true;
-    },
-    updateGalleryRequestFailAction(state) {
-      state['inProcess'] = false;
-    },
-    updateGalleryRequestSuccessAction(state, { payload }) {
-      state['items'] = state['items'].map((item) => {
-        if (item['uuid'] === payload['uuid']) {
-          return {
-            ...item,
-            ...payload,
-          };
-        }
-        return item;
-      });
+    deleteShopsRequestSuccessAction(state, { payload }) {
+      state['items'] = state['items'].filter((item) => !~ payload.indexOf(item['uuid']));
       state['inProcess'] = false;
     },
   },
@@ -82,27 +48,17 @@ const typesSlice = createSlice({
 export const {
   resetStateAction,
 
-  getGalleryRequestAction,
-  getGalleryRequestFailAction,
-  getGalleryRequestSuccessAction,
+  getShopsRequestAction,
+  getShopsRequestFailAction,
+  getShopsRequestSuccessAction,
 
-  createGalleryRequestAction,
-  createGalleryRequestFailAction,
-  createGalleryRequestSuccessAction,
-
-  updateGalleryRequestAction,
-  updateGalleryRequestFailAction,
-  updateGalleryRequestSuccessAction,
-
-  deleteGalleryRequestAction,
-  deleteGalleryRequestFailAction,
-  deleteGalleryRequestSuccessAction,
-} = typesSlice['actions'];
+  deleteShopsRequestAction,
+  deleteShopsRequestFailAction,
+  deleteShopsRequestSuccessAction,
+} = slice['actions'];
 
 export const selectItems = (state) => state[REDUCER_NAME]['items'];
-export const selectMeta = (state) => state[REDUCER_NAME]['meta'];
 export const selectInProcess = (state) => state[REDUCER_NAME]['inProcess'];
-export const selectInCreateProcess = (state) => state[REDUCER_NAME]['inCreateProcess'];
 
-export const name = typesSlice['name'];
-export const reducer = typesSlice['reducer'];
+export const name = slice['name'];
+export const reducer = slice['reducer'];

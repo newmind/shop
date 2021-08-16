@@ -1,8 +1,13 @@
 
 const navigate = [
   {
-    title: 'Каталог',
+    title: "Магазины",
     path: '/',
+    icon: 'fas fa-tag',
+  },
+  {
+    title: 'Каталог',
+    path: '/products',
     icon: 'fas fa-shopping-cart',
   },
   {
@@ -50,25 +55,6 @@ const navigate = [
     title: "Комментарии",
     path: '/comments',
     icon: 'far fa-comments',
-  },
-  {
-    title: "Магазин",
-    path: '/shop/payments',
-    icon: 'fas fa-tag',
-    navigate: [
-      {
-        title: 'Способы оплаты',
-        path: '/shop/payments',
-      },
-      {
-        title: 'Способы доставки',
-        path: '/shop/delivery',
-      },
-      {
-        title: 'Точки выдачи',
-        path: '/shop/pick-up',
-      },
-    ],
   },
   {
     title: "Заказы",

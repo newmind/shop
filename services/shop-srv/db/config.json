@@ -1,0 +1,19 @@
+
+{
+  "development": {
+    "port": 5432,
+    "host": "localhost",
+    "database": "shop_srv",
+    "username": "admin",
+    "password": "1Ctdfcnjgjkm",
+    "dialect": "postgres"
+  },
+  "production": {
+    "port": 5432,
+    "host": "db",
+    "database": "shop_srv",
+    "username": "admin",
+    "password": "1Ctdfcnjgjkm",
+    "dialect": "postgres"
+  }
+}
