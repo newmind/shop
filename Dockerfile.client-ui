@@ -3,7 +3,7 @@
 FROM node:15-alpine as ui
 
 RUN apk update && apk add bash
-RUN npm install -g npm@7.14.0
+RUN npm install -g npm@latest
 RUN npm config set package-lock false
 
 WORKDIR /app
