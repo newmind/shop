@@ -2,7 +2,7 @@
 import { createGallery } from '@modules/admin-product-modify';
 
 import { Dialog, openDialog } from '@ui.packages/dialog';
-import { Image, Draggable, Button, arrayMove, Header, Text } from '@ui.packages/kit';
+import { Image, Draggable, Button, Header, Text, arrayMoveImmutable } from '@ui.packages/kit';
 
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
@@ -25,7 +25,7 @@ function AddImageForm({ input, disabled }) {
   }
 
   function handleOrderChange(from, to) {
-    input.onChange(arrayMove(input['value'], from, to));
+    input.onChange(arrayMoveImmutable(input['value'], from, to));
   }
 
   function handleAddImages() {
