@@ -73,12 +73,31 @@ const validate = (values) => {
     }
   });
 
+  const shopsErrors = [];
+  (values['shops'] || []).forEach((option, index) => {
+    const shopErrors = {};
+
+    if ( ! option['shopUuid']) {
+      shopErrors['shopUuid'] = 'Неоходимо заполнить';
+      shopsErrors[index] = shopErrors;
+    }
+
+    if ( ! option['number']) {
+      shopErrors['number'] = 'Неоходимо заполнить';
+      shopsErrors[index] = shopErrors;
+    }
+  });
+
   if ( !! charsErrors.length) {
     errors['characteristics'] = charsErrors;
   }
 
   if ( !! optionsErrors.length) {
     errors['options'] = optionsErrors;
+  }
+
+  if ( !! shopsErrors.length) {
+    errors['shops'] = shopsErrors;
   }
 
   return errors;

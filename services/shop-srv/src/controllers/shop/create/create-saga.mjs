@@ -9,6 +9,12 @@ import getShop from './shop/get';
 import createShop from './shop/create';
 import deleteShop from './shop/delete';
 
+import createPayments from './payments/create';
+import deletePayments from './payments/delete';
+
+import createDeliveries from './deliveries/create';
+import deleteDeliveries from './deliveries/delete';
+
 
 export default class CopySaga {
   ctx = null;
@@ -49,6 +55,18 @@ export default class CopySaga {
         logger.info('Restore shop');
         const uuid = params.getShopId();
         await deleteShop(uuid);
+        await deleteDeliveries(uuid);
+        await deletePayments(uuid);
+      })
+
+      .step('Create shop deliveries')
+      .invoke(async () => {
+        await createDeliveries(body['uuid'], body['deliveries']);
+      })
+
+      .step('Create shop payments')
+      .invoke(async () => {
+        await createPayments(body['uuid'], body['payments']);
       })
 
       .step('Get shop')

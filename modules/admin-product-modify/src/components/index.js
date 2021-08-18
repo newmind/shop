@@ -8,7 +8,7 @@ import { useParams } from 'react-router-dom';
 
 import Component from './Component';
 
-import { getBrands, getTypes, getCurrencies, getCategories, getAttributes, getPromotions, getProductById } from '../ducks/commands';
+import { getBrands, getTypes, getCurrencies, getCategories, getAttributes, getPromotions, getProductById, getShops } from '../ducks/commands';
 
 import {
   resetStateAction,
@@ -27,6 +27,8 @@ export default function HOC() {
     document.title = `${process.env['REACT_APP_WEBSITE_NAME']} - Редактирование товара`;
 
     dispatch(setProcessAction(true));
+    await dispatch(getShops());
+    await dispatch(getTypes());
     await dispatch(getTypes());
     await dispatch(getBrands());
     await dispatch(getCategories());

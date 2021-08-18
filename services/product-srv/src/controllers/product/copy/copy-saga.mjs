@@ -28,6 +28,9 @@ import getProduct from './product/get';
 import createProduct from './product/create';
 import restoreProduct from './product/restore';
 
+import createShops from './shops/create';
+import restoreShops from './shops/restore';
+
 
 export default class CopySaga {
   ctx = null;
@@ -96,6 +99,17 @@ export default class CopySaga {
       .withCompensation(async () => {
         logger.info('Destroy attributes');
         await restoreAttributes(newUuid);
+      })
+
+      .step('Copy shops')
+      .invoke(async (params) => {
+        logger.info('Copy shops');
+        const product = params.getProduct();
+        await createShops(newUuid, product['shops']);
+      })
+      .withCompensation(async () => {
+        logger.info('Destroy shops');
+        await restoreShops(newUuid);
       })
 
       .step('Copy options')

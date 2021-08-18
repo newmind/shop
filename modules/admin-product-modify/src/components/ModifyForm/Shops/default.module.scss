@@ -1,0 +1,79 @@
+
+@import "~@ui.packages/theme";
+
+
+.wrapper {
+
+  display: block;
+}
+
+.header {
+
+  display: block;
+  padding: 0 0 0 20px;
+}
+
+.content {
+
+  display: block;
+  margin: 10px 0 0;
+  border: 1px solid $pale-lilac;
+  background: $white;
+  border-radius: 5px;
+  padding: 40px 50px;
+}
+
+.characteristics {
+
+  display: block;
+}
+
+.characteristic {
+
+  display: flex;
+  flex-direction: row;
+  flex: 1 0;
+  align-items: flex-end;
+  margin: 0 0 30px;
+}
+
+.shop {
+
+  display: flex;
+  flex-direction: row;
+  flex: 1 0;
+  align-items: flex-end;
+}
+
+.number {
+
+  display: block;
+  width: 200px;
+  margin: 0 0 0 20px;
+}
+
+.remove {
+
+  display: block;
+  margin: 0 0 13px 20px;
+}
+
+.icon {
+
+  font-size: 14px;
+  color: $danger;
+  cursor: pointer;
+}
+
+.attributes {
+
+  display: block;
+  margin: 20px 0 0 20px;
+}
+
+.controls {
+
+  display: block;
+  text-align: right;
+}
+

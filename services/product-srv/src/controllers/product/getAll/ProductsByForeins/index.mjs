@@ -3,7 +3,7 @@ import { models } from "@sys.packages/db";
 
 
 export default async function(options) {
-  const { Product, Currency, Attribute, Category, Brand, Type, Characteristic, CharacteristicAttribute, Unit, Gallery, Comment, ProductOption } = models;
+  const { ProductShop, Product, Currency, Attribute, Category, Brand, Type, Characteristic, CharacteristicAttribute, Unit, Gallery, Comment, ProductOption } = models;
 
   return await Product.findAndCountAll({
     attributes: ['uuid', 'name', 'description', 'price', 'isView', 'createdAt'],
@@ -21,6 +21,11 @@ export default async function(options) {
       ['characteristics', 'attributes', 'order', 'asc'],
     ],
     include: [
+      {
+        model: ProductShop,
+        attributes: ['shopUuid', 'number'],
+        as: 'shops',
+      },
       {
         model: Brand,
         required: !! whereForBrands['id'],

@@ -4,6 +4,7 @@ import { UnauthorizedError } from '@packages/errors';
 import { Mode } from '@ui.packages/types';
 import request from '@ui.packages/request';
 import { uniqName } from '@ui.packages/utils';
+import {closeDialog} from "@ui.packages/dialog";
 import { pushNotification } from '@ui.packages/notifications';
 
 import {
@@ -62,14 +63,40 @@ import {
   getPromotionsRequestAction,
   getPromotionsRequestFailAction,
   getPromotionsRequestSuccessAction,
-} from './slice';
-import {
+
   createGalleryRequestAction,
   createGalleryRequestFailAction,
-  createGalleryRequestSuccessAction
-} from "@modules/admin-gallery/src/ducks/slice";
-import {closeDialog} from "@ui.packages/dialog";
+  createGalleryRequestSuccessAction,
 
+  getShopsRequestAction,
+  getShopsRequestFailAction,
+  getShopsRequestSuccessAction,
+} from './slice';
+
+
+export const getShops = () => async (dispatch) => {
+  try {
+    dispatch(getShopsRequestAction());
+
+    const { data } = await request({
+      url: '/shops',
+      method: 'get',
+    });
+
+    dispatch(getShopsRequestSuccessAction(data));
+  }
+  catch(error) {
+    dispatch(getShopsRequestFailAction(error));
+
+    if (error instanceof UnauthorizedError) {
+      return void 0;
+    }
+    dispatch(pushNotification({
+      mode: 'danger',
+      title: 'Ошибка при выполнении операции'
+    }));
+  }
+};
 
 export const getBrands = () => async (dispatch) => {
   try {

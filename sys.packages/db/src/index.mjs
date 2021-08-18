@@ -65,6 +65,7 @@ export default async (host) => {
     return true;
   }
   catch(error) {
+    console.log(error)
     logger['error']('DB: ' + error['message']);
   }
 }

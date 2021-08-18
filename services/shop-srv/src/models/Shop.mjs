@@ -11,7 +11,6 @@ export default function(sequelize, DataType) {
     uuid: {
       type: DataType.STRING(64),
       primaryKey: true,
-      autoIncrement: true,
       unique: true,
     },
     name: {
@@ -32,7 +31,22 @@ export default function(sequelize, DataType) {
     timestamps: true,
   });
 
-  Shop.associate = () => {};
+  Shop.associate = ({ Delivery, Payment, ShopDelivery, ShopPayment }) => {
+
+    Shop.belongsToMany(Delivery, {
+      through: ShopDelivery,
+      foreignKey: 'shopUuid',
+      otherKey: 'deliveryCode',
+      as: 'deliveries',
+    });
+
+    Shop.belongsToMany(Payment, {
+      through: ShopPayment,
+      foreignKey: 'shopUuid',
+      otherKey: 'paymentCode',
+      as: 'payments',
+    });
+  };
 
   return Shop;
 };

@@ -31,6 +31,9 @@ import destroyPromotion from './promotion/destroy';
 import destroyComment from './comments/destroy';
 // import restorePromotion from './promotion/restore';
 
+import destroyShops from './shops/destroy';
+// import restorePromotion from './promotion/restore';
+
 
 export default class DeleteSaga {
   ctx = null;
@@ -63,6 +66,11 @@ export default class DeleteSaga {
       .step('Destroy gallery')
       .invoke(async () => {
         await destroyGallery(uuid);
+      })
+
+      .step('Destroy shops')
+      .invoke(async () => {
+        await destroyShops(uuid);
       })
 
       .step('Destroy comments')

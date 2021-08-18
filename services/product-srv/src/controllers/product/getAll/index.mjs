@@ -18,7 +18,7 @@ export default () => async (ctx) => {
   let options = {};
 
   const { Op } = Sequelize;
-  const { Product, Currency, Attribute, Category, Brand, Type, Characteristic, CharacteristicAttribute, Unit, Gallery, Comment, ProductOption } = models;
+  const { Product, Currency, Attribute, Category, Brand, Type, Characteristic, CharacteristicAttribute, Unit, Gallery, Comment, ProductOption, ProductShop } = models;
   const {
     limit = null,
     skip = null,
@@ -115,6 +115,11 @@ export default () => async (ctx) => {
             sorting,
           ],
           include: [
+            {
+              model: ProductShop,
+              attributes: ['shopUuid', 'number'],
+              as: 'shops',
+            },
             {
               model: Brand,
               required: !! whereForBrands['id'],
@@ -222,6 +227,11 @@ export default () => async (ctx) => {
         ['characteristics', 'attributes', 'order', 'asc'],
       ],
       include: [
+        {
+          model: ProductShop,
+          attributes: ['shopUuid', 'number'],
+          as: 'shops',
+        },
         {
           model: Brand,
           required: !! whereForBrands['id'],

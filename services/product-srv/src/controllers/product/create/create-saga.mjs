@@ -31,6 +31,9 @@ import restoreProduct from './product/restore';
 import createPromotion from './promotion/create';
 import restorePromotion from './promotion/restore';
 
+import createShops from './shops/create';
+import restoreShops from './shops/restore';
+
 
 export default class CopySaga {
   ctx = null;
@@ -79,6 +82,16 @@ export default class CopySaga {
       .withCompensation(async (params) => {
         const uuid = params.getProductUUID();
         await restoreGallery(uuid);
+      })
+
+      .step('Create shops')
+      .invoke(async (params) => {
+        const productUuid = params.getProductUUID();
+        await createShops(productUuid, body['shops']);
+      })
+      .withCompensation(async (params) => {
+        const uuid = params.getProductUUID();
+        await restoreShops(uuid);
       })
 
       .step('Create attributes')

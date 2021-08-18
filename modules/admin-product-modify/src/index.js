@@ -3,6 +3,7 @@ export { default } from './components';
 export { name, reducer } from './ducks/slice';
 
 export {
+  selectShops,
   selectBrands,
   selectTypes,
   selectCategories,
@@ -17,6 +18,7 @@ export {
 } from './ducks/slice';
 
 export {
+  getShops,
   createType,
   createBrand,
   createCategory,

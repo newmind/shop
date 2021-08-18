@@ -4,7 +4,7 @@ import request from "@sys.packages/request";
 
 
 export default async function updateProperties(uuid) {
-  const { Product, Attribute, Unit, Gallery, Currency, Category, Type, Brand, Characteristic, CharacteristicAttribute, ProductOption } = models;
+  const { ProductShop, Product, Attribute, Unit, Gallery, Currency, Category, Type, Brand, Characteristic, CharacteristicAttribute, ProductOption } = models;
 
   const result = await Product.findOne({
     where: { uuid },
@@ -16,6 +16,11 @@ export default async function updateProperties(uuid) {
       ['characteristics', 'attributes', 'order', 'asc'],
     ],
     include: [
+      {
+        model: ProductShop,
+        attributes: ['shopUuid', 'number'],
+        as: 'shops',
+      },
       {
         model: Brand,
         as: 'brands',

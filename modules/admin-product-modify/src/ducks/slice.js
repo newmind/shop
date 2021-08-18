@@ -3,6 +3,7 @@ import { createSlice } from '@reduxjs/toolkit';
 
 
 const initialState = {
+  shops: [],
   brands: [],
   types: [],
   categories: [],
@@ -44,6 +45,12 @@ const productModifySlice = createSlice({
 
     setProcessAction(state, { payload }) {
       state['inProcess'] = payload;
+    },
+
+    getShopsRequestAction() {},
+    getShopsRequestFailAction() {},
+    getShopsRequestSuccessAction(state, { payload }) {
+      state['shops'] = payload;
     },
 
     getBrandsRequestAction() {},
@@ -277,8 +284,13 @@ export const {
   getPromotionsRequestAction,
   getPromotionsRequestFailAction,
   getPromotionsRequestSuccessAction,
+
+  getShopsRequestAction,
+  getShopsRequestFailAction,
+  getShopsRequestSuccessAction,
 } = productModifySlice['actions'];
 
+export const selectShops = (state) => state[REDUCER_NAME]['shops'];
 export const selectTypes = (state) => state[REDUCER_NAME]['types'];
 export const selectUnits = (state) => state[REDUCER_NAME]['units'];
 export const selectBrands = (state) => state[REDUCER_NAME]['brands'];

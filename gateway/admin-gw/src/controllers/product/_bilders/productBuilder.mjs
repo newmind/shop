@@ -3,6 +3,7 @@ export default function productBuilder(data) {
   return {
     uuid: data['uuid'],
     name: data['name'],
+    shops: data['shops'],
     brand: !! data['brands'].length
       ? ({
         id: data['brands'][0]['id'],

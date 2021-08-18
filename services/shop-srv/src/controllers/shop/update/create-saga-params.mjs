@@ -2,6 +2,8 @@
 export default class CreateSagaParams {
   _shopId = null;
   _shop = null;
+  _payments = [];
+  _deliveries = [];
 
   getShopId() {
     return this._shopId;
@@ -17,5 +19,21 @@ export default class CreateSagaParams {
 
   setShop(shop) {
     this._shop = shop;
+  }
+
+  getDeliveries() {
+    return this._deliveries;
+  }
+
+  setDeliveries(data) {
+    this._deliveries = data;
+  }
+
+  getPayments() {
+    return this._payments;
+  }
+
+  setPayments(data) {
+    this._payments = data;
   }
 }

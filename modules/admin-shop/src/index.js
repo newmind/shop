@@ -8,6 +8,8 @@ export {
 
 export {
   selectItem,
+  selectPayments,
+  selectDeliveries,
   selectInProcess,
 } from './ducks/slice';
 
@@ -15,4 +17,7 @@ export {
   getShop,
   createShop,
   updateShop,
+
+  getPayments,
+  getDeliveries,
 } from './ducks/commands';

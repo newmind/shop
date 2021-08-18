@@ -1,5 +1,5 @@
 
-import { resetStateAction, getShop } from '@modules/admin-shop';
+import { resetStateAction, getShop, getDeliveries, getPayments } from '@modules/admin-shop';
 
 import { useMount, useUnmount, useUpdate } from '@ui.packages/hoc';
 
@@ -17,13 +17,21 @@ export default function HOC() {
   useMount(async function() {
     document.title = `${process.env['REACT_APP_WEBSITE_NAME']} - Магазин`;
 
+    await dispatch(getPayments());
+    await dispatch(getDeliveries());
+
     if (params['uuid']) {
       await dispatch(getShop(params['uuid']));
     }
   });
 
   useUpdate(async function() {
-    await dispatch(getShop());
+    await dispatch(getPayments());
+    await dispatch(getDeliveries());
+
+    if (params['uuid']) {
+      await dispatch(getShop(params['uuid']));
+    }
   });
 
   useUnmount(function() {

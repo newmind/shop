@@ -5,6 +5,14 @@ import request from '@ui.packages/request';
 import { pushNotification } from '@ui.packages/notifications';
 
 import {
+  getDeliveriesRequestAction,
+  getDeliveriesRequestFailAction,
+  getDeliveriesRequestSuccessAction,
+
+  getPaymentsRequestAction,
+  getPaymentsRequestFailAction,
+  getPaymentsRequestSuccessAction,
+
   getShopRequestAction,
   getShopRequestFailAction,
   getShopRequestSuccessAction,
@@ -17,6 +25,55 @@ import {
   updateShopRequestFailAction,
   updateShopRequestSuccessAction,
 } from './slice';
+
+
+export const getDeliveries = () => async (dispatch) => {
+  try {
+    dispatch(getDeliveriesRequestAction());
+
+    const { data } = await request({
+      url: '/deliveries',
+      method: 'get',
+    });
+
+    dispatch(getDeliveriesRequestSuccessAction(data));
+  }
+  catch(error) {
+    dispatch(getDeliveriesRequestFailAction(error));
+
+    if (error instanceof UnauthorizedError) {
+      return void 0;
+    }
+    dispatch(pushNotification({
+      mode: 'danger',
+      title: 'Ошибка при выполнении операции'
+    }));
+  }
+};
+
+export const getPayments = () => async (dispatch) => {
+  try {
+    dispatch(getPaymentsRequestAction());
+
+    const { data } = await request({
+      url: '/payments',
+      method: 'get',
+    });
+
+    dispatch(getPaymentsRequestSuccessAction(data));
+  }
+  catch(error) {
+    dispatch(getPaymentsRequestFailAction(error));
+
+    if (error instanceof UnauthorizedError) {
+      return void 0;
+    }
+    dispatch(pushNotification({
+      mode: 'danger',
+      title: 'Ошибка при выполнении операции'
+    }));
+  }
+};
 
 
 export const getShop = (uuid) => async (dispatch) => {
@@ -62,6 +119,9 @@ export const createShop = (data) => async (dispatch) => {
         name: data['name'],
         address: data['address'],
         description: data['description'],
+        deliveries: data['deliveries'],
+        payments: data['payments'],
+        updatedAt: data['updatedAt'],
       },
     });
 
@@ -100,6 +160,8 @@ export const updateShop = (data) => async (dispatch) => {
         name: data['name'],
         address: data['address'],
         description: data['description'],
+        deliveries: data['deliveries'],
+        payments: data['payments'],
         updatedAt: data['updatedAt'],
       },
     });

@@ -8,6 +8,7 @@ export default class UpdateSagaParams {
   _categories = null;
   _promotions = null;
   _options = null;
+  _shops = null;
 
   setOptions(promotions) {
     this._options = promotions;
@@ -71,5 +72,13 @@ export default class UpdateSagaParams {
 
   setProduct(product) {
     this._product = product;
+  }
+
+  getShops() {
+    return this._shops;
+  }
+
+  setShops(product) {
+    this._shops = product;
   }
 }

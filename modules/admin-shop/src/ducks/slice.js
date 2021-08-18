@@ -4,6 +4,8 @@ import { createSlice } from '@reduxjs/toolkit';
 
 const initialState = {
   item: null,
+  payments: [],
+  deliveries: [],
   error: null,
   inProcess: false,
 };
@@ -17,8 +19,22 @@ const slice = createSlice({
   reducers: {
     resetStateAction(state) {
       state['item'] = null;
+      state['payments'] = [];
+      state['deliveries'] = [];
       state['error'] = null;
       state['inProcess'] = false;
+    },
+
+    getDeliveriesRequestAction(state) {},
+    getDeliveriesRequestFailAction(state) {},
+    getDeliveriesRequestSuccessAction(state, { payload }) {
+      state['deliveries'] = payload;
+    },
+
+    getPaymentsRequestAction(state) {},
+    getPaymentsRequestFailAction(state) {},
+    getPaymentsRequestSuccessAction(state, { payload }) {
+      state['payments'] = payload;
     },
 
     getShopRequestAction(state) {
@@ -61,6 +77,14 @@ const slice = createSlice({
 export const {
   resetStateAction,
 
+  getDeliveriesRequestAction,
+  getDeliveriesRequestFailAction,
+  getDeliveriesRequestSuccessAction,
+
+  getPaymentsRequestAction,
+  getPaymentsRequestFailAction,
+  getPaymentsRequestSuccessAction,
+
   getShopRequestAction,
   getShopRequestFailAction,
   getShopRequestSuccessAction,
@@ -75,6 +99,8 @@ export const {
 } = slice['actions'];
 
 export const selectItem = (state) => state[REDUCER_NAME]['item'];
+export const selectPayments = (state) => state[REDUCER_NAME]['payments'];
+export const selectDeliveries = (state) => state[REDUCER_NAME]['deliveries'];
 export const selectInProcess = (state) => state[REDUCER_NAME]['inProcess'];
 
 export const name = slice['name'];

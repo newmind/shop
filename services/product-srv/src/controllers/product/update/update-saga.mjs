@@ -31,6 +31,9 @@ import restoreProduct from './product/restore';
 import updatePromotion from './promotion/update';
 import restorePromotion from './promotion/restore';
 
+import updateShops from './shops/update';
+import restoreShops from './shops/restore';
+
 
 export default class UpdateSaga {
   ctx = null;
@@ -71,6 +74,18 @@ export default class UpdateSaga {
         logger.info('Restore update gallery');
         const gallery = params.getGallery();
         await restoreGallery(uuid, gallery);
+      })
+
+      .step('Update shops')
+      .invoke(async (params) => {
+        logger.info('Update shops');
+        const shops = await updateShops(uuid, body['shops']);
+        params.setShops(shops);
+      })
+      .withCompensation(async (params) => {
+        logger.info('Restore update shops');
+        const shops = params.getShops();
+        await restoreShops(uuid, shops);
       })
 
       .step('Update attribute')
