@@ -1,0 +1,73 @@
+
+@import "~@ui.packages/theme";
+
+
+.wrapper {
+
+  display: block;
+  padding: 16px;
+  background: $pale-grey;
+  border-radius: 8px;
+  border: 1px solid $pale-lilac;
+}
+
+.header {
+
+  display: block;
+}
+
+.content {
+
+  display: flex;
+  flex-direction: column;
+  flex: 1 0;
+  margin: 32px 0 0;
+}
+
+.shop {
+
+  display: flex;
+  flex-direction: column;
+  flex: 1 0;
+
+  & + & {
+
+    margin: 16px 0 0;
+    padding: 16px 0 0;
+    border-top: 1px solid $pale-lilac;
+  }
+}
+
+.line {
+
+  display: flex;
+  flex-direction: row;
+  flex: 1 0;
+
+  & + & {
+    margin: 4px 0 0;
+  }
+}
+
+.name {
+
+  display: flex;
+  flex-direction: column;
+  flex: 1 0;
+  text-overflow: ellipsis;
+  overflow: hidden;
+}
+
+.number {
+
+  display: block;
+  margin: 0 0 0 15px;
+  min-width: 80px;
+}
+
+.order {
+
+  display: inline-block;
+  font-size: 13px;
+  color: $danger;
+}

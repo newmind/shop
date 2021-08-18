@@ -5,6 +5,7 @@ import moment from '@packages/moment';
 export default function productBuilder(data, filterAttributes) {
   return {
     uuid: data['uuid'],
+    shops: data['shops'],
     brand: !! data['brands'].length ? data['brands'][0] : null,
     name: data['name'],
     price: data['price'],

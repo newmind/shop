@@ -11,12 +11,13 @@ import React, { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 
 import Options from './Options';
+import Shops from './Shops';
 
 import cn from "classnames";
 import styles from './default.module.scss';
 
 
-function Product({ uuid, brand, name, price, prevPrice, currency, options }) {
+function Product({ uuid, brand, name, price, prevPrice, currency, options, shops }) {
   const dispatch = useDispatch();
   const cart = useSelector(selectUuid);
   const [optionDetail, setOptionDetail] = useState(options.find((item) => item['isTarget']));
@@ -60,7 +61,7 @@ function Product({ uuid, brand, name, price, prevPrice, currency, options }) {
           />
         </div>
         <div className={styles['amount']}>
-        <Header type={Text.TYPE_AMOUNT}>{ numeral(price).format() } { currency }</Header>
+         <Header type={Text.TYPE_AMOUNT}>{ numeral(price).format() } { currency }</Header>
           {prevPrice && (
             <Text className={styles['prev-amount']} type={Text.TYPE_BODY}>{ numeral(prevPrice).format() } { currency }</Text>
           )}
@@ -76,6 +77,11 @@ function Product({ uuid, brand, name, price, prevPrice, currency, options }) {
             </div>
           )}
         </div>
+        { !! shops.length && (
+          <div className={styles['available']}>
+          <Shops items={shops} />
+          </div>
+        )}
       </div>
     </div>
   );
